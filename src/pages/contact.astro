@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import { site } from '../site.config';
+
+// Set this to your form endpoint (e.g., Formspree, Netlify Forms, etc.)
+const FORM_ENDPOINT = '/api/contact';
+---
+
+<Base
+  title={`Contact — ${site.name}`}
+  description={`Get in touch with the ${site.name} team. We respond to every message.`}
+  canonical={`${site.url}/contact`}
+>
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Contact', url: `${site.url}/contact` }]} />
+
+      <div class="mb-10">
+        <h1 class="text-4xl font-extrabold text-white sm:text-5xl">
+          Get in <span class="text-lime-400">Touch</span>
+        </h1>
+        <p class="mt-4 text-lg text-dark-300">
+          Have a question, feedback, or just want to say hello? We respond to every message.
+        </p>
+      </div>
+
+      <form
+        id="contact-form"
+        class="space-y-6"
+        data-endpoint={FORM_ENDPOINT}
+      >
+        <div>
+          <label for="name" class="block text-sm font-medium text-dark-300 mb-2">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full px-4 py-3 rounded-lg bg-dark-800 border border-dark-700 text-white placeholder-dark-500 focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500/50 transition"
+            placeholder="Your name"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-dark-300 mb-2">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-4 py-3 rounded-lg bg-dark-800 border border-dark-700 text-white placeholder-dark-500 focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500/50 transition"
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <div>
+          <label for="subject" class="block text-sm font-medium text-dark-300 mb-2">Subject</label>
+          <select
+            id="subject"
+            name="subject"
+            class="w-full px-4 py-3 rounded-lg bg-dark-800 border border-dark-700 text-white focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500/50 transition"
+          >
+            <option value="general">General inquiry</option>
+            <option value="support">Technical support</option>
+            <option value="billing">Billing question</option>
+            <option value="feedback">Feedback</option>
+            <option value="partnership">Partnership</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-dark-300 mb-2">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            class="w-full px-4 py-3 rounded-lg bg-dark-800 border border-dark-700 text-white placeholder-dark-500 focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500/50 transition resize-none"
+            placeholder="Tell us what's on your mind..."
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full px-6 py-3.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold transition"
+        >
+          Send Message
+        </button>
+
+        <p id="form-status" class="text-sm text-center hidden"></p>
+      </form>
+
+      <div class="mt-12 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+          <h3 class="font-semibold text-white mb-1">Response time</h3>
+          <p class="text-sm text-dark-400">We typically respond within 24 hours on business days.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+          <h3 class="font-semibold text-white mb-1">Support docs</h3>
+          <p class="text-sm text-dark-400">
+            Check our <a href="/blog" class="text-lime-400 hover:text-lime-300">blog</a> for guides and FAQs before reaching out.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const statusEl = document.getElementById('form-status') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const endpoint = form.dataset.endpoint || '';
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+
+      if (res.ok) {
+        if (statusEl) {
+          statusEl.textContent = 'Message sent! We\'ll get back to you soon.';
+          statusEl.className = 'text-sm text-center text-lime-400';
+        }
+        form.reset();
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+    } catch {
+      if (statusEl) {
+        statusEl.textContent = 'Something went wrong. Please try again or email us directly.';
+        statusEl.className = 'text-sm text-center text-red-400';
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+      statusEl?.classList.remove('hidden');
+    }
+  });
+</script>

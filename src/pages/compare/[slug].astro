@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
+import CompareTable from '../../components/CompareTable.astro';
+import { site, competitors, features } from '../../site.config';
+
+export function getStaticPaths() {
+  return competitors.map((competitor) => ({
+    params: { slug: `${site.name.toLowerCase().replace(/\s+/g, '-')}-vs-${competitor.slug}` },
+    props: { competitor },
+  }));
+}
+
+const { competitor } = Astro.props;
+
+// Generic comparison rows — customize in site.config.ts
+const compareRows = features.map(f => ({
+  feature: f.name,
+  yours: true,
+  theirs: false,
+}));
+
+// Add some generic rows
+compareRows.push(
+  { feature: 'Free trial / money-back guarantee', yours: '30 days', theirs: 'Varies' },
+  { feature: 'Cancel anytime', yours: true, theirs: false },
+  { feature: 'No lock-in contracts', yours: true, theirs: false },
+);
+---
+
+<Base
+  title={`${site.name} vs ${competitor.name} — Detailed Comparison`}
+  description={`Compare ${site.name} vs ${competitor.name}. Features, pricing, and why ${site.name} is the better choice.`}
+  canonical={`${site.url}/compare/${site.name.toLowerCase().replace(/\s+/g, '-')}-vs-${competitor.slug}`}
+>
+  <article class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs
+        items={[
+          { name: 'Compare', url: `${site.url}/compare` },
+          { name: `${site.name} vs ${competitor.name}`, url: `${site.url}/compare/${site.name.toLowerCase().replace(/\s+/g, '-')}-vs-${competitor.slug}` },
+        ]}
+      />
+
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-white sm:text-5xl">
+          <span class="text-lime-400">{site.name}</span>
+          {' '}vs{' '}
+          {competitor.name}
+        </h1>
+        <p class="mt-4 text-lg text-dark-300">{competitor.tagline}</p>
+      </div>
+
+      <!-- Quick verdict -->
+      <div class="mb-12 rounded-xl border border-lime-500/20 bg-lime-500/5 p-6">
+        <h2 class="text-lg font-bold text-white mb-3">Quick Verdict</h2>
+        <p class="text-dark-300 leading-relaxed">
+          {site.name} offers a simpler, more transparent alternative to {competitor.name}.
+          With {site.cta.subtext.toLowerCase()} and straightforward pricing, {site.name}
+          is the better choice for teams who value clarity over complexity.
+        </p>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Feature Comparison</h2>
+        <CompareTable
+          rows={compareRows}
+          yourName={site.name}
+          theirName={competitor.name}
+        />
+      </div>
+
+      <!-- Why choose us -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Why choose {site.name}?</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {[
+            { title: 'Simpler pricing', desc: `No hidden fees. No annual lock-in required. Start from $${9}/mo, cancel anytime.` },
+            { title: 'Better support', desc: 'Responsive support team, clear documentation, and a community of users.' },
+            { title: 'Transparent', desc: 'What you see is what you get. No upsells buried in the checkout flow.' },
+            { title: `Built for teams`, desc: 'Easy onboarding, team management, and integrations that actually work.' },
+          ].map(item => (
+            <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <svg class="w-4 h-4 text-lime-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                <h3 class="font-semibold text-white">{item.title}</h3>
+              </div>
+              <p class="text-sm text-dark-400 ml-6">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 p-8 text-center">
+        <h2 class="text-2xl font-bold text-white mb-3">
+          Make the switch to {site.name}
+        </h2>
+        <p class="text-dark-300 mb-6">
+          {site.cta.subtext}. See why teams choose {site.name} over {competitor.name}.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={site.cta.href} class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold transition">
+            {site.cta.text}
+          </a>
+          <a href="/pricing" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg border border-dark-700 text-white hover:border-lime-500/40 hover:text-lime-400 transition">
+            View Pricing
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

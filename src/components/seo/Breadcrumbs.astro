@@ -1,0 +1,35 @@
+---
+import { breadcrumbSchema } from '../../lib/seo';
+import { site } from '../../site.config';
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const fullItems = [{ name: 'Home', url: site.url }, ...items];
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex flex-wrap items-center gap-1 text-sm text-dark-400">
+    {fullItems.map((item, i) => (
+      <li class="flex items-center gap-1">
+        {i > 0 && <span class="mx-1">/</span>}
+        {i === fullItems.length - 1 ? (
+          <span class="text-dark-200">{item.name}</span>
+        ) : (
+          <a href={item.url} class="hover:text-lime-400 transition-colors">
+            {item.name}
+          </a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema(fullItems))} />

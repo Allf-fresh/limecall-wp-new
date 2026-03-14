@@ -1,0 +1,106 @@
+---
+import { site } from '../site.config';
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  source?: string;
+  class?: string;
+}
+
+const {
+  heading = 'Stay Informed',
+  subheading = `Get the latest updates from ${site.name}. No spam, unsubscribe anytime.`,
+  source = 'website',
+  class: className = '',
+} = Astro.props;
+---
+
+<section class={`bg-dark-900 border border-dark-800 rounded-xl p-8 md:p-12 ${className}`}>
+  <div class="max-w-xl mx-auto text-center">
+    <h2 class="text-2xl font-bold text-white mb-2">{heading}</h2>
+    <p class="text-dark-400 mb-6">{subheading}</p>
+    <form
+      id="email-capture"
+      class="flex flex-col sm:flex-row gap-3"
+      data-source={source}
+    >
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="you@example.com"
+        autocomplete="email"
+        class="flex-1 px-4 py-3 rounded-lg bg-dark-800 border border-dark-700 text-white placeholder-dark-500 focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500/50 transition"
+      />
+      <button
+        type="submit"
+        class="px-6 py-3 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-semibold transition whitespace-nowrap"
+      >
+        Subscribe
+      </button>
+    </form>
+    <p id="email-status" class="text-sm mt-3 hidden"></p>
+    <p class="text-dark-600 text-xs mt-4">
+      We respect your privacy. Read our <a href="/privacy" class="underline hover:text-dark-400">privacy policy</a>.
+    </p>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('email-capture') as HTMLFormElement | null;
+  const status = document.getElementById('email-status') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = new FormData(form).get('email') as string;
+    const source = form.dataset.source || 'website';
+    const btn = form.querySelector('button') as HTMLButtonElement;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const supabaseUrl = (document.querySelector('meta[name="supabase-url"]') as HTMLMetaElement)?.content;
+      const supabaseKey = (document.querySelector('meta[name="supabase-key"]') as HTMLMetaElement)?.content;
+
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error('Not configured');
+      }
+
+      const res = await fetch(`${supabaseUrl}/rest/v1/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({ email, source }),
+      });
+
+      if (res.ok || res.status === 201) {
+        if (status) {
+          status.textContent = 'You\'re subscribed! Check your inbox.';
+          status.className = 'text-sm mt-3 text-lime-400';
+        }
+        form.reset();
+      } else if (res.status === 409) {
+        if (status) {
+          status.textContent = 'You\'re already subscribed!';
+          status.className = 'text-sm mt-3 text-dark-400';
+        }
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+    } catch {
+      if (status) {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.className = 'text-sm mt-3 text-red-400';
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    }
+  });
+</script>

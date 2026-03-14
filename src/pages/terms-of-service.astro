@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { site } from '../site.config';
+---
+
+<Base
+  title={`Terms of Service — ${site.name}`}
+  description={`The terms and conditions for using ${site.name}. Please read before using our service.`}
+  canonical={`${site.url}/terms-of-service`}
+>
+  <LegalPage
+    title="Terms of Service"
+    lastUpdated="March 1, 2026"
+    effectiveDate="March 1, 2026"
+    summary={`By using ${site.name}, you agree to these terms. The key points: you must be 18+, you may not abuse or resell the service, and we may terminate accounts that violate these terms.`}
+    summaryLabel="Quick summary"
+    summaryType="neutral"
+    breadcrumb={{ name: 'Terms of Service', url: `${site.url}/terms-of-service` }}
+  >
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>
+      By accessing or using {site.name} ("the Service"), you agree to be bound by these Terms of Service.
+      If you do not agree, do not use the Service.
+    </p>
+
+    <h2>2. Eligibility</h2>
+    <p>
+      You must be at least 18 years old to use the Service. By using the Service, you represent
+      that you meet this requirement and that you have the legal capacity to enter into these terms.
+    </p>
+
+    <h2>3. Account Responsibilities</h2>
+    <ul>
+      <li>You are responsible for maintaining the security of your account credentials</li>
+      <li>You must notify us immediately of any unauthorized use of your account</li>
+      <li>You are responsible for all activity that occurs under your account</li>
+      <li>You may not share your account with others or use another person's account</li>
+    </ul>
+
+    <h2>4. Acceptable Use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Violate any applicable laws or regulations</li>
+      <li>Use the Service to harm, threaten, or harass others</li>
+      <li>Attempt to gain unauthorized access to any part of the Service</li>
+      <li>Reverse engineer, decompile, or disassemble any part of the Service</li>
+      <li>Resell or redistribute access to the Service without our written consent</li>
+      <li>Use the Service in a way that could damage, disable, or impair its functioning</li>
+    </ul>
+
+    <h2>5. Payment and Billing</h2>
+    <p>
+      By subscribing to a paid plan, you authorize us to charge your payment method on a
+      recurring basis. All prices are in USD unless stated otherwise. We reserve the right
+      to change pricing with 30 days' notice to subscribers.
+    </p>
+
+    <h2>6. Refund Policy</h2>
+    <p>
+      We offer a 30-day money-back guarantee on all new subscriptions. To request a refund,
+      contact us within 30 days of your initial purchase. Refunds are not available for
+      renewals or after the 30-day period.
+    </p>
+
+    <h2>7. Cancellation</h2>
+    <p>
+      You may cancel your subscription at any time from your account dashboard. Your access
+      continues until the end of the current billing period. We do not provide prorated refunds
+      for cancellations mid-period (outside the 30-day guarantee window).
+    </p>
+
+    <h2>8. Service Availability</h2>
+    <p>
+      We aim for high availability but do not guarantee uninterrupted service. Planned maintenance
+      will be communicated in advance where possible. We are not liable for damages resulting from
+      service interruptions.
+    </p>
+
+    <h2>9. Intellectual Property</h2>
+    <p>
+      {site.name} and all related trademarks, logos, and content are the intellectual property
+      of {site.name}. You may not use our branding without explicit written permission.
+    </p>
+
+    <h2>10. Limitation of Liability</h2>
+    <p>
+      To the maximum extent permitted by law, {site.name} shall not be liable for any indirect,
+      incidental, special, consequential, or punitive damages, including loss of profits, data,
+      or goodwill, arising from your use of the Service.
+    </p>
+
+    <h2>11. Termination</h2>
+    <p>
+      We reserve the right to suspend or terminate accounts that violate these terms, with or
+      without notice. Upon termination, your right to use the Service ceases immediately.
+    </p>
+
+    <h2>12. Changes to Terms</h2>
+    <p>
+      We may update these terms from time to time. Continued use of the Service after changes
+      constitutes acceptance of the new terms. We will provide at least 14 days' notice for
+      material changes.
+    </p>
+
+    <h2>13. Governing Law</h2>
+    <p>
+      These terms are governed by applicable law. Any disputes will be resolved through binding
+      arbitration or in the courts of competent jurisdiction.
+    </p>
+
+    <h2>14. Contact</h2>
+    <p>
+      For questions about these terms, please use our <a href="/contact">contact form</a>.
+    </p>
+
+  </LegalPage>
+</Base>

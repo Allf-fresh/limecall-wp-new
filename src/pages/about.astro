@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import { site } from '../site.config';
+---
+
+<Base
+  title={`About — ${site.name}`}
+  description={`Learn about ${site.name}, our mission, and the team behind the product.`}
+  canonical={`${site.url}/about`}
+>
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'About', url: `${site.url}/about` }]} />
+
+      <div class="max-w-3xl">
+        <h1 class="text-4xl font-extrabold text-white sm:text-5xl">
+          About <span class="text-lime-400">{site.name}</span>
+        </h1>
+        <p class="mt-6 text-xl text-dark-300 leading-relaxed">
+          {site.description}
+        </p>
+      </div>
+
+      <div class="mt-16 grid gap-12">
+        <div class="prose prose-invert max-w-none">
+          <h2 class="text-2xl font-bold text-white">Our Mission</h2>
+          <p class="text-dark-300 leading-relaxed mt-4">
+            We built {site.name} because we believed the existing options were too complex,
+            too expensive, or too locked-in. Our mission is simple: give teams the tools
+            they need without the overhead they don't.
+          </p>
+
+          <h2 class="text-2xl font-bold text-white mt-12">What We Believe</h2>
+          <div class="mt-6 grid gap-6 sm:grid-cols-3">
+            {[
+              { title: 'Simplicity wins', desc: 'The best tool is the one you actually use. We obsess over simplicity.' },
+              { title: 'Transparency builds trust', desc: 'No hidden fees, no surprises, no lock-in. What you see is what you get.' },
+              { title: 'Reliability matters', desc: 'Your business depends on your tools. We take that seriously.' },
+            ].map(item => (
+              <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+                <h3 class="font-semibold text-white mb-2">{item.title}</h3>
+                <p class="text-sm text-dark-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2 class="text-2xl font-bold text-white mt-12">Get in Touch</h2>
+          <p class="text-dark-300 leading-relaxed mt-4">
+            Questions, feedback, or just want to say hello?
+            <a href="/contact" class="text-lime-400 hover:text-lime-300">Contact us</a> — we respond to every message.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-16 rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 p-8 text-center">
+        <h2 class="text-2xl font-bold text-white mb-3">Ready to get started?</h2>
+        <p class="text-dark-300 mb-6">{site.cta.subtext}</p>
+        <a href={site.cta.href} class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold transition">
+          {site.cta.text}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { site } from '../site.config';
+---
+
+<Base
+  title={`Cookie Policy — ${site.name}`}
+  description={`How ${site.name} uses cookies and similar technologies. Your choices explained.`}
+  canonical={`${site.url}/cookie-policy`}
+>
+  <LegalPage
+    title="Cookie Policy"
+    lastUpdated="March 1, 2026"
+    summary={`We use essential cookies to make ${site.name} work. We use analytics cookies only if you consent. We do not use advertising or tracking cookies.`}
+    summaryLabel="Quick summary"
+    summaryType="lime"
+    breadcrumb={{ name: 'Cookie Policy', url: `${site.url}/cookie-policy` }}
+  >
+
+    <h2>1. What Are Cookies?</h2>
+    <p>
+      Cookies are small text files placed on your device by websites you visit. They are widely used
+      to make websites work, improve user experience, and provide information to site owners.
+    </p>
+
+    <h2>2. How We Use Cookies</h2>
+    <p>We use cookies in the following categories:</p>
+
+    <h3>2.1 Essential cookies</h3>
+    <p>
+      These cookies are necessary for the website and service to function. They cannot be disabled.
+      Examples include session cookies that keep you logged in.
+    </p>
+
+    <h3>2.2 Analytics cookies</h3>
+    <p>
+      We use privacy-respecting analytics to understand how visitors use our site. This helps us
+      improve the product and content. Analytics data is aggregated and does not identify individuals.
+      {site.analytics.posthogKey ? 'We use PostHog for product analytics.' : ''}
+      {site.analytics.cloudflareBeaconToken ? 'We use Cloudflare Web Analytics for traffic insights.' : ''}
+    </p>
+
+    <h3>2.3 Functional cookies</h3>
+    <p>
+      These cookies remember your preferences (such as your chosen billing period on the pricing page)
+      to improve your experience. They do not track you across other websites.
+    </p>
+
+    <h2>3. Cookies We Do NOT Use</h2>
+    <ul>
+      <li>Advertising or targeting cookies</li>
+      <li>Third-party social media tracking cookies</li>
+      <li>Cross-site behavioral tracking cookies</li>
+    </ul>
+
+    <h2>4. Cookie List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Cookie Name</th>
+          <th>Purpose</th>
+          <th>Duration</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>session</code></td>
+          <td>Keeps you logged in to your account</td>
+          <td>Session / 30 days</td>
+          <td>Essential</td>
+        </tr>
+        <tr>
+          <td><code>ph_*</code></td>
+          <td>PostHog product analytics</td>
+          <td>1 year</td>
+          <td>Analytics</td>
+        </tr>
+        <tr>
+          <td><code>__cf_bm</code></td>
+          <td>Cloudflare bot management</td>
+          <td>30 minutes</td>
+          <td>Essential</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. Managing Cookies</h2>
+    <p>
+      You can control cookies through your browser settings. Most browsers allow you to:
+    </p>
+    <ul>
+      <li>View cookies that have been set</li>
+      <li>Delete all or specific cookies</li>
+      <li>Block cookies from specific sites or all sites</li>
+    </ul>
+    <p>
+      Note that disabling essential cookies may affect the functionality of {site.name}.
+    </p>
+
+    <h2>6. Changes to This Policy</h2>
+    <p>
+      We may update this Cookie Policy from time to time. We will notify you of significant
+      changes via email or a notice on our website.
+    </p>
+
+    <h2>7. Contact</h2>
+    <p>
+      For questions about our use of cookies, please use our <a href="/contact">contact form</a>.
+    </p>
+
+  </LegalPage>
+</Base>

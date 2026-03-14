@@ -1,0 +1,293 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
+import { site, plans } from '../site.config';
+
+const faqs = [
+  {
+    question: 'Can I cancel anytime?',
+    answer: 'Yes. Cancel anytime from your account dashboard — no phone call, no penalty, no hoops to jump through.',
+  },
+  {
+    question: 'Is there a free trial?',
+    answer: 'Every plan comes with a 30-day money-back guarantee. Try risk-free. If you\'re not satisfied, contact support for a full refund.',
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'We accept all major credit cards (Visa, Mastercard, Amex) and PayPal.',
+  },
+  {
+    question: 'What is the difference between the plans?',
+    answer: `The ${plans[0].name} plan covers the essentials. ${plans[1]?.name || 'The Pro plan'} adds advanced features and priority support.`,
+  },
+];
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: site.name,
+  description: site.description,
+  brand: { '@type': 'Brand', name: site.name },
+  offers: plans.map(plan => ({
+    '@type': 'Offer',
+    name: `${plan.name} Monthly`,
+    price: plan.monthly.toString(),
+    priceCurrency: 'USD',
+    billingDuration: 'P1M',
+    availability: 'https://schema.org/InStock',
+    url: `${site.url}/pricing`,
+  })),
+};
+---
+
+<Base
+  title={`Pricing — ${site.name}`}
+  description={`${site.name} pricing plans. ${plans.map(p => `${p.name} from $${p.monthly}/mo`).join('. ')}. Cancel anytime.`}
+  canonical={`${site.url}/pricing`}
+>
+  <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={productSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Pricing', url: `${site.url}/pricing` }]} />
+
+      <h1 class="mt-2 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Simple Pricing.<br class="sm:hidden" />
+        <span class="text-lime-400"> No Lock-In.</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Start from <span class="font-semibold text-white">${plans[0].monthly}/mo</span>. Cancel anytime.
+        Upgrade when your needs grow.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5">
+          <svg class="h-4 w-4 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+          30-day money-back guarantee
+        </span>
+        <span class="hidden h-4 w-px bg-dark-700 sm:block"></span>
+        <span class="flex items-center gap-1.5">
+          <svg class="h-4 w-4 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+          Secure checkout
+        </span>
+        <span class="hidden h-4 w-px bg-dark-700 sm:block"></span>
+        <span>Cancel anytime, no penalties</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plans -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+
+      <!-- Quick plan picker -->
+      <div class="mx-auto mb-12 max-w-3xl grid gap-4 sm:grid-cols-2">
+        {plans.map((plan, i) => (
+          <div class:list={[
+            'rounded-xl border p-5',
+            i === 1 ? 'border-lime-500/30 bg-dark-900/60' : 'border-dark-800 bg-dark-900/60',
+          ]}>
+            <p class:list={[
+              'text-xs font-bold uppercase tracking-widest mb-2',
+              i === 1 ? 'text-lime-500/70' : 'text-dark-500',
+            ]}>{plan.name} — Best for</p>
+            <ul class="space-y-1.5 text-sm text-dark-300">
+              {plan.features.slice(0, 4).map(f => (
+                <li class="flex items-center gap-2">
+                  <svg class="h-3.5 w-3.5 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <!--
+        CSS-only billing toggle.
+        Default = ANNUAL (unchecked). Clicking "Monthly" checks the box → shows monthly.
+      -->
+      <input type="checkbox" id="billing-toggle" class="sr-only" />
+
+      <div class="mb-12 flex justify-center">
+        <div class="inline-flex items-center gap-1 rounded-xl border border-dark-800 bg-dark-900 p-1 shadow-inner">
+          <label for="billing-toggle" class="billing-lbl billing-lbl-monthly cursor-pointer rounded-lg px-5 py-2 text-sm font-semibold transition select-none">
+            Monthly
+          </label>
+          <label for="billing-toggle" class="billing-lbl billing-lbl-annual cursor-pointer rounded-lg px-5 py-2 text-sm font-semibold transition select-none">
+            Annual
+            <span class="ml-1.5 inline-block rounded-full bg-lime-500/20 px-2 py-0.5 text-xs font-bold text-lime-400">2 months free</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ANNUAL cards (DEFAULT) -->
+      <div id="annual-plans" class="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+        {plans.map((plan) => (
+          <div class:list={[
+            'relative flex flex-col rounded-2xl border p-7 sm:p-8',
+            plan.highlighted
+              ? 'border-lime-500/40 bg-gradient-to-b from-lime-950/40 to-dark-900/80 shadow-[0_0_40px_-8px_rgba(163,230,53,0.15)]'
+              : 'border-dark-800 bg-dark-900/60',
+          ]}>
+            {plan.highlighted && (
+              <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                <span class="whitespace-nowrap rounded-full bg-lime-500 px-4 py-1 text-xs font-extrabold tracking-wide text-dark-950 shadow-lg">
+                  MOST POPULAR
+                </span>
+              </div>
+            )}
+
+            <div>
+              <p class:list={['text-xs font-bold uppercase tracking-widest', plan.highlighted ? 'text-lime-500/70' : 'text-dark-500']}>{plan.name}</p>
+              <h2 class="mt-1.5 text-xl font-bold text-white">{plan.subtitle}</h2>
+              <div class="mt-5 flex items-end gap-2">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-base font-medium text-dark-600 line-through">${plan.monthly}</span>
+                  <span class="text-4xl font-extrabold text-white">${plan.annual}</span>
+                  <span class="text-sm text-dark-400">/mo</span>
+                </div>
+              </div>
+              <p class="mt-1 text-xs text-dark-500">Billed <span class="font-semibold text-dark-400">${plan.annualTotal}/year</span></p>
+            </div>
+
+            <div class="mt-6">
+              <a
+                href={plan.cta.href}
+                class:list={[
+                  'block w-full rounded-xl py-3.5 text-center text-sm font-bold transition',
+                  plan.highlighted
+                    ? 'bg-lime-500 text-dark-950 hover:bg-lime-400 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)]'
+                    : 'border border-dark-700 bg-dark-800 text-white hover:border-lime-500/40 hover:bg-dark-700',
+                ]}
+              >
+                {plan.cta.text} — ${plan.annualTotal}/year
+              </a>
+              <p class="mt-2.5 text-center text-xs text-dark-500">30-day guarantee · Cancel anytime</p>
+            </div>
+
+            <div class="my-6 border-t border-dark-800"></div>
+
+            <ul class="space-y-2.5 flex-1">
+              {plan.features.map((f) => (
+                <li class="flex items-start gap-3 text-sm text-dark-300">
+                  <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <!-- MONTHLY cards -->
+      <div id="monthly-plans" class="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+        {plans.map((plan) => (
+          <div class:list={[
+            'relative flex flex-col rounded-2xl border p-7 sm:p-8',
+            plan.highlighted
+              ? 'border-lime-500/40 bg-gradient-to-b from-lime-950/40 to-dark-900/80 shadow-[0_0_40px_-8px_rgba(163,230,53,0.15)]'
+              : 'border-dark-800 bg-dark-900/60',
+          ]}>
+            {plan.highlighted && (
+              <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                <span class="whitespace-nowrap rounded-full bg-lime-500 px-4 py-1 text-xs font-extrabold tracking-wide text-dark-950 shadow-lg">
+                  MOST POPULAR
+                </span>
+              </div>
+            )}
+
+            <div>
+              <p class:list={['text-xs font-bold uppercase tracking-widest', plan.highlighted ? 'text-lime-500/70' : 'text-dark-500']}>{plan.name}</p>
+              <h2 class="mt-1.5 text-xl font-bold text-white">{plan.subtitle}</h2>
+              <div class="mt-5 flex items-baseline gap-1">
+                <span class="text-4xl font-extrabold text-white">${plan.monthly}</span>
+                <span class="text-sm text-dark-400">/mo</span>
+              </div>
+              <p class="mt-1 text-xs text-dark-500">Billed monthly · cancel anytime</p>
+            </div>
+
+            <div class="mt-6">
+              <a
+                href={plan.cta.href}
+                class:list={[
+                  'block w-full rounded-xl py-3.5 text-center text-sm font-bold transition',
+                  plan.highlighted
+                    ? 'bg-lime-500 text-dark-950 hover:bg-lime-400'
+                    : 'border border-dark-700 bg-dark-800 text-white hover:border-lime-500/40 hover:bg-dark-700',
+                ]}
+              >
+                {plan.cta.text} — ${plan.monthly}/mo
+              </a>
+              <p class="mt-2.5 text-center text-xs text-dark-500">30-day guarantee · Cancel anytime</p>
+            </div>
+
+            <div class="my-6 border-t border-dark-800"></div>
+
+            <ul class="space-y-2.5 flex-1">
+              {plan.features.map((f) => (
+                <li class="flex items-start gap-3 text-sm text-dark-300">
+                  <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <!-- FAQ -->
+      <div class="mx-auto mt-20 max-w-3xl">
+        <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+        <div class="space-y-3">
+          {faqs.map((faq) => (
+            <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+              <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+                {faq.question}
+                <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cross-links -->
+      <div class="mt-16">
+        <CrossLinks
+          heading={`Explore ${site.name}`}
+          links={[
+            { href: '/features', title: 'All Features', desc: 'See everything included in your plan.' },
+            { href: '/compare', title: 'Compare', desc: `How ${site.name} compares to alternatives.` },
+            { href: '/blog', title: 'Blog', desc: 'Tips, guides, and best practices.' },
+            { href: '/about', title: 'About Us', desc: `Learn more about ${site.name} and our mission.` },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  #monthly-plans { display: none; }
+  #annual-plans  { display: grid; }
+
+  .billing-lbl-annual  { background-color: #1e293b; color: #f8fafc; }
+  .billing-lbl-monthly { background-color: transparent; color: #64748b; }
+
+  #billing-toggle:checked ~ #annual-plans  { display: none; }
+  #billing-toggle:checked ~ #monthly-plans { display: grid; }
+  #billing-toggle:checked ~ div .billing-lbl-monthly { background-color: #1e293b; color: #f8fafc; }
+  #billing-toggle:checked ~ div .billing-lbl-annual  { background-color: transparent; color: #64748b; }
+</style>

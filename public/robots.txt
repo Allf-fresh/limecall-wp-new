@@ -1,0 +1,47 @@
+# astro-saas-starter — robots.txt
+# Replace example.com with your domain
+
+# ── Default: allow everything ──────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ── Major Search Engines ────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# ── AI Crawlers (allow by default) ─────────────────────────────────────────
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# ── SEO Tools ──────────────────────────────────────────────────────────────
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+# ── Sitemap ────────────────────────────────────────────────────────────────
+Sitemap: https://example.com/sitemap-index.xml

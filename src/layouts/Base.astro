@@ -1,0 +1,123 @@
+---
+import '../styles/global.css';
+import { buildCanonical, organizationSchema, type SEOProps } from '../lib/seo';
+import { site } from '../site.config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props extends SEOProps {}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/images/og-default.svg',
+  ogType = 'website',
+  noindex = false,
+  publishDate,
+  modifiedDate,
+  author,
+} = Astro.props;
+
+const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const canonicalUrl = canonical || buildCanonical(Astro.url.pathname);
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${site.url}${ogImage}`;
+
+const cfToken = site.analytics.cloudflareBeaconToken;
+const phKey = site.analytics.posthogKey;
+const phHost = site.analytics.posthogHost;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content={site.name} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    {site.social.twitter && <meta name="twitter:site" content={`@${site.social.twitter}`} />}
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {publishDate && <meta property="article:published_time" content={publishDate} />}
+    {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
+
+    <!-- Supabase env (needed for client-side email capture) -->
+    <meta name="supabase-url" content={import.meta.env.PUBLIC_SUPABASE_URL || ''} />
+    <meta name="supabase-key" content={import.meta.env.PUBLIC_SUPABASE_ANON_KEY || ''} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+    <meta name="theme-color" content="#020617" />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} Blog`} href="/feed.xml" />
+
+    <!-- Fonts — preload for non-render-blocking load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema())} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Skip to main content — keyboard / screen reader accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[9999] focus:rounded-lg focus:bg-lime-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-dark-950 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2 focus:ring-offset-dark-950"
+    >
+      Skip to main content
+    </a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Cloudflare Web Analytics (only if token configured) -->
+    {cfToken && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token":"${cfToken}"}`}></script>
+    )}
+
+    <!-- PostHog Analytics (only if key configured) -->
+    {phKey && (
+      <script is:inline define:vars={{ phKey, phHost }}>
+        (function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.crossOrigin="anonymous",p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init capture alias people identify set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId sessionRecordingUrl".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]));
+        posthog.init(phKey, {
+          api_host: phHost,
+          person_profiles: 'identified_only',
+          capture_pageview: true,
+          capture_pageleave: true,
+          persistence: 'localStorage+cookie',
+          loaded: function(ph) {
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+              ph.opt_out_capturing();
+            }
+          }
+        });
+      </script>
+    )}
+  </body>
+</html>

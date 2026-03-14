@@ -1,0 +1,64 @@
+---
+interface Row {
+  feature: string;
+  yours: boolean | string;
+  theirs: boolean | string;
+}
+
+interface Props {
+  rows: Row[];
+  yourName: string;
+  theirName: string;
+}
+
+const { rows, yourName, theirName } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-2xl border border-dark-800">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-dark-800 bg-dark-900">
+        <th class="px-6 py-4 text-left font-medium text-dark-400 w-1/2">Feature</th>
+        <th class="px-4 py-4 text-center font-bold text-lime-400">{yourName}</th>
+        <th class="px-4 py-4 text-center font-bold text-dark-300">{theirName}</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-dark-800/60">
+      {rows.map((row) => (
+        <tr class="bg-dark-900/40 hover:bg-dark-900/70 transition-colors">
+          <td class="px-6 py-3.5 text-dark-300">{row.feature}</td>
+          <td class="px-4 py-3.5 text-center">
+            {typeof row.yours === 'boolean' ? (
+              row.yours ? (
+                <svg class="mx-auto h-4 w-4 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg class="mx-auto h-4 w-4 text-dark-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )
+            ) : (
+              <span class="text-dark-300">{row.yours}</span>
+            )}
+          </td>
+          <td class="px-4 py-3.5 text-center">
+            {typeof row.theirs === 'boolean' ? (
+              row.theirs ? (
+                <svg class="mx-auto h-4 w-4 text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg class="mx-auto h-4 w-4 text-dark-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )
+            ) : (
+              <span class="text-dark-400">{row.theirs}</span>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

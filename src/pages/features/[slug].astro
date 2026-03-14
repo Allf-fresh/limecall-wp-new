@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
+import { site, features, plans } from '../../site.config';
+
+export function getStaticPaths() {
+  return features.map((feature) => ({
+    params: { slug: feature.slug },
+    props: { feature },
+  }));
+}
+
+const { feature } = Astro.props;
+
+const includedPlans = plans.filter(p => feature.includedIn.includes(p.slug));
+---
+
+<Base
+  title={`${feature.name} — ${site.name}`}
+  description={`${feature.tagline} — ${feature.description}`}
+  canonical={`${site.url}/features/${feature.slug}`}
+>
+  <article class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs
+        items={[
+          { name: 'Features', url: `${site.url}/features` },
+          { name: feature.name, url: `${site.url}/features/${feature.slug}` },
+        ]}
+      />
+
+      <!-- Hero -->
+      <div class="text-center mb-12">
+        <div class="text-5xl mb-6" aria-hidden="true">{feature.icon}</div>
+        <h1 class="text-4xl font-extrabold text-white sm:text-5xl">{feature.name}</h1>
+        <p class="mt-4 text-xl text-lime-400 font-medium">{feature.tagline}</p>
+        <p class="mt-6 text-lg text-dark-300 max-w-2xl mx-auto leading-relaxed">
+          {feature.description}
+        </p>
+      </div>
+
+      <!-- Included in plans -->
+      {includedPlans.length > 0 && (
+        <div class="mb-12 rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+          <p class="text-xs font-bold uppercase tracking-wider text-dark-400 mb-4">Included in</p>
+          <div class="flex flex-wrap gap-3">
+            {includedPlans.map((plan) => (
+              <a
+                href="/pricing"
+                class:list={[
+                  'inline-flex items-center rounded-full px-4 py-1.5 text-sm font-semibold transition',
+                  plan.highlighted
+                    ? 'bg-lime-500/15 text-lime-400 border border-lime-500/30 hover:bg-lime-500/25'
+                    : 'bg-dark-800 text-dark-300 border border-dark-700 hover:border-dark-600',
+                ]}
+              >
+                {plan.name} Plan
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- CTA -->
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 p-8 text-center">
+        <h2 class="text-2xl font-bold text-white mb-3">
+          Get {feature.name} with {site.name}
+        </h2>
+        <p class="text-dark-300 mb-6">{site.cta.subtext}</p>
+        <a
+          href={site.cta.href}
+          class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold transition"
+        >
+          {site.cta.text}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+        </a>
+      </div>
+
+      <!-- Other features -->
+      <div class="mt-12">
+        <h2 class="text-xl font-bold text-white mb-6">Other features</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {features.filter(f => f.slug !== feature.slug).map((f) => (
+            <a href={`/features/${f.slug}`} class="group rounded-xl border border-dark-800 bg-dark-900/50 p-5 transition hover:border-lime-500/50">
+              <span class="text-xl mr-3">{f.icon}</span>
+              <span class="font-semibold text-white group-hover:text-lime-400 transition">{f.name}</span>
+              <p class="mt-2 text-sm text-dark-400">{f.tagline}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

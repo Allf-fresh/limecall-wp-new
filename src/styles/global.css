@@ -1,0 +1,427 @@
+@import "tailwindcss";
+
+/* ── SaaS Starter Design Tokens ── */
+@theme {
+  --color-lime-50: #f7fee7;
+  --color-lime-100: #ecfccb;
+  --color-lime-200: #d9f99d;
+  --color-lime-300: #bef264;
+  --color-lime-400: #a3e635;
+  --color-lime-500: #84cc16;
+  --color-lime-600: #65a30d;
+  --color-lime-700: #4d7c0f;
+  --color-lime-800: #3f6212;
+  --color-lime-900: #365314;
+
+  --color-dark-50: #f8fafc;
+  --color-dark-100: #f1f5f9;
+  --color-dark-200: #e2e8f0;
+  --color-dark-300: #cbd5e1;
+  --color-dark-400: #94a3b8;
+  --color-dark-500: #64748b;
+  --color-dark-600: #475569;
+  --color-dark-700: #334155;
+  --color-dark-800: #1e293b;
+  --color-dark-900: #0f172a;
+  --color-dark-950: #020617;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ── Base Styles ── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-dark-950 text-dark-100 font-sans;
+  }
+
+  ::selection {
+    @apply bg-lime-500/30 text-white;
+  }
+}
+
+/* ── Blog Prose Overrides ── */
+@layer components {
+  /* Scroll margin for ToC anchor links */
+  .prose-blog :is(h2, h3) {
+    scroll-margin-top: 5rem;
+  }
+
+  /* ── Legal Prose Overrides ── */
+
+  /* Section anchors (¶ appended by JS) */
+  .section-anchor {
+    opacity: 0;
+    color: var(--color-dark-600);
+    margin-left: 0.4em;
+    font-size: 0.75em;
+    text-decoration: none;
+    transition: opacity 0.15s, color 0.15s;
+    user-select: none;
+  }
+  .prose-legal h2:hover .section-anchor,
+  .section-anchor:focus {
+    opacity: 1;
+  }
+  .section-anchor:hover {
+    color: var(--color-lime-400);
+  }
+
+  /* h2 — numbered section headings with top rule */
+  .prose-legal h2 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-top: 2.75em;
+    padding-top: 1.75em;
+    border-top: 1px solid var(--color-dark-800);
+    scroll-margin-top: 5rem;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0 0.3em;
+  }
+  /* Remove top border on the very first h2 */
+  .prose-legal h2:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  /* h3 — sub-sections */
+  .prose-legal h3 {
+    color: var(--color-dark-100);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 2em;
+    scroll-margin-top: 5rem;
+  }
+
+  /* Larger, more comfortable body text */
+  .prose-legal p,
+  .prose-legal li {
+    color: var(--color-dark-300);
+    line-height: 1.85;
+    font-size: 0.975rem;
+  }
+
+  /* Tables — polished dark style */
+  .prose-legal table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.875rem;
+    margin: 1.5em 0;
+  }
+  .prose-legal th {
+    text-align: left;
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-dark-300);
+    background: var(--color-dark-900);
+    border-bottom: 1px solid var(--color-dark-700);
+  }
+  .prose-legal td {
+    padding: 0.75rem 1rem;
+    color: var(--color-dark-300);
+    border-bottom: 1px solid var(--color-dark-800);
+    vertical-align: top;
+  }
+  .prose-legal tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .prose-legal tbody tr:hover td {
+    background: color-mix(in srgb, var(--color-dark-900) 60%, transparent);
+  }
+
+  /* code inside legal prose */
+  .prose-legal :not(pre) > code {
+    background: var(--color-dark-800);
+    padding: 0.1em 0.35em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+  .prose-legal :not(pre) > code::before,
+  .prose-legal :not(pre) > code::after {
+    content: none;
+  }
+
+  /* Blockquote callout variant */
+  .prose-legal blockquote {
+    border-left-color: var(--color-lime-500);
+    background: color-mix(in srgb, var(--color-dark-900) 50%, transparent);
+    padding: 1rem 1.25rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  /* List markers */
+  .prose-legal ul > li::marker {
+    color: var(--color-lime-500);
+  }
+  .prose-legal ol > li::marker {
+    color: var(--color-lime-400);
+    font-weight: 600;
+  }
+
+  /* Link style */
+  .prose-legal a {
+    color: var(--color-lime-400);
+    text-decoration-color: color-mix(in srgb, var(--color-lime-400) 30%, transparent);
+  }
+  .prose-legal a:hover {
+    color: var(--color-lime-300);
+    text-decoration-color: var(--color-lime-300);
+  }
+
+  /* HR */
+  .prose-legal hr {
+    border-color: var(--color-dark-800);
+  }
+
+  /* strong */
+  .prose-legal strong {
+    color: var(--color-dark-100);
+    font-weight: 600;
+  }
+
+  /* ── prose-blog: spacing & layout ── */
+
+  /* Paragraph spacing */
+  .prose-blog p {
+    margin-top: 0;
+    margin-bottom: 1.25em;
+  }
+  .prose-blog p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Heading spacing */
+  .prose-blog h2 {
+    margin-top: 2.5em;
+    margin-bottom: 0.75em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid var(--color-dark-800);
+  }
+  .prose-blog h2:first-child {
+    margin-top: 0;
+  }
+  .prose-blog h3 {
+    margin-top: 1.75em;
+    margin-bottom: 0.5em;
+  }
+  .prose-blog h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.4em;
+  }
+
+  /* List layout */
+  .prose-blog ul,
+  .prose-blog ol {
+    margin-top: 0.75em;
+    margin-bottom: 1.25em;
+    padding-left: 1.5em;
+  }
+  .prose-blog ul {
+    list-style-type: disc;
+  }
+  .prose-blog ol {
+    list-style-type: decimal;
+  }
+  .prose-blog li {
+    margin-bottom: 0.4em;
+  }
+  .prose-blog li:last-child {
+    margin-bottom: 0;
+  }
+  /* Nested lists */
+  .prose-blog li > ul,
+  .prose-blog li > ol {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+  }
+
+  /* Ordered list — highlight the numbers */
+  .prose-blog ol > li {
+    padding-left: 0.25em;
+  }
+
+  /* Step-by-step numbered items */
+  .prose-blog ol > li::marker {
+    color: var(--color-lime-400);
+    font-weight: 700;
+    font-size: 0.95em;
+  }
+
+  /* Table spacing */
+  .prose-blog table {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .prose-blog th,
+  .prose-blog td {
+    padding: 0.65rem 1rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-dark-800);
+  }
+  .prose-blog th {
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--color-dark-700);
+  }
+  .prose-blog thead tr {
+    background: var(--color-dark-900);
+  }
+  .prose-blog tbody td {
+    background: color-mix(in srgb, var(--color-dark-900) 50%, transparent);
+  }
+  .prose-blog tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* HR spacing */
+  .prose-blog hr {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  /* Blockquote spacing */
+  .prose-blog blockquote {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+  }
+
+  /* Code block spacing */
+  .prose-blog pre {
+    margin-top: 1em;
+    margin-bottom: 1.25em;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  /* Lime-colored links */
+  .prose-blog a {
+    color: var(--color-lime-400);
+    text-decoration-color: color-mix(in srgb, var(--color-lime-400) 30%, transparent);
+  }
+  .prose-blog a:hover {
+    text-decoration-color: var(--color-lime-400);
+  }
+
+  /* Lime accent blockquotes */
+  .prose-blog blockquote {
+    border-left-color: var(--color-lime-500);
+    background: color-mix(in srgb, var(--color-dark-900) 50%, transparent);
+    padding: 1rem 1.25rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  /* Inline code styling */
+  .prose-blog :not(pre) > code {
+    background: var(--color-dark-800);
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    font-weight: 500;
+  }
+  .prose-blog :not(pre) > code::before,
+  .prose-blog :not(pre) > code::after {
+    content: none;
+  }
+
+  /* Code blocks */
+  .prose-blog pre {
+    background: var(--color-dark-900);
+    border: 1px solid var(--color-dark-800);
+    border-radius: 0.75rem;
+  }
+
+  /* Rounded images */
+  .prose-blog img {
+    border-radius: 0.75rem;
+  }
+
+  /* Bold text visibility */
+  .prose-blog strong {
+    color: var(--color-dark-100);
+  }
+
+  /* Heading styles */
+  .prose-blog h2 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-top: 2.75em;
+    scroll-margin-top: 5rem;
+  }
+  .prose-blog h3 {
+    color: var(--color-dark-100);
+    font-weight: 600;
+    font-size: 1.1rem;
+    scroll-margin-top: 5rem;
+  }
+  .prose-blog h4 {
+    color: var(--color-dark-200);
+    font-weight: 600;
+  }
+
+  /* Comfortable body text sizing */
+  .prose-blog p,
+  .prose-blog li {
+    font-size: 1.0125rem;
+    line-height: 1.8;
+    color: var(--color-dark-300);
+  }
+
+  /* List markers */
+  .prose-blog ul > li::marker {
+    color: var(--color-lime-500);
+  }
+  .prose-blog ol > li::marker {
+    color: var(--color-lime-400);
+    font-weight: 600;
+  }
+
+  /* Table styling */
+  .prose-blog table {
+    border-collapse: collapse;
+  }
+  .prose-blog th {
+    background: var(--color-dark-900);
+    color: var(--color-dark-100);
+    border-color: var(--color-dark-700);
+  }
+  .prose-blog td {
+    border-color: var(--color-dark-800);
+  }
+
+  /* HR styling */
+  .prose-blog hr {
+    border-color: var(--color-dark-800);
+  }
+
+  /* Details/summary (inline FAQs in content) */
+  .prose-blog details {
+    background: var(--color-dark-900);
+    border: 1px solid var(--color-dark-800);
+    border-radius: 0.75rem;
+    padding: 0 1rem;
+  }
+  .prose-blog summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+  }
+}

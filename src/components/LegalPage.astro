@@ -1,0 +1,205 @@
+---
+import { site } from '../site.config';
+import Breadcrumbs from './seo/Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  lastUpdated?: string;
+  effectiveDate?: string;
+  summary?: string;
+  summaryLabel?: string;
+  summaryType?: 'lime' | 'amber' | 'neutral';
+  breadcrumb?: { name: string; url: string };
+}
+
+const {
+  title,
+  lastUpdated,
+  effectiveDate,
+  summary,
+  summaryLabel = 'Quick summary',
+  summaryType = 'lime',
+  breadcrumb,
+} = Astro.props;
+
+const callout = {
+  lime:    { border: 'border-lime-500/20',  bg: 'bg-lime-500/5',  label: 'text-lime-400'  },
+  amber:   { border: 'border-amber-500/20', bg: 'bg-amber-500/5', label: 'text-amber-400' },
+  neutral: { border: 'border-dark-700',     bg: 'bg-dark-900/50', label: 'text-white'     },
+}[summaryType];
+---
+
+<!-- Reading progress bar -->
+<div
+  id="reading-progress"
+  class="fixed left-0 top-0 z-50 h-0.5 w-0 bg-lime-400"
+  style="transition: width 0.12s ease-out"
+  role="progressbar"
+  aria-hidden="true"
+></div>
+
+<section class="py-10 sm:py-14">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12 xl:gap-20">
+
+      <!-- Desktop Sidebar -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-24 space-y-8">
+
+          <div>
+            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-dark-600">On this page</p>
+            <nav id="legal-toc" aria-label="Table of contents" class="space-y-px">
+            </nav>
+          </div>
+
+          <div class="border-t border-dark-800 pt-6">
+            <p class="mb-3 text-xs font-bold uppercase tracking-widest text-dark-600">Legal pages</p>
+            <div class="space-y-1.5">
+              {site.footer.legal.map(({ href, label }) => (
+                <a href={href} class="block text-xs text-dark-500 hover:text-lime-400 transition-colors">{label}</a>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="min-w-0">
+
+        {breadcrumb && <Breadcrumbs items={[breadcrumb]} />}
+
+        <div class="mb-8 sm:mb-10">
+          <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">{title}</h1>
+
+          {(lastUpdated || effectiveDate) && (
+            <div class="mt-4 flex flex-wrap items-center gap-2.5">
+              {lastUpdated && (
+                <span class="inline-flex items-center gap-1.5 rounded-full border border-dark-700 bg-dark-900/60 px-2.5 py-1 text-xs font-medium text-dark-400">
+                  <svg class="h-3 w-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  Updated {lastUpdated}
+                </span>
+              )}
+              {effectiveDate && effectiveDate !== lastUpdated && (
+                <span class="text-xs text-dark-600">Effective {effectiveDate}</span>
+              )}
+            </div>
+          )}
+
+          {summary && (
+            <div class={`mt-6 rounded-xl border p-5 ${callout.border} ${callout.bg}`}>
+              <p class="text-sm leading-relaxed text-dark-300">
+                <strong class={callout.label}>{summaryLabel}:</strong>{' '}{summary}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <!-- Mobile TOC (collapsible) -->
+        <details class="mb-8 rounded-xl border border-dark-800 bg-dark-900/50 lg:hidden open:border-lime-500/20">
+          <summary class="flex cursor-pointer select-none items-center justify-between px-4 py-3.5 text-sm font-semibold text-white">
+            <span class="flex items-center gap-2">
+              <svg class="h-4 w-4 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10"/>
+              </svg>
+              Table of Contents
+            </span>
+            <svg class="h-4 w-4 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <nav id="legal-toc-mobile" aria-label="Mobile table of contents" class="space-y-1 px-4 pb-4 pt-1">
+          </nav>
+        </details>
+
+        <!-- Prose content -->
+        <div id="legal-content" class="prose prose-invert prose-lime prose-legal max-w-none">
+          <slot />
+        </div>
+
+        <!-- Footer slot -->
+        <slot name="footer" />
+
+      </main>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+(function () {
+  var content    = document.getElementById('legal-content');
+  var tocD       = document.getElementById('legal-toc');
+  var tocM       = document.getElementById('legal-toc-mobile');
+  var progressEl = document.getElementById('reading-progress');
+
+  if (!content) return;
+
+  var headings = Array.prototype.slice.call(content.querySelectorAll('h2'));
+
+  headings.forEach(function (h, i) {
+    if (!h.id) {
+      var raw = (h.textContent || '').trim();
+      h.id = raw
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/\s+/g, '-')
+        .substring(0, 60) || ('section-' + (i + 1));
+    }
+
+    var anchor = document.createElement('a');
+    anchor.href        = '#' + h.id;
+    anchor.className   = 'section-anchor';
+    anchor.textContent = ' ¶';
+    anchor.setAttribute('aria-label', 'Link to this section');
+    h.appendChild(anchor);
+
+    var label = (h.textContent || '').replace(' ¶', '').trim();
+
+    if (tocD) {
+      var dl = document.createElement('a');
+      dl.href      = '#' + h.id;
+      dl.className = 'toc-item block py-1.5 pl-3 text-sm leading-snug text-dark-500 border-l-2 border-dark-800 transition-colors duration-150 hover:text-lime-400 hover:border-lime-500';
+      dl.dataset.id = h.id;
+      dl.textContent = label;
+      tocD.appendChild(dl);
+    }
+
+    if (tocM) {
+      var ml = document.createElement('a');
+      ml.href      = '#' + h.id;
+      ml.className = 'block py-1 text-sm text-dark-400 hover:text-lime-400 transition-colors';
+      ml.textContent = label;
+      tocM.appendChild(ml);
+    }
+  });
+
+  if (progressEl) {
+    window.addEventListener('scroll', function () {
+      var scrolled = window.scrollY;
+      var total    = document.documentElement.scrollHeight - window.innerHeight;
+      progressEl.style.width = (total > 0 ? Math.min((scrolled / total) * 100, 100) : 0) + '%';
+    }, { passive: true });
+  }
+
+  if (tocD && headings.length > 0 && 'IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var link = tocD.querySelector('[data-id="' + entry.target.id + '"]');
+        if (!link) return;
+        tocD.querySelectorAll('.toc-item').forEach(function (l) {
+          l.classList.remove('text-lime-400', 'border-lime-500');
+          l.classList.add('text-dark-500', 'border-dark-800');
+        });
+        link.classList.remove('text-dark-500', 'border-dark-800');
+        link.classList.add('text-lime-400', 'border-lime-500');
+      });
+    }, { rootMargin: '-5% 0px -80% 0px', threshold: 0 });
+
+    headings.forEach(function (h) { obs.observe(h); });
+  }
+}());
+</script>

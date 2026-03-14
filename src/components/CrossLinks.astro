@@ -1,0 +1,31 @@
+---
+interface LinkItem {
+  href: string;
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  heading?: string;
+  links: LinkItem[];
+  class?: string;
+}
+
+const {
+  heading = 'Explore More',
+  links,
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={className}>
+  {heading && <h2 class="text-xl font-bold text-white mb-6">{heading}</h2>}
+  <div class="grid gap-4 sm:grid-cols-2">
+    {links.map((link) => (
+      <a href={link.href} class="group rounded-xl border border-dark-800 bg-dark-900/50 p-5 transition-colors hover:border-lime-500/50">
+        <h3 class="font-semibold text-white group-hover:text-lime-400 transition">{link.title}</h3>
+        <p class="mt-1 text-sm text-dark-400">{link.desc}</p>
+      </a>
+    ))}
+  </div>
+</div>

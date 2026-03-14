@@ -1,0 +1,285 @@
+---
+import Base from './Base.astro';
+import { site } from '../site.config';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import EmailCapture from '../components/EmailCapture.astro';
+import ArticleHeader from '../components/blog/ArticleHeader.astro';
+import TableOfContents from '../components/blog/TableOfContents.astro';
+import KeyTakeaways from '../components/blog/KeyTakeaways.astro';
+import BlogCTA from '../components/blog/BlogCTA.astro';
+import ShareButtons from '../components/blog/ShareButtons.astro';
+import RelatedPosts from '../components/blog/RelatedPosts.astro';
+import AuthorCard from '../components/blog/AuthorCard.astro';
+import { faqSchema, buildCanonical } from '../lib/seo';
+import { getRelatedPosts } from '../lib/supabase';
+import type { ContentRow } from '../lib/database.types';
+
+interface Props {
+  post: ContentRow;
+}
+
+const { post } = Astro.props;
+
+// ── Build canonical URL ──
+const categorySegment = post.category ? `/${post.category}` : '';
+const url = buildCanonical(`/blog${categorySegment}/${post.slug}`);
+
+// ── Reading time (238 wpm average) ──
+const htmlBody = post.body_html || post.body || '';
+const plainText = htmlBody.replace(/<[^>]*>/g, '');
+const wordCount = plainText.split(/\s+/).filter(Boolean).length;
+const readingTime = Math.max(1, Math.round(wordCount / 238));
+
+// ── Extract headings for Table of Contents ──
+interface TocItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
+const headings: TocItem[] = [];
+let processedBody = htmlBody;
+
+// Extract h2/h3 headings, assign IDs, build ToC data
+const headingRegex = /<(h[23])[^>]*>([\s\S]*?)<\/\1>/gi;
+let headingMatch;
+const headingReplacements: { original: string; replacement: string }[] = [];
+
+headingRegex.lastIndex = 0;
+while ((headingMatch = headingRegex.exec(processedBody)) !== null) {
+  const tag = headingMatch[1].toLowerCase();
+  const fullMatch = headingMatch[0];
+  const innerHtml = headingMatch[2];
+  const text = innerHtml.replace(/<[^>]*>/g, '').trim();
+  const id = text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .substring(0, 60);
+
+  if (id && text) {
+    headings.push({ id, text, level: tag === 'h2' ? 2 : 3 });
+    const newTag = `<${tag} id="${id}">${innerHtml}</${tag}>`;
+    headingReplacements.push({ original: fullMatch, replacement: newTag });
+  }
+}
+
+for (const { original, replacement } of headingReplacements) {
+  processedBody = processedBody.replace(original, replacement);
+}
+
+// ── Extract key takeaways from first <ul> if available ──
+let takeaways: string[] = [];
+if (wordCount > 300) {
+  const firstUlMatch = processedBody.match(/<ul[^>]*>([\s\S]*?)<\/ul>/i);
+  if (firstUlMatch) {
+    const liMatches = firstUlMatch[1].match(/<li[^>]*>([\s\S]*?)<\/li>/gi);
+    if (liMatches && liMatches.length >= 3 && liMatches.length <= 7) {
+      const extracted = liMatches.map(li =>
+        li.replace(/<[^>]*>/g, '').trim()
+      );
+      const allShort = extracted.every(t => t.length < 200 && t.length > 10);
+      if (allShort) {
+        takeaways = extracted.slice(0, 5);
+      }
+    }
+  }
+}
+
+// ── Split body at ~50% for inline CTA insertion ──
+const bodyParagraphs = processedBody.split(/(?=<h2[\s>])/i);
+let firstHalf = processedBody;
+let secondHalf = '';
+
+if (bodyParagraphs.length >= 3) {
+  const midpoint = Math.ceil(bodyParagraphs.length / 2);
+  firstHalf = bodyParagraphs.slice(0, midpoint).join('');
+  secondHalf = bodyParagraphs.slice(midpoint).join('');
+} else {
+  const pSplit = processedBody.split(/(?=<p[\s>])/i);
+  if (pSplit.length >= 6) {
+    const mid = Math.ceil(pSplit.length / 2);
+    firstHalf = pSplit.slice(0, mid).join('');
+    secondHalf = pSplit.slice(mid).join('');
+  }
+}
+
+// ── Breadcrumbs ──
+const breadcrumbItems = [
+  { name: 'Blog', url: `${site.url}/blog` },
+];
+
+if (post.category) {
+  breadcrumbItems.push({
+    name: post.category.charAt(0).toUpperCase() + post.category.slice(1),
+    url: `${site.url}/blog/${post.category}`,
+  });
+}
+
+breadcrumbItems.push({ name: post.title, url });
+
+// ── Related posts ──
+const relatedPosts = await getRelatedPosts('blog', post.category, post.slug, 3);
+
+// ── Enhanced Article JSON-LD ──
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': post.schema_type === 'HowTo' ? 'HowTo' : 'Article',
+  headline: post.title,
+  description: post.meta_description || '',
+  url,
+  image: post.featured_image || `${site.url}/images/og-default.png`,
+  datePublished: post.publish_date,
+  dateModified: post.updated_at || post.publish_date,
+  wordCount,
+  articleSection: post.category || 'Blog',
+  author: {
+    '@type': 'Person',
+    name: post.author || `${site.name} Team`,
+    url: `${site.url}/about`,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${site.url}/images/logo.png`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url,
+  },
+};
+
+if (post.schema_type === 'HowTo' && post.how_to_steps && post.how_to_steps.length > 0) {
+  (articleJsonLd as any).step = post.how_to_steps.map((step, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: step.name,
+    text: step.text,
+    ...(step.image ? { image: step.image } : {}),
+  }));
+}
+---
+
+<Base
+  title={post.title}
+  description={post.meta_description || ''}
+  ogType="article"
+  publishDate={post.publish_date}
+  modifiedDate={post.updated_at}
+  author={post.author}
+>
+  <JsonLd schema={articleJsonLd} />
+
+  {post.faq_items && post.faq_items.length > 0 && (
+    <JsonLd schema={faqSchema(post.faq_items)} />
+  )}
+
+  <article class="py-12 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div class="max-w-3xl">
+        <ArticleHeader
+          title={post.title}
+          description={post.meta_description}
+          category={post.category}
+          author={post.author}
+          publishDate={post.publish_date}
+          updatedAt={post.updated_at}
+          readingTime={readingTime}
+          schemaType={post.schema_type}
+        />
+      </div>
+
+      <div class="lg:hidden max-w-3xl">
+        <div class="mb-6">
+          <ShareButtons url={url} title={post.title} layout="horizontal" />
+        </div>
+        <TableOfContents headings={headings} />
+      </div>
+
+      <div class="lg:grid lg:grid-cols-[1fr_280px] lg:gap-10 max-w-7xl">
+        <div class="max-w-3xl min-w-0">
+          {takeaways.length > 0 && (
+            <KeyTakeaways takeaways={takeaways} />
+          )}
+
+          <div
+            class="prose prose-invert prose-lime prose-blog max-w-none"
+            set:html={firstHalf}
+          />
+
+          {secondHalf && (
+            <BlogCTA variant="inline" category={post.category} />
+          )}
+
+          {secondHalf && (
+            <div
+              class="prose prose-invert prose-lime prose-blog max-w-none"
+              set:html={secondHalf}
+            />
+          )}
+
+          {post.faq_items && post.faq_items.length > 0 && (
+            <section class="mt-14">
+              <h2 class="text-2xl font-bold text-white mb-6" id="faq">
+                Frequently Asked Questions
+              </h2>
+              <div class="space-y-3">
+                {post.faq_items.map((faq) => (
+                  <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-colors hover:border-dark-700">
+                    <summary class="cursor-pointer px-6 py-4 text-white font-medium flex items-center justify-between">
+                      <span>{faq.question}</span>
+                      <svg class="w-5 h-5 text-dark-500 shrink-0 ml-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </summary>
+                    <div class="px-6 pb-5 text-dark-300 leading-relaxed text-sm">{faq.answer}</div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <AuthorCard author={post.author} siteName={site.name} siteUrl={site.url} />
+
+          <section class="mt-10 pt-8 border-t border-dark-800">
+            <div class="rounded-2xl bg-gradient-to-br from-lime-500/10 via-dark-900 to-dark-900 border border-lime-500/20 p-8 md:p-10 text-center">
+              <h2 class="text-2xl font-bold text-white mb-3">
+                Ready to get started?
+              </h2>
+              <p class="text-dark-300 mb-6 max-w-lg mx-auto">
+                Join thousands of users who use {site.name}.
+              </p>
+              <a
+                href="/pricing"
+                class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold text-lg transition"
+              >
+                Get {site.name} Now
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+              </a>
+            </div>
+          </section>
+
+          <RelatedPosts posts={relatedPosts} />
+        </div>
+
+        <aside class="hidden lg:block">
+          <div class="sticky top-24 space-y-6">
+            <TableOfContents headings={headings} />
+            <BlogCTA variant="sidebar" category={post.category} />
+            <ShareButtons url={url} title={post.title} layout="vertical" />
+          </div>
+        </aside>
+      </div>
+
+      <div class="max-w-3xl mt-12">
+        <EmailCapture source={`blog-${post.category || 'general'}`} />
+      </div>
+    </div>
+  </article>
+</Base>

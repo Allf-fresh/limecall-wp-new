@@ -1,0 +1,6 @@
+# Cloudflare Pages / Netlify redirect rules
+# Format: /old-path  /new-path  301
+# Add your redirects below:
+
+# Example:
+# /old-blog-post  /blog/new-blog-post  301

@@ -1,0 +1,181 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/ui/Button.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import { site, plans, features } from '../site.config';
+import { getPublishedContent } from '../lib/supabase';
+
+// Fetch 3 latest blog posts — graceful empty state if Supabase not configured
+const allPosts = await getPublishedContent('blog');
+const latestPosts = allPosts.slice(0, 3);
+const featuredFeatures = features.slice(0, 4);
+---
+
+<Base
+  title={`${site.name} — ${site.tagline}`}
+  description={site.description}
+  canonical={`${site.url}/`}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 h-[600px] w-[800px] rounded-full bg-lime-500/10 blur-[120px]"></div>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
+          {site.tagline.split(' ').slice(0, -2).join(' ')}
+          <span class="text-lime-400"> {site.tagline.split(' ').slice(-2).join(' ')}</span>
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-dark-300 sm:text-xl">
+          {site.description}
+        </p>
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <Button href={site.cta.href} size="lg">
+            {site.cta.text}
+          </Button>
+          <Button href="/features" variant="outline" size="lg">
+            Explore Features
+          </Button>
+        </div>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-dark-400">
+          <span>&#10003; {site.cta.subtext}</span>
+          <span>&#10003; Cancel anytime</span>
+          <span>&#10003; 30-day money-back guarantee</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">Everything you need</h2>
+        <p class="mt-4 text-lg text-dark-400">Built for teams who want results, not complexity.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {featuredFeatures.map((feature) => (
+          <FeatureCard
+            icon={feature.icon}
+            name={feature.name}
+            description={feature.description}
+            href={`/features/${feature.slug}`}
+          />
+        ))}
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/features" class="text-lime-400 hover:text-lime-300 font-medium text-sm transition">
+          View all features →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Preview -->
+  <section class="py-16 sm:py-20 border-t border-dark-800 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white sm:text-4xl">Simple, transparent pricing</h2>
+      <p class="mt-4 text-lg text-dark-400">Start for free, upgrade when you're ready.</p>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
+        {plans.map((plan) => (
+          <div class:list={[
+            'rounded-xl border p-6 text-left',
+            plan.highlighted ? 'border-lime-500/50 bg-dark-900' : 'border-dark-800 bg-dark-900/50',
+          ]}>
+            {plan.highlighted && (
+              <span class="inline-block mb-2 text-xs font-semibold text-lime-400 uppercase tracking-wider">Most Popular</span>
+            )}
+            <h3 class="text-lg font-bold text-white">{plan.name}</h3>
+            <p class="text-dark-400 text-sm mt-1">{plan.subtitle}</p>
+            <div class="mt-4 flex items-baseline gap-1">
+              <span class="text-3xl font-bold text-white">${plan.monthly}</span>
+              <span class="text-dark-400 text-sm">/mo</span>
+            </div>
+            <a
+              href={plan.cta.href}
+              class:list={[
+                'mt-5 block rounded-lg py-2.5 text-center text-sm font-bold transition',
+                plan.highlighted
+                  ? 'bg-lime-500 text-dark-950 hover:bg-lime-400'
+                  : 'border border-dark-700 text-white hover:border-lime-500/40 hover:text-lime-400',
+              ]}
+            >
+              {plan.cta.text}
+            </a>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-dark-500 text-sm">
+        <a href="/pricing" class="text-lime-400 hover:text-lime-300">See full pricing details →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Teaser -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <h2 class="text-2xl font-bold text-white">Latest from the blog</h2>
+          <p class="mt-1 text-dark-400">Guides, tips, and news.</p>
+        </div>
+        <a href="/blog" class="text-sm text-lime-400 hover:text-lime-300 font-medium transition hidden sm:block">
+          View all →
+        </a>
+      </div>
+
+      {latestPosts.length > 0 ? (
+        <div class="grid gap-6 sm:grid-cols-3">
+          {latestPosts.map((post) => (
+            <a
+              href={post.category ? `/blog/${post.category}/${post.slug}` : `/blog/${post.slug}`}
+              class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6 transition-all hover:border-dark-700"
+            >
+              {post.category && (
+                <span class="text-xs font-medium uppercase text-lime-400">{post.category}</span>
+              )}
+              <h3 class="mt-2 font-semibold text-white group-hover:text-lime-400 transition line-clamp-2">{post.title}</h3>
+              <p class="mt-2 text-sm text-dark-400 line-clamp-2">{post.meta_description}</p>
+              {post.publish_date && (
+                <time class="mt-4 block text-xs text-dark-500" datetime={post.publish_date}>
+                  {new Date(post.publish_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </time>
+              )}
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-12 text-center">
+          <p class="text-dark-400">Blog posts coming soon.</p>
+          <p class="text-dark-600 text-sm mt-2">Connect Supabase to populate your blog.</p>
+        </div>
+      )}
+
+      <div class="mt-8 text-center sm:hidden">
+        <a href="/blog" class="text-sm text-lime-400 hover:text-lime-300 font-medium">View all posts →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-20 sm:py-28 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Ready to get started?
+      </h2>
+      <p class="mt-4 text-lg text-dark-400">
+        Join thousands of teams who trust {site.name}. {site.cta.subtext}.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href={site.cta.href} size="lg">
+          {site.cta.text}
+        </Button>
+        <Button href="/about" variant="outline" size="lg">
+          Learn more
+        </Button>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,37 @@
+---
+interface Props {
+  icon: string;
+  name: string;
+  description: string;
+  href?: string;
+}
+
+const { icon, name, description, href } = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  href={href}
+  class:list={[
+    'rounded-xl border border-dark-800 bg-dark-900/50 p-6 transition-all',
+    href ? 'group hover:border-lime-500/50 cursor-pointer' : '',
+  ]}
+>
+  <div class="text-3xl mb-4" aria-hidden="true">{icon}</div>
+  <h3 class:list={[
+    'font-semibold text-white text-lg mb-2',
+    href ? 'group-hover:text-lime-400 transition' : '',
+  ]}>
+    {name}
+  </h3>
+  <p class="text-sm text-dark-400 leading-relaxed">{description}</p>
+  {href && (
+    <span class="mt-4 inline-flex items-center gap-1 text-xs font-medium text-lime-500 group-hover:text-lime-400 transition">
+      Learn more
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+  )}
+</Tag>

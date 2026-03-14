@@ -1,0 +1,63 @@
+---
+import { site } from '../../site.config';
+
+interface Props {
+  variant: 'inline' | 'sidebar';
+  category: string | null;
+}
+
+const { variant, category } = Astro.props;
+
+type CTACopy = { heading: string; body: string; cta: string };
+
+const defaultCopy: CTACopy = {
+  heading: `Get ${site.name} — Simple. Reliable. No lock-in.`,
+  body: `Join thousands of users who rely on ${site.name}.`,
+  cta: `Get ${site.name} →`,
+};
+
+// Customize per category if needed
+const ctaMap: Record<string, CTACopy> = {
+  'how-to': {
+    heading: 'Get Started in Minutes',
+    body: `Follow this guide and start using ${site.name} today.`,
+    cta: `Get ${site.name} Now →`,
+  },
+};
+
+const copy: CTACopy = category ? (ctaMap[category] ?? defaultCopy) : defaultCopy;
+---
+
+{variant === 'sidebar' ? (
+  <div class="rounded-xl border border-lime-500/25 bg-gradient-to-b from-lime-500/10 to-dark-900/50 p-5">
+    <p class="text-xs font-bold uppercase tracking-wider text-lime-500 mb-2">{site.name}</p>
+    <h3 class="text-base font-bold text-white leading-snug mb-2">{copy.heading}</h3>
+    <p class="text-xs text-dark-400 leading-relaxed mb-4">{copy.body}</p>
+    <a
+      href={site.cta.href}
+      class="block w-full text-center px-4 py-2.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold text-sm transition"
+    >
+      {copy.cta}
+    </a>
+    <p class="text-center text-dark-600 text-xs mt-2.5">{site.cta.subtext}</p>
+  </div>
+) : (
+  <div class="my-10 rounded-xl border border-lime-500/20 bg-gradient-to-r from-lime-500/10 via-dark-900/80 to-dark-900 p-6 sm:p-8">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+      <div class="flex-1">
+        <p class="text-xs font-bold uppercase tracking-wider text-lime-500 mb-1">{site.name}</p>
+        <h3 class="text-lg font-bold text-white leading-snug mb-1">{copy.heading}</h3>
+        <p class="text-sm text-dark-400 leading-relaxed">{copy.body}</p>
+      </div>
+      <div class="flex-shrink-0">
+        <a
+          href={site.cta.href}
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold text-sm transition whitespace-nowrap"
+        >
+          {copy.cta}
+        </a>
+        <p class="text-center text-dark-600 text-xs mt-2">{site.cta.subtext}</p>
+      </div>
+    </div>
+  </div>
+)}

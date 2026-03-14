@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: `Page Not Found — ${site.name}`,
+  description: 'The page you are looking for does not exist or has been moved.',
+  noindex: true,
+};
+---
+
+<Base {...seo}>
+  <section class="min-h-[70vh] flex items-center justify-center px-4">
+    <div class="text-center max-w-lg">
+      <p class="text-lime-400 text-7xl font-bold mb-4">404</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">Page Not Found</h1>
+      <p class="text-dark-400 text-lg mb-8">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-semibold transition"
+        >
+          Go to Homepage
+        </a>
+        <a
+          href="/blog"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-dark-700 hover:border-lime-500 text-dark-200 hover:text-lime-400 transition"
+        >
+          Browse Blog
+        </a>
+      </div>
+      <div class="mt-12 text-dark-500 text-sm">
+        <p>Looking for something specific? Try these pages:</p>
+        <div class="flex flex-wrap gap-3 justify-center mt-4">
+          <a href="/features" class="text-dark-300 hover:text-lime-400 underline">Features</a>
+          <a href="/pricing" class="text-dark-300 hover:text-lime-400 underline">Pricing</a>
+          <a href="/blog" class="text-dark-300 hover:text-lime-400 underline">Blog</a>
+          <a href="/contact" class="text-dark-300 hover:text-lime-400 underline">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,44 @@
+---
+interface Props {
+  author: string;
+  siteName?: string;
+  siteUrl?: string;
+}
+
+const { author, siteName = 'Our Team', siteUrl = '/' } = Astro.props;
+
+const displayName = author && author.trim() ? author : `${siteName} Team`;
+const isTeam = !author || displayName.includes('Team');
+---
+
+<section class="mt-12 pt-8 border-t border-dark-800">
+  <div class="flex items-start gap-4 rounded-xl border border-dark-800 bg-dark-900/50 p-5 sm:p-6">
+    <div class="flex-shrink-0">
+      <div class="w-12 h-12 rounded-full bg-lime-500/10 border border-lime-500/20 flex items-center justify-center">
+        <svg class="w-6 h-6 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <p class="text-xs font-semibold uppercase tracking-wider text-dark-500 mb-1">About the Author</p>
+      <h3 class="text-base font-bold text-white mb-2">{displayName}</h3>
+      {isTeam ? (
+        <p class="text-sm text-dark-400 leading-relaxed">
+          The {siteName} team writes guides and articles to help you get the most from our product.
+          All articles are fact-checked and regularly updated.
+        </p>
+      ) : (
+        <p class="text-sm text-dark-400 leading-relaxed">
+          {displayName} is a writer and researcher at {siteName}.
+        </p>
+      )}
+      <div class="mt-3 flex items-center gap-4 text-xs text-dark-500">
+        <a href={`${siteUrl}/about`} class="hover:text-lime-400 transition">About Us</a>
+        <span class="text-dark-700">·</span>
+        <a href={`${siteUrl}/contact`} class="hover:text-lime-400 transition">Contact</a>
+      </div>
+    </div>
+  </div>
+</section>

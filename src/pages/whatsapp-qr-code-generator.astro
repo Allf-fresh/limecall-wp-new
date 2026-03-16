@@ -1,15 +1,139 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Whatsapp Qr-code generator - LimeCall`,
-  description: ``,
+  title: `Free WhatsApp QR Code Generator | LimeCall`,
+  description: `Generate a scannable WhatsApp QR code for your business number. Print it on flyers, packaging, or storefront — anyone who scans it starts a WhatsApp chat instantly.`,
   canonical: `https://www.limecall.com/whatsapp-qr-code-generator/`,
 };
+
+const benefits = [
+  { title: "Scan to Chat Instantly", desc: "Anyone who scans your QR code is taken directly to a WhatsApp conversation with your business — no number to type." },
+  { title: "Pre-filled Message", desc: "Set a custom message that auto-fills when someone scans your code, giving your team instant context." },
+  { title: "Print-Ready Download", desc: "Download your QR code as a high-resolution PNG or SVG, ready to print on any marketing material." },
+  { title: "Works Offline", desc: "WhatsApp QR codes work from printed materials — no internet required for the scanner to initiate the chat." },
+  { title: "Custom Branding", desc: "Add your logo to the center of the QR code. Branded QR codes get more scans and higher trust." },
+  { title: "Track Scans", desc: "Monitor how many people scan your QR code and how many start WhatsApp conversations from it." },
+];
+
+const useCases = [
+  { title: "Business Cards", desc: "Replace a phone number with a WhatsApp QR code. Recipients scan to start a conversation on the spot." },
+  { title: "In-Store Signage", desc: "Let customers in your store scan a QR code to reach you on WhatsApp for questions or support." },
+  { title: "Product Packaging", desc: "Include a WhatsApp QR code on packaging. Customers scan to ask questions, leave feedback, or reorder." },
+  { title: "Event Marketing", desc: "Put your QR code on event banners, handouts, and screens. Attendees scan to connect instantly." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "WhatsApp QR Code Generator", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Free Tool
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Free WhatsApp <span class="text-lime-400">QR Code Generator</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Create a scannable QR code for your WhatsApp Business number. Print it anywhere — business cards, flyers, storefronts — and let customers reach you with one scan.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tool UI (design mockup) -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/80 p-8 shadow-2xl">
+        <h2 class="mb-6 text-xl font-bold text-white">Generate your WhatsApp QR code</h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="space-y-4">
+            <div>
+              <label class="mb-1.5 block text-sm font-medium text-dark-300">Your WhatsApp Business Number</label>
+              <div class="flex items-center gap-2 rounded-lg border border-dark-700 bg-dark-800 px-4 py-3">
+                <span class="text-dark-500 text-sm">Enter with country code, e.g. +14155550123</span>
+              </div>
+            </div>
+            <div>
+              <label class="mb-1.5 block text-sm font-medium text-dark-300">Pre-filled Message (optional)</label>
+              <div class="rounded-lg border border-dark-700 bg-dark-800 px-4 py-3 min-h-[80px]">
+                <span class="text-dark-500 text-sm">Message shown to user when they scan...</span>
+              </div>
+            </div>
+            <a href={site.cta.href} class="block w-full rounded-xl bg-lime-500 py-3.5 text-center text-sm font-bold text-dark-950 transition hover:bg-lime-400">
+              Generate QR code in LimeCall →
+            </a>
+          </div>
+          <!-- QR Preview placeholder -->
+          <div class="flex items-center justify-center">
+            <div class="h-44 w-44 rounded-xl border-2 border-dashed border-dark-700 flex flex-col items-center justify-center gap-2">
+              <div class="grid grid-cols-5 gap-1 opacity-30">
+                {Array.from({length: 25}).map(() => (
+                  <div class="h-3 w-3 rounded-sm bg-white"></div>
+                ))}
+              </div>
+              <p class="mt-2 text-xs text-dark-600">QR preview</p>
+            </div>
+          </div>
+        </div>
+        <p class="mt-6 text-center text-xs text-dark-600">The full tool with branded QR codes, tracking, and PNG/SVG download is available in LimeCall.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Why use a WhatsApp QR code?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Where to use your WhatsApp QR code</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Get more from WhatsApp with LimeCall</h2>
+      <p class="mt-4 text-dark-400">QR codes, link generator, Click-to-WhatsApp ads, and a full business messaging platform — all in one.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/whatsapp-link-generator/', title: 'WhatsApp Link Generator', desc: 'Generate direct WhatsApp links.' },
+        { href: '/click-to-whatsapp/', title: 'Click-to-WhatsApp', desc: 'Turn ads into WhatsApp conversations.' },
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Full SMS platform for your business.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

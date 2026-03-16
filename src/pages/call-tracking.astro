@@ -1,15 +1,107 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Call Tracking - Save time and grow faster | LimeCall`,
-  description: `LimeCalls free call tracking software allows you to understand which marketing campaign works for your business and helps you grow.`,
+  title: `Call Tracking Software — Know What Drives Your Calls | LimeCall`,
+  description: `LimeCall's call tracking software shows you exactly which marketing campaigns, keywords, and pages drive phone calls. Attribute revenue, optimize spend, and grow faster.`,
   canonical: `https://www.limecall.com/call-tracking/`,
 };
+
+const features = [
+  { title: "Source Attribution", desc: "Know exactly which ad, keyword, or page drove each call. Attribute every phone lead to its marketing source." },
+  { title: "Dynamic Number Insertion", desc: "Assign unique phone numbers to each campaign, channel, or landing page. Calls reveal which sources work best." },
+  { title: "Call Recording", desc: "Record every tracked call automatically. Review conversations to improve messaging, training, and quality." },
+  { title: "Call Analytics Dashboard", desc: "See call volume, duration, peak times, and conversion rates by source, campaign, keyword, or landing page." },
+  { title: "Google Ads Integration", desc: "Connect call tracking to Google Ads. Import call conversions to optimize bidding and improve ROAS." },
+  { title: "CRM Sync", desc: "Every tracked call logs to your CRM automatically — with source, keyword, recording, and contact details." },
+];
+
+const useCases = [
+  { title: "PPC Campaign Optimization", desc: "See which Google and Meta ad campaigns drive the most calls. Cut wasted spend and double down on winners." },
+  { title: "SEO Attribution", desc: "Track which organic keywords lead to phone calls. Prove SEO ROI and optimize for high-intent terms." },
+  { title: "Landing Page Testing", desc: "A/B test landing pages and measure the impact on call volume. Optimize for phone conversions, not just clicks." },
+  { title: "Sales Training", desc: "Listen to recorded calls to coach reps, identify objection patterns, and improve your sales scripts." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Call Tracking", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Call Tracking Software
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Know Exactly What's <span class="text-lime-400">Driving Your Calls</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall's call tracking software attributes every phone lead to its marketing source. Stop guessing which campaigns work — know for certain, and grow faster.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Call tracking features</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Start tracking your calls today</h2>
+      <p class="mt-4 text-dark-400">LimeCall's call tracking is free to start. Set up in minutes, no developer required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/form-tracking/', title: 'Form Tracking', desc: 'Track form submissions and sources.' },
+        { href: '/lead-capture/', title: 'Lead Capture', desc: 'Capture every inbound lead.' },
+        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Automate inbound callbacks.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

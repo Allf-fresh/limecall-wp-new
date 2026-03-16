@@ -1,15 +1,132 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `WhatsApp link generator - LimeCall`,
-  description: ``,
+  title: `Free WhatsApp Link Generator | LimeCall`,
+  description: `Generate a direct WhatsApp link (wa.me) for your business in seconds. Share it in emails, social posts, or on your website to let customers message you instantly.`,
   canonical: `https://www.limecall.com/whatsapp-link-generator/`,
 };
+
+const benefits = [
+  { title: "No App Download Needed", desc: "WhatsApp links open directly in the WhatsApp app (or web version). Anyone can click and message you instantly." },
+  { title: "Pre-filled Message", desc: "Include a custom pre-filled message so customers start the conversation with context — perfect for lead capture." },
+  { title: "Works Everywhere", desc: "Share your link in email signatures, social media bios, ad campaigns, business cards, and on your website." },
+  { title: "Track Engagement", desc: "Connect your WhatsApp link to UTM parameters to track which channels drive the most conversations." },
+  { title: "Instant Access", desc: "Generated links work immediately. No account setup or waiting required on the recipient's side." },
+  { title: "Professional Appearance", desc: "Use a short link or custom domain for a clean, professional look — not a long wa.me URL." },
+];
+
+const useCases = [
+  { title: "Email Signatures", desc: "Add your WhatsApp link to your email signature. Let anyone reply via WhatsApp with one click." },
+  { title: "Social Media Bio", desc: "Put your link in your Instagram, TikTok, or LinkedIn bio to direct followers to a WhatsApp conversation." },
+  { title: "Ad Campaigns", desc: "Use as the CTA in Facebook, Instagram, or Google ads to drive Click-to-WhatsApp conversions." },
+  { title: "Website CTA", desc: "Add the link to your website's header, footer, or contact page alongside phone and email." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "WhatsApp Link Generator", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Free Tool
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Free WhatsApp <span class="text-lime-400">Link Generator</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Create a direct WhatsApp link for your business phone number in seconds. Share it anywhere to let customers message you on WhatsApp with one click.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tool UI (design mockup) -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/80 p-8 shadow-2xl">
+        <h2 class="mb-6 text-xl font-bold text-white">Generate your WhatsApp link</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="mb-1.5 block text-sm font-medium text-dark-300">Your WhatsApp Business Number</label>
+            <div class="flex items-center gap-2 rounded-lg border border-dark-700 bg-dark-800 px-4 py-3">
+              <span class="text-dark-500 text-sm">+1</span>
+              <span class="text-dark-600 text-sm">|</span>
+              <span class="text-dark-500 text-sm">Enter your number with country code</span>
+            </div>
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-medium text-dark-300">Pre-filled Message (optional)</label>
+            <div class="rounded-lg border border-dark-700 bg-dark-800 px-4 py-3 min-h-[80px]">
+              <span class="text-dark-500 text-sm">e.g. "Hi, I'd like to know more about your services..."</span>
+            </div>
+          </div>
+          <div class="rounded-lg border border-lime-500/20 bg-lime-500/5 px-4 py-3">
+            <p class="text-sm font-medium text-dark-400">Generated link:</p>
+            <p class="mt-1 font-mono text-sm text-lime-400">https://wa.me/1XXXXXXXXXX?text=...</p>
+          </div>
+          <a href={site.cta.href} class="block w-full rounded-xl bg-lime-500 py-3.5 text-center text-sm font-bold text-dark-950 transition hover:bg-lime-400">
+            Use the full tool in your LimeCall dashboard →
+          </a>
+        </div>
+        <p class="mt-4 text-center text-xs text-dark-600">The full tool with link tracking, short links, and analytics is available in LimeCall.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Why use WhatsApp links for business?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Where to use your WhatsApp link</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Do more with WhatsApp and LimeCall</h2>
+      <p class="mt-4 text-dark-400">LimeCall includes WhatsApp links, QR codes, Click-to-WhatsApp ads, and a full business messaging platform.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/whatsapp-qr-code-generator/', title: 'WhatsApp QR Code Generator', desc: 'Create a scannable WhatsApp QR code.' },
+        { href: '/click-to-whatsapp/', title: 'Click-to-WhatsApp', desc: 'Turn ads into WhatsApp conversations.' },
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Full SMS platform for your business.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

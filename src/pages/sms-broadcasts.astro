@@ -1,15 +1,129 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Reach Customers Instantly, Powerful SMS Broadcasts | LimeCall`,
-  description: `SMS broadcasts, boost sales, reminders & engagement. Get your message directly to customers, targeted messaging, try our free trial today!`,
+  title: `SMS Broadcasts — Reach Customers Instantly | LimeCall`,
+  description: `Send SMS broadcast campaigns to your entire contact list in seconds. Boost sales, send reminders, and drive engagement with targeted bulk SMS from LimeCall.`,
   canonical: `https://www.limecall.com/sms-broadcasts/`,
 };
+
+const features = [
+  { title: "Bulk SMS Sending", desc: "Send a single message to hundreds or thousands of contacts at once. Personalize with custom fields like first name or company." },
+  { title: "Audience Segmentation", desc: "Target specific contact lists or segments. Send the right message to the right people at the right time." },
+  { title: "Scheduled Broadcasts", desc: "Write your messages in advance and schedule them for the optimal send time. Plan campaigns ahead of time." },
+  { title: "Two-Way Replies", desc: "Recipients can reply to your broadcast. Conversations flow into your shared inbox for team follow-up." },
+  { title: "Delivery Reports", desc: "See exactly who received, opened, and replied to your broadcast. Real-time delivery analytics." },
+  { title: "Opt-Out Management", desc: "Automatic opt-out handling keeps your list clean and ensures compliance with SMS marketing regulations." },
+];
+
+const steps = [
+  { n: "1", title: "Build your list", desc: "Upload contacts or sync from your CRM. Segment by location, behavior, or custom tags." },
+  { n: "2", title: "Write your message", desc: "Compose your SMS broadcast. Use personalization tokens to make each message feel 1:1." },
+  { n: "3", title: "Send and track", desc: "Send immediately or schedule. Watch delivery and reply rates in real time." },
+];
+
+const useCases = [
+  { title: "Promotional Offers", desc: "Announce flash sales, limited offers, or seasonal promotions directly in your customers' text inbox." },
+  { title: "Appointment Reminders", desc: "Reduce no-shows with automated reminder texts sent 24 hours and 1 hour before appointments." },
+  { title: "Event Invitations", desc: "Drive attendance to webinars, demos, and events with targeted SMS invitations." },
+  { title: "Win-Back Campaigns", desc: "Re-engage dormant leads or customers with a well-timed text message and a compelling offer." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "SMS Broadcasts", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Bulk SMS Campaigns
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Reach Everyone Instantly with <span class="text-lime-400">SMS Broadcasts</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Send targeted SMS campaigns to your entire contact list in seconds. Drive sales, boost engagement, and keep customers informed — all from LimeCall.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Powerful SMS broadcast features</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Ready to launch your first SMS broadcast?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to reach customers at scale with targeted SMS campaigns.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Two-way SMS for sales and support.' },
+        { href: '/mass-texting/', title: 'Mass Texting', desc: 'Text thousands of contacts at once.' },
+        { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Manage SMS as a team.' },
+        { href: '/sms-notify/', title: 'SMS Notify', desc: 'Automated SMS notifications.' },
+      ]}
+    />
   </div>
 </Base>

@@ -1,15 +1,226 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Guides - LimeCall`,
-  description: `The Ultimate Guide to Enabling Your SaaS Sales Team - First thing’s first. Let’s learn from the best minds in the game and touch on some of the basics of SaaS sales.`,
+  title: `The Ultimate Guide to SaaS Sales Teams — Strategies, Structure & Tools`,
+  description: `Everything you need to build, manage, and scale a high-performing SaaS sales team. Hiring, onboarding, quota setting, KPIs, call tools, and playbooks for 2025.`,
   canonical: `https://www.limecall.com/the-ultimate-guide-to-saas-sales-teams/`,
 };
+
+const faqs = [
+  {
+    question: 'What is the ideal structure for a SaaS sales team?',
+    answer: 'Most SaaS companies use an inbound/outbound split: SDRs (Sales Development Reps) qualify leads, AEs (Account Executives) run demos and close, and CSMs (Customer Success Managers) handle retention and expansion. At smaller scales, AEs often carry the full funnel.',
+  },
+  {
+    question: 'What KPIs should a SaaS sales team track?',
+    answer: 'Key metrics include: Monthly Recurring Revenue (MRR), Annual Contract Value (ACV), win rate, sales cycle length, lead response time, demos booked per SDR, and customer acquisition cost (CAC). Speed-to-lead (response time after a form fill) is especially impactful.',
+  },
+  {
+    question: 'How do you reduce SaaS sales cycle length?',
+    answer: 'Reduce cycle length by responding to inbound leads immediately (within 5 minutes of form submission), disqualifying weak leads early with BANT/MEDDIC, and running tight multi-stakeholder demos. Automation tools that trigger instant callbacks when visitors show intent can cut cycles by 30-50%.',
+  },
+  {
+    question: 'What tools does a SaaS sales team need?',
+    answer: 'Core stack: CRM (HubSpot, Salesforce), sales engagement (Outreach, Salesloft), call intelligence (LimeCall, Gong), intent data (Bombora, G2), and meeting scheduling (Calendly). Inbound lead capture tools like click-to-call widgets have the highest ROI for website traffic.',
+  },
+  {
+    question: 'How do you onboard new SaaS sales reps faster?',
+    answer: 'Best practice is a 90-day ramp: week 1 product deep-dive, week 2 ICP and competitor study, weeks 3-4 shadowing top reps, month 2 solo discovery calls, month 3 full quota. Call recording tools let new reps study winning calls on their own time.',
+  },
+];
+
+const sections = [
+  {
+    title: 'Part 1: Building Your SaaS Sales Team Structure',
+    subsections: [
+      {
+        heading: 'The Core Roles',
+        body: `A modern SaaS sales org has three layers. **SDRs (Sales Development Reps)** prospect outbound or qualify inbound leads. They set meetings but don't close. **AEs (Account Executives)** run discovery calls, demos, and negotiations, then close deals. **CSMs (Customer Success Managers)** handle onboarding, reduce churn, and identify expansion revenue.\n\nEarly-stage startups (sub $1M ARR) often skip the SDR layer — founders or a single AE handle everything. Once you have repeatable inbound, split the roles.`,
+      },
+      {
+        heading: 'When to Hire Your First Sales Rep',
+        body: `Hire your first dedicated sales rep when you have (1) a repeatable sales motion — you've closed at least 10 deals yourself and understand why customers buy, (2) enough pipeline to keep them busy, and (3) a scalable lead source. Hiring too early burns cash. Hiring too late loses momentum.`,
+      },
+      {
+        heading: 'Compensation & Quota Structure',
+        body: `SaaS sales comp typically has a 50/50 base/variable split at OTE (On-Target Earnings). Set quotas at 4-6x OTE for AEs. Avoid overly complex commission plans — reps should be able to calculate their earnings in their head. Include an accelerator (125-150% of rate) for quota attainment above 100%.`,
+      },
+    ],
+  },
+  {
+    title: 'Part 2: The SaaS Sales Process',
+    subsections: [
+      {
+        heading: 'Inbound Lead Response Speed',
+        body: `Speed-to-lead is the single highest-ROI factor in SaaS sales. Responding within 5 minutes of a lead filling out a form increases contact rates by 100x compared to responding 30 minutes later. Use instant callback tools that automatically connect your rep with a visitor the moment they click "Request Demo" — before they open a competitor's tab.`,
+      },
+      {
+        heading: 'Discovery Calls',
+        body: `A great discovery call answers three questions: What is the problem? What is the cost of the problem? Why now? Use MEDDIC (Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion) for complex enterprise deals. For SMB/mid-market, a lighter BANT (Budget, Authority, Need, Timeline) framework works.`,
+      },
+      {
+        heading: 'Demo Best Practices',
+        body: `Never give a generic product tour. Run the demo based on what you learned in discovery — show the three features that directly solve their stated problems, nothing else. Use a "demo sandwich": start with the customer's pain, show the solution, end by connecting it back to their business outcome and ROI.`,
+      },
+      {
+        heading: 'Handling Objections',
+        body: `The four most common SaaS objections: (1) "It's too expensive" — reframe to ROI per unit/user; (2) "We already use [competitor]" — run a side-by-side on their key pain; (3) "Not now" — ask what needs to change; (4) "I need to check with my boss" — offer to run a 15-min executive brief together.`,
+      },
+    ],
+  },
+  {
+    title: 'Part 3: SaaS Sales KPIs & Measurement',
+    subsections: [
+      {
+        heading: 'The Metrics That Actually Matter',
+        body: `Focus on leading indicators: demos booked per SDR per week, demo-to-close rate per AE, average sales cycle length, and win rate against named competitors. Lagging indicators (MRR, churn) tell you what happened — leading indicators tell you what will happen.`,
+      },
+      {
+        heading: 'Sales Velocity Formula',
+        body: `Sales velocity = (# Opportunities × Average Deal Size × Win Rate) ÷ Sales Cycle Length. Improving any of the four variables increases revenue speed. Most teams focus on deal size and win rate — but shortening the sales cycle (e.g., from 30 to 20 days) has a compounding effect.`,
+      },
+      {
+        heading: 'Forecasting Accuracy',
+        body: `Use stage-weighted pipeline forecasts with realistic close probabilities. Stage 1 (discovery): 10%, Stage 2 (demo): 25%, Stage 3 (proposal/trial): 50%, Stage 4 (verbal commit): 80%. Require AEs to update deal stages after every interaction — stale data is worthless for forecasting.`,
+      },
+    ],
+  },
+  {
+    title: 'Part 4: Tools & Technology Stack',
+    subsections: [
+      {
+        heading: 'Inbound Lead Capture',
+        body: `Your website is your top SDR. Install a click-to-call widget that triggers a callback within 28 seconds of a visitor raising their hand. Instant response is the #1 driver of demo booking rates. Tools like LimeCall reduce the gap between "interested" and "talking to a human" to under a minute.`,
+      },
+      {
+        heading: 'CRM & Sales Engagement',
+        body: `HubSpot CRM (free tier) is sufficient until $1M ARR. After that, Salesforce with a sales engagement layer (Outreach, Salesloft, or Apollo) for sequence automation, A/B testing email/call cadences, and activity tracking.`,
+      },
+      {
+        heading: 'Call Intelligence',
+        body: `Record, transcribe, and analyze every sales call. Call intelligence platforms surface winning talk tracks, flag competitor mentions, score calls automatically, and help managers coach at scale. With 50+ calls per rep per week, manual listening is impossible.`,
+      },
+      {
+        heading: 'Scheduling & Frictionless Booking',
+        body: `Every extra step between "interested" and "booked" kills conversion. Embed a booking link in every email, ad, and website page. For inbound calls, use click-to-call widgets that skip scheduling entirely — the call happens now, while the visitor is on your page.`,
+      },
+    ],
+  },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
-  </div>
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Guides', url: `${site.url}/post` }, { name: 'SaaS Sales Teams', url: `${site.url}/the-ultimate-guide-to-saas-sales-teams` }]} />
+      <div class="mt-3 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-3 py-1 text-xs font-semibold text-lime-400">
+        Sales Playbook
+      </div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        The Ultimate Guide to<br class="hidden sm:block" />
+        <span class="text-lime-400"> SaaS Sales Teams</span>
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Everything you need to build, manage, and scale a high-performing SaaS sales team — from hiring your first rep to running a multi-tier org with SDRs, AEs, and CSMs.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3 text-sm text-dark-400">
+        <span class="rounded-lg border border-dark-700 bg-dark-900 px-3 py-1">Team structure</span>
+        <span class="rounded-lg border border-dark-700 bg-dark-900 px-3 py-1">Compensation</span>
+        <span class="rounded-lg border border-dark-700 bg-dark-900 px-3 py-1">Sales KPIs</span>
+        <span class="rounded-lg border border-dark-700 bg-dark-900 px-3 py-1">Tech stack</span>
+        <span class="rounded-lg border border-dark-700 bg-dark-900 px-3 py-1">Playbooks</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
+      <!-- Table of contents -->
+      <div class="mb-12 rounded-xl border border-dark-700 bg-dark-900/60 p-6">
+        <p class="text-xs font-bold uppercase tracking-widest text-dark-500 mb-4">Table of Contents</p>
+        <ol class="space-y-2 text-sm text-dark-300">
+          {sections.map((s, i) => (
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/20 text-xs font-bold text-lime-400">{i+1}</span>
+              <span>{s.title}</span>
+            </li>
+          ))}
+          <li class="flex items-start gap-2">
+            <span class="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/20 text-xs font-bold text-lime-400">5</span>
+            <span>Frequently Asked Questions</span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Main sections -->
+      {sections.map((section) => (
+        <div class="mb-14">
+          <h2 class="mb-8 text-2xl font-bold text-white border-l-4 border-lime-500 pl-4">{section.title}</h2>
+          <div class="space-y-8">
+            {section.subsections.map((sub) => (
+              <div>
+                <h3 class="mb-3 text-lg font-bold text-white">{sub.heading}</h3>
+                <div class="text-dark-300 leading-relaxed space-y-3">
+                  {sub.body.split('\n\n').map((para) => (
+                    <p>{para.replace(/\*\*(.*?)\*\*/g, '$1')}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- CTA box -->
+      <div class="my-12 rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 p-8 text-center">
+        <h2 class="text-2xl font-bold text-white mb-3">Respond to every inbound lead in under 28 seconds</h2>
+        <p class="text-dark-300 mb-6 max-w-xl mx-auto">LimeCall's click-to-call widget connects your sales rep with a website visitor before they close the tab. Increase demo bookings without adding headcount.</p>
+        <a href={site.cta.href} class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold transition">
+          {site.cta.text}
+        </a>
+      </div>
+
+      <!-- FAQ -->
+      <div class="mt-16">
+        <h2 class="mb-8 text-2xl font-bold text-white">Frequently Asked Questions</h2>
+        <div class="space-y-3">
+          {faqs.map((faq) => (
+            <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+              <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+                {faq.question}
+                <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cross-links -->
+      <div class="mt-16">
+        <CrossLinks
+          heading="Related Resources"
+          links={[
+            { href: '/click-to-call-software', title: 'Click-to-Call Software', desc: 'Connect with leads while they are still on your page.' },
+            { href: '/speed-to-lead', title: 'Speed to Lead', desc: 'Why the first 5 minutes after a lead fills a form determines the deal.' },
+            { href: '/customer-callback-software', title: 'Callback Software', desc: 'Automated callbacks that reach prospects in under 28 seconds.' },
+            { href: '/lead-routing-software', title: 'Lead Routing Software', desc: 'Route inbound leads to the right rep instantly.' },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
 </Base>

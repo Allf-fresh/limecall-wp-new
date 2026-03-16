@@ -1,15 +1,117 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Lead Routing: Never Miss Another Hot Lead! | LimeCall`,
-  description: `Stop wasting time on unqualified leads! LimeCall's smart lead routing connects visitors with the perfect rep, skyrocketing conversions.`,
+  title: `Instant Lead Routing — Never Miss a Hot Lead | LimeCall`,
+  description: `LimeCall's instant lead routing connects website visitors to the perfect sales rep in seconds. Smart routing eliminates delays and skyrockets conversion rates.`,
   canonical: `https://www.limecall.com/instant-lead-routing/`,
 };
+
+const features = [
+  { title: "Sub-Second Routing", desc: "Leads are routed the instant they submit a form or click to call. No delays, no queues, no wasted time." },
+  { title: "Smart Rep Matching", desc: "Match each lead to the best available rep based on territory, skills, language, or custom rules — automatically." },
+  { title: "Parallel Dialing", desc: "Dial multiple reps simultaneously. The first rep to answer gets connected to the lead. Zero wait time." },
+  { title: "Availability Detection", desc: "LimeCall checks rep availability in real time before routing. Leads always go to someone who can answer." },
+  { title: "Failover & Overflow", desc: "If the primary rep doesn't answer, LimeCall instantly routes to the next available rep. No lead is ever dropped." },
+  { title: "24/7 Routing Rules", desc: "Set different routing rules for business hours, after hours, and weekends. Leads are always handled appropriately." },
+];
+
+const steps = [
+  { n: "1", title: "Lead submits or clicks", desc: "A visitor fills out a form, clicks to call, or requests a callback on your website." },
+  { n: "2", title: "LimeCall matches instantly", desc: "In milliseconds, LimeCall finds the best available rep based on your routing rules." },
+  { n: "3", title: "Connected in seconds", desc: "Both the rep and the lead are called simultaneously. Connected within 28 seconds of the initial request." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Instant Lead Routing", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Instant Lead Routing
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Never Miss Another <span class="text-lime-400">Hot Lead</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Speed is everything in sales. LimeCall's instant lead routing connects website visitors to the right rep in under 28 seconds — before interest fades and leads go cold.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stat banner -->
+  <section class="border-b border-dark-800 py-10 bg-dark-900/40">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-2xl font-bold text-white">
+        Responding within <span class="text-lime-400">1 minute</span> of a web inquiry increases conversion by <span class="text-lime-400">391%</span>
+      </p>
+      <p class="mt-2 text-sm text-dark-500">LimeCall routes and connects in under 28 seconds.</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How instant lead routing works</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">28 seconds from click to conversation</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Connect with leads while they're hot</h2>
+      <p class="mt-4 text-dark-400">Start your free trial. LimeCall routes and connects your first lead within minutes of setup.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Full lead routing platform.' },
+        { href: '/automatic-lead-distribution/', title: 'Auto Lead Distribution', desc: 'Distribute leads automatically.' },
+        { href: '/lead-capture/', title: 'Lead Capture', desc: 'Capture leads from your website.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

@@ -1,15 +1,173 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
+import { site } from '../site.config';
 
-const seo = {
-  title: `FAQ - LimeCall`,
-  description: ``,
-  canonical: `https://www.limecall.com/faq/`,
-};
+const faqs = [
+  {
+    category: 'Getting Started',
+    items: [
+      {
+        question: 'What is LimeCall?',
+        answer: 'LimeCall is an inbound lead conversion platform. It lets website visitors request an instant callback and connects them with your sales team in under 28 seconds — while they are still on your page and interested.',
+      },
+      {
+        question: 'How does the free trial work?',
+        answer: 'Every plan includes a 30-day money-back guarantee. Sign up, install the widget on your site, and start converting leads. If you are not satisfied within 30 days, contact support for a full refund — no questions asked.',
+      },
+      {
+        question: 'How do I install LimeCall on my website?',
+        answer: 'Copy your unique LimeCall script snippet from your dashboard and paste it before the </body> tag of your website. It works on any platform — WordPress, Webflow, Shopify, custom HTML. Typically takes under 5 minutes.',
+      },
+      {
+        question: 'Do I need technical knowledge to use LimeCall?',
+        answer: 'No. LimeCall is designed for sales and marketing teams. Installing the widget requires copy-pasting a script tag. Everything else — call routing, widget customization, team management — is done through a visual dashboard.',
+      },
+    ],
+  },
+  {
+    category: 'Calls & Features',
+    items: [
+      {
+        question: 'How does the 28-second callback work?',
+        answer: 'When a visitor clicks your LimeCall widget and enters their number, LimeCall simultaneously calls them and your available sales rep. When both pick up, it connects the call — all within 28 seconds. No hold music, no waiting.',
+      },
+      {
+        question: 'Can I schedule callbacks for later?',
+        answer: 'Yes. Visitors who are busy can schedule a callback for a specific time. LimeCall automatically dials your rep and the visitor at the scheduled time. You can also set your team\'s available hours so callbacks only happen during business hours.',
+      },
+      {
+        question: 'Does LimeCall support virtual phone numbers?',
+        answer: 'Yes. LimeCall provides virtual phone numbers in 50+ countries including the US, UK, India, Australia, Canada, Germany, and more. You can buy DID (Direct Inward Dialing) numbers, port existing numbers, and assign numbers to teams or campaigns.',
+      },
+      {
+        question: 'Can I record calls?',
+        answer: 'Yes. Call recording is available on all plans. Recordings are stored securely in your dashboard. You can replay, download, share with your team, or use them for training. All recordings comply with applicable call recording laws.',
+      },
+      {
+        question: 'Does LimeCall integrate with my CRM?',
+        answer: 'LimeCall integrates with HubSpot, Salesforce, Zapier, Slack, Zendesk, and more. Every call, lead, and note syncs automatically. New lead data flows into your CRM without any manual entry.',
+      },
+      {
+        question: 'What is the time limit per call?',
+        answer: 'There is no hard limit on individual call duration. Your plan includes a set number of call minutes per month. Once you reach your monthly limit, additional minute rates apply. Check your plan details in the dashboard for your current usage.',
+      },
+    ],
+  },
+  {
+    category: 'Pricing & Billing',
+    items: [
+      {
+        question: 'Can I cancel anytime?',
+        answer: 'Yes. Cancel anytime from your account dashboard with one click — no phone call required, no penalties, no long notice periods. Your account remains active until the end of your billing cycle.',
+      },
+      {
+        question: 'What payment methods do you accept?',
+        answer: 'We accept all major credit cards (Visa, Mastercard, American Express) and PayPal. Annual plans can be paid via bank transfer — contact sales for details.',
+      },
+      {
+        question: 'Is there a discount for annual billing?',
+        answer: 'Yes. Annual plans include 2 free months — equivalent to a ~17% discount versus monthly billing. You can switch to annual billing at any time from your account settings.',
+      },
+      {
+        question: 'What happens if I exceed my call minutes?',
+        answer: 'You will receive an email alert as you approach your monthly limit. Additional minutes are billed at a per-minute rate based on destination country. You can also upgrade your plan mid-month to get more included minutes.',
+      },
+    ],
+  },
+  {
+    category: 'Privacy & Security',
+    items: [
+      {
+        question: 'Is LimeCall GDPR compliant?',
+        answer: 'Yes. LimeCall is fully GDPR compliant. We process data in accordance with EU data protection law. You control what data is collected, how it is used, and how long it is retained. See our Privacy Policy for full details.',
+      },
+      {
+        question: 'Where is my data stored?',
+        answer: 'LimeCall data is stored on secure servers in the EU and US depending on your account region. All data is encrypted at rest and in transit using industry-standard TLS and AES-256 encryption.',
+      },
+      {
+        question: 'Can I delete my data?',
+        answer: 'Yes. You can delete call recordings, contact data, and your entire account at any time from your dashboard. Data is permanently removed from our systems within 30 days of deletion.',
+      },
+    ],
+  },
+];
+
+const allFaqs = faqs.flatMap(cat => cat.items);
 ---
-<Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
-  </div>
+
+<Base
+  title="LimeCall FAQ — Frequently Asked Questions"
+  description="Answers to the most common questions about LimeCall: how callbacks work, pricing, integrations, virtual numbers, call recording, GDPR compliance, and more."
+  canonical="https://www.limecall.com/faq/"
+>
+  <JsonLd schema={faqSchema(allFaqs)} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'FAQ', url: `${site.url}/faq` }]} />
+      <h1 class="mt-2 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Frequently Asked <span class="text-lime-400">Questions</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Everything you need to know about LimeCall — from setup to billing to GDPR.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ content -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      {faqs.map((cat) => (
+        <div class="mb-12">
+          <h2 class="mb-5 text-lg font-bold text-lime-400 uppercase tracking-widest text-sm">{cat.category}</h2>
+          <div class="space-y-3">
+            {cat.items.map((faq) => (
+              <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+                <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+                  {faq.question}
+                  <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- Still have questions? -->
+      <div class="mt-12 rounded-2xl border border-dark-700 bg-dark-900/60 p-8 text-center">
+        <h2 class="text-xl font-bold text-white mb-3">Still have questions?</h2>
+        <p class="text-dark-400 mb-5">Our support team typically responds within a few hours.</p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <a href="/contact-us/" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-dark-700 bg-dark-800 text-white hover:border-lime-500/40 hover:bg-dark-700 text-sm font-semibold transition">
+            Contact Support
+          </a>
+          <a href={site.cta.href} class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 text-sm font-bold transition">
+            Start Free Trial
+          </a>
+        </div>
+      </div>
+
+      <!-- Cross-links -->
+      <div class="mt-16">
+        <CrossLinks
+          heading={`Learn More About ${site.name}`}
+          links={[
+            { href: '/pricing', title: 'Pricing', desc: 'Simple plans, no lock-in, 30-day guarantee.' },
+            { href: '/features', title: 'All Features', desc: 'Everything included in your plan.' },
+            { href: '/how-it-works', title: 'How It Works', desc: 'See how LimeCall connects leads to your team.' },
+            { href: '/contact-us', title: 'Contact Us', desc: 'Talk to our team directly.' },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
 </Base>

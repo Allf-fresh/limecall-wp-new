@@ -1,15 +1,119 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Capture Inbound Leads - LimeCall`,
-  description: `LimeCall displays fully customizable popups to your visitors. You can edit the text, use a dynamic element, or advanced customization via our powerful CSS editor`,
+  title: `Lead Capture — Convert Visitors Into Leads | LimeCall`,
+  description: `Capture inbound leads from your website with LimeCall. Click-to-call widgets, callback forms, SMS capture, and more — turn traffic into conversations instantly.`,
   canonical: `https://www.limecall.com/lead-capture/`,
 };
+
+const features = [
+  { title: "Click-to-Call Widget", desc: "A single-click call button on your website connects visitors to your team in under 28 seconds. Zero friction." },
+  { title: "Callback Request Forms", desc: "Let visitors request a callback at a time that suits them. LimeCall automates the rest." },
+  { title: "Web-to-Text Capture", desc: "Capture leads via SMS directly from your website. Visitors text in, your team responds." },
+  { title: "Exit Intent Popups", desc: "Trigger a callback offer when visitors are about to leave. Recover leads that would have been lost." },
+  { title: "Real-Time Alerts", desc: "Get instant SMS and email alerts when a new lead is captured, so your team can respond immediately." },
+  { title: "CRM Auto-Sync", desc: "Every captured lead is automatically synced to your CRM with full contact details and source tracking." },
+];
+
+const steps = [
+  { n: "1", title: "Add the LimeCall widget", desc: "Paste one line of code to add the lead capture widget to your website. Done in under 5 minutes." },
+  { n: "2", title: "Visitor clicks or texts", desc: "A visitor clicks to call, requests a callback, or texts in. Their contact details are captured instantly." },
+  { n: "3", title: "Your team connects", desc: "LimeCall alerts your team and connects the call or conversation. Lead details flow to your CRM." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Lead Capture", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Lead Capture Platform
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Capture Every Lead <span class="text-lime-400">Before They Leave</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Most website visitors leave without contacting you. LimeCall's lead capture tools intercept those visitors — through calls, callbacks, and texts — before they're gone.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Capturing Leads →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">All your lead capture channels in one platform</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How lead capture works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-t border-dark-800 py-14 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        <div><p class="text-3xl font-extrabold text-lime-400">28s</p><p class="mt-1 text-sm text-dark-400">Average callback time</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">391%</p><p class="mt-1 text-sm text-dark-400">More conversions in first minute</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">80%</p><p class="mt-1 text-sm text-dark-400">Website visitors captured</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">3x</p><p class="mt-1 text-sm text-dark-400">Higher lead-to-sale rate</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Stop losing leads. Start capturing them.</h2>
+      <p class="mt-4 text-dark-400">Add LimeCall to your website in 5 minutes and watch your lead volume increase immediately.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Software overview and features.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route leads to the right rep.' },
+        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Automate inbound callbacks.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

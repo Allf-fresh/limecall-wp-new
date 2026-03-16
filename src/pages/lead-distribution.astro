@@ -1,15 +1,107 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Lead Distribution - LimeCall`,
-  description: `Qualify and distribute your leads automatically. Route incoming calls and leads to the right agent faster and increase conversions.`,
+  title: `Lead Distribution — Route Leads to the Right Rep | LimeCall`,
+  description: `Qualify and distribute your leads automatically with LimeCall. Route incoming calls and leads to the right agent faster and increase conversions.`,
   canonical: `https://www.limecall.com/lead-distribution/`,
 };
+
+const features = [
+  { title: "Automatic Distribution", desc: "Leads are distributed to the right rep the moment they arrive — no manual work, no delays." },
+  { title: "Multi-Channel Lead Intake", desc: "Receive leads from calls, forms, SMS, and web widgets. All leads flow into one distribution engine." },
+  { title: "Custom Routing Rules", desc: "Define exactly how leads are distributed — by territory, skill, availability, product, or any custom criteria." },
+  { title: "Real-Time Rep Availability", desc: "LimeCall checks rep availability before routing. Leads always go to someone ready to respond." },
+  { title: "Overflow Handling", desc: "When all reps are busy, leads queue or overflow to the next available team member. No lead is ever lost." },
+  { title: "Distribution Reporting", desc: "Full visibility into lead distribution metrics — volume by rep, response times, acceptance rates, and conversion." },
+];
+
+const steps = [
+  { n: "1", title: "Lead arrives", desc: "A new lead is captured from your website, phone, or any channel connected to LimeCall." },
+  { n: "2", title: "Qualifying & matching", desc: "LimeCall qualifies the lead and matches it to the best available rep using your routing rules." },
+  { n: "3", title: "Distributed instantly", desc: "The lead is assigned and the rep is notified — or directly connected via callback — within seconds." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Lead Distribution", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Lead Distribution Platform
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Lead Distribution That <span class="text-lime-400">Increases Conversions</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Route every inbound lead to the right sales rep automatically. LimeCall's lead distribution platform qualifies, routes, and connects leads faster than any manual process.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Lead distribution features</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How lead distribution works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Start distributing leads smarter</h2>
+      <p class="mt-4 text-dark-400">LimeCall's lead distribution is included in Starter and Pro plans. Start your free trial today.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/automatic-lead-distribution/', title: 'Automatic Distribution', desc: 'Automated lead assignment.' },
+        { href: '/instant-lead-routing/', title: 'Instant Lead Routing', desc: 'Route leads in real time.' },
+        { href: '/lead-distribution-guide/', title: 'Distribution Guide', desc: 'Complete guide to lead distribution.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

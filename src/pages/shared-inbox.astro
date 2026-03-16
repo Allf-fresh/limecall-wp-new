@@ -1,15 +1,129 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Shared SMS Inbox for Teams: Say Goodbye to Missed Texts`,
-  description: `Never miss a customer text again! LimeCall's shared inbox lets your team collaborate & manage SMS conversations. Boost customer satisfaction!`,
+  title: `Shared SMS Inbox for Teams | LimeCall`,
+  description: `Never miss a customer text again. LimeCall's shared inbox lets your team collaborate on SMS conversations, assign messages, and manage all texts in one place.`,
   canonical: `https://www.limecall.com/shared-inbox/`,
 };
+
+const features = [
+  { title: "Team Visibility", desc: "Every incoming SMS is visible to your entire team. No more missed texts because one person was out." },
+  { title: "Conversation Assignment", desc: "Assign conversations to the right team member. Clear ownership so no message falls through the cracks." },
+  { title: "Internal Notes", desc: "Leave internal notes on any conversation. Brief teammates with context before they respond." },
+  { title: "Conversation History", desc: "Full message history for every contact. See everything that's been said before responding." },
+  { title: "Status Tracking", desc: "Mark conversations as open, pending, or resolved. Keep your inbox clean and organized." },
+  { title: "Mobile Access", desc: "Access your shared SMS inbox from any device. Respond to customers from desktop or mobile app." },
+];
+
+const steps = [
+  { n: "1", title: "Connect your number", desc: "Link your LimeCall business number to the shared inbox. All inbound texts appear here automatically." },
+  { n: "2", title: "Invite your team", desc: "Add team members to the inbox. Set roles and permissions — who can see, reply, and assign conversations." },
+  { n: "3", title: "Manage together", desc: "Assign conversations, leave notes, and collaborate in real time. No more missed messages." },
+];
+
+const useCases = [
+  { title: "Sales Teams", desc: "Route inbound texts to available sales reps. No lead goes uncontacted because one rep is busy." },
+  { title: "Customer Support", desc: "Support teams collaborate on complex issues. Internal notes mean the customer only has to explain things once." },
+  { title: "Small Businesses", desc: "Everyone on the team can see and respond to customer texts. Perfect for businesses without a dedicated support role." },
+  { title: "Remote Teams", desc: "Distributed teams stay aligned on customer conversations regardless of time zone or location." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Shared Inbox", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Team SMS Inbox
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        One Inbox. <span class="text-lime-400">Your Whole Team.</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Stop losing customer texts in personal inboxes. LimeCall's shared SMS inbox gives your team full visibility, clear ownership, and the collaboration tools to respond faster.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything in your shared SMS inbox</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Set up your shared inbox</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses shared SMS inboxes</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Say goodbye to missed customer texts</h2>
+      <p class="mt-4 text-dark-400">Set up your shared SMS inbox today. Free trial, no credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Full SMS platform for your business.' },
+        { href: '/sms-for-slack/', title: 'SMS for Slack', desc: 'Text from inside Slack.' },
+        { href: '/contacts-lists/', title: 'Contacts & Lists', desc: 'Manage your contact database.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

@@ -1,15 +1,107 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Form Tracking Data At Your Fingerprints`,
-  description: `Uncover hidden insights! Track form data effortlessly and optimize your website conversions. Learn more about LimeCall's form tracking.`,
+  title: `Form Tracking — Uncover Hidden Conversion Insights | LimeCall`,
+  description: `Track every form submission and uncover which campaigns, pages, and sources drive your web leads. LimeCall's form tracking optimizes your website conversions.`,
   canonical: `https://www.limecall.com/form-tracking/`,
 };
+
+const features = [
+  { title: "Form Submission Tracking", desc: "Track every form submission on your website and attribute it to the marketing source, campaign, and keyword that drove the visit." },
+  { title: "Source Attribution", desc: "See whether each form submission came from Google Ads, organic search, social, email, or direct. Full attribution for every lead." },
+  { title: "UTM Parameter Capture", desc: "Automatically capture UTM parameters from URLs and attach them to form submissions. Connect campaigns to leads." },
+  { title: "CRM Integration", desc: "Every tracked form submission syncs to your CRM with full source data — no manual data entry required." },
+  { title: "Multi-Step Form Tracking", desc: "Track drop-off at each step of multi-page forms. Identify where visitors abandon and fix it." },
+  { title: "Conversion Reporting", desc: "Dashboard reports showing form conversion rates by source, page, campaign, device, and more." },
+];
+
+const steps = [
+  { n: "1", title: "Add tracking snippet", desc: "Add the LimeCall form tracking snippet to your website — one line of code covers all forms automatically." },
+  { n: "2", title: "Forms tracked automatically", desc: "Every form submission is tracked with source, referrer, UTM parameters, and visitor behavior data." },
+  { n: "3", title: "Optimize conversions", desc: "Use the data to cut poor-performing sources, improve landing pages, and increase form conversion rates." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Form Tracking", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Form Tracking Software
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Form Tracking Data <span class="text-lime-400">at Your Fingertips</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Uncover hidden conversion insights. Track every form submission, attribute leads to their exact source, and optimize your website to generate more leads.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Form tracking features</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Set up in 3 steps</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Start tracking your form conversions</h2>
+      <p class="mt-4 text-dark-400">Install form tracking in minutes. Start making data-driven decisions about your lead generation.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Track which campaigns drive calls.' },
+        { href: '/lead-capture/', title: 'Lead Capture', desc: 'Capture every inbound lead.' },
+        { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Full lead capture platform.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

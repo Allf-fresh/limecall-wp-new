@@ -1,15 +1,107 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `LimeCall: Simplify Business Communication & Contacts (Free Trial)`,
-  description: `Organize your business phonebook, streamline calls & messages with shared contact lists. LimeCall: Powerful contact management & mobile apps.`,
+  title: `Contacts & Lists Management | LimeCall`,
+  description: `Organize your business contacts, build segmented lists, and power your SMS and call campaigns. LimeCall's contact management keeps your team aligned and your outreach targeted.`,
   canonical: `https://www.limecall.com/contacts-lists/`,
 };
+
+const features = [
+  { title: "Shared Phonebook", desc: "One central contact database your whole team can access. No more duplicate entries or scattered spreadsheets." },
+  { title: "Contact Lists & Segments", desc: "Organize contacts into lists and segments by industry, location, status, or any custom property." },
+  { title: "Import & Export", desc: "Import contacts from CSV files or sync directly from your CRM. Export any list at any time." },
+  { title: "Contact History", desc: "See every call, SMS, and interaction logged automatically against each contact record." },
+  { title: "Tags & Custom Fields", desc: "Tag contacts and add custom fields to capture the data that matters for your business." },
+  { title: "Campaign Integration", desc: "Use contact lists directly in SMS broadcasts, mass texting campaigns, and callback automations." },
+];
+
+const steps = [
+  { n: "1", title: "Import your contacts", desc: "Upload a CSV, sync from your CRM, or add contacts manually. All data is deduplicated automatically." },
+  { n: "2", title: "Organize into lists", desc: "Create smart segments based on tags, properties, or behavior. Keep your contact base tidy and targeted." },
+  { n: "3", title: "Power your campaigns", desc: "Send SMS broadcasts, run callback campaigns, and track all interactions from within your contact lists." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Contacts & Lists", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Contact Management
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Contacts & Lists That <span class="text-lime-400">Power Your Outreach</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Organize your business phonebook, segment contacts into targeted lists, and power your SMS and call campaigns — all from one central LimeCall dashboard.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything in Contacts & Lists</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">From import to campaign in 3 steps</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Organize your contacts, power your campaigns</h2>
+      <p class="mt-4 text-dark-400">Get started with LimeCall's contact management for free. No credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/sms-broadcasts/', title: 'SMS Broadcasts', desc: 'Send targeted SMS to your lists.' },
+        { href: '/mass-texting/', title: 'Mass Texting', desc: 'Reach thousands at once.' },
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Two-way SMS platform.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

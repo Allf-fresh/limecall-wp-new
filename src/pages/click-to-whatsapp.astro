@@ -1,15 +1,128 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Click-to-WhatsApp Ads - Boost Engagement with LimeCall`,
-  description: `Click-to-WhatsApp Ads solution seamlessly connects you with leads through WhatsApp chat. Generate leads, improve conversions. Start today!`,
+  title: `Click-to-WhatsApp — Turn Ads Into Conversations | LimeCall`,
+  description: `Connect Facebook and Instagram ads directly to WhatsApp chat. LimeCall's Click-to-WhatsApp solution generates leads, captures contact details, and starts real conversations instantly.`,
   canonical: `https://www.limecall.com/click-to-whatsapp/`,
 };
+
+const features = [
+  { title: "Instant WhatsApp Conversations", desc: "Ad clicks open a WhatsApp chat immediately. No landing page, no form — just an instant conversation with your lead." },
+  { title: "Facebook & Instagram Ads", desc: "Connect Meta ad campaigns directly to WhatsApp. Set up Click-to-WhatsApp ads in minutes from your LimeCall dashboard." },
+  { title: "Website Widget", desc: "Add a WhatsApp chat button to your website. Visitors click to start a conversation without leaving the page." },
+  { title: "Lead Capture & Routing", desc: "Automatically capture contact details from WhatsApp conversations and route leads to the right sales rep." },
+  { title: "Broadcast Responses", desc: "Send follow-up messages to leads who started a WhatsApp conversation with your brand." },
+  { title: "Analytics & Attribution", desc: "Track which ads, keywords, and pages drive WhatsApp conversations. Attribute revenue back to campaigns." },
+];
+
+const steps = [
+  { n: "1", title: "Connect WhatsApp Business", desc: "Link your WhatsApp Business number to LimeCall. Takes just a few minutes to authorize." },
+  { n: "2", title: "Set up your ads or widget", desc: "Create Click-to-WhatsApp ads in Meta Ads Manager, or add the LimeCall WhatsApp widget to your website." },
+  { n: "3", title: "Capture and convert leads", desc: "Leads click and land in WhatsApp. LimeCall captures their details and routes to your team." },
+];
+
+const stats = [
+  { value: "2B+", label: "WhatsApp users worldwide" },
+  { value: "98%", label: "WhatsApp message open rate" },
+  { value: "5x", label: "Higher engagement vs email" },
+  { value: "40%", label: "Higher ad conversion with Click-to-WhatsApp" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Click-to-WhatsApp", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        WhatsApp Lead Generation
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Turn Clicks Into <span class="text-lime-400">WhatsApp Conversations</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Connect your ads and website to WhatsApp Business. Leads click, conversations start instantly, and your team closes deals in the world's most popular messaging app.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 py-10 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything in Click-to-WhatsApp</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Start converting leads on WhatsApp</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to drive WhatsApp conversations from ads and websites.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/whatsapp-link-generator/', title: 'WhatsApp Link Generator', desc: 'Generate direct WhatsApp links free.' },
+        { href: '/whatsapp-qr-code-generator/', title: 'WhatsApp QR Generator', desc: 'Create a WhatsApp QR code free.' },
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Full SMS platform for your business.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

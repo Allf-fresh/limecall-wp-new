@@ -68,3 +68,7 @@
 # Usecase catch-all
 /usecase/  /use-cases/  301
 /usecase   /use-cases/  301
+
+# Callback automation alias -> canonical product page
+/callbackautomation/  /customer-callback-software/  301
+/callbackautomation   /customer-callback-software/  301

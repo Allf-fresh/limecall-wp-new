@@ -1,15 +1,131 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Get a toll-free number for your business - LimeCall`,
-  description: `Generate more leads from your website by triggering potential customers and deliver them callback with Lead Generation by LimeCall`,
+  title: `Toll-Free Numbers for Business | LimeCall`,
+  description: `Get a toll-free number for your business. Free for callers, professional for you. 800, 888, 877, 866 numbers available. Set up in minutes with LimeCall.`,
   canonical: `https://www.limecall.com/toll-free-numbers/`,
 };
+
+const benefits = [
+  { title: "Free for Callers", desc: "Toll-free numbers mean callers pay nothing to reach you — removing cost barriers and increasing inbound call volume." },
+  { title: "Professional Image", desc: "A toll-free number signals enterprise credibility. Customers see you as an established, accessible business." },
+  { title: "National Reach", desc: "One toll-free number works across an entire country. Perfect for businesses that serve customers nationwide." },
+  { title: "Instant Activation", desc: "Get your toll-free number live in minutes. No hardware, no waiting, no contracts required." },
+  { title: "Smart Call Routing", desc: "Route toll-free calls to the right team member, department, or location based on time, availability, or caller location." },
+  { title: "Full Analytics", desc: "Track every toll-free call — source, duration, outcome, and more — to understand what's driving inbound volume." },
+];
+
+const formats = [
+  { prefix: "800", desc: "The original and most recognized toll-free prefix. High trust and brand recognition." },
+  { prefix: "888", desc: "Popular alternative to 800. Widely recognized as toll-free by US and Canadian callers." },
+  { prefix: "877", desc: "Another trusted toll-free prefix, widely used for customer service and sales lines." },
+  { prefix: "866", desc: "Increasingly common toll-free prefix. Good availability for custom vanity numbers." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Toll-Free Numbers", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Toll-Free Numbers
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Toll-Free Numbers for <span class="text-lime-400">Your Business</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Give customers a free, frictionless way to reach you. Toll-free numbers build trust, increase call volume, and project a professional national presence.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Get a Toll-Free Number →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Why use a toll-free number?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Toll-Free Prefixes -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Available toll-free prefixes</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {formats.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 text-center">
+            <p class="text-2xl font-bold text-lime-400">1-{f.prefix}</p>
+            <p class="mt-2 text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Get started in 3 steps</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
+          <h3 class="mb-2 font-semibold text-white">Sign up free</h3>
+          <p class="text-sm text-dark-400">Create your LimeCall account. No credit card required for the free trial.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
+          <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
+          <p class="text-sm text-dark-400">Select your preferred toll-free prefix and number. Vanity numbers available.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
+          <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
+          <p class="text-sm text-dark-400">Your toll-free number activates instantly. Route calls to any device, anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Get your toll-free number today</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to build a professional, accessible phone presence.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/local-numbers/', title: 'Local Numbers', desc: 'Get a local number in any city.' },
+        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
+        { href: '/incoming-numbers/', title: 'Incoming Numbers', desc: 'DID numbers for inbound calls.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

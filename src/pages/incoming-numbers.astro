@@ -1,15 +1,131 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Buy Virtual Phone Numbers - Get Started in 60 Seconds`,
-  description: `Free Incoming Call Software Now You can route calls and replace phone numbers to keep an active phone presence using LimeCall`,
+  title: `Incoming Numbers (DID) | Buy Virtual Phone Numbers | LimeCall`,
+  description: `Buy virtual incoming phone numbers (DID) and start receiving calls in 60 seconds. Route calls, replace phone numbers, and maintain an active presence with LimeCall.`,
   canonical: `https://www.limecall.com/incoming-numbers/`,
 };
+
+const benefits = [
+  { title: "Direct Inward Dialing (DID)", desc: "DID numbers let outside callers reach specific people or departments directly, without going through a main number or receptionist." },
+  { title: "Multi-Country Coverage", desc: "Get DID numbers in 50+ countries. Give each region, team, or product line its own dedicated inbound number." },
+  { title: "Any Device, Anywhere", desc: "Incoming calls route to any device — desktop app, mobile, or physical phone — wherever your team is located." },
+  { title: "Instant Number Porting", desc: "Already have a number? Port it to LimeCall and keep your existing number while gaining all LimeCall features." },
+  { title: "Call Queuing", desc: "Handle high call volumes with smart queuing. Callers wait in line and your team picks up when available." },
+  { title: "IVR & Auto-Attendant", desc: "Set up interactive voice response menus to route callers to the right team or department automatically." },
+];
+
+const useCases = [
+  { title: "Sales Teams", desc: "Give each sales rep their own DID number. Track individual performance and never mix up leads." },
+  { title: "Customer Support", desc: "Dedicated support line that routes to your support team. Separate from sales for clean tracking." },
+  { title: "Marketing Campaigns", desc: "Assign unique numbers to each ad campaign, channel, or landing page for precise attribution." },
+  { title: "Regional Offices", desc: "Get a local number for each region or office, even if you don't have a physical presence there yet." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Incoming Numbers", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        DID / Incoming Numbers
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Virtual Incoming Numbers <span class="text-lime-400">in 60 Seconds</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Buy DID (Direct Inward Dialing) numbers and start receiving calls instantly. Route calls to any device, track marketing campaigns, and maintain a local phone presence in every market.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Get an Incoming Number →
+        </a>
+        <a href="/virtual-numbers/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Browse Countries
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything you need from an incoming number</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Common use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Get started in 3 steps</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
+          <h3 class="mb-2 font-semibold text-white">Sign up free</h3>
+          <p class="text-sm text-dark-400">Create your LimeCall account. No credit card required for the free trial.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
+          <h3 class="mb-2 font-semibold text-white">Buy your number</h3>
+          <p class="text-sm text-dark-400">Choose from thousands of available DID numbers across 50+ countries.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
+          <h3 class="mb-2 font-semibold text-white">Receive calls instantly</h3>
+          <p class="text-sm text-dark-400">Your incoming number is active immediately. Configure routing and start taking calls.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Get your incoming number today</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall DID numbers to manage inbound calls professionally.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/local-numbers/', title: 'Local Numbers', desc: 'Get a local number in any city.' },
+        { href: '/toll-free-numbers/', title: 'Toll-Free Numbers', desc: 'Free for callers, professional for you.' },
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Track which campaigns drive calls.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

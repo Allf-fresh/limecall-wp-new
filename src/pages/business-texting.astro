@@ -1,15 +1,129 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Web to Text - LimeCall - LimeCall`,
-  description: `LimeCall's text messaging and SMS marketing software makes it easy to reach and engage your customers, drive sales, and grow your business.`,
+  title: `Business Texting & SMS Platform | LimeCall`,
+  description: `LimeCall's business texting platform makes it easy to reach and engage your customers over SMS. Drive sales, send reminders, and grow your business with web-to-text.`,
   canonical: `https://www.limecall.com/business-texting/`,
 };
+
+const features = [
+  { title: "Web to Text Widget", desc: "Add a text widget to your website. Visitors click to start a two-way SMS conversation instantly — no app download required." },
+  { title: "Two-Way SMS", desc: "Send and receive text messages in a real-time conversation. Reply from your LimeCall inbox on any device." },
+  { title: "SMS Automation", desc: "Trigger automatic text messages based on visitor actions, time of day, or CRM events. Nurture leads 24/7." },
+  { title: "Broadcast Campaigns", desc: "Send SMS campaigns to lists of contacts at once. Perfect for promotions, reminders, and re-engagement." },
+  { title: "Shared Team Inbox", desc: "Your whole team sees incoming texts in one shared inbox. Assign conversations and collaborate with ease." },
+  { title: "CRM Integration", desc: "Sync texts with your CRM. Every conversation is logged so your team has full context on every customer." },
+];
+
+const steps = [
+  { n: "1", title: "Add the widget", desc: "Paste one line of code to add the LimeCall text widget to your website. Takes 2 minutes." },
+  { n: "2", title: "Visitor texts you", desc: "Visitors click the widget and start texting. Their number is captured and the conversation begins." },
+  { n: "3", title: "Reply and convert", desc: "Your team responds from the LimeCall inbox. Follow up, qualify, and close — all over SMS." },
+];
+
+const useCases = [
+  { title: "Lead Capture", desc: "Capture leads directly in SMS. No form-fill friction — visitors text you instead of filling out a contact form." },
+  { title: "Sales Follow-Up", desc: "Send automated follow-up texts after calls or demos. Keep leads warm without manual effort." },
+  { title: "Appointment Reminders", desc: "Reduce no-shows with automatic SMS reminders for scheduled calls, demos, or meetings." },
+  { title: "Customer Support", desc: "Let customers text in their support questions. Faster for them, more efficient for your team." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Business Texting", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Business SMS Platform
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Business Texting That <span class="text-lime-400">Converts</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Turn website visitors into SMS conversations. Two-way texting, automated follow-ups, and a shared team inbox — everything your business needs to engage customers over text.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything in your business texting platform</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Ready to start texting with customers?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of sales and support teams using LimeCall business texting to convert more leads.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/sms-broadcasts/', title: 'SMS Broadcasts', desc: 'Send mass texts to contact lists.' },
+        { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Manage SMS as a team.' },
+        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

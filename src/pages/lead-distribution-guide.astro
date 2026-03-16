@@ -1,15 +1,116 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Lead Distribution guide - LimeCall`,
-  description: ``,
+  title: `The Complete Lead Distribution Guide | LimeCall`,
+  description: `Everything you need to know about lead distribution — what it is, types of distribution methods, best practices, and how to implement it for your sales team.`,
   canonical: `https://www.limecall.com/lead-distribution-guide/`,
 };
+
+const chapters = [
+  {
+    number: "01",
+    title: "What is Lead Distribution?",
+    body: "Lead distribution is the process of assigning inbound leads to the appropriate sales rep or team member. When a prospect fills out a form, requests a callback, or calls your business, lead distribution determines who handles that lead — and how quickly. Effective lead distribution is the backbone of a high-performing sales team.",
+  },
+  {
+    number: "02",
+    title: "Why Lead Distribution Matters",
+    body: "Speed is the most important factor in sales conversion. Research shows that contacting a lead within 1 minute of their inquiry increases conversion rates by 391%. Manual assignment is too slow. Automated lead distribution ensures every lead is handled instantly, every time.",
+  },
+  {
+    number: "03",
+    title: "Types of Lead Distribution",
+    body: "There are four primary lead distribution methods: Round-Robin (equal rotation among all reps), Skills-Based (matching leads to reps with relevant expertise), Availability-Based (routing only to available reps), and Geographic/Territory-Based (assigning leads based on location). Most businesses use a combination.",
+  },
+  {
+    number: "04",
+    title: "Lead Distribution Best Practices",
+    body: "Set clear routing rules before you start. Define what makes a lead 'qualified' and which reps should handle which lead types. Monitor response times closely — a lead not responded to in 5 minutes is 10x less likely to convert. Use fallback rules so no lead is ever left unassigned.",
+  },
+  {
+    number: "05",
+    title: "Measuring Distribution Performance",
+    body: "Track these key metrics: Lead Response Time (how fast reps respond), Acceptance Rate (% of assigned leads accepted), Conversion Rate by Rep, Distribution Fairness (are leads being distributed equitably?), and Lead-to-Close Time. Use these to optimize your routing rules over time.",
+  },
+  {
+    number: "06",
+    title: "Tools for Lead Distribution",
+    body: "Modern lead distribution software like LimeCall automates the entire process. When a lead arrives, LimeCall instantly qualifies, scores, and routes the lead to the right rep — triggering an instant callback or sending the lead details to the rep's phone within seconds.",
+  },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Lead Distribution Guide", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Complete Guide
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        The Complete Lead <span class="text-lime-400">Distribution Guide</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Everything you need to know about lead distribution — from the basics to advanced best practices. Learn how to route leads faster, convert more, and build a high-performing sales team.
+      </p>
+    </div>
+  </section>
+
+  <!-- Guide Chapters -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="space-y-6">
+        {chapters.map(c => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="mb-3 flex items-center gap-3">
+              <span class="text-sm font-bold text-lime-400">{c.number}</span>
+              <h2 class="text-lg font-bold text-white">{c.title}</h2>
+            </div>
+            <p class="text-dark-300 leading-relaxed text-sm">{c.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Stats -->
+  <section class="border-t border-dark-800 py-14 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-xl font-bold text-white">Lead distribution by the numbers</h2>
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        <div><p class="text-3xl font-extrabold text-lime-400">391%</p><p class="mt-1 text-sm text-dark-400">More conversions when you respond in 1 minute</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">10x</p><p class="mt-1 text-sm text-dark-400">More likely to convert vs 5-minute response</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">50%</p><p class="mt-1 text-sm text-dark-400">Of sales go to the first vendor to respond</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">28s</p><p class="mt-1 text-sm text-dark-400">LimeCall's average time to connect a lead</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Ready to implement smart lead distribution?</h2>
+      <p class="mt-4 text-dark-400">LimeCall automates lead distribution so you can focus on closing. Start free today.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/lead-distribution/', title: 'Lead Distribution Software', desc: 'Automate your lead distribution.' },
+        { href: '/automatic-lead-distribution/', title: 'Automatic Distribution', desc: 'Set up automatic lead assignment.' },
+        { href: '/instant-lead-routing/', title: 'Instant Lead Routing', desc: 'Route leads in real time.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

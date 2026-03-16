@@ -1,15 +1,104 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Instant lead qualification - LimeCall`,
-  description: `Instantly qualify inbound leads with Limecalls automated lead detection and routing software`,
+  title: `Click 2 Call — Instant Click-to-Call Software | LimeCall`,
+  description: `Click 2 Call (also known as Click to Call) connects website visitors to your sales team instantly with one click. No hold times, no friction — just conversations that convert.`,
   canonical: `https://www.limecall.com/click-2-call/`,
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Click 2 Call", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Also known as "Click to Call"
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Click 2 Call — Connect Instantly
+      </h1>
+      <p class="mt-2 text-lg font-medium text-lime-400">Also referred to as Click to Call or Click-to-Call</p>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Let website visitors connect with your sales team with a single click. No hold times, no phone numbers to dial — just an instant, live conversation the moment interest peaks.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Try Click 2 Call Free →
+        </a>
+        <a href="/click-to-call-software/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Click 2 Call -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 sm:p-12">
+        <h2 class="mb-6 text-2xl font-bold text-white">What is Click 2 Call?</h2>
+        <div class="space-y-4 text-dark-300 leading-relaxed">
+          <p>
+            <strong class="text-white">Click 2 Call</strong> (or Click-to-Call, or Click to Call) is a technology that lets website visitors initiate a phone call to your business with a single button click. When a visitor clicks the button, LimeCall simultaneously calls your sales team and the visitor, connecting them in seconds.
+          </p>
+          <p>
+            Unlike traditional callback forms that create delays, Click 2 Call connects callers instantly — while their interest is at its peak. Studies show that responding within the first minute of a web inquiry increases lead conversion by 391%.
+          </p>
+          <p>
+            LimeCall's Click 2 Call solution includes smart routing, call recording, analytics, and CRM integration — everything you need to turn website traffic into live sales conversations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">What's included with Click 2 Call</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { title: "One-Click Connection", desc: "Visitors click a button on your website. LimeCall calls your team and the visitor simultaneously — connected in under 28 seconds." },
+          { title: "Smart Call Routing", desc: "Route calls to the right sales rep based on availability, skills, time zone, or round-robin distribution." },
+          { title: "Call Recording", desc: "Record every call automatically for quality assurance, training, and compliance." },
+          { title: "CRM Integration", desc: "Log every Click 2 Call conversation to your CRM automatically. Full context for every lead." },
+          { title: "Analytics & Reporting", desc: "Track call volume, connection rates, duration, and conversions. Know what's working and optimize." },
+          { title: "Customizable Widget", desc: "Match the Click 2 Call button to your brand. Choose colors, text, position, and display rules." },
+        ].map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Ready to add Click 2 Call to your website?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to connect with website visitors instantly and increase conversions.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/click-to-call-software/', title: 'Click to Call Software', desc: 'Full click-to-call feature page.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Schedule and automate callbacks.' },
+        { href: '/lead-capture/', title: 'Lead Capture', desc: 'Capture every inbound lead.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

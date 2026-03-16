@@ -1,15 +1,107 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Automatic Lead Distribution for Faster Sales with LimeCall`,
-  description: `Automatic lead distribution: Connect with qualified prospects instantly. Boost sales efficiency, response times & fit with automatic lead routing software.`,
+  title: `Automatic Lead Distribution — Faster Sales | LimeCall`,
+  description: `Automatically distribute leads to the right sales rep the moment they arrive. LimeCall's automatic lead distribution boosts response times, fairness, and conversion rates.`,
   canonical: `https://www.limecall.com/automatic-lead-distribution/`,
 };
+
+const features = [
+  { title: "Rule-Based Distribution", desc: "Define rules to distribute leads by territory, lead source, product interest, company size, or any custom field." },
+  { title: "Round-Robin Fairness", desc: "Distribute leads evenly across your team with round-robin assignment. Fair allocation, no favoritism." },
+  { title: "Performance-Based Weighting", desc: "Give higher-performing reps more leads. Weighted distribution lets your best closers handle more volume." },
+  { title: "Instant Notification", desc: "Reps receive an instant notification — via SMS, email, or Slack — the moment a lead is assigned to them." },
+  { title: "Re-distribution Rules", desc: "If a rep doesn't respond within a defined window, LimeCall automatically redistributes the lead to the next rep." },
+  { title: "Distribution Analytics", desc: "Track lead distribution fairness, response times, and conversion rates by rep to optimize your process." },
+];
+
+const distributionMethods = [
+  { title: "Round-Robin", desc: "Leads are distributed equally to each rep in sequence. Best for teams with similar skill levels." },
+  { title: "Skills-Based", desc: "Match leads to reps based on their expertise, language, or product specialization." },
+  { title: "Availability-Based", desc: "Route only to reps who are currently online and available to take the lead." },
+  { title: "Geographic", desc: "Distribute leads to reps based on the lead's location. Essential for territory-based sales teams." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Automatic Lead Distribution", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Automatic Lead Distribution
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Distribute Leads Automatically, <span class="text-lime-400">Close Faster</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Stop manually assigning leads. LimeCall's automatic lead distribution routes every inbound lead to the right rep instantly — based on your custom rules.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Automatic lead distribution features</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Distribution Methods -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Distribution methods</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {distributionMethods.map(m => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-lime-400">{m.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{m.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Automate your lead distribution</h2>
+      <p class="mt-4 text-dark-400">Set up automatic lead distribution in minutes. Your team gets the right leads instantly.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/lead-distribution/', title: 'Lead Distribution', desc: 'Full lead distribution platform.' },
+        { href: '/instant-lead-routing/', title: 'Instant Lead Routing', desc: 'Route leads in real time.' },
+        { href: '/lead-distribution-guide/', title: 'Lead Distribution Guide', desc: 'Complete guide to lead distribution.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

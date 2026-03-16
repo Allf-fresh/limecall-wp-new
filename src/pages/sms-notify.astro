@@ -1,15 +1,107 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `SMS Notify - LimeCall`,
-  description: `LimeCall displays fully customizable popups to your visitors. You can edit the text, use a dynamic element, or advanced customization via our powerful CSS editor`,
+  title: `SMS Notifications & Alerts | LimeCall SMS Notify`,
+  description: `Send automated SMS notifications for new leads, call events, appointments, and more. Keep your team and customers informed in real time with LimeCall SMS Notify.`,
   canonical: `https://www.limecall.com/sms-notify/`,
 };
+
+const features = [
+  { title: "Instant Lead Alerts", desc: "Get an SMS the moment a new lead comes in. Your team knows immediately, so they can respond while the lead is hot." },
+  { title: "Call Event Notifications", desc: "Receive SMS alerts when a call is missed, completed, or recorded. Stay on top of every customer interaction." },
+  { title: "Appointment Confirmations", desc: "Automatically send SMS confirmation texts when someone books a call or meeting through LimeCall." },
+  { title: "Reminder Sequences", desc: "Set up multi-step reminder sequences — send texts 24 hours, 1 hour, and 15 minutes before scheduled calls." },
+  { title: "Custom Triggers", desc: "Build custom notification triggers based on CRM updates, form submissions, or any LimeCall event." },
+  { title: "Team Notifications", desc: "Notify individual reps, team leads, or entire teams via SMS when important events happen." },
+];
+
+const steps = [
+  { n: "1", title: "Choose your trigger", desc: "Select the event that should trigger an SMS — new lead, missed call, booking, or custom event." },
+  { n: "2", title: "Write your message", desc: "Compose the notification SMS. Use dynamic fields to include lead name, time, phone number, and more." },
+  { n: "3", title: "Set recipients", desc: "Send to the assigned rep, a team, or a phone number. Notifications fire automatically, every time." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "SMS Notify", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Automated SMS Notifications
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Stay Informed with <span class="text-lime-400">SMS Notifications</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Automatically send SMS alerts for new leads, missed calls, appointments, and more. Keep your team responsive and your customers informed — without lifting a finger.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">What SMS Notify can do for you</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Set up in 3 steps</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Never miss a lead or a call again</h2>
+      <p class="mt-4 text-dark-400">Set up automated SMS notifications once, and LimeCall keeps you and your team informed automatically.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Two-way SMS platform.' },
+        { href: '/sms-broadcasts/', title: 'SMS Broadcasts', desc: 'Send bulk SMS campaigns.' },
+        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Automate inbound callbacks.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

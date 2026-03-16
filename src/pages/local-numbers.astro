@@ -1,15 +1,143 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Get a local number for your business - LimeCall`,
-  description: `Generate more leads from your website by triggering potential customers and deliver them callback with Lead Generation by LimeCall`,
+  title: `Local Phone Numbers for Business | LimeCall`,
+  description: `Get local phone numbers for your business in 50+ countries. Build local presence, increase answer rates, and connect with customers using familiar local area codes.`,
   canonical: `https://www.limecall.com/local-numbers/`,
 };
+
+const benefits = [
+  { title: "Increase Answer Rates", desc: "Calls from local numbers are answered up to 4x more often than calls from unknown or international numbers." },
+  { title: "Build Local Trust", desc: "A local number signals to customers that you have a presence in their market — building immediate credibility." },
+  { title: "50+ Countries", desc: "Get local numbers in over 50 countries. Expand globally while maintaining a local feel in every market." },
+  { title: "Instant Activation", desc: "Numbers activate immediately after signup. No contracts, no hardware, no waiting for SIM cards." },
+  { title: "One Dashboard", desc: "Manage all your local numbers from a single LimeCall dashboard — calls, SMS, analytics, and routing." },
+  { title: "Full Call Features", desc: "Every local number includes call routing, recording, callback automation, and SMS — all included." },
+];
+
+const countries = [
+  { name: "United States", code: "+1", href: "/buy-usa-numbers/", flag: "🇺🇸" },
+  { name: "United Kingdom", code: "+44", href: "/get-uk-virtual-phone-number/", flag: "🇬🇧" },
+  { name: "Germany", code: "+49", href: "/buy-germany-numbers/", flag: "🇩🇪" },
+  { name: "France (Paris)", code: "+33", href: "/paris-virtual-phone-numbers/", flag: "🇫🇷" },
+  { name: "Australia", code: "+61", href: "/get-australia-virtual-phone-number/", flag: "🇦🇺" },
+  { name: "Canada", code: "+1", href: "/virtual-phone-number-canada/", flag: "🇨🇦" },
+  { name: "India", code: "+91", href: "/india-virtual-phone-number/", flag: "🇮🇳" },
+  { name: "Singapore", code: "+65", href: "/singapore-virtual-phone-number/", flag: "🇸🇬" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Local Numbers", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Virtual Local Numbers
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Local Phone Numbers for <span class="text-lime-400">Your Business</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Get a local number in any city or country. Build trust with local customers, increase answer rates, and manage everything from one platform.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Get a Local Number →
+        </a>
+        <a href="/virtual-numbers/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Browse All Countries
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Why get a local phone number?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Countries -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Popular local number countries</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {countries.map(c => (
+          <a href={c.href} class="group flex items-center gap-3 rounded-xl border border-dark-800 bg-dark-900/50 p-4 transition-colors hover:border-lime-500/50">
+            <span class="text-2xl">{c.flag}</span>
+            <div>
+              <p class="font-medium text-white group-hover:text-lime-400 transition text-sm">{c.name}</p>
+              <p class="text-xs text-dark-500">{c.code}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href="/virtual-numbers/" class="text-sm font-medium text-lime-400 hover:text-lime-300 transition">
+          View all 50+ countries →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Get started in 3 steps</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
+          <h3 class="mb-2 font-semibold text-white">Sign up free</h3>
+          <p class="text-sm text-dark-400">Create your LimeCall account. No credit card required for the free trial.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
+          <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
+          <p class="text-sm text-dark-400">Pick a country and city area code. Preview and select your preferred number.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
+          <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
+          <p class="text-sm text-dark-400">Your number activates instantly. Route calls to any device, anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Get your local number today</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall local numbers to build trust and close more deals.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
+        { href: '/toll-free-numbers/', title: 'Toll-Free Numbers', desc: 'Free for callers, professional for you.' },
+        { href: '/incoming-numbers/', title: 'Incoming Numbers', desc: 'DID numbers for inbound calls.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

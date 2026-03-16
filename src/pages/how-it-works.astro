@@ -1,14 +1,43 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const seo = {
-  title: `How It Works | Convert Leads | Callback Software | LimeCall`,
-  description: `Tracy is the owner of her own luxury travel consultancy. She signs up for LimeCall and is able to qualify and convert leads within 28 seconds round the clock.`,
+  title: `How It Works | Connect Website Visitors in 28 Seconds | LimeCall`,
+  description: `See how LimeCall works: install a widget, visitor requests a callback, LimeCall connects in 28 seconds, call is recorded and synced to your CRM. Live in 5 minutes.`,
   canonical: `https://www.limecall.com/how-it-works/`,
 };
+
+const faqs = [
+  {
+    question: 'How does LimeCall connect website visitors to my sales team?',
+    answer: 'When a visitor clicks the LimeCall widget and enters their phone number, LimeCall simultaneously dials your sales rep and the visitor. Both answer and are bridged — in an average of 28 seconds.',
+  },
+  {
+    question: 'How do I install the LimeCall widget?',
+    answer: 'Copy a single JavaScript snippet from your LimeCall dashboard and paste it into your website\'s HTML. Works with WordPress, Webflow, Shopify, Wix, and any HTML site. No developer needed.',
+  },
+  {
+    question: 'What happens if my sales rep misses the call?',
+    answer: 'LimeCall routes to the next available rep. If no one is available, the visitor receives an SMS and can schedule a callback for a specific time. Your team also gets an email and SMS alert.',
+  },
+  {
+    question: 'Does LimeCall work 24/7?',
+    answer: 'You configure your business hours. During business hours, LimeCall attempts instant connection. Outside hours, visitors can schedule a callback for when you\'re available.',
+  },
+  {
+    question: 'Does LimeCall record calls automatically?',
+    answer: 'Yes. Every call through LimeCall is recorded and stored securely. Recordings are available in your dashboard for playback, quality review, and compliance.',
+  },
+  {
+    question: 'Which CRMs does LimeCall sync with?',
+    answer: 'LimeCall integrates natively with HubSpot, Salesforce, Pipedrive, and Zoho. Call data, recordings, lead info, and response times sync automatically after every call.',
+  },
+];
 
 const steps = [
   {
@@ -90,6 +119,8 @@ const features = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -204,6 +235,28 @@ const features = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
         ))}
       </div>
     </div>

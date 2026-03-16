@@ -8,8 +8,8 @@ import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Click to Call Software — Smart Callback Platform | LimeCall`,
-  description: `Connect with potential customers instantly and improve your conversion rates by 3x with LimeCall's click to call solution. One-click web calls, instant callbacks in 28 seconds.`,
+  title: `Click-to-Call Software — Get More Calls From Your Website | LimeCall`,
+  description: `Add a click-to-call widget to your website and connect with visitors in 28 seconds. Boost conversions by 3x. No code required. Free plan available.`,
   canonical: `https://www.limecall.com/click-to-call-software/`,
 };
 
@@ -216,6 +216,52 @@ const faqs = [
           <footer class="mt-4 text-sm text-dark-500">— Sales Director, LimeCall Customer</footer>
         </blockquote>
       </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Click-to-Call vs. <span class="text-lime-400">Other Lead Channels</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          See how click-to-call compares to the alternatives for converting website visitors into customers.
+        </p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-6 py-4 text-left font-semibold text-white">Feature</th>
+              <th class="px-6 py-4 text-center font-semibold text-lime-400">Click-to-Call (LimeCall)</th>
+              <th class="px-6 py-4 text-center font-semibold text-dark-400">Contact Form</th>
+              <th class="px-6 py-4 text-center font-semibold text-dark-400">Live Chat</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', '2–48 hours', '1–5 minutes'],
+              ['Conversation quality', 'Live voice call', 'Email follow-up', 'Text chat'],
+              ['Lead capture rate', '3x higher', 'Baseline', '1.5x'],
+              ['Setup time', '< 5 minutes', '< 5 minutes', '15–30 minutes'],
+              ['Works after hours', '✓ Scheduled callbacks', '✓', '✓ Bot only'],
+              ['CRM sync', '✓ Automatic', 'Manual', 'Varies'],
+              ['Call recording', '✓ Included', '✗', '✗'],
+              ['Mobile-friendly', '✓', '✓', 'Varies'],
+            ].map(([feature, clickToCall, form, chat]) => (
+              <tr class="bg-dark-950/40 hover:bg-dark-900/40 transition">
+                <td class="px-6 py-4 font-medium text-white">{feature}</td>
+                <td class="px-6 py-4 text-center text-lime-400 font-medium">{clickToCall}</td>
+                <td class="px-6 py-4 text-center text-dark-400">{form}</td>
+                <td class="px-6 py-4 text-center text-dark-400">{chat}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-center text-xs text-dark-500">Companies using click-to-call see up to 300% more conversions vs. contact forms alone.</p>
     </div>
   </section>
 

@@ -188,6 +188,51 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Callback Software vs. <span class="text-lime-400">Other Options</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          See how automated callback compares to phone systems and live chat for converting website visitors.
+        </p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-6 py-4 text-left font-semibold text-white">Feature</th>
+              <th class="px-6 py-4 text-center font-semibold text-lime-400">Callback Software (LimeCall)</th>
+              <th class="px-6 py-4 text-center font-semibold text-dark-400">Phone System / IVR</th>
+              <th class="px-6 py-4 text-center font-semibold text-dark-400">Live Chat</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Customer waits on hold', '1–5 minutes'],
+              ['Initiated by', 'Customer (no hold music)', 'Customer (hold queue)', 'Customer (text chat)'],
+              ['Conversion quality', 'Live voice call', 'Live voice call', 'Text chat'],
+              ['Missed call recovery', '✓ Auto follow-up + SMS', 'Voicemail only', 'Bot replies'],
+              ['CRM integration', '✓ Automatic sync', 'Manual logging', 'Varies'],
+              ['Call recording', '✓ Included', 'Add-on cost', '✗'],
+              ['Lead analytics', '✓ Full tracking', 'Limited', 'Limited'],
+              ['Setup time', '< 5 minutes', 'Hours / days', '30–60 minutes'],
+            ].map(([feature, callback, phone, chat]) => (
+              <tr class="bg-dark-950/40 hover:bg-dark-900/40 transition">
+                <td class="px-6 py-4 font-medium text-white">{feature}</td>
+                <td class="px-6 py-4 text-center text-lime-400 font-medium">{callback}</td>
+                <td class="px-6 py-4 text-center text-dark-400">{phone}</td>
+                <td class="px-6 py-4 text-center text-dark-400">{chat}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- Social proof metrics -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

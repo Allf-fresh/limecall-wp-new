@@ -72,3 +72,6 @@
 # Callback automation alias -> canonical product page
 /callbackautomation/  /customer-callback-software/  301
 /callbackautomation   /customer-callback-software/  301
+
+# Old WP media file that somehow got indexed and ranks (pos 3.8, 370 impressions)
+/wp-content/uploads/2016/11/5590.html  /click-to-call-software/  301

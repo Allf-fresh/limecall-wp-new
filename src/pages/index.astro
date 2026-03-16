@@ -31,6 +31,93 @@ const faqs = [
     question: 'Is there a free plan?',
     answer: 'Yes. LimeCall offers a free Basic plan with 30 calls per month — no credit card required. Upgrade to a paid plan as your call volume grows.',
   },
+  {
+    question: 'How does LimeCall compare to a standard contact form?',
+    answer: 'Contact forms convert at 1–3%. LimeCall click-to-call widgets convert at 10–12x higher rates because visitors connect with a real person in seconds — when their intent is highest. Speed-to-lead is the #1 factor in closing deals.',
+  },
+];
+
+const roles = [
+  {
+    id: 'sales',
+    label: 'Sales Teams',
+    icon: '💼',
+    headline: 'Close deals before leads go cold',
+    points: [
+      'Auto-connect reps with inbound leads in under 28 seconds',
+      'Smart lead distribution routes to the right rep every time',
+      'Call recordings + CRM sync — zero manual entry',
+      'Speed-to-lead reports show exactly where deals are won or lost',
+    ],
+    stat: '3x higher close rate vs. contact forms',
+    href: '/for-sales-teams',
+  },
+  {
+    id: 'marketing',
+    label: 'Marketing Teams',
+    icon: '📣',
+    headline: 'Prove which campaigns drive calls',
+    points: [
+      'Assign unique numbers to every campaign, ad, and landing page',
+      'Track call volume, duration, and conversions per source',
+      'See ROI across Google Ads, Facebook, and organic traffic',
+      'Retarget visitors who clicked but didn\'t call',
+    ],
+    stat: '391% more conversions in the first minute',
+    href: '/for-marketing-teams',
+  },
+  {
+    id: 'ecommerce',
+    label: 'E-commerce',
+    icon: '🛒',
+    headline: 'Recover abandoning shoppers instantly',
+    points: [
+      'Exit-intent widget triggers a callback offer before visitors leave',
+      'Recover high-value carts with a real conversation',
+      'SMS follow-up for visitors who don\'t answer immediately',
+      'Boost average order value with personal product guidance',
+    ],
+    stat: '80% of visitors captured before they leave',
+    href: '/limecall-for-ecommerce-and-retail-2',
+  },
+  {
+    id: 'support',
+    label: 'Customer Support',
+    icon: '🎧',
+    headline: 'Replace hold music with instant callbacks',
+    points: [
+      'Offer scheduled callbacks instead of putting customers on hold',
+      'Reduce call abandonment by up to 60%',
+      'Route support calls to the right team automatically',
+      'All tickets and call notes sync to your helpdesk',
+    ],
+    stat: '60% reduction in call abandonment',
+    href: '/use-cases',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'LimeCall added 800 more qualified calls each month. We went from 2-minute response times to under 28 seconds — and our close rate tripled.',
+    name: 'Daniel R.',
+    role: 'Sales Director',
+    company: 'FinTech SaaS',
+    metric: '+800 calls/month',
+  },
+  {
+    quote: 'We cut lead response time from 4 hours to 28 seconds. Our conversion rate from website traffic went up 3x in the first 30 days.',
+    name: 'Sarah K.',
+    role: 'Head of Growth',
+    company: 'B2B Software',
+    metric: '3x conversions',
+  },
+  {
+    quote: 'The CRM sync alone saved our team 2 hours per day. Every call automatically logged — plus the callback scheduler recovered 40% of after-hours leads.',
+    name: 'Mark T.',
+    role: 'VP Sales',
+    company: 'Real Estate Tech',
+    metric: '40% leads recovered',
+  },
 ];
 ---
 
@@ -44,57 +131,79 @@ const faqs = [
   <!-- Hero -->
   <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
     <div class="absolute inset-0 -z-10">
-      <div class="absolute left-1/2 top-0 -translate-x-1/2 h-[600px] w-[800px] rounded-full bg-lime-500/10 blur-[120px]"></div>
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 h-[700px] w-[900px] rounded-full bg-lime-500/8 blur-[140px]"></div>
+      <div class="absolute right-0 bottom-0 h-[400px] w-[500px] rounded-full bg-lime-500/5 blur-[100px]"></div>
     </div>
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-3xl text-center">
-        <span class="inline-block mb-6 rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">
-          #1 Callback Automation Platform
-        </span>
+        <!-- Rating badge -->
+        <div class="mb-6 flex flex-wrap items-center justify-center gap-3">
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">
+            ★ 4.6/5 on G2 &amp; Capterra
+          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-dark-700 bg-dark-900/60 px-4 py-1.5 text-sm text-dark-300">
+            10,000+ businesses
+          </span>
+        </div>
+
         <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
           Turn Website Visitors Into
           <span class="text-lime-400"> Sales Calls in 28 Seconds</span>
         </h1>
         <p class="mt-6 text-lg leading-relaxed text-dark-300 sm:text-xl">
-          LimeCall connects your sales team with website visitors instantly — before they bounce to a competitor. No hold music. No friction. Just more conversations and more closed deals.
+          Contact forms convert at 1–3%. LimeCall click-to-call widgets convert at <strong class="text-white">10–12x higher rates</strong> — connecting your team with buyers the moment their intent is highest.
         </p>
         <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href={site.cta.href} size="lg">
-            {site.cta.text}
+            Start Free Trial — No Card Needed
           </Button>
           <Button href="/how-it-works" variant="outline" size="lg">
             See How It Works
           </Button>
         </div>
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-dark-400">
-          <span>&#10003; {site.cta.subtext}</span>
-          <span>&#10003; 28 second average callback</span>
-          <span>&#10003; Up to 300% more conversions</span>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-dark-400">
+          <span>✓ Free plan available</span>
+          <span>✓ 5-minute setup</span>
+          <span>✓ No developer required</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Social proof stats row -->
-  <section class="border-y border-dark-800 bg-dark-900/50 py-10">
+  <!-- Trusted by (logo bar) -->
+  <section class="border-y border-dark-800 bg-dark-900/40 py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <p class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-dark-500">
+        Trusted by 10,000+ businesses in 50+ countries
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
+        {['Financial Services', 'Real Estate', 'SaaS', 'E-commerce', 'Insurance', 'Automotive', 'Healthcare', 'Agencies'].map((industry) => (
+          <span class="text-sm font-medium text-dark-500 hover:text-dark-300 transition">{industry}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats row -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-12">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 gap-8 sm:grid-cols-4 text-center">
         <div>
-          <div class="text-4xl font-extrabold text-lime-400">3x</div>
-          <div class="mt-1 text-sm text-dark-400">more leads vs. web forms</div>
+          <div class="text-4xl font-extrabold text-lime-400">10–12x</div>
+          <div class="mt-1 text-sm text-dark-400">higher conversion vs. forms</div>
         </div>
         <div>
           <div class="text-4xl font-extrabold text-lime-400">28s</div>
           <div class="mt-1 text-sm text-dark-400">average callback time</div>
         </div>
         <div>
-          <div class="text-4xl font-extrabold text-lime-400">50+</div>
-          <div class="mt-1 text-sm text-dark-400">countries covered</div>
+          <div class="text-4xl font-extrabold text-lime-400">391%</div>
+          <div class="mt-1 text-sm text-dark-400">more conversions in first minute</div>
         </div>
         <div>
-          <div class="text-4xl font-extrabold text-lime-400">10,000+</div>
-          <div class="mt-1 text-sm text-dark-400">businesses trust LimeCall</div>
+          <div class="text-4xl font-extrabold text-lime-400">50+</div>
+          <div class="mt-1 text-sm text-dark-400">countries covered</div>
         </div>
       </div>
     </div>
@@ -104,30 +213,161 @@ const faqs = [
   <section class="py-16 sm:py-20 border-b border-dark-800">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">How LimeCall Works</h2>
-        <p class="mt-4 text-lg text-dark-400">From widget click to live sales call in three automated steps.</p>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">From widget click to live call in 28 seconds</h2>
+        <p class="mt-4 text-lg text-dark-400">Three automated steps. Zero friction for your visitor or your team.</p>
       </div>
       <div class="grid gap-8 sm:grid-cols-3">
         <div class="relative flex flex-col items-center text-center">
           <div class="flex h-16 w-16 items-center justify-center rounded-full bg-lime-500/20 border-2 border-lime-500/40 text-2xl font-extrabold text-lime-400 mb-5">1</div>
           <h3 class="text-lg font-bold text-white mb-2">Visitor clicks your widget</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Your LimeCall button appears on your website. A visitor enters their phone number and clicks — it takes under 10 seconds.</p>
+          <p class="text-sm text-dark-400 leading-relaxed">Your LimeCall button appears on your website. A visitor enters their number and clicks — it takes under 10 seconds.</p>
         </div>
         <div class="relative flex flex-col items-center text-center">
           <div class="flex h-16 w-16 items-center justify-center rounded-full bg-lime-500/20 border-2 border-lime-500/40 text-2xl font-extrabold text-lime-400 mb-5">2</div>
-          <h3 class="text-lg font-bold text-white mb-2">LimeCall dials both sides</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">LimeCall simultaneously dials your sales rep and the visitor. Both pick up and are instantly bridged — in under 28 seconds.</p>
+          <h3 class="text-lg font-bold text-white mb-2">LimeCall dials both sides instantly</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">LimeCall simultaneously dials your rep and the visitor. Both pick up and are bridged — average connection time: 28 seconds.</p>
         </div>
         <div class="relative flex flex-col items-center text-center">
           <div class="flex h-16 w-16 items-center justify-center rounded-full bg-lime-500/20 border-2 border-lime-500/40 text-2xl font-extrabold text-lime-400 mb-5">3</div>
-          <h3 class="text-lg font-bold text-white mb-2">Call logged, CRM updated</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">The call is recorded, tagged, and synced to your CRM automatically. Your pipeline is always up to date — zero manual entry.</p>
+          <h3 class="text-lg font-bold text-white mb-2">CRM updated automatically</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">The call is recorded, tagged by outcome, and synced to your CRM. Your pipeline stays current — zero manual entry.</p>
         </div>
       </div>
       <div class="mt-10 text-center">
         <a href="/how-it-works" class="text-lime-400 hover:text-lime-300 font-medium text-sm transition">
           See the full flow in detail →
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Role-based section -->
+  <section class="py-16 sm:py-24 border-b border-dark-800 bg-dark-900/30" id="role-tabs">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">Built for every team that sells</h2>
+        <p class="mt-4 text-lg text-dark-400">Whether you're running a sales floor or solo consulting — LimeCall fits your workflow.</p>
+      </div>
+
+      <!-- Tab buttons -->
+      <div class="flex flex-wrap justify-center gap-2 mb-10" role="tablist">
+        {roles.map((r, i) => (
+          <button
+            role="tab"
+            aria-selected={i === 0}
+            aria-controls={`tabpanel-${r.id}`}
+            data-tab={r.id}
+            class:list={[
+              'role-tab-btn rounded-full border px-5 py-2 text-sm font-medium transition',
+              i === 0
+                ? 'border-lime-500 bg-lime-500/10 text-lime-400'
+                : 'border-dark-700 bg-dark-900/60 text-dark-300 hover:border-lime-500/40 hover:text-white',
+            ]}
+          >
+            {r.icon} {r.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Tab panels -->
+      {roles.map((r, i) => (
+        <div
+          id={`tabpanel-${r.id}`}
+          role="tabpanel"
+          data-tabpanel={r.id}
+          class:list={['role-tab-panel', i !== 0 && 'hidden']}
+        >
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 sm:p-10">
+            <div class="grid gap-8 sm:grid-cols-2 items-center">
+              <div>
+                <h3 class="text-2xl font-bold text-white mb-4">{r.headline}</h3>
+                <ul class="space-y-3">
+                  {r.points.map((point) => (
+                    <li class="flex items-start gap-3 text-sm text-dark-300">
+                      <span class="mt-0.5 flex-shrink-0 text-lime-400">✓</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+                <a href={r.href} class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+                  Learn more →
+                </a>
+              </div>
+              <div class="text-center">
+                <div class="inline-flex flex-col items-center justify-center rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+                  <div class="text-5xl mb-3">{r.icon}</div>
+                  <div class="text-2xl font-extrabold text-lime-400 mb-1">{r.stat}</div>
+                  <div class="text-xs text-dark-400">{r.label} using LimeCall</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    const btns = document.querySelectorAll<HTMLButtonElement>('.role-tab-btn');
+    const panels = document.querySelectorAll<HTMLElement>('.role-tab-panel');
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        btns.forEach((b) => {
+          const active = b.dataset.tab === target;
+          b.setAttribute('aria-selected', String(active));
+          b.className = b.className
+            .replace(/border-lime-500 bg-lime-500\/10 text-lime-400|border-dark-700 bg-dark-900\/60 text-dark-300 hover:border-lime-500\/40 hover:text-white/g, '')
+            .trim();
+          b.classList.add(...(active
+            ? ['border-lime-500', 'bg-lime-500/10', 'text-lime-400']
+            : ['border-dark-700', 'bg-dark-900/60', 'text-dark-300', 'hover:border-lime-500/40', 'hover:text-white']
+          ));
+        });
+        panels.forEach((p) => {
+          p.classList.toggle('hidden', p.dataset.tabpanel !== target);
+        });
+      });
+    });
+  </script>
+
+  <!-- vs Contact Forms comparison -->
+  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">Why calls convert — contact forms don't</h2>
+        <p class="mt-4 text-dark-400">The data is clear: speed and human connection close deals.</p>
+      </div>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-6 py-4 text-left font-semibold text-dark-400"></th>
+              <th class="px-6 py-4 text-center font-semibold text-white">LimeCall Widget</th>
+              <th class="px-6 py-4 text-center font-semibold text-dark-400">Contact Form</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['Response time', '28 seconds avg', '4–24 hours'],
+              ['Conversion rate', '10–12x higher', '1–3%'],
+              ['Lead qualification', 'Real-time conversation', 'Email back-and-forth'],
+              ['CRM sync', 'Automatic after every call', 'Manual entry required'],
+              ['After-hours coverage', 'Scheduled callbacks', 'Wait until business hours'],
+              ['Visitor intent captured', 'At peak intent moment', 'Often too late'],
+            ].map(([feature, lime, form]) => (
+              <tr class="border-b border-dark-800/60 hover:bg-dark-900/40 transition">
+                <td class="px-6 py-4 font-medium text-white">{feature}</td>
+                <td class="px-6 py-4 text-center">
+                  <span class="inline-flex items-center gap-1.5 text-lime-400 font-medium">
+                    <span class="text-lime-500">✓</span> {lime}
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-center text-dark-500">{form}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -153,49 +393,43 @@ const faqs = [
         <a href="/features" class="text-lime-400 hover:text-lime-300 font-medium text-sm transition">
           View all features →
         </a>
-        <div class="mt-8 text-center">
-          <a href="/click-to-call-software" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Click-to-Call</a>
-          <a href="/customer-callback-software" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Callback Software</a>
-          <a href="/lead-distribution" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Lead Distribution</a>
-          <a href="/virtual-numbers" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Virtual Numbers</a>
-          <a href="/business-texting" class="text-dark-400 hover:text-lime-400 text-sm transition">Web to Text</a>
+        <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+          <a href="/click-to-call-software" class="text-dark-400 hover:text-lime-400 transition">Click-to-Call</a>
+          <a href="/customer-callback-software" class="text-dark-400 hover:text-lime-400 transition">Callback Software</a>
+          <a href="/lead-distribution" class="text-dark-400 hover:text-lime-400 transition">Lead Distribution</a>
+          <a href="/virtual-numbers" class="text-dark-400 hover:text-lime-400 transition">Virtual Numbers</a>
+          <a href="/business-texting" class="text-dark-400 hover:text-lime-400 transition">Web to Text</a>
+          <a href="/speed-to-lead" class="text-dark-400 hover:text-lime-400 transition">Speed to Lead</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Use cases -->
+  <!-- Testimonials -->
   <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">Built for every team that sells</h2>
-        <p class="mt-4 text-lg text-dark-400">LimeCall fits into any workflow — from high-volume sales floors to solo consultants.</p>
+      <div class="text-center mb-4">
+        <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/5 px-5 py-2 text-sm font-semibold text-lime-400 mb-6">
+          ★★★★★ 4.6/5 from 500+ reviews on G2 &amp; Capterra
+        </div>
+        <h2 class="text-2xl font-bold text-white sm:text-3xl">Real results from real customers</h2>
       </div>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <div class="text-2xl mb-3">💼</div>
-          <h3 class="font-bold text-white mb-2">Sales Teams</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Connect with inbound leads instantly. Auto-route to the right rep. Never let a hot prospect go cold.</p>
-          <a href="/for-sales-teams" class="mt-3 block text-xs text-lime-400 hover:text-lime-300 transition">For Sales Teams →</a>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <div class="text-2xl mb-3">📣</div>
-          <h3 class="font-bold text-white mb-2">Marketing Teams</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Track which campaigns drive phone calls. Assign unique numbers per channel and measure ROI precisely.</p>
-          <a href="/for-marketing-teams" class="mt-3 block text-xs text-lime-400 hover:text-lime-300 transition">For Marketing →</a>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <div class="text-2xl mb-3">🛒</div>
-          <h3 class="font-bold text-white mb-2">E-commerce</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Recover abandoning shoppers with a quick call. Reduce cart abandonment and boost average order value.</p>
-          <a href="/limecall-for-ecommerce-and-retail-2" class="mt-3 block text-xs text-lime-400 hover:text-lime-300 transition">For E-commerce →</a>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <div class="text-2xl mb-3">🎧</div>
-          <h3 class="font-bold text-white mb-2">Customer Support</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Offer instant callback instead of hold music. Customers prefer it and your team handles more calls efficiently.</p>
-          <a href="/use-cases" class="mt-3 block text-xs text-lime-400 hover:text-lime-300 transition">All Use Cases →</a>
-        </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        {testimonials.map((t) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6 flex flex-col">
+            <div class="mb-4 inline-block self-start rounded-full border border-lime-500/20 bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">
+              {t.metric}
+            </div>
+            <p class="flex-1 text-dark-300 leading-relaxed text-sm italic">"{t.quote}"</p>
+            <div class="mt-5 border-t border-dark-800 pt-4">
+              <p class="font-semibold text-white text-sm">{t.name}</p>
+              <p class="text-xs text-dark-500 mt-0.5">{t.role}, {t.company}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href="/customers" class="text-sm text-lime-400 hover:text-lime-300 transition">Read all customer stories →</a>
       </div>
     </div>
   </section>
@@ -203,9 +437,9 @@ const faqs = [
   <!-- Integrations -->
   <section class="py-14 border-b border-dark-800">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
-      <p class="text-sm font-semibold uppercase tracking-widest text-dark-500 mb-8">Integrates with your existing stack</p>
-      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
-        {['HubSpot', 'Salesforce', 'Slack', 'Zendesk', 'WordPress', 'Webflow', 'Zapier', 'Pipedrive'].map((name) => (
+      <p class="text-sm font-semibold uppercase tracking-widest text-dark-500 mb-8">Connects with your existing stack in minutes</p>
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        {['HubSpot', 'Salesforce', 'Pipedrive', 'Zoho', 'Slack', 'Zendesk', 'WordPress', 'Webflow', 'Shopify', 'Zapier'].map((name) => (
           <span class="rounded-lg border border-dark-800 bg-dark-900/60 px-5 py-2.5 text-sm font-medium text-dark-300 hover:border-lime-500/30 hover:text-white transition">
             {name}
           </span>
@@ -215,37 +449,11 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-2xl font-bold text-white sm:text-3xl">Trusted by sales teams worldwide</h2>
-      </div>
-      <div class="grid gap-6 sm:grid-cols-3">
-        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
-          <p class="text-dark-300 leading-relaxed text-sm italic">"LimeCall increased our inbound call volume by 80% in the first month. The setup was under 15 minutes."</p>
-          <p class="mt-4 text-xs text-dark-500">— Sales Director, LimeCall customer</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
-          <p class="text-dark-300 leading-relaxed text-sm italic">"We respond to every lead in under 30 seconds now. Our close rate went up 3x compared to using contact forms."</p>
-          <p class="mt-4 text-xs text-dark-500">— Head of Growth, B2B SaaS company</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
-          <p class="text-dark-300 leading-relaxed text-sm italic">"The CRM sync alone saved our team 2 hours per day. Every call is automatically logged — no manual entry needed."</p>
-          <p class="mt-4 text-xs text-dark-500">— VP Sales, LimeCall customer</p>
-        </div>
-      </div>
-      <div class="mt-8 text-center">
-        <span class="text-sm text-dark-500">Rated <span class="font-bold text-white">4.6/5</span> on G2 &amp; Capterra</span>
-      </div>
-    </div>
-  </section>
-
   <!-- Pricing Preview -->
-  <section class="py-16 sm:py-20 border-b border-dark-800">
+  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-white sm:text-4xl">Simple, transparent pricing</h2>
-      <p class="mt-4 text-lg text-dark-400">Start for free, upgrade when you're ready.</p>
+      <p class="mt-4 text-lg text-dark-400">Start free. Upgrade when you're ready. No surprises.</p>
       <div class="mt-10 grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
         {plans.map((plan) => (
           <div class:list={[
@@ -282,7 +490,7 @@ const faqs = [
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
+  <section class="py-16 sm:py-20 border-b border-dark-800">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-3xl font-bold text-white">Frequently Asked Questions</h2>
       <div class="space-y-3">
@@ -302,12 +510,12 @@ const faqs = [
   </section>
 
   <!-- Blog Teaser -->
-  <section class="py-16 sm:py-20 border-b border-dark-800">
+  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between mb-10">
         <div>
           <h2 class="text-2xl font-bold text-white">Latest from the blog</h2>
-          <p class="mt-1 text-dark-400">Guides, tips, and news.</p>
+          <p class="mt-1 text-dark-400">Sales guides, conversion tips, and product news.</p>
         </div>
         <a href="/post" class="text-sm text-lime-400 hover:text-lime-300 font-medium transition hidden sm:block">
           View all →
@@ -346,30 +554,38 @@ const faqs = [
   </section>
 
   <!-- Bottom CTA -->
-  <section class="py-20 sm:py-28">
+  <section class="py-20 sm:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-lime-500/8 blur-[120px]"></div>
+    </div>
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-        Ready to convert more website visitors?
+      <div class="inline-block mb-4 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">
+        Start converting visitors today
+      </div>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl leading-tight">
+        Stop losing leads to<br class="hidden sm:block" /> slow follow-up
       </h2>
-      <p class="mt-4 text-lg text-dark-400">
-        Join thousands of businesses using LimeCall to turn website traffic into revenue. {site.cta.subtext}.
+      <p class="mt-5 text-lg text-dark-400">
+        Join 10,000+ businesses using LimeCall to connect with buyers in 28 seconds. {site.cta.subtext}. No credit card required.
       </p>
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
         <Button href={site.cta.href} size="lg">
-          {site.cta.text}
+          Start Free Trial →
         </Button>
-        <Button href="/click-to-call-software" variant="outline" size="lg">
-          See Click-to-Call Software
+        <Button href="/pricing" variant="outline" size="lg">
+          View Pricing
         </Button>
       </div>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-dark-500">
         <a href="/virtual-numbers" class="hover:text-lime-400 transition">Virtual Numbers</a>
         <span>·</span>
-        <a href="/pricing" class="hover:text-lime-400 transition">Pricing</a>
+        <a href="/click-to-call-software" class="hover:text-lime-400 transition">Click-to-Call</a>
         <span>·</span>
         <a href="/features" class="hover:text-lime-400 transition">All Features</a>
         <span>·</span>
         <a href="/integrations" class="hover:text-lime-400 transition">Integrations</a>
+        <span>·</span>
+        <a href="/customers" class="hover:text-lime-400 transition">Customers</a>
       </div>
     </div>
   </section>

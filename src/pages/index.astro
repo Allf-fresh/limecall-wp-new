@@ -3,11 +3,9 @@ import Base from '../layouts/Base.astro';
 import Button from '../components/ui/Button.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import { site, plans, features } from '../site.config';
-import { getPublishedContent } from '../lib/supabase';
+import postsData from '../data/posts.json';
 
-// Fetch 3 latest blog posts — graceful empty state if Supabase not configured
-const allPosts = await getPublishedContent('blog');
-const latestPosts = allPosts.slice(0, 3);
+const latestPosts = postsData.slice(0, 3);
 const featuredFeatures = features.slice(0, 4);
 ---
 
@@ -140,17 +138,16 @@ const featuredFeatures = features.slice(0, 4);
         <div class="grid gap-6 sm:grid-cols-3">
           {latestPosts.map((post) => (
             <a
-              href={post.category ? `/post/${post.category}/${post.slug}` : `/post/${post.slug}`}
+              href={`/post/${post.slug}/`}
               class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6 transition-all hover:border-dark-700"
             >
-              {post.category && (
-                <span class="text-xs font-medium uppercase text-lime-400">{post.category}</span>
-              )}
               <h3 class="mt-2 font-semibold text-white group-hover:text-lime-400 transition line-clamp-2">{post.title}</h3>
-              <p class="mt-2 text-sm text-dark-400 line-clamp-2">{post.meta_description}</p>
-              {post.publish_date && (
-                <time class="mt-4 block text-xs text-dark-500" datetime={post.publish_date}>
-                  {new Date(post.publish_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              <p class="mt-2 text-sm text-dark-400 line-clamp-2">
+                {post.excerpt ? post.excerpt : post.content.replace(/<[^>]+>/g, '').slice(0, 150)}
+              </p>
+              {post.date && (
+                <time class="mt-4 block text-xs text-dark-500" datetime={post.date}>
+                  {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                 </time>
               )}
             </a>
@@ -159,7 +156,6 @@ const featuredFeatures = features.slice(0, 4);
       ) : (
         <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-12 text-center">
           <p class="text-dark-400">Blog posts coming soon.</p>
-          <p class="text-dark-600 text-sm mt-2">Connect Supabase to populate your blog.</p>
         </div>
       )}
 

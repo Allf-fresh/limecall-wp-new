@@ -1,16 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const seo = {
-  title: `Privacy Policy | Callback Software Policy | LimeCall`,
-  description: `This privacy policy describes how we collect and use the Personal Data that we receive about you. as well as your rights in relation to that Personal Data.`,
-  canonical: `https://www.limecall.com/privacy-policy/`,
-};
----
-<Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold text-white mb-8">Privacy Policy</h1>
-    
+const content = `
 <p class="has-text-align-center">Effective Date: 03/25/2019</p>
 
 
@@ -81,7 +72,7 @@ Article 3 -CONTACT:&nbsp;</strong><span class="ez-toc-section-end"></span></h3>
 
 
 
-<p><a href="support@limecall.com">Email</a>: <a href="support@limecall.com">support@limecall.com</a></p>
+<p><a href="mailto:support@limecall.com">Email</a>: <a href="mailto:support@limecall.com">support@limecall.com</a></p>
 
 
 
@@ -141,10 +132,10 @@ Article 6 &#8211; THE PERSONAL DATA WE RECEIVE FROM YOU:</strong><span class="ez
 
 
 <ol>
-<li>Interaction with our representatives in any way</li> 
-<li>making purchases</li> 
-<li>receiving notifications by text message or email about marketing</li> 
-<li>receiving general emails from us</li> 
+<li>Interaction with our representatives in any way</li>
+<li>making purchases</li>
+<li>receiving notifications by text message or email about marketing</li>
+<li>receiving general emails from us</li>
 <li>commenting on our content or other user-generated content on our Website, such as blogs, articles, photographs or videos, or participating in our forums, bulletin boards, chat rooms or other similar features</li>
 </ol>
 
@@ -255,7 +246,7 @@ Article 7 &#8211; THE PERSONAL DATA WE RECEIVE AUTOMATICALLY:</strong><span clas
 
 
 
-<ul class="wp-block-list"><li><a href="http://windows.microsoft.com/en-us/windows-vista/block-or-allow-cookies">Internet Explorer</a></li><li><a href="https://support.mozilla.org/en-us/kb/enable-and-disable-cookies-website-preferences">Firefox</a></li><li><a href="tp://www.apple.com/legal/privacy/">Safari</a></li><li><a href="https://support.google.com/accounts/answer/61416?hl=en">Chrome</a></li><li><a href="http://www.opera.com/help/tutorials/security/cookies/">Opera</a></li></ul>
+<ul class="wp-block-list"><li><a href="http://windows.microsoft.com/en-us/windows-vista/block-or-allow-cookies">Internet Explorer</a></li><li><a href="https://support.mozilla.org/en-us/kb/enable-and-disable-cookies-website-preferences">Firefox</a></li><li><a href="http://www.apple.com/legal/privacy/">Safari</a></li><li><a href="https://support.google.com/accounts/answer/61416?hl=en">Chrome</a></li><li><a href="http://www.opera.com/help/tutorials/security/cookies/">Opera</a></li></ul>
 
 
 
@@ -412,7 +403,7 @@ Article 12 &#8211; DISCLOSURE OF PERSONAL DATA:</strong><span class="ez-toc-sect
 
 
 
-<ol class="wp-block-list">null<li>To satisfy any local, state, or Federal laws or regulations</li><li>To respond to requests, such discovery, criminal, civil, or administrative process, subpoenas, court orders, or writs from law enforcement or other governmental or legal bodies</li><li>To bring legal action against a user who has violated the law or violated the terms of use of our Website</li><li>As may be necessary for the operation of our Website</li><li>To generally cooperate with any lawful investigation about our users</li><li>If we suspect any fraudulent activity on our Website or if we have noticed any activity which may violate our terms or other applicable rules</li></ol>
+<ol class="wp-block-list"><li>To satisfy any local, state, or Federal laws or regulations</li><li>To respond to requests, such discovery, criminal, civil, or administrative process, subpoenas, court orders, or writs from law enforcement or other governmental or legal bodies</li><li>To bring legal action against a user who has violated the law or violated the terms of use of our Website</li><li>As may be necessary for the operation of our Website</li><li>To generally cooperate with any lawful investigation about our users</li><li>If we suspect any fraudulent activity on our Website or if we have noticed any activity which may violate our terms or other applicable rules</li></ol>
 
 
 
@@ -457,6 +448,15 @@ Article 16 &#8211; ACCEPTANCE OF RISK:</strong><span class="ez-toc-section-end">
 
 
 <p>By continuing to our Website in any manner, use the Product, you manifest your continuing asset to this Privacy Policy. You further acknowledge, agree and accept that no transmission of information or data via the internet is not always completely secure, no matter what steps are taken. You acknowledge, agree and accept that we do not guarantee or warrant the security of any information that you provide to us, and that you transmit such information at your own risk.</p>
-
+`;
+---
+<Base
+  title="Privacy Policy | Callback Software Policy | LimeCall"
+  description="This privacy policy describes how we collect and use the Personal Data that we receive about you. as well as your rights in relation to that Personal Data."
+  canonical="https://www.limecall.com/privacy-policy/"
+>
+  <div class="max-w-4xl mx-auto px-4 py-12 prose prose-lg">
+    <h1>Privacy Policy</h1>
+    <div set:html={content} />
   </div>
 </Base>

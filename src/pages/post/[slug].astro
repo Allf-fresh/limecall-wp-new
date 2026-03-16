@@ -1,31 +1,31 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { supabase } from '../../lib/supabase';
-import type { ContentRow } from '../../lib/database.types';
+import Base from '../../layouts/Base.astro';
+import posts from '../../data/posts.json';
 
-// WP posts live at /post/[slug]/ — no category in path
 export async function getStaticPaths() {
-  if (!supabase) return [];
-
-  const { data: posts } = await supabase
-    .from('content')
-    .select('*')
-    .eq('collection', 'blog')
-    .eq('status', 'published')
-    .eq('noindex', false)
-    .order('publish_date', { ascending: false });
-
-  return (posts ?? []).map((post) => ({
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
-interface Props {
-  post: ContentRow;
-}
-
 const { post } = Astro.props;
+
+const seo = {
+  title: post.seo_title,
+  description: post.seo_description,
+  canonical: post.canonical,
+};
 ---
 
-<BlogPost post={post} />
+<Base {seo}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <time class="text-sm text-gray-500" datetime={post.date}>
+        {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+      <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl" set:html={post.title} />
+    </header>
+    <div class="wp-content prose prose-lg max-w-none" set:html={post.content} />
+  </article>
+</Base>

@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.limecall.com',
   // 'never' ensures sitemap URLs match hardcoded canonical tags (no trailing slash).
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   integrations: [
     react(),
     sitemap({

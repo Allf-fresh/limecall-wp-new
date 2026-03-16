@@ -1,15 +1,167 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Free App Integration Software To Connect Your Favourite Enterprise Apps`,
   description: `LimeCall A free App Integration Software platform connects right into your technology stack to enhance Your Conversational Marketing Results.`,
   canonical: `https://www.limecall.com/integrations/`,
 };
+
+const categories = [
+  {
+    name: "CRM",
+    desc: "Sync every call with your CRM — log activities, update contacts, and trigger workflows automatically.",
+    integrations: [
+      { name: "HubSpot", desc: "Auto-log calls, sync leads, and trigger HubSpot workflows on every callback.", href: "/limecall-for-hubspot/", available: true },
+      { name: "Salesforce", desc: "Sync callbacks with Salesforce contacts, leads, and opportunities automatically.", href: null, available: true },
+      { name: "Zoho CRM", desc: "Log every LimeCall callback to Zoho CRM with full call details and recordings.", href: null, available: true },
+      { name: "Pipedrive", desc: "Sync LimeCall leads into Pipedrive deals and activities automatically.", href: null, available: true },
+    ],
+  },
+  {
+    name: "Communication & Support",
+    desc: "Keep your team notified and your support queue current — without switching apps.",
+    integrations: [
+      { name: "Slack", desc: "Get instant call alerts in Slack. Your team sees every lead the moment they arrive.", href: "/limecall-for-slack/", available: true },
+      { name: "Zendesk", desc: "Every callback creates a Zendesk ticket with full call context and recording.", href: "/integration-zendesk/", available: true },
+      { name: "Intercom", desc: "Sync LimeCall conversations with Intercom contacts and conversations.", href: null, available: true },
+      { name: "Freshdesk", desc: "Log LimeCall callbacks as Freshdesk tickets automatically.", href: null, available: true },
+    ],
+  },
+  {
+    name: "Website Platforms",
+    desc: "Add the LimeCall widget to any website in minutes — no developer required.",
+    integrations: [
+      { name: "WordPress", desc: "Install LimeCall with our official WordPress plugin. Works with all themes.", href: "/limecall-for-wordpress/", available: true },
+      { name: "Webflow", desc: "Add one script tag to your Webflow site. Go live in minutes.", href: "/limecall-for-webflow/", available: true },
+      { name: "Shopify", desc: "Add LimeCall to your Shopify store to rescue abandoned carts and close big-ticket sales.", href: null, available: true },
+      { name: "Wix", desc: "Embed LimeCall on any Wix site with a single code block.", href: null, available: true },
+    ],
+  },
+  {
+    name: "Marketing & Analytics",
+    desc: "Track which campaigns drive callbacks and attribute conversions accurately.",
+    integrations: [
+      { name: "Google Analytics", desc: "Track LimeCall callback events in Google Analytics. See which pages convert best.", href: null, available: true },
+      { name: "Google Tag Manager", desc: "Deploy LimeCall via GTM without touching your website code.", href: null, available: true },
+      { name: "Facebook Ads", desc: "Fire Facebook conversion events when a visitor requests a callback.", href: null, available: true },
+      { name: "Google Ads", desc: "Track LimeCall callbacks as Google Ads conversions. Optimize campaigns on real leads.", href: null, available: true },
+    ],
+  },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Integrations', url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall Works With<br class="hidden sm:block" />
+        <span class="text-lime-400">Your Existing Stack</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Connect LimeCall with your CRM, support platform, website builder, and marketing tools. Every callback — automatically logged, synced, and attributed.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Connect Your Tools Free →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration categories -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="space-y-16">
+        {categories.map(cat => (
+          <div>
+            <div class="mb-6">
+              <h2 class="text-xl font-bold text-white">{cat.name}</h2>
+              <p class="mt-1 text-sm text-dark-400">{cat.desc}</p>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {cat.integrations.map(int => (
+                int.href ? (
+                  <a href={int.href} class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5 hover:border-lime-500/40 transition">
+                    <h3 class="font-semibold text-white group-hover:text-lime-400 transition">{int.name}</h3>
+                    <p class="mt-2 text-xs text-dark-400 leading-relaxed">{int.desc}</p>
+                    <span class="mt-3 inline-block text-xs font-semibold text-lime-500">Learn more →</span>
+                  </a>
+                ) : (
+                  <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+                    <h3 class="font-semibold text-white">{int.name}</h3>
+                    <p class="mt-2 text-xs text-dark-400 leading-relaxed">{int.desc}</p>
+                    <span class="mt-3 inline-block text-xs font-semibold text-lime-500/60">Available</span>
+                  </div>
+                )
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom / API section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 sm:grid-cols-2">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-4">Don't see your tool?</h2>
+          <p class="text-dark-300 leading-relaxed mb-4">
+            LimeCall's open API lets you connect with any tool your team uses. Build custom integrations with Zapier, Make (formerly Integromat), or directly via our REST API.
+          </p>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            Available on Pro plan and above. Our team can also help with custom integration setup.
+          </p>
+          <a href={site.cta.href} class="mt-6 inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-4">Zapier & Make</h2>
+          <p class="text-dark-300 leading-relaxed mb-4">
+            Use LimeCall's Zapier and Make integrations to connect with 5,000+ tools — no code required. Trigger workflows from callbacks, missed calls, or new leads.
+          </p>
+          <div class="space-y-2">
+            {[
+              "New callback → Add to Google Sheets",
+              "Missed call → Send Slack message",
+              "New lead → Create Trello card",
+              "Call completed → Update Airtable record",
+            ].map(zap => (
+              <div class="flex items-center gap-2 text-sm text-dark-400">
+                <svg class="h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                {zap}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Connect LimeCall to your stack today</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore LimeCall" links={[
+        { href: '/how-it-works/', title: 'How It Works', desc: 'See the full LimeCall flow from widget to call.' },
+        { href: '/features/', title: 'All Features', desc: 'Every feature in the LimeCall platform.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'What makes LimeCall different.' },
+      ]} />
+    </div>
   </div>
 </Base>

@@ -1,15 +1,179 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Why is Limecall | Intercom - Best Sales Tools`,
   description: `We have come a long way since we first started and with each coming day, the team at Limecall is working hard to create an even simpler solution from the features.`,
   canonical: `https://www.limecall.com/why-limecall/`,
 };
+
+const differentiators = [
+  {
+    headline: "28 seconds",
+    subhead: "The fastest callback in the industry",
+    desc: "The average sales lead goes cold in 5 minutes. LimeCall connects your team with a visitor in under 28 seconds — faster than any form, email, or live chat alternative. Speed isn't a nice-to-have. It's the difference between a sale and a lost lead.",
+  },
+  {
+    headline: "3x more conversions",
+    subhead: "Phone calls convert better than any other channel",
+    desc: "Leads contacted by phone convert at 3x the rate of those handled by form or email. LimeCall puts phone at the centre of your conversion strategy — and makes it as easy to request as clicking a button.",
+  },
+  {
+    headline: "5-minute setup",
+    subhead: "No developer. No consultant. No waiting.",
+    desc: "Copy one line of code. Paste it into your website. Your callback widget is live in 5 minutes. Works with WordPress, Webflow, Shopify, Wix, or any website with a custom code field.",
+  },
+  {
+    headline: "Every channel",
+    subhead: "Phone, SMS, WhatsApp, and scheduling — in one platform",
+    desc: "Not every visitor wants a phone call. LimeCall lets visitors request a call, send an SMS, or schedule a future callback — all from the same widget. Capture every lead, regardless of their preferred channel.",
+  },
+];
+
+const reasons = [
+  { title: "Speed to lead", desc: "Connect with inbound leads in under 28 seconds. Studies show that leads called within 5 minutes are 9x more likely to convert." },
+  { title: "No-code setup", desc: "One snippet. No dev resource required. Go from sign-up to live widget in under 5 minutes — on any website platform." },
+  { title: "Intelligent routing", desc: "Route leads to the right rep based on skills, geography, availability, or round-robin. Never send the wrong lead to the wrong person." },
+  { title: "Multi-channel capture", desc: "Phone callback, SMS, scheduled calls — capture leads on their preferred channel. Don't force every visitor down the same path." },
+  { title: "Deep integrations", desc: "HubSpot, Salesforce, Zoho, Slack, Zendesk — every call logged automatically. Your CRM is always current, your team always in context." },
+  { title: "Local presence globally", desc: "Virtual numbers in 50+ countries. Show a local number to international visitors — build trust and increase answer rates." },
+  { title: "24/7 lead capture", desc: "After-hours requests are captured and queued. Your team arrives each morning to a prioritized list of warm leads — ready to call." },
+  { title: "Full call analytics", desc: "See which pages, campaigns, and sources drive the most callbacks. Attribute conversions and optimize your marketing spend." },
+];
+
+const stats = [
+  { value: "28s", label: "Avg. time to connect" },
+  { value: "3x", label: "Conversion improvement" },
+  { value: "80%", label: "Fewer missed leads" },
+  { value: "50+", label: "Countries with virtual numbers" },
+];
+
+const comparisons = [
+  { feature: "Speed to connect", limecall: "Under 28 seconds", them: "Hours (via email/form)" },
+  { feature: "Setup time", limecall: "5 minutes, no dev", them: "Days or weeks" },
+  { feature: "Multi-channel", limecall: "Call, SMS, schedule", them: "Usually call-only" },
+  { feature: "After-hours leads", limecall: "Captured & queued", them: "Lost or auto-replied" },
+  { feature: "CRM sync", limecall: "Automatic, real-time", them: "Manual or limited" },
+  { feature: "Call recording", limecall: "Every call, stored", them: "Optional or extra cost" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Why LimeCall', url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Why Choose <span class="text-lime-400">LimeCall</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Your website is sending you leads right now. Most of them are going unanswered. LimeCall fixes that — in 5 minutes.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Key differentiators -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-2xl font-bold text-white sm:text-3xl">
+        What makes LimeCall different
+      </h2>
+      <div class="grid gap-8 sm:grid-cols-2">
+        {differentiators.map(d => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-1 text-4xl font-extrabold text-lime-400">{d.headline}</div>
+            <div class="mb-3 text-sm font-semibold text-white">{d.subhead}</div>
+            <p class="text-sm text-dark-400 leading-relaxed">{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 reasons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">8 reasons teams choose LimeCall</h2>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {reasons.map((r, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <div class="mb-2 text-xs font-bold uppercase tracking-widest text-lime-500/60">{String(i + 1).padStart(2, '0')}</div>
+            <h3 class="mb-2 font-semibold text-white">{r.title}</h3>
+            <p class="text-xs text-dark-400 leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall vs. the old way</h2>
+      <div class="overflow-hidden rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-6 py-4 text-left font-semibold text-dark-400">Feature</th>
+              <th class="px-6 py-4 text-left font-semibold text-lime-400">LimeCall</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-500">Form / Email / Chat</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisons.map((row, i) => (
+              <tr class:list={['border-b border-dark-800/50', i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-950/40']}>
+                <td class="px-6 py-4 text-dark-300 font-medium">{row.feature}</td>
+                <td class="px-6 py-4 text-white">{row.limecall}</td>
+                <td class="px-6 py-4 text-dark-500">{row.them}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Start converting more of your existing traffic</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Learn more" links={[
+        { href: '/how-it-works/', title: 'How It Works', desc: 'The full LimeCall flow from click to call.' },
+        { href: '/benefits/', title: 'Benefits', desc: 'See the measurable impact of LimeCall.' },
+        { href: '/customers/', title: 'Customers', desc: 'Who uses LimeCall and their results.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

@@ -1,15 +1,135 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Sales Enablement software for Software, IT & Technology`,
   description: `Sales Enablement software for Software, IT & Technology. LimeCall is the most reviewed and #1 rated help desk software for SMB in 2019.`,
   canonical: `https://www.limecall.com/limecall-for-software-it-technology/`,
 };
+
+const challenges = [
+  { title: "Trial-to-paid conversion", desc: "Users who sign up for a free trial and don't hear from a human within 24 hours are far less likely to convert. The window to influence is tiny." },
+  { title: "Demo request friction", desc: "When a prospect wants a demo, making them fill out a form and wait 48 hours is a conversion killer. You lose them to a competitor who responds faster." },
+  { title: "Complex product, real questions", desc: "Technical buyers need answers to complex integration, security, and pricing questions. They buy when they can talk to someone who knows the product deeply." },
+];
+
+const benefits = [
+  { title: "Instant demo scheduling", desc: "Prospects click 'Book a Demo' and get connected to a sales engineer in under 28 seconds — or schedule for a convenient time with zero friction." },
+  { title: "Trial user activation", desc: "Trigger callback prompts for trial users at key activation moments — when they hit a paywall, upgrade prompt, or setup step where they get stuck." },
+  { title: "Route to technical sales", desc: "Automatically route enterprise inquiries to your senior AEs and technical pre-sales team, while SMB leads go to your SDR team." },
+  { title: "Deep CRM integration", desc: "Sync with HubSpot or Salesforce. Every demo call, follow-up, and note is logged automatically. Full pipeline visibility with zero admin." },
+  { title: "Slack alerts for sales teams", desc: "Your whole team sees every inbound lead in Slack the moment they arrive. Fast-moving SaaS teams close deals when they respond first." },
+  { title: "Virtual numbers for global reach", desc: "Show local numbers in every country you sell into. Build trust with international prospects using a number that looks local to them." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More demo conversions" },
+  { value: "5 min", label: "Average setup time" },
+  { value: "50+", label: "Countries supported" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Software & Technology', url: seo.canonical }]} />
+      <div class="inline-flex items-center rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400 mb-4">
+        Software · IT · Technology
+      </div>
+      <h1 class="mt-2 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Convert Trials to Paid.<br class="hidden sm:block" />
+        <span class="text-lime-400">Book More Demos.</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        SaaS and tech companies use LimeCall to connect with high-intent visitors, activate trial users, and book more demos — instantly.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry challenges -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Why SaaS teams need faster lead response</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {challenges.map(c => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{c.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall helps tech companies</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenario -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">How a SaaS company books 3x more demos</h2>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          A VP of Sales visits your pricing page for the third time. They hover over the Enterprise plan. A LimeCall widget appears: "Talk to sales in 28 seconds." They click. Your top AE is connected before the visitor's coffee goes cold. The demo is booked on that call.
+        </p>
+        <p class="text-dark-400 text-sm">
+          No form. No waiting. No "we'll get back to you." Just a conversation — while intent is highest.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to book more demos and convert more trials?</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More solutions" links={[
+        { href: '/limecall-for-finance-insurance/', title: 'Finance & Insurance', desc: 'Convert leads before they go to a competitor.' },
+        { href: '/limecall-for-real-estate/', title: 'Real Estate', desc: 'Convert property browsers into booked viewings.' },
+        { href: '/use-cases/', title: 'All Use Cases', desc: 'See how LimeCall works across every industry.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'Connect with HubSpot, Slack, Salesforce, and more.' },
+      ]} />
+    </div>
   </div>
 </Base>

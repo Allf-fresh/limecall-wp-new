@@ -1,15 +1,113 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const tool = "Slack";
 
 const seo = {
   title: `LimeCall for Slack - Generate Qualified Leads with LimeCall`,
   description: `Maximize sales efficiency with LimeCall + Slack! Get call notifications, manage conversations & automate callbacks within Slack. Try it now!`,
   canonical: `https://www.limecall.com/limecall-for-slack/`,
 };
+
+const steps = [
+  { n: "1", title: "Connect your Slack workspace", desc: "Authorize LimeCall to post to your Slack workspace in seconds — choose which channel receives call alerts." },
+  { n: "2", title: "Get instant call notifications", desc: "Every callback request, missed call, and new lead instantly pings your chosen Slack channel with full details." },
+  { n: "3", title: "Act fast, close faster", desc: "Your team sees lead info in Slack the moment it arrives — name, number, page they came from, and call recording link." },
+];
+
+const benefits = [
+  { title: "Instant call alerts", desc: "The moment a visitor requests a callback, your whole team is notified in Slack — before they can look elsewhere." },
+  { title: "Never miss a lead", desc: "Missed calls trigger an automatic Slack alert so your team can follow up within minutes — not hours." },
+  { title: "Full lead context in Slack", desc: "See caller name, phone number, source page, and call recording — all directly in your Slack channel. No app switching." },
+  { title: "Route to the right channel", desc: "Send alerts to your sales channel, support channel, or DM specific reps based on lead type or territory." },
+  { title: "Team coordination", desc: "Reps can claim leads, leave notes, and coordinate follow-up directly in Slack threads — keeping everything in one place." },
+  { title: "Real-time dashboards", desc: "Track call volume and response times without leaving Slack. Daily summaries keep managers up to date." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `LimeCall for ${tool}`, url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">{tool}</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Get instant call notifications in Slack. Your team sees every lead the moment they arrive — with full context to act fast.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Connect {tool} Free →</a>
+        <a href="/integrations/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">All Integrations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup steps -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Connect in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What you get</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use case callout -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Speed wins deals — and Slack helps you get there first</h2>
+        <p class="text-dark-300 leading-relaxed mb-6">
+          Research shows that leads contacted within 5 minutes are 9x more likely to convert. When a prospect fills out your callback widget, LimeCall pings your Slack channel immediately. Your rep sees the lead, dials back, and is in conversation before the competitor even sends an email.
+        </p>
+        <p class="text-dark-400 text-sm">
+          LimeCall connects in under 28 seconds. Slack keeps your team ready to act.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with {tool}?</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations" links={[
+        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
+        { href: '/limecall-for-hubspot/', title: 'LimeCall for HubSpot', desc: 'Log every call automatically in your CRM.' },
+        { href: '/integration-zendesk/', title: 'LimeCall for Zendesk', desc: 'Support-focused call integration.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

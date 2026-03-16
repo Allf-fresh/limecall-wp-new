@@ -1,15 +1,169 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Benefits - LimeCall`,
   description: `Limecall enables businesses to drive revenue and increase conversions with smart lead distribution and instant click2call routing`,
   canonical: `https://www.limecall.com/benefits/`,
 };
+
+const primaryBenefits = [
+  {
+    stat: "3x",
+    label: "More Conversions",
+    desc: "Companies using LimeCall convert website visitors into sales calls at 3x the rate of those relying on forms and email. The reason is simple: phone calls convert better than every other channel.",
+  },
+  {
+    stat: "28s",
+    label: "Time to Connect",
+    desc: "The average LimeCall callback connects visitor to rep in 28 seconds. Leads called within 5 minutes are 9x more likely to convert. Speed is the single most powerful lever in lead conversion.",
+  },
+  {
+    stat: "80%",
+    label: "Fewer Missed Leads",
+    desc: "LimeCall captures after-hours requests, routes to available reps, and queues missed calls for follow-up. 80% fewer leads fall through the cracks compared to manual call processes.",
+  },
+  {
+    stat: "5 min",
+    label: "Setup Time",
+    desc: "From sign-up to live widget in under 5 minutes. No developer needed. Works on any website platform — WordPress, Webflow, Shopify, Wix, or custom-built sites.",
+  },
+];
+
+const detailedBenefits = [
+  {
+    category: "Revenue",
+    items: [
+      { title: "More conversations, more deals", desc: "Every additional conversation is an opportunity to sell. LimeCall creates more conversations by removing the friction between intent and contact." },
+      { title: "Shorter sales cycles", desc: "Phone conversations move prospects through the funnel faster than email chains. Qualify, handle objections, and close — all in one call." },
+      { title: "Higher average deal value", desc: "Reps on the phone can upsell and cross-sell in real time. Deals done via phone consistently close at higher values than self-service purchases." },
+    ],
+  },
+  {
+    category: "Efficiency",
+    items: [
+      { title: "Zero manual data entry", desc: "Every call is automatically logged to your CRM with caller info, duration, and recording. Reps spend time selling, not updating spreadsheets." },
+      { title: "Smart lead routing", desc: "Inbound leads automatically route to the right rep — no coordinator needed, no delays from manual assignment." },
+      { title: "One platform, every channel", desc: "Manage phone callbacks, SMS, scheduled calls, and virtual numbers from one dashboard. No tool-switching, no dropped context." },
+    ],
+  },
+  {
+    category: "Customer Experience",
+    items: [
+      { title: "Instant gratification", desc: "Visitors get what they want — a real person, right now. That immediate responsiveness sets the tone for the entire customer relationship." },
+      { title: "No hold music, no IVR", desc: "LimeCall connects the visitor directly to a human. No call queue, no automated voice tree, no frustration." },
+      { title: "Callbacks when it suits them", desc: "Visitors who can't talk right now can schedule a callback at a convenient time. Reduces no-shows and respects customer time." },
+    ],
+  },
+  {
+    category: "Visibility",
+    items: [
+      { title: "Know what's working", desc: "See which pages, campaigns, and traffic sources drive the most callbacks. Attribute revenue to marketing channels accurately." },
+      { title: "Call recording for quality", desc: "Every call recorded automatically. Review conversations, coach reps, and maintain consistent standards at scale." },
+      { title: "Real-time team dashboard", desc: "See call volume, response times, and rep performance in real time. Identify bottlenecks and act on them immediately." },
+    ],
+  },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Benefits', url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        The Business Case for<br class="hidden sm:block" />
+        <span class="text-lime-400">Instant Callback</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall turns website traffic into revenue — by putting a phone conversation between your team and every high-intent visitor.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Primary benefit stats -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-2xl font-bold text-white">The numbers</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {primaryBenefits.map(b => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-1 text-5xl font-extrabold text-lime-400">{b.stat}</div>
+            <div class="mb-4 text-lg font-semibold text-white">{b.label}</div>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed benefits by category -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-2xl font-bold text-white">Benefits across your business</h2>
+      <div class="space-y-12">
+        {detailedBenefits.map(cat => (
+          <div>
+            <h3 class="mb-6 text-lg font-bold text-lime-400 uppercase tracking-widest text-sm">{cat.category}</h3>
+            <div class="grid gap-5 sm:grid-cols-3">
+              {cat.items.map(item => (
+                <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+                  <h4 class="mb-2 font-semibold text-white">{item.title}</h4>
+                  <p class="text-sm text-dark-400 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem it solves -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">The lead conversion problem LimeCall solves</h2>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          You spend money to drive traffic to your website. That traffic arrives, browses, and often leaves — without converting. The average website converts 2–3% of its visitors. The other 97% leave without ever speaking to anyone.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          The gap isn't product or price. It's timing and friction. A visitor who wants to buy has a question, can't get an instant answer, and moves on. LimeCall closes that gap — by making it as easy to talk to your team as it is to browse your site.
+        </p>
+        <p class="text-dark-400 text-sm">
+          The result: more of your existing traffic becomes revenue, without spending more on ads.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">See the benefits for yourself</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Learn more" links={[
+        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'What makes LimeCall different from alternatives.' },
+        { href: '/how-it-works/', title: 'How It Works', desc: 'The full LimeCall flow from click to call.' },
+        { href: '/customers/', title: 'Customers', desc: 'Who uses LimeCall and their results.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

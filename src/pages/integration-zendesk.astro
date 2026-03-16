@@ -1,15 +1,113 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const tool = "Zendesk";
 
 const seo = {
   title: `Zendesk Integration - LimeCall`,
   description: `No need to rush in-between apps anymore — manage everything from one platform through zendesk integration.`,
   canonical: `https://www.limecall.com/integration-zendesk/`,
 };
+
+const steps = [
+  { n: "1", title: `Connect LimeCall to ${tool}`, desc: `Authorize the integration in your LimeCall dashboard. Enter your Zendesk subdomain and API credentials — done in under 3 minutes.` },
+  { n: "2", title: "Calls create Zendesk tickets", desc: "Every LimeCall callback automatically creates a Zendesk ticket with caller details, call recording, and full context." },
+  { n: "3", title: "Support teams stay in sync", desc: "Agents see all call history inside Zendesk tickets — no switching between apps to understand what a customer called about." },
+];
+
+const benefits = [
+  { title: "Auto-create Zendesk tickets", desc: "Every LimeCall callback creates a Zendesk ticket with caller name, number, page of origin, call duration, and recording link." },
+  { title: "Full call context for agents", desc: "Support agents see everything they need inside the ticket — no need to ask the customer to repeat themselves." },
+  { title: "No app switching", desc: "Everything lives in Zendesk. Agents handle calls, view history, and update tickets without leaving their support workspace." },
+  { title: "Callback from Zendesk", desc: "Agents can initiate a LimeCall callback directly from a Zendesk ticket — reaching the customer with one click." },
+  { title: "SLA tracking", desc: "Call response times are logged in Zendesk, helping you meet SLAs and track support team performance accurately." },
+  { title: "CSAT integration", desc: "Tie call outcomes to Zendesk satisfaction scores — understand which callback interactions lead to happy customers." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `LimeCall + ${tool} Integration`, url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">{tool}</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Every callback becomes a Zendesk ticket automatically. Your support team stays in context — no app switching, no missed calls.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Connect {tool} Free →</a>
+        <a href="/integrations/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">All Integrations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup steps -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Connect in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What you get</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use case callout -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Support teams love one unified view</h2>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          When a customer has a billing question and requests a callback from your pricing page, LimeCall connects them to a support agent in seconds. Simultaneously, a Zendesk ticket is created with the customer's phone number, the page they were on, and a recording of the call. The next agent who picks up the ticket has everything they need.
+        </p>
+        <p class="text-dark-400 text-sm">
+          Fewer escalations. Faster resolutions. Better CSAT scores.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with {tool}?</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations" links={[
+        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
+        { href: '/limecall-for-hubspot/', title: 'LimeCall for HubSpot', desc: 'Log every call automatically in your CRM.' },
+        { href: '/limecall-for-slack/', title: 'LimeCall for Slack', desc: 'Get instant call alerts in Slack.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

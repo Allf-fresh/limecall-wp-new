@@ -1,15 +1,135 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Callback Software for Real Estate Industry I LimeCall`,
   description: `Looking for Real Estate Sales Enablement & Callback Software? Convert and help your website visitors to find them a new home.`,
   canonical: `https://www.limecall.com/limecall-for-real-estate/`,
 };
+
+const challenges = [
+  { title: "Buyers move fast", desc: "A buyer browsing listings is often talking to multiple agents. The first agent to get them on the phone wins the relationship — not the one who sends the best email." },
+  { title: "After-hours enquiries", desc: "Most property searches happen in the evenings and weekends. Agencies with 9–5 response windows lose a huge proportion of their best leads." },
+  { title: "Multiple team members", desc: "Routing the right enquiry to the right agent — based on area, property type, or buyer budget — is complex. Manual routing means delays and missed handoffs." },
+];
+
+const benefits = [
+  { title: "Connect in 28 seconds", desc: "Buyer requests a callback from your listing page. Your agent is on the phone in under 28 seconds — before they browse to the next listing." },
+  { title: "Smart lead routing", desc: "Route callbacks by property area, listing type, or price bracket. Luxury buyers talk to your luxury specialists automatically." },
+  { title: "After-hours lead capture", desc: "Capture evening and weekend callback requests automatically. Agents arrive Monday to a prioritized queue of warm leads — ready to call." },
+  { title: "Schedule viewings instantly", desc: "Can't talk right now? Let prospects schedule a viewing or callback directly from the widget. Your calendar stays full." },
+  { title: "Call recordings for training", desc: "Record every callback automatically. Review calls for quality, train new agents, and ensure consistent service standards." },
+  { title: "CRM integration", desc: "Every callback syncs to your CRM — HubSpot, Salesforce, or custom. Build a complete buyer history with zero manual data entry." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More viewings booked" },
+  { value: "80%", label: "Fewer missed leads" },
+  { value: "24/7", label: "Lead capture coverage" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Real Estate', url: seo.canonical }]} />
+      <div class="inline-flex items-center rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400 mb-4">
+        Real Estate
+      </div>
+      <h1 class="mt-2 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Turn Property Browsers<br class="hidden sm:block" />
+        <span class="text-lime-400">Into Booked Viewings</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Real estate agencies use LimeCall to respond to buyer and seller enquiries faster than the competition — and book more viewings as a result.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry challenges -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">The real estate lead problem</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {challenges.map(c => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{c.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall helps estate agents</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenario -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Sunday evening. Your best leads are online.</h2>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          A family is browsing your listings on a Sunday evening. They find a 4-bed house that ticks every box. They click "Request a Callback." LimeCall captures the request and queues it for Monday morning. At 9am, your agent calls — and the family is still interested, still remembered the listing, and books a viewing before 9:30am.
+        </p>
+        <p class="text-dark-400 text-sm">
+          Without LimeCall, that lead fills out a contact form and waits. By Monday they've already booked a viewing with another agency.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Book more viewings. Lose fewer leads.</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More solutions" links={[
+        { href: '/limecall-for-finance-insurance/', title: 'Finance & Insurance', desc: 'Convert financial and mortgage leads faster.' },
+        { href: '/limecall-for-travel/', title: 'Travel', desc: 'Capture travel enquiries in real time.' },
+        { href: '/use-cases/', title: 'All Use Cases', desc: 'See how LimeCall works across every industry.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

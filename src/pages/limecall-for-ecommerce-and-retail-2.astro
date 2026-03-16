@@ -1,15 +1,135 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Sales Enablement Software for E-commerce Industry | LimeCall`,
   description: `Get closer to your potential shoppers and sell more and increase the satisfaction with Sales Enablement Software for E-commerce Industry`,
   canonical: `https://www.limecall.com/limecall-for-ecommerce-and-retail-2/`,
 };
+
+const challenges = [
+  { title: "Cart abandonment", desc: "67% of online shopping carts are abandoned. Often, buyers just have a question that wasn't answered. A quick callback can save the sale." },
+  { title: "High-value product hesitation", desc: "Shoppers buying furniture, electronics, or luxury items want reassurance before committing. A human conversation closes more big-ticket sales." },
+  { title: "Post-purchase anxiety", desc: "Order issues, returns, and delivery questions handled slowly drive negative reviews. Fast callbacks turn problems into loyalty." },
+];
+
+const benefits = [
+  { title: "Rescue abandoned carts", desc: "Trigger callback widgets on checkout and cart pages. A quick call at the right moment answers last-minute objections and closes the sale." },
+  { title: "Product expertise on demand", desc: "Connect shoppers to your product specialists instantly. Expert guidance builds confidence and increases average order value." },
+  { title: "Reduce returns", desc: "Customers who talk to someone before buying are more confident in their purchase — and far less likely to return the product." },
+  { title: "Post-purchase support", desc: "Handle order queries, delivery questions, and returns via callback — giving customers the fast, human service that builds loyalty." },
+  { title: "SMS order updates", desc: "Send SMS confirmations for callback requests, order updates, and follow-ups. Keep shoppers informed at every step." },
+  { title: "CRM and Shopify integration", desc: "Sync LimeCall with your Shopify store and CRM. Log every customer interaction with full order context — no manual data entry." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More conversions" },
+  { value: "67%", label: "Cart abandonment rate industry-wide" },
+  { value: "80%", label: "Fewer missed customer contacts" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'E-commerce & Retail', url: seo.canonical }]} />
+      <div class="inline-flex items-center rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400 mb-4">
+        E-commerce & Retail
+      </div>
+      <h1 class="mt-2 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Stop Losing Shoppers<br class="hidden sm:block" />
+        <span class="text-lime-400">to Unanswered Questions</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        E-commerce stores and retailers use LimeCall to rescue abandoned carts, close big-ticket sales, and deliver post-purchase support that builds lasting loyalty.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenges -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">The e-commerce conversion challenge</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {challenges.map(c => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{c.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall helps e-commerce & retail</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenario -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">The £800 sofa that almost didn't sell</h2>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          A customer adds an £800 sofa to their cart. They're not sure about the dimensions. They're about to abandon the page when a LimeCall widget appears: "Have a question? Talk to us in 28 seconds." They click. Your furniture specialist answers, confirms the dimensions, and the customer places the order.
+        </p>
+        <p class="text-dark-400 text-sm">
+          Without that callback, the customer would have bought from a competitor with a clearer product description. One call, one sale saved.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Stop losing shoppers. Start converting them.</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More solutions" links={[
+        { href: '/limecall-for-real-estate/', title: 'Real Estate', desc: 'Convert property browsers into booked viewings.' },
+        { href: '/limecall-for-finance-insurance/', title: 'Finance & Insurance', desc: 'Convert financial leads before they go elsewhere.' },
+        { href: '/use-cases/', title: 'All Use Cases', desc: 'See how LimeCall works across every industry.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

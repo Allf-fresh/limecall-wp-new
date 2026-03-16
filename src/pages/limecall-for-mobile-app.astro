@@ -1,15 +1,132 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Lead Generation with LimeCall Mobile App | Lead Generation App`,
   description: `Boost lead generation effortlessly with LimeCall mobile app. Get instant call backs, manage leads, and close deals faster - all on the go.`,
   canonical: `https://www.limecall.com/limecall-for-mobile-app/`,
 };
+
+const features = [
+  { title: "Instant call alerts", desc: "Get push notifications the moment a lead requests a callback — then accept and connect in seconds, directly from your phone." },
+  { title: "Manage leads on the go", desc: "View your lead queue, call history, and recordings from anywhere. Your entire pipeline in your pocket." },
+  { title: "Click to call from mobile", desc: "Call back any lead with one tap. LimeCall routes through the app so your personal number stays private." },
+  { title: "Call recordings & notes", desc: "Review call recordings, add notes, and update lead status directly in the mobile app — right after every call." },
+  { title: "Team management", desc: "See which reps are available, reassign leads, and monitor team performance — all from the LimeCall mobile dashboard." },
+  { title: "Offline lead queue", desc: "Missed a callback while offline? The app queues unanswered requests and surfaces them when you reconnect." },
+];
+
+const platforms = [
+  { name: "iOS", icon: "M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z", store: "App Store", href: "#" },
+  { name: "Android", icon: "M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z", store: "Google Play", href: "#" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'LimeCall Mobile App', url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall <span class="text-lime-400">Mobile App</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Never miss a lead — wherever you are. Get instant callback alerts, manage your lead pipeline, and close deals from your phone.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Download Free →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-dark-400">
+        <span>Available on iOS & Android</span>
+        <span class="h-4 w-px bg-dark-700 hidden sm:block"></span>
+        <span>Free with your LimeCall account</span>
+        <span class="h-4 w-px bg-dark-700 hidden sm:block"></span>
+        <span>No additional cost</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Your lead pipeline, in your pocket</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works on mobile -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works on mobile</h2>
+      <div class="grid gap-8 sm:grid-cols-4">
+        {[
+          { n: "1", title: "Lead arrives", desc: "Visitor clicks the callback widget on your website." },
+          { n: "2", title: "You get notified", desc: "Push notification hits your phone instantly." },
+          { n: "3", title: "Accept & connect", desc: "Tap to accept — LimeCall connects you in seconds." },
+          { n: "4", title: "Log & follow up", desc: "Add notes and schedule next steps from the app." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white text-sm">{s.title}</h3>
+            <p class="text-xs text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Ideal for section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Built for teams that are always moving</h2>
+        <p class="text-dark-300 leading-relaxed mb-6">
+          Field sales reps, real estate agents, insurance brokers, and solo founders — LimeCall's mobile app keeps you connected to your website leads even when you're away from your desk. Whether you're at a showing, a meeting, or on the road, you'll never miss a hot lead again.
+        </p>
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 text-center">
+          {[
+            { stat: "28s", label: "Average connect time" },
+            { stat: "3x", label: "More conversions" },
+            { stat: "24/7", label: "Lead coverage" },
+            { stat: "0", label: "Extra cost" },
+          ].map(s => (
+            <div>
+              <div class="text-2xl font-extrabold text-lime-400">{s.stat}</div>
+              <div class="mt-1 text-xs text-dark-400">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Download LimeCall for iOS & Android</h2>
+      <p class="mt-4 text-dark-400">Free with your LimeCall account. Start your free trial today.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore LimeCall" links={[
+        { href: '/how-it-works/', title: 'How It Works', desc: 'See the full LimeCall flow from widget to call.' },
+        { href: '/features/', title: 'All Features', desc: 'Every feature included in your plan.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'Connect with your favourite tools.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

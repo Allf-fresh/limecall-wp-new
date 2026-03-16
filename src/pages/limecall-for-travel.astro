@@ -1,15 +1,135 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
   title: `Sales Enablement & Callback Software for Travel Agency`,
   description: `Lime call is a perfect sales enablement & callback software for Travel Agency to get more customers. Convert 80% more customers on their hours than yours.`,
   canonical: `https://www.limecall.com/limecall-for-travel/`,
 };
+
+const challenges = [
+  { title: "High-value, complex bookings", desc: "A family holiday or honeymoon trip is an emotional, high-value purchase. Customers want to talk to a human — not fill out a form and wait." },
+  { title: "Browsing happens outside business hours", desc: "Travel research happens in evenings and weekends. Agencies with slow response windows lose leads to OTAs that have 24/7 booking tools." },
+  { title: "Multiple destinations, multiple experts", desc: "Routing a Maldives honeymoon enquiry to a European city breaks expert wastes everyone's time and erodes trust." },
+];
+
+const benefits = [
+  { title: "Instant connection, peak intent", desc: "A traveller comparing packages clicks your widget and talks to an agent in 28 seconds — before they book somewhere else." },
+  { title: "Route to destination experts", desc: "Automatically route Caribbean holiday enquiries to your Caribbean specialists. Every call lands with the most relevant agent." },
+  { title: "After-hours lead capture", desc: "Queue weekend and evening callback requests. Your agents start every Monday with a list of warm leads ready to call — no lead left behind." },
+  { title: "Schedule consultations", desc: "Complex group tours or corporate travel bookings need time. Let customers schedule a 30-minute consultation at a convenient time." },
+  { title: "SMS follow-ups", desc: "Send an instant SMS confirmation when a callback is requested. Keep travellers engaged while they wait for your call." },
+  { title: "Full call history", desc: "Every conversation is recorded and linked to the customer record. Never lose context on a complex multi-stage booking." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More enquiries converted" },
+  { value: "80%", label: "Fewer missed leads" },
+  { value: "24/7", label: "Lead capture coverage" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Travel Agency', url: seo.canonical }]} />
+      <div class="inline-flex items-center rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400 mb-4">
+        Travel & Tourism
+      </div>
+      <h1 class="mt-2 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Turn Travel Enquiries<br class="hidden sm:block" />
+        <span class="text-lime-400">Into Bookings Instantly</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Travel agencies and tour operators use LimeCall to connect with holiday planners at the exact moment they're ready to book — before the competition does.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenges -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Why travel agencies lose leads</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {challenges.map(c => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{c.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall helps travel businesses</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenario -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">A Friday night honeymoon enquiry that becomes a booking</h2>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          A couple is browsing Maldives honeymoon packages on a Friday evening. They're excited, comparing options, and click "Talk to a specialist." LimeCall connects them to your Maldives specialist in 28 seconds. By Saturday morning, the honeymoon is booked.
+        </p>
+        <p class="text-dark-400 text-sm">
+          That couple did not fill out a contact form and wait until Monday. They talked to a human who was ready.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Convert more travel enquiries into bookings</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More solutions" links={[
+        { href: '/limecall-for-travel-tourism-aviation/', title: 'Travel, Tourism & Aviation', desc: 'Full travel industry guide for LimeCall.' },
+        { href: '/limecall-for-real-estate/', title: 'Real Estate', desc: 'Convert property enquiries in under 28 seconds.' },
+        { href: '/use-cases/', title: 'All Use Cases', desc: 'See how LimeCall works across every industry.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

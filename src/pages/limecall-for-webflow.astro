@@ -1,15 +1,115 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const tool = "Webflow";
 
 const seo = {
   title: `Boost Webflow Conversions with Effortless Callbacks with LimeCall`,
   description: `Maximize Webflow conversions! Try LimeCall's callbacks & texting for lead capture, streamlined communication & deal closure. Try LimeCall Now`,
   canonical: `https://www.limecall.com/limecall-for-webflow/`,
 };
+
+const steps = [
+  { n: "1", title: "Copy your LimeCall snippet", desc: "Get your unique embed code from the LimeCall dashboard — a single JavaScript snippet, no plugins required." },
+  { n: "2", title: "Paste into Webflow", desc: "Add the snippet to your Webflow project's custom code section. Works in the head, body, or on specific pages." },
+  { n: "3", title: "Go live and capture leads", desc: "Publish your Webflow site. The callback widget appears instantly — styled to match your brand." },
+];
+
+const benefits = [
+  { title: "No-code embed", desc: "One script tag is all it takes. No Webflow plugins, no custom code complexity — paste and publish." },
+  { title: "Pixel-perfect styling", desc: "Customize the widget color, position, text, and timing to match your Webflow design system perfectly." },
+  { title: "Page-level targeting", desc: "Show the callback widget only on high-intent pages like pricing, features, or contact — not on every page." },
+  { title: "Callback in 28 seconds", desc: "Visitors request a call and get connected with your team in under 28 seconds — while they're still on your site." },
+  { title: "Lead data captured", desc: "Every callback request captures visitor name, phone, and the page they converted on — ready for your CRM." },
+  { title: "Works with CMS pages", desc: "LimeCall works on static pages, CMS templates, and dynamic Webflow pages — embed once, works everywhere." },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `LimeCall for ${tool}`, url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall for <span class="text-lime-400">{tool}</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Add instant callback to any Webflow site with one snippet. Turn high-intent visitors into live conversations — no dev work, no plugins.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Add to Webflow Free →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup steps -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Install in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What you get</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Code snippet example -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/80 p-8">
+        <h2 class="text-xl font-bold text-white mb-2">That's literally all you need</h2>
+        <p class="text-dark-400 text-sm mb-6">Add LimeCall to any Webflow page via Project Settings → Custom Code → Footer Code.</p>
+        <div class="rounded-xl bg-dark-950 border border-dark-800 p-5 font-mono text-sm text-lime-400 overflow-x-auto">
+          <span class="text-dark-500">&lt;!-- LimeCall Widget --&gt;</span><br />
+          <span class="text-dark-400">&lt;script</span> <span class="text-lime-300">src</span>=<span class="text-white">"https://widget.limecall.com/widget.js"</span><br />
+          <span class="ml-8 text-lime-300">data-id</span>=<span class="text-white">"YOUR_WIDGET_ID"</span><br />
+          <span class="ml-8 text-lime-300">async</span><span class="text-dark-400">&gt;&lt;/script&gt;</span>
+        </div>
+        <p class="mt-4 text-xs text-dark-500">Replace YOUR_WIDGET_ID with the ID from your LimeCall dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to add LimeCall to your Webflow site?</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More ways to embed LimeCall" links={[
+        { href: '/limecall-for-wordpress/', title: 'LimeCall for WordPress', desc: 'Install with our official WordPress plugin.' },
+        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
+        { href: '/click-2-call/', title: 'Click to Call', desc: 'Learn how our core callback feature works.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

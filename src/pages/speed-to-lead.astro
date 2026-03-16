@@ -1,15 +1,339 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import { faqSchema } from '../lib/seo';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Speed to Lead Advantage with LimeCall - Close Deals Faster`,
-  description: `Experience the competitive edge with LimeCall's speed to lead advantage. Accelerate your sales process & close deals faster than ever before.`,
+  title: `Speed to Lead Advantage with LimeCall — Close Deals Faster`,
+  description: `Experience the competitive edge with LimeCall's speed to lead advantage. Connect with new leads in under 28 seconds and close deals faster than ever before.`,
   canonical: `https://www.limecall.com/speed-to-lead/`,
 };
+
+const features = [
+  {
+    icon: '⚡',
+    name: 'Callback in Under 28 Seconds',
+    description: 'The moment a lead submits a form or clicks your widget, LimeCall dials your rep and the prospect simultaneously — connecting them while interest is at its peak.',
+  },
+  {
+    icon: '📞',
+    name: 'Click to Call',
+    description: 'Remove all friction from lead initiation. A single click starts the call — no forms, no hold music, no waiting. Your team answers before the lead even thinks about a competitor.',
+  },
+  {
+    icon: '🔀',
+    name: 'Intelligent Call Routing',
+    description: 'Route each lead to the right rep based on availability, expertise, location, or round-robin rules. The best rep gets the right lead every time.',
+  },
+  {
+    icon: '💬',
+    name: 'Automated SMS Follow-Ups',
+    description: 'If a rep misses a call, LimeCall automatically sends an SMS follow-up to the lead within seconds — doubling your chance to connect.',
+  },
+  {
+    icon: '🔗',
+    name: 'CRM Integration',
+    description: 'Every call, recording, and lead data point syncs automatically to your CRM. No manual entry — your team has full context before the conversation even starts.',
+  },
+  {
+    icon: '📈',
+    name: 'Speed-to-Lead Analytics',
+    description: 'Track response times, answer rates, and contact rates in real-time. Identify bottlenecks and optimize your team\'s performance with data-driven insights.',
+  },
+];
+
+const stats = [
+  { value: '100x', label: 'Higher Qualification Rate', sub: 'when responding within 5 minutes vs. 30 minutes' },
+  { value: '28s', label: 'Average Connect Time', sub: 'from lead submission to live conversation' },
+  { value: '3x', label: 'More Deals Closed', sub: 'by teams with sub-30-second response times' },
+  { value: '80%', label: 'More Call Requests', sub: 'compared to traditional contact forms' },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Lead Shows Intent',
+    description: 'A prospect clicks your call button, fills a form, or chats on your site. LimeCall detects the signal immediately.',
+  },
+  {
+    number: '02',
+    title: 'Instant Connection Triggered',
+    description: 'LimeCall simultaneously dials your best available rep and the lead. Both answer — and are bridged within 28 seconds.',
+  },
+  {
+    number: '03',
+    title: 'Deal Moves Forward',
+    description: 'Your rep has the lead context, call is recorded, CRM is updated. Follow-ups are automated if the first attempt misses.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is "speed to lead" and why does it matter?',
+    answer: 'Speed to lead is the time between a prospect showing interest and your sales rep making first contact. Research shows that contacting a lead within 5 minutes makes you 100x more likely to qualify them than waiting 30 minutes. LimeCall achieves this in under 28 seconds.',
+  },
+  {
+    question: 'How does LimeCall improve speed to lead?',
+    answer: 'LimeCall\'s callback widget triggers an automatic simultaneous dial to both your rep and the lead the moment someone requests a call. This eliminates manual processes and connects both parties before the lead loses interest.',
+  },
+  {
+    question: 'What if my sales team is unavailable?',
+    answer: 'LimeCall\'s intelligent routing finds the next available rep. If no one is available, an automated SMS follow-up is sent to the lead, and your team receives an alert. You can also set business hours and let visitors schedule a callback for a specific time.',
+  },
+  {
+    question: 'Does LimeCall work with lead forms on my website?',
+    answer: 'Yes. LimeCall integrates with your existing web forms via webhook or Zapier. When a form is submitted, LimeCall can automatically trigger an outbound call to your team and the lead.',
+  },
+  {
+    question: 'Which CRMs does LimeCall integrate with?',
+    answer: 'LimeCall integrates natively with HubSpot, Salesforce, Pipedrive, and Zoho, plus 1000+ tools via Zapier. All lead data, call recordings, and response-time metrics sync automatically.',
+  },
+  {
+    question: 'Can I track how fast my team is responding to leads?',
+    answer: 'Yes. LimeCall\'s analytics dashboard tracks average response time, answer rate, and contact rate for every rep and every channel. Identify bottlenecks and coach your team with real data.',
+  },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
-  </div>
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Speed to Lead', url: `${site.url}/speed-to-lead/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Speed to Lead
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Strike While Hot:<br />
+        <span class="text-lime-400">Connect in 28 Seconds</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Every minute you wait to contact a new lead, your odds of closing drop dramatically. LimeCall eliminates the delay — connecting your reps with hot leads automatically, in under 28 seconds.
+      </p>
+
+      <!-- Key stat callout -->
+      <div class="mt-8 inline-flex items-center gap-4 rounded-2xl border border-lime-500/20 bg-lime-500/5 px-6 py-4">
+        <div class="text-left">
+          <div class="text-3xl font-extrabold text-lime-400">100x</div>
+          <div class="text-sm text-dark-300">higher qualification rate</div>
+        </div>
+        <div class="h-10 w-px bg-dark-700"></div>
+        <div class="text-left text-sm text-dark-400 max-w-xs">
+          When you respond to a lead within 5 minutes vs. 30 minutes — Harvard Business Review
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free — No Card Needed
+        </a>
+        <a
+          href="/contact-us"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Request a Demo
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">30-day money-back guarantee · Free plan available</p>
+    </div>
+  </section>
+
+  <!-- Stats section -->
+  <section class="border-b border-dark-800 bg-dark-900/60 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        {stats.map((s) => (
+          <div class="p-4">
+            <div class="text-4xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-2 text-sm font-bold text-white">{s.label}</div>
+            <div class="mt-1 text-xs text-dark-500">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          How LimeCall <span class="text-lime-400">Supercharges Speed to Lead</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          From lead signal to live conversation in three automated steps — no manual effort required.
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map((step) => (
+          <div class="relative flex flex-col rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="text-4xl font-extrabold text-lime-500/20 mb-4 leading-none">{step.number}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{step.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          How LimeCall Empowers <span class="text-lime-400">Your Business</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Every LimeCall feature is engineered to get your team talking to the right lead at exactly the right moment.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <FeatureCard icon={f.icon} name={f.name} description={f.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The cost of slow response -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2 items-center">
+        <div>
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+            The Cost of <span class="text-red-400">Slow Response</span>
+          </h2>
+          <p class="mt-4 text-dark-400 leading-relaxed">
+            Leads are perishable. A prospect who fills out your form is at peak interest for only a few minutes. After that, attention drifts — to your competitor's site, to a phone call, to something else entirely.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Responding in 1 min vs 5 min: 400% better contact rate',
+              'After 10 minutes: chances of qualifying drop by 400%',
+              'Most B2B companies take 42 hours to respond on average',
+              'Companies using LimeCall respond in under 28 seconds',
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-sm text-dark-300">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-950/30 to-dark-900/80 p-8">
+          <h3 class="text-xl font-bold text-white mb-6">With LimeCall vs. Without</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-dark-400">Average response time</span>
+                <span class="font-bold text-lime-400">28 seconds</span>
+              </div>
+              <div class="h-2 rounded-full bg-dark-800">
+                <div class="h-2 rounded-full bg-lime-500" style="width: 5%"></div>
+              </div>
+              <div class="mt-1 text-right text-xs text-dark-600">Industry avg: 42 hours</div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-dark-400">Lead qualification rate</span>
+                <span class="font-bold text-lime-400">Up to 100x better</span>
+              </div>
+              <div class="h-2 rounded-full bg-dark-800">
+                <div class="h-2 rounded-full bg-lime-500" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-dark-400">Deals closed / month</span>
+                <span class="font-bold text-lime-400">3x improvement</span>
+              </div>
+              <div class="h-2 rounded-full bg-dark-800">
+                <div class="h-2 rounded-full bg-lime-500" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Your Next Lead Is Waiting.<br />
+        <span class="text-lime-400">Will You Answer in Time?</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Install LimeCall in minutes and respond to every lead in under 28 seconds — automatically.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free Trial
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">30-day money-back guarantee · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="More Ways LimeCall Accelerates Your Sales"
+        links={[
+          { href: '/click-to-call-software', title: 'Click to Call Software', desc: 'One-click web calling for your website visitors.' },
+          { href: '/customer-callback-software', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds from your website.' },
+          { href: '/lead-distribution', title: 'Lead Distribution', desc: 'Route every lead to the right rep instantly.' },
+          { href: '/calltracking-software', title: 'Call Tracking', desc: 'See which channels drive calls and conversions.' },
+          { href: '/conversation-scheduling', title: 'Schedule Callbacks', desc: 'Let prospects pick their ideal callback time.' },
+          { href: '/pricing', title: 'Pricing', desc: 'Start free. Upgrade as you grow.' },
+        ]}
+      />
+    </div>
+  </section>
 </Base>

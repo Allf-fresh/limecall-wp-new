@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const country = "United Kingdom";
@@ -10,49 +12,38 @@ const slug = "uk-virtual-phone-number";
 const flag = "🇬🇧";
 
 const seo = {
-  title: `Get UK Virtual Phone Number (${code}) | LimeCall`,
-  description: `Get a UK virtual phone number (${code}) instantly. No hardware needed. Route calls, enable callbacks, and grow your UK business with LimeCall.`,
+  title: `UK Virtual Phone Number — Get a British Number in 60 Seconds | LimeCall`,
+  description: `Get a UK virtual phone number (+44) from $4.99/mo. London 020, Manchester 0161, Birmingham 0121 numbers. Instant setup, Ofcom-compliant. Cancel anytime.`,
   canonical: `https://www.limecall.com/${slug}/`,
 };
 
-const features = [
-  { title: "Instant Setup", desc: "Get your UK virtual number in minutes. No hardware, no SIM card, no contracts." },
-  { title: "Smart Call Routing", desc: "Route incoming calls to any device or team member — mobile, desktop, or desk phone." },
-  { title: "Call Recording", desc: "Record and review every call for quality assurance and compliance." },
-  { title: "Callback Automation", desc: "Let website visitors request instant callbacks from your UK-based or global team." },
-  { title: "SMS & WhatsApp", desc: "Send and receive SMS messages on your UK virtual number." },
-  { title: "Analytics Dashboard", desc: "Full call analytics, reporting, and conversion tracking in one dashboard." },
-];
-
 const faqs = [
   {
-    q: `What is a UK virtual phone number?`,
-    a: `A UK virtual phone number (${code}) is a telephone number that isn't tied to a physical phone line or SIM card. It routes calls over the internet to any device — mobile, laptop, or desk phone — anywhere in the world. Your customers in the UK dial a local number and the call reaches you wherever you are.`,
+    question: `Can I get a UK virtual number without being in the UK?`,
+    answer: `Yes. You can get a UK virtual phone number (+44) from anywhere in the world. LimeCall provisions a genuine British number that local customers can call at local rates, while your team answers from any country via app or browser.`,
   },
   {
-    q: `Do I need to be in the UK to get a UK virtual number?`,
-    a: `No. Anyone can get a UK virtual phone number from anywhere in the world. LimeCall gives you a local ${code} number that British customers can call at local rates, while your team answers from any country.`,
+    question: `What is the country code for the United Kingdom?`,
+    answer: `The UK's international dialling code is +44. When dialling from outside the UK, you drop the leading zero from the area code. Key city codes include London (020), Birmingham (0121), Manchester (0161), Leeds (0113), Glasgow (0141), and Edinburgh (0131).`,
   },
   {
-    q: `What types of UK virtual numbers are available?`,
-    a: `LimeCall offers local UK geographic numbers (020 London, 0121 Birmingham, 0161 Manchester, 0113 Leeds, etc.), national 03 numbers, and 0800 freephone numbers. Choose the format that best represents your UK business.`,
+    question: `How much does a UK virtual phone number cost?`,
+    answer: `LimeCall's UK virtual numbers start from $4.99 per month. Incoming call rates and SMS charges are billed per use with no hidden setup fees. Geographic numbers (01/02), national 03 numbers, and 0800 freephone options are all available. See the pricing page for full details.`,
   },
   {
-    q: "How long does setup take?",
-    a: "Setup takes under 5 minutes. Sign up, choose your UK number, and you're ready to receive calls immediately — no waiting for hardware or SIM activation.",
+    question: `Can I make outbound calls with my UK virtual number?`,
+    answer: `Yes. LimeCall lets you make outbound calls displaying your UK (+44) number as the caller ID. UK recipients see a familiar local or national number, which dramatically improves answer rates for sales and support calls.`,
   },
   {
-    q: "Can I use a UK virtual number for callbacks?",
-    a: "Yes — LimeCall's callback automation lets website visitors request a call and your team calls them back within 28 seconds using your UK virtual number. This dramatically improves lead conversion rates.",
-  },
-  {
-    q: `Is a UK virtual number compliant with Ofcom regulations?`,
-    a: `LimeCall's UK virtual numbers are provisioned through Ofcom-licensed carriers and comply with UK telecommunications regulations. All numbers are legitimate, properly registered UK numbers.`,
+    question: `How quickly can I get a UK virtual number?`,
+    answer: `Your UK virtual number is active within 60 seconds of signing up. No waiting for hardware, SIM cards, or Ofcom registration. Choose your UK number format, configure call routing, and you are ready to receive calls immediately.`,
   },
 ];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -62,8 +53,14 @@ const faqs = [
         Get a <span class="text-lime-400">UK Virtual Phone Number</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Local {country} number ({code}) that works anywhere. Instant setup, no hardware. Route calls, automate callbacks, and close more deals.
+        Get a local United Kingdom number ({code}) without being physically present in the UK. Instant setup, no hardware, no SIM card required.
       </p>
+      <!-- Trust signals -->
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Instant setup in 60 seconds</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+      </div>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
           Get Your UK Number →
@@ -75,17 +72,147 @@ const faqs = [
     </div>
   </section>
 
+  <!-- How it works -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How to get your UK number in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
+          <h3 class="mb-2 font-semibold text-white">Pick a number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose your UK city prefix — London (020), Birmingham (0121), Manchester (0161), Leeds (0113), or a national 03/0800 number.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, team member, or phone number globally. Set up IVR menus, voicemail, or ring groups.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
+          <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your UK number goes live instantly. British customers call a local number and you answer from anywhere in the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
-  <section class="py-16 sm:py-20">
+  <section class="py-16 sm:py-20 border-t border-dark-800">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything included with your UK number</h2>
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your UK number</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map(f => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
-          </div>
-        ))}
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Local presence in the UK</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Appear as a genuine local British business with a real +44 number. UK customers are more likely to answer and trust calls from a local number.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">No physical address required</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Get a UK virtual number without a UK registered address or company. Fully remote, Ofcom-compliant operation from anywhere globally.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Forward to any device globally</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route incoming UK calls to mobile phones, laptops, desk phones, or SIP devices anywhere in the world.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Call recording & analytics</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every UK call automatically. Review call quality, track response times, and analyse conversion rates from your dashboard.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Competitive per-minute rates</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Low per-minute rates for calls to and from the UK. Transparent pricing for all UK traffic — geographic, 03 national, and 0800 freephone.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">UK number formats supported</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Geographic 01/02 numbers, 03 national-rate numbers, and 0800 freephone numbers. All formats dial the same way for UK callers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses UK virtual numbers?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🏢</div>
+          <h3 class="mb-2 font-semibold text-white">Businesses expanding to the UK</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Establish a credible UK presence without a physical office. A London 020 number signals professionalism to British prospects.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">💻</div>
+          <h3 class="mb-2 font-semibold text-white">Remote teams with UK clients</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your distributed team answers UK calls from anywhere. No need for anyone to be physically located in the UK.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🛒</div>
+          <h3 class="mb-2 font-semibold text-white">E-commerce with UK customers</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Display a local UK support number to reduce cart abandonment and build trust with British online shoppers.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🎧</div>
+          <h3 class="mb-2 font-semibold text-white">Customer support with local number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route UK customer support calls to your global team. UK callers pay local rates while your agents work remotely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Did you know -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-6 text-xl font-bold text-white">Did you know? UK phone system facts</h2>
+        <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>The UK's international dialling code is <strong class="text-white">+44</strong>. When calling from abroad, drop the leading 0 from the area code — so London's 020 becomes +44 20.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Major UK city codes: <strong class="text-white">London 020</strong>, <strong class="text-white">Birmingham 0121</strong>, <strong class="text-white">Manchester 0161</strong>, <strong class="text-white">Leeds 0113</strong>, <strong class="text-white">Glasgow 0141</strong>, <strong class="text-white">Edinburgh 0131</strong>, <strong class="text-white">Bristol 0117</strong>.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Ofcom (the UK's communications regulator) oversees all UK telecoms. UK numbers beginning with 03 are charged at the same rate as 01/02 geographic numbers and are included in mobile bundles.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">LimeCall virtual number vs physical UK SIM</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="py-3 pr-6 text-left font-semibold text-dark-400">Feature</th>
+              <th class="py-3 px-4 text-left font-semibold text-lime-400">LimeCall Virtual</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Physical SIM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Setup time</td>
+              <td class="py-3 px-4 text-white">Instant (60 seconds)</td>
+              <td class="py-3 px-4 text-dark-400">Days to weeks</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Physical presence needed</td>
+              <td class="py-3 px-4 text-white">No</td>
+              <td class="py-3 px-4 text-dark-400">Yes — must be in the UK</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Works from</td>
+              <td class="py-3 px-4 text-white">Anywhere in the world</td>
+              <td class="py-3 px-4 text-dark-400">Must be in the UK</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Cancel anytime</td>
+              <td class="py-3 px-4 text-white">Yes — no contracts</td>
+              <td class="py-3 px-4 text-dark-400">Often locked to contract</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
+              <td class="py-3 px-4 text-white">Yes — unlimited</td>
+              <td class="py-3 px-4 text-dark-400">One per SIM card</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -98,12 +225,12 @@ const faqs = [
         {faqs.map(faq => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {faq.question}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
           </details>
         ))}
       </div>
@@ -114,7 +241,7 @@ const faqs = [
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-white">Ready to get your UK number?</h2>
-      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall virtual numbers to connect with customers globally.</p>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to connect with British customers — without being in the UK.</p>
       <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
         Start Free Trial →
       </a>
@@ -126,9 +253,9 @@ const faqs = [
       heading="Explore Virtual Numbers"
       links={[
         { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+        { href: '/virtual-phone-number-germany/', title: 'Germany Virtual Number', desc: 'Get a Germany +49 number.' },
+        { href: '/australia-virtual-phone-numbers/', title: 'Australia Virtual Number', desc: 'Get an Australia +61 number.' },
+        { href: '/new-zealand-virtual-phone-numbers/', title: 'New Zealand Virtual Number', desc: 'Get a New Zealand +64 number.' },
       ]}
     />
   </div>

@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const country = "Sri Lanka";
@@ -9,63 +11,58 @@ const code = "+94";
 const flag = "🇱🇰";
 
 const seo = {
-  title: `Sri Lanka Virtual Phone Numbers (${code}) | LimeCall`,
-  description: `Get a Sri Lanka virtual phone number (${code}) instantly. No hardware needed. Route calls, enable callbacks, and grow your Sri Lanka business with LimeCall.`,
+  title: `Sri Lanka Virtual Phone Number — Get a Sri Lankan Number in 60 Seconds | LimeCall`,
+  description: `Get a Sri Lanka virtual phone number (+94) from $4.99/mo. Instant setup, no physical presence needed. Colombo, Kandy & Galle numbers available. Cancel anytime.`,
   canonical: `https://www.limecall.com/sri-lanka-virtual-phone-numbers/`,
 };
 
-const features = [
-  { title: "Instant Setup", desc: "Get your Sri Lanka virtual number in minutes. No hardware, no SIM card, no contracts." },
-  { title: "Smart Call Routing", desc: "Route incoming calls to any device or team member — mobile, desktop, or desk phone." },
-  { title: "Call Recording", desc: "Record and review every call for quality assurance and compliance." },
-  { title: "Callback Automation", desc: "Let website visitors request instant callbacks from your Sri Lanka-based or global team." },
-  { title: "SMS & WhatsApp", desc: "Send and receive SMS messages on your Sri Lanka virtual number." },
-  { title: "Analytics Dashboard", desc: "Full call analytics, reporting, and conversion tracking in one dashboard." },
-];
-
 const faqs = [
   {
-    q: `What is a Sri Lanka virtual phone number?`,
-    a: `A Sri Lanka virtual phone number (${code}) is a telephone number that isn't tied to a physical phone line or SIM card. It routes calls over the internet to any device — mobile, laptop, or desk phone — anywhere in the world. Your customers in Sri Lanka dial a local number, and the call reaches you wherever you are.`,
+    question: `Can I get a Sri Lanka virtual number without being in Sri Lanka?`,
+    answer: `Yes. You can get a Sri Lanka virtual phone number (+94) from anywhere in the world. LimeCall provisions a genuine Sri Lankan number that local customers can call at local rates, while your team answers from any country via app or browser.`,
   },
   {
-    q: `Do I need to be in Sri Lanka to get a Sri Lankan virtual number?`,
-    a: `No. Anyone can get a Sri Lanka virtual phone number from anywhere in the world. LimeCall gives you a local ${code} number that Sri Lankan customers can call at local rates, while your team answers from any country.`,
+    question: `What is the country code for Sri Lanka?`,
+    answer: `Sri Lanka's country code is +94. Major city area codes include Colombo (011), Kandy (081), Galle (091), Jaffna (021), Negombo (031), Kurunegala (037), and Ratnapura (045). Mobile numbers in Sri Lanka are 9 digits long and begin with 07.`,
   },
   {
-    q: `What types of Sri Lanka virtual numbers are available?`,
-    a: `LimeCall offers local Sri Lanka numbers with city-specific area codes (Colombo 011, Kandy 081, Galle 091, Jaffna 021, etc.) as well as national numbers. Choose the number type that best fits your business needs.`,
+    question: `How much does a Sri Lanka virtual phone number cost?`,
+    answer: `LimeCall's Sri Lanka virtual numbers start from $4.99 per month. Incoming call rates and SMS charges are billed per use with no hidden setup fees. See the pricing page for full details.`,
   },
   {
-    q: "How long does setup take?",
-    a: "Setup takes under 5 minutes. Sign up, choose your Sri Lanka number, and you're ready to receive calls immediately — no waiting for hardware or SIM activation.",
+    question: `Can I make outbound calls with my Sri Lanka virtual number?`,
+    answer: `Yes. LimeCall lets you make outbound calls displaying your Sri Lanka (+94) number as the caller ID. Sri Lankan recipients see a local number, which improves answer rates significantly.`,
   },
   {
-    q: "Can I use a Sri Lanka virtual number for callbacks?",
-    a: "Yes — LimeCall's callback automation lets website visitors request a call and your team calls them back within 28 seconds using your Sri Lanka virtual number. This dramatically improves lead conversion rates.",
-  },
-  {
-    q: `Are Sri Lanka virtual numbers compliant with TRCSL regulations?`,
-    a: `LimeCall's Sri Lanka virtual numbers are provisioned through licensed telecom partners and comply with the Telecommunications Regulatory Commission of Sri Lanka (TRCSL) guidelines. All numbers are legitimate, registered numbers suitable for business use.`,
+    question: `How quickly can I get a Sri Lanka virtual number?`,
+    answer: `Your Sri Lanka virtual number is active within 60 seconds of signing up. No waiting for hardware, SIM cards, or approvals. Choose your city prefix, configure call routing, and you are ready to receive calls immediately.`,
   },
 ];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: `${country} Virtual Number`, url: seo.canonical }]} />
       <div class="mt-4 text-5xl">{flag}</div>
       <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Get a <span class="text-lime-400">{country} Virtual Phone Number</span>
+        Get a <span class="text-lime-400">Sri Lanka Virtual Phone Number</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Local {country} number ({code}) that works anywhere. Instant setup, no hardware. Route calls, automate callbacks, and close more deals.
+        Get a local Sri Lanka number ({code}) without being physically present in Sri Lanka. Instant setup, no hardware, no SIM card required.
       </p>
+      <!-- Trust signals -->
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Instant setup in 60 seconds</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+      </div>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
-          Get Your {country} Number →
+          Get Your Sri Lanka Number →
         </a>
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
@@ -74,17 +71,147 @@ const faqs = [
     </div>
   </section>
 
+  <!-- How it works -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How to get your Sri Lanka number in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
+          <h3 class="mb-2 font-semibold text-white">Pick a number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose your Sri Lanka city prefix — Colombo (011), Kandy (081), Galle (091), Jaffna (021), Negombo (031), and more.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, team member, or phone number globally. Set up IVR menus, voicemail, or ring groups.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
+          <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your Sri Lanka number goes live instantly. Sri Lankan customers call a local number and you answer from anywhere in the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
-  <section class="py-16 sm:py-20">
+  <section class="py-16 sm:py-20 border-t border-dark-800">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything included with your {country} number</h2>
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your Sri Lanka number</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map(f => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
-          </div>
-        ))}
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Local presence in Sri Lanka</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Appear as a genuine local Sri Lankan business with a real +94 number. Build trust with customers who prefer calling local numbers.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">No physical address required</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Get a Sri Lanka virtual number without registering a company or renting office space in Sri Lanka. Fully remote, fully legal.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Forward to any device globally</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route incoming Sri Lanka calls to mobile phones, laptops, desk phones, or SIP devices anywhere in the world.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Call recording & analytics</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every Sri Lanka call automatically. Review call quality, track response times, and analyse conversion rates from your dashboard.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Competitive per-minute rates</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Low per-minute rates for calls to and from Sri Lanka. Transparent pricing with no international calling surprises.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Sri Lanka city codes & formats</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose from Colombo +94-11, Kandy +94-81, Galle +94-91, Jaffna +94-21, Negombo +94-31, and all major Sri Lankan cities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses Sri Lanka virtual numbers?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🏢</div>
+          <h3 class="mb-2 font-semibold text-white">Businesses expanding to Sri Lanka</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Establish a local Sri Lanka presence before committing to a physical office. Test the market with a real +94 number.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">💻</div>
+          <h3 class="mb-2 font-semibold text-white">Remote teams with Sri Lanka clients</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your distributed team answers Sri Lanka calls from anywhere. No need for anyone to be physically located in Sri Lanka.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🛒</div>
+          <h3 class="mb-2 font-semibold text-white">E-commerce with Sri Lanka customers</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Display a local Sri Lanka support number on your website to increase trust and boost conversion rates.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🎧</div>
+          <h3 class="mb-2 font-semibold text-white">Customer support with local number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route Sri Lanka customer support calls to your global team. Local callers pay local rates while your agents work remotely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Did you know -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-6 text-xl font-bold text-white">Did you know? Sri Lanka phone system facts</h2>
+        <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Sri Lanka's international dialling code is <strong class="text-white">+94</strong>. The capital Colombo uses area code <strong class="text-white">011</strong>, making a full local number format +94-11-XXXXXXX.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Major Sri Lankan city codes: <strong class="text-white">Colombo +94-11</strong>, <strong class="text-white">Kandy +94-81</strong>, <strong class="text-white">Galle +94-91</strong>, <strong class="text-white">Jaffna +94-21</strong>, <strong class="text-white">Negombo +94-31</strong>.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Sri Lanka's telecom sector is regulated by the <strong class="text-white">TRCSL</strong> (Telecommunications Regulatory Commission of Sri Lanka). The country has a rapidly growing mobile penetration rate with Dialog, Mobitel, Hutch, and Airtel as major operators.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">LimeCall virtual number vs physical Sri Lanka SIM</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="py-3 pr-6 text-left font-semibold text-dark-400">Feature</th>
+              <th class="py-3 px-4 text-left font-semibold text-lime-400">LimeCall Virtual</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Physical SIM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Setup time</td>
+              <td class="py-3 px-4 text-white">Instant (60 seconds)</td>
+              <td class="py-3 px-4 text-dark-400">Days to weeks</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Physical presence needed</td>
+              <td class="py-3 px-4 text-white">No</td>
+              <td class="py-3 px-4 text-dark-400">Yes — must be in Sri Lanka</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Works from</td>
+              <td class="py-3 px-4 text-white">Anywhere in the world</td>
+              <td class="py-3 px-4 text-dark-400">Must be in Sri Lanka</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Cancel anytime</td>
+              <td class="py-3 px-4 text-white">Yes — no contracts</td>
+              <td class="py-3 px-4 text-dark-400">Often locked to contract</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
+              <td class="py-3 px-4 text-white">Yes — unlimited</td>
+              <td class="py-3 px-4 text-dark-400">One per SIM card</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -97,12 +224,12 @@ const faqs = [
         {faqs.map(faq => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {faq.question}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
           </details>
         ))}
       </div>
@@ -112,8 +239,8 @@ const faqs = [
   <!-- CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white">Ready to get your {country} number?</h2>
-      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall virtual numbers to connect with customers globally.</p>
+      <h2 class="text-3xl font-bold text-white">Ready to get your Sri Lanka number?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to connect with Sri Lankan customers — without being in Sri Lanka.</p>
       <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
         Start Free Trial →
       </a>
@@ -125,9 +252,9 @@ const faqs = [
       heading="Explore Virtual Numbers"
       links={[
         { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+        { href: '/india-virtual-phone-number/', title: 'India Virtual Number', desc: 'Get an India +91 number instantly.' },
+        { href: '/singapore-virtual-phone-number/', title: 'Singapore Virtual Number', desc: 'Get a Singapore +65 number.' },
+        { href: '/buy-egypt-numbers/', title: 'Egypt Virtual Number', desc: 'Get an Egypt +20 number instantly.' },
       ]}
     />
   </div>

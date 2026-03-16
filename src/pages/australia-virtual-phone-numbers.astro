@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const country = "Australia";
@@ -10,63 +12,58 @@ const slug = "australia-virtual-phone-numbers";
 const flag = "🇦🇺";
 
 const seo = {
-  title: `Get Australia Virtual Phone Number (${code}) | LimeCall`,
-  description: `Get an Australia virtual phone number (${code}) instantly. No hardware needed. Route calls, enable callbacks, and grow your Australia business with LimeCall.`,
+  title: `Australia Virtual Phone Number — Get an Australian Number in 60 Seconds | LimeCall`,
+  description: `Get an Australia virtual phone number (+61) from $4.99/mo. Sydney 02, Melbourne 03 & Brisbane 07 numbers. Instant setup, ACMA-compliant. Cancel anytime.`,
   canonical: `https://www.limecall.com/${slug}/`,
 };
 
-const features = [
-  { title: "Instant Setup", desc: "Get your Australia virtual number in minutes. No hardware, no SIM card, no contracts." },
-  { title: "Smart Call Routing", desc: "Route incoming calls to any device or team member — mobile, desktop, or desk phone." },
-  { title: "Call Recording", desc: "Record and review every call for quality assurance and compliance." },
-  { title: "Callback Automation", desc: "Let website visitors request instant callbacks from your Australia-based or global team." },
-  { title: "SMS & WhatsApp", desc: "Send and receive SMS messages on your Australia virtual number." },
-  { title: "Analytics Dashboard", desc: "Full call analytics, reporting, and conversion tracking in one dashboard." },
-];
-
 const faqs = [
   {
-    q: `What is an Australia virtual phone number?`,
-    a: `An Australia virtual phone number (${code}) is a telephone number that isn't tied to a physical phone line or SIM card. It routes calls over the internet to any device — mobile, laptop, or desk phone — anywhere in the world. Your customers in Australia dial a local Australian number, and the call reaches you wherever you are.`,
+    question: `Can I get an Australia virtual number without being in Australia?`,
+    answer: `Yes. You can get an Australia virtual phone number (+61) from anywhere in the world. LimeCall provisions a genuine Australian number that local customers can call at local rates, while your team answers from any country via app or browser.`,
   },
   {
-    q: `Do I need to be in Australia to get an Australian virtual number?`,
-    a: `No. Anyone can get an Australia virtual phone number from anywhere in the world. LimeCall gives you a local ${code} number that Australian customers can call at local rates, while your team answers from any country.`,
+    question: `What is the country code for Australia?`,
+    answer: `Australia's country code is +61. Key city area codes include Sydney (02), Melbourne (03), Brisbane (07), Perth (08), Adelaide (08), and Canberra (02). When dialling from outside Australia, drop the leading 0 from the area code.`,
   },
   {
-    q: `What types of Australia virtual numbers are available?`,
-    a: `LimeCall offers local Australia numbers with city-specific area codes (Sydney 02, Melbourne 03, Brisbane 07, Perth 08, etc.) as well as national 1300 and 1800 numbers. Choose the number type that best suits your business presence.`,
+    question: `How much does an Australia virtual phone number cost?`,
+    answer: `LimeCall's Australia virtual numbers start from $4.99 per month. Incoming call rates and SMS charges are billed per use with no hidden setup fees. Geographic 02/03/07/08 numbers, national 1300 numbers, and 1800 freephone options are available. See the pricing page for full details.`,
   },
   {
-    q: "How long does setup take?",
-    a: "Setup takes under 5 minutes. Sign up, choose your Australia number, and you're ready to receive calls immediately — no waiting for hardware or SIM activation.",
+    question: `Can I make outbound calls with my Australia virtual number?`,
+    answer: `Yes. LimeCall lets you make outbound calls displaying your Australia (+61) number as the caller ID. Australian recipients see a local number, which significantly improves answer rates for sales and support calls.`,
   },
   {
-    q: "Can I use an Australian virtual number for callbacks?",
-    a: "Yes — LimeCall's callback automation lets website visitors request a call and your team calls them back within 28 seconds using your Australia virtual number. This dramatically improves lead conversion rates.",
-  },
-  {
-    q: `Is an Australian virtual number compliant with ACMA regulations?`,
-    a: `LimeCall's Australia virtual numbers are provisioned through licensed carriers and comply with ACMA (Australian Communications and Media Authority) guidelines. All numbers are legitimate, registered Australian numbers.`,
+    question: `How quickly can I get an Australia virtual number?`,
+    answer: `Your Australia virtual number is active within 60 seconds of signing up. No waiting for hardware, SIM cards, or ACMA registration. Choose your city prefix, configure call routing, and you are ready to receive calls immediately.`,
   },
 ];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: `${country} Virtual Number`, url: seo.canonical }]} />
       <div class="mt-4 text-5xl">{flag}</div>
       <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Get an <span class="text-lime-400">{country} Virtual Phone Number</span>
+        Get an <span class="text-lime-400">Australia Virtual Phone Number</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Local {country} number ({code}) that works anywhere. Instant setup, no hardware. Route calls, automate callbacks, and close more deals.
+        Get a local Australia number ({code}) without being physically present in Australia. Instant setup, no hardware, no SIM card required.
       </p>
+      <!-- Trust signals -->
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Instant setup in 60 seconds</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+      </div>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
-          Get Your {country} Number →
+          Get Your Australia Number →
         </a>
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
@@ -75,17 +72,147 @@ const faqs = [
     </div>
   </section>
 
+  <!-- How it works -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How to get your Australia number in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
+          <h3 class="mb-2 font-semibold text-white">Pick a number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose your Australian city prefix — Sydney (02), Melbourne (03), Brisbane (07), Perth (08), Adelaide (08), or a national 1300/1800 number.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, team member, or phone number globally. Set up IVR menus, voicemail, or ring groups.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
+          <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your Australian number goes live instantly. Australian customers call a local number and you answer from anywhere in the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
-  <section class="py-16 sm:py-20">
+  <section class="py-16 sm:py-20 border-t border-dark-800">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything included with your {country} number</h2>
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your Australia number</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map(f => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
-          </div>
-        ))}
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Local presence in Australia</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Appear as a genuine local Australian business with a real +61 number. Build trust with Australian customers who prefer calling local numbers.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">No physical address required</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Get an Australian virtual number without registering a company or renting office space in Australia. Fully remote, ACMA-compliant.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Forward to any device globally</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route incoming Australia calls to mobile phones, laptops, desk phones, or SIP devices anywhere in the world.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Call recording & analytics</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every Australia call automatically. Review call quality, track response times, and analyse conversion rates from your dashboard.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Competitive per-minute rates</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Low per-minute rates for calls to and from Australia. Transparent pricing for geographic, 1300 national, and 1800 freephone traffic.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Australian number formats supported</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose from Sydney +61-2, Melbourne +61-3, Brisbane +61-7, Perth +61-8, Adelaide +61-8, or national 1300 and 1800 numbers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses Australia virtual numbers?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🏢</div>
+          <h3 class="mb-2 font-semibold text-white">Businesses expanding to Australia</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Establish a local Australian presence before committing to a physical office. Test the market with a real +61 number.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">💻</div>
+          <h3 class="mb-2 font-semibold text-white">Remote teams with Australian clients</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your distributed team answers Australian calls from anywhere. No need for anyone to be physically located in Australia.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🛒</div>
+          <h3 class="mb-2 font-semibold text-white">E-commerce with Australian customers</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Display a local Australian support number to build trust and increase conversions with Australian online shoppers.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🎧</div>
+          <h3 class="mb-2 font-semibold text-white">Customer support with local number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route Australian customer support calls to your global team. Local callers pay local rates while your agents work remotely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Did you know -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-6 text-xl font-bold text-white">Did you know? Australia phone system facts</h2>
+        <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Australia's international dialling code is <strong class="text-white">+61</strong>. City codes: <strong class="text-white">Sydney +61-2</strong>, <strong class="text-white">Melbourne +61-3</strong>, <strong class="text-white">Brisbane +61-7</strong>, <strong class="text-white">Perth +61-8</strong>, <strong class="text-white">Adelaide +61-8</strong>.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Australian mobile numbers begin with <strong class="text-white">04</strong> and are 10 digits long. National 1300 numbers are charged at a local call rate from anywhere in Australia; 1800 numbers are freephone (toll-free).</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>The ACMA (Australian Communications and Media Authority) regulates Australia's telecom sector. Australia has over 25 million mobile phone subscribers and one of the highest smartphone penetration rates in the world.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">LimeCall virtual number vs physical Australia SIM</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="py-3 pr-6 text-left font-semibold text-dark-400">Feature</th>
+              <th class="py-3 px-4 text-left font-semibold text-lime-400">LimeCall Virtual</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Physical SIM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Setup time</td>
+              <td class="py-3 px-4 text-white">Instant (60 seconds)</td>
+              <td class="py-3 px-4 text-dark-400">Days to weeks</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Physical presence needed</td>
+              <td class="py-3 px-4 text-white">No</td>
+              <td class="py-3 px-4 text-dark-400">Yes — must be in Australia</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Works from</td>
+              <td class="py-3 px-4 text-white">Anywhere in the world</td>
+              <td class="py-3 px-4 text-dark-400">Must be in Australia</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Cancel anytime</td>
+              <td class="py-3 px-4 text-white">Yes — no contracts</td>
+              <td class="py-3 px-4 text-dark-400">Often locked to contract</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
+              <td class="py-3 px-4 text-white">Yes — unlimited</td>
+              <td class="py-3 px-4 text-dark-400">One per SIM card</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -98,12 +225,12 @@ const faqs = [
         {faqs.map(faq => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {faq.question}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
           </details>
         ))}
       </div>
@@ -113,8 +240,8 @@ const faqs = [
   <!-- CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white">Ready to get your {country} number?</h2>
-      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall virtual numbers to connect with customers globally.</p>
+      <h2 class="text-3xl font-bold text-white">Ready to get your Australia number?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to connect with Australian customers — without being in Australia.</p>
       <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
         Start Free Trial →
       </a>
@@ -126,9 +253,9 @@ const faqs = [
       heading="Explore Virtual Numbers"
       links={[
         { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+        { href: '/new-zealand-virtual-phone-numbers/', title: 'New Zealand Virtual Number', desc: 'Get a New Zealand +64 number.' },
+        { href: '/singapore-virtual-phone-number/', title: 'Singapore Virtual Number', desc: 'Get a Singapore +65 number.' },
+        { href: '/uk-virtual-phone-number/', title: 'UK Virtual Number', desc: 'Get a UK +44 number instantly.' },
       ]}
     />
   </div>

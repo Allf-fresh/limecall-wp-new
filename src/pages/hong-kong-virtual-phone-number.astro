@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const country = "Hong Kong";
@@ -10,63 +12,58 @@ const slug = "hong-kong-virtual-phone-number";
 const flag = "🇭🇰";
 
 const seo = {
-  title: `Get Hong Kong Virtual Phone Number (${code}) | LimeCall`,
-  description: `Get a Hong Kong virtual phone number (${code}) instantly. No hardware needed. Route calls, enable callbacks, and grow your Hong Kong business with LimeCall.`,
+  title: `Hong Kong Virtual Phone Number — Get a HK Number in 60 Seconds | LimeCall`,
+  description: `Get a Hong Kong virtual phone number (+852) from $4.99/mo. Instant setup, no physical presence needed. 8-digit HK numbers, OFCA-compliant. Cancel anytime.`,
   canonical: `https://www.limecall.com/${slug}/`,
 };
 
-const features = [
-  { title: "Instant Setup", desc: "Get your Hong Kong virtual number in minutes. No hardware, no SIM card, no contracts." },
-  { title: "Smart Call Routing", desc: "Route incoming calls to any device or team member — mobile, desktop, or desk phone." },
-  { title: "Call Recording", desc: "Record and review every call for quality assurance and compliance." },
-  { title: "Callback Automation", desc: "Let website visitors request instant callbacks from your Hong Kong-based or global team." },
-  { title: "SMS & WhatsApp", desc: "Send and receive SMS messages on your Hong Kong virtual number." },
-  { title: "Analytics Dashboard", desc: "Full call analytics, reporting, and conversion tracking in one dashboard." },
-];
-
 const faqs = [
   {
-    q: `What is a Hong Kong virtual phone number?`,
-    a: `A Hong Kong virtual phone number (${code}) is a telephone number that isn't tied to a physical phone line or SIM card. It routes calls over the internet to any device — mobile, laptop, or desk phone — anywhere in the world. Your customers in Hong Kong dial a local number and the call reaches you wherever you are.`,
+    question: `Can I get a Hong Kong virtual number without being in Hong Kong?`,
+    answer: `Yes. You can get a Hong Kong virtual phone number (+852) from anywhere in the world. LimeCall provisions a genuine HK number that local customers can call at local rates, while your team answers from any country via app or browser.`,
   },
   {
-    q: `Do I need to be in Hong Kong to get a Hong Kong virtual number?`,
-    a: `No. Anyone can get a Hong Kong virtual phone number from anywhere in the world. LimeCall gives you a local ${code} number that Hong Kong customers can call at local rates, while your team answers from any country.`,
+    question: `What is the country code for Hong Kong?`,
+    answer: `Hong Kong's international dialling code is +852. Like Singapore, Hong Kong uses a flat numbering plan with no regional area codes — all local numbers are 8 digits. Landline numbers typically begin with 2 or 3, mobile numbers begin with 5, 6, 7, or 9.`,
   },
   {
-    q: `What types of Hong Kong virtual numbers are available?`,
-    a: `LimeCall offers local Hong Kong numbers that appear as genuine ${code} numbers to your callers. Both geographic and non-geographic Hong Kong numbers are available depending on your business requirements.`,
+    question: `How much does a Hong Kong virtual phone number cost?`,
+    answer: `LimeCall's Hong Kong virtual numbers start from $4.99 per month. Incoming call rates and SMS charges are billed per use with no hidden setup fees. See the pricing page for full details.`,
   },
   {
-    q: "How long does setup take?",
-    a: "Setup takes under 5 minutes. Sign up, choose your Hong Kong number, and you're ready to receive calls immediately — no waiting for hardware or SIM activation.",
+    question: `Can I make outbound calls with my Hong Kong virtual number?`,
+    answer: `Yes. LimeCall lets you make outbound calls displaying your Hong Kong (+852) number as the caller ID. HK recipients see a local number, which improves answer rates significantly for business calls.`,
   },
   {
-    q: "Can I use a Hong Kong virtual number for callbacks?",
-    a: "Yes — LimeCall's callback automation lets website visitors request a call and your team calls them back within 28 seconds using your Hong Kong virtual number. This dramatically improves lead conversion rates.",
-  },
-  {
-    q: `Why would a business need a Hong Kong virtual number?`,
-    a: `Hong Kong is a major international business hub serving as the gateway to Greater China and Asia-Pacific markets. A local Hong Kong number builds trust with regional clients, reduces calling costs for your Hong Kong-based customers, and establishes a credible local business presence without the cost of a physical office.`,
+    question: `How quickly can I get a Hong Kong virtual number?`,
+    answer: `Your Hong Kong virtual number is active within 60 seconds of signing up. No waiting for hardware, SIM cards, or OFCA registration. Choose your number, configure call routing, and you are ready to receive calls immediately.`,
   },
 ];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: `${country} Virtual Number`, url: seo.canonical }]} />
       <div class="mt-4 text-5xl">{flag}</div>
       <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Get a <span class="text-lime-400">{country} Virtual Phone Number</span>
+        Get a <span class="text-lime-400">Hong Kong Virtual Phone Number</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Local {country} number ({code}) that works anywhere. Instant setup, no hardware. Route calls, automate callbacks, and close more deals.
+        Get a local Hong Kong number ({code}) without being physically present in HK. Instant setup, no hardware, no SIM card required.
       </p>
+      <!-- Trust signals -->
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Instant setup in 60 seconds</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+      </div>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
-          Get Your {country} Number →
+          Get Your Hong Kong Number →
         </a>
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
@@ -75,17 +72,147 @@ const faqs = [
     </div>
   </section>
 
+  <!-- How it works -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How to get your Hong Kong number in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
+          <h3 class="mb-2 font-semibold text-white">Pick a number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose your Hong Kong +852 number. All HK numbers are 8 digits — landlines begin with 2 or 3, mobiles begin with 5, 6, 7, or 9.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, team member, or phone number globally. Set up IVR menus, voicemail, or ring groups.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
+          <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your HK number goes live instantly. Hong Kong customers call a local number and you answer from anywhere in the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
-  <section class="py-16 sm:py-20">
+  <section class="py-16 sm:py-20 border-t border-dark-800">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything included with your {country} number</h2>
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your Hong Kong number</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map(f => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
-          </div>
-        ))}
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Local presence in Hong Kong</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Appear as a genuine local HK business with a real +852 number. Build trust with customers in Asia's leading financial and business hub.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">No physical address required</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Get a Hong Kong virtual number without a registered HK company or office. Fully remote, OFCA-compliant operation from anywhere globally.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Forward to any device globally</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route incoming HK calls to mobile phones, laptops, desk phones, or SIP devices anywhere in the world.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Call recording & analytics</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every HK call automatically. Review call quality, track response times, and analyse conversion rates from your dashboard.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Competitive per-minute rates</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Low per-minute rates for calls to and from Hong Kong. Transparent pricing for all HK traffic — no international calling surprises.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">HK 8-digit number formats</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">All Hong Kong numbers follow the +852 XXXX XXXX format. Choose DID landline numbers that appear exactly like genuine local HK numbers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses Hong Kong virtual numbers?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🏢</div>
+          <h3 class="mb-2 font-semibold text-white">Businesses expanding to HK</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Establish a credible HK presence — Asia's global financial gateway — with a local +852 number before setting up a physical office.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">💻</div>
+          <h3 class="mb-2 font-semibold text-white">Remote teams with HK clients</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your distributed team answers HK calls from anywhere. No need for anyone to be physically located in Hong Kong.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🛒</div>
+          <h3 class="mb-2 font-semibold text-white">E-commerce with HK customers</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Display a local HK support number to build trust with Hong Kong shoppers and reduce cart abandonment on your online store.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🎧</div>
+          <h3 class="mb-2 font-semibold text-white">Customer support with local number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route HK customer support calls to your global team. Local callers pay local rates while your agents work remotely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Did you know -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-6 text-xl font-bold text-white">Did you know? Hong Kong phone system facts</h2>
+        <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Hong Kong's international dialling code is <strong class="text-white">+852</strong>. Like Singapore, Hong Kong uses no geographic area codes — all local numbers are 8 digits, dialled as +852 XXXX XXXX.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>HK landline numbers begin with <strong class="text-white">2</strong> or <strong class="text-white">3</strong>. Mobile numbers begin with <strong class="text-white">5</strong>, <strong class="text-white">6</strong>, <strong class="text-white">7</strong>, or <strong class="text-white">9</strong>. Numbers beginning with 800 are freephone (toll-free).</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Hong Kong is one of the world's leading financial centres and serves as the primary gateway to mainland China. The OFCA (Office of the Communications Authority) regulates HK's telecom sector.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">LimeCall virtual number vs physical Hong Kong SIM</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="py-3 pr-6 text-left font-semibold text-dark-400">Feature</th>
+              <th class="py-3 px-4 text-left font-semibold text-lime-400">LimeCall Virtual</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Physical SIM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Setup time</td>
+              <td class="py-3 px-4 text-white">Instant (60 seconds)</td>
+              <td class="py-3 px-4 text-dark-400">Days to weeks</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Physical presence needed</td>
+              <td class="py-3 px-4 text-white">No</td>
+              <td class="py-3 px-4 text-dark-400">Yes — must be in Hong Kong</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Works from</td>
+              <td class="py-3 px-4 text-white">Anywhere in the world</td>
+              <td class="py-3 px-4 text-dark-400">Must be in Hong Kong</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Cancel anytime</td>
+              <td class="py-3 px-4 text-white">Yes — no contracts</td>
+              <td class="py-3 px-4 text-dark-400">Often locked to contract</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
+              <td class="py-3 px-4 text-white">Yes — unlimited</td>
+              <td class="py-3 px-4 text-dark-400">One per SIM card</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -98,12 +225,12 @@ const faqs = [
         {faqs.map(faq => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {faq.question}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
           </details>
         ))}
       </div>
@@ -113,8 +240,8 @@ const faqs = [
   <!-- CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white">Ready to get your {country} number?</h2>
-      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall virtual numbers to connect with customers globally.</p>
+      <h2 class="text-3xl font-bold text-white">Ready to get your Hong Kong number?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to connect with Hong Kong customers — without being in HK.</p>
       <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
         Start Free Trial →
       </a>
@@ -126,9 +253,9 @@ const faqs = [
       heading="Explore Virtual Numbers"
       links={[
         { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+        { href: '/singapore-virtual-phone-number/', title: 'Singapore Virtual Number', desc: 'Get a Singapore +65 number.' },
+        { href: '/australia-virtual-phone-numbers/', title: 'Australia Virtual Number', desc: 'Get an Australia +61 number.' },
+        { href: '/india-virtual-phone-number/', title: 'India Virtual Number', desc: 'Get an India +91 number.' },
       ]}
     />
   </div>

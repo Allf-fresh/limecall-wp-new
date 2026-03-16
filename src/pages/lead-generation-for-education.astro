@@ -1,15 +1,122 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const industry = "Education";
+const icon = "🎓";
 
 const seo = {
-  title: `Lead Generation for Education: Higher Education Lead Generation`,
-  description: `Boost your educational institution's growth with targeted lead-generation strategies. Learn how to attract, nurture & convert leads with us.`,
+  title: `Education Lead Generation Software | LimeCall`,
+  description: `Convert prospective students into enrolled learners. LimeCall's instant callback software helps schools, colleges, and online course providers respond to enrollment inquiries in under 28 seconds.`,
   canonical: `https://www.limecall.com/lead-generation-for-education/`,
 };
+
+const useCases = [
+  { title: "Instant Callback on Enrollment Inquiries", desc: "When a prospective student requests information, they're evaluating multiple institutions simultaneously. LimeCall connects your admissions team in under 28 seconds, making your institution the first to have a real conversation." },
+  { title: "Admissions Team Call Routing", desc: "Route inquiries to the right admissions counselor based on program interest, study level, or geographic region. Give every prospective student a personalized first contact." },
+  { title: "Open Day & Event Follow-Up Callbacks", desc: "Capture callback requests from event attendees and prospective students who explored your open day materials. Automate follow-up sequences to keep them engaged through the enrollment decision." },
+  { title: "International Student Lead Capture", desc: "Prospective students from different time zones inquire at all hours. Capture callbacks overnight and queue them for your admissions team to action at the start of each day." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More enrollments initiated" },
+  { value: "80%", label: "Reduction in missed inquiries" },
+  { value: "5 min", label: "Setup time" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `Education Lead Generation`, url: seo.canonical }]} />
+      <div class="mt-4 text-5xl">{icon}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        <span class="text-lime-400">{industry}</span> Lead Generation Software
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Convert prospective students into enrolled learners. Respond to admissions inquiries in under 28 seconds while interest is at its highest.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Built for {industry} institutions</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Student requests info", desc: "A prospective student browses your programs page and clicks the LimeCall widget to request a callback from admissions." },
+          { step: "2", title: "Admissions team connected", desc: "LimeCall calls your admissions counselor and the student simultaneously, connecting them in under 28 seconds." },
+          { step: "3", title: "Enrollment journey begins", desc: "The conversation is logged and followed up automatically with next steps if the call isn't answered." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to enroll more students?</h2>
+      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8 mx-auto max-w-5xl px-4">
+    <CrossLinks heading="More LimeCall Solutions" links={[
+      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
+      { href: '/conversation-scheduling/', title: 'Schedule Callbacks', desc: 'Let students book a call at their convenience.' },
+      { href: '/healthcare-lead-generation/', title: 'Healthcare Lead Gen', desc: 'Callbacks for medical practices and clinics.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+    ]} />
   </div>
 </Base>

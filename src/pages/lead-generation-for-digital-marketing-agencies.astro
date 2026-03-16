@@ -1,15 +1,122 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const industry = "Digital Marketing Agencies";
+const icon = "📊";
 
 const seo = {
-  title: `Lead Generation Tools for Digital Marketing Agencies | LimeCall`,
-  description: `Struggling to attract high-quality clients for your digital marketing agency? Discover proven lead-generation strategies that convert!`,
+  title: `Lead Generation for Digital Marketing Agencies | LimeCall`,
+  description: `Help your clients convert more leads and prove campaign ROI. LimeCall's callback platform is built for agencies — white-label ready, reseller-friendly, and easy to deploy across client accounts.`,
   canonical: `https://www.limecall.com/lead-generation-for-digital-marketing-agencies/`,
 };
+
+const useCases = [
+  { title: "Prove Campaign ROI with Call Attribution", desc: "Show clients exactly which campaigns, ads, and landing pages are driving phone conversations. Call attribution closes the loop between marketing spend and real revenue — making you indispensable." },
+  { title: "Boost Client Lead Conversion Rates", desc: "Your campaigns drive traffic but leads still get lost. Add LimeCall to any client's site and watch conversion rates climb. Agencies using LimeCall report 3x more leads converted from existing traffic." },
+  { title: "White-Label & Reseller Opportunity", desc: "Deploy LimeCall across all client accounts from a single agency dashboard. White-label the widget, add a margin, and turn lead gen into a recurring service revenue stream." },
+  { title: "Instant Demo Callbacks for Your Own Agency", desc: "Use LimeCall on your own website to respond to new business inquiries in under 28 seconds. Be the fastest agency to follow up and win more pitches before competitors send their first email." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More leads converted" },
+  { value: "80%", label: "Reduction in missed leads" },
+  { value: "5 min", label: "Client setup time" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `Lead Generation for Digital Marketing Agencies`, url: seo.canonical }]} />
+      <div class="mt-4 text-5xl">{icon}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Lead Generation for <span class="text-lime-400">Digital Marketing Agencies</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Help your clients convert more leads and prove your campaign ROI. Add instant callbacks to any client site in 5 minutes.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Built for digital marketing agencies</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Visitor clicks the widget", desc: "A prospect lands on your client's site from a campaign ad and clicks the LimeCall callback widget." },
+          { step: "2", title: "Instant connection", desc: "LimeCall connects the visitor with your client's sales team in under 28 seconds — while the campaign ad is still fresh in their mind." },
+          { step: "3", title: "Conversion attributed", desc: "The call is logged with source attribution, giving you hard data to report in client dashboards." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to add callback automation to your agency stack?</h2>
+      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8 mx-auto max-w-5xl px-4">
+    <CrossLinks heading="More LimeCall Solutions" links={[
+      { href: '/call-tracking/', title: 'Call Tracking', desc: 'Attribute every call to the right campaign.' },
+      { href: '/partnership/', title: 'Agency Partnership', desc: 'Resell LimeCall as part of your service offering.' },
+      { href: '/for-marketing-teams/', title: 'For Marketing Teams', desc: 'Marketing-specific features and integrations.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+    ]} />
   </div>
 </Base>

@@ -1,15 +1,121 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const icon = "📊";
 
 const seo = {
-  title: `Double Inbound Website Conversions: Powerful Tools - LimeCall`,
-  description: `Stop website visitors from bouncing! LimeCall offers instant callbacks, lead capture & smart routing to skyrocket conversions & boost sales. Try for free!`,
+  title: `Increase Website Conversions with LimeCall | CRO Software`,
+  description: `Stop website visitors from bouncing. LimeCall's instant callback widget converts more of your existing traffic into leads and customers — no extra ad spend required.`,
   canonical: `https://www.limecall.com/increase-your-website-conversions/`,
 };
+
+const useCases = [
+  { title: "Convert More Visitors Without More Traffic", desc: "Most CRO strategies focus on copy and design. LimeCall tackles the #1 conversion killer — slow follow-up. By connecting a human to every high-intent visitor in under 28 seconds, you get more from the traffic you already have." },
+  { title: "Reduce Bounce Rate on High-Intent Pages", desc: "Pricing pages, demo pages, and product pages have the highest intent but also the highest drop-off. Place LimeCall's callback widget on these pages to intercept visitors at the critical moment before they bounce." },
+  { title: "Exit-Intent Callback Recovery", desc: "When a visitor moves to close the tab or navigate away, trigger an exit-intent callback offer. A real human conversation at the exit point converts browsers who would otherwise be lost forever." },
+  { title: "A/B Test Callback Placement & Messaging", desc: "LimeCall integrates with your analytics stack so you can test which pages, messaging, and widget placements drive the highest conversion rates. Data-driven CRO, powered by real human conversations." },
+];
+
+const stats = [
+  { value: "300%", label: "Conversion rate uplift" },
+  { value: "28s", label: "Average callback time" },
+  { value: "80%", label: "Fewer bounced leads" },
+  { value: "5 min", label: "Setup time" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `Increase Website Conversions`, url: seo.canonical }]} />
+      <div class="mt-4 text-5xl">{icon}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        <span class="text-lime-400">Increase Your Website</span> Conversions
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Stop losing visitors to slow follow-up. LimeCall converts up to 300% more of your existing website traffic into leads and customers.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall increases your conversion rate</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Embed the widget", desc: "Add LimeCall's callback widget to your highest-converting pages in minutes. No developer required." },
+          { step: "2", title: "Visitor requests callback", desc: "A high-intent visitor clicks the widget or is prompted by an exit-intent trigger and requests an instant callback." },
+          { step: "3", title: "Conversion happens", desc: "Your team is connected to the visitor in under 28 seconds. A real conversation converts where forms and chatbots fail." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to double your website conversion rate?</h2>
+      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8 mx-auto max-w-5xl px-4">
+    <CrossLinks heading="More LimeCall Solutions" links={[
+      { href: '/connect-with-visitors-instantly/', title: 'Connect Instantly', desc: 'Real-time visitor engagement tools.' },
+      { href: '/generate-more-leads/', title: 'Generate More Leads', desc: 'Turn traffic into pipeline.' },
+      { href: '/increase-sales/', title: 'Increase Sales', desc: 'Close more deals with faster follow-up.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+    ]} />
   </div>
 </Base>

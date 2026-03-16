@@ -1,15 +1,122 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const industry = "Home Services";
+const icon = "🔧";
 
 const seo = {
-  title: `Lead Generation for Home Services: Power Up with LimeCall`,
-  description: `Stop Chasing Leads! Boost Lead Generation & Streamline Communication for Your Home Service Business. Try LimeCall Now to Power your business!`,
+  title: `Home Services Lead Generation Software | LimeCall`,
+  description: `Win more home service jobs by being first to respond. LimeCall's instant callback software helps plumbers, electricians, and HVAC companies connect with quote requests in under 28 seconds.`,
   canonical: `https://www.limecall.com/lead-generation-for-home-services/`,
 };
+
+const useCases = [
+  { title: "Emergency Service Routing", desc: "A burst pipe or no heat in winter can't wait. LimeCall routes emergency callback requests to your on-call technician instantly — ensuring you capture the highest-value, most urgent jobs first." },
+  { title: "Quote Request Callbacks", desc: "Homeowners request multiple quotes in one sitting. LimeCall connects your estimator with the prospect in under 28 seconds, making you the first home services company to have an actual conversation." },
+  { title: "Service Area & Technician Routing", desc: "Automatically route calls to the nearest available technician based on the customer's postcode or service area. Reduce response times and improve first-call resolution rates." },
+  { title: "After-Hours Lead Capture", desc: "Homeowners search for help at all hours. Capture callback requests overnight and schedule them for your team's first appointment slot so you start every day with a full job queue." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More jobs booked" },
+  { value: "80%", label: "Reduction in missed leads" },
+  { value: "5 min", label: "Setup time" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `Home Services Lead Generation`, url: seo.canonical }]} />
+      <div class="mt-4 text-5xl">{icon}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        <span class="text-lime-400">{industry}</span> Lead Generation Software
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Win more home service jobs by being the first to respond. Connect with quote requests and emergency calls in under 28 seconds.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Built for {industry} businesses</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Homeowner needs help", desc: "A homeowner searches for a plumber, electrician, or HVAC tech and clicks the LimeCall widget on your site." },
+          { step: "2", title: "Technician connected fast", desc: "LimeCall calls your on-call technician and the homeowner at the same time, bridging them in under 28 seconds." },
+          { step: "3", title: "Job booked", desc: "The call is recorded and the job details are captured automatically. Follow-up is triggered if no one answers." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to book more home service jobs?</h2>
+      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8 mx-auto max-w-5xl px-4">
+    <CrossLinks heading="More LimeCall Solutions" links={[
+      { href: '/lead-generation-for-construction/', title: 'Construction Lead Gen', desc: 'Win more contractor and builder projects.' },
+      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
+      { href: '/lead-distribution/', title: 'Lead Distribution', desc: 'Route jobs to the right technician automatically.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+    ]} />
   </div>
 </Base>

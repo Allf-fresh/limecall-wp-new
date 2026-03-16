@@ -1,15 +1,146 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const icon = "📈";
 
 const seo = {
-  title: `Generate More Leads in Seconds:Boost Lead Conversion LimeCall`,
-  description: `Generate More Leads and Boost Your Sales Now! LimeCall's Callbacks, Pop-ups & Smart Routing Will Skyrocket Your Leads! Try for Free Today!`,
+  title: `Generate More Leads with Instant Callbacks | LimeCall`,
+  description: `Stop losing high-intent website visitors. LimeCall's callback automation connects your sales team with leads in under 28 seconds — boosting conversions by up to 300%.`,
   canonical: `https://www.limecall.com/generate-more-leads/`,
 };
+
+const useCases = [
+  { title: "Capture Leads Before They Bounce", desc: "The average website visitor decides to leave within seconds. LimeCall's exit-intent callback widget engages high-intent visitors at the exact moment they're about to leave, turning bounces into conversations." },
+  { title: "Respond in Under 28 Seconds", desc: "Speed is the single biggest factor in lead conversion. Studies show leads contacted within 5 minutes are 100x more likely to convert. LimeCall connects your team with inbound leads in under 28 seconds, automatically." },
+  { title: "Never Miss an After-Hours Lead", desc: "Leads don't stop coming when your team clocks out. Capture callback requests 24/7 and schedule them for business hours. Wake up to a pipeline of warm, pre-qualified prospects ready to talk." },
+  { title: "Works for Every Industry", desc: "Whether you're in healthcare, real estate, legal, e-commerce, or any other industry, LimeCall's callback platform adapts to your workflow. One platform, universal results across all verticals." },
+];
+
+const stats = [
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More leads converted" },
+  { value: "80%", label: "Reduction in missed leads" },
+  { value: "5 min", label: "Setup time" },
+];
+
+const industries = [
+  { href: '/healthcare-lead-generation/', label: 'Healthcare' },
+  { href: '/real-estate-lead-generation-software/', label: 'Real Estate' },
+  { href: '/lead-generation-for-automotive/', label: 'Automotive' },
+  { href: '/lead-generation-for-lawyers/', label: 'Legal' },
+  { href: '/lead-generation-for-education/', label: 'Education' },
+  { href: '/lead-generation-for-home-services/', label: 'Home Services' },
+  { href: '/lead-generation-for-e-commerce/', label: 'E-Commerce' },
+  { href: '/lead-generation-for-travel-companies/', label: 'Travel' },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `Generate More Leads`, url: seo.canonical }]} />
+      <div class="mt-4 text-5xl">{icon}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Generate <span class="text-lime-400">More Leads</span> in Seconds
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Stop losing high-intent visitors. LimeCall connects your sales team with website leads in under 28 seconds — before they move on to a competitor.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Why teams choose LimeCall to generate leads</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Lead generation for every industry</h2>
+      <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {industries.map(ind => (
+          <a href={ind.href} class="rounded-lg border border-dark-800 bg-dark-900/60 px-4 py-3 text-center text-sm font-medium text-white hover:border-lime-500/50 hover:text-lime-400 transition">
+            {ind.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall generates more leads</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Visitor shows interest", desc: "A potential lead lands on your site and clicks the LimeCall widget, or tries to leave and sees the exit-intent callback offer." },
+          { step: "2", title: "Instant connection", desc: "LimeCall calls your sales team and the visitor simultaneously, connecting them in under 28 seconds." },
+          { step: "3", title: "Lead captured", desc: "The conversation is recorded, logged, and followed up automatically if no answer — so nothing falls through the cracks." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to generate more leads starting today?</h2>
+      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8 mx-auto max-w-5xl px-4">
+    <CrossLinks heading="More LimeCall Solutions" links={[
+      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
+      { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Connect with leads in seconds, not hours.' },
+      { href: '/lead-generation-tools/', title: 'Lead Gen Tools', desc: 'Compare the best lead generation tools.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+    ]} />
   </div>
 </Base>

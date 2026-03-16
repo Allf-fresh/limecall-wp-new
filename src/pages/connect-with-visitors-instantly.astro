@@ -1,15 +1,121 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
+
+const icon = "⚡";
 
 const seo = {
-  title: `Don't Miss a Lead! Connect Instantly with LimeCall`,
-  description: `Learn effective ways to instantly connect with your website visitors & boost engagement. Boost conversions, capture leads & close more deals!`,
+  title: `Connect with Website Visitors Instantly | LimeCall`,
+  description: `Don't let high-intent visitors leave without a conversation. LimeCall connects your team with website visitors in under 28 seconds — real-time engagement that converts.`,
   canonical: `https://www.limecall.com/connect-with-visitors-instantly/`,
 };
+
+const useCases = [
+  { title: "Real-Time Visitor Engagement", desc: "The moment a visitor shows high intent — dwelling on your pricing page, viewing multiple products, or returning for the second time — LimeCall can trigger a proactive callback offer. Engage them in real time before they leave." },
+  { title: "28-Second Human Connection", desc: "Unlike chatbots, forms, and email, LimeCall connects a real human in under 28 seconds. A live voice conversation builds trust instantly, answers objections in real time, and converts at rates no automated tool can match." },
+  { title: "No Hold Times or Phone Trees", desc: "Visitors who click the callback widget are never put on hold or routed through a phone menu. LimeCall connects both parties simultaneously — the first thing they hear is a real person, ready to help." },
+  { title: "Works on Any Device, Any Channel", desc: "Whether your visitor is on mobile, tablet, or desktop, LimeCall's widget works seamlessly. Instant callbacks reach prospects on their mobile phone — the most trusted communication channel available." },
+];
+
+const stats = [
+  { value: "28s", label: "Connection time" },
+  { value: "100x", label: "Higher conversion vs. slow follow-up" },
+  { value: "0", label: "Hold times or phone trees" },
+  { value: "5 min", label: "Setup time" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `Connect with Visitors Instantly`, url: seo.canonical }]} />
+      <div class="mt-4 text-5xl">{icon}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Connect with Visitors <span class="text-lime-400">Instantly</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Every second a high-intent visitor spends waiting is a second they spend considering your competitor. LimeCall connects a real human in under 28 seconds.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What instant visitor connection looks like</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">From click to conversation in under 28 seconds</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Visitor clicks the widget", desc: "A high-intent visitor sees the LimeCall button on your site and clicks to request an instant callback." },
+          { step: "2", title: "Both parties called at once", desc: "LimeCall simultaneously dials your team member and the visitor's phone — no hold times, no transfers." },
+          { step: "3", title: "Connected in under 28 seconds", desc: "Both parties pick up and are instantly connected for a real, human-to-human conversation." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect with visitors instantly?</h2>
+      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8 mx-auto max-w-5xl px-4">
+    <CrossLinks heading="More LimeCall Solutions" links={[
+      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from any page on your website.' },
+      { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why the first responder wins the deal.' },
+      { href: '/increase-your-website-conversions/', title: 'Increase Conversions', desc: 'CRO tools that turn visitors into customers.' },
+      { href: '/generate-more-leads/', title: 'Generate More Leads', desc: 'Turn traffic into a pipeline of warm leads.' },
+    ]} />
   </div>
 </Base>

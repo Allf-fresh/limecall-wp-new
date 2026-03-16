@@ -24,9 +24,12 @@ const featuredFeatures = features.slice(0, 4);
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-3xl text-center">
+        <span class="inline-block mb-6 rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">
+          #1 Callback Automation Platform
+        </span>
         <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
-          {site.tagline.split(' ').slice(0, -2).join(' ')}
-          <span class="text-lime-400"> {site.tagline.split(' ').slice(-2).join(' ')}</span>
+          Convert website visitors into
+          <span class="text-lime-400"> sales calls Instantly</span>
         </h1>
         <p class="mt-6 text-lg leading-relaxed text-dark-300 sm:text-xl">
           {site.description}
@@ -35,14 +38,14 @@ const featuredFeatures = features.slice(0, 4);
           <Button href={site.cta.href} size="lg">
             {site.cta.text}
           </Button>
-          <Button href="/features" variant="outline" size="lg">
-            Explore Features
+          <Button href="/how-it-works" variant="outline" size="lg">
+            See How It Works
           </Button>
         </div>
         <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-dark-400">
           <span>&#10003; {site.cta.subtext}</span>
-          <span>&#10003; Cancel anytime</span>
-          <span>&#10003; 30-day money-back guarantee</span>
+          <span>&#10003; 28 second average callback</span>
+          <span>&#10003; Up to 300% more conversions</span>
         </div>
       </div>
     </div>
@@ -52,8 +55,8 @@ const featuredFeatures = features.slice(0, 4);
   <section class="py-16 sm:py-20 border-t border-dark-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">Everything you need</h2>
-        <p class="mt-4 text-lg text-dark-400">Built for teams who want results, not complexity.</p>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">Everything you need to convert more leads</h2>
+        <p class="mt-4 text-lg text-dark-400">Built for sales & marketing teams who want results, not complexity.</p>
       </div>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {featuredFeatures.map((feature) => (
@@ -69,6 +72,13 @@ const featuredFeatures = features.slice(0, 4);
         <a href="/features" class="text-lime-400 hover:text-lime-300 font-medium text-sm transition">
           View all features →
         </a>
+        <div class="mt-8 text-center">
+          <a href="/click-2-call" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Click2Call</a>
+          <a href="/lead-distribution" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Lead Distribution</a>
+          <a href="/conversation-scheduling" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Schedule Callbacks</a>
+          <a href="/virtual-numbers" class="text-dark-400 hover:text-lime-400 text-sm mr-6 transition">Virtual Numbers</a>
+          <a href="/business-texting" class="text-dark-400 hover:text-lime-400 text-sm transition">Web to Text</a>
+        </div>
       </div>
     </div>
   </section>
@@ -121,7 +131,7 @@ const featuredFeatures = features.slice(0, 4);
           <h2 class="text-2xl font-bold text-white">Latest from the blog</h2>
           <p class="mt-1 text-dark-400">Guides, tips, and news.</p>
         </div>
-        <a href="/blog" class="text-sm text-lime-400 hover:text-lime-300 font-medium transition hidden sm:block">
+        <a href="/post" class="text-sm text-lime-400 hover:text-lime-300 font-medium transition hidden sm:block">
           View all →
         </a>
       </div>
@@ -130,7 +140,7 @@ const featuredFeatures = features.slice(0, 4);
         <div class="grid gap-6 sm:grid-cols-3">
           {latestPosts.map((post) => (
             <a
-              href={post.category ? `/blog/${post.category}/${post.slug}` : `/blog/${post.slug}`}
+              href={post.category ? `/post/${post.category}/${post.slug}` : `/post/${post.slug}`}
               class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6 transition-all hover:border-dark-700"
             >
               {post.category && (
@@ -154,7 +164,7 @@ const featuredFeatures = features.slice(0, 4);
       )}
 
       <div class="mt-8 text-center sm:hidden">
-        <a href="/blog" class="text-sm text-lime-400 hover:text-lime-300 font-medium">View all posts →</a>
+        <a href="/post" class="text-sm text-lime-400 hover:text-lime-300 font-medium">View all posts →</a>
       </div>
     </div>
   </section>
@@ -163,16 +173,16 @@ const featuredFeatures = features.slice(0, 4);
   <section class="py-20 sm:py-28 border-t border-dark-800">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-        Ready to get started?
+        Ready to convert more website visitors?
       </h2>
       <p class="mt-4 text-lg text-dark-400">
-        Join thousands of teams who trust {site.name}. {site.cta.subtext}.
+        Join thousands of businesses using LimeCall to turn website traffic into revenue. {site.cta.subtext}.
       </p>
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
         <Button href={site.cta.href} size="lg">
           {site.cta.text}
         </Button>
-        <Button href="/about" variant="outline" size="lg">
+        <Button href="/about-us" variant="outline" size="lg">
           Learn more
         </Button>
       </div>

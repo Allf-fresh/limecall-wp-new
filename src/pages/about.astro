@@ -1,7 +1,6 @@
 ---
-import Base from '../layouts/Base.astro';
-import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
-import { site } from '../site.config';
+// /about redirects to /about-us (LimeCall's canonical URL)
+return Astro.redirect('/about-us', 301);
 ---
 
 <Base

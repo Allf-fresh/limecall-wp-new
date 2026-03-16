@@ -44,9 +44,9 @@ const productSchema = {
 ---
 
 <Base
-  title={`Pricing — ${site.name}`}
-  description={`${site.name} pricing plans. ${plans.map(p => `${p.name} from $${p.monthly}/mo`).join('. ')}. Cancel anytime.`}
-  canonical={`${site.url}/pricing`}
+  title="LimeCall Pricing - Inbound Lead Conversion Software"
+  description="Turn website visitors into buyers. LimeCall simple pricing — no hidden charges. Start free with 30 calls/month."
+  canonical="https://www.limecall.com/pricing"
 >
   <JsonLd schema={faqSchema(faqs)} />
   <JsonLd schema={productSchema} />
@@ -270,8 +270,8 @@ const productSchema = {
           links={[
             { href: '/features', title: 'All Features', desc: 'See everything included in your plan.' },
             { href: '/compare', title: 'Compare', desc: `How ${site.name} compares to alternatives.` },
-            { href: '/blog', title: 'Blog', desc: 'Tips, guides, and best practices.' },
-            { href: '/about', title: 'About Us', desc: `Learn more about ${site.name} and our mission.` },
+            { href: '/post', title: 'Blog', desc: 'Tips, guides, and best practices.' },
+            { href: '/about-us', title: 'About Us', desc: `Learn more about ${site.name} and our mission.` },
           ]}
         />
       </div>

@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPublishedContent } from '../../lib/supabase';
+import { site } from '../../site.config';
+
+const allPosts = await getPublishedContent('blog');
+const latestPosts = allPosts.slice(0, 24);
+
+const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
+---
+
+<Base
+  title="LimeCall Blog — Sales, Lead Generation & Callback Tips"
+  description="Get LimeCall's advice on the best ways to convert website visitors, engage leads, and support your customers. Delivered straight from our team."
+  canonical="https://www.limecall.com/post"
+>
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center mb-14">
+        <span class="inline-block mb-4 rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">Blog</span>
+        <h1 class="text-4xl font-extrabold text-white sm:text-5xl">
+          LimeCall
+          <span class="text-lime-400"> Blog</span>
+        </h1>
+        <p class="mt-6 text-lg text-dark-300">
+          Guides, tips, and news to help you convert more website visitors into sales calls.
+          {allPosts.length > 0 && <span class="text-dark-500"> ({allPosts.length} articles)</span>}
+        </p>
+      </div>
+
+      {/* Categories */}
+      {categories.length > 0 && (
+        <div class="flex flex-wrap gap-3 justify-center mb-12">
+          <a href="/post" class="rounded-full border border-lime-500/40 bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400 hover:bg-lime-500/20 transition">
+            All Posts
+          </a>
+          {categories.map((cat) => (
+            <a
+              href={`/post/${cat}`}
+              class="rounded-full border border-dark-700 px-4 py-1.5 text-sm font-medium text-dark-300 hover:border-lime-500/40 hover:text-lime-400 transition"
+            >
+              {cat?.charAt(0).toUpperCase()}{cat?.slice(1).replace(/-/g, ' ')}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {/* Posts Grid */}
+      {latestPosts.length > 0 ? (
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {latestPosts.map((post) => (
+            <a
+              href={post.category ? `/post/${post.category}/${post.slug}` : `/post/${post.slug}`}
+              class="group rounded-xl border border-dark-800 bg-dark-900/50 overflow-hidden transition-all hover:border-dark-700 flex flex-col"
+            >
+              {post.featured_image && (
+                <div class="aspect-video overflow-hidden bg-dark-800">
+                  <img
+                    src={post.featured_image}
+                    alt={post.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div class="p-6 flex-1 flex flex-col">
+                {post.category && (
+                  <span class="text-xs font-semibold uppercase tracking-wide text-lime-400 mb-2">
+                    {post.category.replace(/-/g, ' ')}
+                  </span>
+                )}
+                <h2 class="font-semibold text-white group-hover:text-lime-400 transition line-clamp-2 flex-1">
+                  {post.title}
+                </h2>
+                {post.meta_description && (
+                  <p class="mt-2 text-sm text-dark-400 line-clamp-2">{post.meta_description}</p>
+                )}
+                {post.publish_date && (
+                  <time class="mt-4 block text-xs text-dark-500" datetime={post.publish_date}>
+                    {new Date(post.publish_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </time>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-16 text-center">
+          <div class="text-4xl mb-4">📝</div>
+          <p class="text-dark-400 text-lg">Blog posts coming soon.</p>
+          <p class="text-dark-600 text-sm mt-2">Connect Supabase to populate your blog.</p>
+        </div>
+      )}
+
+      {/* LimeCall content promo */}
+      <div class="mt-20 rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-10 text-center">
+        <h2 class="text-2xl font-bold text-white mb-3">Want more conversions?</h2>
+        <p class="text-dark-300 mb-6 max-w-lg mx-auto">
+          Join thousands of businesses using LimeCall to turn website visitors into sales calls — instantly.
+        </p>
+        <a
+          href="/signup"
+          class="inline-block rounded-xl bg-lime-500 px-8 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition"
+        >
+          TRY FOR FREE
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

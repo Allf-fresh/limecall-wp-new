@@ -1,10 +1,10 @@
-// site.config.ts — Edit this file to configure your site
+// site.config.ts — LimeCall configuration
 
 export const site = {
-  name: 'My SaaS',
-  tagline: 'The tagline for your product',
-  description: 'A brief description of your product for meta tags.',
-  url: 'https://example.com',
+  name: 'LimeCall',
+  tagline: 'Convert website visitors into sales calls Instantly',
+  description: "LimeCall's #1 callback automation platform instantly connects site visitors over phone call to the right sales rep, and increases your site conversions by upto 300%.",
+  url: 'https://www.limecall.com',
 
   colors: {
     accent: 'lime',
@@ -12,69 +12,105 @@ export const site = {
   },
 
   nav: [
-    { label: 'Features', href: '/features' },
+    { label: 'Products', href: '/features' },
+    { label: 'Why LimeCall', href: '/why-limecall' },
+    { label: 'Solutions', href: '/use-cases' },
     { label: 'Pricing', href: '/pricing' },
-    { label: 'Blog', href: '/blog' },
     {
       label: 'Resources',
-      href: '/blog',
+      href: '/post',
       children: [
-        { href: '/blog', label: 'Blog', desc: 'News and guides' },
-        { href: '/compare', label: 'Comparisons', desc: 'How we compare' },
+        { href: '/post', label: 'Blog', desc: 'Tips, guides and news' },
+        { href: '/lead-distribution-guide', label: 'Guides', desc: 'In-depth guides' },
       ],
     },
   ] as NavItem[],
 
   cta: {
-    text: 'Get Started',
-    href: '/pricing',
+    text: 'TRY FOR FREE',
+    href: '/signup',
     subtext: 'No credit card required',
-    login: { text: 'Log In', href: '/login' },
+    login: { text: 'Sign in', href: 'https://app.limecall.com/login' },
   },
 
   footer: {
-    tagline: 'Simple. Reliable. No lock-in.',
+    tagline: 'Convert website visitors into sales calls Instantly.',
     columns: [
       {
-        title: 'Product',
+        title: 'Products',
         links: [
+          { label: 'Click2Call', href: '/click-2-call' },
+          { label: 'Lead Distribution', href: '/lead-distribution' },
+          { label: 'Schedule Callbacks', href: '/conversation-scheduling' },
+          { label: 'Web to Text', href: '/business-texting' },
+          { label: 'Virtual Numbers', href: '/virtual-numbers' },
+          { label: 'Call Tracking', href: '/call-tracking' },
           { label: 'Features', href: '/features' },
-          { label: 'Pricing', href: '/pricing' },
-          { label: 'Compare', href: '/compare' },
+          { label: 'Integrations', href: '/integrations' },
         ],
       },
       {
-        title: 'Resources',
+        title: 'Solutions',
         links: [
-          { label: 'Blog', href: '/blog' },
-          { label: 'Guides', href: '/guides' },
+          { label: 'For Sales Teams', href: '/for-sales-teams' },
+          { label: 'For Marketing Teams', href: '/for-marketing-teams' },
+          { label: 'Real Estate', href: '/limecall-for-real-estate' },
+          { label: 'Travel & Tourism', href: '/limecall-for-travel-tourism-aviation' },
+          { label: 'Finance & Insurance', href: '/limecall-for-finance-insurance' },
+          { label: 'E-commerce', href: '/limecall-for-ecommerce-and-retail-2' },
+          { label: 'Healthcare', href: '/healthcare-lead-generation' },
+          { label: 'Education', href: '/lead-generation-for-education' },
         ],
       },
       {
         title: 'Company',
         links: [
-          { label: 'About', href: '/about' },
-          { label: 'Contact', href: '/contact' },
+          { label: 'About Us', href: '/about-us' },
+          { label: 'Why LimeCall', href: '/why-limecall' },
+          { label: 'Customers', href: '/customers' },
+          { label: 'Security', href: '/security' },
+          { label: 'Partnership', href: '/partnership' },
+          { label: 'Affiliates', href: '/affiliates' },
+          { label: 'Brand Assets', href: '/brand-assets' },
+          { label: 'Contact Us', href: '/contact-us' },
+        ],
+      },
+      {
+        title: 'Resources',
+        links: [
+          { label: 'Blog', href: '/post' },
+          { label: 'How It Works', href: '/how-it-works' },
+          { label: 'Pricing', href: '/pricing' },
+          { label: 'Compare', href: '/compare' },
+          { label: 'FAQ', href: '/faq' },
+          { label: 'Glossary', href: '/glossary' },
+          { label: 'Free Tools', href: '/free-tools' },
+          { label: 'GDPR', href: '/gdpr' },
         ],
       },
     ] as FooterColumn[],
     legal: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms-of-service' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms & Conditions', href: '/terms-conditions' },
+      { label: 'Refund Policy', href: '/refund-policy' },
       { label: 'Cookie Policy', href: '/cookie-policy' },
+      { label: 'GDPR', href: '/gdpr' },
     ],
-    copyright: 'My SaaS',
+    copyright: 'LimeCall',
   },
 
   social: {
-    twitter: '',
+    twitter: 'limecall',
     github: '',
+    linkedin: 'https://www.linkedin.com/company/limecall',
+    facebook: 'https://www.facebook.com/limecall',
+    youtube: 'https://www.youtube.com/c/LimeCall',
   },
 
   blog: {
     supabaseTable: 'content',
     supabaseCollection: 'blog',
-    categories: ['how-to', 'news', 'guides'] as string[],
+    categories: ['how-to', 'news', 'guides', 'sales', 'marketing'] as string[],
   },
 
   analytics: {
@@ -84,40 +120,65 @@ export const site = {
   },
 };
 
-// Pricing plans
+// Pricing plans — LimeCall actual pricing
 export const plans = [
+  {
+    name: 'Basic',
+    slug: 'basic',
+    subtitle: 'For small teams getting started',
+    monthly: 0,
+    annual: 0,
+    annualTotal: 0,
+    features: [
+      '1 Widget',
+      '30 calls / month',
+      'Click to Call',
+      'Schedule Callbacks',
+      'Email support',
+    ],
+    notIncluded: ['Lead Distribution', 'Virtual Numbers', 'SMS', 'Priority support'],
+    cta: { text: 'Start Free', href: '/signup' },
+    highlighted: false,
+  },
   {
     name: 'Starter',
     slug: 'starter',
-    subtitle: 'For individuals',
-    monthly: 9,
-    annual: 7,
-    annualTotal: 84,
+    subtitle: 'For growing sales teams',
+    monthly: 29,
+    annual: 24,
+    annualTotal: 288,
     features: [
-      'Feature one',
-      'Feature two',
-      'Feature three',
-      'Email support',
+      '3 Widgets',
+      '100 calls / month',
+      'Click to Call',
+      'Schedule Callbacks',
+      'Lead Distribution',
+      'SMS notifications',
+      'Priority email support',
     ],
-    notIncluded: ['Advanced feature', 'Priority support'],
-    cta: { text: 'Get Started', href: '/checkout?plan=starter' },
+    notIncluded: ['Virtual Numbers', 'API access'],
+    cta: { text: 'Start Free Trial', href: '/signup' },
     highlighted: false,
   },
   {
     name: 'Pro',
     slug: 'pro',
-    subtitle: 'For professionals',
-    monthly: 29,
-    annual: 24,
-    annualTotal: 288,
+    subtitle: 'For high-volume teams',
+    monthly: 99,
+    annual: 82,
+    annualTotal: 984,
     features: [
-      'Everything in Starter',
-      'Advanced feature',
-      'Priority support',
+      'Unlimited Widgets',
+      '500 calls / month',
+      'All Starter features',
+      'Virtual Numbers',
+      'Web to Text',
       'API access',
+      'Priority support',
+      'Custom integrations',
     ],
     notIncluded: [],
-    cta: { text: 'Get Started', href: '/checkout?plan=pro' },
+    cta: { text: 'Start Free Trial', href: '/signup' },
     highlighted: true,
   },
 ];
@@ -125,35 +186,65 @@ export const plans = [
 // Competitor data for compare pages
 export const competitors = [
   {
-    slug: 'competitor-a',
-    name: 'Competitor A',
-    website: 'https://competitora.com',
-    tagline: 'Their tagline',
+    slug: 'callpage',
+    name: 'CallPage',
+    website: 'https://callpage.io',
+    tagline: 'Callback widget for websites',
   },
   {
-    slug: 'competitor-b',
-    name: 'Competitor B',
-    website: 'https://competitorb.com',
-    tagline: 'Their tagline',
+    slug: 'callingly',
+    name: 'Callingly',
+    website: 'https://callingly.com',
+    tagline: 'Instant lead calling automation',
+  },
+  {
+    slug: 'responseiq',
+    name: 'ResponseiQ',
+    website: 'https://responseiq.com',
+    tagline: 'Intelligent callback software',
   },
 ];
 
-// Feature list for features page
+// Feature list — LimeCall actual features
 export const features = [
   {
-    slug: 'feature-one',
-    name: 'Feature One',
-    icon: '🔒',
-    tagline: 'Short feature tagline',
-    description: 'Longer description of what this feature does and why it matters.',
+    slug: 'click-2-call',
+    name: 'Click2Call',
+    icon: '📞',
+    tagline: 'One-click connection to your sales team',
+    description: 'Let website visitors connect with your sales team instantly with a single click. No hold times, no friction — just conversations that convert.',
+    includedIn: ['basic', 'starter', 'pro'],
+  },
+  {
+    slug: 'lead-distribution',
+    name: 'Lead Distribution',
+    icon: '🔀',
+    tagline: 'Route every lead to the right rep automatically',
+    description: 'Automatically distribute inbound leads to the right sales rep based on skills, availability, round-robin, or custom rules.',
     includedIn: ['starter', 'pro'],
   },
   {
-    slug: 'feature-two',
-    name: 'Feature Two',
-    icon: '⚡',
-    tagline: 'Short feature tagline',
-    description: 'Longer description of what this feature does and why it matters.',
+    slug: 'conversation-scheduling',
+    name: 'Schedule Callbacks',
+    icon: '📅',
+    tagline: 'Let prospects book calls at their convenience',
+    description: 'Allow website visitors to schedule a callback at a time that suits them. Reduce no-shows and increase conversion rates.',
+    includedIn: ['basic', 'starter', 'pro'],
+  },
+  {
+    slug: 'business-texting',
+    name: 'Web to Text',
+    icon: '💬',
+    tagline: 'SMS conversations from your website',
+    description: 'Convert website visitors into text conversations. Send follow-up SMS, automate responses, and never miss a lead.',
+    includedIn: ['starter', 'pro'],
+  },
+  {
+    slug: 'virtual-numbers',
+    name: 'Virtual Numbers',
+    icon: '🌍',
+    tagline: 'Local presence in 50+ countries',
+    description: 'Get local virtual phone numbers in 50+ countries. Build trust with local numbers while managing everything from one platform.',
     includedIn: ['pro'],
   },
 ];

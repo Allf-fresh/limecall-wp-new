@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://www.limecall.com',
   // 'never' ensures sitemap URLs match hardcoded canonical tags (no trailing slash).
   trailingSlash: 'never',
   integrations: [
@@ -16,7 +16,7 @@ export default defineConfig({
       serialize: (item) => {
         const url = item.url;
         // Homepage
-        if (url === 'https://example.com/' || url === 'https://example.com') {
+        if (url === 'https://www.limecall.com/' || url === 'https://www.limecall.com') {
           return { ...item, changefreq: 'weekly', priority: 1.0 };
         }
         // Core pages

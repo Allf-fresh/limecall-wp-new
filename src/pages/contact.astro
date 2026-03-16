@@ -1,10 +1,6 @@
 ---
-import Base from '../layouts/Base.astro';
-import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
-import { site } from '../site.config';
-
-// Set this to your form endpoint (e.g., Formspree, Netlify Forms, etc.)
-const FORM_ENDPOINT = '/api/contact';
+// /contact redirects to /contact-us (LimeCall's canonical URL)
+return Astro.redirect('/contact-us', 301);
 ---
 
 <Base

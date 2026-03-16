@@ -1,0 +1,31 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import { supabase } from '../../lib/supabase';
+import type { ContentRow } from '../../lib/database.types';
+
+// WP posts live at /post/[slug]/ — no category in path
+export async function getStaticPaths() {
+  if (!supabase) return [];
+
+  const { data: posts } = await supabase
+    .from('content')
+    .select('*')
+    .eq('collection', 'blog')
+    .eq('status', 'published')
+    .eq('noindex', false)
+    .order('publish_date', { ascending: false });
+
+  return (posts ?? []).map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: ContentRow;
+}
+
+const { post } = Astro.props;
+---
+
+<BlogPost post={post} />

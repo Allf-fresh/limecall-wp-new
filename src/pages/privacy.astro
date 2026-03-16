@@ -1,9 +1,6 @@
 ---
-import Base from '../layouts/Base.astro';
-import LegalPage from '../components/LegalPage.astro';
-import { site } from '../site.config';
-
-const year = new Date().getFullYear();
+// /privacy redirects to /privacy-policy (LimeCall canonical)
+return Astro.redirect('/privacy-policy', 301);
 ---
 
 <Base

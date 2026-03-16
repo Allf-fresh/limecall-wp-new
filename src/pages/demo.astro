@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+
+const seo = {
+  title: `Book a Demo - LimeCall`,
+  description: `Book a free 30-minute demo of LimeCall. See how our callback automation platform can increase your website conversions by up to 300%.`,
+  canonical: `https://www.limecall.com/demo`,
+};
+---
+<Base {...seo}>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block mb-4 rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">Book a Demo</span>
+      <h1 class="text-4xl font-extrabold text-white sm:text-5xl mb-6">
+        See LimeCall <span class="text-lime-400">in Action</span>
+      </h1>
+      <p class="text-dark-300 text-lg mb-8">
+        Join a free 30-minute demo and see how LimeCall can increase your website conversions by up to 300% — with live Q&A.
+      </p>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/50 p-8 mb-8">
+        <ul class="space-y-3 text-left max-w-sm mx-auto">
+          {['Live walkthrough of all features', 'Custom setup for your use case', 'Q&A with our product experts', 'See real conversion rate results'].map(item => (
+            <li class="flex items-center gap-3 text-dark-300">
+              <svg class="w-5 h-5 text-lime-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <a href="https://app.limecall.com/register" class="inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 hover:bg-lime-400 transition">
+        Book Your Free Demo
+      </a>
+      <p class="mt-4 text-dark-500 text-sm">Or <a href="/signup" class="text-lime-400 hover:text-lime-300">start free today</a> — no credit card required.</p>
+    </div>
+  </section>
+</Base>

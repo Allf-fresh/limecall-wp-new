@@ -1,7 +1,6 @@
 ---
-import Base from '../layouts/Base.astro';
-import LegalPage from '../components/LegalPage.astro';
-import { site } from '../site.config';
+// /terms-of-service redirects to /terms-conditions (LimeCall canonical)
+return Astro.redirect('/terms-conditions', 301);
 ---
 
 <Base

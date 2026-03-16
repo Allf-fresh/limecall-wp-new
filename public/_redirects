@@ -1,6 +1,70 @@
 # Cloudflare Pages / Netlify redirect rules
 # Format: /old-path  /new-path  301
-# Add your redirects below:
 
-# Example:
-# /old-blog-post  /blog/new-blog-post  301
+# Blog redirect - WP used /blog/, Astro uses /post/
+/blog/  /post/  301
+/blog   /post   301
+
+# WP trailing slash normalization (already handled by trailingSlash: 'never' in astro.config)
+# But keep explicit redirects for key WP pages with alternate slugs
+
+# About page alias
+/about/  /about-us  301
+/about   /about-us  301
+
+# Contact alias
+/contact/   /contact-us  301
+/contact    /contact-us  301
+
+# Privacy alias
+/privacy/    /privacy-policy  301
+/privacy     /privacy-policy  301
+
+# Terms alias
+/terms-of-service/  /terms-conditions  301
+/terms-of-service   /terms-conditions  301
+
+# Cookie policy (not in WP but may be linked)
+/cookie-policy/  /privacy-policy  301
+
+# Signup / get started aliases
+/start-free-trial/  /signup  301
+/start-free-trial   /signup  301
+/get-started/  /signup  301
+/get-started   /signup  301
+/trial-activate/  /signup  301
+/trial-activate   /signup  301
+/try-it-out/  /signup  301
+/try-it-out   /signup  301
+/order/  /signup  301
+/order   /signup  301
+
+# Legacy home-new page -> home
+/home-new/  /  301
+/home-new   /  301
+
+# Demo aliases
+/demo-new/  /demo  301
+/demo-new   /demo  301
+
+# Integrations alias
+/integrations-new/  /integrations  301
+/integrations-new   /integrations  301
+
+# Customer success alias
+/customer-success-new/  /customers  301
+/customer-success-new   /customers  301
+
+# Alternative pages
+/limecall-vs-callpage/  /alternative-to-callpage  301
+/limecall-vs-callpage   /alternative-to-callpage  301
+
+# Test pages (suppress, redirect to home)
+/test/      /  301
+/test       /  301
+/test-page/ /  301
+/test-page  /  301
+
+# Usecase catch-all
+/usecase/  /use-cases  301
+/usecase   /use-cases  301

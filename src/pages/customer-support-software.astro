@@ -1,15 +1,130 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Customer Support Software - LimeCall`,
-  description: ``,
+  title: `Customer Support Software | LimeCall`,
+  description: `Deliver exceptional customer support with LimeCall. Instant callbacks, shared SMS inbox, virtual numbers, and full call analytics — all the tools your support team needs.`,
   canonical: `https://www.limecall.com/customer-support-software/`,
 };
+
+const features = [
+  { title: "Instant Callback Widget", desc: "Customers request a callback from your website and connect with a support agent in under 28 seconds. No hold music." },
+  { title: "Shared SMS Inbox", desc: "Your support team manages all customer text conversations in one shared inbox. Assign, reply, and resolve together." },
+  { title: "Call Routing & IVR", desc: "Route support calls to the right team or agent with smart IVR. Customers get help faster, teams work more efficiently." },
+  { title: "Call Recording", desc: "Record support calls automatically for quality assurance, training, and dispute resolution." },
+  { title: "Virtual Support Numbers", desc: "Get local support numbers in 50+ countries. Customers call a familiar local number — you manage everything from one dashboard." },
+  { title: "Helpdesk Integrations", desc: "Connect LimeCall to Zendesk, Intercom, Freshdesk, and other helpdesks. Every call and text logs automatically." },
+];
+
+const benefits = [
+  { metric: "28s", desc: "Average callback connection time" },
+  { metric: "4x", desc: "Higher customer satisfaction with callbacks vs hold queues" },
+  { metric: "98%", desc: "SMS read rate for support updates" },
+  { metric: "50+", desc: "Countries with local support numbers" },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Customer Support Software", url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Customer Support Software
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Customer Support That <span class="text-lime-400">Customers Actually Love</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Replace hold queues with instant callbacks. Let customers reach you by phone, text, or WhatsApp — and manage everything from one LimeCall dashboard.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits banner -->
+  <section class="border-b border-dark-800 py-10 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {benefits.map(b => (
+          <div>
+            <p class="text-3xl font-extrabold text-lime-400">{b.metric}</p>
+            <p class="mt-1 text-sm text-dark-400">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything your support team needs</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">A better support experience</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
+          <h3 class="mb-2 font-semibold text-white">Customer reaches out</h3>
+          <p class="text-sm text-dark-400">Via callback button, SMS, or phone — customers choose how they want to reach you.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
+          <h3 class="mb-2 font-semibold text-white">Routed to right agent</h3>
+          <p class="text-sm text-dark-400">LimeCall routes to the right support agent based on issue type, language, or availability.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
+          <h3 class="mb-2 font-semibold text-white">Issue resolved fast</h3>
+          <p class="text-sm text-dark-400">Call is recorded, notes sync to CRM, and the customer leaves satisfied — without holding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Upgrade your customer support today</h2>
+      <p class="mt-4 text-dark-400">Thousands of support teams use LimeCall to deliver faster, better support. Start your free trial.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/inbound-call-center-software/', title: 'Inbound Call Center', desc: 'Full inbound call center platform.' },
+        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Automate customer callbacks.' },
+        { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Team SMS inbox for support.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
   </div>
 </Base>

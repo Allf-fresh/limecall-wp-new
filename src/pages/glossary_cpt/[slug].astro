@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import glossary from '../../data/glossary.json';
+
+export async function getStaticPaths() {
+  return glossary.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+<Base
+  title={entry.seo_title}
+  description={entry.seo_description}
+  canonical={entry.canonical}
+>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="mb-6 text-sm text-gray-500">
+      <a href="/" class="hover:text-lime-600">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/call-centre-glossary/" class="hover:text-lime-600">Glossary</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-900">{entry.title}</span>
+    </nav>
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{entry.title}</h1>
+    </header>
+    <div class="wp-content prose prose-lg max-w-none" set:html={entry.content} />
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <p class="text-sm text-gray-500">
+        Explore more in the <a href="/call-centre-glossary/" class="text-lime-600 hover:underline">Sales & Call Centre Glossary</a> or learn how <a href="/click-to-call-software/" class="text-lime-600 hover:underline">LimeCall's click-to-call software</a> can help your team.
+      </p>
+    </div>
+  </article>
+</Base>

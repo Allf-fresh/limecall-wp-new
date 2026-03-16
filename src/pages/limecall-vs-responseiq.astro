@@ -1,15 +1,185 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const competitor = "ResponseIQ";
+const competitorSlug = "responseiq";
 
 const seo = {
-  title: `Response IQ Alternative`,
-  description: `Is ResponseIQ slowing you down? LimeCall offers a simpler, more affordable path to sales success. Streamline your communication, close more deals, and pay less. Compare LimeCall & ResponseIQ now!`,
-  canonical: `https://www.limecall.com/limecall-vs-responseiq/`,
+  title: `LimeCall vs ${competitor} — Which is Better in 2026? | LimeCall`,
+  description: `LimeCall vs ${competitor}: honest side-by-side comparison. Is ResponseIQ slowing you down? LimeCall offers a simpler, more affordable path to sales success with more features and better support.`,
+  canonical: `https://www.limecall.com/limecall-vs-${competitorSlug}/`,
+};
+
+const features = [
+  { feature: "Instant Callback (28 sec)", limecall: true, competitor: true },
+  { feature: "Click-to-Call Widget", limecall: true, competitor: true },
+  { feature: "Lead Distribution", limecall: true, competitor: false },
+  { feature: "SMS & WhatsApp", limecall: true, competitor: false },
+  { feature: "Virtual Phone Numbers (40+ countries)", limecall: true, competitor: false },
+  { feature: "CRM Integrations", limecall: true, competitor: true },
+  { feature: "Call Recording", limecall: true, competitor: true },
+  { feature: "Free Trial (no credit card)", limecall: true, competitor: false },
+  { feature: "Shared SMS Inbox", limecall: true, competitor: false },
+  { feature: "Speed-to-Lead Automation", limecall: true, competitor: false },
+];
+
+const reasons = [
+  { title: "More affordable pricing", desc: "LimeCall offers a more transparent, affordable pricing structure. No hidden fees, no per-minute surprises — just predictable costs." },
+  { title: "SMS & WhatsApp built-in", desc: "Engage leads over SMS and WhatsApp directly from LimeCall. ResponseIQ is limited to phone callbacks only." },
+  { title: "Lead distribution included", desc: "Automatically route inbound leads to the right sales rep. ResponseIQ doesn't offer intelligent lead distribution." },
+  { title: "Virtual numbers in 40+ countries", desc: "Build local presence in over 40 countries with LimeCall virtual numbers. Expand globally without a local office." },
+  { title: "Free to start", desc: "LimeCall has a free plan with 30 calls/month — no credit card needed. Try before you buy." },
+  { title: "Speed-to-lead automation", desc: "Automate follow-up the moment a lead lands. LimeCall's speed-to-lead tools cut response time to under 28 seconds." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall a good ResponseIQ alternative?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall offers intelligent callback software like ResponseIQ, plus SMS, WhatsApp, virtual numbers, lead distribution, and speed-to-lead automation — all at a more competitive price.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall offer virtual phone numbers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall provides local virtual phone numbers in 40+ countries, allowing you to build local presence globally. ResponseIQ does not offer virtual numbers.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall pricing compare to ResponseIQ?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall starts free (no credit card required) and scales from $29/month. Plans are transparent with no per-minute charges. ResponseIQ typically requires a paid plan to get started.',
+      },
+    },
+  ],
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: `LimeCall vs ${competitor}`, url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall vs <span class="text-lime-400">{competitor}</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300">
+        An honest comparison. See why growing sales teams choose LimeCall over {competitor} for a simpler, more affordable path to faster lead response.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+          Try LimeCall Free →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Feature Comparison</h2>
+      <div class="overflow-hidden rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-6 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-6 py-4 text-center font-semibold text-dark-400">{competitor}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {features.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-6 py-3.5 text-dark-300">{row.feature}</td>
+                <td class="px-6 py-3.5 text-center">
+                  {row.limecall
+                    ? <span class="text-lime-400 text-base">✓</span>
+                    : <span class="text-dark-600 text-base">✗</span>}
+                </td>
+                <td class="px-6 py-3.5 text-center">
+                  {row.competitor
+                    ? <span class="text-dark-300 text-base">✓</span>
+                    : <span class="text-dark-600 text-base">✗</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why switch -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Why teams switch from {competitor} to LimeCall</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {reasons.map(r => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{r.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to make the switch?</h2>
+      <p class="mt-4 text-dark-400">Join thousands who chose LimeCall over {competitor}. No credit card. Cancel anytime.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free — No Credit Card →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore LimeCall" links={[
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      { href: '/click-2-call/', title: 'Click to Call', desc: 'Instant website callbacks.' },
+      { href: '/features/', title: 'Features', desc: 'Everything LimeCall does.' },
+      { href: '/customers/', title: 'Customers', desc: 'See who uses LimeCall.' },
+    ]} />
   </div>
 </Base>

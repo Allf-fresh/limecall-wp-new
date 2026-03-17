@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -119,9 +120,37 @@ const deals = [
 ];
 
 const categories = ['All', ...new Set(deals.map(d => d.category))];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'When do SaaS Black Friday deals start?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Most SaaS Black Friday deals go live in the week before Thanksgiving (late November) and run through Cyber Monday. Some vendors extend promotions through the end of November or even into December.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are SaaS Black Friday discounts worth it?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes — Black Friday is the best time of year to switch from monthly to annual billing on tools you already use. Discounts of 30–50% on annual plans are common, which can save hundreds of dollars per tool per year.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which types of SaaS tools offer Black Friday deals?',
+      acceptedAnswer: { '@type': 'Answer', text: 'CRM, marketing automation, SEO, analytics, productivity, and communication tools all commonly offer Black Friday promotions. Categories like sales software, email marketing platforms, and project management tools tend to have the deepest discounts.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I find the best SaaS deals on Black Friday?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The best approach is to make a list of tools you already use or plan to adopt, then check vendor pricing pages and deal aggregator sites like AppSumo in the week before Black Friday. Signing up for vendor email lists in advance often gives early access to deals.' },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

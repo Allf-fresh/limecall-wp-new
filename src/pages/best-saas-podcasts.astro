@@ -2,12 +2,40 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `15 Best SaaS Podcasts to Follow in 2026 | LimeCall`,
   description: `The 15 best SaaS podcasts of 2026 — curated for founders, sales leaders, and marketers. From Lenny's Podcast to SaaStr, find the shows worth your commute.`,
   canonical: `https://www.limecall.com/best-saas-podcasts/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What are the best SaaS podcasts?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The best SaaS podcasts in 2026 include SaaStr Podcast, Lenny\'s Podcast, Startups For the Rest of Us, SaaS Interviews with Nathan Latka, and Acquired. These shows cover everything from bootstrapped growth to VC-backed scaling strategies.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which podcast is best for sales teams?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Revenue Collective Podcast (hosted by Sam Jacobs) and The Growth Show (by HubSpot) are among the best for sales and go-to-market teams, covering compensation design, sales process, and scaling revenue motions.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are there good SaaS podcasts for bootstrapped founders?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes — Startups For the Rest of Us (Rob Walling), MicroConf On Air, The Bootstrapped Founder (Arvid Kahl), and Indie Hackers Podcast are all excellent for bootstrapped or indie SaaS founders looking for practical, non-VC advice.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How often should I listen to SaaS podcasts?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Most top SaaS podcasts release one episode per week, making them easy to follow during commutes or workouts. Choosing 2–3 shows aligned with your role — founder, sales, or product — is more effective than trying to keep up with every episode of every show.' },
+    },
+  ],
 };
 
 const podcasts = [
@@ -122,6 +150,7 @@ const categories = [...new Set(podcasts.map(p => p.category))];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

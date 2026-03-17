@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import CrossLinks from '../components/CrossLinks.astro';
 
 const content = `
 <p class="has-text-align-center">Effective Date: 03/25/2019</p>
@@ -459,4 +460,10 @@ Article 16 &#8211; ACCEPTANCE OF RISK:</strong><span class="ez-toc-section-end">
     <h1>Privacy Policy</h1>
     <div set:html={content} />
   </div>
+  <CrossLinks links={[
+    { href: '/gdpr/', title: 'GDPR Compliance', desc: 'How LimeCall handles your data in line with GDPR requirements.' },
+    { href: '/security/', title: 'Security', desc: 'Our security practices, infrastructure, and data protection measures.' },
+    { href: '/terms-conditions/', title: 'Terms & Conditions', desc: 'The terms governing your use of LimeCall and our services.' },
+    { href: '/contact-us/', title: 'Contact Us', desc: 'Get in touch with the LimeCall team for support or questions.' },
+  ]} />
 </Base>

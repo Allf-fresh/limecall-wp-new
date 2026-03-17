@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Button from '../components/ui/Button.astro';
 import FeatureCard from '../components/FeatureCard.astro';
+import CrossLinks from '../components/CrossLinks.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { faqSchema } from '../lib/seo';
 import { site, plans, features } from '../site.config';
@@ -589,4 +590,13 @@ const testimonials = [
       </div>
     </div>
   </section>
+
+  <CrossLinks links={[
+    { href: '/features/', title: 'All Features', desc: 'Explore every LimeCall feature — callback, call tracking, and more.' },
+    { href: '/pricing/', title: 'Pricing Plans', desc: 'Simple, transparent pricing with a free tier and no hidden fees.' },
+    { href: '/integrations/', title: 'Integrations', desc: 'Connect LimeCall with your CRM, helpdesk, and marketing tools.' },
+    { href: '/customers/', title: 'Customer Stories', desc: 'See how businesses use LimeCall to convert more leads.' },
+    { href: '/how-it-works/', title: 'How It Works', desc: 'Learn how LimeCall connects visitors with your sales team in 28 seconds.' },
+    { href: '/demo/', title: 'Book a Demo', desc: 'Get a personalised walkthrough of the LimeCall platform.' },
+  ]} />
 </Base>

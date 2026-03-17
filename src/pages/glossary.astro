@@ -2,12 +2,40 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: 'LimeCall Glossary — Sales & Call Tracking Terms',
   description: 'Definitions for call tracking, lead generation, and sales automation terms. Your complete glossary for LimeCall features and industry terminology.',
   canonical: `${site.url}/glossary/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a call centre glossary?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A call centre glossary is a reference guide defining the key terms, metrics, and acronyms used in contact centre operations — such as AHT, FCR, IVR, and ASA — so that agents, managers, and stakeholders share a common vocabulary.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What does AHT mean?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AHT stands for Average Handle Time — the mean duration of a customer interaction, including talk time, hold time, and after-call wrap-up. It is a core call centre efficiency metric.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is FCR?',
+      acceptedAnswer: { '@type': 'Answer', text: 'FCR stands for First Call Resolution — the percentage of customer issues resolved on the very first contact, with no follow-up call required. A high FCR rate indicates effective agents and well-designed call flows.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is a callback in call centres?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A callback is an automated phone call triggered when a customer requests to be called back rather than waiting on hold. Callback software like LimeCall can connect a website visitor with a sales rep in as little as 28 seconds.' },
+    },
+  ],
 };
 
 const stats = [
@@ -57,6 +85,7 @@ const quickTerms = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const icon = "💰";
@@ -20,14 +21,63 @@ const useCases = [
 ];
 
 const stats = [
+  { value: "391%", label: "Higher contact-to-close rate" },
+  { value: "3x", label: "Close rate increase" },
+  { value: "10–12x", label: "Vs. slow form follow-up" },
   { value: "28s", label: "Average callback time" },
-  { value: "3x", label: "Revenue increase per lead" },
-  { value: "80%", label: "Reduction in missed leads" },
-  { value: "300%", label: "Conversion rate uplift" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall increase sales?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall increases sales by connecting your reps with high-intent inbound leads in under 28 seconds. Research shows that contacting a lead within 1 minute of their inquiry increases conversion by 391%. LimeCall automates that instant connection so every lead gets a real conversation while they are still actively interested.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the fastest way to increase sales without more ad spend?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The fastest way to increase sales from existing traffic is to reduce your response time to inbound leads. Most businesses take hours or days to follow up. LimeCall connects reps to leads in 28 seconds, immediately unlocking more revenue from the traffic you are already paying for.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does calling leads faster really help close more deals?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes — dramatically. Studies by MIT and the Harvard Business Review consistently show that lead response time is the single biggest factor in whether a lead converts. A lead contacted within 1 minute is 391% more likely to convert than one contacted 24 hours later.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much can I increase sales with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Results vary by industry and current response time, but LimeCall customers typically report a 2–4x increase in qualified conversations from the same volume of inbound leads. Teams that previously had multi-hour response times see the largest gains.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: "What's the ROI of callback software?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The ROI of callback software like LimeCall is typically measured by comparing the increase in closed deals to the cost of the platform. Because LimeCall converts existing traffic more effectively, there is no incremental ad spend. Most customers recover the cost of LimeCall within their first additional closed deal each month.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -94,6 +144,47 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The sales math section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">The sales math is simple</h2>
+      <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-8">
+        <div class="grid gap-6 sm:grid-cols-3 text-center">
+          <div>
+            <p class="text-4xl font-extrabold text-dark-400">2%</p>
+            <p class="mt-2 text-sm text-dark-400">Avg. inbound lead conversion<br/>with slow follow-up (&gt;24h)</p>
+          </div>
+          <div class="flex items-center justify-center">
+            <span class="text-3xl text-lime-400 font-bold">→</span>
+          </div>
+          <div>
+            <p class="text-4xl font-extrabold text-lime-400">8–10%</p>
+            <p class="mt-2 text-sm text-dark-300">Avg. inbound lead conversion<br/>with LimeCall (&lt;28s response)</p>
+          </div>
+        </div>
+        <p class="mt-6 text-center text-sm text-dark-400">Same traffic. Same leads. More revenue — just by responding faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

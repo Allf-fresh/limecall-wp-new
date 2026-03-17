@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -24,9 +25,73 @@ const steps = [
   { n: "2", title: "Score automatically", desc: "LimeCall scores every inbound lead in real time based on your criteria. No manual review needed." },
   { n: "3", title: "Route to close", desc: "Qualified leads go directly to your best reps. Unqualified leads go to nurture — automatically." },
 ];
+
+const stats = [
+  { value: "3x", label: "More qualified leads reached" },
+  { value: "40%", label: "Shorter sales cycles" },
+  { value: "80%", label: "Leads qualified in first call" },
+  { value: "28s", label: "First contact time" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead qualification?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead qualification is the process of evaluating an inbound lead to determine whether they meet the criteria to be a viable sales opportunity. Qualification typically assesses budget, authority, need, and timeline (BANT) before a rep invests significant time in a prospect.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What makes a lead qualified?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A qualified lead typically meets criteria across four dimensions: Budget (can they afford your solution?), Authority (are they the decision-maker?), Need (do they have a genuine problem your product solves?), and Timeline (are they ready to buy soon?). The BANT framework is the most widely used qualification standard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does callback help qualify leads faster?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A 2-minute phone conversation reveals more about a lead\'s qualification than a 10-question form. Callback software like LimeCall connects reps with leads in 28 seconds, when the lead is most engaged and willing to share information. Reps can run through BANT qualification naturally, in real time.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is BANT and how does LimeCall support it?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'BANT stands for Budget, Authority, Need, and Timeline — the four qualification criteria developed by IBM. LimeCall supports BANT qualification by capturing web form data (budget, company size, role) for pre-call scoring, and by connecting reps with qualified prospects instantly so BANT assessment happens in the first conversation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I automate lead qualification with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall automates qualification through IVR menus (voice-based qualifying questions), form scoring (automatically scoring form submissions), behavioral signals (pages viewed, session depth), and routing rules (sending high-score leads to senior reps instantly). This means low-quality leads are filtered before they reach your team.',
+      },
+    },
+  ],
+};
+
+const comparisonRows = [
+  { label: "Qualification accuracy", phone: "High — conversational", form: "Low — self-reported" },
+  { label: "Speed of qualification", phone: "2–3 minutes", form: "Hours to days" },
+  { label: "Relationship-building", phone: "Strong — human trust", form: "None" },
+  { label: "Conversion rate (qualified)", phone: "25–40%", form: "5–10%" },
+  { label: "Lead drop-off risk", phone: "Low (caught in 28s)", form: "High (slow follow-up)" },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -47,6 +112,20 @@ const steps = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -77,6 +156,51 @@ const steps = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison: phone vs form qualification -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Phone qualification vs. form qualification</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300"></th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">Phone (LimeCall)</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-300">Web Form Only</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-900/20'}`}>
+                <td class="px-5 py-4 font-medium text-dark-300">{row.label}</td>
+                <td class="px-5 py-4 text-center font-semibold text-lime-400">{row.phone}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{row.form}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

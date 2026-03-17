@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -42,9 +43,58 @@ const chapters = [
     body: "Modern lead distribution software like LimeCall automates the entire process. When a lead arrives, LimeCall instantly qualifies, scores, and routes the lead to the right rep — triggering an instant callback or sending the lead details to the rep's phone within seconds.",
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead distribution?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead distribution is the process of assigning new inbound leads to the right sales rep or team as soon as they arrive. Automated systems evaluate leads against routing rules (territory, skill, availability) and assign them instantly, eliminating the delays and errors of manual lead assignment.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the main types of lead distribution models?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The four primary lead distribution models are: Round-Robin (rotating leads equally across all reps), Skills-Based Routing (matching leads to reps with specific expertise), Availability-Based Routing (sending leads only to reps who are currently available), and Territory/Geography-Based Routing (assigning leads by location). Most sales teams use a hybrid of two or more models.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the best practices for lead distribution?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Key best practices include: (1) Define routing rules before launch based on rep skills and territory. (2) Set response time SLAs — reps should connect within 5 minutes. (3) Use overflow rules so no lead is ever dropped. (4) Monitor distribution fairness to prevent top reps from getting all leads. (5) Review routing performance monthly and refine rules based on conversion data.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are common mistakes in lead distribution?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Common mistakes include: relying on manual assignment (too slow), having no overflow rules (leads get dropped when reps are busy), routing all leads to the same top rep (burns out your best closer), not tracking response time (no accountability), and failing to A/B test routing rules (missing optimization opportunities).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I implement lead distribution software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'To implement lead distribution software: (1) Choose a platform like LimeCall that supports your routing logic. (2) Connect your lead sources — web forms, phone, SMS. (3) Define routing rules for each lead type. (4) Set up overflow and after-hours handling. (5) Integrate with your CRM for automatic logging. (6) Run for 2–4 weeks, then review performance and refine rules.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -61,9 +111,22 @@ const chapters = [
     </div>
   </section>
 
+  <!-- Key Stats -->
+  <section class="border-b border-dark-800 py-14 bg-dark-900/50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        <div><p class="text-3xl font-extrabold text-lime-400">391%</p><p class="mt-1 text-sm text-dark-400">More conversions when you respond in 1 minute</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">10x</p><p class="mt-1 text-sm text-dark-400">More likely to convert vs 5-minute response</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">50%</p><p class="mt-1 text-sm text-dark-400">Of sales go to the first vendor to respond</p></div>
+        <div><p class="text-3xl font-extrabold text-lime-400">28s</p><p class="mt-1 text-sm text-dark-400">LimeCall's average time to connect a lead</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Guide Chapters -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Guide chapters</h2>
       <div class="space-y-6">
         {chapters.map(c => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-7">
@@ -78,15 +141,67 @@ const chapters = [
     </div>
   </section>
 
-  <!-- Key Stats -->
-  <section class="border-t border-dark-800 py-14 bg-dark-900/30">
+  <!-- Deep dive: Distribution models -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-8 text-center text-xl font-bold text-white">Lead distribution by the numbers</h2>
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
-        <div><p class="text-3xl font-extrabold text-lime-400">391%</p><p class="mt-1 text-sm text-dark-400">More conversions when you respond in 1 minute</p></div>
-        <div><p class="text-3xl font-extrabold text-lime-400">10x</p><p class="mt-1 text-sm text-dark-400">More likely to convert vs 5-minute response</p></div>
-        <div><p class="text-3xl font-extrabold text-lime-400">50%</p><p class="mt-1 text-sm text-dark-400">Of sales go to the first vendor to respond</p></div>
-        <div><p class="text-3xl font-extrabold text-lime-400">28s</p><p class="mt-1 text-sm text-dark-400">LimeCall's average time to connect a lead</p></div>
+      <h2 class="mb-8 text-2xl font-bold text-white">Lead distribution models explained</h2>
+      <div class="space-y-6">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-lime-400">Round-Robin Distribution</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Leads rotate equally across all available reps in sequence. Best for teams with similar skills where lead fairness matters most. Simple to set up but ignores rep specialization.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-lime-400">Skills-Based Routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Each lead is matched to the rep with the most relevant expertise — product knowledge, language, vertical, or deal size. More complex to configure but produces higher conversion rates because leads talk to the most qualified person.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-lime-400">Availability-Based Routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Leads only route to reps who are currently available and able to take a call. Prevents leads from being assigned to reps who are in meetings, on calls, or off-shift. LimeCall checks availability in real time before every routing decision.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-lime-400">Territory/Geography-Based Routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Leads are assigned based on geographic location — state, country, or custom territory. Uses phone area codes, IP geolocation, or CRM field data to ensure each lead goes to the rep who owns that region.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best practices deep dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-2xl font-bold text-white">Lead distribution best practices</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {[
+          { title: "Define routing rules before launch", desc: "Map out every lead type and which rep or team should handle it. Document the rules before building them in software." },
+          { title: "Set response time SLAs", desc: "Reps should respond within 5 minutes. 78% of sales go to the first business that responds. Track this metric weekly." },
+          { title: "Always have overflow rules", desc: "Define what happens when all reps are busy: queue, fallback team, SMS acknowledgement, or scheduled callback." },
+          { title: "Monitor distribution fairness", desc: "Ensure leads are distributed equitably. If one rep gets 80% of leads, top talent may burn out while others under-perform." },
+          { title: "A/B test routing strategies", desc: "Test round-robin vs. skills-based routing on a segment of leads. Measure conversion rates and let data decide." },
+          { title: "Review and refine monthly", desc: "Pull routing performance reports every month. Which rules produce the highest conversion rates? Adjust accordingly." },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <h3 class="mb-2 font-semibold text-white text-sm">{item.title}</h3>
+            <p class="text-xs text-dark-400 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>

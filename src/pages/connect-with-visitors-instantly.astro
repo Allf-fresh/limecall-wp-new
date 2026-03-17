@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const icon = "⚡";
@@ -20,14 +21,63 @@ const useCases = [
 ];
 
 const stats = [
-  { value: "28s", label: "Connection time" },
-  { value: "100x", label: "Higher conversion vs. slow follow-up" },
-  { value: "0", label: "Hold times or phone trees" },
-  { value: "5 min", label: "Setup time" },
+  { value: "28s", label: "Avg. connection time" },
+  { value: "10–12x", label: "Higher conversion vs. form" },
+  { value: "72%", label: "Visitors leave without converting" },
+  { value: "9x", label: "More likely to convert at <5 min" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall connect with visitors instantly?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'When a visitor clicks the LimeCall callback widget on your website, LimeCall simultaneously dials your team member and the visitor\'s phone. Both are connected within 28 seconds on average — with no hold times, phone menus, or waiting. The entire process is automated and happens in real time.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is a callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A callback widget is a button or popup on your website that lets visitors request an immediate phone call from your team. When clicked, it triggers an automated system (like LimeCall) to call both the visitor and a rep simultaneously and bridge them together. It eliminates the need for the visitor to dial in or wait on hold.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I install LimeCall on my website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall installs via a single JavaScript snippet — the same way you\'d add Google Analytics or a chat widget. Copy the snippet from your LimeCall dashboard and paste it into your site\'s HTML before the closing </body> tag. Setup takes under 5 minutes and requires no developer. WordPress, Shopify, and Wix plugins are also available.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does the LimeCall callback widget work on mobile?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes — LimeCall is fully optimized for mobile visitors. When a mobile visitor clicks the widget, LimeCall calls their mobile phone directly. This is especially powerful since mobile visitors are often higher-intent (searching with purchase intent on their phone) and respond better to direct calls than forms.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I customize when the widget appears on my website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall gives you full control over widget display rules — you can show it on specific pages, trigger it after a set time on page, show it on exit intent, or target it to specific traffic sources. You can also set business hours so the widget only appears when your team is available, and configure an after-hours scheduled callback option.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -94,6 +144,46 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why speed matters -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Why the first 28 seconds determine your conversion rate</h2>
+      <div class="grid gap-6 sm:grid-cols-3 text-center">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <p class="text-3xl font-extrabold text-lime-400">9x</p>
+          <p class="mt-2 text-sm text-dark-400">More likely to convert if contacted within 5 minutes vs. 10 minutes</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <p class="text-3xl font-extrabold text-lime-400">391%</p>
+          <p class="mt-2 text-sm text-dark-400">Higher conversion rate when responding within 1 minute</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <p class="text-3xl font-extrabold text-lime-400">72%</p>
+          <p class="mt-2 text-sm text-dark-400">Of B2B buyers expect a response within the same business day</p>
+        </div>
+      </div>
+      <p class="mt-6 text-center text-sm text-dark-400">LimeCall's average callback time is 28 seconds — beating every benchmark above.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

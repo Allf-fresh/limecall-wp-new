@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -24,9 +25,73 @@ const steps = [
   { n: "2", title: "Qualifying & matching", desc: "LimeCall qualifies the lead and matches it to the best available rep using your routing rules." },
   { n: "3", title: "Distributed instantly", desc: "The lead is assigned and the rep is notified — or directly connected via callback — within seconds." },
 ];
+
+const stats = [
+  { value: "391%", label: "More conversions, <1 min response" },
+  { value: "<1s", label: "Distribution decision time" },
+  { value: "3x", label: "Higher rep contact rate" },
+  { value: "100%", label: "Lead coverage, no drops" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead distribution?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead distribution is the process of assigning inbound leads to the appropriate sales rep or team as soon as they arrive. Automated lead distribution software like LimeCall evaluates each lead against configurable rules — territory, skills, availability — and routes it instantly, without any manual intervention.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is round-robin different from skills-based routing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Round-robin distribution rotates leads equally across all available reps regardless of their skills or specialization. Skills-based routing matches each lead to the rep most qualified to handle it — for example, routing enterprise leads to senior reps and SMB leads to junior reps. LimeCall supports both methods and lets you combine them.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can leads be distributed by territory or geography?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports territory-based distribution using the lead\'s phone area code, IP geolocation, or CRM field data. You can define geographic territories and ensure each lead is always routed to the rep responsible for that region.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What CRMs does LimeCall sync with for lead distribution?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates natively with Salesforce, HubSpot, Pipedrive, Zoho CRM, and many others. Every distributed lead is automatically logged in your CRM with routing details, response time, and call outcome. Zapier integration extends support to hundreds of additional tools.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to overflow leads when all reps are busy?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall has configurable overflow rules. When all reps are busy, leads can be queued with a wait-time estimate, routed to a backup team or after-hours number, sent an automated SMS acknowledgement, or scheduled for a callback at the next available slot. No lead is ever simply dropped.',
+      },
+    },
+  ],
+};
+
+const comparisonRows = [
+  { label: "Assignment speed", automated: "< 1 second", manual: "Minutes to hours" },
+  { label: "Available 24/7", automated: "Yes", manual: "No" },
+  { label: "Skill-based matching", automated: "Yes", manual: "Inconsistent" },
+  { label: "Overflow handling", automated: "Automatic failover", manual: "Leads dropped" },
+  { label: "Attribution tracking", automated: "Full CRM sync", manual: "Often lost" },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -47,6 +112,20 @@ const steps = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -77,6 +156,51 @@ const steps = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison: automated vs manual -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Automated distribution vs. manual assignment</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300"></th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">LimeCall Automated</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-300">Manual Assignment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-900/20'}`}>
+                <td class="px-5 py-4 font-medium text-dark-300">{row.label}</td>
+                <td class="px-5 py-4 text-center font-semibold text-lime-400">{row.automated}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{row.manual}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

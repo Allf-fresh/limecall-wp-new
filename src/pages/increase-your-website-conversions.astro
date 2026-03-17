@@ -2,12 +2,13 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const icon = "📊";
 
 const seo = {
-  title: `Increase Website Conversions with LimeCall | CRO Software`,
+  title: `Increase Website Conversions with LimeCall | CRO`,
   description: `Stop website visitors from bouncing. LimeCall's instant callback widget converts more of your existing traffic into leads and customers — no extra ad spend required.`,
   canonical: `https://www.limecall.com/increase-your-website-conversions/`,
 };
@@ -20,14 +21,71 @@ const useCases = [
 ];
 
 const stats = [
-  { value: "300%", label: "Conversion rate uplift" },
-  { value: "28s", label: "Average callback time" },
-  { value: "80%", label: "Fewer bounced leads" },
+  { value: "10–12x", label: "Higher conversion than forms" },
+  { value: "72%", label: "Visitors leave without converting" },
+  { value: "28s", label: "Avg. callback time" },
   { value: "5 min", label: "Setup time" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I increase website conversions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The most effective way to increase website conversions is to reduce the time between a visitor showing interest and a human making contact. Adding a callback widget like LimeCall to your high-intent pages ensures every interested visitor can connect with your team in under 28 seconds — dramatically improving conversion rates without spending more on ads.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What converts better than a contact form?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Phone callbacks consistently outperform contact forms. Forms have average completion rates of 1–3% and require hours of follow-up. An instant callback widget like LimeCall connects a real human within 28 seconds of a visitor expressing interest, converting at 10–12x the rate of a form.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does a callback widget improve conversions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall customers typically see a 200–400% uplift in conversions from pages where the callback widget is placed, compared to form-only pages. The exact improvement depends on the industry, traffic quality, and current baseline conversion rate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is a good website conversion rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Average website conversion rates vary by industry: SaaS and software average 3–5%, B2B services average 2–4%, and e-commerce averages 1–3%. With an instant callback widget, companies typically achieve 2–4x their baseline rate on pages where real-time conversation is offered.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall install on my website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall installs with a single JavaScript snippet added to your site — similar to Google Analytics or a chat widget. Setup takes under 5 minutes with no developer required. LimeCall also has native integrations for WordPress, Shopify, and most popular CMS platforms.',
+      },
+    },
+  ],
+};
+
+const comparisonRows = [
+  { label: "Avg. conversion rate", callback: "8–12%", form: "1–3%", chat: "3–6%" },
+  { label: "Avg. response time", callback: "28 seconds", form: "4–24 hours", chat: "Varies (often bot)" },
+  { label: "Human conversation", callback: "Always", form: "Delayed", chat: "Often automated" },
+  { label: "Cost per lead", callback: "Low", form: "High (slow follow-up waste)", chat: "Medium" },
+  { label: "Mobile friendly", callback: "Yes — calls phone", form: "Yes", chat: "Partial" },
 ];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -94,6 +152,53 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Callback widget vs. contact form vs. live chat</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300"></th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">Callback Widget</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-300">Contact Form</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-300">Live Chat</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-900/20'}`}>
+                <td class="px-5 py-4 font-medium text-dark-300">{row.label}</td>
+                <td class="px-5 py-4 text-center font-semibold text-lime-400">{row.callback}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{row.form}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{row.chat}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

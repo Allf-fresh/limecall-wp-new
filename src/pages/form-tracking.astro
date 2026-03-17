@@ -2,10 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Form Tracking — Uncover Hidden Conversion Insights | LimeCall`,
+  title: `Form Tracking — Uncover Conversion Insights | LimeCall`,
   description: `Track every form submission and uncover which campaigns, pages, and sources drive your web leads. LimeCall's form tracking optimizes your website conversions.`,
   canonical: `https://www.limecall.com/form-tracking/`,
 };
@@ -24,9 +25,65 @@ const steps = [
   { n: "2", title: "Forms tracked automatically", desc: "Every form submission is tracked with source, referrer, UTM parameters, and visitor behavior data." },
   { n: "3", title: "Optimize conversions", desc: "Use the data to cut poor-performing sources, improve landing pages, and increase form conversion rates." },
 ];
+
+const stats = [
+  { value: "100%", label: "Form submission attribution" },
+  { value: "40%", label: "Lower cost per lead" },
+  { value: "5 min", label: "Setup time" },
+  { value: "CRM", label: "Auto-sync on every submit" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is form tracking?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Form tracking is the process of recording which marketing source, campaign, keyword, or page drove each web form submission. It closes the attribution gap between your ad spend and your actual leads, showing you exactly which channels produce qualified form submissions.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall track form submissions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall captures UTM parameters from the visitor\'s URL the moment they land on your site, stores them in a session cookie, and appends them to every form submission the visitor completes. This attribution data is then synced to your CRM alongside the lead record — with zero manual effort.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall form tracking work with HubSpot forms?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates natively with HubSpot and can track form submissions from HubSpot\'s native forms, as well as custom HTML forms, Gravity Forms, Typeform, and most other popular form builders. Attribution data flows directly into the HubSpot contact record.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I track which ad drove a specific form submission?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes — this is the core use case. By tagging your Google Ads and other paid campaigns with UTM parameters (utm_source, utm_medium, utm_campaign, utm_content, utm_term), LimeCall captures exactly which ad drove each form submission, down to the keyword and ad variation level.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is form tracking different from call tracking?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Call tracking attributes phone calls to marketing sources using dynamic phone number swapping. Form tracking attributes web form submissions using UTM parameter capture. LimeCall provides both in one platform — giving you complete attribution across all inbound lead channels, whether leads come in via phone or form.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -47,6 +104,20 @@ const steps = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -77,6 +148,50 @@ const steps = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What gets tracked -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">What LimeCall captures on every form submission</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { label: "UTM Source", example: "google, facebook, email" },
+          { label: "UTM Medium", example: "cpc, organic, referral" },
+          { label: "UTM Campaign", example: "summer-promo, brand" },
+          { label: "UTM Content", example: "ad-variation-a" },
+          { label: "UTM Term", example: "callback software" },
+          { label: "Landing Page URL", example: "Full page path" },
+          { label: "Referrer", example: "Previous page or domain" },
+          { label: "Device Type", example: "Desktop / Mobile / Tablet" },
+          { label: "Session Timestamp", example: "Exact submit time" },
+        ].map(item => (
+          <div class="rounded-lg border border-dark-800 bg-dark-900/60 p-4">
+            <p class="font-semibold text-white text-sm">{item.label}</p>
+            <p class="mt-1 text-xs text-dark-500">{item.example}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-sm text-dark-400">All data synced to your CRM automatically on every submission.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

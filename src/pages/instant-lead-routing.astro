@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -24,9 +25,65 @@ const steps = [
   { n: "2", title: "LimeCall matches instantly", desc: "In milliseconds, LimeCall finds the best available rep based on your routing rules." },
   { n: "3", title: "Connected in seconds", desc: "Both the rep and the lead are called simultaneously. Connected within 28 seconds of the initial request." },
 ];
+
+const stats = [
+  { value: "80%", label: "Faster lead response" },
+  { value: "<1s", label: "Routing decision time" },
+  { value: "3x", label: "Higher contact rate" },
+  { value: "100%", label: "Lead coverage" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is instant lead routing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Instant lead routing is the automatic process of assigning an inbound lead to the right sales rep the moment it arrives — without any manual review or delay. Software like LimeCall evaluates routing rules (territory, skills, availability) and connects the lead to a rep in under one second.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How fast does LimeCall route leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall makes the routing decision in under one second. From the moment a lead submits a form or requests a callback, the rep is dialed and the lead is connected within 28 seconds on average.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What routing rules can I set in LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall supports routing by territory, language, product line, rep skills, lead score, time of day, and custom criteria. You can combine multiple rules and set priority orders so that the best-matched available rep always receives each lead.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does instant lead routing work with my CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates natively with Salesforce, HubSpot, Pipedrive, and dozens of other CRMs. Every routed lead is logged automatically with source data, routing decision details, and call outcome.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens if no rep is available when a lead comes in?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall has configurable overflow and failover rules. If no rep is available, leads can be queued, routed to a backup team, sent an automated SMS, or scheduled for a callback at the next available slot — so no lead is ever dropped.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -47,6 +104,20 @@ const steps = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -87,6 +158,53 @@ const steps = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why instant routing beats manual assignment -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Why instant routing beats manual assignment</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-3 font-semibold text-lime-400">Instant routing with LimeCall</h3>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Lead routed in under 1 second</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Rep connected before interest fades</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Rules fire automatically 24/7</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Overflow handled without dropped leads</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Full attribution logged to CRM instantly</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-3 font-semibold text-dark-400">Manual lead assignment</h3>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-600">✗</span> Leads sit in queue for hours or days</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-600">✗</span> High-intent visitors go cold waiting</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-600">✗</span> After-hours leads are often missed entirely</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-600">✗</span> Wrong rep assigned based on availability, not skill</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-600">✗</span> Attribution lost or entered incorrectly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {q.name}
+              <span class="ml-4 shrink-0 text-lime-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

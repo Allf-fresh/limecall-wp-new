@@ -2,12 +2,60 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Free WhatsApp Link Generator | LimeCall`,
   description: `Generate a direct WhatsApp link (wa.me) for your business in seconds. Share it in emails, social posts, or on your website to let customers message you instantly.`,
   canonical: `https://www.limecall.com/whatsapp-link-generator/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a WhatsApp link?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A WhatsApp link (wa.me link) is a direct URL that opens WhatsApp and starts a conversation with a specific phone number when clicked. For example, https://wa.me/447700900000 opens a chat with that number. You can also add a pre-filled message to the URL so customers begin the conversation with context.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I create a WhatsApp link for my business?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can create a WhatsApp link using the format https://wa.me/[country-code][phone-number]. For example, a UK number 07700 900000 becomes https://wa.me/447700900000. Use this tool to generate the link automatically — enter your number and optional pre-filled message, and copy the result.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I add a pre-filled message to a WhatsApp link?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. You can add a pre-filled message by appending ?text=[your-message] to your wa.me link. When a visitor clicks the link, WhatsApp opens with your message already typed in the text field — they just need to tap Send. This is great for lead capture, support requests, and appointment bookings.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does a WhatsApp link work without WhatsApp Business?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. A wa.me link works with any WhatsApp account — personal or Business. However, WhatsApp Business is recommended for customer-facing use because it gives you a business profile, automated greetings, quick replies, and better analytics. The link generation works identically for both.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I add a WhatsApp link to my website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can add your WhatsApp link to your website as a plain text link, a button, or a floating chat widget. For a floating widget with tracking and analytics, use LimeCall\'s WhatsApp widget — paste one snippet into your site and a branded WhatsApp button appears on every page.',
+      },
+    },
+  ],
 };
 
 const benefits = [
@@ -25,9 +73,18 @@ const useCases = [
   { title: "Ad Campaigns", desc: "Use as the CTA in Facebook, Instagram, or Google ads to drive Click-to-WhatsApp conversions." },
   { title: "Website CTA", desc: "Add the link to your website's header, footer, or contact page alongside phone and email." },
 ];
+
+const stats = [
+  { value: "Free", label: "Tool — no account needed" },
+  { value: "All devices", label: "Works on mobile + desktop" },
+  { value: "0", label: "App downloads required" },
+  { value: "Custom", label: "Pre-filled message support" },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -41,6 +98,20 @@ const useCases = [
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
         Create a direct WhatsApp link for your business phone number in seconds. Share it anywhere to let customers message you on WhatsApp with one click.
       </p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-2xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -77,8 +148,28 @@ const useCases = [
     </div>
   </section>
 
-  <!-- Benefits -->
+  <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How to create a WhatsApp link</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { n: "1", title: "Enter your WhatsApp number", desc: "Type in your WhatsApp Business phone number including the country code. E.g. +44 for UK, +1 for US." },
+          { n: "2", title: "Add a pre-filled message", desc: "Optionally add a message that will be pre-filled in the chat when a visitor clicks your link." },
+          { n: "3", title: "Copy your wa.me link", desc: "Copy your generated wa.me link and share it anywhere — email, website, social media, or ads." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Why use WhatsApp links for business?</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -93,7 +184,7 @@ const useCases = [
   </section>
 
   <!-- Use Cases -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Where to use your WhatsApp link</h2>
       <div class="grid gap-6 sm:grid-cols-2">
@@ -102,6 +193,24 @@ const useCases = [
             <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -122,10 +231,10 @@ const useCases = [
     <CrossLinks
       heading="Explore More"
       links={[
-        { href: '/whatsapp-qr-code-generator/', title: 'WhatsApp QR Code Generator', desc: 'Create a scannable WhatsApp QR code.' },
         { href: '/click-to-whatsapp/', title: 'Click-to-WhatsApp', desc: 'Turn ads into WhatsApp conversations.' },
+        { href: '/whatsapp-qr-code-generator/', title: 'WhatsApp QR Code Generator', desc: 'Create a scannable WhatsApp QR code.' },
         { href: '/business-texting/', title: 'Business Texting', desc: 'Full SMS platform for your business.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+        { href: '/click-to-call-software/', title: 'Click-to-Call Software', desc: 'Voice callbacks connected in 28 seconds.' },
       ]}
     />
   </div>

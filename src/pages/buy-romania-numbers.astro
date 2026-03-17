@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const country = "Romania";
@@ -9,8 +10,8 @@ const code = "+40";
 const flag = "🇷🇴";
 
 const seo = {
-  title: `Romania Virtual Phone Numbers (${code}) | LimeCall`,
-  description: `Get a Romania virtual phone number (${code}) instantly. No hardware needed. Route calls, enable callbacks, and grow your Romania business with LimeCall.`,
+  title: `Romania Virtual Phone Numbers (+40) | LimeCall`,
+  description: `Get a Romania virtual phone number (+40) instantly. No hardware needed. Route calls, enable callbacks, and grow your Romania business with LimeCall.`,
   canonical: `https://www.limecall.com/buy-romania-numbers/`,
 };
 
@@ -22,6 +23,74 @@ const features = [
   { title: "SMS & WhatsApp", desc: "Send and receive SMS messages on your Romania virtual number." },
   { title: "Analytics Dashboard", desc: "Full call analytics, reporting, and conversion tracking in one dashboard." },
 ];
+
+const stats = [
+  { value: "Instant", label: "Activation" },
+  { value: "21", label: "Bucharest Area Code" },
+  { value: "+40", label: "RO Country Code" },
+  { value: "99.9%", label: "Uptime SLA" },
+];
+
+const countryFacts = [
+  { title: "Country Code +40", desc: "Romania uses country code +40. Bucharest landline numbers start with area code 21, appearing internationally as +40 21 XX XX XX. Mobile numbers in Romania begin with +40 7XX." },
+  { title: "Fast-Growing Tech Hub", desc: "Romania has a rapidly growing tech and outsourcing sector, with Bucharest and Cluj-Napoca as major IT centers. A local Romanian number helps international companies connect with this talent pool and customer base." },
+  { title: "EU GDPR Applies", desc: "Romania is an EU member state, fully subject to GDPR. Call data, recordings, and customer information handled through LimeCall must comply with EU data protection requirements." },
+];
+
+const comparisonRows = [
+  { aspect: "Setup Time", virtual: "Under 5 minutes", sim: "Days + in-country ID verification" },
+  { aspect: "Monthly Cost", virtual: "From $4/mo", sim: "RON 15–60/mo plan" },
+  { aspect: "Works Internationally", virtual: "Yes — route from anywhere", sim: "Roaming charges apply" },
+  { aspect: "Bucharest Area Code (21)", virtual: "Yes, available", sim: "Depends on SIM region" },
+  { aspect: "EU GDPR Tools", virtual: "Full compliance controls", sim: "Carrier dependent" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I get a Romanian phone number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sign up for LimeCall, select Romania, choose your preferred area code (Bucharest: 21, Cluj-Napoca: 264, Timisoara: 256), and your number activates instantly. No SIM card or Romanian residency required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: "What is Romania's country code?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Romania's country code is +40. A Romanian landline number looks like +40 21 XX XX XX (Bucharest), while mobile numbers are formatted as +40 7XX XXX XXX.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the Bucharest area code?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Bucharest uses area code 21. Internationally, Bucharest numbers are written as +40 21 XX XX XX. LimeCall provides Bucharest virtual numbers with the correct 021 area code.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do Romanians trust calls from foreign numbers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Romanian consumers and businesses are much more likely to answer calls from local +40 numbers than from unknown foreign numbers. A virtual Romanian number from LimeCall shows a local caller ID, significantly improving answer rates.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a Romanian virtual number EU GDPR compliant?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall provides GDPR-compliant infrastructure. Romania is an EU member state, so all call data and recordings are handled in accordance with EU GDPR requirements and Romanian telecom regulations (ANCOM).',
+      },
+    },
+  ],
+};
 
 const faqs = [
   {
@@ -52,6 +121,8 @@ const faqs = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -74,6 +145,20 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-2xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-xs text-dark-400 uppercase tracking-wide">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -89,20 +174,63 @@ const faqs = [
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- Virtual vs SIM Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Virtual Romanian Number vs Romanian SIM Card</h2>
+      <p class="mb-10 text-center text-sm text-dark-400">Why a virtual number beats a physical SIM for most businesses</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-6 py-4 text-left font-semibold text-lime-400">Virtual Number (LimeCall)</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400">Romanian SIM Card</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/20' : ''}`}>
+                <td class="px-6 py-4 font-medium text-white">{row.aspect}</td>
+                <td class="px-6 py-4 text-dark-300">{row.virtual}</td>
+                <td class="px-6 py-4 text-dark-500">{row.sim}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Country Facts -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Romania Telecom & Business Facts</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {countryFacts.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 text-sm font-bold text-lime-400 uppercase tracking-wide">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ with JSON-LD -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
       <div class="space-y-3">
-        {faqs.map(faq => (
+        {faqSchema.mainEntity.map(item => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {item.name}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{item.acceptedAnswer.text}</div>
           </details>
         ))}
       </div>
@@ -124,9 +252,9 @@ const faqs = [
     <CrossLinks
       heading="Explore Virtual Numbers"
       links={[
-        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds.' },
+        { href: '/incoming-numbers/', title: 'Incoming Numbers', desc: 'DID numbers for inbound calls.' },
+        { href: '/virtual-business-numbers/', title: 'Business Numbers', desc: 'Professional virtual numbers for teams.' },
+        { href: '/buy-ukraine-numbers/', title: 'Ukraine Numbers', desc: 'Get a Ukrainian virtual phone number.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

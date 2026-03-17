@@ -2,12 +2,60 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Mass Texting Service | Send Texts to Thousands | LimeCall`,
   description: `Send text messages to thousands of contacts at once with LimeCall mass texting. Drive engagement, boost sales, and reach your audience instantly with bulk SMS.`,
   canonical: `https://www.limecall.com/mass-texting/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is mass texting?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Mass texting is the ability to send a single SMS message to a large group of contacts simultaneously — hundreds, thousands, or more. Businesses use mass texting for promotions, announcements, reminders, and campaigns. Unlike email, SMS messages are read within 90 seconds on average, giving mass texts a 98% open rate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is mass texting legal?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, mass texting is legal when done correctly. In the US, the Telephone Consumer Protection Act (TCPA) requires prior written consent before sending marketing texts. In the UK, PECR and GDPR rules apply. LimeCall helps you stay compliant with built-in opt-in collection, opt-out management, and do-not-contact enforcement.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I get opt-in compliance for mass texting?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'To collect opt-ins, use a keyword campaign (e.g., "Text JOIN to 12345"), a web sign-up form with SMS consent checkbox, or import contacts who have previously given explicit consent. LimeCall stores consent records and automatically honours opt-outs so you stay compliant.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How many texts can I send at once with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall supports sending to thousands of contacts in a single broadcast. The exact limits depend on your plan and the number of sending numbers in your account. Higher-volume plans use multiple numbers and carrier-grade infrastructure to maximise throughput and deliverability.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I personalise mass texts?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports dynamic personalisation tokens in mass texts. You can insert fields like {FirstName}, {Company}, or {CustomField} to make every message feel individually written. Personalised texts significantly outperform generic blasts in both open and response rates.',
+      },
+    },
+  ],
 };
 
 const features = [
@@ -25,9 +73,18 @@ const stats = [
   { value: "45%", label: "Average SMS response rate" },
   { value: "3x", label: "Higher conversion vs email" },
 ];
+
+const comparison = [
+  { metric: "Open rate", sms: "98%", email: "20%" },
+  { metric: "Click rate", sms: "19%", email: "2.5%" },
+  { metric: "Response rate", sms: "45%", email: "6%" },
+  { metric: "Avg time to read", sms: "90 seconds", email: "48 hours" },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -88,19 +145,64 @@ const stats = [
       <div class="grid gap-6 sm:grid-cols-3">
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
-          <h3 class="mb-2 font-semibold text-white">Upload your contacts</h3>
-          <p class="text-sm text-dark-400">Import a CSV or sync from your CRM. Organize into lists and segments.</p>
+          <h3 class="mb-2 font-semibold text-white">Build or import your contact list</h3>
+          <p class="text-sm text-dark-400">Import a CSV, sync from your CRM, or build a list with keyword opt-ins. Organise into segments for targeted sends.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
-          <h3 class="mb-2 font-semibold text-white">Compose your message</h3>
-          <p class="text-sm text-dark-400">Write your text, add personalization, and preview how it looks on mobile.</p>
+          <h3 class="mb-2 font-semibold text-white">Compose with personalisation tokens</h3>
+          <p class="text-sm text-dark-400">Write your message using dynamic fields like {"{FirstName}"} and {"{Company}"}. Preview exactly how it looks before sending.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
-          <h3 class="mb-2 font-semibold text-white">Send or schedule</h3>
-          <p class="text-sm text-dark-400">Send now or schedule for optimal timing. Track delivery and responses in real time.</p>
+          <h3 class="mb-2 font-semibold text-white">Schedule send or send immediately</h3>
+          <p class="text-sm text-dark-400">Send now or schedule for optimal timing. Track opens, clicks, and replies in real time from your dashboard.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Mass texting vs email broadcasts</h2>
+      <div class="overflow-hidden rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/60">
+              <th class="px-6 py-3 text-left font-semibold text-dark-300">Metric</th>
+              <th class="px-6 py-3 text-center font-semibold text-lime-400">Mass SMS</th>
+              <th class="px-6 py-3 text-center font-semibold text-dark-400">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/30' : 'bg-dark-900/10'}`}>
+                <td class="px-6 py-3 text-dark-300">{row.metric}</td>
+                <td class="px-6 py-3 text-center font-semibold text-lime-400">{row.sms}</td>
+                <td class="px-6 py-3 text-center text-dark-500">{row.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -120,9 +222,9 @@ const stats = [
     <CrossLinks
       heading="Explore More"
       links={[
-        { href: '/sms-broadcasts/', title: 'SMS Broadcasts', desc: 'Targeted SMS campaign tool.' },
         { href: '/business-texting/', title: 'Business Texting', desc: 'Two-way SMS for your business.' },
-        { href: '/contacts-lists/', title: 'Contacts & Lists', desc: 'Manage your contact lists.' },
+        { href: '/sms-broadcasts/', title: 'SMS Broadcasts', desc: 'Targeted SMS campaign tool.' },
+        { href: '/sms-for-slack/', title: 'SMS for Slack', desc: 'Send and receive texts from inside Slack.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

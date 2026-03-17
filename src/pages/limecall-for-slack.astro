@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const tool = "Slack";
@@ -11,6 +12,66 @@ const seo = {
   description: `Maximize sales efficiency with LimeCall + Slack! Get call notifications, manage conversations & automate callbacks within Slack. Try it now!`,
   canonical: `https://www.limecall.com/limecall-for-slack/`,
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall work with Slack?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects to your Slack workspace via OAuth. Once authorised, every inbound callback request, missed call, and call recording is automatically posted to the Slack channel you choose. Your team sees lead details — name, number, source page — in real time without leaving Slack.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall notify my team on every incoming call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Every callback request triggers an instant Slack notification with the caller\'s name, phone number, and the page they were on when they requested the call. Missed calls also trigger a notification so your team can follow up quickly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I receive call recordings in Slack?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. After each call ends, LimeCall posts a follow-up Slack message to the same channel with the call outcome, duration, and a link to the call recording. Your team can listen back without leaving Slack.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which Slack channels can I use for LimeCall notifications?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can direct LimeCall notifications to any public or private Slack channel, or to individual DMs. You can also set different channels for different lead types — for example, enterprise leads to one channel and SMB leads to another.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is the Slack integration free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Slack integration is included in all LimeCall paid plans. It is available during your free trial so you can test it before committing. No additional cost, no separate app purchase required.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "Real-time", label: "Call alerts in Slack" },
+  { value: "28s", label: "Average callback time" },
+  { value: "100%", label: "Call visibility for your team" },
+  { value: "5 min", label: "Setup time" },
+];
+
+const howItWorks = [
+  { n: "1", title: "Connect LimeCall to your Slack workspace", desc: "Authorise LimeCall from your dashboard in seconds. Choose which Slack channel receives call alerts." },
+  { n: "2", title: "Every callback posts a Slack notification", desc: "When a visitor requests a callback, your team sees it in Slack instantly — name, number, and source page." },
+  { n: "3", title: "Recordings and outcomes post after each call", desc: "When the call ends, LimeCall posts the call result and a recording link to the same Slack channel." },
+];
 
 const steps = [
   { n: "1", title: "Connect your Slack workspace", desc: "Authorize LimeCall to post to your Slack workspace in seconds — choose which channel receives call alerts." },
@@ -29,6 +90,8 @@ const benefits = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: `LimeCall for ${tool}`, url: seo.canonical }]} />
@@ -45,12 +108,26 @@ const benefits = [
     </div>
   </section>
 
-  <!-- Setup steps -->
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Connect in 3 steps</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
-        {steps.map(s => (
+        {howItWorks.map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
@@ -91,6 +168,24 @@ const benefits = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
@@ -103,9 +198,9 @@ const benefits = [
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More Integrations" links={[
+        { href: '/sms-for-slack/', title: 'SMS for Slack', desc: 'Send and receive texts from inside Slack.' },
         { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
-        { href: '/limecall-for-hubspot/', title: 'LimeCall for HubSpot', desc: 'Log every call automatically in your CRM.' },
-        { href: '/integration-zendesk/', title: 'LimeCall for Zendesk', desc: 'Support-focused call integration.' },
+        { href: '/for-sales-teams/', title: 'LimeCall for Sales Teams', desc: 'Close more deals with instant callbacks.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>

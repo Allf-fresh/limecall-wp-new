@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const country = "United States";
@@ -10,8 +11,8 @@ const slug = "us-virtual-phone-number";
 const flag = "🇺🇸";
 
 const seo = {
-  title: `Get a US Virtual Phone Number (${code}) | LimeCall`,
-  description: `Get a US virtual phone number (${code}) instantly. No hardware needed. Route calls, enable callbacks, and grow your US business with LimeCall.`,
+  title: `Get a US Virtual Phone Number (+1) | LimeCall`,
+  description: `Get a US virtual phone number (+1) instantly. No hardware needed. Route calls, enable callbacks, and grow your US business with LimeCall.`,
   canonical: `https://www.limecall.com/${slug}/`,
 };
 
@@ -23,6 +24,74 @@ const features = [
   { title: "SMS & WhatsApp", desc: "Send and receive SMS messages on your US virtual number." },
   { title: "Analytics Dashboard", desc: "Full call analytics, reporting, and conversion tracking in one dashboard." },
 ];
+
+const stats = [
+  { value: "Instant", label: "Activation" },
+  { value: "200+", label: "US Area Codes" },
+  { value: "99.9%", label: "Uptime SLA" },
+  { value: "No Contract", label: "Cancel Anytime" },
+];
+
+const countryFacts = [
+  { title: "50 States, 200+ Area Codes", desc: "The US spans 50 states, each served by multiple area codes. Having a local area code signals regional presence — a New York 212 number reads very differently than a generic 800 toll-free." },
+  { title: "NANP: US & Canada Share +1", desc: "The North American Numbering Plan (NANP) means the US and Canada share country code +1. Businesses serving both markets can use the same dial plan with distinct area codes for each country." },
+  { title: "Toll-Free Culture", desc: "800, 888, 877, and 866 toll-free numbers are widely expected in US B2B and enterprise sales. LimeCall supports both local area code numbers and toll-free US numbers." },
+];
+
+const comparisonRows = [
+  { aspect: "Setup Time", virtual: "Under 5 minutes", sim: "1–3 business days" },
+  { aspect: "Monthly Cost", virtual: "From $4/mo", sim: "$40–80/mo plan required" },
+  { aspect: "Works Internationally", virtual: "Yes — route from anywhere", sim: "International roaming fees" },
+  { aspect: "Area Code Choice", virtual: "200+ US area codes available", sim: "Assigned by carrier region" },
+  { aspect: "Toll-Free Option", virtual: "800/888/877 available", sim: "Not available on SIM" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I get a US virtual phone number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sign up for LimeCall, select United States, choose your preferred area code (e.g., 212 New York, 310 Los Angeles, 312 Chicago), and your number activates instantly. No SIM card or hardware required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What US area codes can I choose from?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall offers 200+ US area codes covering all 50 states, including 212/646 (New York), 310/323 (Los Angeles), 312/773 (Chicago), 415/628 (San Francisco), 713/832 (Houston), 202 (Washington DC), and many more.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I send and receive SMS with a US virtual number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall US virtual numbers support two-way SMS. You can send and receive text messages from the LimeCall dashboard or mobile app using your US number.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need to be in the USA to use a US virtual number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. You can use your US virtual number from anywhere in the world. Calls are routed over the internet, so your team can answer from any country while callers see a legitimate US number.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I get a toll-free US number through LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. In addition to local area code numbers, LimeCall offers US toll-free numbers with 800, 888, 877, and 866 prefixes. Toll-free numbers are free for US callers and project a national business presence.',
+      },
+    },
+  ],
+};
 
 const faqs = [
   {
@@ -53,6 +122,8 @@ const faqs = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -75,6 +146,20 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-2xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-xs text-dark-400 uppercase tracking-wide">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -90,20 +175,63 @@ const faqs = [
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- Virtual vs SIM Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Virtual US Number vs US SIM Card</h2>
+      <p class="mb-10 text-center text-sm text-dark-400">Why a virtual number beats a physical SIM for most businesses</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-6 py-4 text-left font-semibold text-lime-400">Virtual Number (LimeCall)</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400">US SIM Card</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/20' : ''}`}>
+                <td class="px-6 py-4 font-medium text-white">{row.aspect}</td>
+                <td class="px-6 py-4 text-dark-300">{row.virtual}</td>
+                <td class="px-6 py-4 text-dark-500">{row.sim}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Country Facts -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">US Telecom & Business Facts</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {countryFacts.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 text-sm font-bold text-lime-400 uppercase tracking-wide">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ with JSON-LD -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
       <div class="space-y-3">
-        {faqs.map(faq => (
+        {faqSchema.mainEntity.map(item => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {item.name}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{item.acceptedAnswer.text}</div>
           </details>
         ))}
       </div>
@@ -125,9 +253,9 @@ const faqs = [
     <CrossLinks
       heading="Explore Virtual Numbers"
       links={[
-        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds.' },
+        { href: '/incoming-numbers/', title: 'Incoming Numbers', desc: 'DID numbers for inbound calls.' },
+        { href: '/toll-free-numbers/', title: 'Toll-Free Numbers', desc: 'Free for callers, professional for you.' },
+        { href: '/virtual-business-numbers/', title: 'Business Numbers', desc: 'Professional virtual numbers for teams.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const tool = "HubSpot";
@@ -12,6 +13,66 @@ const seo = {
   description: `Explore the full potential of lead generation with LimeCall's integration with HubSpot. Effortlessly capture, qualify, and convert leads Now!`,
   canonical: `https://www.limecall.com/limecall-for-hubspot/`,
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall integrate with HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects to HubSpot via a native OAuth integration. Authorise the connection in your LimeCall dashboard and every callback is automatically logged as a call activity in HubSpot with full details — caller name, number, duration, recording link, and outcome.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall create HubSpot contacts automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. When a new visitor requests a callback, LimeCall checks HubSpot for an existing contact. If none exists, it creates one automatically and populates the phone number, source page, and any form data captured. If the contact already exists, LimeCall updates the record.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I trigger callbacks from HubSpot workflows?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. You can use HubSpot workflows to trigger outbound callback requests to leads based on lifecycle stage, contact properties, or deal events — for example, triggering a call when a lead reaches the "Sales Qualified Lead" stage.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there a native HubSpot integration or does it require Zapier?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall offers a native HubSpot integration — no Zapier or third-party middleware required. The integration is authorised via OAuth and syncs data in real time without any additional setup steps.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does call recording sync to HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. After each call, LimeCall logs a call activity in the HubSpot contact timeline that includes a link to the call recording. This means your team can listen back to any call directly from the HubSpot contact record.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "100%", label: "Calls auto-logged in HubSpot" },
+  { value: "28s", label: "Callback from HubSpot contacts" },
+  { value: "3x", label: "More deals closed" },
+  { value: "5 min", label: "Setup time" },
+];
+
+const howItWorks = [
+  { n: "1", title: `Connect LimeCall to ${tool} in 5 min`, desc: `Authorise the native OAuth integration from your LimeCall dashboard. No developer, no Zapier — done in under 5 minutes.` },
+  { n: "2", title: "Leads trigger instant callbacks", desc: `When a HubSpot contact or new visitor requests a callback, LimeCall dials your rep and connects them within 28 seconds.` },
+  { n: "3", title: "Every call logged automatically", desc: `Call outcome, duration, and recording are logged in ${tool} the moment the call ends. Zero manual data entry.` },
+];
 
 const steps = [
   { n: "1", title: `Connect LimeCall to ${tool}`, desc: `Authorize the integration in your LimeCall dashboard — takes 2 minutes. No developer needed.` },
@@ -30,6 +91,8 @@ const benefits = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: `LimeCall for ${tool}`, url: seo.canonical }]} />
@@ -46,12 +109,26 @@ const benefits = [
     </div>
   </section>
 
-  <!-- Setup steps -->
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Connect in 3 steps</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
-        {steps.map(s => (
+        {howItWorks.map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
@@ -92,6 +169,24 @@ const benefits = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
@@ -105,8 +200,8 @@ const benefits = [
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More Integrations" links={[
         { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
-        { href: '/limecall-for-slack/', title: 'LimeCall for Slack', desc: 'Get instant call alerts in Slack.' },
-        { href: '/integration-zendesk/', title: 'LimeCall for Zendesk', desc: 'Support-focused call integration.' },
+        { href: '/for-sales-teams/', title: 'LimeCall for Sales Teams', desc: 'Close more deals with instant callbacks.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in 28 seconds wins more deals.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>

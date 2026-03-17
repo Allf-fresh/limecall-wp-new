@@ -2,12 +2,60 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Shared SMS Inbox for Teams | LimeCall`,
   description: `Never miss a customer text again. LimeCall's shared inbox lets your team collaborate on SMS conversations, assign messages, and manage all texts in one place.`,
   canonical: `https://www.limecall.com/shared-inbox/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a shared inbox for calls and SMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A shared inbox for calls and SMS is a centralised place where all inbound customer texts and call activity are visible to your entire team. Instead of messages going to one person\'s phone, everyone on the team sees every conversation — eliminating the problem of missed messages when someone is on holiday, sick, or just busy.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall shared inbox work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall routes all inbound SMS messages to a shared inbox where every team member can see them. Conversations can be assigned to specific reps, marked with status (open, pending, resolved), and annotated with internal notes. The full conversation history is visible to everyone so context is never lost.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can multiple reps see and respond from the same inbox?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Multiple team members can view and respond from the LimeCall shared inbox simultaneously. To avoid duplicate replies, conversations can be assigned to a specific rep. Once assigned, only that rep can respond — but all team members can still view the conversation and leave internal notes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall shared inbox work for both SMS and calls?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s shared inbox handles both SMS conversations and call activity logs. Inbound texts appear as conversations for team members to respond to, while call logs, recordings, and notes from phone calls are also visible to the whole team — giving full visibility across every communication channel.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I assign conversations to reps in the shared inbox?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'In the LimeCall shared inbox, any team member can assign a conversation to a specific rep with one click. The assigned rep receives a notification and takes ownership. Managers can also set up automatic assignment rules — for example, routing leads from a specific number or campaign to a designated team member.',
+      },
+    },
+  ],
 };
 
 const features = [
@@ -31,9 +79,25 @@ const useCases = [
   { title: "Small Businesses", desc: "Everyone on the team can see and respond to customer texts. Perfect for businesses without a dedicated support role." },
   { title: "Remote Teams", desc: "Distributed teams stay aligned on customer conversations regardless of time zone or location." },
 ];
+
+const stats = [
+  { value: "100%", label: "Visibility on team conversations" },
+  { value: "40%", label: "Faster response time" },
+  { value: "Zero", label: "Missed leads" },
+  { value: "5 min", label: "Setup time" },
+];
+
+const comparison = [
+  { feature: "Team visibility", shared: "Everyone sees all conversations", individual: "Only the owner sees messages" },
+  { feature: "Accountability", shared: "Assigned to named rep", individual: "No clear ownership" },
+  { feature: "Collaboration", shared: "Internal notes, shared context", individual: "No way to collaborate" },
+  { feature: "Missed leads", shared: "None — team coverage", individual: "High when rep is away" },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -58,6 +122,20 @@ const useCases = [
     </div>
   </section>
 
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 py-10 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -76,7 +154,7 @@ const useCases = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Set up your shared inbox</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-6 sm:grid-cols-3">
         {steps.map(s => (
           <div class="text-center">
@@ -89,8 +167,35 @@ const useCases = [
     </div>
   </section>
 
-  <!-- Use Cases -->
+  <!-- Comparison table -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Shared inbox vs individual inboxes</h2>
+      <div class="overflow-hidden rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/60">
+              <th class="px-5 py-3 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-3 text-center font-semibold text-lime-400">Shared Inbox</th>
+              <th class="px-5 py-3 text-center font-semibold text-dark-400">Individual Inbox</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/30' : 'bg-dark-900/10'}`}>
+                <td class="px-5 py-3 text-dark-300">{row.feature}</td>
+                <td class="px-5 py-3 text-center text-lime-400 font-medium">{row.shared}</td>
+                <td class="px-5 py-3 text-center text-dark-500">{row.individual}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses shared SMS inboxes</h2>
       <div class="grid gap-6 sm:grid-cols-2">
@@ -99,6 +204,24 @@ const useCases = [
             <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -120,8 +243,8 @@ const useCases = [
       heading="Explore More"
       links={[
         { href: '/business-texting/', title: 'Business Texting', desc: 'Full SMS platform for your business.' },
-        { href: '/sms-for-slack/', title: 'SMS for Slack', desc: 'Text from inside Slack.' },
-        { href: '/contacts-lists/', title: 'Contacts & Lists', desc: 'Manage your contact database.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route leads to the right rep automatically.' },
+        { href: '/for-sales-teams/', title: 'LimeCall for Sales Teams', desc: 'Close more deals with instant callbacks.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const city = "Paris";
@@ -10,8 +11,8 @@ const code = "+33";
 const flag = "🇫🇷";
 
 const seo = {
-  title: `Paris Virtual Phone Numbers (${code}) | LimeCall`,
-  description: `Get a Paris virtual phone number with a local French dialing code (${code}). No hardware needed. Route calls, enable callbacks, and build a Paris presence with LimeCall.`,
+  title: `Paris Virtual Phone Numbers (+33) | LimeCall`,
+  description: `Get a Paris virtual phone number with a local French dialing code (+33). No hardware needed. Route calls, enable callbacks, and build a Paris presence with LimeCall.`,
   canonical: `https://www.limecall.com/paris-virtual-phone-numbers/`,
 };
 
@@ -23,6 +24,74 @@ const features = [
   { title: "SMS & WhatsApp", desc: "Send and receive SMS messages on your Paris virtual number." },
   { title: "Analytics Dashboard", desc: "Full call analytics, reporting, and conversion tracking in one dashboard." },
 ];
+
+const stats = [
+  { value: "Instant", label: "Activation" },
+  { value: "01", label: "Paris Area Code" },
+  { value: "99.9%", label: "Uptime SLA" },
+  { value: "GDPR", label: "Compliant" },
+];
+
+const countryFacts = [
+  { title: "France Country Code +33", desc: "France uses country code +33. Paris local numbers begin with 01 when dialled domestically, appearing as +33 1 XX XX XX XX internationally. A local Paris number immediately signals presence in the French capital." },
+  { title: "Local Trust Matters in France", desc: "French consumers and businesses strongly prefer calling and receiving calls from local numbers. An international or unknown number is often ignored — a Paris local number builds immediate credibility." },
+  { title: "GDPR & ARCEP Compliance", desc: "Operating in France requires compliance with both EU GDPR for data handling and ARCEP (the French telecom regulator) for number usage. LimeCall virtual numbers are provisioned through ARCEP-licensed partners." },
+];
+
+const comparisonRows = [
+  { aspect: "Setup Time", virtual: "Under 5 minutes", sim: "Days + in-person ID required" },
+  { aspect: "Monthly Cost", virtual: "From $4/mo", sim: "€20–50/mo plan + device" },
+  { aspect: "Works Internationally", virtual: "Yes — route from anywhere", sim: "Roaming charges apply" },
+  { aspect: "Paris Area Code (01)", virtual: "Yes, included", sim: "Depends on SIM region" },
+  { aspect: "GDPR Data Controls", virtual: "Full data control in dashboard", sim: "Carrier holds data" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I get a Paris virtual phone number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sign up for LimeCall, select France as your country, choose a Paris area code (01), and your number is provisioned instantly. No SIM card, no hardware, and no visit to France required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the Paris area code?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Paris uses area code 01 within France. Internationally, Paris numbers are written as +33 1 XX XX XX XX. LimeCall provides Paris virtual numbers with the correct 01 area code.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I send and receive SMS with a French virtual number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall French virtual numbers support two-way SMS. You can send and receive text messages to and from French numbers directly from the LimeCall web or mobile app.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a Paris virtual number GDPR compliant?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall operates in compliance with EU GDPR. Call data and recordings are handled according to GDPR requirements, with options for data residency and retention settings in your dashboard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How will French customers see my caller ID?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'When you call out using your LimeCall Paris number, French customers will see a local Paris number (+33 1 XX XX XX XX) on their screen — exactly as if you were calling from a Paris office.',
+      },
+    },
+  ],
+};
 
 const faqs = [
   {
@@ -53,6 +122,8 @@ const faqs = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -75,6 +146,20 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-2xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-xs text-dark-400 uppercase tracking-wide">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -90,20 +175,63 @@ const faqs = [
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- Virtual vs SIM Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Paris Virtual Number vs French SIM Card</h2>
+      <p class="mb-10 text-center text-sm text-dark-400">Why a virtual number beats a physical SIM for most businesses</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-6 py-4 text-left font-semibold text-lime-400">Virtual Number (LimeCall)</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400">French SIM Card</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/20' : ''}`}>
+                <td class="px-6 py-4 font-medium text-white">{row.aspect}</td>
+                <td class="px-6 py-4 text-dark-300">{row.virtual}</td>
+                <td class="px-6 py-4 text-dark-500">{row.sim}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Country Facts -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">France Telecom & Business Facts</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {countryFacts.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 text-sm font-bold text-lime-400 uppercase tracking-wide">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ with JSON-LD -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
       <div class="space-y-3">
-        {faqs.map(faq => (
+        {faqSchema.mainEntity.map(item => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {item.name}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{item.acceptedAnswer.text}</div>
           </details>
         ))}
       </div>
@@ -125,9 +253,9 @@ const faqs = [
     <CrossLinks
       heading="Explore Virtual Numbers"
       links={[
-        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Let visitors call you instantly.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Automated callbacks in 28 seconds.' },
+        { href: '/get-virtual-phone-number-france/', title: 'France Virtual Numbers', desc: 'All French virtual number options.' },
+        { href: '/incoming-numbers/', title: 'Incoming Numbers', desc: 'DID numbers for inbound calls.' },
+        { href: '/virtual-business-numbers/', title: 'Business Numbers', desc: 'Professional virtual numbers for teams.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

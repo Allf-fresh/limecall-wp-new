@@ -2,12 +2,60 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `SMS Broadcasts — Reach Customers Instantly | LimeCall`,
   description: `Send SMS broadcast campaigns to your entire contact list in seconds. Boost sales, send reminders, and drive engagement with targeted bulk SMS from LimeCall.`,
   canonical: `https://www.limecall.com/sms-broadcasts/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is an SMS broadcast?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'An SMS broadcast is a one-to-many message sent from a business to a list of contacts simultaneously. Unlike individual texts, a broadcast sends the same message (with optional personalisation) to hundreds or thousands of recipients at once. Businesses use SMS broadcasts for promotions, reminders, announcements, and event invitations.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is an SMS broadcast different from mass texting?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'SMS broadcast and mass texting are often used interchangeably. The distinction is subtle: "mass texting" typically refers to very high-volume sending (thousands+), while "SMS broadcast" implies more targeted, campaign-based sending to specific segments. LimeCall supports both use cases from the same platform.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I schedule SMS broadcasts in advance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall lets you schedule SMS broadcasts for any future date and time. You can plan campaigns in advance, set the optimal send time for your audience\'s time zone, and manage your entire broadcast calendar from the LimeCall dashboard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I track SMS broadcast performance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall provides real-time delivery reports for every SMS broadcast showing total sent, delivered, failed, and reply counts. You can also track click-through rates if you include links, and see which individual contacts replied to follow up directly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the legal requirements for SMS broadcasts?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For SMS broadcasts, you must have explicit prior consent from each recipient. In the US this is governed by TCPA, in the UK by PECR. Every broadcast must include an easy opt-out option (usually "Reply STOP"). LimeCall handles opt-out management automatically and maintains consent records to help you stay compliant.',
+      },
+    },
+  ],
 };
 
 const features = [
@@ -17,6 +65,13 @@ const features = [
   { title: "Two-Way Replies", desc: "Recipients can reply to your broadcast. Conversations flow into your shared inbox for team follow-up." },
   { title: "Delivery Reports", desc: "See exactly who received, opened, and replied to your broadcast. Real-time delivery analytics." },
   { title: "Opt-Out Management", desc: "Automatic opt-out handling keeps your list clean and ensures compliance with SMS marketing regulations." },
+];
+
+const stats = [
+  { value: "98%", label: "SMS open rate" },
+  { value: "90s", label: "Average read time" },
+  { value: "45%", label: "Average reply rate" },
+  { value: "5x", label: "Better response vs email" },
 ];
 
 const steps = [
@@ -31,9 +86,18 @@ const useCases = [
   { title: "Event Invitations", desc: "Drive attendance to webinars, demos, and events with targeted SMS invitations." },
   { title: "Win-Back Campaigns", desc: "Re-engage dormant leads or customers with a well-timed text message and a compelling offer." },
 ];
+
+const comparison = [
+  { metric: "Open rate", sms: "98%", email: "20%" },
+  { metric: "Response rate", sms: "45%", email: "6%" },
+  { metric: "Avg time to read", sms: "90 seconds", email: "48 hours" },
+  { metric: "Deliverability", sms: "Very high", email: "Spam filters vary" },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -54,6 +118,20 @@ const useCases = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 py-10 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -104,6 +182,51 @@ const useCases = [
     </div>
   </section>
 
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">SMS broadcasts vs email newsletters</h2>
+      <div class="overflow-hidden rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/60">
+              <th class="px-6 py-3 text-left font-semibold text-dark-300">Metric</th>
+              <th class="px-6 py-3 text-center font-semibold text-lime-400">SMS Broadcast</th>
+              <th class="px-6 py-3 text-center font-semibold text-dark-400">Email Newsletter</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/30' : 'bg-dark-900/10'}`}>
+                <td class="px-6 py-3 text-dark-300">{row.metric}</td>
+                <td class="px-6 py-3 text-center font-semibold text-lime-400">{row.sms}</td>
+                <td class="px-6 py-3 text-center text-dark-500">{row.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -119,10 +242,10 @@ const useCases = [
     <CrossLinks
       heading="Explore More"
       links={[
-        { href: '/business-texting/', title: 'Business Texting', desc: 'Two-way SMS for sales and support.' },
         { href: '/mass-texting/', title: 'Mass Texting', desc: 'Text thousands of contacts at once.' },
-        { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Manage SMS as a team.' },
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Two-way SMS for sales and support.' },
         { href: '/sms-notify/', title: 'SMS Notify', desc: 'Automated SMS notifications.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />
   </div>

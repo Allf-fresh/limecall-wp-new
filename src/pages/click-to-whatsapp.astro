@@ -2,12 +2,60 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Click-to-WhatsApp — Turn Ads Into Conversations | LimeCall`,
   description: `Connect Facebook and Instagram ads directly to WhatsApp chat. LimeCall's Click-to-WhatsApp solution generates leads, captures contact details, and starts real conversations instantly.`,
   canonical: `https://www.limecall.com/click-to-whatsapp/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is click to WhatsApp?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Click to WhatsApp is a feature that lets people start a WhatsApp conversation with your business by clicking a button on your website, ad, or social media post. Instead of filling out a form, the visitor is taken directly into WhatsApp and can message you instantly — no app download needed if WhatsApp is already installed.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I add a WhatsApp button to my website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can add a WhatsApp button to your website using LimeCall. After connecting your WhatsApp Business number, LimeCall generates a widget snippet you paste into your site. The button appears on your pages and opens a WhatsApp chat with your number when clicked — setup takes about 5 minutes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need WhatsApp Business to use click to WhatsApp?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For website buttons and click-to-chat links, a regular WhatsApp account technically works, but WhatsApp Business is strongly recommended. It gives you a business profile, automated greetings, quick replies, and access to the WhatsApp Business API for higher-volume messaging and analytics.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I track WhatsApp leads with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall captures lead details from WhatsApp conversations — including contact number, name (if shared), and the source (which ad, page, or campaign triggered the conversation). This data is stored in LimeCall and can be synced to your CRM for full attribution.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is click-to-WhatsApp different from click-to-call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Click-to-call connects a visitor directly to a live phone call with your team within 28 seconds. Click-to-WhatsApp opens a messaging chat on WhatsApp. Both drive conversations, but click-to-call is better for immediate high-intent sales calls, while click-to-WhatsApp suits customers who prefer text-based communication or are browsing outside business hours.',
+      },
+    },
+  ],
 };
 
 const features = [
@@ -34,6 +82,8 @@ const stats = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -103,6 +153,51 @@ const stats = [
     </div>
   </section>
 
+  <!-- Click-to-call vs click-to-WhatsApp callout -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Which is right for you?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/20 bg-lime-950/20 p-6">
+          <h3 class="mb-3 font-semibold text-lime-400">Click-to-Call</h3>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li>Best for: immediate high-intent sales conversations</li>
+            <li>Connected in under 28 seconds</li>
+            <li>Live voice call with a rep</li>
+            <li>Ideal for complex or high-value sales</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="mb-3 font-semibold text-white">Click-to-WhatsApp</h3>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li>Best for: async messaging and after-hours leads</li>
+            <li>Familiar, preferred by many mobile users</li>
+            <li>Supports media, documents, and links</li>
+            <li>Works across 180+ countries on 2B+ devices</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -119,8 +214,8 @@ const stats = [
       heading="Explore More"
       links={[
         { href: '/whatsapp-link-generator/', title: 'WhatsApp Link Generator', desc: 'Generate direct WhatsApp links free.' },
-        { href: '/whatsapp-qr-code-generator/', title: 'WhatsApp QR Generator', desc: 'Create a WhatsApp QR code free.' },
         { href: '/business-texting/', title: 'Business Texting', desc: 'Full SMS platform for your business.' },
+        { href: '/click-to-call-software/', title: 'Click-to-Call Software', desc: 'Voice callbacks connected in 28 seconds.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

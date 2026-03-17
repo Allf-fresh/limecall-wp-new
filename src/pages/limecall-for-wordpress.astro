@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const tool = "WordPress";
@@ -11,6 +12,66 @@ const seo = {
   description: `Struggling to convert website visitors into paying customers? Integrate LimeCall with WordPress for lead capture via website callbacks.`,
   canonical: `https://www.limecall.com/limecall-for-wordpress/`,
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I add LimeCall to WordPress?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can add LimeCall to WordPress in two ways: install our official plugin from the WordPress.org plugin directory, or paste the LimeCall widget JavaScript snippet into your theme\'s footer. Both methods take under 5 minutes and require no coding skills.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there a LimeCall WordPress plugin?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall has an official WordPress plugin available in the WordPress.org plugin directory. Search for "LimeCall" in the Plugins section of your WordPress dashboard, install, and enter your API key to activate the callback widget on your site.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need a developer to install LimeCall on WordPress?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No developer is needed. The LimeCall WordPress plugin installs with one click from the plugin directory, and all configuration is done through a simple settings panel in your WordPress dashboard. No code, no FTP, no technical knowledge required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work with WooCommerce?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall works seamlessly with WooCommerce. You can add callback widgets to product pages, cart, checkout, and any WooCommerce page. This lets shoppers talk to someone instantly at the moment they\'re most likely to convert.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does the LimeCall widget slow down my WordPress site?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. The LimeCall widget script is loaded asynchronously and has a negligible impact on page load time. It does not block rendering, and the script is served from a fast global CDN. Most sites see no measurable impact on Core Web Vitals.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "5 min", label: "WordPress install time" },
+  { value: "10-12x", label: "More conversions vs forms" },
+  { value: "0", label: "Lines of code required" },
+  { value: "40+", label: "Countries supported" },
+];
+
+const howItWorks = [
+  { n: "1", title: "Install LimeCall plugin or paste widget code", desc: "Find LimeCall in the WordPress plugin directory and install with one click — or paste our snippet into your theme footer." },
+  { n: "2", title: "Widget appears on your WordPress site", desc: "Configure which pages show the widget from your LimeCall dashboard. Target high-intent pages like pricing, product, or contact." },
+  { n: "3", title: "Leads call — your team responds in 28s", desc: "Visitors request a callback. LimeCall dials your team and connects both parties in under 28 seconds." },
+];
 
 const steps = [
   { n: "1", title: "Install the LimeCall plugin", desc: "Search for 'LimeCall' in the WordPress plugin directory and install with one click. No FTP, no manual uploads." },
@@ -29,6 +90,8 @@ const benefits = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: `LimeCall for ${tool}`, url: seo.canonical }]} />
@@ -45,12 +108,26 @@ const benefits = [
     </div>
   </section>
 
-  <!-- Setup steps -->
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Install in 3 steps</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
-        {steps.map(s => (
+        {howItWorks.map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
@@ -91,6 +168,24 @@ const benefits = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
@@ -104,8 +199,8 @@ const benefits = [
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More ways to embed LimeCall" links={[
         { href: '/limecall-for-webflow/', title: 'LimeCall for Webflow', desc: 'Add LimeCall to Webflow with one snippet.' },
-        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
-        { href: '/click-2-call/', title: 'Click to Call', desc: 'Learn how our core callback feature works.' },
+        { href: '/click-to-call-software/', title: 'Click-to-Call Software', desc: 'Learn how our core callback feature works.' },
+        { href: '/how-it-works/', title: 'How It Works', desc: 'See the full LimeCall flow end to end.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>

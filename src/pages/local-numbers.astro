@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -19,6 +20,13 @@ const benefits = [
   { title: "Full Call Features", desc: "Every local number includes call routing, recording, callback automation, and SMS — all included." },
 ];
 
+const stats = [
+  { value: "40+", label: "Countries Available" },
+  { value: "Instant", label: "Activation" },
+  { value: "68%", label: "More Likely to Answer Local Calls" },
+  { value: "No Hardware", label: "Required" },
+];
+
 const countries = [
   { name: "United States", code: "+1", href: "/buy-usa-numbers/", flag: "🇺🇸" },
   { name: "United Kingdom", code: "+44", href: "/get-uk-virtual-phone-number/", flag: "🇬🇧" },
@@ -29,9 +37,97 @@ const countries = [
   { name: "India", code: "+91", href: "/india-virtual-phone-number/", flag: "🇮🇳" },
   { name: "Singapore", code: "+65", href: "/singapore-virtual-phone-number/", flag: "🇸🇬" },
 ];
+
+const comparisonRows = [
+  {
+    aspect: "Trust Factor",
+    local: "High — customers recognise their area code",
+    tollFree: "Medium — professional but impersonal",
+    intl: "Low — often blocked or ignored",
+  },
+  {
+    aspect: "Call Answer Rates",
+    local: "Up to 4x higher than unknown numbers",
+    tollFree: "Good for inbound — familiar to consumers",
+    intl: "Poor — many people do not answer foreign numbers",
+  },
+  {
+    aspect: "Cost to Caller",
+    local: "Local rate or included in plan",
+    tollFree: "Free for the caller",
+    intl: "International rates — discourages calls",
+  },
+  {
+    aspect: "Best For",
+    local: "Local market presence, SMB, field sales",
+    tollFree: "National brands, support lines, US/CA enterprise",
+    intl: "Internal use or markets without virtual options",
+  },
+  {
+    aspect: "Setup Speed",
+    local: "Instant with LimeCall",
+    tollFree: "Instant with LimeCall",
+    intl: "Depends on carrier and country",
+  },
+];
+
+const howItWorks = [
+  { step: "1", title: "Choose Country & Area Code", desc: "Browse 40+ countries and select the city or area code that matches your target market. Preview available numbers before confirming." },
+  { step: "2", title: "Number Provisioned Instantly", desc: "Your local number activates the moment you complete signup. No waiting for hardware, SIM cards, or carrier approval." },
+  { step: "3", title: "Calls Forward to Any Phone Worldwide", desc: "Incoming calls to your local number route to your mobile, desktop app, or any phone number — anywhere in the world." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a local phone number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A local phone number is a telephone number with an area code specific to a city or region — for example, 212 for New York or 020 for London. When you call from a local number, recipients see a familiar area code rather than an unknown or international number, which significantly increases answer rates.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why do businesses use local phone numbers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Businesses use local numbers to build trust and increase answer rates in specific markets. Research shows calls from local numbers are answered up to 4x more often than calls from unknown or international numbers. Local numbers also convey a physical presence in a market without requiring an actual office.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I get a local number in another country?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sign up for LimeCall, browse the available countries (40+), choose your preferred country and area code, and your local number activates instantly. No local address, SIM card, or in-country presence is required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I have local numbers in multiple cities?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall lets you provision local numbers in multiple cities and countries from a single account. You can manage all numbers, routing rules, and analytics from one dashboard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do local virtual numbers work for SMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall local virtual numbers support two-way SMS in supported countries. You can send and receive text messages using your local number from the LimeCall web app or mobile app.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -56,6 +152,20 @@ const countries = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-2xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-xs text-dark-400 uppercase tracking-wide">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Benefits -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -71,8 +181,24 @@ const countries = [
     </div>
   </section>
 
-  <!-- Popular Countries -->
+  <!-- How It Works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {howItWorks.map(h => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{h.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{h.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{h.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Countries -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Popular local number countries</h2>
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -94,26 +220,52 @@ const countries = [
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- Comparison: Local vs Toll-Free vs International -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Local vs Toll-Free vs International Number</h2>
+      <p class="mb-10 text-center text-sm text-dark-400">Choose the right number type for your use case</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Factor</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">Local Number</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Toll-Free Number</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-400">International Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/20' : ''}`}>
+                <td class="px-5 py-4 font-medium text-white">{row.aspect}</td>
+                <td class="px-5 py-4 text-dark-300">{row.local}</td>
+                <td class="px-5 py-4 text-dark-400">{row.tollFree}</td>
+                <td class="px-5 py-4 text-dark-500">{row.intl}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ with JSON-LD -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Get started in 3 steps</h2>
-      <div class="grid gap-6 sm:grid-cols-3">
-        <div class="text-center">
-          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
-          <h3 class="mb-2 font-semibold text-white">Sign up free</h3>
-          <p class="text-sm text-dark-400">Create your LimeCall account. No credit card required for the free trial.</p>
-        </div>
-        <div class="text-center">
-          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
-          <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
-          <p class="text-sm text-dark-400">Pick a country and city area code. Preview and select your preferred number.</p>
-        </div>
-        <div class="text-center">
-          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
-          <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
-          <p class="text-sm text-dark-400">Your number activates instantly. Route calls to any device, anywhere.</p>
-        </div>
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {item.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{item.acceptedAnswer.text}</div>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -133,9 +285,9 @@ const countries = [
     <CrossLinks
       heading="Explore More"
       links={[
-        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/toll-free-numbers/', title: 'Toll-Free Numbers', desc: 'Free for callers, professional for you.' },
         { href: '/incoming-numbers/', title: 'Incoming Numbers', desc: 'DID numbers for inbound calls.' },
+        { href: '/toll-free-numbers/', title: 'Toll-Free Numbers', desc: 'Free for callers, professional for you.' },
+        { href: '/virtual-business-numbers/', title: 'Business Numbers', desc: 'Professional virtual numbers for teams.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

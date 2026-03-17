@@ -2,12 +2,60 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Sales Enablement Software for E-commerce Industry | LimeCall`,
   description: `Get closer to your potential shoppers and sell more and increase the satisfaction with Sales Enablement Software for E-commerce Industry`,
   canonical: `https://www.limecall.com/limecall-for-ecommerce-and-retail-2/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does a callback widget reduce cart abandonment?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Cart abandonment often happens because shoppers have an unanswered question — about product specs, delivery times, or return policies. A LimeCall callback widget lets them get an instant answer from a human. Stores using callbacks see significant reductions in checkout abandonment because buyers\' last-minute objections are resolved on the spot.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work with Shopify?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Shopify stores. You can add the callback widget by pasting a snippet into your Shopify theme, or via the LimeCall integration. The widget can be triggered on product pages, cart, and checkout, and LimeCall can sync customer interaction data with your Shopify records.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I trigger a callback offer on exit intent?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall includes exit-intent triggers that detect when a visitor moves their cursor toward closing the tab or navigating away. When exit intent is detected, the callback widget can automatically pop up with a message like "Have a question before you go? Talk to us in 28 seconds." This catches abandoning visitors at the last moment.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the ROI for e-commerce callbacks?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'E-commerce businesses using callback tools typically see a 10-12x increase in conversions compared to web forms. A single recovered high-value cart often pays for months of LimeCall usage. The ROI is strongest for stores selling products over £100 where buyers need reassurance before purchasing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall callbacks for post-purchase upsells?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. You can trigger post-purchase callbacks to thank customers, confirm their order, and introduce complementary products. Automated SMS follow-ups can also be sent after purchase to invite customers to call back for accessory recommendations, extended warranties, or loyalty offers.',
+      },
+    },
+  ],
 };
 
 const challenges = [
@@ -31,9 +79,17 @@ const stats = [
   { value: "67%", label: "Cart abandonment rate industry-wide" },
   { value: "80%", label: "Fewer missed customer contacts" },
 ];
+
+const howItWorks = [
+  { n: "1", title: "Cart abandonment triggers callback offer", desc: "LimeCall detects when a shopper hesitates at checkout and offers an instant callback — right when they're about to leave." },
+  { n: "2", title: "Shopper clicks — connected in 28s", desc: "The shopper requests a callback. LimeCall dials your support or sales team and connects both parties in 28 seconds." },
+  { n: "3", title: "Question answered — sale completed", desc: "Your specialist answers the question, closes the objection, and the shopper completes the purchase with confidence." },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: 'E-commerce & Retail', url: seo.canonical }]} />
@@ -83,8 +139,24 @@ const stats = [
     </div>
   </section>
 
-  <!-- Benefits -->
+  <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {howItWorks.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall helps e-commerce & retail</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -99,7 +171,7 @@ const stats = [
   </section>
 
   <!-- Scenario -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
         <h2 class="text-xl font-bold text-white mb-4">The £800 sofa that almost didn't sell</h2>
@@ -109,6 +181,24 @@ const stats = [
         <p class="text-dark-400 text-sm">
           Without that callback, the customer would have bought from a competitor with a clearer product description. One call, one sale saved.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -125,9 +215,9 @@ const stats = [
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More solutions" links={[
-        { href: '/limecall-for-real-estate/', title: 'Real Estate', desc: 'Convert property browsers into booked viewings.' },
-        { href: '/limecall-for-finance-insurance/', title: 'Finance & Insurance', desc: 'Convert financial leads before they go elsewhere.' },
-        { href: '/use-cases/', title: 'All Use Cases', desc: 'See how LimeCall works across every industry.' },
+        { href: '/lead-generation-for-e-commerce/', title: 'E-commerce Lead Generation', desc: 'Capture more leads from your online store.' },
+        { href: '/click-to-call-software/', title: 'Click-to-Call Software', desc: 'Learn how our core callback feature works.' },
+        { href: '/increase-your-website-conversions/', title: 'Increase Conversions', desc: 'Proven tactics to convert more visitors.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>

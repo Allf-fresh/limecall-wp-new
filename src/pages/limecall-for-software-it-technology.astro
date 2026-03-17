@@ -2,12 +2,60 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Sales Enablement software for Software, IT & Technology`,
   description: `Sales Enablement software for Software, IT & Technology. LimeCall is the most reviewed and #1 rated help desk software for SMB in 2019.`,
   canonical: `https://www.limecall.com/limecall-for-software-it-technology/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help SaaS companies?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall helps SaaS companies convert more website visitors into demos and paying customers by connecting high-intent prospects with sales reps in under 28 seconds. It also helps activate trial users at key moments and reduces trial-to-paid churn by enabling real-time human conversations.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall for demo bookings?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is ideal for demo bookings. When a prospect clicks "Book a Demo" or "Talk to Sales," LimeCall either connects them instantly with an available rep or lets them schedule a future callback. Companies using LimeCall for demo booking report up to 3x more demos booked.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work with SaaS pricing models?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall offers per-seat and usage-based pricing that scales with your SaaS team. Whether you have 2 reps or 200, the platform scales to match. All plans include CRM integrations, call routing, and analytics.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How can LimeCall improve free trial conversions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall improves free trial conversions by triggering callback prompts at key in-product moments — when a trial user hits a paywall, reaches a setup step where they get stuck, or is approaching trial expiry. A human conversation at the right moment significantly increases upgrade rates.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do tech companies use callbacks to close deals?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Tech companies use LimeCall callbacks on pricing pages, enterprise landing pages, and "Contact Sales" CTAs. When a buyer signals high intent, LimeCall connects them with a senior AE or technical pre-sales engineer in seconds — before they can open a competitor\'s tab.',
+      },
+    },
+  ],
 };
 
 const challenges = [
@@ -26,14 +74,22 @@ const benefits = [
 ];
 
 const stats = [
+  { value: "3x", label: "More demos booked" },
+  { value: "391%", label: "Higher contact rate vs web forms" },
   { value: "28s", label: "Average callback time" },
-  { value: "3x", label: "More demo conversions" },
   { value: "5 min", label: "Average setup time" },
-  { value: "50+", label: "Countries supported" },
+];
+
+const howItWorks = [
+  { n: "1", title: "Embed LimeCall on your high-intent pages", desc: "Add the widget to pricing, features, and 'Book a Demo' pages — the pages where buyers show the strongest purchase intent." },
+  { n: "2", title: "Prospect clicks — rep connects in 28s", desc: "When a buyer clicks your callback CTA, LimeCall dials an available rep and connects both parties in under 28 seconds." },
+  { n: "3", title: "Call logged, deal moves forward", desc: "Every call is automatically logged in your CRM with recording and outcome. The deal stage updates, and follow-up sequences fire." },
 ];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: 'Software & Technology', url: seo.canonical }]} />
@@ -83,8 +139,24 @@ const stats = [
     </div>
   </section>
 
-  <!-- Benefits -->
+  <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works for SaaS teams</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {howItWorks.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall helps tech companies</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -99,7 +171,7 @@ const stats = [
   </section>
 
   <!-- Scenario -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
         <h2 class="text-xl font-bold text-white mb-4">How a SaaS company books 3x more demos</h2>
@@ -109,6 +181,24 @@ const stats = [
         <p class="text-dark-400 text-sm">
           No form. No waiting. No "we'll get back to you." Just a conversation — while intent is highest.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -125,10 +215,10 @@ const stats = [
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More solutions" links={[
-        { href: '/limecall-for-finance-insurance/', title: 'Finance & Insurance', desc: 'Convert leads before they go to a competitor.' },
-        { href: '/limecall-for-real-estate/', title: 'Real Estate', desc: 'Convert property browsers into booked viewings.' },
-        { href: '/use-cases/', title: 'All Use Cases', desc: 'See how LimeCall works across every industry.' },
+        { href: '/for-sales-teams/', title: 'LimeCall for Sales Teams', desc: 'Close more deals with instant callbacks.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route leads to the right rep automatically.' },
         { href: '/integrations/', title: 'Integrations', desc: 'Connect with HubSpot, Slack, Salesforce, and more.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>
   </div>

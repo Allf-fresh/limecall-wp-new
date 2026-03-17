@@ -1,15 +1,312 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Get a local number for your business - LimeCall`,
-  description: `Generate more leads from your website by triggering potential customers and deliver them callback with Lead Generation by LimeCall`,
-  canonical: `https://www.limecall.com/get-a-local-number-for-your-business/`,
+  title: 'Get a Local Number for Your Business | LimeCall',
+  description: 'Build local trust with a local phone number in any city or country. 40+ countries, instant activation, 68% more likely to answer. No hardware required.',
+  canonical: `${site.url}/get-a-local-number-for-your-business/`,
+};
+
+const stats = [
+  { value: '40+', label: 'Countries Available', sub: 'Local numbers in every major market worldwide' },
+  { value: 'Instant', label: 'Activation', sub: 'Your local number is live in under 5 minutes' },
+  { value: '68%', label: 'More Likely to Answer', sub: 'customers answer calls from local numbers vs. unknown' },
+  { value: '0', label: 'Hardware Needed', sub: 'Receive calls on any device, anywhere' },
+];
+
+const features = [
+  {
+    icon: '📍',
+    name: 'City & Area Code Selection',
+    description: 'Choose a number with the exact area code you need. Pick from hundreds of city and regional codes in 40+ countries to match your target market.',
+  },
+  {
+    icon: '⚡',
+    name: 'Instant Provisioning',
+    description: 'Your local number is live within minutes of selecting it. No paperwork, no waiting periods, no carrier negotiations — just immediate activation.',
+  },
+  {
+    icon: '📡',
+    name: 'Call Forwarding to Any Phone',
+    description: 'Forward calls from your local number to your mobile, desk phone, or a team of agents. Your business number rings wherever your team is working.',
+  },
+  {
+    icon: '💬',
+    name: 'SMS Enabled',
+    description: 'Send and receive text messages from your local business number. Run SMS campaigns, send appointment reminders, and respond to customer queries.',
+  },
+  {
+    icon: '🎙️',
+    name: 'Call Recording',
+    description: 'Record inbound and outbound calls automatically for quality assurance, training, and compliance. Recordings stored securely in the cloud.',
+  },
+  {
+    icon: '👥',
+    name: 'Shared Team Access',
+    description: 'Give your entire team access to one local number. Calls ring to all available agents and the first to answer connects — no call left unanswered.',
+  },
+];
+
+const useCases = [
+  {
+    icon: '🛒',
+    title: 'Retail & E-commerce',
+    description: 'Give local customers a local number to call for support and enquiries. Local numbers get far more calls than generic 1-800 or international numbers.',
+  },
+  {
+    icon: '🏠',
+    title: 'Real Estate & Property',
+    description: 'Agents working a specific city or suburb use local numbers to build instant trust with buyers and sellers who prefer dealing locally.',
+  },
+  {
+    icon: '🚀',
+    title: 'Market Expansion',
+    description: 'Testing a new city or country? Get a local number before you have an office. Signal local presence from day one without any infrastructure investment.',
+  },
+  {
+    icon: '🏥',
+    title: 'Healthcare & Professional Services',
+    description: 'Patients and clients expect local businesses. A local number signals you are nearby, accessible, and part of their community.',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Choose Your Location & Area Code',
+    description: 'Select the country, state, and city you want your local number in. Browse available numbers with your preferred area code and pick one that fits.',
+  },
+  {
+    number: '02',
+    title: 'Set Up Routing & Business Hours',
+    description: 'Configure where calls should ring — your mobile, a team of reps, or a shared queue. Set business hours, voicemail, and after-hours messages.',
+  },
+  {
+    number: '03',
+    title: 'Start Receiving Local Calls',
+    description: 'Your local business number is live. Share it on your website, ads, and business cards. Callers see a local number and are significantly more likely to call.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Why should a business use a local phone number?',
+    answer: 'Research consistently shows that customers are 68% more likely to answer and return calls from local numbers than from unknown or toll-free numbers. A local number signals presence, trust, and accessibility — particularly important for service businesses, real estate, healthcare, and any company expanding into a new market.',
+  },
+  {
+    question: 'How do I get a local business phone number?',
+    answer: 'Sign up for LimeCall, navigate to the Numbers section, select the country and city you want, choose your preferred area code, and your local number is activated instantly. The entire process takes under 5 minutes.',
+  },
+  {
+    question: 'Can I get a local number in another country?',
+    answer: 'Yes. LimeCall provides local numbers in 40+ countries including the US, UK, Canada, Australia, Germany, France, and many more. You can manage numbers in multiple countries from a single LimeCall dashboard.',
+  },
+  {
+    question: 'Does a local business number forward to my mobile?',
+    answer: 'Yes. You can forward calls from your local number to your personal mobile, a desk phone, or a VoIP app. You can also set up simultaneous ring (calling multiple devices at once) or sequential ring (try one device, then another) based on your team\'s setup.',
+  },
+  {
+    question: 'Can I send texts from a local business number?',
+    answer: 'Yes. LimeCall local numbers support SMS in supported countries. You can send and receive text messages from your local number via the dashboard or API. This is useful for appointment reminders, lead follow-ups, and two-way customer communication.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
-  </div>
+  <JsonLd schema={faqJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Get a Local Number for Your Business', url: `${site.url}/get-a-local-number-for-your-business/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Local Business Numbers
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Build Local Trust with a<br />
+        <span class="text-lime-400">Local Phone Number in Any City</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Customers are 68% more likely to answer calls from a local number. Get a local business number with your city's area code — live in minutes, no hardware, no contracts.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Get Your Local Number Free
+        </a>
+        <a
+          href="/incoming-numbers"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Browse Numbers
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Instant activation · No hardware needed · 40+ countries available</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/60 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        {stats.map((s) => (
+          <div class="p-4">
+            <div class="text-4xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-2 text-sm font-bold text-white">{s.label}</div>
+            <div class="mt-1 text-xs text-dark-500">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Everything You Need with Your<br />
+          <span class="text-lime-400">Local Business Number</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          A LimeCall local number is more than just a phone number — it's a fully featured business communication tool.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-4">{f.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{f.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Who Benefits from<br />
+          <span class="text-lime-400">Local Business Numbers?</span>
+        </h2>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {useCases.map((uc) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-3">{uc.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Get Your Local Number<br />
+          <span class="text-lime-400">in 3 Simple Steps</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map((step) => (
+          <div class="relative flex flex-col rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="text-4xl font-extrabold text-lime-500/20 mb-4 leading-none">{step.number}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{step.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Get a Local Number Today.<br />
+        <span class="text-lime-400">Active in Under 5 Minutes.</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Join thousands of businesses that trust LimeCall for local numbers in 40+ countries. No hardware, no contracts.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Get My Local Number
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">Free plan available · No hardware · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Explore More Number Solutions"
+        links={[
+          { href: '/incoming-numbers', title: 'Incoming Numbers', desc: 'Manage all your inbound business numbers in one place.' },
+          { href: '/virtual-business-numbers', title: 'Virtual Business Numbers', desc: 'Professional numbers in 40+ countries, instantly activated.' },
+          { href: '/toll-free-numbers', title: 'Toll-Free Numbers', desc: 'Give customers a free-to-call professional number.' },
+          { href: '/pricing', title: 'Pricing', desc: 'Transparent plans starting at $0/month.' },
+        ]}
+      />
+    </div>
+  </section>
 </Base>

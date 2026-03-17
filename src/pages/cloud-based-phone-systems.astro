@@ -1,15 +1,316 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Best cloud-based phone systems - Top 11 | By LimeCall`,
-  description: `Find the perfect cloud-based phone system for your needs from the list below. 11 Best cloud-based phone systems in 2020 by LimeCall`,
-  canonical: `https://www.limecall.com/cloud-based-phone-systems/`,
+  title: 'Cloud-Based Phone Systems for Business | LimeCall',
+  description: 'Replace your legacy phone system with a cloud-based solution. 99.9% uptime, 40+ countries, 5-minute setup, 60% cost savings. No hardware required.',
+  canonical: `${site.url}/cloud-based-phone-systems/`,
+};
+
+const stats = [
+  { value: '99.9%', label: 'Uptime Guaranteed', sub: 'Enterprise-grade reliability with redundant infrastructure' },
+  { value: '40+', label: 'Countries', sub: 'Local numbers in every major market worldwide' },
+  { value: '5 min', label: 'Setup Time', sub: 'Go live in minutes, not days or weeks' },
+  { value: '60%', label: 'Cost Savings', sub: 'vs. traditional PBX hardware and maintenance' },
+];
+
+const features = [
+  {
+    icon: '🌐',
+    name: 'Virtual Numbers',
+    description: 'Get local, toll-free, or vanity phone numbers in 40+ countries instantly. Build local presence in any market without a physical office.',
+  },
+  {
+    icon: '🔀',
+    name: 'Intelligent Call Routing',
+    description: 'Route inbound calls to the right team or agent based on skills, availability, time zones, or custom rules. Never miss a call again.',
+  },
+  {
+    icon: '🎙️',
+    name: 'Call Recording',
+    description: 'Record every call automatically for quality assurance, compliance, and coaching. Store recordings securely in the cloud for 90 days.',
+  },
+  {
+    icon: '🤖',
+    name: 'IVR & Auto-Attendant',
+    description: 'Welcome callers with a professional menu. Route them to the right department without a human touch using customisable IVR flows.',
+  },
+  {
+    icon: '👥',
+    name: 'Team Management',
+    description: 'Add or remove agents, set business hours, create ring groups, and manage permissions — all from a single dashboard.',
+  },
+  {
+    icon: '📊',
+    name: 'Analytics Dashboard',
+    description: 'Track call volume, average handle time, missed calls, and rep performance in real-time. Make data-driven decisions every day.',
+  },
+];
+
+const useCases = [
+  {
+    icon: '🏢',
+    title: 'Replace Legacy PBX',
+    description: 'Ditch expensive on-premises hardware. Move your entire phone system to the cloud and cut costs by up to 60% in the first year.',
+  },
+  {
+    icon: '🌍',
+    title: 'Expand to New Markets',
+    description: 'Get a local number in any country in minutes. Give customers a familiar number while your team manages everything from headquarters.',
+  },
+  {
+    icon: '🏠',
+    title: 'Enable Remote Teams',
+    description: 'Your team makes and receives business calls from anywhere using their laptop or mobile. No desk phone or VPN required.',
+  },
+  {
+    icon: '📈',
+    title: 'Scale Sales Operations',
+    description: 'Add new agents and numbers in seconds as your team grows. No contract renegotiations or hardware procurement delays.',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Sign Up & Choose Your Numbers',
+    description: 'Create your account and select virtual numbers in any country. Choose local, toll-free, or port your existing number — all in under 5 minutes.',
+  },
+  {
+    number: '02',
+    title: 'Configure Your Call Flows',
+    description: 'Set up your IVR menu, routing rules, business hours, and team assignments with our drag-and-drop editor. No technical knowledge needed.',
+  },
+  {
+    number: '03',
+    title: 'Go Live & Start Saving',
+    description: 'Your cloud phone system is live. Team members use the web dashboard or mobile app to take calls from anywhere in the world.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is a cloud-based phone system?',
+    answer: 'A cloud-based phone system (also called VoIP or hosted PBX) routes calls over the internet instead of traditional phone lines. All infrastructure lives in the cloud — you just need an internet connection. This means no expensive hardware, free upgrades, and the ability to call from anywhere.',
+  },
+  {
+    question: 'How much does a cloud-based phone system cost?',
+    answer: 'LimeCall plans start at $0/month for basic call functionality and scale up to $99/month for full-featured capabilities including virtual numbers, call recording, and API access. Most businesses save 40–60% compared to traditional PBX systems when factoring in hardware, maintenance, and per-minute costs.',
+  },
+  {
+    question: 'Do I need any hardware to use a cloud phone system?',
+    answer: 'No hardware is required. Your team can make and receive calls using the LimeCall web dashboard, the mobile app (iOS and Android), or any SIP-compatible desk phone if preferred. Most teams go completely hardware-free within their first month.',
+  },
+  {
+    question: 'Can I keep my existing phone number when switching?',
+    answer: 'Yes. LimeCall supports number porting for most countries. You submit a porting request, we handle the paperwork with your current carrier, and your existing number transfers — usually within 5–10 business days. During transition, calls forward automatically so you never miss anything.',
+  },
+  {
+    question: 'What happens if my internet connection goes down?',
+    answer: 'LimeCall includes automatic failover protection. If your internet drops, calls automatically forward to a backup mobile number or voicemail. You can pre-configure a fallback routing path in your dashboard so business continuity is always maintained.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
-  </div>
+  <JsonLd schema={faqJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Cloud-Based Phone Systems', url: `${site.url}/cloud-based-phone-systems/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Cloud Phone Systems
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Replace Your Old Phone System<br />
+        <span class="text-lime-400">with a Cloud-Based Solution</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Ditch expensive hardware, long contracts, and IT headaches. LimeCall's cloud phone system gives your team professional calling in 40+ countries — set up in 5 minutes, no hardware required.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free — No Card Needed
+        </a>
+        <a
+          href="/contact-us"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Book a Demo
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan available · No hardware required · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/60 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        {stats.map((s) => (
+          <div class="p-4">
+            <div class="text-4xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-2 text-sm font-bold text-white">{s.label}</div>
+            <div class="mt-1 text-xs text-dark-500">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Everything Your Business Needs<br />
+          <span class="text-lime-400">in One Cloud Platform</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          LimeCall replaces your entire phone infrastructure with a modern, flexible cloud system built for growing teams.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-4">{f.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{f.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Who Uses <span class="text-lime-400">Cloud Phone Systems?</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          From startups to enterprises, teams of every size switch to cloud calling for speed, flexibility, and significant cost savings.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {useCases.map((uc) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-3">{uc.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Set Up in <span class="text-lime-400">3 Simple Steps</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Your entire cloud phone system is live in under 5 minutes. No IT department, no hardware, no waiting.
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map((step) => (
+          <div class="relative flex flex-col rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="text-4xl font-extrabold text-lime-500/20 mb-4 leading-none">{step.number}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{step.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Ready to Modernise Your<br />
+        <span class="text-lime-400">Business Phone System?</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Join thousands of businesses that have ditched legacy PBX for LimeCall's cloud phone system. Set up in 5 minutes, cancel anytime.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free Trial
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">No credit card required · Free plan available · 30-day money-back guarantee</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Explore More Phone & Calling Features"
+        links={[
+          { href: '/incoming-numbers', title: 'Incoming Numbers', desc: 'Manage all your inbound numbers from one dashboard.' },
+          { href: '/virtual-numbers', title: 'Virtual Numbers', desc: 'Get local and toll-free numbers in 40+ countries.' },
+          { href: '/pricing', title: 'Pricing', desc: 'Transparent plans starting at $0/month.' },
+          { href: '/features', title: 'All Features', desc: 'Explore every feature LimeCall has to offer.' },
+        ]}
+      />
+    </div>
+  </section>
 </Base>

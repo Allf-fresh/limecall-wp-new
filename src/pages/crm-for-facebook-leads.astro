@@ -1,15 +1,314 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Best CRM for Facebook Leads: Drive Engagement & Sales`,
-  description: `Turn Facebook Likes into Customers! LimeCall's CRM streamlines Facebook lead capture, offers multiple communication methods & simplifies management. Increase engagement. Try LimeCall now!`,
-  canonical: `https://www.limecall.com/crm-for-facebook-leads/`,
+  title: 'CRM for Facebook Leads — Instant Callback from Meta Ads | LimeCall',
+  description: 'Call Facebook leads in under 28 seconds before they go cold. Connect Meta Lead Ads to LimeCall for instant callbacks. 3x more Facebook leads converted.',
+  canonical: `${site.url}/crm-for-facebook-leads/`,
+};
+
+const stats = [
+  { value: '90%', label: 'Go Cold Within 1 Hour', sub: 'of Facebook leads if not contacted immediately' },
+  { value: '28s', label: 'Callback Speed', sub: 'from Facebook lead submission to live call' },
+  { value: '3x', label: 'More Leads Converted', sub: 'vs. manual follow-up on Facebook ad leads' },
+  { value: '5 min', label: 'Setup Time', sub: 'connect Meta Lead Ads to LimeCall instantly' },
+];
+
+const features = [
+  {
+    icon: '📘',
+    name: 'Facebook Lead Ads Integration',
+    description: 'Connect Meta Lead Ads directly to LimeCall. Every form submission from your Facebook or Instagram ads triggers an automatic callback within 28 seconds.',
+  },
+  {
+    icon: '⚡',
+    name: 'Instant Callback Trigger',
+    description: 'The moment a Facebook lead submits their details, LimeCall dials your rep and the prospect simultaneously — before they close the app or forget your brand.',
+  },
+  {
+    icon: '🔄',
+    name: 'Lead Form Sync',
+    description: 'All lead form data captured by Meta — name, phone, email, custom questions — syncs to LimeCall and your CRM automatically. Zero manual data entry.',
+  },
+  {
+    icon: '📝',
+    name: 'CRM Auto-Logging',
+    description: 'Every Facebook lead, callback attempt, call recording, and outcome is logged automatically to HubSpot, Salesforce, Pipedrive, or your CRM of choice.',
+  },
+  {
+    icon: '📣',
+    name: 'Campaign Attribution',
+    description: 'See exactly which Facebook campaign, ad set, and ad drove each call and conversion. Optimise ad spend based on calls-to-close, not just clicks.',
+  },
+  {
+    icon: '⭐',
+    name: 'Lead Quality Scoring',
+    description: 'Score incoming Facebook leads based on form answers, demographics, and engagement signals. Route the highest-quality leads to your best closers first.',
+  },
+];
+
+const useCases = [
+  {
+    icon: '📘',
+    title: 'Facebook Lead Ads Callback',
+    description: 'Any lead that submits a Facebook Lead Ad form is called automatically within 28 seconds. Turn passive form data into live conversations at scale.',
+  },
+  {
+    icon: '📸',
+    title: 'Instagram Form Leads',
+    description: 'Instagram lead forms connect through the Meta platform. LimeCall works with all Meta properties — Facebook, Instagram, and Messenger lead flows.',
+  },
+  {
+    icon: '🔁',
+    title: 'Meta Retargeting Campaigns',
+    description: 'Retargeting audiences who have already shown intent are high-value. Call them within 28 seconds of re-engaging to maximise conversion on retargeting spend.',
+  },
+  {
+    icon: '💬',
+    title: 'Facebook Messenger Leads',
+    description: 'When a Messenger conversation reaches the point of interest, automatically escalate to a live callback — bridging chat and voice for maximum conversion.',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Connect Meta Lead Ads',
+    description: 'Authorise LimeCall to receive your Facebook Lead Ads data. Takes under 2 minutes using our guided OAuth connection — no developer required.',
+  },
+  {
+    number: '02',
+    title: 'Facebook Lead Submits Form',
+    description: 'A prospect completes your Facebook or Instagram lead form. LimeCall receives the data instantly and triggers an automatic callback within 28 seconds.',
+  },
+  {
+    number: '03',
+    title: 'Rep Connects, CRM Updates',
+    description: 'Your rep speaks with a warm lead who just expressed interest. All data — including campaign attribution — syncs to your CRM automatically.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How does LimeCall work with Facebook leads?',
+    answer: 'LimeCall integrates directly with Meta Lead Ads via the Facebook Lead Ads API. When a prospect submits a lead form on Facebook or Instagram, LimeCall receives the data in real time and automatically triggers a callback — dialling your rep and the lead simultaneously within 28 seconds.',
+  },
+  {
+    question: 'Does LimeCall connect with Meta Lead Ads directly?',
+    answer: 'Yes. LimeCall has a native Meta Lead Ads integration that you can activate in minutes using OAuth — no developer or Zapier required. You can also connect via Zapier if you prefer a multi-step workflow or need to connect other tools in the same flow.',
+  },
+  {
+    question: 'How fast does LimeCall call Facebook leads?',
+    answer: 'LimeCall averages 28 seconds from Facebook lead form submission to live phone conversation. This is critical because 90% of Facebook leads go cold within the first hour. Being first to call — within seconds — is the difference between a conversion and a wasted ad spend.',
+  },
+  {
+    question: 'Does LimeCall work with Zapier for Facebook leads?',
+    answer: 'Yes. LimeCall has a Zapier integration that works with Facebook Lead Ads, allowing you to build custom workflows. For example: new Facebook lead → LimeCall callback trigger → CRM entry → Slack notification. No code required.',
+  },
+  {
+    question: 'Can I track which Facebook ad drove each call?',
+    answer: 'Yes. LimeCall captures the campaign ID, ad set ID, and ad ID from every Meta Lead Ads submission. This lets you attribute calls and conversions back to specific ads in your analytics dashboard — so you can see true cost-per-call and cost-per-conversion by ad.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
-  </div>
+  <JsonLd schema={faqJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'CRM for Facebook Leads', url: `${site.url}/crm-for-facebook-leads/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Facebook & Meta Ads
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Call Facebook Leads in Under 28 Seconds<br />
+        <span class="text-lime-400">Before They Forget You</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        90% of Facebook leads go cold within 1 hour. LimeCall connects Meta Lead Ads to instant callback — so your team talks to every fresh lead within 28 seconds of form submission.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free — No Card Needed
+        </a>
+        <a
+          href="/integrations"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          See All Integrations
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">5-minute setup · Works with Meta Lead Ads & Zapier · No developer needed</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/60 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        {stats.map((s) => (
+          <div class="p-4">
+            <div class="text-4xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-2 text-sm font-bold text-white">{s.label}</div>
+            <div class="mt-1 text-xs text-dark-500">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Turn Facebook Lead Ads into<br />
+          <span class="text-lime-400">Live Conversations Instantly</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          LimeCall bridges the gap between Meta ad leads and your sales team — automatically, in real time.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-4">{f.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{f.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Every Meta Lead Source<br />
+          <span class="text-lime-400">Covered by LimeCall</span>
+        </h2>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {useCases.map((uc) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-3">{uc.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Set Up in <span class="text-lime-400">3 Steps</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Connect your Meta Lead Ads to LimeCall in under 5 minutes. No code, no developer, no friction.
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map((step) => (
+          <div class="relative flex flex-col rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="text-4xl font-extrabold text-lime-500/20 mb-4 leading-none">{step.number}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{step.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Stop Wasting Your Meta Ad Budget.<br />
+        <span class="text-lime-400">Call Every Facebook Lead in 28 Seconds.</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Connect LimeCall to your Facebook Lead Ads in 5 minutes and convert 3x more leads from the same ad spend.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free Trial
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">No credit card required · Free plan available · 5-minute setup</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="More Tools for Converting Ad Leads"
+        links={[
+          { href: '/lead-capture-software', title: 'Lead Capture Software', desc: 'Capture more leads from every channel and page.' },
+          { href: '/integrations', title: 'Integrations', desc: 'Connect LimeCall to 50+ tools including Meta and CRMs.' },
+          { href: '/lead-routing-software', title: 'Lead Routing Software', desc: 'Route every Facebook lead to the right sales rep.' },
+          { href: '/pricing', title: 'Pricing', desc: 'Start free. Scale with your ad budget.' },
+        ]}
+      />
+    </div>
+  </section>
 </Base>

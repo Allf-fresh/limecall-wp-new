@@ -1,15 +1,331 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Gross sales - LimeCall`,
-  description: ``,
-  canonical: `https://www.limecall.com/gross-sales/`,
+  title: 'Gross Sales Calculator & Guide — Track Your Revenue | LimeCall',
+  description: 'Understand gross sales, how to calculate it, the difference from net sales, and 5 proven ways to grow it — including faster lead response with LimeCall.',
+  canonical: `${site.url}/gross-sales/`,
+};
+
+const stats = [
+  { value: '10-12x', label: 'Higher Conversion', sub: 'from phone calls vs. form submissions alone' },
+  { value: '28s', label: 'Response Time', sub: 'LimeCall average from lead to live conversation' },
+  { value: '3x', label: 'Close Rate', sub: 'for leads contacted within 5 minutes of intent' },
+  { value: '391%', label: 'Higher Contact Rate', sub: 'responding in 1 min vs. 5 min (MIT research)' },
+];
+
+const grossSalesWays = [
+  {
+    icon: '⚡',
+    title: '1. Respond to Leads Faster',
+    description: 'The single highest-impact change most businesses can make. Leads contacted within 5 minutes convert at 9x the rate of leads contacted later. LimeCall automates 28-second callbacks from your website, forms, and CRM — turning slow follow-up into a competitive advantage.',
+  },
+  {
+    icon: '📊',
+    title: '2. Increase Average Deal Size',
+    description: 'Train reps to identify upsell opportunities during discovery calls. Customers who feel heard and understood on the phone are significantly more likely to buy premium options and add-ons than those who only interact via email or chat.',
+  },
+  {
+    icon: '🔄',
+    title: '3. Reduce Sales Cycle Length',
+    description: 'Every extra day in your sales cycle is a day the prospect might change their mind or buy from a competitor. Faster callbacks, better call preparation, and proactive follow-up compress the cycle and move more deals to close.',
+  },
+  {
+    icon: '📣',
+    title: '4. Optimise Your Lead Sources',
+    description: 'Track which channels — Google Ads, SEO, social, referrals — drive the most and highest-quality calls. Cut spend on channels with poor conversion rates and reinvest in those that drive gross sales most efficiently.',
+  },
+  {
+    icon: '🔁',
+    title: '5. Increase Repeat Purchases',
+    description: 'Existing customers who have a positive relationship with your team buy again more often. Proactive success calls and renewal conversations drive expansion revenue — which contributes to gross sales without the full cost of new customer acquisition.',
+  },
+];
+
+const educationalFacts = [
+  {
+    heading: 'What is Gross Sales?',
+    content: 'Gross sales is the total revenue from all sales transactions during a given period, before any deductions. It includes all invoiced amounts, regardless of returns, discounts, or allowances. Gross sales = Total Units Sold × Average Selling Price. It is the top-line number that reflects the full commercial activity of the business.',
+  },
+  {
+    heading: 'Gross Sales vs. Net Sales',
+    content: 'Net sales is gross sales minus returns, allowances, and discounts. For example: if your gross sales are $500,000 and you have $30,000 in returns and $20,000 in discounts, your net sales are $450,000. Gross sales shows total volume; net sales shows what you actually keep. Both are important — but investors and analysts typically focus on net sales for profitability analysis.',
+  },
+  {
+    heading: 'How to Calculate Gross Sales',
+    content: 'Gross Sales = Number of Units Sold × Unit Selling Price. Example: 100 units at $500 each = $50,000 gross sales. For service businesses: Gross Sales = Number of Clients × Average Contract Value. Gross sales does not subtract cost of goods sold (COGS), returns, or expenses — those come later in the P&L.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is gross sales?',
+    answer: 'Gross sales is the total value of all sales transactions in a given period before any deductions for returns, allowances, or discounts. It is the raw top-line revenue figure. Gross Sales = Total Units Sold × Average Selling Price. It is a measure of total commercial activity, not profitability.',
+  },
+  {
+    question: 'How is gross sales different from net sales?',
+    answer: 'Gross sales is the total invoiced amount before deductions. Net sales is gross sales minus sales returns, allowances, and discounts. If you sold $500,000 worth of products but had $40,000 in returns and $10,000 in early-payment discounts, your net sales would be $450,000. Net sales is a more accurate reflection of actual revenue earned.',
+  },
+  {
+    question: 'What is a good gross sales growth rate?',
+    answer: 'For early-stage companies (under $1M ARR), annual gross sales growth of 100%+ is achievable and expected. For mid-stage companies ($1M–$10M ARR), 50–100% YoY is strong. For larger businesses, 20–30% growth is considered excellent. Industry benchmarks vary significantly — e-commerce, SaaS, and professional services all have different norms.',
+  },
+  {
+    question: 'How do I calculate gross sales?',
+    answer: 'Gross Sales = Number of Units Sold × Selling Price Per Unit. For a business selling multiple products: sum up the gross sales for each product line. For service businesses: Gross Sales = Number of Engagements × Average Engagement Value. Note that gross sales does not account for cost of goods sold, operational costs, or taxes.',
+  },
+  {
+    question: 'How can LimeCall help increase gross sales?',
+    answer: 'LimeCall increases gross sales by improving your lead-to-customer conversion rate. Leads contacted within 28 seconds of showing intent convert at 9x the rate of leads contacted later. If you are currently converting 2% of your leads, improving your speed-to-lead could raise that to 4–6% — doubling gross sales from the same marketing spend. LimeCall also reduces sales cycle length by enabling immediate conversations when intent is highest.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
-  </div>
+  <JsonLd schema={faqJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Gross Sales', url: `${site.url}/gross-sales/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Sales Revenue Guide
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Understand and Grow Your<br />
+        <span class="text-lime-400">Gross Sales with Better Lead Conversion</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Gross sales is the top-line metric every business needs to grow. This guide explains what it is, how to calculate it, and five proven ways to increase it — including why faster lead response is the highest-leverage move most businesses overlook.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Increase Sales with LimeCall Free
+        </a>
+        <a
+          href="/speed-to-lead"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Learn About Speed to Lead
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan available · 5-minute setup · No credit card required</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/60 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        {stats.map((s) => (
+          <div class="p-4">
+            <div class="text-4xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-2 text-sm font-bold text-white">{s.label}</div>
+            <div class="mt-1 text-xs text-dark-500">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Understanding <span class="text-lime-400">Gross Sales</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          The fundamentals every sales and finance professional should know about gross sales as a metric.
+        </p>
+      </div>
+      <div class="space-y-6">
+        {educationalFacts.map((fact) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="text-xl font-bold text-lime-400 mb-3">{fact.heading}</h3>
+            <p class="text-dark-300 leading-relaxed">{fact.content}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Ways to Increase Gross Sales -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          5 Ways to Increase<br />
+          <span class="text-lime-400">Your Gross Sales</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Tactical levers for growing top-line revenue — ranked by impact and ease of implementation.
+        </p>
+      </div>
+      <div class="space-y-5">
+        {grossSalesWays.map((way) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex items-start gap-4">
+              <div class="text-3xl flex-shrink-0">{way.icon}</div>
+              <div>
+                <h3 class="text-lg font-bold text-white mb-2">{way.title}</h3>
+                <p class="text-sm text-dark-400 leading-relaxed">{way.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How LimeCall helps -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2 items-center">
+        <div>
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+            How LimeCall Grows Your<br />
+            <span class="text-lime-400">Gross Sales Directly</span>
+          </h2>
+          <p class="mt-4 text-dark-400 leading-relaxed">
+            The fastest way to increase gross sales without increasing your marketing budget is to convert more of the leads you already have. Most businesses are leaving more than half their potential revenue on the table due to slow lead response.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Convert 3x more website leads into paying customers',
+              'Reduce sales cycle length with immediate conversations',
+              'Improve rep close rates with call recording and coaching',
+              'Attribute every call to its source to optimise ad spend',
+              'Re-engage dormant customers with proactive callback campaigns',
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-sm text-dark-300">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-950/30 to-dark-900/80 p-8">
+          <h3 class="text-xl font-bold text-white mb-6">Gross Sales Impact with LimeCall</h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-dark-400">Lead-to-customer conversion rate</span>
+                <span class="font-bold text-lime-400">3x higher</span>
+              </div>
+              <div class="h-2 rounded-full bg-dark-800">
+                <div class="h-2 rounded-full bg-lime-500" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-dark-400">Response time to new leads</span>
+                <span class="font-bold text-lime-400">28 seconds</span>
+              </div>
+              <div class="h-2 rounded-full bg-dark-800">
+                <div class="h-2 rounded-full bg-lime-500" style="width: 5%"></div>
+              </div>
+              <div class="mt-1 text-right text-xs text-dark-600">Industry avg: 42 hours</div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-dark-400">Contact rate vs. slow follow-up</span>
+                <span class="font-bold text-lime-400">391% higher</span>
+              </div>
+              <div class="h-2 rounded-full bg-dark-800">
+                <div class="h-2 rounded-full bg-lime-500" style="width: 78%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Ready to Grow Your Gross Sales<br />
+        <span class="text-lime-400">Without Growing Your Ad Budget?</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Install LimeCall in 5 minutes and convert 3x more of your existing leads into customers. Start free, no credit card needed.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free Trial
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">No credit card required · Free plan available · 30-day money-back guarantee</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="More Resources for Growing Revenue"
+        links={[
+          { href: '/increase-sales', title: 'Increase Sales', desc: 'Proven strategies to grow revenue from existing traffic.' },
+          { href: '/for-sales-teams', title: 'For Sales Teams', desc: 'LimeCall tools built to help sales teams close more deals.' },
+          { href: '/speed-to-lead', title: 'Speed to Lead', desc: 'Why the fastest responder wins and how to be first.' },
+          { href: '/pricing', title: 'Pricing', desc: 'Start free. Scale as your revenue grows.' },
+        ]}
+      />
+    </div>
+  </section>
 </Base>

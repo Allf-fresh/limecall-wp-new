@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const seo = {
@@ -24,9 +26,41 @@ const steps = [
   { n: "2", title: "Write your message", desc: "Compose the notification SMS. Use dynamic fields to include lead name, time, phone number, and more." },
   { n: "3", title: "Set recipients", desc: "Send to the assigned rep, a team, or a phone number. Notifications fire automatically, every time." },
 ];
+
+const stats = [
+  { value: "3x", label: "Higher open rate vs email" },
+  { value: "28s", label: "Avg delivery time" },
+  { value: "98%", label: "SMS open rate" },
+  { value: "5 min", label: "Setup time" },
+];
+
+const faqs = [
+  {
+    question: "What types of SMS notifications does LimeCall send?",
+    answer: "LimeCall sends SMS notifications for a wide range of events: new inbound leads, missed calls, completed calls, appointment confirmations, booking reminders, and custom CRM-triggered events. You can configure which events fire an SMS and who receives them.",
+  },
+  {
+    question: "Can I customize the SMS notification content?",
+    answer: "Yes. Every SMS notification template is fully customizable. You can insert dynamic fields such as the lead's name, phone number, the time of the event, the assigned rep's name, and more. Changes take effect immediately with no code changes needed.",
+  },
+  {
+    question: "Does LimeCall send SMS to both my team and leads?",
+    answer: "Yes. LimeCall can send SMS notifications to your internal team (alerting reps and managers of new leads or missed calls) and to your leads and customers (appointment confirmations, reminders, follow-up messages). Both directions are configurable independently.",
+  },
+  {
+    question: "How do I set up SMS notifications in LimeCall?",
+    answer: "Setting up SMS notifications takes about 5 minutes. Log in to your LimeCall dashboard, navigate to Automations, choose your trigger event, write your message template, and select your recipients. Notifications will fire automatically from that point on.",
+  },
+  {
+    question: "Is there a limit on how many SMS notifications I can send?",
+    answer: "SMS notification volume depends on your LimeCall plan. Each plan includes a set number of SMS messages per month. If you exceed your limit, additional SMS are billed at a per-message rate. You can view your current usage and upgrade at any time from the dashboard.",
+  },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -47,6 +81,20 @@ const steps = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -77,6 +125,26 @@ const steps = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
         ))}
       </div>
     </div>

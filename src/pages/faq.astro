@@ -95,6 +95,34 @@ const faqs = [
       },
     ],
   },
+  {
+    category: 'Call Quality & Reliability',
+    items: [
+      {
+        question: 'What is LimeCall\'s uptime SLA?',
+        answer: 'LimeCall targets 99.9% uptime. Our infrastructure is hosted on redundant cloud providers with automatic failover. Status and historical uptime are published on our status page. Enterprise plans include enhanced SLA guarantees.',
+      },
+      {
+        question: 'What call quality can I expect?',
+        answer: 'LimeCall uses HD Voice (wideband audio) on supported connections. Call quality depends on your internet connection — we recommend at least 1 Mbps upload/download per simultaneous call. Our dashboard flags calls with quality issues so you can investigate network problems.',
+      },
+      {
+        question: 'Does LimeCall support international calls?',
+        answer: 'Yes. LimeCall supports calls to and from 50+ countries. Virtual numbers are available in major markets including the US, UK, India, Australia, Germany, France, and more. Per-minute rates for international destinations are published on the pricing page.',
+      },
+      {
+        question: 'Is LimeCall compliant with GDPR and international data regulations?',
+        answer: 'Yes. LimeCall is GDPR compliant for EU customers and adheres to applicable data protection regulations in other regions. Call recordings are stored securely, access is role-based, and data retention periods are fully configurable. We sign DPAs (Data Processing Agreements) with business customers on request.',
+      },
+    ],
+  },
+];
+
+const pageStats = [
+  { value: "5,000+", label: "Active customers" },
+  { value: "24/7", label: "Support available" },
+  { value: "5 min", label: "Average setup time" },
+  { value: "30-day", label: "Money-back guarantee" },
 ];
 
 const allFaqs = faqs.flatMap(cat => cat.items);
@@ -117,6 +145,20 @@ const allFaqs = faqs.flatMap(cat => cat.items);
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
         Everything you need to know about LimeCall — from setup to billing to GDPR.
       </p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {pageStats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 

@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const country = "France";
@@ -26,33 +28,42 @@ const features = [
 
 const faqs = [
   {
-    q: `What is a France virtual phone number?`,
-    a: `A France virtual phone number (${code}) is a telephone number that isn't tied to a physical phone line or SIM card. It routes calls over the internet to any device — mobile, laptop, or desk phone — anywhere in the world. Your customers in France dial a local number and the call reaches you wherever you are.`,
+    question: `What is a France virtual phone number?`,
+    answer: `A France virtual phone number (${code}) is a telephone number that isn't tied to a physical phone line or SIM card. It routes calls over the internet to any device — mobile, laptop, or desk phone — anywhere in the world. Your customers in France dial a local number and the call reaches you wherever you are.`,
   },
   {
-    q: `Do I need to be in France to get a French virtual number?`,
-    a: `No. Anyone can get a France virtual phone number from anywhere in the world. LimeCall gives you a local ${code} number that French customers can call at local rates, while your team answers from any country.`,
+    question: `Do I need to be in France to get a French virtual number?`,
+    answer: `No. Anyone can get a France virtual phone number from anywhere in the world. LimeCall gives you a local ${code} number that French customers can call at local rates, while your team answers from any country.`,
   },
   {
-    q: `What types of French virtual numbers are available?`,
-    a: `LimeCall offers local French numbers with city-specific area codes (01 Paris, 02 Northwest France, 03 Northeast France, 04 Southeast France, 05 Southwest France) as well as national 0800 freephone numbers and non-geographic 09 numbers. Choose the format that best fits your French business presence.`,
+    question: `What types of French virtual numbers are available?`,
+    answer: `LimeCall offers local French numbers with city-specific area codes (01 Paris, 02 Northwest France, 03 Northeast France, 04 Southeast France, 05 Southwest France) as well as national 0800 freephone numbers and non-geographic 09 numbers. Choose the format that best fits your French business presence.`,
   },
   {
-    q: "How long does setup take?",
-    a: "Setup takes under 5 minutes. Sign up, choose your France number, and you're ready to receive calls immediately — no waiting for hardware or SIM activation.",
+    question: "How long does setup take?",
+    answer: "Setup takes under 5 minutes. Sign up, choose your France number, and you're ready to receive calls immediately — no waiting for hardware or SIM activation.",
   },
   {
-    q: "Can I use a French virtual number for callbacks?",
-    a: "Yes — LimeCall's callback automation lets website visitors request a call and your team calls them back within 28 seconds using your France virtual number. This dramatically improves lead conversion rates.",
+    question: "Can I use a French virtual number for callbacks?",
+    answer: "Yes — LimeCall's callback automation lets website visitors request a call and your team calls them back within 28 seconds using your France virtual number. This dramatically improves lead conversion rates.",
   },
   {
-    q: `Is a French virtual number compliant with ARCEP regulations?`,
-    a: `LimeCall's France virtual numbers are provisioned through licensed carriers regulated by ARCEP (Autorité de Régulation des Communications Électroniques, des Postes et de la Distribution de la Presse) and comply with French telecommunications laws. All numbers are legitimate, properly registered French numbers.`,
+    question: `Is a French virtual number compliant with ARCEP regulations?`,
+    answer: `LimeCall's France virtual numbers are provisioned through licensed carriers regulated by ARCEP (Autorité de Régulation des Communications Électroniques, des Postes et de la Distribution de la Presse) and comply with French telecommunications laws. All numbers are legitimate, properly registered French numbers.`,
   },
+];
+
+const stats = [
+  { value: "+33", label: "France area code" },
+  { value: "1 min", label: "Setup time" },
+  { value: "28s", label: "Avg callback speed" },
+  { value: "40+", label: "Countries available" },
 ];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -71,6 +82,20 @@ const faqs = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -98,12 +123,12 @@ const faqs = [
         {faqs.map(faq => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
-              {faq.q}
+              {faq.question}
               <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.a}</div>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
           </details>
         ))}
       </div>

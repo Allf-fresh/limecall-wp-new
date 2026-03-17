@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const seo = {
@@ -24,9 +26,41 @@ const steps = [
   { n: "2", title: "Organize into lists", desc: "Create smart segments based on tags, properties, or behavior. Keep your contact base tidy and targeted." },
   { n: "3", title: "Power your campaigns", desc: "Send SMS broadcasts, run callback campaigns, and track all interactions from within your contact lists." },
 ];
+
+const stats = [
+  { value: "100%", label: "Call coverage logged" },
+  { value: "0", label: "Manual data entry" },
+  { value: "5 min", label: "CSV import time" },
+  { value: "50+", label: "Custom fields" },
+];
+
+const faqs = [
+  {
+    question: "How do I import contacts into LimeCall?",
+    answer: "You can import contacts into LimeCall by uploading a CSV file directly from your dashboard. The import wizard maps your CSV columns to LimeCall contact fields, deduplicates entries, and creates the contact records in under 5 minutes regardless of list size.",
+  },
+  {
+    question: "Can I sync contacts from my CRM?",
+    answer: "Yes. LimeCall integrates with HubSpot, Salesforce, and other popular CRMs via native integrations and Zapier. Contact records sync bidirectionally — new contacts created in LimeCall appear in your CRM, and CRM updates flow back to LimeCall automatically.",
+  },
+  {
+    question: "What contact data does LimeCall capture automatically?",
+    answer: "LimeCall automatically logs every call, SMS message, and callback event against the matching contact record. This includes call duration, recording, outcome, assigned rep, and timestamps. No manual data entry is required — the contact history builds itself.",
+  },
+  {
+    question: "Can I segment contacts by behavior or tags?",
+    answer: "Yes. LimeCall supports contact segmentation by tags, custom fields, call history, and behavioral attributes. You can build dynamic lists that update automatically as contacts meet your criteria, making it easy to target the right people with the right campaign.",
+  },
+  {
+    question: "Is my contact data secure with LimeCall?",
+    answer: "Yes. All contact data is encrypted at rest using AES-256 and in transit using TLS. LimeCall is GDPR compliant and you retain full ownership of your data. You can export or permanently delete your contact data at any time from the dashboard.",
+  },
+];
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -47,6 +81,20 @@ const steps = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -77,6 +125,26 @@ const steps = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
         ))}
       </div>
     </div>

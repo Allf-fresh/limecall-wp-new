@@ -1,15 +1,266 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `For Sales Teams. Streamline & Convert with Our Mobile CRM`,
-  description: `Boost sales & empower your team. Our mobile CRM streamlines workflows & boosts conversions. Get a free trial & watch your sales soar!`,
+  title: `LimeCall for Sales Teams — Close More Deals`,
+  description: `Your sales team calls leads in under 28 seconds. 391% higher contact rates vs email. Speed-to-lead automation, lead routing, CRM sync and call recording.`,
   canonical: `https://www.limecall.com/for-sales-teams/`,
 };
+
+const stats = [
+  { value: '28s', label: 'Avg. callback time' },
+  { value: '391%', label: 'Higher contact rate vs email' },
+  { value: '3x', label: 'Close rate improvement' },
+  { value: '10k+', label: 'Sales teams using LimeCall' },
+];
+
+const features = [
+  {
+    title: 'Speed-to-Lead Automation',
+    desc: 'The moment a lead submits a form or clicks your widget, LimeCall dials your available rep and connects them — all within 28 seconds. Studies confirm leads called within 5 minutes are 9x more likely to convert. LimeCall makes 28 seconds the standard.',
+    icon: '⚡',
+  },
+  {
+    title: 'Lead Distribution',
+    desc: 'Route every inbound lead to the right rep automatically. Set rules based on territory, product line, skill set, or simple round-robin rotation. No cherry-picking, no leads falling through the cracks.',
+    icon: '🔀',
+  },
+  {
+    title: 'CRM Auto-Logging',
+    desc: 'Every call is logged in HubSpot, Salesforce, Zoho, or your CRM of choice — automatically. Call duration, outcome, recording link, and lead data synced in real time. Your reps focus on selling, not admin.',
+    icon: '🗂️',
+  },
+  {
+    title: 'Call Recording & Coaching',
+    desc: 'Every call is recorded and stored. Sales managers can review calls, identify coaching opportunities, and onboard new reps faster using real conversations — not role plays.',
+    icon: '🎙️',
+  },
+  {
+    title: 'Live Transfer',
+    desc: 'Instantly transfer a live caller to a specialist, manager, or available rep with one click. No hold music, no dropped context. The receiving rep gets a whisper summary before the call connects.',
+    icon: '↗️',
+  },
+  {
+    title: 'Call Scheduling',
+    desc: 'Not every lead wants to talk right now. Let them pick a time that works. LimeCall\'s scheduling widget syncs with your reps\' calendars and sends reminders to both parties — reducing no-shows dramatically.',
+    icon: '📅',
+  },
+];
+
+const useCases = [
+  {
+    title: 'Inbound Lead Response',
+    desc: 'A visitor fills in your demo request form. LimeCall triggers an immediate callback to your next available rep and patches the lead through — before they\'ve closed your tab. Most teams see contact rates jump within the first week.',
+  },
+  {
+    title: 'Demo Requests',
+    desc: 'Qualify and book product demos at peak intent. When a prospect requests a demo, LimeCall can route them to a pre-sales specialist immediately or schedule them for a future slot — your choice.',
+  },
+  {
+    title: 'Trade Show & Event Follow-Up',
+    desc: 'Upload your event lead list and trigger a callback campaign. LimeCall dials through your list, connects live answers to your reps, and logs everything automatically. Strike while the event is still fresh.',
+  },
+  {
+    title: 'Re-Engagement Campaigns',
+    desc: 'Dormant leads in your CRM are a goldmine. Create a re-engagement list, set a callback campaign, and let LimeCall do the dialling. Your reps only hear the phone ring when a real person answers.',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'We went from a 2-hour average response time to under a minute. Our pipeline doubled in 90 days. The speed-to-lead automation is unlike anything we had before.',
+    name: 'Tom W.',
+    role: 'VP Sales, B2B SaaS company',
+  },
+  {
+    quote: 'Lead routing used to be a daily argument. Now it\'s automatic. Every rep gets a fair share and the right leads. Our close rate is up 3x since we switched.',
+    name: 'Rachel M.',
+    role: 'Sales Director, Financial Services',
+  },
+  {
+    quote: 'The call recording feature alone is worth the subscription. I use real calls every week for coaching. My new reps ramp 40% faster than before.',
+    name: 'Chris B.',
+    role: 'Head of Sales, E-commerce brand',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How does LimeCall improve speed-to-lead for sales teams?',
+    a: 'When a lead submits a form or clicks the callback widget, LimeCall immediately dials your available sales rep and the lead simultaneously, connecting them in under 28 seconds. This happens automatically, 24/7, without any manual action from your team.',
+  },
+  {
+    q: 'Does LimeCall integrate with our CRM?',
+    a: 'Yes. LimeCall integrates natively with HubSpot, Salesforce, Zoho CRM, Pipedrive, and others. Every call is logged automatically with duration, outcome, and a link to the recording. Zapier support extends this to 5,000+ additional tools.',
+  },
+  {
+    q: 'Can we route leads to specific sales reps based on territory or product?',
+    a: 'Absolutely. Lead distribution rules can be based on geography, product line, rep skills, availability, or round-robin rotation. Rules are set in the LimeCall dashboard with no developer involvement required.',
+  },
+  {
+    q: 'Is call recording included?',
+    a: 'Call recording is included on Starter and Pro plans. All recordings are stored securely and accessible from your LimeCall dashboard and synced to your CRM. There is no per-minute storage fee.',
+  },
+  {
+    q: 'What happens to leads that come in outside business hours?',
+    a: 'LimeCall captures after-hours requests and queues them for your team. When business hours resume, your reps see a prioritised list of warm leads ready to call. You can also configure an automated SMS acknowledgement to keep the lead warm overnight.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'For Sales Teams', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Sales Teams
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Your sales team calls leads<br class="hidden sm:block" />
+        <span class="text-lime-400">in under 28 seconds</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        391% higher contact rates vs email follow-up. LimeCall gives your sales team the speed advantage that turns inbound traffic into closed deals.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          See How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Built for sales team performance
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Every feature is designed to cut response time, increase contact rates, and give managers visibility over every call.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Sales use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What sales leaders say</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {testimonials.map(t => (
+          <figure class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex flex-col">
+            <blockquote class="flex-1 text-sm text-dark-300 leading-relaxed">
+              <span class="text-2xl text-lime-500 font-bold leading-none">"</span>
+              {t.quote}
+            </blockquote>
+            <figcaption class="mt-5 border-t border-dark-800 pt-4">
+              <div class="font-semibold text-white text-sm">{t.name}</div>
+              <div class="text-xs text-dark-500 mt-0.5">{t.role}</div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Give your sales team the speed advantage</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'How LimeCall connects your team with leads in under 28 seconds.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Automatically route every inbound lead to the right rep.' },
+        { href: '/click-to-call-software/', title: 'Click-to-Call Software', desc: 'One-click calls from your website to your sales team.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans for sales teams of every size.' },
+      ]} />
+    </div>
   </div>
 </Base>

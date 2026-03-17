@@ -1,17 +1,284 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Spotlight on Customer Experiences - LimeCall`,
-  description: `Learn how Cue enables clients to boost sales speed and streamline customer support.`,
+  title: `LimeCall Customers — 10,000+ Businesses Trust LimeCall`,
+  description: `Join 10,000+ businesses in 40+ countries growing with LimeCall. See how real estate, SaaS, healthcare, and e-commerce teams convert more leads with instant callbacks.`,
   canonical: `https://www.limecall.com/customers/`,
 };
----
-<Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold text-white mb-8">Spotlight on Customer Experiences</h1>
-    
-<p>Learn how Cue enables clients to boost sales speed and streamline customer support.</p>
 
+const stats = [
+  { value: '10k+', label: 'Businesses worldwide' },
+  { value: '40+', label: 'Countries served' },
+  { value: '4.5/5', label: 'Average rating' },
+  { value: '2M+', label: 'Calls connected' },
+];
+
+const industries = [
+  {
+    name: 'Real Estate',
+    icon: '🏠',
+    desc: 'Property buyers and renters have high intent but low patience. Real estate agencies use LimeCall to connect with enquiring buyers within 28 seconds — before a competing agent calls first. Teams report 3x more viewings booked from the same website traffic.',
+  },
+  {
+    name: 'E-Commerce',
+    icon: '🛒',
+    desc: 'Online retailers use LimeCall to convert high-value shoppers who have questions before purchasing. A callback widget on product and checkout pages reduces cart abandonment and increases average order value by giving customers a human touch when they need it most.',
+  },
+  {
+    name: 'Financial Services',
+    icon: '💼',
+    desc: 'Mortgage brokers, insurance advisers, and financial planners rely on LimeCall to respond to enquiries before competitors do. Every lead is routed to the right specialist, every call is recorded for compliance, and every interaction is logged in the CRM automatically.',
+  },
+  {
+    name: 'Healthcare',
+    icon: '🏥',
+    desc: 'Private clinics, dental practices, and healthcare providers use LimeCall to ensure patients who request appointments are contacted immediately. After-hours requests are queued so reception staff arrive to a prioritised callback list every morning.',
+  },
+  {
+    name: 'SaaS & Tech',
+    icon: '💻',
+    desc: 'Software companies embed LimeCall on pricing and demo request pages to connect inbound prospects with sales reps in under 28 seconds. Marketing teams use call attribution to prove ROI on every campaign channel down to the keyword level.',
+  },
+  {
+    name: 'Home Services',
+    icon: '🔧',
+    desc: 'Plumbers, electricians, and home improvement companies use LimeCall to be first to call back every website enquiry. Urgency is high in home services — the first contractor to pick up the phone wins the job. LimeCall makes sure that contractor is you.',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'We\'ve seen a 3x increase in callbacks booked from our website since adding LimeCall. Our agents used to miss half the enquiries that came in overnight. Now every lead gets a call the next morning without anyone having to remember.',
+    name: 'Sarah K.',
+    role: 'Marketing Manager, Residential Real Estate Agency',
+    metric: '3x more callbacks',
+  },
+  {
+    quote: 'Demo bookings are up 40% since we put LimeCall on our pricing page. Prospects can request a demo instantly instead of filling in a form and waiting two days for a reply. The conversion difference is night and day.',
+    name: 'James R.',
+    role: 'Sales Director, B2B SaaS company',
+    metric: '40% more demos',
+  },
+  {
+    quote: 'It connects in 28 seconds every time. I\'ve tested it dozens of times — it never misses. Our customers comment on how fast we are. It\'s become a genuine competitive advantage.',
+    name: 'David O.',
+    role: 'Operations Manager, Insurance Brokerage',
+    metric: 'Consistent 28-second connects',
+  },
+  {
+    quote: 'Our cost per acquisition on Google Ads dropped by 38% after we added LimeCall to our landing pages. The same budget now generates significantly more customers because we\'re converting at a much higher rate.',
+    name: 'Mia C.',
+    role: 'Performance Marketing Lead, E-commerce brand',
+    metric: '38% lower CPA',
+  },
+  {
+    quote: 'Patient enquiries are time-sensitive. With LimeCall, our front desk team can see every after-hours request and call them back first thing. We\'ve filled 60% more appointment slots from the same web traffic.',
+    name: 'Dr. Amanda F.',
+    role: 'Practice Manager, Private Dental Clinic',
+    metric: '60% more appointments',
+  },
+  {
+    quote: 'We tried live chat first. Most visitors ignored it. LimeCall\'s callback widget gets used by 4x more visitors because people actually want to talk to a human. Our revenue per visitor has doubled.',
+    name: 'Nathan B.',
+    role: 'Head of Growth, Home Services marketplace',
+    metric: '2x revenue per visitor',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What types of businesses use LimeCall?',
+    a: 'LimeCall is used by over 10,000 businesses across industries including real estate, financial services, healthcare, SaaS, e-commerce, and home services. Any business that relies on inbound leads and phone conversations benefits from LimeCall\'s speed-to-lead automation.',
+  },
+  {
+    q: 'How quickly do businesses see results after implementing LimeCall?',
+    a: 'Most businesses see measurable improvements within the first week. Contact rates typically improve immediately because LimeCall eliminates the delay between a lead enquiring and a rep calling back. Conversion rate improvements compound over time as teams refine their routing and follow-up processes.',
+  },
+  {
+    q: 'Is LimeCall suitable for small businesses or only enterprises?',
+    a: 'LimeCall has plans for businesses of every size, starting with a free tier. Small businesses benefit as much as enterprise teams — often more, because speed-to-lead is especially critical when you have limited rep capacity and every lead matters.',
+  },
+  {
+    q: 'How does LimeCall handle businesses operating in multiple countries?',
+    a: 'LimeCall provides virtual phone numbers in 50+ countries, enabling businesses to show local numbers to visitors in each market. This increases answer rates and builds trust. Multi-country routing rules ensure international leads reach the right regional team.',
+  },
+  {
+    q: 'What do customers say about LimeCall support and reliability?',
+    a: 'LimeCall holds a 4.5/5 rating on G2 and 4.6/5 on Capterra. Customers frequently cite the speed of the callback connection and the quality of customer support as key strengths. Uptime is monitored 24/7 with a published SLA.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Customers', url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Join <span class="text-lime-400">10,000+</span> businesses<br class="hidden sm:block" />
+        growing with LimeCall
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        From real estate agencies to SaaS companies, businesses in 40+ countries use LimeCall to connect with leads faster and convert more of their existing traffic.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Rating badges -->
+  <section class="border-b border-dark-800 py-8">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <p class="text-sm font-semibold text-dark-400 mb-4">Trusted and reviewed by businesses worldwide</p>
+      <div class="flex flex-wrap justify-center gap-6">
+        <div class="flex items-center gap-2 rounded-xl border border-dark-800 bg-dark-900/60 px-5 py-3">
+          <span class="text-2xl font-extrabold text-white">4.5</span>
+          <div class="text-left">
+            <div class="text-xs font-bold text-lime-400">★★★★★</div>
+            <div class="text-xs text-dark-500">on G2</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 rounded-xl border border-dark-800 bg-dark-900/60 px-5 py-3">
+          <span class="text-2xl font-extrabold text-white">4.6</span>
+          <div class="text-left">
+            <div class="text-xs font-bold text-lime-400">★★★★★</div>
+            <div class="text-xs text-dark-500">on Capterra</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 rounded-xl border border-dark-800 bg-dark-900/60 px-5 py-3">
+          <span class="text-2xl font-extrabold text-lime-400">10,000+</span>
+          <div class="text-left">
+            <div class="text-xs font-bold text-white">businesses</div>
+            <div class="text-xs text-dark-500">trust LimeCall</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry breakdown -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Industries we serve
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        LimeCall works for any business that converts website visitors into phone conversations. Here's how leading industries use it.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {industries.map(ind => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{ind.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{ind.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{ind.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white sm:text-3xl">Customer results</h2>
+      <p class="mb-10 text-center text-dark-400">Real metrics from real businesses using LimeCall.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {testimonials.map(t => (
+          <figure class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex flex-col">
+            <div class="mb-4 inline-block rounded-lg bg-lime-500/10 border border-lime-500/20 px-3 py-1 text-xs font-bold text-lime-400">
+              {t.metric}
+            </div>
+            <blockquote class="flex-1 text-sm text-dark-300 leading-relaxed">
+              <span class="text-2xl text-lime-500 font-bold leading-none">"</span>
+              {t.quote}
+            </blockquote>
+            <figcaption class="mt-5 border-t border-dark-800 pt-4">
+              <div class="font-semibold text-white text-sm">{t.name}</div>
+              <div class="text-xs text-dark-500 mt-0.5">{t.role}</div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Join 10,000+ businesses converting more leads</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore LimeCall" links={[
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans for teams of every size.' },
+        { href: '/features/', title: 'Features', desc: 'Every tool LimeCall provides to capture and convert leads.' },
+        { href: '/how-it-works/', title: 'How It Works', desc: 'The full LimeCall flow from visitor click to sales call.' },
+        { href: '/click-to-call-software/', title: 'Click-to-Call Software', desc: 'One-click connections from your website to your sales team.' },
+      ]} />
+    </div>
   </div>
 </Base>

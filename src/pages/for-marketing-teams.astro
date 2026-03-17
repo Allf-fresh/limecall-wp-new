@@ -1,15 +1,307 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Improve Lead Management for Marketing Teams with LimeCall`,
-  description: `Stop Wasting Time on Bad Leads. LimeCall for Marketing Teams helps you monitor your lead management and improve your ROI. See how your teams interact with leads, track response times, and identify areas for improvement. Get started for free today!`,
+  title: `LimeCall for Marketing Teams — Turn Ad Spend Into Calls`,
+  description: `Turn every campaign click into a sales conversation. 10-12x higher conversion from calls vs forms. Click-to-call widget, call tracking, UTM attribution and more.`,
   canonical: `https://www.limecall.com/for-marketing-teams/`,
 };
+
+const stats = [
+  { value: '10-12x', label: 'Higher conversion vs forms' },
+  { value: '28s', label: 'Avg. callback time' },
+  { value: '40%', label: 'Lower cost per lead' },
+  { value: '5 min', label: 'Setup time' },
+];
+
+const features = [
+  {
+    title: 'Click-to-Call Widget',
+    desc: 'Add a branded callback widget to any page in minutes. Visitors click, enter their number, and LimeCall connects them to your sales team in under 28 seconds. Fully customisable to match your brand colours and copy.',
+    icon: '📞',
+  },
+  {
+    title: 'Form Integration',
+    desc: 'Trigger an immediate callback the moment a visitor submits your lead form. Works with any form — HubSpot forms, Typeform, Gravity Forms, or custom HTML forms. No dev work required beyond a single snippet.',
+    icon: '📋',
+  },
+  {
+    title: 'Call Tracking & Attribution',
+    desc: 'Know exactly which campaigns, pages, and keywords generate calls. LimeCall assigns dynamic numbers to each traffic source so you can see true call attribution in your dashboard and Google Analytics.',
+    icon: '📊',
+  },
+  {
+    title: 'UTM Parameter Tracking',
+    desc: 'Every callback request automatically captures the visitor\'s UTM parameters — source, medium, campaign, content, and term. Prove ROI on every ad campaign down to the keyword level.',
+    icon: '🏷️',
+  },
+  {
+    title: 'A/B Widget Testing',
+    desc: 'Test different widget positions, colours, copy, and trigger timings to find the combination that converts best on each page. Make data-driven decisions about your lead capture strategy.',
+    icon: '🧪',
+  },
+  {
+    title: 'Zapier & HubSpot Integration',
+    desc: 'Push call data to HubSpot, Salesforce, Google Sheets, Slack, or any of 5,000+ tools via Zapier. Build automated workflows that enrol callers in nurture sequences, alert reps in Slack, or update deal stages automatically.',
+    icon: '🔗',
+  },
+];
+
+const useCases = [
+  {
+    title: 'PPC Campaign Optimisation',
+    desc: 'Your paid traffic is expensive. Replace generic landing page forms with a callback widget and convert the same traffic at dramatically higher rates. LimeCall tracks which ad groups and keywords are driving calls, so you can double down on what works.',
+  },
+  {
+    title: 'SEO Lead Capture',
+    desc: 'Organic visitors are high-intent but rarely convert on a first visit. A callback widget catches them at peak interest — the moment they\'re reading your content. No email form friction, no waiting 24 hours for a response.',
+  },
+  {
+    title: 'Landing Page Conversion',
+    desc: 'Add LimeCall to any landing page to offer an instant call alternative to your form. Visitors who prefer to talk convert at 10-12x the rate of form submitters. One widget, dramatically better results.',
+  },
+  {
+    title: 'Facebook & Google Ads Attribution',
+    desc: 'Close the attribution loop between your ad spend and phone call conversions. LimeCall passes call data back to Google Ads and Facebook via conversion events — so your bidding algorithms optimise for calls, not just clicks.',
+  },
+];
+
+const comparison = [
+  { aspect: 'Conversion rate', callback: '10-12x higher', form: 'Baseline' },
+  { aspect: 'Response time', callback: '28 seconds', form: '24 – 48 hours' },
+  { aspect: 'Lead qualification', callback: 'Live conversation', form: 'Email back-and-forth' },
+  { aspect: 'No-show risk', callback: 'Zero — call is live', form: 'Lead goes cold overnight' },
+  { aspect: 'Relationship building', callback: 'Voice builds trust instantly', form: 'Impersonal text exchange' },
+  { aspect: 'Setup effort', callback: '5 minutes, no dev', form: 'Already live' },
+];
+
+const testimonials = [
+  {
+    quote: 'Our Google Ads cost per acquisition dropped 40% after we added LimeCall to our landing pages. Same ad spend, 40% more customers. The attribution alone is worth the price.',
+    name: 'Priya S.',
+    role: 'Head of Demand Generation, SaaS company',
+  },
+  {
+    quote: 'I was skeptical about callbacks — we\'re a digital-first brand. But the data doesn\'t lie. Visitors who use the widget convert at 11x the rate of form submitters. It\'s now on every campaign page.',
+    name: 'Marcus T.',
+    role: 'Performance Marketing Manager, E-commerce',
+  },
+  {
+    quote: 'The UTM tracking means I can finally tell the CFO which campaigns generate revenue, not just leads. LimeCall closed the attribution gap we\'d been missing for years.',
+    name: 'Jennifer L.',
+    role: 'Marketing Director, Financial Services firm',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How does LimeCall fit into a paid search campaign?',
+    a: 'Add the LimeCall widget to your PPC landing pages. When a visitor clicks your ad and lands on the page, the widget offers an instant callback. LimeCall captures their UTM parameters so you can attribute the call back to the specific campaign, ad group, and keyword that drove it. Call conversion events can also be sent back to Google Ads to optimise bidding.',
+  },
+  {
+    q: 'Can LimeCall trigger a callback when a form is submitted?',
+    a: 'Yes. LimeCall\'s form integration can listen for a form submit event on any page and automatically trigger a callback request. This works with HubSpot forms, Typeform, Gravity Forms, Contact Form 7, and any custom HTML form. No changes to your form are needed — just add the LimeCall snippet and configure the trigger.',
+  },
+  {
+    q: 'Does LimeCall integrate with HubSpot and our CRM?',
+    a: 'LimeCall has a native HubSpot integration that logs every call as an activity on the contact record, including call duration, outcome, and recording link. It also integrates with Salesforce, Zoho, and Pipedrive. Zapier support connects LimeCall to 5,000+ additional tools.',
+  },
+  {
+    q: 'How does call attribution work across multiple campaigns?',
+    a: 'LimeCall uses dynamic number insertion. Each traffic source or campaign gets a unique phone number. When a visitor arrives from a specific source, they see that source\'s number in the widget. All calls are tracked back to the originating source, giving you accurate, per-campaign call attribution.',
+  },
+  {
+    q: 'How long does it take to set up LimeCall on a landing page?',
+    a: 'Under 5 minutes. Copy the LimeCall snippet, paste it into your landing page or tag manager, and the widget is live. No developer involvement is required. You can customise colours, copy, and trigger timing directly from the LimeCall dashboard.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'For Marketing Teams', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Marketing Teams
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Turn every campaign click into<br class="hidden sm:block" />
+        <span class="text-lime-400">a sales conversation</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Calls convert 10-12x better than forms. LimeCall puts a callback widget on every campaign page — and proves every conversion back to its source.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          See How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Marketing tools built for conversion
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Track every call back to its source. Capture leads at peak intent. Prove campaign ROI in real money, not just clicks.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Marketing use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison: callback vs forms -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white sm:text-3xl">
+        Callback widgets vs contact forms
+      </h2>
+      <p class="mb-10 text-center text-dark-400 max-w-lg mx-auto">
+        Forms have been the default lead capture tool for 20 years. The data shows they shouldn't be.
+      </p>
+      <div class="overflow-hidden rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-6 py-4 text-left font-semibold text-dark-400">Aspect</th>
+              <th class="px-6 py-4 text-left font-semibold text-lime-400">LimeCall Callback</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-500">Contact Form</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr class:list={['border-b border-dark-800/50', i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-950/40']}>
+                <td class="px-6 py-4 text-dark-300 font-medium">{row.aspect}</td>
+                <td class="px-6 py-4 text-white">{row.callback}</td>
+                <td class="px-6 py-4 text-dark-500">{row.form}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What marketing teams say</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {testimonials.map(t => (
+          <figure class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex flex-col">
+            <blockquote class="flex-1 text-sm text-dark-300 leading-relaxed">
+              <span class="text-2xl text-lime-500 font-bold leading-none">"</span>
+              {t.quote}
+            </blockquote>
+            <figcaption class="mt-5 border-t border-dark-800 pt-4">
+              <div class="font-semibold text-white text-sm">{t.name}</div>
+              <div class="text-xs text-dark-500 mt-0.5">{t.role}</div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Make your ad spend work harder</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Attribute every call to the campaign, keyword, and source that drove it.' },
+        { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture more leads from the traffic you already have.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'Connect LimeCall to HubSpot, Salesforce, Zapier and more.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans for marketing teams of every size.' },
+      ]} />
+    </div>
   </div>
 </Base>

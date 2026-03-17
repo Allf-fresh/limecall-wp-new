@@ -2,11 +2,12 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Why is Limecall | Intercom - Best Sales Tools`,
-  description: `We have come a long way since we first started and with each coming day, the team at Limecall is working hard to create an even simpler solution from the features.`,
+  title: `Why Choose LimeCall — Fastest Callback Software`,
+  description: `LimeCall connects leads with your sales team in under 28 seconds. See why 10,000+ businesses choose LimeCall over forms, live chat, and chatbots.`,
   canonical: `https://www.limecall.com/why-limecall/`,
 };
 
@@ -59,9 +60,119 @@ const comparisons = [
   { feature: "CRM sync", limecall: "Automatic, real-time", them: "Manual or limited" },
   { feature: "Call recording", limecall: "Every call, stored", them: "Optional or extra cost" },
 ];
+
+const alternativesComparison = [
+  {
+    feature: "Response time",
+    limecall: "28 seconds",
+    forms: "24 – 48 hours",
+    chat: "Minutes (if staff online)",
+    bots: "Instant (but impersonal)",
+  },
+  {
+    feature: "Conversion rate",
+    limecall: "Highest — phone converts 3x",
+    forms: "Lowest — 1-3% typical",
+    chat: "Moderate — depends on agent",
+    bots: "Low — bot friction reduces trust",
+  },
+  {
+    feature: "Lead qualification",
+    limecall: "Live conversation, immediate",
+    forms: "Slow — email back-and-forth",
+    chat: "Text-based, limited context",
+    bots: "Scripted, rigid flow",
+  },
+  {
+    feature: "After-hours coverage",
+    limecall: "Captured & queued for AM",
+    forms: "Form sits in inbox",
+    chat: "Offline message or bot",
+    bots: "Bot handles but rarely converts",
+  },
+  {
+    feature: "CRM integration",
+    limecall: "Automatic, every call",
+    forms: "Manual or via Zapier",
+    chat: "Partial — transcript only",
+    bots: "Limited — conversation logs",
+  },
+  {
+    feature: "Setup time",
+    limecall: "5 minutes",
+    forms: "Already live",
+    chat: "1 – 2 days",
+    bots: "1 – 4 weeks to train",
+  },
+  {
+    feature: "Call recording",
+    limecall: "Every call, stored & searchable",
+    forms: "N/A",
+    chat: "Transcript only",
+    bots: "Conversation log only",
+  },
+];
+
+const callbackScience = [
+  {
+    stat: "9x",
+    claim: "More likely to convert",
+    detail: "Leads called within 5 minutes are 9x more likely to convert than those called after 30 minutes. LimeCall's 28-second callback puts you well inside that window, every time.",
+  },
+  {
+    stat: "391%",
+    claim: "Higher contact rate vs email",
+    detail: "Email follow-up has a contact rate of around 8-10%. Phone callback achieves 40%+. That's a 391% improvement in actually reaching the lead — before they forget who you are.",
+  },
+  {
+    stat: "78%",
+    claim: "Of buyers choose the first responder",
+    detail: "In competitive markets, the first company to speak with a prospect wins the business 78% of the time. LimeCall makes sure your team is always first.",
+  },
+  {
+    stat: "10-12x",
+    claim: "Higher conversion than forms",
+    detail: "A phone call converts at 10-12x the rate of a form submission. The reason is simple: a live conversation builds trust, handles objections instantly, and shortens the sales cycle.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Why does speed-to-lead matter so much?",
+    a: "Research consistently shows that the probability of making contact with a lead drops by over 80% after the first 5 minutes. LimeCall's 28-second callback ensures your sales team reaches every lead while they are still actively interested — dramatically increasing both contact rates and conversion rates.",
+  },
+  {
+    q: "How does LimeCall compare to live chat?",
+    a: "Live chat requires a visitor to type out their question and wait for a typed response. This creates friction and limits conversation depth. LimeCall initiates a live phone call within 28 seconds, enabling richer, faster conversations that build trust and close more deals. Chat converts at a fraction of the rate of phone calls.",
+  },
+  {
+    q: "Why is a callback better than a contact form?",
+    a: "Contact forms introduce a 24-48 hour delay before a lead hears from you. By that time, the lead has likely contacted competitors and lost interest. A callback request is answered in under 28 seconds — the difference between a warm lead and a cold one. Phone calls also convert at 10-12x the rate of form submissions.",
+  },
+  {
+    q: "Does LimeCall work for businesses with high call volumes?",
+    a: "Yes. LimeCall's lead distribution and routing features are built for high-volume teams. Calls are distributed across available reps using round-robin, skills-based, or custom routing rules. After-hours requests are queued automatically. The platform scales from small teams to enterprise operations.",
+  },
+  {
+    q: "What makes LimeCall different from other callback tools?",
+    a: "LimeCall combines speed-to-lead automation, intelligent lead routing, multi-channel capture (call, SMS, scheduling), deep CRM integrations, and full call analytics in a single platform — with a 5-minute setup. Most competitors offer callback widgets alone. LimeCall is a complete inbound lead conversion platform.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -79,7 +190,7 @@ const comparisons = [
     </div>
   </section>
 
-  <!-- Stats -->
+  <!-- Stats bar -->
   <section class="border-b border-dark-800 bg-dark-900/50 py-10">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
@@ -127,7 +238,70 @@ const comparisons = [
     </div>
   </section>
 
-  <!-- Comparison table -->
+  <!-- Why callback converts better — science -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Why callback converts better
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        The data behind LimeCall's approach — and why phone is the highest-converting channel for inbound leads.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {callbackScience.map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex gap-5">
+            <div class="shrink-0">
+              <div class="text-3xl font-extrabold text-lime-400">{item.stat}</div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-2">{item.claim}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{item.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison: LimeCall vs alternatives -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        LimeCall vs the alternatives
+      </h2>
+      <p class="mb-10 text-center text-dark-400 max-w-lg mx-auto">
+        How LimeCall stacks up against contact forms, live chat, and chatbots — the three most common lead capture alternatives.
+      </p>
+      <div class="overflow-x-auto">
+        <div class="overflow-hidden rounded-2xl border border-dark-800 min-w-[640px]">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-800 bg-dark-900/80">
+                <th class="px-5 py-4 text-left font-semibold text-dark-400">Feature</th>
+                <th class="px-5 py-4 text-left font-semibold text-lime-400">LimeCall</th>
+                <th class="px-5 py-4 text-left font-semibold text-dark-500">Contact Forms</th>
+                <th class="px-5 py-4 text-left font-semibold text-dark-500">Live Chat</th>
+                <th class="px-5 py-4 text-left font-semibold text-dark-500">Chatbots</th>
+              </tr>
+            </thead>
+            <tbody>
+              {alternativesComparison.map((row, i) => (
+                <tr class:list={['border-b border-dark-800/50', i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-950/40']}>
+                  <td class="px-5 py-4 text-dark-300 font-medium">{row.feature}</td>
+                  <td class="px-5 py-4 text-white">{row.limecall}</td>
+                  <td class="px-5 py-4 text-dark-500">{row.forms}</td>
+                  <td class="px-5 py-4 text-dark-500">{row.chat}</td>
+                  <td class="px-5 py-4 text-dark-500">{row.bots}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Classic comparison table — LimeCall vs "the old way" -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall vs. the old way</h2>
@@ -154,6 +328,21 @@ const comparisons = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
@@ -166,11 +355,12 @@ const comparisons = [
     </div>
   </section>
 
-  <div class="py-8">
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="Learn more" links={[
         { href: '/how-it-works/', title: 'How It Works', desc: 'The full LimeCall flow from click to call.' },
-        { href: '/benefits/', title: 'Benefits', desc: 'See the measurable impact of LimeCall.' },
+        { href: '/features/', title: 'Features', desc: 'Every feature LimeCall provides.' },
         { href: '/customers/', title: 'Customers', desc: 'Who uses LimeCall and their results.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />

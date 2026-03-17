@@ -2,74 +2,142 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Benefits - LimeCall`,
-  description: `Limecall enables businesses to drive revenue and increase conversions with smart lead distribution and instant click2call routing`,
+  title: `LimeCall Benefits — ROI, Speed, and Conversion Results`,
+  description: `LimeCall converts website visitors into sales calls 3x faster. 28s callback, 80% fewer missed leads, 5-minute setup. See the full business case for instant callback.`,
   canonical: `https://www.limecall.com/benefits/`,
 };
 
 const primaryBenefits = [
   {
-    stat: "3x",
-    label: "More Conversions",
-    desc: "Companies using LimeCall convert website visitors into sales calls at 3x the rate of those relying on forms and email. The reason is simple: phone calls convert better than every other channel.",
+    stat: '3x',
+    label: 'More Conversions',
+    desc: 'Companies using LimeCall convert website visitors into sales calls at 3x the rate of those relying on forms and email. The reason is simple: phone calls convert better than every other channel.',
   },
   {
-    stat: "28s",
-    label: "Time to Connect",
-    desc: "The average LimeCall callback connects visitor to rep in 28 seconds. Leads called within 5 minutes are 9x more likely to convert. Speed is the single most powerful lever in lead conversion.",
+    stat: '28s',
+    label: 'Time to Connect',
+    desc: 'The average LimeCall callback connects visitor to rep in 28 seconds. Leads called within 5 minutes are 9x more likely to convert. Speed is the single most powerful lever in lead conversion.',
   },
   {
-    stat: "80%",
-    label: "Fewer Missed Leads",
-    desc: "LimeCall captures after-hours requests, routes to available reps, and queues missed calls for follow-up. 80% fewer leads fall through the cracks compared to manual call processes.",
+    stat: '80%',
+    label: 'Fewer Missed Leads',
+    desc: 'LimeCall captures after-hours requests, routes to available reps, and queues missed calls for follow-up. 80% fewer leads fall through the cracks compared to manual call processes.',
   },
   {
-    stat: "5 min",
-    label: "Setup Time",
-    desc: "From sign-up to live widget in under 5 minutes. No developer needed. Works on any website platform — WordPress, Webflow, Shopify, Wix, or custom-built sites.",
+    stat: '5 min',
+    label: 'Setup Time',
+    desc: 'From sign-up to live widget in under 5 minutes. No developer needed. Works on any website platform — WordPress, Webflow, Shopify, Wix, or custom-built sites.',
   },
 ];
 
 const detailedBenefits = [
   {
-    category: "Revenue",
+    category: 'Revenue',
     items: [
-      { title: "More conversations, more deals", desc: "Every additional conversation is an opportunity to sell. LimeCall creates more conversations by removing the friction between intent and contact." },
-      { title: "Shorter sales cycles", desc: "Phone conversations move prospects through the funnel faster than email chains. Qualify, handle objections, and close — all in one call." },
-      { title: "Higher average deal value", desc: "Reps on the phone can upsell and cross-sell in real time. Deals done via phone consistently close at higher values than self-service purchases." },
+      { title: 'More conversations, more deals', desc: 'Every additional conversation is an opportunity to sell. LimeCall creates more conversations by removing the friction between intent and contact.' },
+      { title: 'Shorter sales cycles', desc: 'Phone conversations move prospects through the funnel faster than email chains. Qualify, handle objections, and close — all in one call.' },
+      { title: 'Higher average deal value', desc: 'Reps on the phone can upsell and cross-sell in real time. Deals done via phone consistently close at higher values than self-service purchases.' },
     ],
   },
   {
-    category: "Efficiency",
+    category: 'Efficiency',
     items: [
-      { title: "Zero manual data entry", desc: "Every call is automatically logged to your CRM with caller info, duration, and recording. Reps spend time selling, not updating spreadsheets." },
-      { title: "Smart lead routing", desc: "Inbound leads automatically route to the right rep — no coordinator needed, no delays from manual assignment." },
-      { title: "One platform, every channel", desc: "Manage phone callbacks, SMS, scheduled calls, and virtual numbers from one dashboard. No tool-switching, no dropped context." },
+      { title: 'Zero manual data entry', desc: 'Every call is automatically logged to your CRM with caller info, duration, and recording. Reps spend time selling, not updating spreadsheets.' },
+      { title: 'Smart lead routing', desc: 'Inbound leads automatically route to the right rep — no coordinator needed, no delays from manual assignment.' },
+      { title: 'One platform, every channel', desc: 'Manage phone callbacks, SMS, scheduled calls, and virtual numbers from one dashboard. No tool-switching, no dropped context.' },
     ],
   },
   {
-    category: "Customer Experience",
+    category: 'Customer Experience',
     items: [
-      { title: "Instant gratification", desc: "Visitors get what they want — a real person, right now. That immediate responsiveness sets the tone for the entire customer relationship." },
-      { title: "No hold music, no IVR", desc: "LimeCall connects the visitor directly to a human. No call queue, no automated voice tree, no frustration." },
-      { title: "Callbacks when it suits them", desc: "Visitors who can't talk right now can schedule a callback at a convenient time. Reduces no-shows and respects customer time." },
+      { title: 'Instant gratification', desc: 'Visitors get what they want — a real person, right now. That immediate responsiveness sets the tone for the entire customer relationship.' },
+      { title: 'No hold music, no IVR', desc: 'LimeCall connects the visitor directly to a human. No call queue, no automated voice tree, no frustration.' },
+      { title: 'Callbacks when it suits them', desc: 'Visitors who can\'t talk right now can schedule a callback at a convenient time. Reduces no-shows and respects customer time.' },
     ],
   },
   {
-    category: "Visibility",
+    category: 'Visibility',
     items: [
-      { title: "Know what's working", desc: "See which pages, campaigns, and traffic sources drive the most callbacks. Attribute revenue to marketing channels accurately." },
-      { title: "Call recording for quality", desc: "Every call recorded automatically. Review conversations, coach reps, and maintain consistent standards at scale." },
-      { title: "Real-time team dashboard", desc: "See call volume, response times, and rep performance in real time. Identify bottlenecks and act on them immediately." },
+      { title: 'Know what\'s working', desc: 'See which pages, campaigns, and traffic sources drive the most callbacks. Attribute revenue to marketing channels accurately.' },
+      { title: 'Call recording for quality', desc: 'Every call recorded automatically. Review conversations, coach reps, and maintain consistent standards at scale.' },
+      { title: 'Real-time team dashboard', desc: 'See call volume, response times, and rep performance in real time. Identify bottlenecks and act on them immediately.' },
     ],
   },
 ];
+
+const testimonials = [
+  {
+    quote: 'We went from a 2-hour average response time to under a minute. Our pipeline doubled in 90 days. The speed-to-lead automation changed everything.',
+    name: 'Tom W.',
+    role: 'VP Sales, B2B SaaS',
+  },
+  {
+    quote: 'LimeCall paid for itself in the first week. We were losing leads to slow response — now we\'re first to call, every time.',
+    name: 'Sarah K.',
+    role: 'Head of Marketing, Real Estate Agency',
+  },
+  {
+    quote: 'The call recording alone is worth it. I use real calls for coaching every week. My team closes 40% more deals than before.',
+    name: 'Chris B.',
+    role: 'Sales Director, Financial Services',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What ROI can I expect from LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most customers see measurable ROI within the first week. Common outcomes include 3x more leads contacted, 80% fewer missed leads, and conversion rate improvements of 200-300%. Exact ROI depends on your current traffic, close rate, and deal value — but the math typically shows LimeCall paying for itself many times over.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does it take to see results?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most teams see a change in contact rate and lead response time within the first 24 hours of going live. Conversion improvements typically become measurable within the first 1-2 weeks as the team builds rhythm with the new workflow.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall require a long-term contract?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. LimeCall is available on monthly plans with no lock-in. You can start with a free trial, upgrade to a paid plan, and cancel at any time. We believe the results speak for themselves — no contract required to prove the value.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the main benefit of callback over forms?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Speed. A form submission requires your team to notice it, pick it up, and make an outbound call — which often happens hours later. By then, the lead has gone cold. LimeCall triggers a callback automatically within 28 seconds of the visitor expressing interest. That speed difference is the entire ROI.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does LimeCall cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall offers plans starting at a low monthly price for small teams, scaling to enterprise options for larger organisations. All plans include the callback widget, lead routing, CRM sync, and call recording. Visit the pricing page for current plan details.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -88,10 +156,24 @@ const detailedBenefits = [
     </div>
   </section>
 
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+        {primaryBenefits.map(b => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{b.stat}</div>
+            <div class="mt-1 text-sm text-dark-400">{b.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Primary benefit stats -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-12 text-center text-2xl font-bold text-white">The numbers</h2>
+      <h2 class="mb-12 text-center text-2xl font-bold text-white">The numbers behind the benefits</h2>
       <div class="grid gap-6 sm:grid-cols-2">
         {primaryBenefits.map(b => (
           <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
@@ -111,7 +193,7 @@ const detailedBenefits = [
       <div class="space-y-12">
         {detailedBenefits.map(cat => (
           <div>
-            <h3 class="mb-6 text-lg font-bold text-lime-400 uppercase tracking-widest text-sm">{cat.category}</h3>
+            <h3 class="mb-6 text-sm font-bold text-lime-400 uppercase tracking-widest">{cat.category}</h3>
             <div class="grid gap-5 sm:grid-cols-3">
               {cat.items.map(item => (
                 <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
@@ -140,6 +222,42 @@ const detailedBenefits = [
         <p class="text-dark-400 text-sm">
           The result: more of your existing traffic becomes revenue, without spending more on ads.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What customers say</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {testimonials.map(t => (
+          <figure class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex flex-col">
+            <blockquote class="flex-1 text-sm text-dark-300 leading-relaxed">
+              <span class="text-2xl text-lime-500 font-bold leading-none">"</span>
+              {t.quote}
+            </blockquote>
+            <figcaption class="mt-5 border-t border-dark-800 pt-4">
+              <div class="font-semibold text-white text-sm">{t.name}</div>
+              <div class="text-xs text-dark-500 mt-0.5">{t.role}</div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <summary class="cursor-pointer font-semibold text-white">{q.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>

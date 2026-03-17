@@ -155,8 +155,28 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Use Cases -->
+  <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { n: '1', title: 'Traveller browses your site', desc: 'A prospective customer compares holiday packages on your site and clicks "Talk to a specialist" while their interest is at peak.' },
+          { n: '2', title: 'Connected to specialist in 28s', desc: 'LimeCall routes the callback to the right destination expert — by destination, language, or trip type — and connects both parties in 28 seconds.' },
+          { n: '3', title: 'Booking confirmed on the call', desc: 'Your specialist answers questions, upsells relevant options, and confirms the booking during the live conversation.' },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Travel booking use cases</h2>
       <div class="grid gap-6 sm:grid-cols-2">

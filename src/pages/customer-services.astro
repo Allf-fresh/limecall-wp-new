@@ -6,32 +6,32 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Customer Services Software — Resolve Issues Faster`,
-  description: `Resolve customer service issues before they become complaints. LimeCall delivers 28s callbacks, 95% first-contact resolution, and 40% lower churn.`,
+  title: `Customer Services Software — Faster Help, Higher Satisfaction | LimeCall`,
+  description: `Resolve customer service issues faster with LimeCall. Multi-channel service callbacks, SLA timer, skills-based routing, 90% CSAT, 80% first-call resolution.`,
   canonical: `https://www.limecall.com/customer-services/`,
 };
 
 const stats = [
-  { value: "70%", label: "Give up after one failed contact" },
+  { value: "90%", label: "CSAT improvement" },
   { value: "28s", label: "Average callback time" },
-  { value: "95%", label: "First-contact resolution" },
-  { value: "40%", label: "Lower churn with fast response" },
+  { value: "4.5★", label: "Average post-call rating" },
+  { value: "80%", label: "First-call resolution rate" },
 ];
 
 const features = [
-  { title: "Instant callback", desc: "Replace hold queues with instant callbacks. Customers request a call and receive one in 28 seconds — no waiting, no frustration." },
-  { title: "Call routing", desc: "Route customers to the right department or agent automatically — by issue type, account tier, or language preference." },
-  { title: "IVR / self-service options", desc: "Let customers resolve simple queries without an agent. Reserve your team for the complex, high-value interactions that need a human touch." },
-  { title: "Call recording", desc: "Record every customer service interaction for quality assurance, dispute resolution, and agent training." },
-  { title: "SLA tracking", desc: "Monitor response times and resolution rates in real time. Get alerts when SLAs are at risk before they're breached." },
-  { title: "CRM logging", desc: "Every call is automatically logged to your CRM with full context — so agents never ask customers to repeat their story." },
+  { title: "Multi-channel service requests", desc: "Accept service requests via phone callback, SMS, WhatsApp, or web form. All routed through the same platform and queued in priority order." },
+  { title: "SLA callback timer", desc: "Set SLA response time targets per service tier. LimeCall alerts your team when a callback SLA is approaching and auto-escalates breaches." },
+  { title: "Skills-based routing", desc: "Route service requests to the agent with the right skills for the issue — billing queries to billing specialists, technical issues to engineers." },
+  { title: "Recorded calls for compliance", desc: "Every customer service interaction is recorded and stored securely. Replay calls for dispute resolution, quality assurance, and regulatory compliance." },
+  { title: "Shared service inbox", desc: "All service requests — calls, callbacks, messages, and tickets — in one shared inbox. No issue falls through the cracks between channels or team members." },
+  { title: "Post-call CSAT", desc: "Automatically send a CSAT survey after every service call. Capture satisfaction scores and feedback in real time, tied to the agent and call record." },
 ];
 
 const useCases = [
-  { title: "Technical support", desc: "Customers with technical issues get connected to the right support engineer immediately. Faster resolution, fewer repeat contacts." },
-  { title: "Billing and account issues", desc: "Sensitive account queries require a fast, human response. LimeCall ensures no billing dispute goes unanswered for hours." },
-  { title: "Product guidance", desc: "Customers who need help getting the most from your product get connected to a specialist in seconds — reducing churn and driving adoption." },
-  { title: "Escalation management", desc: "Escalated complaints are routed instantly to senior agents. Fast escalation handling protects retention and NPS." },
+  { title: "Inbound service requests", desc: "Customers with service needs request a callback and are connected to the right agent in 28 seconds — no hold queue, no frustration." },
+  { title: "Warranty claims", desc: "Warranty and product issue calls require specialist knowledge. LimeCall routes to the right team instantly and logs every interaction for compliance." },
+  { title: "Technical support", desc: "Complex technical issues get routed to engineers with the right expertise. Full call recording ensures knowledge is captured for future training." },
+  { title: "Billing inquiries", desc: "Sensitive billing queries are handled by dedicated billing agents. SLA timers ensure no billing dispute waits longer than your service standards allow." },
 ];
 
 const faqSchema = {
@@ -43,39 +43,39 @@ const faqSchema = {
       name: 'What is customer services software?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Customer services software helps businesses handle inbound customer requests — including support tickets, phone calls, callbacks, and routing. LimeCall specialises in the phone channel, connecting customers to the right agent in under 28 seconds to resolve issues on the first contact.',
+        text: 'Customer services software helps businesses handle inbound service requests across multiple channels — phone, SMS, web, and chat. LimeCall specialises in callback-driven service delivery, connecting customers to the right agent in 28 seconds with skills-based routing, SLA tracking, and full call recording.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How does callback reduce customer service costs?',
+      name: 'How does skills-based routing improve service quality?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Callback reduces costs in three ways: it cuts call handle time (agents have more context before answering), reduces repeat contacts (issues get resolved first time), and lowers abandonment (customers don\'t hang up frustrated and call back twice). Teams using LimeCall typically see 40% lower operational costs.',
+        text: 'Skills-based routing ensures every service request reaches the agent best equipped to resolve it on the first contact. A billing dispute goes to a billing specialist. A technical fault goes to an engineer. This reduces transfers, lowers handle time, and dramatically improves first-call resolution rates.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can LimeCall replace my call centre?',
+      name: 'What is an SLA callback timer and how does it work?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'LimeCall can handle inbound callback routing, call recording, IVR, and CRM sync — covering the core functionality many teams need. It works alongside or as an alternative to traditional call centre platforms for businesses that primarily need inbound callback management.',
+        text: 'An SLA callback timer tracks the time between a service request and the callback being made. LimeCall lets you set SLA targets per customer tier or issue type. If a callback is approaching its SLA deadline without being answered, the system escalates to a supervisor and alerts the team — ensuring no SLA is breached without action.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What is a good first-contact resolution rate?',
+      name: 'Does LimeCall support multi-channel service requests?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Industry benchmarks suggest 70-75% is average and 85%+ is excellent. LimeCall helps teams reach 95%+ by ensuring agents have full context before every call — call history, CRM records, and the page the customer was on when they requested a callback.',
+        text: 'Yes. LimeCall consolidates service requests from phone callbacks, SMS, WhatsApp, and web forms into a single shared service inbox. Every request is tracked, prioritised, and assigned — regardless of which channel the customer used to reach out.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How do I measure customer service quality?',
+      name: 'How does post-call CSAT collection work in LimeCall?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Key metrics include first-contact resolution rate, average handle time, abandonment rate, CSAT, and NPS. LimeCall\'s dashboard tracks response times and call volumes. Paired with your CRM and survey tools, you get a complete view of service quality.',
+        text: 'After every service call, LimeCall automatically sends a CSAT survey to the customer via SMS or email. The survey is sent within minutes of call completion. Scores and feedback are captured in the LimeCall dashboard and tied to the agent, call recording, and customer record for full context.',
       },
     },
   ],
@@ -93,11 +93,11 @@ const faqSchema = {
         Customer Services
       </div>
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Resolve customer service issues<br class="hidden sm:block" />
-        <span class="text-lime-400">before they become complaints</span>
+        Faster help, higher satisfaction —<br class="hidden sm:block" />
+        <span class="text-lime-400">built for service teams</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        70% of customers give up after one failed contact attempt. LimeCall ensures every customer reaches an agent in 28 seconds — delivering 95% first-contact resolution and 40% lower churn.
+        LimeCall gives your service team skills-based routing, SLA callback timers, multi-channel request management, and post-call CSAT — all in one platform. 90% CSAT improvement, 80% first-call resolution.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
@@ -156,9 +156,9 @@ const faqSchema = {
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
-          { n: "1", title: "Customer requests callback", desc: "From your website, app, or support portal, the customer clicks the callback button — no hold queue, no frustration." },
-          { n: "2", title: "Routed to right agent in 28s", desc: "LimeCall routes the call based on issue type or agent availability and connects customer to agent in 28 seconds." },
-          { n: "3", title: "Issue resolved on first contact", desc: "The agent has full context — call history, CRM record — and resolves the issue first time. Call is logged automatically." },
+          { n: "1", title: "Service request comes in", desc: "Customer submits a request via callback widget, SMS, WhatsApp, or web form. SLA timer starts immediately." },
+          { n: "2", title: "Skills-based routing fires", desc: "LimeCall matches the request to the best-skilled available agent and connects them within 28 seconds." },
+          { n: "3", title: "Issue resolved, CSAT captured", desc: "Agent resolves the issue with full CRM context. Call is recorded and a post-call CSAT survey fires automatically." },
         ].map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>

@@ -6,32 +6,32 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Customer Care Software — Instant Callbacks | LimeCall`,
-  description: `Give customers the fastest, most personal support experience. LimeCall connects them to a care agent in 28 seconds. 3x higher CSAT, 40% lower abandonment.`,
+  title: `Customer Care Software — Proactive Callbacks That Delight | LimeCall`,
+  description: `Give customers the fastest, most personal care experience. LimeCall connects them to a care agent in 28 seconds. 90% CSAT improvement, 3x retention rate.`,
   canonical: `https://www.limecall.com/customer-care/`,
 };
 
 const stats = [
-  { value: "90%", label: "Of customers want immediate response" },
+  { value: "90%", label: "CSAT improvement" },
   { value: "28s", label: "Average callback time" },
-  { value: "40%", label: "Lower call abandonment" },
-  { value: "3x", label: "Higher CSAT scores" },
+  { value: "80%", label: "Faster issue resolution" },
+  { value: "3x", label: "Higher retention rate" },
 ];
 
 const features = [
-  { title: "Instant callback", desc: "A customer needing help clicks one button and is connected to a care agent in 28 seconds. No hold music, no frustration." },
-  { title: "Smart routing to care agents", desc: "Route customers to the right care specialist based on issue type, account tier, or agent availability — every time." },
-  { title: "Call recording", desc: "Record every customer care call for quality monitoring, compliance, and coaching. Replay to resolve disputes and improve service." },
-  { title: "Shared inbox", desc: "All customer interactions — calls, callbacks, messages — in one shared inbox. No lead, no complaint, no query falls through the cracks." },
-  { title: "After-hours queuing", desc: "Customers who request a callback outside hours are queued automatically. First thing in the morning, your team calls them back." },
-  { title: "CRM sync", desc: "Every care interaction is logged to your CRM automatically — so the next agent to speak to a customer has full context." },
+  { title: "Proactive care callbacks", desc: "Don't wait for customers to complain. Trigger outbound callbacks to at-risk customers before issues escalate — turning potential churn into loyalty." },
+  { title: "Customer health alerts", desc: "Set automated alerts based on customer usage signals, missed renewals, or support ticket spikes. Your care team knows who needs attention before they ask." },
+  { title: "Churn prevention workflows", desc: "Route at-risk customers to senior retention specialists automatically. Purpose-built workflows for cancellation saves, renewal calls, and win-back campaigns." },
+  { title: "VIP callback queue", desc: "Priority routing for your highest-value customers. VIP accounts skip the queue and are connected to their dedicated care specialist within seconds." },
+  { title: "NPS survey triggers post-call", desc: "Automatically send NPS or CSAT surveys after every care call. Capture feedback while the experience is fresh and close the loop on detractors." },
+  { title: "CRM history on every call", desc: "Agents see the full customer history — past calls, purchases, open tickets, and CRM notes — before they even say hello. No more asking customers to repeat themselves." },
 ];
 
 const useCases = [
-  { title: "Product support", desc: "Customers with product questions get connected to the right support specialist in seconds — not stuck in a queue for 20 minutes." },
-  { title: "Billing enquiries", desc: "Sensitive billing questions deserve a human. LimeCall connects customers to a billing specialist instantly, reducing frustration and churn." },
-  { title: "Returns and complaints", desc: "Unhappy customers need fast, personal responses. A 28-second callback turns a complaint into a retention opportunity." },
-  { title: "Account management", desc: "High-value customers get priority routing to their dedicated account manager — reinforcing the relationship at every touchpoint." },
+  { title: "At-risk customer callbacks", desc: "Proactively call customers showing churn signals — declining usage, overdue renewals, unresolved tickets — before they leave." },
+  { title: "Renewal calls", desc: "Trigger automated renewal outreach at the right time in the customer lifecycle. Care agents call with full context and the right offers ready." },
+  { title: "Post-purchase follow-up", desc: "Reach out after a purchase or onboarding milestone to ensure customers are succeeding. Proactive care prevents early churn and builds loyalty." },
+  { title: "Loyalty programme calls", desc: "Personal callbacks to reward loyal customers, announce exclusive offers, or gather feedback. Make your best customers feel like VIPs." },
 ];
 
 const faqSchema = {
@@ -40,42 +40,42 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What is customer care software?',
+      name: 'What is the difference between customer care and customer support?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Customer care software helps businesses manage and improve their interactions with customers — including support requests, callbacks, call routing, and recording. LimeCall focuses on the phone channel, connecting customers to care agents in under 28 seconds.',
+        text: 'Customer support is reactive — it responds to issues after they happen. Customer care is proactive — it anticipates customer needs, monitors account health, and reaches out before problems escalate. LimeCall supports both: instant callbacks for reactive support and automated outreach workflows for proactive care.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How is customer care different from customer service?',
+      name: 'How do proactive callbacks prevent churn?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Customer service typically refers to transactional help — answering questions, resolving issues. Customer care is broader and more proactive — it covers the entire relationship, emotional connection, and long-term satisfaction. Good customer care software supports both.',
+        text: 'Proactive callbacks reach customers before they decide to leave. By identifying churn signals — low usage, unresolved tickets, upcoming renewals — and triggering outbound calls from a care specialist, businesses can address concerns directly. Customers who receive proactive outreach are significantly more likely to renew.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How does callback improve customer care?',
+      name: 'Can LimeCall identify at-risk customers automatically?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Callback eliminates hold times — the single biggest source of customer frustration. When a customer requests a callback and receives one in 28 seconds, their experience starts positively. Studies show callback customers report 3x higher satisfaction scores than those left on hold.',
+        text: 'LimeCall can trigger callback workflows based on CRM data, support ticket events, or custom signals you define. When a customer crosses a threshold — like submitting three support tickets in a week or not logging in for 30 days — an automatic callback to a care specialist is queued. Your team acts at the right moment, every time.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can I track customer care call quality?',
+      name: 'Does LimeCall integrate with our CRM for customer history?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall records every call and ties recordings to customer records and tickets. Managers can review calls for quality, use them in coaching, and monitor response times and resolution rates from the dashboard.',
+        text: 'Yes. LimeCall integrates with HubSpot, Salesforce, Zoho, and other CRMs. When a care agent picks up a callback, they see the full customer record — past calls, purchases, open tickets, and notes — before the conversation starts. No asking customers to repeat their history.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What makes customers feel cared for?',
+      name: 'How does NPS collection work after a care call?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Speed, personalisation, and consistency. When a customer calls and reaches someone immediately who already knows their history — not someone who asks them to repeat everything — they feel genuinely cared for. LimeCall enables all three with instant routing, CRM sync, and call recording.',
+        text: 'After every customer care call, LimeCall can automatically trigger an NPS or CSAT survey via SMS or email. Surveys are sent within minutes of call completion while the experience is fresh. Responses are collected and tied to the call record so managers can identify patterns and close the loop with detractors.',
       },
     },
   ],
@@ -93,11 +93,11 @@ const faqSchema = {
         Customer Care
       </div>
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Give customers the fastest,<br class="hidden sm:block" />
-        <span class="text-lime-400">most personal support experience</span>
+        Proactive care callbacks that<br class="hidden sm:block" />
+        <span class="text-lime-400">delight customers and prevent churn</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        90% of customers expect an immediate response. LimeCall connects them to a care agent in 28 seconds — cutting abandonment by 40% and tripling CSAT.
+        Don't wait for customers to complain. LimeCall enables proactive care callbacks, VIP routing, and churn prevention workflows — delivering 90% CSAT improvement and 3x higher retention.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
@@ -156,9 +156,9 @@ const faqSchema = {
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
-          { n: "1", title: "Customer needs help", desc: "A customer on your website, app, or support page clicks the callback button. No hold music, no frustration." },
-          { n: "2", title: "Connected in 28 seconds", desc: "LimeCall routes the callback to the right care agent and connects them in under 28 seconds." },
-          { n: "3", title: "Issue resolved, call logged", desc: "The agent resolves the issue. The call is recorded and logged against the customer record automatically." },
+          { n: "1", title: "Signal detected or request made", desc: "A customer triggers a churn alert, requests a callback, or your proactive workflow fires. LimeCall queues the outreach immediately." },
+          { n: "2", title: "Agent connected with full context", desc: "The care agent receives the callback with full CRM history, past interactions, and relevant context — before they say a word." },
+          { n: "3", title: "Issue resolved, NPS triggered", desc: "The agent resolves the issue or completes the proactive call. A post-call NPS survey fires automatically. Call is recorded and logged." },
         ].map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
@@ -197,8 +197,8 @@ const faqSchema = {
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="Related resources" links={[
-        { href: '/customer-callback-software/', title: 'Customer Callback Software', desc: 'The full callback software guide.' },
         { href: '/customer-support-software/', title: 'Customer Support Software', desc: 'LimeCall for support teams.' },
+        { href: '/retention/', title: 'Retention', desc: 'Keep customers with proactive outreach.' },
         { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Manage all customer conversations in one place.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />

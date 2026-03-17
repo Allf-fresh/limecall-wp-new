@@ -93,8 +93,47 @@ const useCases = [
     </div>
   </section>
 
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+        {[
+          { v: '2B+', l: 'WhatsApp active users' },
+          { v: '98%', l: 'Message open rate' },
+          { v: '3x', l: 'More engagement vs email' },
+          { v: '0', l: 'Friction to start a chat' },
+        ].map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.v}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How to use -->
+  <section class="py-14 sm:py-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How to create your WhatsApp QR code</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { n: '1', title: 'Enter your number', desc: 'Type your WhatsApp Business number with country code (e.g. +14155550123). This is the number customers will message when they scan.' },
+          { n: '2', title: 'Add a pre-filled message', desc: 'Optionally add a message that auto-fills when someone scans — like "Hi, I saw your ad and would like to know more." Gives your team instant context.' },
+          { n: '3', title: 'Download and use', desc: 'Generate your QR code and download it as a high-resolution PNG or SVG. Print it on any material — business cards, packaging, signage.' },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Tool UI (design mockup) -->
-  <section class="py-16 sm:py-20">
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-2xl border border-dark-700 bg-dark-900/80 p-8 shadow-2xl">
         <h2 class="mb-6 text-xl font-bold text-white">Generate your WhatsApp QR code</h2>

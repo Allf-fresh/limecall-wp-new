@@ -1,109 +1,290 @@
 ---
 import Base from '../layouts/Base.astro';
-import Button from '../components/ui/Button.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: 'About Us | Callback Solutions Company | LimeCall',
-  description: 'The idea and the people behind LimeCall. Our vision is to deliver a multichannel real-time platform enhanced by data integration that helps businesses convert website visitors into sales calls instantly.',
+  title: 'About Us — The Company Behind LimeCall | LimeCall',
+  description: 'LimeCall was built to make phone conversations the fastest path from website visitor to revenue. Learn our story, mission, values, and the team behind the product.',
   canonical: 'https://www.limecall.com/about-us/',
 };
+
+const stats = [
+  { value: '10,000+', label: 'Customers worldwide' },
+  { value: '40+', label: 'Countries supported' },
+  { value: '2018', label: 'Founded' },
+  { value: '2M+', label: 'Calls connected' },
+];
+
+const products = [
+  { title: 'Callbacks', desc: 'Instant callback widgets that connect website visitors to your sales or support team in under 28 seconds — no hold music, no friction.' },
+  { title: 'Call Tracking', desc: 'Attribute every phone call to the marketing campaign, keyword, or page that drove it. Know exactly what generates revenue.' },
+  { title: 'Virtual Numbers', desc: 'Local and toll-free numbers in 40+ countries for instant local presence wherever your customers are.' },
+  { title: 'SMS & Messaging', desc: 'Two-way SMS, WhatsApp integration, and business texting — all managed from the same dashboard as your calls.' },
+];
+
+const values = [
+  { title: 'Speed', desc: 'Response time is the most powerful lever in lead conversion. We obsess over every millisecond between intent and connection — in our product and in our company.' },
+  { title: 'Simplicity', desc: 'The best tool is the one people actually use. We strip away complexity so teams can be live in minutes, not months.' },
+  { title: 'Customer Obsession', desc: 'We measure our success by our customers\' outcomes. Revenue generated, leads converted, and deals closed — those are the numbers that matter to us.' },
+  { title: 'Transparency', desc: 'No hidden fees, no lock-in contracts, no surprises. We believe transparency builds trust — and trust builds long-term partnerships.' },
+  { title: 'Innovation', desc: 'The sales and marketing landscape moves fast. We stay ahead of it so our customers can too, shipping features that solve real problems before they become industry-wide pain points.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Where is LimeCall based?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is a globally distributed company. Our team works remotely across multiple time zones, allowing us to provide support and serve customers in over 40 countries around the world.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How big is the LimeCall team?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We are a lean, focused team of product builders, engineers, and customer success specialists. We intentionally stay small to move fast and keep a close relationship with every customer.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What industries does LimeCall serve?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall serves businesses across real estate, finance, travel, SaaS, healthcare, education, e-commerce, and more. Any business that converts leads over the phone — and wants to do it faster — benefits from LimeCall.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall a public company?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. LimeCall is privately held. This lets us focus entirely on our customers and product without the pressure of quarterly earnings cycles. We are funded by the revenue our customers generate with the platform.',
+      },
+    },
+  ],
+};
 ---
+
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
-  <section class="relative overflow-hidden py-20 sm:py-28">
+  <section class="relative overflow-hidden border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="absolute inset-0 -z-10">
       <div class="absolute left-1/2 top-0 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-lime-500/8 blur-[120px]"></div>
     </div>
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-      <span class="inline-block mb-4 rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">Our Story</span>
-      <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
-        Turning website visitors into
-        <span class="text-lime-400"> real conversations</span>
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'About Us', url: seo.canonical }]} />
+      <div class="mt-4 inline-block rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">
+        Our Story
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
+        Making phone conversations the
+        <span class="text-lime-400"> fastest path to revenue</span>
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-dark-300 sm:text-xl max-w-2xl mx-auto">
-        LimeCall was born from a simple insight: the gap between a website visitor and a sales conversation is costing businesses millions in lost revenue. We built the platform to close that gap — instantly.
+        LimeCall was built on a simple insight: the gap between a website visitor and a sales conversation costs businesses billions in lost revenue every year. We built the platform to close that gap — instantly.
       </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/contact-us/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Talk to Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
   <!-- Mission -->
-  <section class="py-16 border-t border-dark-800">
+  <section class="py-16 sm:py-20 border-b border-dark-800">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="grid gap-12 lg:grid-cols-2 items-center">
         <div>
           <h2 class="text-3xl font-bold text-white mb-6">Our Mission</h2>
           <p class="text-dark-300 text-lg leading-relaxed mb-4">
-            We believe every sales conversation starts with a moment of intent. When a visitor lands on your website, they have a question, a need, a problem to solve. That moment is fleeting.
+            We believe every sales conversation starts with a moment of intent. When a visitor lands on your website, they have a question, a need, a problem to solve. That moment is fleeting — and for most businesses, it passes without a conversation ever happening.
           </p>
           <p class="text-dark-300 text-lg leading-relaxed mb-4">
-            LimeCall's mission is to make that connection instant — connecting the right visitor with the right sales rep in seconds, not minutes. Because speed-to-lead is everything.
+            LimeCall's mission is to make that connection instant. Connecting the right visitor with the right person in seconds, not hours. Because speed-to-lead isn't a nice-to-have — it's the single most powerful variable in sales conversion.
           </p>
           <p class="text-dark-300 text-lg leading-relaxed">
-            Our #1 callback automation platform increases website conversions by up to 300% by eliminating friction from the sales process.
+            Phone conversations close more deals, at higher values, with shorter cycles than any other channel. Our job is to make every one of those conversations happen as fast as possible.
           </p>
         </div>
         <div class="grid grid-cols-2 gap-6">
           <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6 text-center">
             <div class="text-4xl font-extrabold text-lime-400 mb-2">300%</div>
-            <div class="text-dark-400 text-sm">Increase in conversions</div>
+            <div class="text-dark-400 text-sm">Conversion increase</div>
           </div>
           <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6 text-center">
             <div class="text-4xl font-extrabold text-lime-400 mb-2">28s</div>
             <div class="text-dark-400 text-sm">Average callback time</div>
           </div>
           <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6 text-center">
-            <div class="text-4xl font-extrabold text-lime-400 mb-2">50+</div>
-            <div class="text-dark-400 text-sm">Countries supported</div>
+            <div class="text-4xl font-extrabold text-lime-400 mb-2">9x</div>
+            <div class="text-dark-400 text-sm">Higher conversion in first 5 min</div>
           </div>
           <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6 text-center">
-            <div class="text-4xl font-extrabold text-lime-400 mb-2">1000+</div>
-            <div class="text-dark-400 text-sm">Businesses worldwide</div>
+            <div class="text-4xl font-extrabold text-lime-400 mb-2">5 min</div>
+            <div class="text-dark-400 text-sm">Average setup time</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we started -->
+  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-6 text-center">How we started</h2>
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
+        <p class="text-dark-300 text-lg leading-relaxed mb-4">
+          LimeCall was founded in 2018 after our founders noticed a consistent pattern while working with sales teams: companies were spending tens of thousands on traffic and ads, only to lose leads because their teams couldn't respond fast enough.
+        </p>
+        <p class="text-dark-300 text-lg leading-relaxed mb-4">
+          A visitor would land on a pricing page, fill in a contact form, and wait. Hours later — sometimes days — someone would follow up. By that point, the lead had gone cold, booked with a competitor, or simply moved on.
+        </p>
+        <p class="text-dark-300 text-lg leading-relaxed">
+          The fix wasn't more salespeople. It was speed. We built LimeCall to make that first conversation happen in 28 seconds — automatically, every time, with zero manual effort from the team. More than 10,000 businesses later, that insight still drives everything we build.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we build -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white">What we build</h2>
+        <p class="mt-4 text-dark-400 text-lg max-w-xl mx-auto">Four core product areas, one unified platform for turning conversations into revenue.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {products.map(p => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="text-lg font-bold text-lime-400 mb-3">{p.title}</h3>
+            <p class="text-dark-400 text-sm leading-relaxed">{p.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- Values -->
-  <section class="py-16 border-t border-dark-800 bg-dark-900/30">
+  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-white">What drives us</h2>
-        <p class="mt-4 text-dark-400 text-lg">The values behind every feature we build.</p>
+        <h2 class="text-3xl font-bold text-white">Our values</h2>
+        <p class="mt-4 text-dark-400 text-lg">The principles behind every decision we make and every feature we ship.</p>
       </div>
-      <div class="grid gap-6 sm:grid-cols-3">
-        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
-          <div class="text-3xl mb-4">⚡</div>
-          <h3 class="text-lg font-bold text-white mb-2">Speed First</h3>
-          <p class="text-dark-400 text-sm leading-relaxed">Response time is the #1 factor in lead conversion. We obsess over every millisecond between intent and connection.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {values.map(v => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="text-lg font-bold text-white mb-2">{v.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Our team</h2>
+      <p class="text-dark-300 text-lg leading-relaxed mb-4 max-w-2xl mx-auto">
+        LimeCall is built by a global remote team of engineers, product designers, and customer success specialists. We're distributed across multiple continents — close to the customers we serve and the time zones they work in.
+      </p>
+      <p class="text-dark-300 text-lg leading-relaxed max-w-2xl mx-auto">
+        We hire for talent and ownership, not location. Every team member is a customer advocate first — because the best product decisions come from deeply understanding the problem, not just the code.
+      </p>
+    </div>
+  </section>
+
+  <!-- Careers teaser -->
+  <section class="py-16 sm:py-20 border-b border-dark-800 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-white mb-3">Join our team</h2>
+          <p class="text-dark-400 leading-relaxed">
+            We're a small team that ships fast, cares deeply about quality, and obsesses over customer outcomes. If you want to build products that directly impact business revenue — we'd love to hear from you.
+          </p>
         </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
-          <div class="text-3xl mb-4">🎯</div>
-          <h3 class="text-lg font-bold text-white mb-2">Right Person, Right Time</h3>
-          <p class="text-dark-400 text-sm leading-relaxed">Smart lead distribution ensures every inbound call reaches the best available rep — not just whoever picks up first.</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
-          <div class="text-3xl mb-4">📊</div>
-          <h3 class="text-lg font-bold text-white mb-2">Data-Driven</h3>
-          <p class="text-dark-400 text-sm leading-relaxed">Every call, every conversion, every outcome is tracked. Use the insights to continuously improve your sales process.</p>
+        <div class="flex-shrink-0">
+          <a href="/contact-us/" class="inline-flex items-center gap-2 rounded-xl border border-lime-500/30 bg-lime-500/10 px-8 py-3.5 text-sm font-semibold text-lime-400 hover:bg-lime-500/20 transition">
+            Get in touch →
+          </a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <summary class="cursor-pointer font-semibold text-white">{q.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section class="py-20 border-t border-dark-800">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
         Ready to convert more visitors?
       </h2>
       <p class="mt-4 text-lg text-dark-400">
         Join thousands of businesses using LimeCall to turn website traffic into revenue.
       </p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <Button href="/signup" size="lg">TRY FOR FREE</Button>
-        <Button href="/contact-us" variant="outline" size="lg">Talk to sales</Button>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
       </div>
     </div>
   </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore LimeCall" links={[
+        { href: '/how-it-works/', title: 'How It Works', desc: 'The full LimeCall flow from click to call.' },
+        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'What sets LimeCall apart from alternatives.' },
+        { href: '/customers/', title: 'Customers', desc: 'Who uses LimeCall and their results.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
+  </div>
 </Base>

@@ -2,41 +2,107 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const tool = "Zendesk";
 
 const seo = {
-  title: `Zendesk Integration - LimeCall`,
-  description: `No need to rush in-between apps anymore — manage everything from one platform through zendesk integration.`,
+  title: `LimeCall Zendesk Integration — Auto-Log Calls as Tickets | LimeCall`,
+  description: `Connect LimeCall to Zendesk and every callback automatically creates a ticket with caller details, call recording, and full context. Zero manual ticket creation, 5-minute setup.`,
   canonical: `https://www.limecall.com/integration-zendesk/`,
 };
 
+const stats = [
+  { value: "0", label: "Manual ticket creation needed" },
+  { value: "100%", label: "Call coverage in Zendesk" },
+  { value: "28s", label: "Avg. callback response time" },
+  { value: "5 min", label: "Setup time" },
+];
+
 const steps = [
   { n: "1", title: `Connect LimeCall to ${tool}`, desc: `Authorize the integration in your LimeCall dashboard. Enter your Zendesk subdomain and API credentials — done in under 3 minutes.` },
-  { n: "2", title: "Calls create Zendesk tickets", desc: "Every LimeCall callback automatically creates a Zendesk ticket with caller details, call recording, and full context." },
-  { n: "3", title: "Support teams stay in sync", desc: "Agents see all call history inside Zendesk tickets — no switching between apps to understand what a customer called about." },
+  { n: "2", title: "Lead calls — ticket auto-created", desc: "Every LimeCall callback automatically creates a Zendesk ticket with caller name, number, page of origin, call recording, and full context." },
+  { n: "3", title: "Support teams stay in sync", desc: "Agents see all call history inside Zendesk tickets. No app switching, no repeated questions — just faster, better support." },
 ];
 
 const benefits = [
-  { title: "Auto-create Zendesk tickets", desc: "Every LimeCall callback creates a Zendesk ticket with caller name, number, page of origin, call duration, and recording link." },
-  { title: "Full call context for agents", desc: "Support agents see everything they need inside the ticket — no need to ask the customer to repeat themselves." },
-  { title: "No app switching", desc: "Everything lives in Zendesk. Agents handle calls, view history, and update tickets without leaving their support workspace." },
-  { title: "Callback from Zendesk", desc: "Agents can initiate a LimeCall callback directly from a Zendesk ticket — reaching the customer with one click." },
-  { title: "SLA tracking", desc: "Call response times are logged in Zendesk, helping you meet SLAs and track support team performance accurately." },
-  { title: "CSAT integration", desc: "Tie call outcomes to Zendesk satisfaction scores — understand which callback interactions lead to happy customers." },
+  { title: "Auto-Create Zendesk Tickets", desc: "Every LimeCall callback creates a Zendesk ticket with caller name, phone number, page of origin, call duration, and recording link — automatically." },
+  { title: "Call Recording in Every Ticket", desc: "The full call recording is attached to the Zendesk ticket so any agent who picks up the ticket has complete audio context without asking the customer to repeat themselves." },
+  { title: "Caller ID Lookup", desc: "LimeCall enriches each incoming call with caller identity data before creating the ticket — giving agents context before they even read the conversation." },
+  { title: "Ticket Assignment Rules", desc: "Map LimeCall routing rules to Zendesk agent groups. Calls from your pricing page route to the sales team; support queries route to Tier-1 agents — automatically." },
+  { title: "CSAT Trigger After Call", desc: "Automatically trigger a Zendesk CSAT survey after a callback is resolved. Tie call quality to satisfaction scores and identify coaching opportunities." },
+  { title: "Shared Notes Sync", desc: "Agent notes entered during or after a LimeCall callback sync directly to the Zendesk ticket, keeping the entire customer record in one place." },
 ];
+
+const useCases = [
+  {
+    title: "Customer Support Tickets",
+    desc: "Every inbound callback from a support page becomes a tracked Zendesk ticket. Agents handle the call, add notes, and close the ticket — all without switching apps. Support metrics are automatically captured.",
+  },
+  {
+    title: "Callback Request Tracking",
+    desc: "Prospects or customers who request a callback from your website are captured in Zendesk as new tickets. Nothing falls through the cracks, even during peak volume periods.",
+  },
+  {
+    title: "Escalation Tracking",
+    desc: "When a Tier-1 agent needs to escalate, they can initiate a LimeCall transfer directly from the Zendesk ticket. The escalation is logged, the new agent has full context, and the ticket is updated automatically.",
+  },
+  {
+    title: "SLA Compliance",
+    desc: "Call response times are logged as Zendesk ticket timestamps. Your SLA clock starts the moment a callback is requested — so you can track, measure, and meet your service level commitments.",
+  },
+];
+
+const faqs = [
+  {
+    q: 'How do I connect LimeCall to Zendesk?',
+    a: 'In your LimeCall dashboard, navigate to Integrations and select Zendesk. Enter your Zendesk subdomain and generate an API token in your Zendesk Admin settings. Paste the token into LimeCall, authorize the connection, and the integration is live. The entire process takes under 5 minutes.',
+  },
+  {
+    q: 'What data syncs between LimeCall and Zendesk?',
+    a: 'Every callback syncs the caller phone number, name (if available), the page they called from, call duration, call recording URL, agent notes, and outcome. This data populates a new Zendesk ticket automatically so agents have complete context without any manual data entry.',
+  },
+  {
+    q: 'Does the integration work with Zendesk Talk?',
+    a: 'Yes. LimeCall can work alongside Zendesk Talk. LimeCall handles the inbound callback and instant connection layer while Zendesk Talk manages your traditional inbound queue. Tickets from both systems appear in the same Zendesk workspace.',
+  },
+  {
+    q: 'Can I control which calls create Zendesk tickets?',
+    a: 'Yes. You can configure ticket creation rules in LimeCall — for example, only create tickets for calls from specific widgets, pages, or phone numbers. You can also set minimum call duration thresholds so accidental hang-ups do not generate empty tickets.',
+  },
+  {
+    q: 'Is the Zendesk integration available on all LimeCall plans?',
+    a: 'The Zendesk integration is available on LimeCall\'s Starter plan and above. Visit the LimeCall pricing page for full plan details and to compare feature availability across tiers.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: `LimeCall + ${tool} Integration`, url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Integration
+      </div>
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
         LimeCall + <span class="text-lime-400">{tool}</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Every callback becomes a Zendesk ticket automatically. Your support team stays in context — no app switching, no missed calls.
+        Every callback becomes a Zendesk ticket automatically. Your support team stays in context — no app switching, no missed calls, zero manual ticket creation.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Connect {tool} Free →</a>
@@ -45,10 +111,25 @@ const benefits = [
     </div>
   </section>
 
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Setup steps -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Connect in 3 steps</h2>
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Connect in 3 steps</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-lg mx-auto">No developer required. The integration is live in under 5 minutes from your LimeCall dashboard.</p>
       <div class="grid gap-8 sm:grid-cols-3">
         {steps.map(s => (
           <div class="text-center">
@@ -61,10 +142,11 @@ const benefits = [
     </div>
   </section>
 
-  <!-- Benefits -->
+  <!-- Features / Benefits -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">What you get</h2>
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">What you get with LimeCall + Zendesk</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-xl mx-auto">Every call is captured, contextualised, and tracked — no manual work required from your support team.</p>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {benefits.map(b => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
@@ -76,8 +158,23 @@ const benefits = [
     </div>
   </section>
 
-  <!-- Use case callout -->
+  <!-- Use cases -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use case callout -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-2xl border border-lime-500/20 bg-lime-950/20 p-8 sm:p-10">
         <h2 class="text-xl font-bold text-white mb-4">Support teams love one unified view</h2>
@@ -91,21 +188,39 @@ const benefits = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
       <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with {tool}?</h2>
       <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
-      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
     </div>
   </section>
 
-  <div class="py-8">
+  <div class="py-8 border-t border-dark-800">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More Integrations" links={[
         { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
         { href: '/limecall-for-hubspot/', title: 'LimeCall for HubSpot', desc: 'Log every call automatically in your CRM.' },
-        { href: '/limecall-for-slack/', title: 'LimeCall for Slack', desc: 'Get instant call alerts in Slack.' },
+        { href: '/customer-support-software/', title: 'Customer Support Software', desc: 'LimeCall for faster, better support teams.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>

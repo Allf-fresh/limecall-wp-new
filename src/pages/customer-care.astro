@@ -1,15 +1,207 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Boost Conversions And Customer Care with Instant Callbacks`,
-  description: `Stop waiting, start converting! LimeCall equips your team to instantly connect with website visitors, increasing conversions and improving customer care.`,
+  title: `Customer Care Software — Instant Callbacks | LimeCall`,
+  description: `Give customers the fastest, most personal support experience. LimeCall connects them to a care agent in 28 seconds. 3x higher CSAT, 40% lower abandonment.`,
   canonical: `https://www.limecall.com/customer-care/`,
 };
+
+const stats = [
+  { value: "90%", label: "Of customers want immediate response" },
+  { value: "28s", label: "Average callback time" },
+  { value: "40%", label: "Lower call abandonment" },
+  { value: "3x", label: "Higher CSAT scores" },
+];
+
+const features = [
+  { title: "Instant callback", desc: "A customer needing help clicks one button and is connected to a care agent in 28 seconds. No hold music, no frustration." },
+  { title: "Smart routing to care agents", desc: "Route customers to the right care specialist based on issue type, account tier, or agent availability — every time." },
+  { title: "Call recording", desc: "Record every customer care call for quality monitoring, compliance, and coaching. Replay to resolve disputes and improve service." },
+  { title: "Shared inbox", desc: "All customer interactions — calls, callbacks, messages — in one shared inbox. No lead, no complaint, no query falls through the cracks." },
+  { title: "After-hours queuing", desc: "Customers who request a callback outside hours are queued automatically. First thing in the morning, your team calls them back." },
+  { title: "CRM sync", desc: "Every care interaction is logged to your CRM automatically — so the next agent to speak to a customer has full context." },
+];
+
+const useCases = [
+  { title: "Product support", desc: "Customers with product questions get connected to the right support specialist in seconds — not stuck in a queue for 20 minutes." },
+  { title: "Billing enquiries", desc: "Sensitive billing questions deserve a human. LimeCall connects customers to a billing specialist instantly, reducing frustration and churn." },
+  { title: "Returns and complaints", desc: "Unhappy customers need fast, personal responses. A 28-second callback turns a complaint into a retention opportunity." },
+  { title: "Account management", desc: "High-value customers get priority routing to their dedicated account manager — reinforcing the relationship at every touchpoint." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is customer care software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Customer care software helps businesses manage and improve their interactions with customers — including support requests, callbacks, call routing, and recording. LimeCall focuses on the phone channel, connecting customers to care agents in under 28 seconds.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is customer care different from customer service?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Customer service typically refers to transactional help — answering questions, resolving issues. Customer care is broader and more proactive — it covers the entire relationship, emotional connection, and long-term satisfaction. Good customer care software supports both.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does callback improve customer care?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Callback eliminates hold times — the single biggest source of customer frustration. When a customer requests a callback and receives one in 28 seconds, their experience starts positively. Studies show callback customers report 3x higher satisfaction scores than those left on hold.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I track customer care call quality?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall records every call and ties recordings to customer records and tickets. Managers can review calls for quality, use them in coaching, and monitor response times and resolution rates from the dashboard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What makes customers feel cared for?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Speed, personalisation, and consistency. When a customer calls and reaches someone immediately who already knows their history — not someone who asks them to repeat everything — they feel genuinely cared for. LimeCall enables all three with instant routing, CRM sync, and call recording.',
+      },
+    },
+  ],
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Customer Care Software', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Customer Care
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Give customers the fastest,<br class="hidden sm:block" />
+        <span class="text-lime-400">most personal support experience</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        90% of customers expect an immediate response. LimeCall connects them to a care agent in 28 seconds — cutting abandonment by 40% and tripling CSAT.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/customer-callback-software/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">Callback Software</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Customer care tools that make a real difference</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Customer care use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { n: "1", title: "Customer needs help", desc: "A customer on your website, app, or support page clicks the callback button. No hold music, no frustration." },
+          { n: "2", title: "Connected in 28 seconds", desc: "LimeCall routes the callback to the right care agent and connects them in under 28 seconds." },
+          { n: "3", title: "Issue resolved, call logged", desc: "The agent resolves the issue. The call is recorded and logged against the customer record automatically." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <summary class="cursor-pointer font-semibold text-white">{q.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Make every customer feel cared for</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/customer-callback-software/', title: 'Customer Callback Software', desc: 'The full callback software guide.' },
+        { href: '/customer-support-software/', title: 'Customer Support Software', desc: 'LimeCall for support teams.' },
+        { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Manage all customer conversations in one place.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

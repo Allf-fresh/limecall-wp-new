@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -69,6 +70,62 @@ const industries = [
   },
 ];
 
+const roleLinks = [
+  { title: "Sales Teams", desc: "Connect inbound leads to reps in 28 seconds.", href: "/for-sales-teams/" },
+  { title: "Marketing Teams", desc: "Track which campaigns drive callbacks and revenue.", href: "/for-marketing-teams/" },
+  { title: "Customer Support", desc: "Replace hold queues with instant callbacks.", href: "/customer-support-software/" },
+  { title: "Customer Care", desc: "Build lasting relationships with instant, personal responses.", href: "/customer-care/" },
+  { title: "Customer Services", desc: "Resolve issues on the first contact, every time.", href: "/customer-services/" },
+  { title: "Real Estate Agents", desc: "Book more viewings with speed-to-lead automation.", href: "/limecall-for-real-estate/" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What industries use LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is used across real estate, finance and insurance, travel and tourism, software and technology, e-commerce, healthcare, and education — as well as by individual sales and marketing teams in any industry where inbound phone leads matter.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the main use cases for callback software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The main use cases are: inbound sales lead conversion (connecting website visitors to sales reps instantly), customer support (replacing hold queues with instant callbacks), and marketing attribution (tracking which campaigns generate phone enquiries). LimeCall covers all three.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall for support as well as sales?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall works equally well for sales teams (converting leads) and support teams (resolving customer issues via callback). You can run separate widgets for each team with different routing rules, agents, and tracking.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall work for e-commerce?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'E-commerce businesses use LimeCall to answer pre-purchase questions on high-value product pages, rescue abandoned carts by calling hesitant buyers, and handle post-purchase support. A callback widget on checkout pages reduces drop-off and increases average order value.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the most common LimeCall use case?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The most common use case is inbound sales lead conversion — placing a callback widget on high-intent pages (pricing, product, landing pages) so that website visitors can request an instant call and be connected to a sales rep within 28 seconds.',
+      },
+    },
+  ],
+};
+
 const teamUses = [
   {
     team: "Sales Teams",
@@ -98,6 +155,7 @@ const teamUses = [
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -166,6 +224,36 @@ const teamUses = [
     </div>
   </section>
 
+  <!-- By role -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">By role</h2>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {roleLinks.map(r => (
+          <a href={r.href} class="group rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/40 transition">
+            <h3 class="mb-1 font-bold text-white group-hover:text-lime-400 transition">{r.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{r.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <summary class="cursor-pointer font-semibold text-white">{q.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Quick proof section -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -205,9 +293,9 @@ const teamUses = [
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="Explore LimeCall" links={[
-        { href: '/how-it-works/', title: 'How It Works', desc: 'The full LimeCall flow from click to call.' },
+        { href: '/customers/', title: 'Customers', desc: 'See how real businesses use LimeCall.' },
+        { href: '/features/', title: 'Features', desc: 'Every feature LimeCall offers.' },
         { href: '/integrations/', title: 'Integrations', desc: 'Connect LimeCall with your existing tools.' },
-        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'What makes LimeCall different.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>

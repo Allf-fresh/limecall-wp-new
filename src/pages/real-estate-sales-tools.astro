@@ -1,15 +1,207 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Real Estate Sales Tools for Closers - Top 10 | By LimeCall`,
-  description: `As there are so many different tools on the market, we bring you a list of 10 vital real estate sales tools by LimeCall to close deals faster`,
+  title: `Real Estate Sales Tools — Close More Listings`,
+  description: `Agents who call back in under 5 minutes close 8x more listings. LimeCall connects you to leads in 28 seconds. Speed-to-lead automation for realtors.`,
   canonical: `https://www.limecall.com/real-estate-sales-tools/`,
 };
+
+const stats = [
+  { value: "8x", label: "More closings at <5 min response" },
+  { value: "70%", label: "Of leads go to the first responder" },
+  { value: "28s", label: "LimeCall average callback" },
+  { value: "3x", label: "Higher contact rate" },
+];
+
+const features = [
+  { title: "Speed-to-lead automation", desc: "The moment a lead submits an enquiry, LimeCall dials your agent. First to call wins — and 28 seconds is hard to beat." },
+  { title: "Lead distribution", desc: "Automatically assign leads to the right agent based on area, availability, or round-robin. No lead sits uncontacted." },
+  { title: "CRM logging", desc: "Every call, duration, and recording is automatically saved to your CRM. Your pipeline is always up to date." },
+  { title: "Call coaching", desc: "Review recordings of every listing call to coach agents, identify objections, and close the gap between top and average performers." },
+  { title: "Live transfer", desc: "Transfer a hot buyer directly to a listing agent mid-call. Keep momentum and close on the spot." },
+  { title: "Scheduling widget", desc: "When a buyer isn't ready to talk right now, let them schedule a callback at their convenience — so you never lose them to a competitor." },
+];
+
+const useCases = [
+  { title: "Buyer lead follow-up", desc: "Automatically call every new buyer lead the instant they register interest. First agent to speak closes 70% of the time." },
+  { title: "Listing inquiries", desc: "Buyers enquiring about a specific listing get connected to the listing agent in seconds — not days." },
+  { title: "Expired listing campaigns", desc: "Run outbound callback campaigns to homeowners whose listings expired. LimeCall connects your agent the moment they pick up." },
+  { title: "Open house lead capture", desc: "Capture open house attendee numbers and trigger automatic follow-up calls within 28 seconds of the open house ending." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What are the best sales tools for realtors?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The highest-impact sales tools for realtors are those that reduce speed-to-lead. Studies show that agents who call back within 5 minutes close 8x more deals than those who wait an hour. LimeCall automates this — connecting your agent to an inbound lead in 28 seconds, every time.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I follow up with real estate leads faster?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Use a speed-to-lead tool like LimeCall. When a buyer submits an enquiry, LimeCall simultaneously dials your agent and the lead — connecting them in under 28 seconds. No manual dialling, no delays, no leads going cold.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What CRM do real estate agents use?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Popular real estate CRMs include Follow Up Boss, LionDesk, kvCORE, and HubSpot. LimeCall integrates with all of them, automatically logging every call, recording, and contact detail so your CRM stays current without manual entry.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work with Follow Up Boss or LionDesk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Follow Up Boss, LionDesk, and other real estate CRMs via native connectors and Zapier. Every callback is logged automatically with full call details and recordings.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I close more real estate deals?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The single biggest lever is speed-to-lead. 70% of deals go to the first agent who makes contact. LimeCall ensures you\'re always first — connecting you to every inbound lead in 28 seconds, day or night.',
+      },
+    },
+  ],
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Real Estate Sales Tools', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Real Estate Sales
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Agents who call back in under 5 minutes<br class="hidden sm:block" />
+        <span class="text-lime-400">close 8x more listings</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall connects your agents to inbound leads in 28 seconds. Be first. Close more. Lose fewer deals to the agent who picked up faster.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Start Free Trial →</a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Sales tools built for real estate agents</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Real estate sales use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { n: "1", title: "Lead submits enquiry", desc: "A buyer or seller fills out a form or clicks the callback button on your website or listing page." },
+          { n: "2", title: "LimeCall dials agent in 28s", desc: "LimeCall instantly calls your agent and connects them to the lead — 28 seconds after the enquiry lands." },
+          { n: "3", title: "First call → showing booked", desc: "Your agent is first to speak. They qualify the buyer, answer questions, and book the showing on the spot." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(q => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <summary class="cursor-pointer font-semibold text-white">{q.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{q.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Start closing more listings today</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/real-estate-lead-generation-software/', title: 'Real Estate Lead Generation', desc: 'Generate more seller and buyer leads online.' },
+        { href: '/real-estate-marketing-tools/', title: 'Real Estate Marketing Tools', desc: 'The best tools for marketing your listings.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why the first agent to call wins the deal.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

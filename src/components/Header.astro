@@ -6,8 +6,13 @@ const cta = site.cta;
 const currentPath = Astro.url.pathname;
 ---
 
+<!-- Announcement bar -->
+<div class="bg-lime-500/10 border-b border-lime-500/20 py-2 px-4 text-center text-xs font-medium text-lime-400">
+  🚀 Connect leads to your team in <strong>28 seconds</strong> — <a href={cta.href} class="underline hover:text-lime-300 transition-colors">Start free, no credit card →</a>
+</div>
+
 <header class="sticky top-0 z-50 border-b border-dark-800 bg-dark-950/95 backdrop-blur-md">
-  <nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+  <nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
 
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2.5 flex-shrink-0" aria-label={`${site.name} Home`}>
@@ -20,40 +25,48 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <!-- Desktop Nav -->
-    <ul class="hidden items-center gap-1 md:flex">
+    <ul class="hidden items-center gap-0.5 md:flex">
       {navLinks.map((item) => (
         <li class={item.children ? 'relative group' : ''}>
           {item.children ? (
             <>
               <button
                 class:list={[
-                  'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-lime-400 hover:bg-dark-900',
+                  'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-white hover:bg-dark-800',
                   item.href && currentPath.startsWith(item.href) ? 'text-lime-400' : 'text-dark-300',
                 ]}
                 aria-haspopup="true"
               >
                 {item.label}
-                <svg class="w-3 h-3 mt-px transition-transform duration-150 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3 h-3 mt-px transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div class="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <div class="w-64 rounded-xl border border-dark-800 bg-dark-950 p-2 shadow-2xl shadow-black/40">
-                  {item.children.map((child) => (
-                    <a
-                      href={child.href}
-                      class:list={[
-                        'flex flex-col rounded-lg px-3 py-2.5 transition-colors',
-                        currentPath.startsWith(child.href) ? 'bg-dark-900 text-lime-400' : 'hover:bg-dark-900',
-                      ]}
-                    >
-                      <span class:list={['text-sm font-medium', currentPath.startsWith(child.href) ? 'text-lime-400' : 'text-white']}>{child.label}</span>
-                      {child.desc && <span class="mt-0.5 text-xs text-dark-500">{child.desc}</span>}
-                    </a>
-                  ))}
+              <div class="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2.5 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div class:list={[
+                  "rounded-2xl border border-dark-800 bg-dark-950 shadow-2xl shadow-black/60 p-2",
+                  item.children.length > 4 ? "w-[480px]" : "w-64"
+                ]}>
+                  <div class:list={[
+                    "grid gap-0.5",
+                    item.children.length > 4 ? "grid-cols-2" : "grid-cols-1"
+                  ]}>
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class:list={[
+                          'flex flex-col rounded-xl px-3 py-2.5 transition-colors group/item',
+                          currentPath.startsWith(child.href) ? 'bg-lime-500/10' : 'hover:bg-dark-800/80',
+                        ]}
+                      >
+                        <span class:list={['text-sm font-medium leading-snug', currentPath.startsWith(child.href) ? 'text-lime-400' : 'text-white group-hover/item:text-lime-400 transition-colors']}>{child.label}</span>
+                        {child.desc && <span class="mt-0.5 text-xs text-dark-500 leading-snug">{child.desc}</span>}
+                      </a>
+                    ))}
+                  </div>
                   {item.href && (
-                    <div class="mt-1 border-t border-dark-800/60 pt-1">
-                      <a href={item.href} class="flex items-center gap-1 rounded-lg px-3 py-2 text-xs font-medium text-dark-500 hover:text-lime-400 transition-colors">
+                    <div class="mt-1 border-t border-dark-800/60 pt-1 px-1">
+                      <a href={item.href} class="flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs font-medium text-dark-500 hover:text-lime-400 transition-colors">
                         View all {item.label.toLowerCase()} →
                       </a>
                     </div>
@@ -65,7 +78,7 @@ const currentPath = Astro.url.pathname;
             <a
               href={item.href}
               class:list={[
-                'rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-lime-400 hover:bg-dark-900',
+                'rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-white hover:bg-dark-800',
                 item.href && (currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))) ? 'text-lime-400' : 'text-dark-300',
               ]}
             >
@@ -78,6 +91,11 @@ const currentPath = Astro.url.pathname;
 
     <!-- CTA group -->
     <div class="hidden items-center gap-3 md:flex">
+      <!-- Social proof -->
+      <div class="hidden lg:flex items-center gap-1.5 text-xs text-dark-500">
+        <span class="text-yellow-400">★</span>
+        <span>4.5 · 10,000+ teams</span>
+      </div>
       <a
         href={cta.login.href}
         class="text-sm font-medium text-dark-400 transition-colors hover:text-white"
@@ -86,7 +104,7 @@ const currentPath = Astro.url.pathname;
       </a>
       <a
         href={cta.href}
-        class="rounded-lg bg-lime-500 px-4 py-2 text-sm font-bold text-dark-950 transition-colors hover:bg-lime-400"
+        class="rounded-lg bg-lime-500 px-5 py-2 text-sm font-bold text-dark-950 transition-all hover:bg-lime-400 shadow-md shadow-lime-500/20 hover:shadow-lime-400/30"
       >
         {cta.text}
       </a>
@@ -111,25 +129,32 @@ const currentPath = Astro.url.pathname;
 
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden border-t border-dark-800 md:hidden">
-    <div class="px-4 py-4 space-y-1">
+    <div class="px-4 py-4 space-y-1 max-h-[80vh] overflow-y-auto">
 
       {navLinks.map((item) => (
         item.children ? (
           <div class="py-1">
             <p class="px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-dark-500">{item.label}</p>
-            {item.children.map((child) => (
-              <a
-                href={child.href}
-                class:list={[
-                  'block rounded-lg px-3 py-2 text-sm font-medium transition-colors',
-                  currentPath.startsWith(child.href)
-                    ? 'bg-dark-800 text-lime-400'
-                    : 'text-dark-300 hover:bg-dark-900 hover:text-white',
-                ]}
-              >
-                {child.label}
+            <div class="grid grid-cols-2 gap-0.5">
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class:list={[
+                    'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                    currentPath.startsWith(child.href)
+                      ? 'bg-dark-800 text-lime-400'
+                      : 'text-dark-300 hover:bg-dark-900 hover:text-white',
+                  ]}
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+            {item.href && (
+              <a href={item.href} class="block px-3 py-1.5 text-xs text-dark-500 hover:text-lime-400 transition-colors">
+                View all {item.label.toLowerCase()} →
               </a>
-            ))}
+            )}
           </div>
         ) : (
           <a
@@ -158,7 +183,7 @@ const currentPath = Astro.url.pathname;
           href={cta.href}
           class="rounded-lg bg-lime-500 px-3 py-3 text-center text-sm font-bold text-dark-950 hover:bg-lime-400 transition-colors"
         >
-          {cta.text}
+          {cta.text} — Free
         </a>
       </div>
     </div>

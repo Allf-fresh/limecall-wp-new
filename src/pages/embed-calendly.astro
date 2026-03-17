@@ -1,15 +1,235 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Free Call Scheduling software Best Sales Tools Call Back`,
-  description: `Free Call Scheduling software Automatically call back your customers at the time of meeting. Turn more bookings into revenue, No more missed meetings lime call.`,
+  title: `Free Calendly Alternative — Embed a Scheduling Widget That Calls Back | LimeCall`,
+  description: `LimeCall is a smarter Calendly alternative: it schedules AND instantly calls back your leads. 2x more meetings completed, 80% fewer no-shows. Free plan available.`,
   canonical: `https://www.limecall.com/embed-calendly/`,
 };
+
+const stats = [
+  { value: '2x', label: 'More meetings completed vs Calendly-only' },
+  { value: '80%', label: 'No-show reduction' },
+  { value: '28s', label: 'Instant callback time' },
+  { value: 'Free', label: 'Plan available' },
+];
+
+const features = [
+  {
+    title: 'Embeddable Scheduling Widget',
+    desc: 'Add LimeCall\'s scheduling widget to any webpage with one line of code — just like Calendly. Visitors see your team\'s real availability and can book a slot in seconds.',
+    icon: '📋',
+  },
+  {
+    title: 'Instant Callback (Calendly Can\'t Do This)',
+    desc: 'The moment a visitor books, LimeCall can call them back immediately — within 28 seconds. No waiting for the meeting time. Your lead talks to a rep while they\'re still at peak interest.',
+    icon: '⚡',
+  },
+  {
+    title: 'Automated SMS & Email Reminders',
+    desc: 'Reduce no-shows with automatic reminders before every scheduled call. LimeCall sends reminders to both the lead and your rep — Calendly\'s free plan only sends email reminders to one side.',
+    icon: '🔔',
+  },
+  {
+    title: 'CRM Auto-Logging',
+    desc: 'Every booking and every call is automatically logged in HubSpot, Salesforce, or your CRM. No manual data entry, no missed records. Calendly requires a paid plan and Zapier for CRM sync.',
+    icon: '🗂️',
+  },
+  {
+    title: 'Call Recording',
+    desc: 'LimeCall records every call and stores it against the CRM record. You get a full history of every conversation — not just a booking entry. Calendly doesn\'t record calls at all.',
+    icon: '🎙️',
+  },
+  {
+    title: 'Team Scheduling & Routing',
+    desc: 'Round-robin distribution, skills-based routing, and territory assignments — all built in. LimeCall ensures every booking goes to the right rep, not just whoever is listed first.',
+    icon: '👥',
+  },
+];
+
+const comparison = [
+  { feature: 'Instant callback after booking', limecall: true, calendly: false },
+  { feature: 'SMS reminders', limecall: true, calendly: false },
+  { feature: 'Call recording', limecall: true, calendly: false },
+  { feature: 'CRM auto-logging', limecall: true, calendly: false },
+  { feature: 'Free plan', limecall: true, calendly: true },
+  { feature: 'Team scheduling', limecall: true, calendly: true },
+  { feature: 'Calendar sync', limecall: true, calendly: true },
+  { feature: 'Embeddable widget', limecall: true, calendly: true },
+];
+
+const faqs = [
+  {
+    q: 'Is LimeCall a Calendly replacement?',
+    a: 'LimeCall covers everything Calendly does — embeddable scheduling widget, calendar sync, automated reminders, team scheduling — and goes further. The key difference is that LimeCall can instantly call back a lead the moment they book, connecting them to a rep in under 28 seconds. For sales teams who need to convert bookings into actual conversations, LimeCall is a more complete solution. For teams that only need a booking tool with no phone component, Calendly is simpler.',
+  },
+  {
+    q: 'Can I embed LimeCall\'s scheduling widget on my website?',
+    a: 'Yes. Add one line of JavaScript to your page and the scheduling widget appears. It\'s fully customisable — colours, language, available time slots, and routing rules. No developer required for standard embed. Advanced customisation can use the LimeCall widget API.',
+  },
+  {
+    q: 'Does LimeCall have a free plan like Calendly?',
+    a: 'Yes. LimeCall\'s Basic plan is free and includes the scheduling widget, click-to-call, and up to 30 calls per month. Paid plans start at $29/month and add lead distribution, SMS notifications, and higher call volumes. There is no credit card required to start.',
+  },
+  {
+    q: 'How does the instant callback work after a booking?',
+    a: 'When a visitor books a slot using the LimeCall widget, you can optionally trigger an immediate callback — LimeCall dials your next available rep and the lead simultaneously and connects them within 28 seconds. This is separate from the scheduled slot and captures leads at their highest intent moment. You can configure whether to offer instant callback, schedule only, or let the visitor choose.',
+  },
+  {
+    q: 'Which calendars does LimeCall sync with?',
+    a: 'LimeCall syncs with Google Calendar and Microsoft Outlook / Office 365. Two-way sync ensures real-time availability accuracy. When a lead books, both the rep and lead receive a calendar event with all relevant details.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Calendly Alternative', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Free Calendly Alternative
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Schedule calls AND<br class="hidden sm:block" />
+        <span class="text-lime-400">call back instantly</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall does everything Calendly does — and more. Embed a scheduling widget on your site, then automatically call leads back the moment they book. 2x more meetings completed, free to start.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">LimeCall vs Calendly</h2>
+      <p class="mb-10 text-center text-dark-400">See what you get with LimeCall that Calendly doesn't offer.</p>
+      <div class="overflow-hidden rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-6 py-4 text-center font-semibold text-lime-400">LimeCall</th>
+              <th class="px-6 py-4 text-center font-semibold text-dark-400">Calendly</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-950' : 'bg-dark-900/40'}`}>
+                <td class="px-6 py-4 text-dark-300">{row.feature}</td>
+                <td class="px-6 py-4 text-center text-lg">{row.limecall ? '✅' : '❌'}</td>
+                <td class="px-6 py-4 text-center text-lg">{row.calendly ? '✅' : '❌'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Why teams switch to LimeCall
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Every feature is designed to convert bookings into actual conversations — not just calendar entries.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {f.q}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Switch to a smarter scheduling tool</h2>
+      <p class="mt-4 text-dark-400">Free plan available · No credit card · Setup in 5 minutes</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related features" links={[
+        { href: '/call-scheduling-2/', title: 'Call Scheduling', desc: 'Automated call scheduling with calendar sync and reminders.' },
+        { href: '/conversation-scheduling/', title: 'Conversation Scheduling', desc: 'Schedule instant or future conversations with leads.' },
+        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Instant automated callbacks from your website.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans including a free tier.' },
+      ]} />
+    </div>
   </div>
 </Base>

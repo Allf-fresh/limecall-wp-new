@@ -1,15 +1,193 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `SaaS Vendors to watch in 2020 - Top 50 | By LimeCall`,
-  description: `In this post, let's explore what a SaaS company is, what it sells, and how to follow its business model. Top SaaS Vendors by LimeCall`,
+  title: `Top SaaS Tools for Sales Teams in 2026 — Curated List | LimeCall`,
+  description: `30+ SaaS tools reviewed across CRM, communication, lead gen, analytics, automation, and sales enablement. Updated March 2026. The definitive resource for sales team software.`,
   canonical: `https://www.limecall.com/saas-vendors/`,
 };
+
+const metaStats = [
+  { value: '6', label: 'Categories covered' },
+  { value: '30+', label: 'Tools reviewed' },
+  { value: 'March 2026', label: 'Last updated' },
+];
+
+const categories = [
+  {
+    title: 'CRM',
+    icon: '🗂️',
+    desc: 'Manage contacts, deals, and pipeline. The foundation of every sales tech stack.',
+    tools: [
+      { name: 'HubSpot CRM', desc: 'Free-tier CRM with powerful marketing automation. Best for growing B2B teams.' },
+      { name: 'Salesforce', desc: 'The enterprise standard. Deep customisation, vast ecosystem, significant setup investment.' },
+      { name: 'Pipedrive', desc: 'Sales-first CRM with a clean pipeline view. Ideal for smaller, deal-focused teams.' },
+      { name: 'Zoho CRM', desc: 'Feature-rich and competitively priced. Strong automation and multichannel support.' },
+    ],
+  },
+  {
+    title: 'Communication & Call Management',
+    icon: '📞',
+    desc: 'Connect with leads faster and manage every conversation. Speed-to-lead is the single biggest lever in outbound sales.',
+    tools: [
+      { name: 'LimeCall', desc: 'Instant callback software — connects your team with inbound leads in under 28 seconds. Scheduling, routing, call recording, and CRM sync built in.' },
+      { name: 'Aircall', desc: 'Cloud phone system for sales teams. Good CRM integrations and call analytics.' },
+      { name: 'RingCentral', desc: 'Enterprise UCaaS platform. Voice, video, and messaging in one product.' },
+      { name: 'Dialpad', desc: 'AI-powered calling with real-time transcription and coaching prompts.' },
+      { name: 'Intercom', desc: 'Conversational support and sales platform. Strong for in-app and web chat.' },
+    ],
+  },
+  {
+    title: 'Lead Generation',
+    icon: '🎯',
+    desc: 'Fill the top of the funnel with qualified prospects from multiple channels.',
+    tools: [
+      { name: 'Apollo.io', desc: 'B2B prospecting database with 275M+ contacts, email sequences, and dialler.' },
+      { name: 'LinkedIn Sales Navigator', desc: 'Advanced LinkedIn search and outreach. Essential for enterprise and B2B sales.' },
+      { name: 'Clearbit', desc: 'Real-time data enrichment for leads and accounts. Integrates deeply with HubSpot.' },
+      { name: 'Drift', desc: 'Conversational marketing platform. Qualifies leads via chatbot before routing to sales.' },
+      { name: 'Leadfeeder', desc: 'Identifies companies visiting your website by IP, even without form submissions.' },
+    ],
+  },
+  {
+    title: 'Analytics & Reporting',
+    icon: '📊',
+    desc: 'Measure what matters. Data-driven teams close more deals and waste less budget.',
+    tools: [
+      { name: 'Google Analytics 4', desc: 'Free web analytics. Essential baseline for understanding traffic and conversion paths.' },
+      { name: 'Mixpanel', desc: 'Product and funnel analytics. Best for SaaS companies tracking in-product behaviour.' },
+      { name: 'Tableau', desc: 'Enterprise BI and data visualisation. Connects to virtually any data source.' },
+      { name: 'Hotjar', desc: 'Heatmaps, session recordings, and surveys. Understand how visitors use your site.' },
+    ],
+  },
+  {
+    title: 'Automation',
+    icon: '⚙️',
+    desc: 'Automate repetitive tasks so your team can focus on selling.',
+    tools: [
+      { name: 'Zapier', desc: 'No-code automation connecting 6,000+ apps. The go-to tool for non-technical workflow automation.' },
+      { name: 'Make (formerly Integromat)', desc: 'Visual workflow builder with more complex logic and lower cost than Zapier at scale.' },
+      { name: 'HubSpot Workflows', desc: 'Native CRM automation for lead nurturing, task creation, and deal stage updates.' },
+      { name: 'Outreach', desc: 'Sales engagement platform with automated sequencing, task management, and analytics.' },
+      { name: 'Salesloft', desc: 'Competitor to Outreach. Strong cadence management and conversation intelligence.' },
+    ],
+  },
+  {
+    title: 'Sales Enablement',
+    icon: '🚀',
+    desc: 'Arm your reps with the content, coaching, and context they need to win deals.',
+    tools: [
+      { name: 'Gong.io', desc: 'Revenue intelligence platform. Records calls, surfaces insights, and coaches reps using AI.' },
+      { name: 'Chorus.ai (ZoomInfo)', desc: 'Conversation intelligence with deal risk alerts and competitor mention tracking.' },
+      { name: 'Highspot', desc: 'Sales content management. Ensure reps always use the latest, most effective materials.' },
+      { name: 'Seismic', desc: 'Enterprise sales enablement platform with deep content personalisation features.' },
+      { name: 'Loom', desc: 'Async video messaging. Popular for personalised video prospecting and async demos.' },
+    ],
+  },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'SaaS Vendors', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Updated March 2026
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Top SaaS Tools for<br class="hidden sm:block" />
+        <span class="text-lime-400">Sales Teams in 2026</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        A curated, opinionated list of the best SaaS tools across 6 categories — CRM, communication, lead gen, analytics, automation, and sales enablement. Updated March 2026.
+      </p>
+    </div>
+  </section>
+
+  <!-- Meta stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-3 gap-6 text-center">
+        {metaStats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-12">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <p class="text-dark-300 leading-relaxed">
+        The sales technology landscape has matured significantly. In 2026, winning sales teams aren't using more tools — they're using the right ones, deeply integrated with each other. This list focuses on tools with proven track records, strong integrations, and real ROI. It is organised by job-to-be-done, not by market position or sponsorship.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category cards -->
+  <section class="pb-16 sm:pb-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-12">
+      {categories.map(cat => (
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 overflow-hidden">
+          <div class="flex items-center gap-4 px-8 py-6 border-b border-dark-800 bg-dark-900/80">
+            <span class="text-3xl">{cat.icon}</span>
+            <div>
+              <h2 class="text-xl font-bold text-white">{cat.title}</h2>
+              <p class="text-sm text-dark-400 mt-0.5">{cat.desc}</p>
+            </div>
+          </div>
+          <div class="divide-y divide-dark-800">
+            {cat.tools.map(tool => (
+              <div class="flex items-start gap-4 px-8 py-5">
+                <div class="shrink-0 mt-0.5 h-2 w-2 rounded-full bg-lime-500 mt-2"></div>
+                <div>
+                  <span class="font-semibold text-white">{tool.name}</span>
+                  <span class="text-dark-400"> — </span>
+                  <span class="text-sm text-dark-400">{tool.desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Add LimeCall to your 2026 sales stack</h2>
+      <p class="mt-4 text-dark-400 max-w-lg mx-auto">
+        LimeCall connects your website leads with your sales team in under 28 seconds. It's the communication layer that ties your CRM, routing, and scheduling together.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore LimeCall" links={[
+        { href: '/for-sales-teams/', title: 'LimeCall for Sales Teams', desc: 'Speed-to-lead, routing, and call intelligence for sales.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'See how LimeCall connects with your existing tools.' },
+        { href: '/tour/', title: 'Product Tour', desc: 'Step-by-step walkthrough of all LimeCall features.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Free plan available. Paid plans from $29/month.' },
+      ]} />
+    </div>
   </div>
 </Base>

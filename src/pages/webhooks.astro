@@ -1,15 +1,255 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Automate Your Workflow with Powerful LimeCall Webhooks`,
-  description: `Streamline call management & boost efficiency! LimeCall Webhooks trigger actions in your apps based on calls, saving you time & eliminating errors. Get started today & unlock a more connected workflow.`,
+  title: `LimeCall Webhooks — Automate Workflows Triggered by Calls | LimeCall`,
+  description: `LimeCall webhooks send real-time event payloads to any endpoint when calls start, complete, or are missed. Connect 5,000+ apps, zero-code setup, 99.9% reliability.`,
   canonical: `https://www.limecall.com/webhooks/`,
 };
+
+const stats = [
+  { value: '5,000+', label: 'Connected apps via webhooks' },
+  { value: 'Real-time', label: 'Event delivery' },
+  { value: '99.9%', label: 'Delivery reliability' },
+  { value: 'Zero-code', label: 'Setup required' },
+];
+
+const features = [
+  {
+    title: 'Real-Time Event Triggers',
+    desc: 'Every key call event fires a webhook instantly — call started, completed, missed, recorded, lead captured, or agent assigned. Your downstream systems are updated the moment something happens.',
+    icon: '⚡',
+  },
+  {
+    title: 'JSON Payload',
+    desc: 'Each webhook delivers a clean, structured JSON payload with all relevant event data: call ID, timestamp, caller details, rep assigned, duration, recording URL, lead source, and more.',
+    icon: '{ }',
+  },
+  {
+    title: 'Retry Logic',
+    desc: 'If your endpoint is temporarily unavailable, LimeCall automatically retries delivery with exponential backoff — up to 5 attempts over 24 hours. No lost events, even during downtime.',
+    icon: '🔄',
+  },
+  {
+    title: 'Webhook Logs',
+    desc: 'A full delivery log shows every webhook sent, the HTTP response received, the payload contents, and retry history. Debugging a failed integration has never been easier.',
+    icon: '📋',
+  },
+  {
+    title: 'Test Mode',
+    desc: 'Send test webhook payloads to any endpoint without generating real calls. Perfect for building and validating your integrations before going live.',
+    icon: '🧪',
+  },
+  {
+    title: 'HTTPS Security',
+    desc: 'All webhooks are delivered over HTTPS. Optionally add a shared secret key to each endpoint — LimeCall signs every payload so your receiver can verify authenticity.',
+    icon: '🔒',
+  },
+];
+
+const events = [
+  { event: 'call.started', desc: 'Fired when a call begins between a rep and a lead' },
+  { event: 'call.completed', desc: 'Fired when a call ends, includes duration and outcome' },
+  { event: 'call.missed', desc: 'Fired when a call goes unanswered' },
+  { event: 'call.recorded', desc: 'Fired when a call recording is ready, includes recording URL' },
+  { event: 'lead.captured', desc: 'Fired when a new lead submits the widget form' },
+  { event: 'agent.assigned', desc: 'Fired when a lead or call is assigned to a specific rep' },
+];
+
+const useCases = [
+  {
+    title: 'CRM Auto-Update',
+    desc: 'When a call completes, fire a webhook to update the contact record in your CRM — log the call, set the next activity, update the deal stage, or create a follow-up task. No manual data entry.',
+  },
+  {
+    title: 'Slack Alerts',
+    desc: 'Send a Slack message to your sales channel every time a new lead is captured or a call is missed. Your team sees what\'s happening in real time without leaving their workspace.',
+  },
+  {
+    title: 'Custom Reporting',
+    desc: 'Push call event data to your own data warehouse (BigQuery, Redshift, Snowflake) via webhooks. Build custom dashboards that combine LimeCall data with revenue and marketing data.',
+  },
+  {
+    title: 'Zapier & Make Workflows',
+    desc: 'Connect LimeCall to 5,000+ apps via Zapier or Make using webhooks as the trigger. Create leads in your email tool, update sheets, send notifications, or trigger any automation — no code required.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What format is the webhook payload?',
+    a: 'All LimeCall webhooks deliver JSON payloads over HTTPS POST requests. Each payload includes an event type, a timestamp, a unique event ID, and an event-specific data object. For example, a call.completed payload includes call duration, rep assigned, lead details, recording URL, and call outcome. Full schema documentation is available in the LimeCall developer docs.',
+  },
+  {
+    q: 'How do I secure my webhook endpoint?',
+    a: 'LimeCall supports two security mechanisms: HTTPS-only delivery (all webhooks are refused over plain HTTP) and payload signing. When you configure a webhook endpoint, you can optionally set a shared secret. LimeCall will include an HMAC-SHA256 signature in the X-LimeCall-Signature header of every request. Your server verifies the signature to confirm the payload is authentic and hasn\'t been tampered with.',
+  },
+  {
+    q: 'What happens if my endpoint is down when a webhook fires?',
+    a: 'LimeCall will retry the delivery automatically. The retry schedule uses exponential backoff: first retry after 1 minute, then 5 minutes, 30 minutes, 2 hours, and finally 24 hours — up to 5 total attempts. If all retries fail, the event is marked as failed in your webhook log and you can manually trigger a redeliver from the dashboard.',
+  },
+  {
+    q: 'Do I need a developer to set up webhooks?',
+    a: 'For basic webhook integrations — such as triggering Zapier zaps or Make scenarios — no developer is required. You configure the webhook URL in the LimeCall dashboard and paste it into your automation tool. For custom endpoint integrations that require processing the payload in your own application, basic backend development knowledge is helpful but the LimeCall webhook format is straightforward and well-documented.',
+  },
+  {
+    q: 'Can I test webhooks without making real calls?',
+    a: 'Yes. LimeCall\'s test mode lets you send sample payloads for any event type to your configured endpoints. You can verify the payload structure, test your endpoint\'s response, and confirm your integration logic — all without triggering real calls or incurring usage. Test events are clearly labelled in webhook logs.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Webhooks', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        LimeCall Webhooks
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Automate workflows<br class="hidden sm:block" />
+        <span class="text-lime-400">triggered by every call</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall fires real-time webhooks for every call event. Connect your CRM, Slack, data warehouse, or any tool — zero code required for most integrations.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/integrations/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View All Integrations
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Enterprise-grade webhook infrastructure
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Reliable delivery, structured payloads, and full observability — everything you need to build integrations you can trust.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl font-mono font-bold text-lime-400 text-xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Events list -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">Available webhook events</h2>
+      <p class="mb-10 text-center text-dark-400">Subscribe to any combination of these events per endpoint.</p>
+      <div class="overflow-hidden rounded-2xl border border-dark-800">
+        {events.map((e, i) => (
+          <div class={`flex items-start gap-4 px-6 py-4 ${i < events.length - 1 ? 'border-b border-dark-800' : ''} ${i % 2 === 0 ? 'bg-dark-950' : 'bg-dark-900/40'}`}>
+            <code class="shrink-0 rounded-md bg-lime-500/10 border border-lime-500/20 px-3 py-1 text-xs font-mono text-lime-400">{e.event}</code>
+            <span class="text-sm text-dark-400 pt-0.5">{e.desc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">What teams build with webhooks</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {f.q}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Connect LimeCall to your entire stack</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · Webhooks on all plans</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/integrations/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Integrations
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related features" links={[
+        { href: '/integrations/', title: 'Integrations', desc: 'Native integrations with HubSpot, Salesforce, and more.' },
+        { href: '/push-notifications/', title: 'Push Notifications', desc: 'Instant alerts for your team and leads.' },
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Attribute every call to its marketing source.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans for every team size.' },
+      ]} />
+    </div>
   </div>
 </Base>

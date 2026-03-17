@@ -1,15 +1,212 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Tour - LimeCall`,
-  description: ``,
+  title: `LimeCall Product Tour — See Every Feature in 5 Minutes | LimeCall`,
+  description: `Take the LimeCall product tour. See how to install the widget, get callbacks in 28s, log leads to your CRM, review recordings, and route leads to the right rep. Free to start.`,
   canonical: `https://www.limecall.com/tour/`,
 };
+
+const stats = [
+  { value: '5', label: 'Key features' },
+  { value: '5 min', label: 'To explore the tour' },
+  { value: '10,000+', label: 'Teams using LimeCall' },
+  { value: 'Free', label: 'To start' },
+];
+
+const stops = [
+  {
+    n: '01',
+    title: 'Install the widget',
+    desc: 'Add one line of JavaScript to your website and the LimeCall widget appears. It works on any platform — WordPress, Webflow, Shopify, or custom HTML. No developer needed, no plugin to install.',
+    detail: 'Visitors see a customisable call button or form. You control the colours, copy, and behaviour. Changes go live instantly from the dashboard.',
+    code: `<script src="https://cdn.limecall.com/widget.js" data-id="YOUR_ID" async></script>`,
+  },
+  {
+    n: '02',
+    title: 'A visitor connects in 28 seconds',
+    desc: 'A lead clicks your widget or submits a form. LimeCall immediately dials your next available rep AND the lead simultaneously. They\'re connected within 28 seconds — while the lead is still on your page.',
+    detail: 'Speed-to-lead data is consistent: leads called within 5 minutes are 9x more likely to convert. 28 seconds is LimeCall\'s average. Most competitors take minutes.',
+    code: null,
+  },
+  {
+    n: '03',
+    title: 'Lead is logged in your CRM',
+    desc: 'The moment the call ends, LimeCall automatically creates or updates the contact record in your CRM. Call duration, outcome, recording link, and lead source are all logged without any manual input.',
+    detail: 'Native integrations with HubSpot, Salesforce, Zoho, Pipedrive, and more. Zapier support for 5,000+ additional tools.',
+    code: null,
+  },
+  {
+    n: '04',
+    title: 'Review recordings and analytics',
+    desc: 'Every call is recorded and stored in your LimeCall dashboard. Filter by rep, date, source, or outcome. Listen to recordings, leave timestamped notes, and share clips with your team.',
+    detail: 'Call analytics show volume trends, peak times, avg duration, and conversion rates by source and campaign. Connect to Google Ads to import call conversions.',
+    code: null,
+  },
+  {
+    n: '05',
+    title: 'Route leads to the right rep',
+    desc: 'Set routing rules to automatically distribute calls and leads to the right rep — by territory, product expertise, availability, or round-robin. No cherry-picking, no leads falling through the cracks.',
+    detail: 'When a lead can\'t connect now, LimeCall\'s scheduling widget lets them pick a future slot. At the scheduled time, LimeCall dials both parties and connects them automatically.',
+    code: null,
+  },
+];
+
+const highlights = [
+  { title: 'Free plan available', desc: 'Start with 30 calls per month at no cost. No credit card required.', icon: '🎁' },
+  { title: '5-minute setup', desc: 'One snippet, a setup wizard, and a go-live checklist. No developer needed.', icon: '⚡' },
+  { title: 'All integrations included', desc: 'HubSpot, Salesforce, Google Ads, Zapier — connected from day one.', icon: '🔗' },
+  { title: '24/7 support', desc: 'Live chat and email support available around the clock for all customers.', icon: '💬' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is a callback and call scheduling platform that connects website visitors with your sales team in under 28 seconds. It includes call routing, scheduling, recording, CRM integration, and analytics — all in one product.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does it take to set up LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most teams are live within 5 minutes. You add one line of JavaScript to your website, configure the widget in the dashboard, and connect your CRM using the guided setup wizard. No developer involvement required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there a free plan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s Basic plan is free and includes up to 30 calls per month, click-to-call, and scheduling. No credit card required to sign up.',
+      },
+    },
+  ],
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Product Tour', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Product Tour
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        See LimeCall in action<br class="hidden sm:block" />
+        <span class="text-lime-400">in 5 minutes</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Walk through the five core features that 10,000+ teams use to turn website visitors into booked calls, logged leads, and closed deals.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/implementation/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Implementation Guide
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tour stops -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">The LimeCall walkthrough</h2>
+      <p class="mb-14 text-center text-dark-400 max-w-xl mx-auto">Five steps from installation to insight.</p>
+      <div class="space-y-10">
+        {stops.map((stop, i) => (
+          <div class="relative flex gap-6">
+            <!-- Step connector line -->
+            {i < stops.length - 1 && (
+              <div class="absolute left-6 top-14 bottom-0 w-px bg-dark-800 -mb-4"></div>
+            )}
+            <div class="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/30 text-lime-400 font-bold font-mono text-sm">
+              {stop.n}
+            </div>
+            <div class="flex-1 rounded-2xl border border-dark-800 bg-dark-900/60 p-6 pb-8">
+              <h3 class="mb-3 text-lg font-bold text-white">{stop.title}</h3>
+              <p class="text-dark-300 leading-relaxed">{stop.desc}</p>
+              {stop.code && (
+                <pre class="mt-5 overflow-x-auto rounded-xl bg-dark-950 border border-dark-800 p-4 text-xs text-lime-400 font-mono">{stop.code}</pre>
+              )}
+              <p class="mt-4 text-sm text-dark-500 leading-relaxed">{stop.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Why teams choose LimeCall</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {highlights.map(h => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="mb-3 text-3xl">{h.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{h.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{h.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to start your free trial?</h2>
+      <p class="mt-4 text-dark-400">No credit card required · 5-minute setup · Free plan available</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore more" links={[
+        { href: '/implementation/', title: 'Implementation Guide', desc: 'Step-by-step guide to going live in 5 minutes.' },
+        { href: '/how-it-works/', title: 'How It Works', desc: 'The full LimeCall flow from click to connected call.' },
+        { href: '/for-sales-teams/', title: 'For Sales Teams', desc: 'Speed-to-lead, routing, and coaching tools.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans for every team size.' },
+      ]} />
+    </div>
   </div>
 </Base>

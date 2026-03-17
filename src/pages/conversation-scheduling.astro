@@ -1,15 +1,230 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Conversation Scheduling - LimeCall`,
-  description: `LimeCall displays fully customizable popups to your visitors. You can edit the text, use a dynamic element, or advanced customization via our powerful CSS editor`,
+  title: `Conversation Scheduling — Book Real-Time Calls with Leads | LimeCall`,
+  description: `LimeCall's conversation scheduling lets you book instant or future calls with leads from your website. 3x more conversations, 60% less scheduling friction, 28s connection. Free trial.`,
   canonical: `https://www.limecall.com/conversation-scheduling/`,
 };
+
+const stats = [
+  { value: '3x', label: 'More conversations booked' },
+  { value: '60%', label: 'Less scheduling friction' },
+  { value: '28s', label: 'Avg connection time' },
+  { value: '5 min', label: 'Setup time' },
+];
+
+const features = [
+  {
+    title: 'Conversational Scheduling Widget',
+    desc: 'A smart widget that sits on your website and lets visitors choose: talk now or schedule for later. Either way, LimeCall handles the connection automatically — no manual outreach needed.',
+    icon: '💬',
+  },
+  {
+    title: 'Instant + Scheduled Modes',
+    desc: 'Not every lead is ready to talk now. LimeCall gives visitors both options: an immediate callback within 28 seconds, or a future time slot that fits their schedule. You capture every lead regardless of timing.',
+    icon: '⚡',
+  },
+  {
+    title: 'Smart Availability Detection',
+    desc: 'LimeCall checks your team\'s real-time calendar availability and only shows time slots where a rep is free. No double bookings, no awkward reschedules. Availability updates automatically as calls complete.',
+    icon: '🗓️',
+  },
+  {
+    title: 'SMS & Email Reminders',
+    desc: 'Automated reminders go to both the lead and the rep before every scheduled conversation. Choose your timing — 24 hours, 1 hour, or 15 minutes before. Reminder content is fully customisable.',
+    icon: '🔔',
+  },
+  {
+    title: 'CRM Logging',
+    desc: 'Every scheduled conversation is logged in your CRM automatically — before the call even happens. The lead record is created, the scheduled time is recorded, and post-call notes are added when the call completes.',
+    icon: '🗂️',
+  },
+  {
+    title: 'Multi-Rep Scheduling',
+    desc: 'Distribute scheduled conversations across your team with round-robin, skills-based, or territory routing. Managers get a unified calendar view of all upcoming conversations and rep capacity.',
+    icon: '👥',
+  },
+];
+
+const useCases = [
+  {
+    title: 'Inbound Lead Conversations',
+    desc: 'A visitor lands on your pricing page. They\'re interested but not ready to fill in a form. The LimeCall widget invites them to talk now or schedule a call. Either option captures the lead and connects them to a rep with zero friction.',
+  },
+  {
+    title: 'Outbound Follow-Ups',
+    desc: 'After a marketing email or LinkedIn outreach, send a personalised scheduling link. Leads click, pick a time, and get a confirmation. Your rep gets a CRM-logged appointment — no back-and-forth required.',
+  },
+  {
+    title: 'Demo Scheduling',
+    desc: 'Let prospects self-schedule product demos directly from your website. LimeCall routes each booking to the right pre-sales rep based on their product expertise and current availability.',
+  },
+  {
+    title: 'Support Call Scheduling',
+    desc: 'Give customers the ability to book a support conversation rather than waiting in a queue. Customer satisfaction improves when people can choose a time that works for them.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is conversation scheduling?',
+    a: 'Conversation scheduling is the ability to let website visitors and leads book real-time voice calls — either immediately (instant callback) or at a scheduled future time. Unlike traditional meeting scheduling tools, LimeCall focuses on phone conversations, not video meetings or calendar slots. The goal is a live conversation between your rep and the lead as quickly as possible.',
+  },
+  {
+    q: 'How is LimeCall different from a standard scheduling tool?',
+    a: 'Standard scheduling tools like Calendly book a time slot and leave it at that. LimeCall goes further: when the scheduled time arrives, it automatically dials both your rep and the lead and connects them instantly. There\'s no waiting for a meeting link or relying on either party to make the first move. It\'s scheduling that delivers an actual conversation.',
+  },
+  {
+    q: 'Can visitors choose between calling now and scheduling later?',
+    a: 'Yes. The LimeCall widget can be configured to offer both options simultaneously. Visitors who want to talk immediately trigger an instant callback within 28 seconds. Visitors who prefer a later time can pick from available slots. This dual-mode approach means you never lose a lead because the timing isn\'t right.',
+  },
+  {
+    q: 'Which CRMs does conversation scheduling integrate with?',
+    a: 'LimeCall integrates natively with HubSpot, Salesforce, Zoho CRM, Pipedrive, and others. Scheduled conversations are logged before the call, and call outcomes, recordings, and notes are synced after. Zapier support extends this to 5,000+ additional tools.',
+  },
+  {
+    q: 'How do multi-rep routing and availability work?',
+    a: 'LimeCall checks each rep\'s connected calendar in real time and only shows slots where at least one qualified rep is available. You define routing rules — round-robin, territory, skill-based — and LimeCall assigns the booking accordingly. The assigned rep receives an immediate notification and a calendar event.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Conversation Scheduling', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Conversation Scheduling
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Schedule conversations,<br class="hidden sm:block" />
+        <span class="text-lime-400">not just calendar slots</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall lets leads choose to talk now or schedule for later — and automatically connects them to your rep at the right moment. 3x more conversations, 60% less friction.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          See How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Built for real conversations, not just bookings
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Every feature is designed to remove friction between your leads and a live conversation with your team.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {f.q}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Start scheduling conversations today</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related features" links={[
+        { href: '/call-scheduling-2/', title: 'Call Scheduling', desc: 'Automated call scheduling with calendar sync and reminders.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Connect with leads in under 28 seconds automatically.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route every inbound lead to the right rep.' },
+        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Automate inbound and outbound callbacks.' },
+      ]} />
+    </div>
   </div>
 </Base>

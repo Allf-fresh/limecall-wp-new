@@ -1,15 +1,230 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Seamless Customer Transitions: How LimeCall Can Help`,
-  description: `Learn how LimeCall's data-rich handoff platform can create seamless customer transitions and improve your customer experience.`,
+  title: `Seamless Call Handoff — Transfer Live Calls with Full Context | LimeCall`,
+  description: `LimeCall's call handoff transfers live calls between teams with zero dropped context. Warm transfers, whisper briefing, CRM sync, and real-time lead data. 90% CSAT improvement.`,
   canonical: `https://www.limecall.com/handoff/`,
 };
+
+const stats = [
+  { value: '0', label: 'Dropped context on transfer' },
+  { value: '90%', label: 'CSAT improvement' },
+  { value: '3x', label: 'Faster escalation' },
+  { value: 'Real-time', label: 'Data sync on handoff' },
+];
+
+const features = [
+  {
+    title: 'Live Call Transfer',
+    desc: 'Transfer an active call to any available team member with a single click. The receiving rep is connected while the caller is still on the line — no hold music, no re-explanation, no frustration.',
+    icon: '↗️',
+  },
+  {
+    title: 'Whisper Briefing',
+    desc: 'Before the handoff completes, the receiving rep hears a whispered summary of the call — lead name, company, topic, and key context. They arrive in the conversation informed, not cold.',
+    icon: '🔈',
+  },
+  {
+    title: 'Context Packet',
+    desc: 'Every handoff carries a full context packet: traffic source, previous call history, lead score, CRM notes, and the reason for transfer. Nothing is lost between teams.',
+    icon: '📦',
+  },
+  {
+    title: 'Warm vs Cold Transfer',
+    desc: 'Choose your transfer style. Warm transfer: stay on the line until the new rep is briefed and ready. Cold transfer: route immediately when speed matters more. Both are available per call.',
+    icon: '🔀',
+  },
+  {
+    title: 'CRM Sync on Handoff',
+    desc: 'When a handoff occurs, LimeCall updates the CRM record in real time — logging the transfer event, the receiving rep, the time, and any notes added during the call. Full audit trail, zero manual entry.',
+    icon: '🗂️',
+  },
+  {
+    title: 'Team Availability Display',
+    desc: 'See which reps and departments are available before initiating a transfer. LimeCall shows real-time availability so you never send a call to someone who is busy or offline.',
+    icon: '👥',
+  },
+];
+
+const useCases = [
+  {
+    title: 'Sales-to-Support Handoff',
+    desc: 'A sales rep closes a deal and the new customer needs onboarding support. Transfer the live call to the customer success team with a full context packet — the customer never has to repeat themselves.',
+  },
+  {
+    title: 'Rep-to-Specialist Escalation',
+    desc: 'When a customer raises a technical question outside a rep\'s expertise, escalate to the right specialist instantly. The specialist receives a whisper brief and the customer stays on the line — no hold, no callback needed.',
+  },
+  {
+    title: 'After-Hours to On-Call',
+    desc: 'After-hours calls routed to an on-call rep can be cleanly transferred to the primary team when business hours resume — with the full conversation history, so the day-team rep has complete context.',
+  },
+  {
+    title: 'SDR to AE Transfer',
+    desc: 'Once an SDR qualifies a lead on a live call, transfer directly to an Account Executive with a warm introduction. The AE hears a whisper summary, the lead stays on the line, and the deal progresses without interruption.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is the difference between a warm transfer and a cold transfer?',
+    a: 'A warm transfer means the transferring rep stays on the call until the receiving rep is briefed and ready to take over. The customer hears a live introduction. A cold transfer routes the caller directly to the next rep without a live introduction — suitable when speed is more important than context. LimeCall supports both, selectable per call.',
+  },
+  {
+    q: 'What information is shared in the context packet during a handoff?',
+    a: 'The context packet includes: the caller\'s name and contact details, the traffic source that brought them in, previous call history with your team, CRM notes, lead score, the reason for the transfer, and any notes added by the transferring rep during the call. All of this is visible to the receiving rep before they pick up.',
+  },
+  {
+    q: 'How does the whisper briefing work?',
+    a: 'When a transfer is initiated, LimeCall plays a brief audio summary to the receiving rep before the customer is connected. This whisper is only audible to the rep — the customer cannot hear it. The rep has a few seconds to process the context before they begin speaking with the customer.',
+  },
+  {
+    q: 'Is the CRM updated automatically when a handoff happens?',
+    a: 'Yes. LimeCall logs the handoff event in your CRM in real time: the time of transfer, the receiving rep, the call duration up to that point, and any notes. The customer\'s contact record and deal record are both updated. No manual entry is required.',
+  },
+  {
+    q: 'Can I see which reps are available before transferring a call?',
+    a: 'Yes. LimeCall\'s team availability panel shows which reps and departments are online and available at the moment of transfer. You can see current call status for each rep so you never accidentally transfer to someone who is busy.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Call Handoff', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Seamless Call Handoff
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Transfer live calls with<br class="hidden sm:block" />
+        <span class="text-lime-400">zero dropped context</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Transfer calls between teams in real time — with full lead history, whisper briefing, and automatic CRM sync. Your customer never has to repeat themselves.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          See How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Everything needed for seamless handoffs
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Every handoff feature is designed to protect context, speed up escalations, and keep the customer experience smooth from first contact to resolution.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Handoff use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {f.q}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Give your team seamless handoffs</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related features" links={[
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route every inbound lead to the right rep automatically.' },
+        { href: '/for-sales-teams/', title: 'For Sales Teams', desc: 'Speed-to-lead, routing, and coaching for sales.' },
+        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Automate inbound callback workflows.' },
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Attribute every call to its marketing source.' },
+      ]} />
+    </div>
   </div>
 </Base>

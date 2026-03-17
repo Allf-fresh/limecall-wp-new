@@ -1,15 +1,282 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Implementation - LimeCall`,
-  description: ``,
+  title: `LimeCall Implementation Guide — Go Live in 5 Minutes | LimeCall`,
+  description: `Get LimeCall up and running in 5 minutes. One-line embed, no developer needed, CRM setup wizard, and a go-live checklist. 99.9% uptime, 24/7 support.`,
   canonical: `https://www.limecall.com/implementation/`,
 };
+
+const stats = [
+  { value: '5 min', label: 'Average setup time' },
+  { value: '0', label: 'Developers required' },
+  { value: '99.9%', label: 'Platform uptime' },
+  { value: '24/7', label: 'Support availability' },
+];
+
+const steps = [
+  {
+    n: '1',
+    title: 'Add the snippet to your site',
+    desc: 'Copy one line of JavaScript from your LimeCall dashboard and paste it before the closing </body> tag on your website. That\'s it — the widget is live. No developer, no build step, no plugin required.',
+    code: `<script src="https://cdn.limecall.com/widget.js" data-id="YOUR_ID" async></script>`,
+  },
+  {
+    n: '2',
+    title: 'Configure your widget',
+    desc: 'Customise the widget appearance, set your business hours, choose callback vs scheduling mode, and configure routing rules — all from the visual dashboard. Changes go live instantly.',
+  },
+  {
+    n: '3',
+    title: 'Connect your CRM',
+    desc: 'Use LimeCall\'s setup wizard to connect HubSpot, Salesforce, Zoho, or Pipedrive. Select which fields to map and LimeCall starts logging calls and leads automatically from day one.',
+  },
+  {
+    n: '4',
+    title: 'Test and go live',
+    desc: 'Use LimeCall\'s built-in test mode to trigger a test call and verify the full flow — widget, routing, CRM logging, and recording. When everything looks good, switch to live mode and you\'re done.',
+  },
+];
+
+const features = [
+  {
+    title: 'One-Line Embed Snippet',
+    desc: 'A single JavaScript tag is all it takes to install LimeCall on any website — WordPress, Webflow, Shopify, custom HTML, or any other platform. No plugin installs, no coding.',
+    icon: '🔧',
+  },
+  {
+    title: 'CRM Setup Wizard',
+    desc: 'Connect your CRM in minutes using LimeCall\'s guided setup wizard. Select your CRM, authenticate, map fields, and test the connection — all through a step-by-step UI.',
+    icon: '🗂️',
+  },
+  {
+    title: 'Team Onboarding',
+    desc: 'Invite team members, assign roles, set availability, and configure call routing — all from the dashboard. New reps are operational in minutes, not days.',
+    icon: '👥',
+  },
+  {
+    title: 'Widget Customisation',
+    desc: 'Match LimeCall\'s widget to your brand. Customise colours, button text, position, languages, and behaviour. A visual preview updates in real time as you make changes.',
+    icon: '🎨',
+  },
+  {
+    title: 'Testing Tools',
+    desc: 'LimeCall\'s test mode lets you trigger real calls, verify routing, check CRM logging, and confirm reminders — all in a safe sandbox before you go live.',
+    icon: '🧪',
+  },
+  {
+    title: 'Go-Live Checklist',
+    desc: 'A built-in checklist walks you through every step before launch: widget live, CRM connected, team added, hours set, test call passed. Go live with confidence.',
+    icon: '✅',
+  },
+];
+
+const useCases = [
+  {
+    title: 'New Customer Onboarding',
+    desc: 'First time setting up LimeCall? The guided onboarding flow takes you from sign-up to first live call in under 5 minutes. Follow the checklist and you won\'t miss a step.',
+  },
+  {
+    title: 'Migrating from Another Tool',
+    desc: 'Switching from CallPage, ResponseiQ, or another callback tool? LimeCall\'s import wizard moves your widget settings, team members, and call history. Most teams migrate in under an hour.',
+  },
+  {
+    title: 'Multi-Site Deployment',
+    desc: 'Running multiple websites or brands? Each property gets its own widget and configuration, managed from one LimeCall account. Copy settings between widgets to deploy consistently across sites.',
+  },
+  {
+    title: 'Enterprise Rollout',
+    desc: 'Deploying LimeCall across a large enterprise? LimeCall\'s team supports enterprise rollouts with a dedicated implementation manager, custom CRM mapping, and SSO configuration.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Do I need a developer to set up LimeCall?',
+    a: 'No. The entire LimeCall setup — from adding the widget to your site, to connecting your CRM and configuring routing — is designed to be completed without any developer involvement. You need to paste one line of JavaScript into your site\'s HTML, which most non-technical users can do via a tag manager like Google Tag Manager or a CMS plugin.',
+  },
+  {
+    q: 'How long does implementation take?',
+    a: 'Most teams are fully live within 5 minutes. Adding the snippet takes under a minute. CRM connection via the setup wizard takes 2-3 minutes. Widget configuration is another few minutes. The go-live checklist ensures nothing is missed before you switch to live mode.',
+  },
+  {
+    q: 'Which website platforms does LimeCall support?',
+    a: 'LimeCall works on any website that allows you to add JavaScript. This includes WordPress, Webflow, Wix, Shopify, Squarespace, HubSpot CMS, custom HTML/CSS sites, and any other platform. If you can add a script tag or use Google Tag Manager, LimeCall will work.',
+  },
+  {
+    q: 'What happens if I need help during setup?',
+    a: 'LimeCall\'s support team is available 24/7 via live chat and email. During business hours, you can also book a live onboarding call with a LimeCall implementation specialist who will walk through setup with you. Most setup questions are resolved in under 10 minutes.',
+  },
+  {
+    q: 'Can I test LimeCall before going live?',
+    a: 'Yes. LimeCall includes a test mode that lets you trigger real calls, check routing logic, verify CRM logging, and confirm reminders are working — all without affecting your live traffic. When you\'re satisfied, flip the switch to live mode. You can return to test mode at any time.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Implementation', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Implementation Guide
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        From sign-up to first call<br class="hidden sm:block" />
+        <span class="text-lime-400">in 5 minutes</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        No developer needed. One snippet, a guided CRM setup, and a go-live checklist. LimeCall is the fastest implementation in the callback software category.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          See How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works (numbered steps) -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        How to implement LimeCall
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Four steps. Average completion time: 5 minutes.
+      </p>
+      <div class="space-y-6">
+        {steps.map(s => (
+          <div class="flex gap-6 rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold border border-lime-500/20">
+              {s.n}
+            </div>
+            <div class="flex-1">
+              <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+              {s.code && (
+                <pre class="mt-4 overflow-x-auto rounded-xl bg-dark-950 border border-dark-800 p-4 text-xs text-lime-400 font-mono">{s.code}</pre>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Implementation tools included
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Everything you need to go from zero to live — no agency, no developer, no delays.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Getting started scenarios</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {f.q}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to go live in 5 minutes?</h2>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · No developer required</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/how-it-works/', title: 'How It Works', desc: 'See the full LimeCall flow from widget click to connected call.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'Connect LimeCall to your CRM and marketing stack.' },
+        { href: '/tour/', title: 'Product Tour', desc: 'Step-by-step walkthrough of all LimeCall features.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans for every team size.' },
+      ]} />
+    </div>
   </div>
 </Base>

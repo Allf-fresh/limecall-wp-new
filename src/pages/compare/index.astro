@@ -1,56 +1,244 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
-import { site, competitors } from '../../site.config';
+import CrossLinks from '../../components/CrossLinks.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+import { site } from '../../site.config';
+
+const seo = {
+  title: `LimeCall Comparisons — See How We Stack Up | LimeCall`,
+  description: `Compare LimeCall vs CallPage, Callingly, ResponseIQ, live chat, contact forms, and chatbots. See why 10,000+ teams chose LimeCall for faster lead response and higher conversions.`,
+  canonical: `${site.url}/compare/`,
+};
+
+const comparisons = [
+  {
+    slug: '/limecall-vs-callpage/',
+    opponent: 'CallPage',
+    tagline: 'More channels, better value, lead distribution built in.',
+    badges: ['Free plan', 'SMS & WhatsApp', 'Lead distribution'],
+    category: 'Competitor',
+  },
+  {
+    slug: '/limecall-vs-callingly/',
+    opponent: 'Callingly',
+    tagline: 'Call recording, SMS, virtual numbers — all the features Callingly is missing.',
+    badges: ['Call recording', 'Virtual numbers', 'Shared inbox'],
+    category: 'Competitor',
+  },
+  {
+    slug: '/limecall-vs-responseiq/',
+    opponent: 'ResponseIQ',
+    tagline: 'More affordable, more channels, and a free plan to get started.',
+    badges: ['Free plan', 'SMS & WhatsApp', '40+ countries'],
+    category: 'Competitor',
+  },
+  {
+    slug: null,
+    opponent: 'Contact Forms',
+    tagline: 'Forms make leads wait hours. LimeCall connects them in 28 seconds — while they\'re still on your site.',
+    badges: ['28-sec connection', 'No waiting', 'Higher intent'],
+    category: 'Alternative',
+  },
+  {
+    slug: null,
+    opponent: 'Live Chat',
+    tagline: 'Chat is great for support. For high-value leads, a real phone call converts 10x better.',
+    badges: ['10x conversion', 'Real conversations', 'Decision makers prefer calls'],
+    category: 'Alternative',
+  },
+  {
+    slug: null,
+    opponent: 'Chatbots',
+    tagline: 'Chatbots qualify. LimeCall closes. Nothing beats a real human conversation for complex sales.',
+    badges: ['Human touch', 'Higher close rate', 'Works with your chatbot'],
+    category: 'Alternative',
+  },
+];
+
+const differentiators = [
+  {
+    title: "28-Second Connection",
+    desc: "LimeCall connects website visitors with your sales team in under 28 seconds — while they're still engaged and on your page. No other tool matches this speed-to-lead.",
+  },
+  {
+    title: "Omni-Channel: Voice + SMS + WhatsApp",
+    desc: "Unlike narrowly-focused callback tools, LimeCall handles calls, SMS, and WhatsApp from a single platform — so no lead slips through the cracks regardless of their preferred channel.",
+  },
+  {
+    title: "Intelligent Lead Distribution",
+    desc: "Automatically route inbound leads to the right rep based on skills, territory, or availability. Most competitors offer round-robin at best. LimeCall goes further.",
+  },
+  {
+    title: "Free Plan. No Credit Card.",
+    desc: "Start with 30 calls/month completely free. No trial expiry, no credit card required. Competitors typically require a paid plan from day one.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Which is better — CallPage or LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is the better choice for most sales teams. It offers all of CallPage\'s callback features plus SMS, WhatsApp, virtual numbers (40+ countries), intelligent lead distribution, and a free plan with no credit card required. CallPage does not offer a free plan or SMS/WhatsApp channels.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall compare to live chat?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Live chat is excellent for support and low-stakes queries. For high-value leads — people about to make a purchase decision — a real phone conversation converts significantly better. LimeCall enables instant callbacks that catch decision-makers at peak intent, which live chat cannot replicate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall better than a contact form?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For sales conversion, yes. Contact forms make leads wait hours or days for a response. LimeCall connects them to a sales rep in 28 seconds while they\'re still on your site and at peak interest. Studies show leads contacted within 5 minutes are 100x more likely to convert.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What makes LimeCall unique compared to other callback tools?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall stands out through four key advantages: (1) 28-second connection speed, (2) omni-channel coverage — calls, SMS, and WhatsApp in one platform, (3) intelligent lead distribution that routes leads to the right rep automatically, and (4) a free plan with no credit card required.',
+      },
+    },
+  ],
+};
 ---
 
-<Base
-  title={`Compare ${site.name} — vs Competitors`}
-  description={`See how ${site.name} compares to ${competitors.map(c => c.name).join(', ')} and more.`}
-  canonical={`${site.url}/compare`}
->
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Compare', url: seo.canonical }]} />
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        See Why 10,000+ Teams<br class="hidden sm:block" />
+        <span class="text-lime-400">Chose LimeCall</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Honest, side-by-side comparisons against the top alternatives — competitors, live chat, contact forms, and chatbots. No spin.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Try LimeCall Free →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See Pricing</a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Comparison cards grid -->
   <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <Breadcrumbs items={[{ name: 'Compare', url: `${site.url}/compare` }]} />
-
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-white sm:text-5xl">
-          {site.name} vs the
-          <span class="text-lime-400"> Competition</span>
-        </h1>
-        <p class="mt-4 text-lg text-dark-300">
-          See how we compare to other options. Honest comparisons, no spin.
-        </p>
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-2xl font-bold text-white">LimeCall vs the Alternatives</h2>
+        <p class="mt-2 text-dark-400">Click any comparison for a full feature-by-feature breakdown.</p>
       </div>
-
-      <div class="grid gap-4 sm:grid-cols-2">
-        {competitors.map((competitor) => (
-          <a
-            href={`/compare/${site.name.toLowerCase().replace(/\s+/g, '-')}-vs-${competitor.slug}`}
-            class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6 transition-all hover:border-lime-500/50"
-          >
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-3">
-                <span class="text-lg font-bold text-lime-400">{site.name}</span>
-                <span class="text-dark-600 font-medium">vs</span>
-                <span class="text-lg font-bold text-white">{competitor.name}</span>
-              </div>
-              <svg class="w-4 h-4 text-dark-500 group-hover:text-lime-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {comparisons.map(c => (
+          <div class="group relative flex flex-col rounded-xl border border-dark-800 bg-dark-900/60 p-6 transition-all hover:border-lime-500/40">
+            <div class="mb-1 flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-dark-500">{c.category}</span>
+              {c.slug && (
+                <svg class="h-4 w-4 text-dark-600 group-hover:text-lime-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              )}
             </div>
-            <p class="text-sm text-dark-400">{competitor.tagline}</p>
-          </a>
+            <div class="mb-3 flex items-center gap-2">
+              <span class="text-sm font-bold text-lime-400">LimeCall</span>
+              <span class="text-dark-600">vs</span>
+              <span class="text-sm font-bold text-white">{c.opponent}</span>
+            </div>
+            <p class="flex-1 text-sm text-dark-400 leading-relaxed">{c.tagline}</p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              {c.badges.map(b => (
+                <span class="rounded-full bg-lime-500/10 px-2.5 py-0.5 text-xs font-semibold text-lime-400/80">{b}</span>
+              ))}
+            </div>
+            {c.slug ? (
+              <a href={c.slug} class="mt-4 text-xs font-semibold text-lime-500 hover:text-lime-400 transition">Full comparison →</a>
+            ) : (
+              <span class="mt-4 text-xs text-dark-600">Detailed guide coming soon</span>
+            )}
+          </div>
         ))}
-      </div>
-
-      <div class="mt-16 text-center rounded-xl border border-dark-800 bg-dark-900/50 p-8">
-        <h2 class="text-xl font-bold text-white mb-2">Ready to switch?</h2>
-        <p class="text-dark-400 mb-6">Try {site.name} risk-free. {site.cta.subtext}.</p>
-        <a href={site.cta.href} class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold transition">
-          {site.cta.text}
-        </a>
       </div>
     </div>
   </section>
+
+  <!-- LimeCall advantage -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-2xl font-bold text-white">The LimeCall Advantage</h2>
+        <p class="mt-2 text-dark-400">Four reasons teams consistently choose LimeCall — regardless of which alternative they came from.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {differentiators.map((d, i) => (
+          <div class="flex gap-4 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-bold text-lime-400">
+              {i + 1}
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">{d.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{d.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to see the difference?</h2>
+      <p class="mt-4 text-dark-400">Join 10,000+ teams. No credit card. Cancel anytime.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        Start Free — No Credit Card →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore LimeCall" links={[
+        { href: '/limecall-vs-callpage/', title: 'LimeCall vs CallPage', desc: 'Side-by-side feature and pricing comparison.' },
+        { href: '/features/', title: 'All Features', desc: 'Everything LimeCall does.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'What makes LimeCall different.' },
+      ]} />
+    </div>
+  </div>
 </Base>

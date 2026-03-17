@@ -2,13 +2,21 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Lead Routing Software — Route Every Lead Instantly | LimeCall`,
-  description: `LimeCall's lead routing software connects website visitors to the right sales rep in seconds. Smart routing rules, instant callback, and real-time distribution.`,
+  description: `LimeCall lead routing software connects website visitors to the right sales rep in seconds. 80% faster response, 3x higher contact rate. 5-min setup, free trial.`,
   canonical: `https://www.limecall.com/lead-routing-software/`,
 };
+
+const stats = [
+  { value: "80%", label: "Faster lead response" },
+  { value: "3x", label: "Higher contact rate" },
+  { value: "100%", label: "Lead coverage" },
+  { value: "5 min", label: "Setup time" },
+];
 
 const features = [
   { title: "Rules-Based Routing", desc: "Route leads based on location, lead source, form data, or any custom criteria. The right rep gets every lead." },
@@ -19,14 +27,77 @@ const features = [
   { title: "Routing Analytics", desc: "Track how leads are routed, which reps get the most leads, and how routing rules affect conversion rates." },
 ];
 
-const steps = [
-  { n: "1", title: "Set your routing rules", desc: "Define who gets which leads based on territory, product, source, or any custom field." },
-  { n: "2", title: "Lead arrives", desc: "A visitor submits a form, clicks to call, or requests a callback on your website." },
-  { n: "3", title: "Routed and connected", desc: "LimeCall applies your routing rules and connects the lead to the right rep in seconds." },
+const useCases = [
+  { title: "Multi-Rep Sales Teams", desc: "Distribute inbound leads fairly and instantly across your entire sales team. No leads fall through the cracks, no rep is overloaded." },
+  { title: "Territory-Based Sales", desc: "Route leads automatically to the rep who owns that geographic region. Protect territories and improve close rates." },
+  { title: "Product Specialists", desc: "Ensure leads interested in specific products or plans always reach the rep with the right expertise to close them." },
+  { title: "Enterprise Sales Development", desc: "Route marketing-qualified leads to the correct SDR or AE based on company size, industry, or deal value." },
 ];
+
+const steps = [
+  { n: "1", title: "Set your routing rules", desc: "Define who gets which leads based on territory, product, source, or any custom field. No coding required." },
+  { n: "2", title: "Lead arrives", desc: "A visitor submits a form, clicks to call, or requests a callback on your website. LimeCall captures them instantly." },
+  { n: "3", title: "Routed and connected", desc: "LimeCall applies your routing rules and connects the lead to the right rep in seconds — before the lead goes cold." },
+];
+
+const comparisonRows = [
+  { criterion: "Lead response speed", automated: "Seconds", manual: "Minutes to hours" },
+  { criterion: "Routing accuracy", automated: "Rules-enforced 100%", manual: "Human error prone" },
+  { criterion: "Lead coverage", automated: "24/7 automatic", manual: "Business hours only" },
+  { criterion: "Rep satisfaction", automated: "Fair, transparent", manual: "Perceived favoritism" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead routing software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead routing software automatically directs inbound leads — from forms, calls, or chat — to the most appropriate sales rep based on rules you define. Rules can include territory, product interest, company size, language, availability, or any other custom criteria. LimeCall\'s lead routing software also triggers an instant callback so the lead is connected by phone within seconds of expressing interest.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does round-robin routing work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Round-robin routing distributes leads evenly across a team in sequence — rep 1 gets the first lead, rep 2 gets the second, rep 3 gets the third, and so on. When the sequence reaches the last rep, it starts again from rep 1. LimeCall\'s round-robin includes automatic failover: if a rep is unavailable, the lead skips to the next available rep so no lead ever goes uncontacted.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can leads be routed by territory or geography?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s lead routing software supports territory-based routing using the lead\'s IP address, form data (e.g., state or country field), or phone area code. You define the territories and assign reps to each. When a lead arrives from a specific region, it is automatically sent to the rep who owns that territory.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What integrations does LimeCall lead routing support?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates with Salesforce, HubSpot, Pipedrive, Zoho CRM, Marketo, and many other platforms natively, plus hundreds more via Zapier. Lead routing rules can be triggered by CRM data, form submissions, or website events, and routed leads are automatically created or updated in your CRM with full contact and source details.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How fast is automated lead routing with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall routes and connects leads in under 28 seconds on average. The moment a lead is captured — via form, widget, or click-to-call — LimeCall evaluates your routing rules, identifies the best available rep, and dials both the lead and the rep simultaneously. Research shows that responding to a lead within 5 minutes makes you 100x more likely to connect than responding after 30 minutes.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -51,6 +122,20 @@ const steps = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -66,8 +151,23 @@ const steps = [
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- Use Cases -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How lead routing works</h2>
       <div class="grid gap-6 sm:grid-cols-3">
@@ -82,11 +182,56 @@ const steps = [
     </div>
   </section>
 
+  <!-- Comparison Table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Automated routing vs manual assignment</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-3 text-left font-semibold text-dark-300">Criterion</th>
+              <th class="px-5 py-3 text-left font-semibold text-lime-400">Automated (LimeCall)</th>
+              <th class="px-5 py-3 text-left font-semibold text-dark-400">Manual assignment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : ''}`}>
+                <td class="px-5 py-3 text-dark-300">{row.criterion}</td>
+                <td class="px-5 py-3 text-white font-medium">{row.automated}</td>
+                <td class="px-5 py-3 text-dark-400">{row.manual}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-white">Never route a lead to the wrong rep again</h2>
-      <p class="mt-4 text-dark-400">Set up LimeCall's lead routing in minutes. Start connecting leads to the right reps instantly.</p>
+      <p class="mt-4 text-dark-400">Set up LimeCall's lead routing in 5 minutes. Start connecting leads to the right reps instantly.</p>
       <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
         Start Free Trial →
       </a>

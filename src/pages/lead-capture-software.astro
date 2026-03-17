@@ -2,29 +2,95 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Lead Capture Software | LimeCall`,
-  description: `LimeCall's lead capture software converts website visitors into calls and conversations. Click-to-call, callback automation, and web-to-text — all in one platform.`,
+  title: `Lead Capture Software — Never Miss a Visitor | LimeCall`,
+  description: `LimeCall lead capture converts high-intent website visitors before they leave. Exit-intent popups, instant callback, form-to-call, CRM sync. Free trial.`,
   canonical: `https://www.limecall.com/lead-capture-software/`,
 };
 
-const features = [
-  { title: "Multi-Channel Capture", desc: "Capture leads through calls, callbacks, SMS, and chat. Meet visitors on their preferred channel." },
-  { title: "Instant Call Connection", desc: "When a visitor clicks your call button, LimeCall connects your team and the visitor in under 28 seconds." },
-  { title: "Automated Callback Scheduling", desc: "Let visitors schedule callbacks at their convenience. LimeCall sends reminders and automates the call." },
-  { title: "Lead Qualification Engine", desc: "Qualify leads in real time using IVR menus, pre-call questions, and routing rules before they reach your team." },
-  { title: "Full Attribution Tracking", desc: "Know exactly which page, ad, or keyword drove each lead. Attribute revenue back to the right campaigns." },
-  { title: "Real-Time Notifications", desc: "Your team gets instant alerts — via SMS, email, or Slack — the moment a new lead is captured." },
+const stats = [
+  { value: "72%", label: "Visitors leave without converting" },
+  { value: "28s", label: "Avg callback connection time" },
+  { value: "3x", label: "More leads captured" },
+  { value: "0", label: "Missed high-intent visitors" },
 ];
 
-const integrations = [
-  "Salesforce", "HubSpot", "Pipedrive", "Zoho CRM", "Zapier", "Slack", "Google Analytics", "Facebook Ads"
+const features = [
+  { title: "Exit-Intent Callback Popup", desc: "Trigger a callback request popup the moment a visitor is about to leave. Capture leads that would otherwise be lost forever." },
+  { title: "Form-to-Call Automation", desc: "Turn form submissions into instant phone calls. LimeCall dials your rep and the lead simultaneously the second a form is submitted." },
+  { title: "Chat-to-Call Escalation", desc: "Let visitors start in chat and escalate to a live call with one click. Convert conversations into closed deals faster." },
+  { title: "Mobile-Optimized Widget", desc: "Our capture widget is built for mobile-first browsing. Tap-to-call, SMS opt-in, and scheduling — all responsive and fast." },
+  { title: "Custom Scheduling", desc: "Let high-intent visitors book a callback slot on your calendar. Reduce no-shows with automated SMS and email reminders." },
+  { title: "CRM Instant Sync", desc: "Every captured lead flows into your CRM in real time — with source, page, session data, and contact details pre-filled." },
 ];
+
+const useCases = [
+  { title: "E-commerce Cart Abandonment", desc: "Trigger callback offers when shoppers add to cart but hesitate to check out. Recover revenue with a personal call from your team." },
+  { title: "SaaS Demo Requests", desc: "Convert trial sign-up form submissions into instant demo calls. Connect with high-intent prospects while motivation is highest." },
+  { title: "Real Estate Inquiries", desc: "Respond to property inquiry forms within seconds. Beat competing agents to the call and win more listings." },
+  { title: "Financial Services Leads", desc: "Capture and qualify financial leads the moment they show interest. Compliance-ready recordings included." },
+];
+
+const steps = [
+  { n: "1", title: "Install the widget", desc: "Paste one snippet to your site or deploy via Google Tag Manager. No developer needed — live in under 5 minutes." },
+  { n: "2", title: "Visitor triggers capture", desc: "A visitor clicks to call, submits a form, or triggers the exit-intent popup. LimeCall captures their contact instantly." },
+  { n: "3", title: "Rep connected in 28 seconds", desc: "LimeCall dials your available rep and the lead simultaneously. Both parties are live on a call before the lead goes cold." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead capture software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead capture software converts website visitors into actionable leads by offering them a way to connect — via callback, form, SMS, or chat — before they leave. LimeCall\'s lead capture tools include click-to-call widgets, exit-intent popups, form-to-call automation, and scheduling widgets, all designed to maximize the number of visitors who become conversations.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does exit-intent lead capture work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Exit-intent technology detects when a visitor\'s mouse moves toward the browser close button or address bar, signaling they are about to leave. LimeCall triggers a popup at that exact moment offering an immediate callback, a scheduled call, or an SMS conversation. This recovers leads that would otherwise bounce without leaving any contact information.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How fast does LimeCall connect a captured lead to a rep?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects leads to available sales reps in an average of 28 seconds. When a lead is captured — through a form, widget, or popup — LimeCall simultaneously dials the lead and the next available rep based on your routing rules. Both parties hear each other as soon as they answer.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does lead capture software integrate with my CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates natively with Salesforce, HubSpot, Pipedrive, Zoho CRM, and more. Every captured lead is automatically created or updated in your CRM with their contact details, the page they came from, the campaign that drove them, and the call recording — all without any manual data entry.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I customize the lead capture widget for my brand?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s widgets are fully customizable — you can match your brand colors, choose which channels to display (call, SMS, chat, schedule), set the trigger rules (time on page, scroll depth, exit intent), and control which pages the widget appears on. No coding knowledge is required to configure the widget.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -33,7 +99,7 @@ const integrations = [
         Lead Capture Software
       </div>
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Lead Capture Software That <span class="text-lime-400">Converts Traffic</span>
+        Capture <span class="text-lime-400">100% of High-Intent</span> Website Visitors Before They Leave
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
         LimeCall's lead capture software turns anonymous website visitors into live sales conversations. Connect through calls, callbacks, and SMS — before leads go cold.
@@ -45,6 +111,20 @@ const integrations = [
         <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -64,13 +144,50 @@ const integrations = [
     </div>
   </section>
 
-  <!-- Integrations -->
-  <section class="border-t border-dark-800 py-14 bg-dark-900/30">
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-8 text-center text-xl font-bold text-white">Integrates with your existing stack</h2>
-      <div class="flex flex-wrap justify-center gap-3">
-        {integrations.map(i => (
-          <span class="rounded-full border border-dark-700 bg-dark-800 px-4 py-2 text-sm font-medium text-dark-300">{i}</span>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

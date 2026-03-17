@@ -22,7 +22,7 @@ const features = [
   { feature: "Virtual Phone Numbers (40+ countries)", limecall: true, competitor: false },
   { feature: "CRM Integrations", limecall: true, competitor: true },
   { feature: "Call Recording", limecall: true, competitor: false },
-  { feature: "Free Trial (no credit card)", limecall: true, competitor: false },
+  { feature: "Free Plan (no credit card)", limecall: true, competitor: false },
   { feature: "Shared SMS Inbox", limecall: true, competitor: false },
   { feature: "Speed-to-Lead Automation", limecall: true, competitor: true },
 ];
@@ -36,32 +36,88 @@ const reasons = [
   { title: "Simple widget setup", desc: "Add the LimeCall widget to any website in under 5 minutes. No developer, no complex configuration." },
 ];
 
+const pricing = [
+  {
+    tool: "LimeCall",
+    highlight: true,
+    tiers: [
+      { name: "Free", price: "$0/mo", note: "30 calls/month, no credit card" },
+      { name: "Starter", price: "$29/mo", note: "100 calls, SMS, lead distribution" },
+      { name: "Pro", price: "$99/mo", note: "500 calls, virtual numbers, API, call recording" },
+    ],
+  },
+  {
+    tool: "Callingly",
+    highlight: false,
+    tiers: [
+      { name: "No free plan", price: "—", note: "Paid plan required to start" },
+      { name: "Basic", price: "~$25/mo", note: "Callbacks only, no SMS or recording" },
+      { name: "Growth", price: "~$75/mo", note: "More calls, no virtual numbers" },
+    ],
+  },
+];
+
+const differentiators = [
+  {
+    title: "SMS & WhatsApp — Callingly has neither",
+    desc: "Callingly focuses exclusively on instant phone calls. LimeCall lets you follow up via SMS and WhatsApp from the same platform, capturing leads who don't answer their phone.",
+  },
+  {
+    title: "Virtual Numbers in 40+ Countries",
+    desc: "Callingly doesn't offer virtual numbers. LimeCall lets your team present local caller IDs in over 40 countries — dramatically improving answer rates for outbound follow-up.",
+  },
+  {
+    title: "Call Recording for Coaching",
+    desc: "Callingly doesn't record calls. LimeCall includes call recording on paid plans so managers can coach reps, review conversations, and maintain compliance records.",
+  },
+  {
+    title: "Shared Team SMS Inbox",
+    desc: "LimeCall's shared inbox lets your entire team collaborate on SMS threads with leads. Callingly has no text messaging capability at all.",
+  },
+];
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Is LimeCall a good Callingly alternative?',
+      name: 'What is Callingly?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall covers instant lead calling like Callingly, and adds SMS, WhatsApp, virtual numbers, call recording, and a shared team inbox — all on a more affordable plan.',
+        text: 'Callingly is a speed-to-lead calling tool that instantly dials your sales reps when a new lead fills out a form on your website. It focuses on instant phone connection but does not offer SMS, WhatsApp, virtual numbers, or call recording.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Does LimeCall offer call recording?',
+      name: 'Why choose LimeCall over Callingly?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall includes call recording on paid plans, making it easy to review calls for coaching and compliance. Callingly does not offer call recording.',
+        text: 'LimeCall covers everything Callingly does — instant lead calling and lead distribution — and adds SMS, WhatsApp, virtual phone numbers in 40+ countries, call recording, a shared team inbox, and a free plan. It\'s a more complete platform at a competitive price.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can I try LimeCall without a credit card?',
+      name: 'Does LimeCall have all of Callingly\'s features?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall has a free plan that requires no credit card. You can upgrade to a paid plan at any time.',
+        text: 'Yes. LimeCall includes instant callback, lead distribution, and CRM integrations that Callingly offers — and extends beyond with call recording, SMS, WhatsApp, virtual numbers, and a shared inbox that Callingly does not have.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much cheaper is LimeCall compared to Callingly?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall starts completely free (no credit card), while Callingly requires a paid plan from day one. On paid tiers, LimeCall offers more features — call recording, SMS, virtual numbers — at comparable or lower pricing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I migrate from Callingly to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Migration is straightforward: (1) Sign up for LimeCall free — no credit card needed. (2) Add the LimeCall widget to your website or configure the lead form webhook trigger (takes under 10 minutes). (3) Connect your CRM using LimeCall\'s native integrations. Most teams are fully live within a day.',
       },
     },
   ],
@@ -74,7 +130,7 @@ const faqSchema = {
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <Breadcrumbs items={[{ name: `LimeCall vs ${competitor}`, url: seo.canonical }]} />
+      <Breadcrumbs items={[{ name: 'Compare', url: 'https://www.limecall.com/compare/' }, { name: `LimeCall vs ${competitor}`, url: seo.canonical }]} />
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
         LimeCall vs <span class="text-lime-400">{competitor}</span>
       </h1>
@@ -128,6 +184,49 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- Pricing comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Pricing Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">LimeCall starts free. Callingly requires a paid plan from day one.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricing.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/30 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-4 text-lg font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="space-y-3">
+              {p.tiers.map(t => (
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <div class="text-sm font-semibold text-white">{t.name}</div>
+                    <div class="text-xs text-dark-500">{t.note}</div>
+                  </div>
+                  <div class:list={["text-sm font-bold whitespace-nowrap", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-xs text-dark-600">Pricing approximate. Check each vendor's website for current rates.</p>
+    </div>
+  </section>
+
+  <!-- Key differentiators -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">What LimeCall Has That {competitor} Doesn't</h2>
+      <p class="mb-10 text-center text-dark-400">Four capabilities that make LimeCall the more complete platform.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {differentiators.map(d => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-lime-400">{d.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Why switch -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -139,6 +238,36 @@ const faqSchema = {
             <p class="text-sm text-dark-400 leading-relaxed">{r.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration tip -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-2 text-xl font-bold text-white">Migration Tip: Switch in Under an Hour</h2>
+        <p class="text-dark-300 leading-relaxed mb-6">
+          Callingly connects to leads via CRM webhooks. LimeCall supports the same webhook triggers — so you can point your existing CRM events at LimeCall without any workflow rebuild. Sign up free, replace the webhook URL, and you're live.
+        </p>
+        <div class="space-y-2 mb-6">
+          {[
+            "Sign up free — no credit card, instant access",
+            "Replace your Callingly webhook URL with LimeCall's",
+            "Connect Slack, HubSpot, or Salesforce in one click",
+            "Enable call recording and SMS follow-up",
+          ].map(step => (
+            <div class="flex items-center gap-2 text-sm text-dark-300">
+              <svg class="h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+              {step}
+            </div>
+          ))}
+        </div>
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Migration →
+        </a>
       </div>
     </div>
   </section>

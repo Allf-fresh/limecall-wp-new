@@ -2,13 +2,21 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
   title: `Automatic Lead Distribution — Faster Sales | LimeCall`,
-  description: `Automatically distribute leads to the right sales rep the moment they arrive. LimeCall's automatic lead distribution boosts response times, fairness, and conversion rates.`,
+  description: `Automatically distribute leads to the right sales rep the moment they arrive. LimeCall's auto lead distribution boosts response times, fairness, and conversion rates.`,
   canonical: `https://www.limecall.com/automatic-lead-distribution/`,
 };
+
+const stats = [
+  { value: "80%", label: "Faster first response" },
+  { value: "3x", label: "Higher contact rate" },
+  { value: "100%", label: "Lead coverage, 24/7" },
+  { value: "5 min", label: "To go live" },
+];
 
 const features = [
   { title: "Rule-Based Distribution", desc: "Define rules to distribute leads by territory, lead source, product interest, company size, or any custom field." },
@@ -20,14 +28,88 @@ const features = [
 ];
 
 const distributionMethods = [
-  { title: "Round-Robin", desc: "Leads are distributed equally to each rep in sequence. Best for teams with similar skill levels." },
-  { title: "Skills-Based", desc: "Match leads to reps based on their expertise, language, or product specialization." },
-  { title: "Availability-Based", desc: "Route only to reps who are currently online and available to take the lead." },
-  { title: "Geographic", desc: "Distribute leads to reps based on the lead's location. Essential for territory-based sales teams." },
+  {
+    title: "Round-Robin",
+    desc: "Leads cycle through each rep in sequence — rep 1, rep 2, rep 3, then back to rep 1. This ensures equal lead volume across your team regardless of tenure or seniority. Automatic failover skips unavailable reps so no lead is left uncontacted.",
+  },
+  {
+    title: "Skills-Based",
+    desc: "Match leads to the rep best equipped to close them. Define skills like product expertise, language, industry experience, or deal size range. LimeCall evaluates each incoming lead and routes it to the rep whose skills are the best match.",
+  },
+  {
+    title: "Territory-Based",
+    desc: "Automatically assign leads to the rep who owns that geographic region. Territory data comes from the lead's IP address, phone area code, or form fields. Protect rep territories and give each lead a local, knowledgeable contact.",
+  },
+  {
+    title: "Availability-Based",
+    desc: "Only route leads to reps who are currently online, active, and available to engage immediately. Reps set their own status — available, in a call, in after-call work — and LimeCall uses that signal to route intelligently in real time.",
+  },
 ];
+
+const useCases = [
+  { title: "High-Volume Lead Teams", desc: "Handle dozens or hundreds of daily inbound leads without manual assignment. Every lead gets a rep in seconds." },
+  { title: "Territory Sales Organizations", desc: "Protect rep territories and improve local relevance by routing leads based on geography automatically." },
+  { title: "Remote Sales Teams", desc: "Distribute leads fairly across a distributed team in multiple time zones with availability-aware routing." },
+  { title: "Performance-Managed Sales", desc: "Reward top performers with more leads using weighted distribution while keeping the team motivated." },
+];
+
+const steps = [
+  { n: "1", title: "Configure distribution rules", desc: "Define how leads should be distributed — by territory, skills, availability, performance, or round-robin. No coding needed." },
+  { n: "2", title: "Lead arrives automatically", desc: "A new lead comes in from a form, call, or widget. LimeCall evaluates your rules in milliseconds and assigns it instantly." },
+  { n: "3", title: "Rep notified and connected", desc: "The assigned rep receives an instant notification and LimeCall triggers a callback to connect them with the lead right away." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is automatic lead distribution?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Automatic lead distribution is the process of using software to assign incoming leads to sales reps based on predefined rules — without any manual intervention. Rules can include round-robin sequencing, skills matching, geographic territory, rep availability, or performance weighting. LimeCall\'s automatic lead distribution ensures every lead is assigned instantly and no lead sits uncontacted.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is automatic lead distribution different from lead routing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead routing and lead distribution are closely related but distinct. Lead routing determines which rep or team a lead should go to based on criteria like territory or skills. Lead distribution focuses on how leads are spread across a team — ensuring fairness and coverage through methods like round-robin, weighted distribution, or availability-based assignment. LimeCall does both in a single platform.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens if a rep does not respond to a distributed lead?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall\'s re-distribution rules handle unresponsive reps automatically. You define a response time window — for example, 5 minutes — and if the assigned rep does not accept or respond to the lead within that window, LimeCall redistributes it to the next available rep. This ensures no lead goes cold because of one rep\'s unavailability.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I weight lead distribution by rep performance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports performance-based weighted distribution. You assign a weight to each rep — for example, your top closer gets a weight of 3 while a newer rep gets a weight of 1 — and LimeCall distributes leads proportionally based on those weights. This means your best reps handle more volume while newer reps ramp up at a manageable pace.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does automatic lead distribution work with my CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Salesforce, HubSpot, Pipedrive, Zoho CRM, and many others. Distributed leads are automatically created or updated in your CRM with assignment details, source, contact information, and distribution timestamp. CRM data can also be used as a routing criterion — for example, routing leads from existing accounts to their account owner.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -52,6 +134,20 @@ const distributionMethods = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -70,13 +166,62 @@ const distributionMethods = [
   <!-- Distribution Methods -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Distribution methods</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Distribution methods explained</h2>
       <div class="grid gap-6 sm:grid-cols-2">
         {distributionMethods.map(m => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
             <h3 class="mb-2 font-semibold text-lime-400">{m.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{m.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -99,7 +244,7 @@ const distributionMethods = [
       links={[
         { href: '/lead-distribution/', title: 'Lead Distribution', desc: 'Full lead distribution platform.' },
         { href: '/instant-lead-routing/', title: 'Instant Lead Routing', desc: 'Route leads in real time.' },
-        { href: '/lead-distribution-guide/', title: 'Lead Distribution Guide', desc: 'Complete guide to lead distribution.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Rules-based lead routing.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

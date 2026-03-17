@@ -2,38 +2,102 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Business Texting & SMS Platform | LimeCall`,
-  description: `LimeCall's business texting platform makes it easy to reach and engage your customers over SMS. Drive sales, send reminders, and grow your business with web-to-text.`,
+  title: `Business Texting Software — SMS for Sales & Support | LimeCall`,
+  description: `LimeCall business texting: 2-way SMS, shared inbox, automation, broadcast campaigns, and WhatsApp. 98% open rate, 5x response vs email. Free trial.`,
   canonical: `https://www.limecall.com/business-texting/`,
 };
 
-const features = [
-  { title: "Web to Text Widget", desc: "Add a text widget to your website. Visitors click to start a two-way SMS conversation instantly — no app download required." },
-  { title: "Two-Way SMS", desc: "Send and receive text messages in a real-time conversation. Reply from your LimeCall inbox on any device." },
-  { title: "SMS Automation", desc: "Trigger automatic text messages based on visitor actions, time of day, or CRM events. Nurture leads 24/7." },
-  { title: "Broadcast Campaigns", desc: "Send SMS campaigns to lists of contacts at once. Perfect for promotions, reminders, and re-engagement." },
-  { title: "Shared Team Inbox", desc: "Your whole team sees incoming texts in one shared inbox. Assign conversations and collaborate with ease." },
-  { title: "CRM Integration", desc: "Sync texts with your CRM. Every conversation is logged so your team has full context on every customer." },
+const stats = [
+  { value: "98%", label: "SMS open rate" },
+  { value: "5x", label: "Response rate vs email" },
+  { value: "90s", label: "Avg response time" },
+  { value: "40+", label: "Countries supported" },
 ];
 
-const steps = [
-  { n: "1", title: "Add the widget", desc: "Paste one line of code to add the LimeCall text widget to your website. Takes 2 minutes." },
-  { n: "2", title: "Visitor texts you", desc: "Visitors click the widget and start texting. Their number is captured and the conversation begins." },
-  { n: "3", title: "Reply and convert", desc: "Your team responds from the LimeCall inbox. Follow up, qualify, and close — all over SMS." },
+const features = [
+  { title: "2-Way SMS", desc: "Send and receive text messages in a real-time conversation. Reply from your LimeCall inbox on any device, instantly." },
+  { title: "Shared Team Inbox", desc: "Your whole team sees incoming texts in one shared inbox. Assign conversations, add notes, and collaborate with ease." },
+  { title: "SMS Automation", desc: "Trigger automatic text messages based on visitor actions, time of day, or CRM events. Nurture leads 24/7 without manual effort." },
+  { title: "Mass Broadcast", desc: "Send SMS campaigns to entire contact lists at once. Perfect for promotions, event reminders, and re-engagement sequences." },
+  { title: "Message Templates", desc: "Save your most effective messages as reusable templates. Send consistent, on-brand replies in one click." },
+  { title: "WhatsApp Integration", desc: "Extend your business texting to WhatsApp. Reach customers on the world's most popular messaging platform." },
 ];
 
 const useCases = [
-  { title: "Lead Capture", desc: "Capture leads directly in SMS. No form-fill friction — visitors text you instead of filling out a contact form." },
-  { title: "Sales Follow-Up", desc: "Send automated follow-up texts after calls or demos. Keep leads warm without manual effort." },
+  { title: "Lead Capture via SMS", desc: "Capture leads directly in SMS. No form-fill friction — visitors text you instead of filling out a contact form." },
+  { title: "Sales Follow-Up", desc: "Send automated follow-up texts after calls or demos. Keep leads warm without manual effort from your team." },
   { title: "Appointment Reminders", desc: "Reduce no-shows with automatic SMS reminders for scheduled calls, demos, or meetings." },
-  { title: "Customer Support", desc: "Let customers text in their support questions. Faster for them, more efficient for your team." },
+  { title: "Customer Support", desc: "Let customers text in their support questions. Faster for them, more efficient for your team than phone or email." },
 ];
+
+const steps = [
+  { n: "1", title: "Add the widget", desc: "Paste one line of code to add the LimeCall text widget to your website. Takes 2 minutes, no developer required." },
+  { n: "2", title: "Visitor texts you", desc: "Visitors click the widget and start texting. Their number is captured and the conversation begins immediately." },
+  { n: "3", title: "Reply and convert", desc: "Your team responds from the LimeCall shared inbox. Follow up, qualify, and close — all over SMS." },
+];
+
+const comparisonRows = [
+  { criterion: "Open rate", sms: "98%", email: "20%", phone: "N/A" },
+  { criterion: "Response rate", sms: "45%", email: "6%", phone: "38%" },
+  { criterion: "Avg response time", sms: "90 seconds", email: "90 minutes", phone: "Immediate" },
+  { criterion: "Automation support", sms: "Full", email: "Full", phone: "Limited" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is business texting software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Business texting software allows companies to send and receive SMS messages from a business phone number or short code, rather than a personal mobile phone. It includes features like a shared team inbox, two-way messaging, automation, broadcast campaigns, and CRM integrations. LimeCall\'s business texting platform lets sales and support teams engage customers over SMS at scale.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can multiple team members send and receive SMS from the same number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s shared inbox allows your entire team to send and receive SMS from a single business number. Conversations can be assigned to specific team members, tagged, and annotated with internal notes. This means customers always get a fast response and your team always has full context on every conversation, regardless of who handled it previously.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does SMS automation work in LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall\'s SMS automation lets you create triggers and sequences based on events — such as when a lead fills out a form, books a call, or goes quiet for a set number of days. When the trigger fires, LimeCall automatically sends a personalized SMS. You can build multi-step sequences, set delays, and branch based on whether the recipient responded. No manual effort required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support WhatsApp business messaging?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with WhatsApp Business API, allowing you to send and receive WhatsApp messages from the same unified inbox where you manage SMS and calls. This lets you reach customers on their preferred channel — whether that is a standard SMS number or WhatsApp — without switching between tools.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is business texting compliant with SMS regulations?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is built with compliance in mind. The platform includes opt-in and opt-out management for TCPA compliance in the US, supports GDPR-compliant data handling for European customers, and provides audit trails for all messages sent and received. You should always ensure your contacts have opted in to receive SMS communications from your business before messaging them.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -58,6 +122,20 @@ const useCases = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -73,8 +151,23 @@ const useCases = [
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- Use Cases -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-6 sm:grid-cols-3">
@@ -89,16 +182,48 @@ const useCases = [
     </div>
   </section>
 
-  <!-- Use Cases -->
+  <!-- Comparison Table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">SMS vs email vs phone</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-3 text-left font-semibold text-dark-300">Metric</th>
+              <th class="px-5 py-3 text-left font-semibold text-lime-400">SMS</th>
+              <th class="px-5 py-3 text-left font-semibold text-dark-400">Email</th>
+              <th class="px-5 py-3 text-left font-semibold text-dark-400">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : ''}`}>
+                <td class="px-5 py-3 text-dark-300">{row.criterion}</td>
+                <td class="px-5 py-3 text-white font-medium">{row.sms}</td>
+                <td class="px-5 py-3 text-dark-400">{row.email}</td>
+                <td class="px-5 py-3 text-dark-400">{row.phone}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        {useCases.map(u => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
-            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
-          </div>
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

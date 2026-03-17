@@ -2,21 +2,29 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Toll-Free Numbers for Business | LimeCall`,
-  description: `Get a toll-free number for your business. Free for callers, professional for you. 800, 888, 877, 866 numbers available. Set up in minutes with LimeCall.`,
+  title: `Toll Free Numbers for Business — 800, 888, 877 | LimeCall`,
+  description: `Get a toll free number for your business instantly. 800, 888, 877, 866 numbers, vanity options, call forwarding, IVR, and analytics. No contracts. Free trial.`,
   canonical: `https://www.limecall.com/toll-free-numbers/`,
 };
 
-const benefits = [
-  { title: "Free for Callers", desc: "Toll-free numbers mean callers pay nothing to reach you — removing cost barriers and increasing inbound call volume." },
-  { title: "Professional Image", desc: "A toll-free number signals enterprise credibility. Customers see you as an established, accessible business." },
-  { title: "National Reach", desc: "One toll-free number works across an entire country. Perfect for businesses that serve customers nationwide." },
-  { title: "Instant Activation", desc: "Get your toll-free number live in minutes. No hardware, no waiting, no contracts required." },
-  { title: "Smart Call Routing", desc: "Route toll-free calls to the right team member, department, or location based on time, availability, or caller location." },
-  { title: "Full Analytics", desc: "Track every toll-free call — source, duration, outcome, and more — to understand what's driving inbound volume." },
+const stats = [
+  { value: "Instant", label: "Number activation" },
+  { value: "40+", label: "Countries supported" },
+  { value: "99.9%", label: "Uptime SLA" },
+  { value: "No", label: "Long-term contract" },
+];
+
+const features = [
+  { title: "Vanity Numbers", desc: "Choose a memorable toll-free number that spells your brand — like 1-800-LIMECALL. Vanity numbers improve recall and response rates." },
+  { title: "Call Forwarding", desc: "Forward toll-free calls to any device — mobile, desk phone, softphone, or browser. Your team takes calls anywhere." },
+  { title: "Call Recording", desc: "Record all calls to your toll-free number automatically. Store, replay, and share recordings for training and compliance." },
+  { title: "IVR Menu", desc: "Set up a multi-level auto-attendant menu. Route callers to the right department or team without a human receptionist." },
+  { title: "Usage Analytics", desc: "See call volume, peak hours, geographic distribution, and caller trends for your toll-free number in one dashboard." },
+  { title: "Port Existing Number", desc: "Already have a toll-free number? Port it to LimeCall in days and keep the number your customers already know." },
 ];
 
 const formats = [
@@ -25,9 +33,65 @@ const formats = [
   { prefix: "877", desc: "Another trusted toll-free prefix, widely used for customer service and sales lines." },
   { prefix: "866", desc: "Increasingly common toll-free prefix. Good availability for custom vanity numbers." },
 ];
+
+const useCases = [
+  { title: "National Sales Lines", desc: "Give your sales team one national toll-free number. Route calls to the right rep by territory, product, or availability." },
+  { title: "Customer Support", desc: "Provide a free, easy-to-remember support line. Reduce abandonment with smart queuing and callback options." },
+  { title: "Marketing Campaigns", desc: "Use unique toll-free numbers for each campaign. Track which promotions drive the most calls with call analytics." },
+  { title: "Multi-Location Businesses", desc: "One toll-free number rings across all your locations. Callers always reach the right branch based on their location." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a toll free number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A toll free number is a telephone number that is free for the caller to dial. The business receiving the call pays for the charges instead. Toll free numbers use prefixes like 800, 888, 877, 866, 855, and 844 in North America. They allow businesses to project a national, professional presence and remove cost barriers that might otherwise prevent potential customers from calling.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does a toll free number cost with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall toll free numbers are available on all paid plans. Pricing includes a monthly number fee plus per-minute rates for inbound calls. There are no long-term contracts and you can cancel at any time. Vanity numbers and numbers with premium patterns may carry a higher monthly fee. Visit the LimeCall pricing page for current rates.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I port my existing toll free number to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports number porting so you can bring your existing toll free number from your current provider. The porting process typically takes 5 to 10 business days. During the transition, your number remains active with your current provider so there is no disruption to your calls. LimeCall\'s support team guides you through every step of the port.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do toll free numbers work internationally?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Standard North American toll free numbers (800, 888, etc.) are free to call from within the US and Canada. International callers may incur charges depending on their carrier. LimeCall also offers international toll free numbers (ITFS) in 40+ countries, allowing callers in specific countries to reach your business for free. Contact LimeCall to set up international toll free coverage.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I get a vanity toll free number?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'When setting up a toll free number in LimeCall, you can search for available vanity numbers by typing your desired word or phrase into the number search. LimeCall checks availability across 800, 888, 877, and 866 prefixes. If your preferred vanity number is not available on one prefix, it may be available on another. Popular vanity patterns should be searched as soon as possible as availability changes.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -39,7 +103,7 @@ const formats = [
         Toll-Free Numbers for <span class="text-lime-400">Your Business</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Give customers a free, frictionless way to reach you. Toll-free numbers build trust, increase call volume, and project a professional national presence.
+        Give customers a free, frictionless way to reach you. Toll-free 800, 888, and 877 numbers build trust, increase call volume, and project a professional national presence.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
@@ -52,15 +116,29 @@ const formats = [
     </div>
   </section>
 
-  <!-- Benefits -->
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-12 text-center text-3xl font-bold text-white">Why use a toll-free number?</h2>
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything included with your toll-free number</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {benefits.map(b => (
+        {features.map(f => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -82,8 +160,23 @@ const formats = [
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- Use Cases -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Get started in 3 steps</h2>
       <div class="grid gap-6 sm:grid-cols-3">
@@ -95,13 +188,31 @@ const formats = [
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
           <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
-          <p class="text-sm text-dark-400">Select your preferred toll-free prefix and number. Vanity numbers available.</p>
+          <p class="text-sm text-dark-400">Select your preferred toll-free prefix and number. Vanity numbers available on all plans.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
           <h3 class="mb-2 font-semibold text-white">Start receiving calls</h3>
-          <p class="text-sm text-dark-400">Your toll-free number activates instantly. Route calls to any device, anywhere.</p>
+          <p class="text-sm text-dark-400">Your toll-free number activates instantly. Route calls to any device, anywhere in the world.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -110,7 +221,7 @@ const formats = [
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-white">Get your toll-free number today</h2>
-      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to build a professional, accessible phone presence.</p>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to build a professional, accessible phone presence. Instant activation, no contracts.</p>
       <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
         Start Free Trial →
       </a>

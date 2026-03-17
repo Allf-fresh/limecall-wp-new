@@ -2,11 +2,12 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Free App Integration Software To Connect Your Favourite Enterprise Apps`,
-  description: `LimeCall A free App Integration Software platform connects right into your technology stack to enhance Your Conversational Marketing Results.`,
+  title: `50+ Integrations — Connect LimeCall to Your Stack | LimeCall`,
+  description: `LimeCall integrates with 50+ tools: HubSpot, Salesforce, Slack, Zapier, Google Analytics, Zendesk, and more. Connect your CRM, helpdesk, and marketing tools in minutes.`,
   canonical: `https://www.limecall.com/integrations/`,
 };
 
@@ -22,13 +23,53 @@ const categories = [
     ],
   },
   {
-    name: "Communication & Support",
-    desc: "Keep your team notified and your support queue current — without switching apps.",
+    name: "Communication",
+    desc: "Keep your team notified across SMS, WhatsApp, and Slack the moment a lead arrives.",
     integrations: [
-      { name: "Slack", desc: "Get instant call alerts in Slack. Your team sees every lead the moment they arrive.", href: "/limecall-for-slack/", available: true },
+      { name: "Slack", desc: "Get instant call alerts in Slack. Your team sees every lead the moment they arrive.", href: "/sms-for-slack/", available: true },
+      { name: "WhatsApp", desc: "Engage leads over WhatsApp directly from LimeCall — no extra app needed.", href: null, available: true },
+      { name: "SMS", desc: "Send automated follow-up SMS after every callback, missed call, or new lead.", href: null, available: true },
+      { name: "Microsoft Teams", desc: "Receive LimeCall notifications and lead alerts directly in Teams channels.", href: null, available: true },
+    ],
+  },
+  {
+    name: "Analytics",
+    desc: "Track which campaigns drive callbacks and attribute conversions accurately.",
+    integrations: [
+      { name: "Google Analytics", desc: "Track LimeCall callback events in Google Analytics. See which pages convert best.", href: null, available: true },
+      { name: "Meta Pixel", desc: "Fire Facebook/Meta conversion events when a visitor requests a callback.", href: null, available: true },
+      { name: "Google Tag Manager", desc: "Deploy LimeCall via GTM without touching your website code.", href: null, available: true },
+      { name: "Google Ads", desc: "Track LimeCall callbacks as Google Ads conversions. Optimize campaigns on real leads.", href: null, available: true },
+    ],
+  },
+  {
+    name: "Automation",
+    desc: "Build no-code workflows that trigger on every call, lead, or missed opportunity.",
+    integrations: [
+      { name: "Zapier", desc: "Connect LimeCall to 5,000+ apps via Zapier. No code. Trigger on callbacks, missed calls, or new leads.", href: null, available: true },
+      { name: "Make (Integromat)", desc: "Build advanced multi-step workflows with LimeCall as your trigger or action.", href: null, available: true },
+      { name: "n8n", desc: "Self-host your LimeCall automations with n8n for full data control.", href: null, available: true },
+      { name: "Webhooks / REST API", desc: "Full REST API and webhooks for custom integrations with any internal tool.", href: null, available: true },
+    ],
+  },
+  {
+    name: "Helpdesk",
+    desc: "Turn every callback into a support ticket — automatically logged with full call context.",
+    integrations: [
       { name: "Zendesk", desc: "Every callback creates a Zendesk ticket with full call context and recording.", href: "/integration-zendesk/", available: true },
       { name: "Intercom", desc: "Sync LimeCall conversations with Intercom contacts and conversations.", href: null, available: true },
       { name: "Freshdesk", desc: "Log LimeCall callbacks as Freshdesk tickets automatically.", href: null, available: true },
+      { name: "HelpScout", desc: "Create HelpScout conversations from LimeCall callbacks and missed calls.", href: null, available: true },
+    ],
+  },
+  {
+    name: "Marketing",
+    desc: "Sync leads to your email marketing tools and nurture them automatically after every call.",
+    integrations: [
+      { name: "Mailchimp", desc: "Add every LimeCall lead to a Mailchimp audience and trigger nurture sequences.", href: null, available: true },
+      { name: "ActiveCampaign", desc: "Create contacts and start automations in ActiveCampaign from every callback.", href: null, available: true },
+      { name: "Klaviyo", desc: "Sync LimeCall callback data to Klaviyo for e-commerce follow-up flows.", href: null, available: true },
+      { name: "ConvertKit", desc: "Add leads to ConvertKit sequences the moment they request a callback.", href: null, available: true },
     ],
   },
   {
@@ -41,34 +82,157 @@ const categories = [
       { name: "Wix", desc: "Embed LimeCall on any Wix site with a single code block.", href: null, available: true },
     ],
   },
+];
+
+const spotlights = [
   {
-    name: "Marketing & Analytics",
-    desc: "Track which campaigns drive callbacks and attribute conversions accurately.",
-    integrations: [
-      { name: "Google Analytics", desc: "Track LimeCall callback events in Google Analytics. See which pages convert best.", href: null, available: true },
-      { name: "Google Tag Manager", desc: "Deploy LimeCall via GTM without touching your website code.", href: null, available: true },
-      { name: "Facebook Ads", desc: "Fire Facebook conversion events when a visitor requests a callback.", href: null, available: true },
-      { name: "Google Ads", desc: "Track LimeCall callbacks as Google Ads conversions. Optimize campaigns on real leads.", href: null, available: true },
-    ],
+    name: "HubSpot",
+    category: "CRM",
+    desc: "LimeCall's HubSpot integration is the deepest in its class. Every callback automatically creates or updates a HubSpot contact, logs the call activity with duration and recording, and can trigger any HubSpot workflow. Sales reps never have to manually update their CRM again.",
+    href: "/limecall-for-hubspot/",
+    highlight: "Auto-log calls · Sync contacts · Trigger workflows",
+  },
+  {
+    name: "Salesforce",
+    category: "CRM",
+    desc: "Keep your Salesforce data always up to date. LimeCall pushes callback data to Salesforce leads, contacts, and opportunities in real time. Custom field mapping ensures data lands exactly where your team expects it.",
+    href: null,
+    highlight: "Real-time sync · Custom field mapping · Lead & opportunity updates",
+  },
+  {
+    name: "Slack",
+    category: "Communication",
+    desc: "Never miss a hot lead. LimeCall sends instant Slack notifications with caller name, phone, page URL, and call recording link. Route alerts to the right channel by team, territory, or product line.",
+    href: "/sms-for-slack/",
+    highlight: "Instant alerts · Channel routing · Call recording links",
+  },
+  {
+    name: "Zapier",
+    category: "Automation",
+    desc: "LimeCall's Zapier integration unlocks connections to 5,000+ apps without a single line of code. Trigger zaps from new callbacks, missed calls, or scheduled call requests. Popular workflows include Google Sheets logging, Trello card creation, and Airtable record updates.",
+    href: null,
+    highlight: "5,000+ apps · No code · Multi-step workflows",
+  },
+  {
+    name: "Google Analytics",
+    category: "Analytics",
+    desc: "Track LimeCall callbacks as conversion events in GA4. See exactly which landing pages, traffic sources, and campaigns generate the most phone leads. Feed call conversion data back into Google Ads for smarter bidding.",
+    href: null,
+    highlight: "GA4 events · Source attribution · Ad conversion tracking",
+  },
+  {
+    name: "Zendesk",
+    category: "Helpdesk",
+    desc: "Every LimeCall callback automatically creates a Zendesk ticket with the caller's details, the page they called from, and a link to the call recording. Support teams get full context before they even pick up the phone.",
+    href: "/integration-zendesk/",
+    highlight: "Auto-create tickets · Full call context · Recording links",
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall has a native HubSpot integration that automatically logs every callback as a call activity, creates or updates contacts, and can trigger any HubSpot workflow. No manual data entry required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does the Zapier integration work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects to Zapier as a trigger app. You can trigger Zaps when a new callback is requested, when a call is completed, or when a call is missed. This lets you connect LimeCall to 5,000+ apps without any code.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I sync call data to Salesforce?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall syncs callback data to Salesforce in real time. Each callback can create or update a Lead, Contact, or Opportunity, and log a call activity with duration, recording, and custom fields.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work with Google Ads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can fire Google Ads conversion events when a visitor requests a callback. This lets you attribute phone leads to the exact campaign, ad group, and keyword — and feed that data back to Google for smarter bidding.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there a LimeCall API?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall offers a full REST API and webhook support on Pro plans and above. You can use the API to build custom integrations, retrieve call data, manage contacts, and trigger actions in your own systems.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: 'Integrations', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        50+ integrations available
+      </div>
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
         LimeCall Works With<br class="hidden sm:block" />
         <span class="text-lime-400">Your Existing Stack</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Connect LimeCall with your CRM, support platform, website builder, and marketing tools. Every callback — automatically logged, synced, and attributed.
+        Connect LimeCall with your CRM, helpdesk, marketing tools, and automation platforms. Every callback — automatically logged, synced, and attributed across 50+ integrations.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">Connect Your Tools Free →</a>
         <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">See How It Works</a>
+      </div>
+      <!-- Integration logo strip -->
+      <div class="mt-10 flex flex-wrap justify-center gap-3 text-xs text-dark-500">
+        {["HubSpot", "Salesforce", "Slack", "Zapier", "Google Analytics", "Zendesk", "Mailchimp", "Pipedrive"].map(n => (
+          <span class="rounded-lg border border-dark-800 bg-dark-900/80 px-3 py-1.5 text-dark-400">{n}</span>
+        ))}
+        <span class="rounded-lg border border-dark-800 bg-dark-900/80 px-3 py-1.5 text-lime-500/70 font-semibold">+42 more</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular integration spotlights -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-2xl font-bold text-white">Popular Integrations</h2>
+        <p class="mt-2 text-dark-400">The tools teams connect with most — and what they unlock.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {spotlights.map(s => (
+          <div class="flex flex-col rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex items-center justify-between">
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-lime-500/70">{s.category}</span>
+                <h3 class="mt-0.5 text-lg font-bold text-white">{s.name}</h3>
+              </div>
+            </div>
+            <p class="flex-1 text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            <div class="mt-4 rounded-lg bg-dark-800/60 px-3 py-2 text-xs text-dark-500 leading-relaxed">{s.highlight}</div>
+            {s.href ? (
+              <a href={s.href} class="mt-4 text-xs font-semibold text-lime-500 hover:text-lime-400 transition">See {s.name} integration →</a>
+            ) : (
+              <a href={site.cta.href} class="mt-4 text-xs font-semibold text-lime-500/60 hover:text-lime-500 transition">Connect {s.name} →</a>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -76,12 +240,18 @@ const categories = [
   <!-- Integration categories -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-2xl font-bold text-white">All Integrations by Category</h2>
+        <p class="mt-2 text-dark-400">Browse all 50+ integrations organized by use case.</p>
+      </div>
       <div class="space-y-16">
         {categories.map(cat => (
           <div>
-            <div class="mb-6">
-              <h2 class="text-xl font-bold text-white">{cat.name}</h2>
-              <p class="mt-1 text-sm text-dark-400">{cat.desc}</p>
+            <div class="mb-6 flex items-center gap-3">
+              <div>
+                <h2 class="text-xl font-bold text-white">{cat.name}</h2>
+                <p class="mt-1 text-sm text-dark-400">{cat.desc}</p>
+              </div>
             </div>
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {cat.integrations.map(int => (
@@ -106,24 +276,24 @@ const categories = [
     </div>
   </section>
 
-  <!-- Custom / API section -->
+  <!-- Zapier / API section -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="grid gap-10 sm:grid-cols-2">
         <div>
           <h2 class="text-2xl font-bold text-white mb-4">Don't see your tool?</h2>
           <p class="text-dark-300 leading-relaxed mb-4">
-            LimeCall's open API lets you connect with any tool your team uses. Build custom integrations with Zapier, Make (formerly Integromat), or directly via our REST API.
+            LimeCall's open REST API and webhook support let you connect with any tool your team uses. Build custom integrations or use our Zapier / Make connectors to reach 5,000+ apps — no code required.
           </p>
-          <p class="text-dark-400 text-sm leading-relaxed">
-            Available on Pro plan and above. Our team can also help with custom integration setup.
+          <p class="text-dark-400 text-sm leading-relaxed mb-6">
+            API access available on Pro plan. Our team can also assist with custom integration setup.
           </p>
-          <a href={site.cta.href} class="mt-6 inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+          <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
         </div>
         <div>
-          <h2 class="text-2xl font-bold text-white mb-4">Zapier & Make</h2>
+          <h2 class="text-2xl font-bold text-white mb-4">Example Zapier Workflows</h2>
           <p class="text-dark-300 leading-relaxed mb-4">
-            Use LimeCall's Zapier and Make integrations to connect with 5,000+ tools — no code required. Trigger workflows from callbacks, missed calls, or new leads.
+            Trigger automations from any LimeCall event — new callback, missed call, completed call, or scheduled request.
           </p>
           <div class="space-y-2">
             {[
@@ -131,6 +301,7 @@ const categories = [
               "Missed call → Send Slack message",
               "New lead → Create Trello card",
               "Call completed → Update Airtable record",
+              "Callback request → Add to Mailchimp audience",
             ].map(zap => (
               <div class="flex items-center gap-2 text-sm text-dark-400">
                 <svg class="h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,6 +312,26 @@ const categories = [
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Integration FAQs</h2>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -157,10 +348,10 @@ const categories = [
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="Explore LimeCall" links={[
-        { href: '/how-it-works/', title: 'How It Works', desc: 'See the full LimeCall flow from widget to call.' },
+        { href: '/limecall-for-hubspot/', title: 'HubSpot Integration', desc: 'Deep HubSpot sync for sales teams.' },
         { href: '/features/', title: 'All Features', desc: 'Every feature in the LimeCall platform.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
-        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'What makes LimeCall different.' },
+        { href: '/sms-for-slack/', title: 'SMS for Slack', desc: 'Get call alerts directly in Slack.' },
       ]} />
     </div>
   </div>

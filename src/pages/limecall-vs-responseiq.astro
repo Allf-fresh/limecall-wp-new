@@ -22,7 +22,7 @@ const features = [
   { feature: "Virtual Phone Numbers (40+ countries)", limecall: true, competitor: false },
   { feature: "CRM Integrations", limecall: true, competitor: true },
   { feature: "Call Recording", limecall: true, competitor: true },
-  { feature: "Free Trial (no credit card)", limecall: true, competitor: false },
+  { feature: "Free Plan (no credit card)", limecall: true, competitor: false },
   { feature: "Shared SMS Inbox", limecall: true, competitor: false },
   { feature: "Speed-to-Lead Automation", limecall: true, competitor: false },
 ];
@@ -36,24 +36,64 @@ const reasons = [
   { title: "Speed-to-lead automation", desc: "Automate follow-up the moment a lead lands. LimeCall's speed-to-lead tools cut response time to under 28 seconds." },
 ];
 
+const pricing = [
+  {
+    tool: "LimeCall",
+    highlight: true,
+    tiers: [
+      { name: "Free", price: "$0/mo", note: "30 calls/month, no credit card" },
+      { name: "Starter", price: "$29/mo", note: "100 calls, SMS, lead distribution" },
+      { name: "Pro", price: "$99/mo", note: "500 calls, virtual numbers, API" },
+    ],
+  },
+  {
+    tool: "ResponseIQ",
+    highlight: false,
+    tiers: [
+      { name: "No free plan", price: "—", note: "Paid plan required to start" },
+      { name: "Starter", price: "~$50/mo", note: "Basic callbacks, no SMS" },
+      { name: "Business", price: "~$120/mo", note: "More calls, no virtual numbers" },
+    ],
+  },
+];
+
+const differentiators = [
+  {
+    title: "SMS & WhatsApp — ResponseIQ is phone-only",
+    desc: "ResponseIQ handles phone callbacks only. LimeCall adds SMS and WhatsApp, so you can reach leads on their preferred channel — not just the phone.",
+  },
+  {
+    title: "Lead Distribution — Absent in ResponseIQ",
+    desc: "ResponseIQ doesn't route leads to the right rep. LimeCall's lead distribution engine routes by skill, territory, availability, or round-robin — automatically.",
+  },
+  {
+    title: "Virtual Numbers in 40+ Countries",
+    desc: "ResponseIQ has no virtual number offering. LimeCall provides local numbers in 40+ countries so your callbacks look local to prospects — improving answer rates.",
+  },
+  {
+    title: "Free Plan — No Risk to Start",
+    desc: "ResponseIQ requires a paid plan to start. LimeCall's free tier gives you 30 calls/month with no credit card, so you can validate the tool before committing.",
+  },
+];
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Is LimeCall a good ResponseIQ alternative?',
+      name: 'What is ResponseIQ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall offers intelligent callback software like ResponseIQ, plus SMS, WhatsApp, virtual numbers, lead distribution, and speed-to-lead automation — all at a more competitive price.',
+        text: 'ResponseIQ is a UK-based callback software tool that connects website visitors with sales teams via instant phone callbacks. It focuses on call-back functionality but does not offer SMS, WhatsApp, virtual numbers, lead distribution, or a free plan.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Does LimeCall offer virtual phone numbers?',
+      name: 'Is LimeCall a good ResponseIQ alternative?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall provides local virtual phone numbers in 40+ countries, allowing you to build local presence globally. ResponseIQ does not offer virtual numbers.',
+        text: 'Yes. LimeCall offers intelligent callback software like ResponseIQ, plus SMS, WhatsApp, virtual numbers, lead distribution, and speed-to-lead automation — all at a more competitive price with a free plan.',
       },
     },
     {
@@ -61,7 +101,23 @@ const faqSchema = {
       name: 'How does LimeCall pricing compare to ResponseIQ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'LimeCall starts free (no credit card required) and scales from $29/month. Plans are transparent with no per-minute charges. ResponseIQ typically requires a paid plan to get started.',
+        text: 'LimeCall starts free (no credit card required) with 30 calls/month. Paid plans start from $29/month. ResponseIQ typically requires a paid plan from the start, with pricing starting around $50/month for basic usage.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall offer virtual phone numbers like ResponseIQ?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall provides local virtual phone numbers in 40+ countries, allowing you to build local presence globally. ResponseIQ does not offer virtual numbers — this is a key differentiator for teams selling internationally.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I migrate from ResponseIQ to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Migration typically takes less than a day: (1) Sign up for LimeCall free — no credit card. (2) Add the LimeCall widget script to your website (5 minutes). (3) Connect your CRM and notification tools using LimeCall\'s one-click integrations. (4) Cancel ResponseIQ once you\'re satisfied with LimeCall.',
       },
     },
   ],
@@ -74,7 +130,7 @@ const faqSchema = {
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <Breadcrumbs items={[{ name: `LimeCall vs ${competitor}`, url: seo.canonical }]} />
+      <Breadcrumbs items={[{ name: 'Compare', url: 'https://www.limecall.com/compare/' }, { name: `LimeCall vs ${competitor}`, url: seo.canonical }]} />
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
         LimeCall vs <span class="text-lime-400">{competitor}</span>
       </h1>
@@ -128,6 +184,49 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- Pricing comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Pricing Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">LimeCall starts free with no credit card. ResponseIQ requires a paid plan from day one.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricing.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/30 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-4 text-lg font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="space-y-3">
+              {p.tiers.map(t => (
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <div class="text-sm font-semibold text-white">{t.name}</div>
+                    <div class="text-xs text-dark-500">{t.note}</div>
+                  </div>
+                  <div class:list={["text-sm font-bold whitespace-nowrap", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-xs text-dark-600">Pricing approximate. Check each vendor's website for current rates.</p>
+    </div>
+  </section>
+
+  <!-- Key differentiators -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">What LimeCall Has That {competitor} Doesn't</h2>
+      <p class="mb-10 text-center text-dark-400">Four capabilities that make LimeCall the more complete platform for modern sales teams.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {differentiators.map(d => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-lime-400">{d.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Why switch -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -139,6 +238,37 @@ const faqSchema = {
             <p class="text-sm text-dark-400 leading-relaxed">{r.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration guide -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-2 text-xl font-bold text-white">Switching from {competitor} to LimeCall</h2>
+        <p class="text-dark-300 leading-relaxed mb-6">
+          ResponseIQ uses a standard JavaScript widget — the same approach as LimeCall. Switching takes minutes, not days. You can run both in parallel on staging before going live.
+        </p>
+        <div class="space-y-2 mb-6">
+          {[
+            "Sign up free — no credit card, instant access",
+            "Copy LimeCall's widget script tag to your site",
+            "Connect CRM, Slack, or other tools in one click",
+            "Enable SMS & WhatsApp follow-up for missed calls",
+            "Cancel ResponseIQ when you're ready",
+          ].map(step => (
+            <div class="flex items-center gap-2 text-sm text-dark-300">
+              <svg class="h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+              {step}
+            </div>
+          ))}
+        </div>
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free Migration →
+        </a>
       </div>
     </div>
   </section>

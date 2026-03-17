@@ -8,20 +8,32 @@ import { site, plans } from '../site.config';
 
 const faqs = [
   {
+    question: 'Is there a free plan?',
+    answer: 'Yes. LimeCall\'s Basic plan is completely free — 30 calls/month, no credit card required, no time limit. You can upgrade to a paid plan whenever you\'re ready.',
+  },
+  {
     question: 'Can I cancel anytime?',
     answer: 'Yes. Cancel anytime from your account dashboard — no phone call, no penalty, no hoops to jump through.',
   },
   {
-    question: 'Is there a free trial?',
-    answer: 'Every plan comes with a 30-day money-back guarantee. Try risk-free. If you\'re not satisfied, contact support for a full refund.',
+    question: 'What counts as a call?',
+    answer: 'A call is counted each time LimeCall connects a website visitor with one of your team members — whether that\'s an instant callback, a scheduled callback, or a click-to-call. Missed calls and unanswered requests do not count against your monthly limit.',
+  },
+  {
+    question: 'Do you charge per seat or per call?',
+    answer: 'LimeCall charges per call volume, not per seat. You can add unlimited team members to your account. You only pay based on how many calls you handle each month, making costs predictable regardless of team size.',
+  },
+  {
+    question: 'Is there a setup fee?',
+    answer: 'No setup fees, ever. You can get started for free in under 5 minutes — just add a script tag to your website. No developer required, no onboarding fee.',
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept all major credit cards (Visa, Mastercard, Amex) and PayPal.',
+    answer: 'We accept all major credit cards (Visa, Mastercard, Amex) and PayPal. Annual plans can also be paid by invoice — contact us for details.',
   },
   {
-    question: 'What is the difference between the plans?',
-    answer: `The ${plans[0].name} plan covers the essentials. ${plans[1]?.name || 'The Pro plan'} adds advanced features and priority support.`,
+    question: 'Is there a money-back guarantee?',
+    answer: 'Yes. Every paid plan comes with a 30-day money-back guarantee. If you\'re not satisfied for any reason, contact our support team within 30 days of your first payment for a full refund.',
   },
 ];
 
@@ -261,6 +273,40 @@ const productSchema = {
             </details>
           ))}
         </div>
+      </div>
+
+      <!-- Money-back guarantee trust signal -->
+      <div class="mx-auto mt-12 max-w-3xl rounded-xl border border-lime-500/20 bg-lime-500/5 p-6 text-center">
+        <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-lime-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span class="font-semibold text-white">30-day money-back guarantee</span>
+          </div>
+          <span class="hidden h-4 w-px bg-dark-700 sm:block"></span>
+          <div class="flex items-center gap-2 text-dark-400">
+            <svg class="h-4 w-4 text-lime-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            No credit card for free plan
+          </div>
+          <span class="hidden h-4 w-px bg-dark-700 sm:block"></span>
+          <div class="flex items-center gap-2 text-dark-400">
+            <svg class="h-4 w-4 text-lime-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            No setup fees
+          </div>
+          <span class="hidden h-4 w-px bg-dark-700 sm:block"></span>
+          <div class="flex items-center gap-2 text-dark-400">
+            <svg class="h-4 w-4 text-lime-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            Cancel anytime
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-dark-500">If you're not completely satisfied within 30 days of your first payment, we'll refund every cent. No questions asked.</p>
       </div>
 
       <!-- Cross-links -->

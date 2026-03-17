@@ -2,27 +2,95 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Inbound Call Center Software | LimeCall`,
-  description: `LimeCall's inbound call center software helps you manage high call volumes, route calls intelligently, record conversations, and support customers from any device or location.`,
+  title: `Inbound Call Center Software — Route & Track Calls | LimeCall`,
+  description: `LimeCall inbound call center software routes every call intelligently, records conversations, and gives real-time dashboards. 28s avg answer, 95% routing accuracy.`,
   canonical: `https://www.limecall.com/inbound-call-center-software/`,
 };
 
-const features = [
-  { title: "Intelligent Call Routing", desc: "Route inbound calls to the right agent based on IVR selection, caller history, skills, or availability. Minimize transfers." },
-  { title: "Call Queuing", desc: "Handle high call volumes with smart queuing. Give callers their estimated wait time and offer callback options instead of holding." },
-  { title: "Mobile App Support", desc: "Agents can take inbound calls from the LimeCall mobile app on any smartphone — no desk phone required." },
-  { title: "Call Recording & Monitoring", desc: "Record all inbound calls. Supervisors can listen live, whisper to agents, or barge into calls for quality assurance." },
-  { title: "Real-Time Dashboard", desc: "Monitor live call volumes, agent status, queue lengths, and wait times in a real-time dashboard." },
-  { title: "After-Call Work", desc: "Give agents time for after-call work — logging notes, updating CRM — before routing the next call." },
-  { title: "IVR / Auto-Attendant", desc: "Set up multi-level IVR menus to qualify and route callers automatically — 24/7, without a human receptionist." },
-  { title: "CRM Integration", desc: "Every inbound call auto-creates or updates a CRM record with caller details, call recording, and agent notes." },
+const stats = [
+  { value: "28s", label: "Avg answer time" },
+  { value: "95%", label: "Call routing accuracy" },
+  { value: "100%", label: "Call recording coverage" },
+  { value: "40%", label: "Lower call abandonment" },
 ];
+
+const features = [
+  { title: "Smart Call Routing", desc: "Route inbound calls to the right agent based on IVR selection, caller history, skills, or availability. Minimize transfers and frustration." },
+  { title: "Queue Management", desc: "Handle high call volumes with smart queuing. Give callers estimated wait times and offer callback options instead of holding." },
+  { title: "Call Recording", desc: "Record all inbound calls automatically. Supervisors can listen live, whisper to agents, or barge in for quality assurance." },
+  { title: "Real-Time Dashboards", desc: "Monitor live call volumes, agent status, queue lengths, and wait times in a real-time dashboard from any device." },
+  { title: "Agent Availability", desc: "Agents set status — available, busy, after-call work — so calls only route to reps who can answer immediately." },
+  { title: "After-Hours Handling", desc: "Set up IVR menus, voicemail, or callback scheduling for calls that arrive outside business hours. Never miss a lead." },
+];
+
+const useCases = [
+  { title: "Customer Support Teams", desc: "Manage high inbound call volumes with intelligent queuing, routing, and real-time monitoring. Reduce wait times and boost CSAT." },
+  { title: "Sales Inbound Lines", desc: "Route inbound sales calls to the right product specialist instantly. Record calls for training and CRM sync for follow-up." },
+  { title: "Remote Call Centers", desc: "Run a distributed call center with agents anywhere in the world. No hardware — just a browser or mobile app." },
+  { title: "SMB Phone Operations", desc: "Give small businesses enterprise-grade call center capabilities without enterprise-level cost or complexity." },
+];
+
+const steps = [
+  { n: "1", title: "Configure your routing rules", desc: "Set up IVR menus, define team queues, and create routing logic based on skills, availability, or caller input." },
+  { n: "2", title: "Caller connects instantly", desc: "Inbound calls hit your IVR, get routed to the right queue, and connect to the best available agent — automatically." },
+  { n: "3", title: "Data captured and synced", desc: "Call recordings, outcomes, and agent notes sync to your CRM in real time. Every call is documented and attributed." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is inbound call center software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Inbound call center software is a cloud-based platform that manages incoming phone calls for businesses. It handles call routing, queuing, recording, and reporting — enabling teams to answer calls efficiently, reduce wait times, and deliver consistent customer experiences. LimeCall\'s inbound call center software also integrates with CRMs and provides real-time dashboards for supervisors.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does intelligent call routing work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Intelligent call routing uses rules you configure to direct each inbound call to the most appropriate agent or team. Rules can be based on IVR selections, caller location, time of day, agent skills, language, or caller history. LimeCall evaluates all routing criteria in real time so callers reach the right person on the first try, reducing transfers and improving satisfaction.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can agents work remotely with LimeCall inbound call center software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is fully cloud-based, so agents can take inbound calls from any browser or the LimeCall mobile app — from home, in the office, or anywhere in the world. There is no hardware to install, no VPN required, and onboarding a new remote agent takes minutes rather than days.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall record all inbound calls?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can record 100% of inbound calls automatically. Recordings are stored securely in the cloud, accessible from your dashboard, and can be automatically attached to CRM records. Supervisors can also listen live, whisper coaching to agents, or barge into calls for quality assurance — all without disrupting the caller experience.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to calls that arrive after business hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall handles after-hours calls with configurable rules. You can play a custom message, route to voicemail, offer a callback scheduling option, or forward to an on-call number. Callers can book a callback slot for the next business day, and your team is notified with the details automatically. No call or lead is ever completely lost.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -34,7 +102,7 @@ const features = [
         Inbound Call Center Software <span class="text-lime-400">Built for Modern Teams</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Handle high inbound call volumes with confidence. LimeCall gives your team intelligent routing, real-time monitoring, mobile support, and full analytics — in one cloud platform.
+        Handle high inbound call volumes with confidence. LimeCall gives your team intelligent routing, real-time monitoring, call recording, and full analytics — in one cloud platform.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
@@ -47,15 +115,60 @@ const features = [
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything in your inbound call center</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {features.map(f => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
             <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
           </div>
         ))}
       </div>
@@ -70,6 +183,24 @@ const features = [
         <p>Traditional call centers require expensive hardware, physical locations, and complex IT infrastructure. Cloud-based inbound call center software eliminates all of that.</p>
         <p>With LimeCall, your agents can take calls from anywhere — home, office, or on the go. New agents are onboarded in minutes, not days. Scaling up or down is instant.</p>
         <p>You pay only for what you use. No CapEx, no maintenance, no hardware failures. Just a modern, reliable inbound call platform that grows with your team.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>

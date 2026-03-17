@@ -1,15 +1,209 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Affiliates - LimeCall`,
-  description: ``,
+  title: `LimeCall Affiliate Program — Earn 30% Recurring Commission | LimeCall`,
+  description: `Join the LimeCall affiliate program and earn 30% recurring commission on every referral. 90-day cookie, real-time dashboard, dedicated affiliate manager.`,
   canonical: `https://www.limecall.com/affiliates/`,
 };
+
+const stats = [
+  { value: '30%', label: 'Recurring commission' },
+  { value: '90 days', label: 'Cookie duration' },
+  { value: '$150', label: 'Avg. monthly payout' },
+  { value: '500+', label: 'Active affiliates' },
+];
+
+const steps = [
+  { step: '01', title: 'Sign Up Free', desc: 'Apply for the LimeCall affiliate program in minutes. Once approved, you get access to your unique referral link, marketing materials, and real-time dashboard.' },
+  { step: '02', title: 'Share Your Link', desc: 'Promote LimeCall through your blog, newsletter, YouTube channel, social media, or directly to your audience. We provide banners, copy templates, and landing pages to help you convert.' },
+  { step: '03', title: 'Earn Commission', desc: 'Every time someone signs up for a paid LimeCall plan using your link, you earn 30% recurring commission — every month they stay a customer. No cap on earnings.' },
+];
+
+const perks = [
+  { icon: '💰', title: 'Recurring Income', desc: 'Earn 30% every month for as long as your referrals remain customers. Build a passive income stream that grows with your audience.' },
+  { icon: '🎨', title: 'Marketing Materials', desc: 'Access a full library of banners, email templates, social posts, and landing pages — all pre-built and ready to use.' },
+  { icon: '👤', title: 'Dedicated Manager', desc: 'Every affiliate gets a dedicated partner manager available to help with strategy, content ideas, and maximising your conversion rate.' },
+  { icon: '📊', title: 'Real-Time Dashboard', desc: 'Track clicks, sign-ups, and commissions in real time. See exactly which content drives conversions and where your payouts stand.' },
+  { icon: '⏱️', title: '90-Day Cookie', desc: 'Your cookie stays active for 90 days. If a referred visitor signs up anytime within 3 months of clicking your link, you earn the commission.' },
+  { icon: '💳', title: 'Monthly Payouts', desc: 'Get paid monthly via PayPal or bank transfer. Minimum payout threshold is just $50 — no waiting months to see your earnings.' },
+];
+
+const audiences = [
+  { title: 'Bloggers & Content Creators', desc: 'If you write about sales, marketing, or SaaS tools, your audience is already interested in LimeCall. A single well-placed review can generate recurring income for years.' },
+  { title: 'Marketing & Sales Agencies', desc: 'Recommend LimeCall to your clients and earn commission on every plan they sign up for. Your clients get a better tool, you get recurring revenue.' },
+  { title: 'Business Consultants', desc: 'Help your clients improve lead response time and earn while doing it. LimeCall is a natural fit for any client with a sales-driven website.' },
+  { title: 'SaaS Reviewers & Comparisons', desc: 'Review sites and comparison pages convert extremely well. LimeCall\'s free trial makes it easy for your audience to try before buying.' },
+];
+
+const faqs = [
+  {
+    q: 'What is the commission rate for LimeCall affiliates?',
+    a: 'LimeCall affiliates earn 30% recurring commission on every paid plan their referrals subscribe to. This applies for the lifetime of the customer, not just the first payment — so your earnings grow as your referrals stay.',
+  },
+  {
+    q: 'How long does the affiliate cookie last?',
+    a: 'The LimeCall affiliate cookie is active for 90 days. If someone clicks your referral link and signs up for a paid plan anytime within 90 days, the commission is attributed to you.',
+  },
+  {
+    q: 'How and when do affiliates get paid?',
+    a: 'Payouts are processed monthly via PayPal or bank transfer. The minimum payout threshold is $50. Commissions earned in a given month are paid out in the following month after a short verification period.',
+  },
+  {
+    q: 'Is there a minimum payout threshold?',
+    a: 'Yes, the minimum payout is $50. Once your account balance reaches $50 or more, it will be included in the next monthly payout cycle. Most active affiliates reach this within their first month.',
+  },
+  {
+    q: 'How do I join the LimeCall affiliate program?',
+    a: 'Click the "Become an Affiliate" button on this page, fill in a short application form, and our team will review it within 1–2 business days. Once approved, you\'ll receive your unique link and full access to the affiliate dashboard.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Affiliate Program', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Affiliate Program
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Earn 30% recurring commission<br class="hidden sm:block" />
+        <span class="text-lime-400">every single month</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Join 500+ affiliates earning passive income by recommending LimeCall — the callback automation platform trusted by 10,000+ sales teams worldwide.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Become an Affiliate →
+        </a>
+        <a href="/partnership/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Partner Program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">How it works</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">Three simple steps from sign-up to your first commission payment.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="mb-3 text-4xl font-extrabold text-lime-500/30">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Perks grid -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Everything you need to succeed</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {perks.map(p => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{p.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{p.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Who thrives as a LimeCall affiliate?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {audiences.map(a => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{a.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to start earning?</h2>
+      <p class="mt-4 text-dark-400">Free to join · 30% recurring · Monthly payouts</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Become an Affiliate →
+        </a>
+        <a href="/referral-program/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          See Referral Program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/referral-program/', title: 'Referral Program', desc: 'Refer a friend and earn $150 per successful sign-up.' },
+        { href: '/partnership/', title: 'Partner Program', desc: 'Agency and technology partner opportunities with LimeCall.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See the plans your referrals will be signing up for.' },
+        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'Learn what makes LimeCall worth recommending to your audience.' },
+      ]} />
+    </div>
   </div>
 </Base>

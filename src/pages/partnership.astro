@@ -1,15 +1,233 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Partnership - LimeCall`,
-  description: ``,
+  title: `Partner With LimeCall — Agency & Technology Partner Program`,
+  description: `Join the LimeCall partner program. Agency partners, technology integrations, and resellers earn 30% revenue share with co-marketing support and a dedicated partner manager.`,
   canonical: `https://www.limecall.com/partnership/`,
 };
+
+const stats = [
+  { value: '200+', label: 'Active partners' },
+  { value: '40+', label: 'Country reach' },
+  { value: '30%', label: 'Revenue share' },
+  { value: '1:1', label: 'Dedicated partner manager' },
+];
+
+const partnerTypes = [
+  {
+    type: 'Agency Partners',
+    icon: '🏢',
+    desc: 'Marketing and sales agencies that recommend LimeCall to clients, implement the platform, and earn recurring revenue share on every account they bring in. Ideal for agencies focused on lead generation, conversion rate optimisation, or sales enablement.',
+    benefits: ['Revenue share on all referred clients', 'White-label reporting options', 'Co-branded proposal templates', 'Priority technical support'],
+  },
+  {
+    type: 'Technology Partners',
+    icon: '🔌',
+    desc: 'SaaS platforms, CRMs, marketing tools, and analytics providers that integrate with LimeCall to offer a more complete solution to shared customers. Listed in the LimeCall integration directory with joint go-to-market support.',
+    benefits: ['Official integration listing', 'Joint press releases', 'Co-marketing campaigns', 'Shared product roadmap access'],
+  },
+  {
+    type: 'Reseller Partners',
+    icon: '🤝',
+    desc: 'Regional resellers and value-added resellers (VARs) who want to include LimeCall in their product portfolio. Full white-glove onboarding, training, and account management support to help you grow your LimeCall customer base.',
+    benefits: ['Volume-based commission tiers', 'Reseller training program', 'Dedicated account management', 'Custom pricing for your clients'],
+  },
+];
+
+const partnerBenefits = [
+  { icon: '💰', title: 'Revenue Sharing', desc: 'Earn 30% recurring revenue share on every LimeCall customer you refer or manage. Commission applies for the lifetime of the customer.' },
+  { icon: '📣', title: 'Co-Marketing', desc: 'Get featured in LimeCall marketing campaigns, case studies, and the partner directory. Joint webinars, blog posts, and social promotion available.' },
+  { icon: '🎓', title: 'Training & Certification', desc: 'Access the LimeCall Partner Academy with product training, sales enablement content, and a partner certification you can display to clients.' },
+  { icon: '🛡️', title: 'Priority Support', desc: 'Partner accounts get dedicated technical support and access to a partner Slack channel. Escalations handled within 4 hours.' },
+  { icon: '📋', title: 'Joint Case Studies', desc: 'Co-author case studies with LimeCall that showcase your work. Published on both sites and distributed to our combined audiences.' },
+  { icon: '📊', title: 'Partner Dashboard', desc: 'Real-time visibility into your referrals, revenue share, and client health scores. Know exactly what is performing and where to focus.' },
+];
+
+const applySteps = [
+  { step: '01', title: 'Apply Online', desc: 'Fill in the short partner application form — takes about 5 minutes. Tell us about your business, your clients, and what type of partnership interests you.' },
+  { step: '02', title: 'Partner Review', desc: 'Our partnerships team reviews your application within 3 business days. We look for alignment with our target market and a genuine interest in helping clients succeed.' },
+  { step: '03', title: 'Onboarding & Launch', desc: 'Once approved, you get access to the Partner Academy, your unique partner link, and a kickoff call with your dedicated partner manager to plan your first 90 days.' },
+];
+
+const faqs = [
+  {
+    q: 'What are the requirements to become a LimeCall partner?',
+    a: 'There are no minimum revenue or client count requirements to apply. We look for partners who serve businesses with active sales or marketing teams, and who are genuinely committed to helping clients improve their lead conversion. Agencies, consultants, SaaS companies, and resellers are all welcome.',
+  },
+  {
+    q: 'How does the revenue share work?',
+    a: 'Partners earn 30% recurring commission on the monthly plan value of every customer they refer or manage. This applies for as long as the customer remains on a paid plan. Commissions are tracked in real time in the partner dashboard and paid monthly.',
+  },
+  {
+    q: 'What support do partners receive?',
+    a: 'All partners get a dedicated partner manager, access to the Partner Academy training content, a partner Slack channel, and priority technical support. Agency and reseller partners also get co-marketing support and access to proposal templates.',
+  },
+  {
+    q: 'Can partners resell LimeCall under their own brand?',
+    a: 'White-label options are available for reseller partners who meet volume thresholds. Contact the partnerships team to discuss white-label pricing and branding requirements for your specific use case.',
+  },
+  {
+    q: 'How do I track my referrals and commission?',
+    a: 'Partners get access to a real-time dashboard showing all referred accounts, their subscription status, monthly recurring revenue attributed to your partnership, and commission earned to date. Payouts are processed monthly via PayPal or bank transfer.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Partner Program', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Partnership Program
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Grow together with<br class="hidden sm:block" />
+        <span class="text-lime-400">LimeCall</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Join 200+ agency and technology partners earning recurring revenue while helping their clients convert more leads into calls. 30% revenue share, dedicated manager, co-marketing included.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Apply to Partner →
+        </a>
+        <a href="/affiliates/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Affiliate Program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner types -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">Find the right partnership track</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">Three distinct tracks for different types of partners — each with its own benefits and structure.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {partnerTypes.map(p => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex flex-col">
+            <div class="mb-3 text-3xl">{p.icon}</div>
+            <h3 class="mb-3 font-semibold text-white text-lg">{p.type}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed mb-5">{p.desc}</p>
+            <ul class="mt-auto space-y-2">
+              {p.benefits.map(b => (
+                <li class="flex items-start gap-2 text-xs text-dark-300">
+                  <span class="text-lime-400 font-bold shrink-0">✓</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner benefits -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Partner benefits</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {partnerBenefits.map(b => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{b.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How to apply -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">How to become a partner</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">From application to first commission in as little as one week.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {applySteps.map(s => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="mb-3 text-4xl font-extrabold text-lime-500/30">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to grow together?</h2>
+      <p class="mt-4 text-dark-400">Free to join · 30% revenue share · Dedicated partner manager</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Apply to Partner →
+        </a>
+        <a href="/affiliates/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Affiliate Program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/affiliates/', title: 'Affiliate Program', desc: 'Earn 30% recurring commission as a LimeCall affiliate.' },
+        { href: '/referral-program/', title: 'Referral Program', desc: 'Refer a friend and earn $150 per successful sign-up.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'Browse LimeCall\'s native integrations and API.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See plans and pricing for your clients.' },
+      ]} />
+    </div>
   </div>
 </Base>

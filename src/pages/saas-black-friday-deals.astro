@@ -1,15 +1,228 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Top Blackfriday SaaS Deals of 2023 | By LimeCall`,
-  description: `Black Friday is here! Use discounts to boost your business. Check the list of 55+ best SaaS deals for 2023!`,
+  title: `Best SaaS Black Friday Deals 2026 — 55+ Discounts | LimeCall`,
+  description: `The best SaaS Black Friday deals of 2026 — curated discounts on CRM, marketing, sales, analytics, and productivity tools. Updated every year.`,
   canonical: `https://www.limecall.com/saas-black-friday-deals/`,
 };
+
+const deals = [
+  {
+    tool: 'LimeCall',
+    category: 'Sales / Callback',
+    deal: '50% off first 3 months',
+    desc: 'Callback automation platform. Connect leads with your sales team in under 28 seconds.',
+    highlight: true,
+  },
+  {
+    tool: 'HubSpot',
+    category: 'CRM',
+    deal: '30% off annual plans',
+    desc: 'All-in-one CRM, marketing, sales, and service platform for growing teams.',
+    highlight: false,
+  },
+  {
+    tool: 'Pipedrive',
+    category: 'CRM',
+    deal: '40% off first year',
+    desc: 'Sales-focused CRM with pipeline management and activity tracking.',
+    highlight: false,
+  },
+  {
+    tool: 'Zoho CRM',
+    category: 'CRM',
+    deal: '35% off annual plan',
+    desc: 'Affordable CRM with deep customisation, automation, and AI-assisted selling.',
+    highlight: false,
+  },
+  {
+    tool: 'ActiveCampaign',
+    category: 'Marketing',
+    deal: '40% off new annual subscriptions',
+    desc: 'Email marketing, automation, and CRM in one. Strong for B2B lead nurturing.',
+    highlight: false,
+  },
+  {
+    tool: 'Semrush',
+    category: 'Analytics / SEO',
+    deal: '25% off annual plans',
+    desc: 'SEO, content, PPC, and competitive research platform.',
+    highlight: false,
+  },
+  {
+    tool: 'Ahrefs',
+    category: 'Analytics / SEO',
+    deal: '2 months free on annual',
+    desc: 'SEO toolset for backlink analysis, keyword research, and site audits.',
+    highlight: false,
+  },
+  {
+    tool: 'Notion',
+    category: 'Productivity',
+    deal: '20% off Plus annual plan',
+    desc: 'All-in-one workspace for notes, docs, project management, and wikis.',
+    highlight: false,
+  },
+  {
+    tool: 'Loom',
+    category: 'Communication',
+    deal: '30% off Business plan',
+    desc: 'Async video messaging for sales, support, and team communication.',
+    highlight: false,
+  },
+  {
+    tool: 'Intercom',
+    category: 'Communication',
+    deal: '25% off new annual plans',
+    desc: 'Customer messaging and support platform with AI-powered help desk.',
+    highlight: false,
+  },
+  {
+    tool: 'Hotjar',
+    category: 'Analytics',
+    deal: '35% off annual plans',
+    desc: 'Heatmaps, session recordings, and user feedback tools for website optimisation.',
+    highlight: false,
+  },
+  {
+    tool: 'Typeform',
+    category: 'Marketing',
+    deal: '30% off annual subscriptions',
+    desc: 'Conversational forms, surveys, and quizzes that improve completion rates.',
+    highlight: false,
+  },
+  {
+    tool: 'Monday.com',
+    category: 'Productivity',
+    deal: '40% off annual Pro plan',
+    desc: 'Work OS for project management, CRM, and team collaboration.',
+    highlight: false,
+  },
+  {
+    tool: 'Zapier',
+    category: 'Productivity',
+    deal: '25% off annual plans',
+    desc: 'Automation platform connecting 6,000+ apps without writing code.',
+    highlight: false,
+  },
+  {
+    tool: 'Slack',
+    category: 'Communication',
+    deal: '30% off Pro annual plan',
+    desc: 'Team messaging and collaboration platform with deep app integrations.',
+    highlight: false,
+  },
+];
+
+const categories = ['All', ...new Set(deals.map(d => d.category))];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'SaaS Black Friday Deals 2026', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Updated for 2026
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Best SaaS Black Friday Deals<br class="hidden sm:block" />
+        <span class="text-lime-400">2026</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        The biggest SaaS discounts of the year — curated across CRM, marketing, sales, analytics, productivity, and communication. Updated every year. No filler.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400 font-bold">15</span> deals listed</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400 font-bold">7</span> categories</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400 font-bold">Updated</span> for 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notice -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-5">
+    <div class="mx-auto max-w-3xl px-4 text-center text-xs text-dark-500">
+      Deals listed are illustrative and sourced from publicly available Black Friday promotions. Exact terms, availability, and eligibility may vary. Verify current pricing on each vendor's site before purchase.
+    </div>
+  </section>
+
+  <!-- Deals grid -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-2xl font-bold text-white sm:text-3xl">All Black Friday deals</h2>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {deals.map(d => (
+          <div class={`rounded-2xl border p-6 flex flex-col ${d.highlight ? 'border-lime-500/40 bg-lime-500/5' : 'border-dark-800 bg-dark-900/60'}`}>
+            <div class="mb-3 flex items-center justify-between">
+              <span class="rounded-full border border-dark-700 bg-dark-800 px-2.5 py-0.5 text-xs text-dark-400">{d.category}</span>
+              {d.highlight && <span class="rounded-full bg-lime-500/20 px-2.5 py-0.5 text-xs font-semibold text-lime-400">Featured</span>}
+            </div>
+            <h3 class={`mb-1 text-lg font-bold ${d.highlight ? 'text-lime-400' : 'text-white'}`}>{d.tool}</h3>
+            <div class="mb-3 text-sm font-semibold text-dark-300">{d.deal}</div>
+            <p class="flex-1 text-sm text-dark-400 leading-relaxed">{d.desc}</p>
+            <div class="mt-5">
+              <a href={site.cta.href} class={`inline-block rounded-lg px-4 py-2 text-sm font-semibold transition ${d.highlight ? 'bg-lime-500 text-dark-950 hover:bg-lime-400' : 'border border-dark-700 text-dark-300 hover:border-lime-500/30 hover:text-white'}`}>
+                {d.highlight ? 'Claim Deal →' : 'View Deal →'}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-xl font-bold text-white">How to get the most from SaaS Black Friday</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <h3 class="font-semibold text-white mb-1">Upgrade annual plans on existing tools</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Black Friday is the best time to switch from monthly to annual on tools you already use. A 30–40% discount on a $100/month tool saves $360–480 per year.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <h3 class="font-semibold text-white mb-1">Check if lifetime deals are available</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Some SaaS companies offer lifetime deals through AppSumo or their own sites during Black Friday. These can be exceptional value for smaller teams with stable needs.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <h3 class="font-semibold text-white mb-1">Consolidate your stack before purchasing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Before adding new tools, audit what you already pay for. Black Friday deals often encourage impulse purchases on tools that duplicate existing functionality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Don't miss the LimeCall deal</h2>
+      <p class="mt-4 text-dark-400">50% off your first 3 months — claim it before Black Friday ends.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Claim 50% Off →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More resources" links={[
+        { href: '/free-tools/', title: 'Free Sales Tools', desc: 'Phone validator, ROI calculator, and more — no signup needed.' },
+        { href: '/best-saas-podcasts/', title: 'Best SaaS Podcasts 2026', desc: '15 podcasts worth following for founders and sales leaders.' },
+        { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Transparent plans for teams of every size.' },
+        { href: '/affiliates/', title: 'Affiliate Program', desc: 'Earn 30% recurring commission promoting LimeCall.' },
+      ]} />
+    </div>
   </div>
 </Base>

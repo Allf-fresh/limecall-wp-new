@@ -1,15 +1,206 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Referral program - LimeCall`,
-  description: `If you know a friend or a business contact that could benefit from LimeCall, let us know. If we onboard them, you get a reward worth a whopping $150! More referrals equal more closures and hence more rewards for you.`,
+  title: `LimeCall Referral Program — Earn $150 Per Referral`,
+  description: `Refer a friend to LimeCall and earn $150 for every successful sign-up. No limit on earnings, instant credit, 500+ happy referrers.`,
   canonical: `https://www.limecall.com/referral-program/`,
 };
+
+const stats = [
+  { value: '$150', label: 'Per successful referral' },
+  { value: 'No limit', label: 'On total earnings' },
+  { value: 'Instant', label: 'Credit on sign-up' },
+  { value: '500+', label: 'Happy referrers' },
+];
+
+const steps = [
+  {
+    step: '01',
+    title: 'Share Your Unique Link',
+    desc: 'Sign in to your LimeCall account and copy your unique referral link from the dashboard. Share it with colleagues, clients, connections, or anyone who could benefit from faster lead response.',
+  },
+  {
+    step: '02',
+    title: 'They Sign Up',
+    desc: 'When your referral clicks your link and signs up for a paid LimeCall plan, the referral is automatically tracked and attributed to you. No manual steps required.',
+  },
+  {
+    step: '03',
+    title: 'You Get $150',
+    desc: 'Once your referral\'s payment is confirmed, $150 is credited to your account. Withdraw via PayPal or bank transfer, or apply it as credit toward your own LimeCall subscription.',
+  },
+];
+
+const earningsTable = [
+  { referrals: 1, earnings: '$150' },
+  { referrals: 3, earnings: '$450' },
+  { referrals: 5, earnings: '$750' },
+  { referrals: 10, earnings: '$1,500' },
+  { referrals: 20, earnings: '$3,000' },
+  { referrals: 50, earnings: '$7,500' },
+];
+
+const faqs = [
+  {
+    q: 'Who is eligible to participate in the LimeCall referral program?',
+    a: 'Any existing LimeCall customer on any paid plan is eligible to participate. Free plan users can also refer — but the $150 reward only pays out when the referred person signs up for a paid plan. There is no limit on how many referrals you can make.',
+  },
+  {
+    q: 'When do I get paid for a referral?',
+    a: 'Payment is processed after the referred customer\'s first successful monthly payment clears, typically within 7 business days of their payment date. You will receive an email notification when your reward is ready to claim.',
+  },
+  {
+    q: 'Can I refer myself or create a new account to earn the reward?',
+    a: 'No. Self-referrals, duplicate accounts, and referrals to accounts you already control are not eligible. Our system automatically detects and excludes these cases. The program is designed for genuine new customer referrals.',
+  },
+  {
+    q: 'How do I track my referrals?',
+    a: 'All referral activity is visible in your LimeCall dashboard under the Referrals section. You can see how many people have clicked your link, how many have signed up, and the status of each pending or confirmed reward.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Referral Program', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Referral Program
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Refer a friend.<br class="hidden sm:block" />
+        <span class="text-lime-400">Earn $150.</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Know someone who could benefit from faster lead response? Share your unique LimeCall referral link and earn $150 for every person who signs up — with no cap on how much you can earn.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Get My Referral Link →
+        </a>
+        <a href="/affiliates/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          View Affiliate Program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">How it works</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">Three steps from your first share to $150 in your account.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map(s => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="mb-3 text-4xl font-extrabold text-lime-500/30">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Earnings table -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">What you can earn</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-xl mx-auto">The more you refer, the more you earn. No cap, no tiers — just $150 per confirmed referral.</p>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-widest text-dark-500">Referrals</th>
+              <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-widest text-dark-500">Your Earnings</th>
+            </tr>
+          </thead>
+          <tbody>
+            {earningsTable.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i === earningsTable.length - 1 ? 'border-0' : ''}`}>
+                <td class="px-6 py-4 text-dark-300">{row.referrals} {row.referrals === 1 ? 'referral' : 'referrals'}</td>
+                <td class="px-6 py-4 text-right font-bold text-lime-400">{row.earnings}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-500">Payouts processed monthly via PayPal or bank transfer. $50 minimum balance to withdraw.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Start earning today</h2>
+      <p class="mt-4 text-dark-400">$150 per referral · No cap on earnings · Instant credit</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Get My Referral Link →
+        </a>
+        <a href="/affiliates/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          See Affiliate Program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/affiliates/', title: 'Affiliate Program', desc: 'Earn 30% recurring commission — ideal for content creators and agencies.' },
+        { href: '/partnership/', title: 'Partner Program', desc: 'Agency and technology partner opportunities with revenue sharing.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See the plans your referrals will be joining.' },
+        { href: '/why-limecall/', title: 'Why LimeCall', desc: 'The case for recommending LimeCall to your network.' },
+      ]} />
+    </div>
   </div>
 </Base>

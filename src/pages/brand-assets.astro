@@ -1,15 +1,235 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Brand assets - LimeCall`,
-  description: `All the assets you need to share Limecall with your audience. Download a folder containing all variations of the Limecall logo; images are available in PNG format.`,
+  title: `LimeCall Brand Assets — Logos, Colors & Usage Guidelines`,
+  description: `Download official LimeCall logos, brand colors, typography guidelines, and usage rules for press, partners, and integrations.`,
   canonical: `https://www.limecall.com/brand-assets/`,
 };
+
+const colors = [
+  { name: 'Lime Green', hex: '#84CC16', role: 'Primary accent — CTAs, highlights, links', bg: 'bg-lime-500', border: false },
+  { name: 'Dark BG', hex: '#0A0F0D', role: 'Page background — primary dark surface', bg: 'bg-dark-950', border: true },
+  { name: 'White', hex: '#FFFFFF', role: 'Primary text on dark backgrounds', bg: 'bg-white', border: true },
+  { name: 'Dark Gray', hex: '#374151', role: 'Secondary text and UI borders', bg: 'bg-dark-700', border: false },
+];
+
+const logos = [
+  { name: 'Full Logo — Dark BG', desc: 'Primary logo variant for use on dark or black backgrounds. Recommended for all digital use.', format: 'SVG · PNG · WebP' },
+  { name: 'Full Logo — Light BG', desc: 'Inverted logo variant for use on white or light-colored backgrounds and print materials.', format: 'SVG · PNG · WebP' },
+  { name: 'Icon Only — Dark BG', desc: 'Standalone icon mark for favicons, app icons, small placements, and social media profile images.', format: 'SVG · PNG · ICO' },
+  { name: 'Icon Only — Light BG', desc: 'Standalone icon mark on light backgrounds for integration badges and partner co-branding.', format: 'SVG · PNG · ICO' },
+];
+
+const dos = [
+  'Use the official logo files provided in this kit',
+  'Maintain clear space around the logo equal to the height of the "L" in LimeCall',
+  'Use the full-color logo whenever possible',
+  'Use the approved color palette for all co-branded materials',
+  'Refer to the LimeCall brand name as one word: "LimeCall"',
+];
+
+const donts = [
+  'Do not stretch, skew, or distort the logo in any way',
+  'Do not change the logo colors or apply gradients',
+  'Do not place the logo on backgrounds that reduce legibility',
+  'Do not add drop shadows, outlines, or effects to the logo',
+  'Do not use the brand name as a verb (e.g., "LimeCall it")',
+];
+
+const faqs = [
+  {
+    q: 'Can I use the LimeCall logo in my integration or partnership listing?',
+    a: 'Yes. Partners and integration developers may use the LimeCall logo in integration directories, co-marketing materials, and partner pages — provided they follow the usage guidelines on this page and do not modify the logo.',
+  },
+  {
+    q: 'Can I modify the LimeCall logo or brand colors?',
+    a: 'No. The LimeCall logo and brand assets must be used as provided. Do not alter colors, proportions, typography, or add effects. If you need a specific variation not covered here, contact our team at press@limecall.com.',
+  },
+  {
+    q: 'I\'m writing a press article about LimeCall. Where do I find approved assets?',
+    a: 'All assets on this page are approved for editorial and press use. Download the full press kit, which includes logos in all formats, founder headshots, and product screenshots. For additional press inquiries, email press@limecall.com.',
+  },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Brand Assets', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Brand Guidelines
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall Brand Assets &<br class="hidden sm:block" />
+        <span class="text-lime-400">Usage Guidelines</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Official logos, color palette, typography, and usage rules for press, partners, affiliates, and integrations. Please read the guidelines before using any assets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Brand Colors -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">Brand Colors</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        The LimeCall palette is built for high contrast and accessibility on dark interfaces. Always use colors as specified.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {colors.map(c => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 overflow-hidden">
+            <div class={`h-24 w-full ${c.bg} ${c.border ? 'border border-dark-700' : ''}`}></div>
+            <div class="p-5">
+              <div class="font-semibold text-white">{c.name}</div>
+              <div class="mt-1 font-mono text-sm text-lime-400">{c.hex}</div>
+              <div class="mt-2 text-xs text-dark-400 leading-relaxed">{c.role}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo Variants -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">Logo Variants</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Use the variant that provides the best contrast for your background. SVG format is preferred for all digital and print uses.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {logos.map(l => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex flex-col gap-4">
+            <div class="h-20 rounded-xl bg-dark-800 border border-dark-700 flex items-center justify-center">
+              <span class="text-2xl font-extrabold text-lime-400">LimeCall</span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white">{l.name}</h3>
+              <p class="mt-1 text-sm text-dark-400 leading-relaxed">{l.desc}</p>
+              <div class="mt-3 text-xs font-mono text-dark-500">{l.format}</div>
+            </div>
+            <a href={site.cta.href} class="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+              Download →
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Typography</h2>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 sm:p-10">
+        <div class="grid gap-8 sm:grid-cols-2">
+          <div>
+            <div class="text-xs font-semibold uppercase tracking-widest text-dark-500 mb-3">Primary Typeface</div>
+            <div class="text-4xl font-extrabold text-white">Inter</div>
+            <div class="mt-2 text-dark-400 text-sm leading-relaxed">
+              Inter is LimeCall's primary typeface across all digital surfaces — web, product, and marketing. It is an open-source typeface available via Google Fonts.
+            </div>
+          </div>
+          <div>
+            <div class="text-xs font-semibold uppercase tracking-widest text-dark-500 mb-3">Weights Used</div>
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="font-normal text-dark-300">Regular 400</span>
+                <span class="text-dark-500 font-mono">Body copy</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="font-semibold text-white">Semibold 600</span>
+                <span class="text-dark-500 font-mono">Subheadings</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-white">Bold 700</span>
+                <span class="text-dark-500 font-mono">Headings</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="font-extrabold text-white">ExtraBold 800</span>
+                <span class="text-dark-500 font-mono">Hero headlines</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Do's and Don'ts -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Usage Guidelines</h2>
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div class="rounded-2xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <h3 class="mb-5 font-semibold text-lime-400 text-lg">Do</h3>
+          <ul class="space-y-3">
+            {dos.map(d => (
+              <li class="flex items-start gap-3 text-sm text-dark-300">
+                <span class="mt-0.5 text-lime-400 font-bold shrink-0">✓</span>
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-red-500/20 bg-dark-900/60 p-7">
+          <h3 class="mb-5 font-semibold text-red-400 text-lg">Don't</h3>
+          <ul class="space-y-3">
+            {donts.map(d => (
+              <li class="flex items-start gap-3 text-sm text-dark-300">
+                <span class="mt-0.5 text-red-400 font-bold shrink-0">✕</span>
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4 mb-14">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+      <div class="rounded-2xl border border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 p-10 text-center">
+        <h2 class="text-2xl font-bold text-white">Download the full brand kit</h2>
+        <p class="mt-3 text-dark-400">Logos in all formats, color swatches, and typography guide — zipped and ready to use.</p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+            Download Brand Kit →
+          </a>
+          <a href="/about-us/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+            About LimeCall
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/affiliates/', title: 'Affiliate Program', desc: 'Earn 30% recurring commission promoting LimeCall.' },
+        { href: '/partnership/', title: 'Partner Program', desc: 'Agency and technology partner opportunities.' },
+        { href: '/about-us/', title: 'About LimeCall', desc: 'Our mission, team, and story.' },
+        { href: '/contact-us/', title: 'Contact Us', desc: 'Reach our team for press, partnerships, or support.' },
+      ]} />
+    </div>
   </div>
 </Base>

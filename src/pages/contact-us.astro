@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
 
 const seo = {
   title: `Callback Software Company Contact Us - LimeCall`,
@@ -11,6 +13,7 @@ const seo = {
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10">
+        <Breadcrumbs items={[{ name: 'Contact Us', url: 'https://www.limecall.com/contact-us/' }]} />
         <span class="inline-block mb-4 rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">Contact Us</span>
         <h1 class="text-4xl font-extrabold text-white sm:text-5xl">
           Get in <span class="text-lime-400">Touch</span>
@@ -27,7 +30,7 @@ const seo = {
           <p class="text-sm text-dark-400">support@limecall.com</p>
           <p class="text-xs text-dark-500 mt-2">24h response on business days</p>
         </a>
-        <a href="/demo" class="rounded-xl border border-dark-800 bg-dark-900/50 p-6 hover:border-lime-500/30 transition group">
+        <a href="/demo/" class="rounded-xl border border-dark-800 bg-dark-900/50 p-6 hover:border-lime-500/30 transition group">
           <div class="text-2xl mb-3">🎥</div>
           <h3 class="font-semibold text-white mb-1 group-hover:text-lime-400 transition">Book a Demo</h3>
           <p class="text-sm text-dark-400">See LimeCall live with our team</p>
@@ -56,4 +59,16 @@ const seo = {
       </div>
     </div>
   </section>
+
+  <div class="py-8 border-t border-dark-800">
+    <CrossLinks
+      heading="Quick Links"
+      links={[
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+        { href: '/demo/', title: 'Book a Demo', desc: 'See LimeCall live with our team.' },
+        { href: '/how-it-works/', title: 'How It Works', desc: 'See the platform in action.' },
+        { href: '/faq/', title: 'FAQ', desc: 'Common questions answered.' },
+      ]}
+    />
+  </div>
 </Base>

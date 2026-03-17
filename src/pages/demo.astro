@@ -1,15 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
 
 const seo = {
   title: `Book a Demo - LimeCall`,
   description: `Book a free 30-minute demo of LimeCall. See how our callback automation platform can increase your website conversions by up to 300%.`,
-  canonical: `https://www.limecall.com/demo`,
+  canonical: `https://www.limecall.com/demo/`,
 };
 ---
 <Base {...seo}>
   <section class="py-16 sm:py-24">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Book a Demo', url: 'https://www.limecall.com/demo/' }]} />
       <span class="inline-block mb-4 rounded-full bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400">Book a Demo</span>
       <h1 class="text-4xl font-extrabold text-white sm:text-5xl mb-6">
         See LimeCall <span class="text-lime-400">in Action</span>
@@ -35,4 +38,16 @@ const seo = {
       <p class="mt-4 text-dark-500 text-sm">Or <a href="/signup" class="text-lime-400 hover:text-lime-300">start free today</a> — no credit card required.</p>
     </div>
   </section>
+
+  <div class="py-8 border-t border-dark-800">
+    <CrossLinks
+      heading="Explore Before the Demo"
+      links={[
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+        { href: '/how-it-works/', title: 'How It Works', desc: 'See the platform in action.' },
+        { href: '/customers/', title: 'Customers', desc: 'Teams using LimeCall.' },
+        { href: '/features/', title: 'Features', desc: 'Everything LimeCall does.' },
+      ]}
+    />
+  </div>
 </Base>

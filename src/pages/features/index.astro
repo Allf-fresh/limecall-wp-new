@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
 import FeatureCard from '../../components/FeatureCard.astro';
+import CrossLinks from '../../components/CrossLinks.astro';
 import { site, features } from '../../site.config';
 ---
 
@@ -70,54 +71,54 @@ import { site, features } from '../../site.config';
           <div class="text-2xl mb-3">📞</div>
           <h3 class="font-bold text-white mb-2">Calling</h3>
           <ul class="space-y-2 text-sm text-dark-400">
-            <li><a href="/click-to-call-software" class="hover:text-lime-400 transition">Click-to-Call Software</a></li>
-            <li><a href="/customer-callback-software" class="hover:text-lime-400 transition">Customer Callback Software</a></li>
-            <li><a href="/features/click-2-call" class="hover:text-lime-400 transition">Click2Call Widget</a></li>
+            <li><a href="/click-to-call-software/" class="hover:text-lime-400 transition">Click-to-Call Software</a></li>
+            <li><a href="/customer-callback-software/" class="hover:text-lime-400 transition">Customer Callback Software</a></li>
+            <li><a href="/features/click-2-call/" class="hover:text-lime-400 transition">Click2Call Widget</a></li>
           </ul>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="text-2xl mb-3">🔀</div>
           <h3 class="font-bold text-white mb-2">Lead Management</h3>
           <ul class="space-y-2 text-sm text-dark-400">
-            <li><a href="/lead-distribution" class="hover:text-lime-400 transition">Lead Distribution</a></li>
-            <li><a href="/speed-to-lead" class="hover:text-lime-400 transition">Speed to Lead</a></li>
-            <li><a href="/conversation-scheduling" class="hover:text-lime-400 transition">Schedule Callbacks</a></li>
+            <li><a href="/lead-distribution/" class="hover:text-lime-400 transition">Lead Distribution</a></li>
+            <li><a href="/speed-to-lead/" class="hover:text-lime-400 transition">Speed to Lead</a></li>
+            <li><a href="/conversation-scheduling/" class="hover:text-lime-400 transition">Schedule Callbacks</a></li>
           </ul>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="text-2xl mb-3">💬</div>
           <h3 class="font-bold text-white mb-2">Messaging</h3>
           <ul class="space-y-2 text-sm text-dark-400">
-            <li><a href="/business-texting" class="hover:text-lime-400 transition">Web to Text / SMS</a></li>
-            <li><a href="/sms-for-slack" class="hover:text-lime-400 transition">SMS for Slack</a></li>
-            <li><a href="/shared-inbox" class="hover:text-lime-400 transition">Shared Inbox</a></li>
+            <li><a href="/business-texting/" class="hover:text-lime-400 transition">Web to Text / SMS</a></li>
+            <li><a href="/sms-for-slack/" class="hover:text-lime-400 transition">SMS for Slack</a></li>
+            <li><a href="/shared-inbox/" class="hover:text-lime-400 transition">Shared Inbox</a></li>
           </ul>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="text-2xl mb-3">🌍</div>
           <h3 class="font-bold text-white mb-2">Phone Numbers</h3>
           <ul class="space-y-2 text-sm text-dark-400">
-            <li><a href="/virtual-numbers" class="hover:text-lime-400 transition">Virtual Numbers</a></li>
-            <li><a href="/incoming-numbers" class="hover:text-lime-400 transition">Incoming DID Numbers</a></li>
-            <li><a href="/toll-free-numbers" class="hover:text-lime-400 transition">Toll-Free Numbers</a></li>
+            <li><a href="/virtual-numbers/" class="hover:text-lime-400 transition">Virtual Numbers</a></li>
+            <li><a href="/incoming-numbers/" class="hover:text-lime-400 transition">Incoming DID Numbers</a></li>
+            <li><a href="/toll-free-numbers/" class="hover:text-lime-400 transition">Toll-Free Numbers</a></li>
           </ul>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="text-2xl mb-3">📊</div>
           <h3 class="font-bold text-white mb-2">Analytics</h3>
           <ul class="space-y-2 text-sm text-dark-400">
-            <li><a href="/calltracking-software" class="hover:text-lime-400 transition">Call Tracking</a></li>
-            <li><a href="/features" class="hover:text-lime-400 transition">Performance Dashboards</a></li>
-            <li><a href="/speed-to-lead" class="hover:text-lime-400 transition">Speed-to-Lead Reports</a></li>
+            <li><a href="/calltracking-software/" class="hover:text-lime-400 transition">Call Tracking</a></li>
+            <li><a href="/features/" class="hover:text-lime-400 transition">Performance Dashboards</a></li>
+            <li><a href="/speed-to-lead/" class="hover:text-lime-400 transition">Speed-to-Lead Reports</a></li>
           </ul>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="text-2xl mb-3">🔗</div>
           <h3 class="font-bold text-white mb-2">Integrations</h3>
           <ul class="space-y-2 text-sm text-dark-400">
-            <li><a href="/integrations" class="hover:text-lime-400 transition">All Integrations</a></li>
-            <li><a href="/sms-for-slack" class="hover:text-lime-400 transition">Slack</a></li>
-            <li><a href="/integrations" class="hover:text-lime-400 transition">HubSpot, Salesforce &amp; more</a></li>
+            <li><a href="/integrations/" class="hover:text-lime-400 transition">All Integrations</a></li>
+            <li><a href="/sms-for-slack/" class="hover:text-lime-400 transition">Slack</a></li>
+            <li><a href="/integrations/" class="hover:text-lime-400 transition">HubSpot, Salesforce &amp; more</a></li>
           </ul>
         </div>
       </div>
@@ -134,11 +135,23 @@ import { site, features } from '../../site.config';
           <a href={site.cta.href} class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-lime-500 hover:bg-lime-400 text-dark-950 font-bold transition">
             {site.cta.text}
           </a>
-          <a href="/pricing" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-dark-700 bg-dark-800 hover:border-lime-500/40 text-white font-bold transition">
+          <a href="/pricing/" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-dark-700 bg-dark-800 hover:border-lime-500/40 text-white font-bold transition">
             Compare Plans →
           </a>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="py-8 border-t border-dark-800">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'Connect your favorite tools.' },
+        { href: '/how-it-works/', title: 'How It Works', desc: 'See the platform in action.' },
+        { href: '/customers/', title: 'Customers', desc: 'Teams using LimeCall.' },
+      ]}
+    />
+  </div>
 </Base>

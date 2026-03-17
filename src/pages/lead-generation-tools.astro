@@ -8,25 +8,77 @@ import { site } from '../site.config';
 const icon = "🛠️";
 
 const seo = {
-  title: `Lead Generation Tools Overview | LimeCall`,
-  description: `Compare the best lead generation tools for 2025. See how LimeCall's instant callback platform stacks up against forms, chat, and email — and why speed-to-lead wins every time.`,
+  title: `Best Lead Generation Tools in 2026 — Complete Toolkit | LimeCall`,
+  description: `Compare the best lead generation tools for 2026. See how LimeCall's instant callback platform stacks up against forms, chat, and email — and why speed-to-lead wins every time.`,
   canonical: `https://www.limecall.com/lead-generation-tools/`,
 };
-
-const tools = [
-  { name: "Instant Callback (LimeCall)", desc: "Connects a human sales rep with the lead in under 28 seconds. Highest conversion rate of any lead gen tool because it strikes while intent is at its peak.", highlight: true },
-  { name: "Web Chat & Live Chat", desc: "Good for answering quick questions but lacks the personal connection of a voice call. Requires agents to be online and manually monitoring multiple conversations simultaneously." },
-  { name: "Contact Forms", desc: "Generates leads passively but suffers from high abandonment rates and slow follow-up. Most form submissions are contacted hours or days later — well past peak intent." },
-  { name: "Email Capture & Drip Sequences", desc: "Effective for top-of-funnel nurturing but too slow for high-intent bottom-of-funnel visitors. Works best in combination with immediate callback for hot leads." },
-  { name: "Pop-Ups & Exit-Intent Offers", desc: "Captures attention before visitors leave. Most effective when combined with a real callback offer rather than another form — a live human beats a lead magnet for high-intent prospects." },
-  { name: "Chatbots & AI Assistants", desc: "Handle common questions 24/7 but lack the emotional intelligence to close complex sales. Best used for triage and qualification before handing off to a human via callback." },
-];
 
 const stats = [
   { value: "73%", label: "Leads go to the first responder" },
   { value: "28s", label: "LimeCall callback time" },
   { value: "10–12x", label: "Higher conversion vs forms" },
   { value: "5 min", label: "Setup time" },
+];
+
+const toolCategories = [
+  {
+    category: "Callback & Phone",
+    highlight: true,
+    tools: [
+      {
+        name: "LimeCall",
+        desc: "Connects a human sales rep with the lead in under 28 seconds. Highest conversion rate of any lead gen tool because it strikes while intent is at its peak. Includes call routing, recording, CRM sync, and analytics.",
+        highlight: true,
+        badge: "#1 for Conversion",
+      },
+    ],
+    summary: "Phone callbacks beat every other channel for bottom-of-funnel, high-intent leads. The moment a visitor is ready to buy, a live conversation converts them — forms and chat cannot compete.",
+  },
+  {
+    category: "Forms & Landing Pages",
+    highlight: false,
+    tools: [
+      { name: "Typeform", desc: "Conversational multi-step forms with high completion rates. Best for qualification surveys and long-form lead capture where a callback widget cannot replace the data collection." },
+      { name: "Unbounce", desc: "Landing page builder with A/B testing and lead capture forms. Pairs well with LimeCall — drive traffic to Unbounce pages and use LimeCall's widget to convert the most intent-ready visitors instantly." },
+    ],
+    summary: "Forms work well for top-of-funnel lead nurturing but suffer from high abandonment on high-intent pages. Pair with LimeCall for maximum conversion.",
+  },
+  {
+    category: "Live Chat",
+    highlight: false,
+    tools: [
+      { name: "Intercom", desc: "Full customer messaging platform with live chat, bots, and product tours. Best for SaaS products with a high volume of pre-sale questions. Escalate to LimeCall callback for hot prospects." },
+      { name: "Drift", desc: "Conversational marketing platform designed for B2B. Strong at qualifying leads via chat bots, but live conversations via phone convert pipeline faster for high-value deals." },
+    ],
+    summary: "Live chat is excellent for answering pre-sale questions but lacks the personal conversion power of a phone call for high-intent prospects.",
+  },
+  {
+    category: "Email Outreach",
+    highlight: false,
+    tools: [
+      { name: "Mailchimp", desc: "Email marketing platform for newsletters, drip sequences, and promotional sends. Strong for TOFU nurturing but not suited to instant lead capture." },
+      { name: "ActiveCampaign", desc: "Marketing automation with CRM. Excellent for multi-step nurture sequences. When a contact reaches a 'hot' lead score, trigger a LimeCall callback to capitalise on intent immediately." },
+    ],
+    summary: "Email outreach is the backbone of lead nurturing but is too slow for bottom-of-funnel conversion. Use LimeCall to capture leads email sequences surface.",
+  },
+  {
+    category: "Lead Enrichment",
+    highlight: false,
+    tools: [
+      { name: "Clearbit", desc: "Enriches lead records with company data, job titles, and contact details automatically. Pairs with LimeCall to give your sales reps context before they pick up a callback." },
+      { name: "Apollo.io", desc: "Sales intelligence and sequencing platform. Strong for outbound prospecting. For inbound traffic, LimeCall converts intent in real time while Apollo manages your outbound list." },
+    ],
+    summary: "Lead enrichment tools make your existing leads more valuable. Combined with LimeCall, your reps have full context before every callback.",
+  },
+  {
+    category: "Analytics & Attribution",
+    highlight: false,
+    tools: [
+      { name: "Google Analytics 4", desc: "Free web analytics platform tracking traffic sources, conversions, and user behaviour. LimeCall integrates with GA4 so phone callbacks are attributed to the correct traffic source and campaign." },
+      { name: "Hotjar", desc: "Heatmaps, session recordings, and user feedback. Identify which pages generate the most intent (and therefore the most LimeCall callbacks) and optimise those pages for even higher conversion." },
+    ],
+    summary: "Analytics tools show you where leads come from. LimeCall ensures you capture them the moment they arrive, with full attribution back to the source.",
+  },
 ];
 
 const faqSchema = {
@@ -59,18 +111,18 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'What is a lead generation funnel?',
+      name: 'How do I choose the right lead gen tool stack?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A lead generation funnel describes the journey a prospect takes from first becoming aware of your product or service to making contact or converting. The top of the funnel (TOFU) involves awareness via content, SEO, and ads. The middle (MOFU) involves nurturing via email and retargeting. The bottom (BOFU) is where high-intent prospects are ready to talk — and this is where instant callback software like LimeCall has the biggest impact.',
+        text: 'Start with the conversion layer — the tool that captures and converts the highest-intent visitors. That is LimeCall for phone-ready leads. Then add analytics (GA4, Hotjar) to understand where your best leads come from. Add a CRM (HubSpot, Salesforce) to manage them. Finally, add nurture tools (email, retargeting) for leads not yet ready to buy. Each layer compounds on the others.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How does LimeCall complement other lead gen tools?',
+      name: 'What ROI should I expect from lead generation tools?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'LimeCall integrates with your existing CRM, email platform, and analytics tools. When a visitor arrives via a Google Ads campaign, LimeCall captures the UTM parameters and logs them with the call record — so you know which campaigns generate the most phone-ready leads. Callbacks initiated from HubSpot landing pages automatically create contact records. LimeCall makes your existing lead gen investment work harder by converting more of the traffic you are already paying for.',
+        text: 'ROI varies by industry and traffic volume, but teams using LimeCall typically see a 3x increase in lead conversion rates within the first month. Because LimeCall converts traffic you are already paying to acquire, the incremental cost is low relative to the leads generated. Most teams report payback periods of under 30 days based on a single additional closed deal per month.',
       },
     },
   ],
@@ -86,10 +138,10 @@ const faqSchema = {
       <Breadcrumbs items={[{ name: `Lead Generation Tools`, url: seo.canonical }]} />
       <div class="mt-4 text-5xl">{icon}</div>
       <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        <span class="text-lime-400">Lead Generation Tools</span> Compared
+        Best <span class="text-lime-400">Lead Generation Tools</span><br class="hidden sm:block" /> in 2026
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Not all lead generation tools are equal. Here's how the most common options compare — and why speed-to-lead is the only metric that matters for high-intent visitors.
+        Not all lead generation tools are equal. Here's your complete guide to building a stack that converts — and why speed-to-lead is the only metric that matters for high-intent visitors.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
@@ -104,10 +156,10 @@ const faqSchema = {
 
   <!-- Stats -->
   <section class="border-b border-dark-800 bg-dark-900/50 py-10">
-    <div class="mx-auto max-w-4xl px-4">
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
         {stats.map(s => (
-          <div class="text-center">
+          <div>
             <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
             <div class="mt-1 text-sm text-dark-400">{s.label}</div>
           </div>
@@ -116,15 +168,34 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Tools comparison -->
+  <!-- Tool categories -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">The lead generation toolkit — ranked by conversion impact</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        {tools.map(tool => (
-          <div class={`rounded-xl border p-6 ${tool.highlight ? 'border-lime-500/50 bg-lime-500/5' : 'border-dark-800 bg-dark-900/60'}`}>
-            <h3 class={`mb-2 font-semibold ${tool.highlight ? 'text-lime-400' : 'text-white'}`}>{tool.name}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{tool.desc}</p>
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        The complete lead generation toolkit — by category
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Six categories of tools, how they fit together, and where LimeCall sits as the highest-converting layer.
+      </p>
+      <div class="space-y-10">
+        {toolCategories.map(cat => (
+          <div class={`rounded-2xl border p-6 sm:p-8 ${cat.highlight ? 'border-lime-500/40 bg-lime-500/5' : 'border-dark-800 bg-dark-900/40'}`}>
+            <div class="flex items-center gap-3 mb-4">
+              <h3 class={`text-lg font-bold ${cat.highlight ? 'text-lime-400' : 'text-white'}`}>{cat.category}</h3>
+              {cat.highlight && <span class="rounded-full bg-lime-500 px-3 py-0.5 text-xs font-bold text-dark-950">Highest Converting</span>}
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 mb-4">
+              {cat.tools.map(tool => (
+                <div class={`rounded-xl border p-5 ${tool.highlight ? 'border-lime-500/30 bg-dark-950' : 'border-dark-800 bg-dark-900/60'}`}>
+                  <div class="flex items-start justify-between gap-2 mb-2">
+                    <h4 class={`font-semibold ${tool.highlight ? 'text-lime-400' : 'text-white'}`}>{tool.name}</h4>
+                    {tool.badge && <span class="shrink-0 rounded bg-lime-500/20 px-2 py-0.5 text-xs text-lime-400">{tool.badge}</span>}
+                  </div>
+                  <p class="text-sm text-dark-400 leading-relaxed">{tool.desc}</p>
+                </div>
+              ))}
+            </div>
+            <p class="text-sm text-dark-500 italic">{cat.summary}</p>
           </div>
         ))}
       </div>
@@ -193,19 +264,22 @@ const faqSchema = {
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
       <h2 class="text-3xl font-bold text-white">Add the fastest lead gen tool to your stack</h2>
-      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
-      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
-        Start Free →
-      </a>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
     </div>
   </section>
 
-  <div class="py-8 mx-auto max-w-5xl px-4">
-    <CrossLinks heading="More LimeCall Solutions" links={[
-      { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture every inbound lead automatically.' },
-      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
-      { href: '/for-marketing-teams/', title: 'For Marketing Teams', desc: 'LimeCall for marketers and growth teams.' },
-      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
-    ]} />
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More LimeCall Solutions" links={[
+        { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture every inbound lead automatically.' },
+        { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
+        { href: '/integrations/', title: 'Integrations', desc: 'Connect LimeCall to your existing stack.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

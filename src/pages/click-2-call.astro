@@ -6,15 +6,15 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Click 2 Call — Instant Click-to-Call Software | LimeCall`,
+  title: `Click 2 Call Software — Instant Calls From Your Website | LimeCall`,
   description: `Click 2 Call (also known as Click to Call) connects website visitors to your sales team instantly with one click. No hold times, no friction — just conversations that convert.`,
   canonical: `https://www.limecall.com/click-2-call/`,
 };
 
 const stats = [
-  { value: "28s", label: "Average connection time" },
+  { value: "28s", label: "Avg. connection time" },
   { value: "10–12x", label: "Higher conversion vs forms" },
-  { value: "100%", label: "Mobile compatible" },
+  { value: "300%", label: "More conversions" },
   { value: "5 min", label: "Setup time" },
 ];
 
@@ -24,42 +24,42 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What is click to call?',
+      name: 'What is click 2 call software?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Click to call (also written as click-to-call or click 2 call) is a technology that lets website visitors initiate a phone call to your business with a single button click. Instead of finding and dialling a phone number manually, the visitor clicks a button on your website and is immediately connected to your team — usually in under 30 seconds.',
+        text: 'Click 2 call software (also written click-to-call or click to call) lets website visitors initiate a phone call to your business with a single button click. Instead of finding and manually dialling a number, the visitor clicks a button and LimeCall connects them to your sales or support team within seconds — while their interest is at its peak.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How does click to call work on a website?',
+      name: 'How fast does click 2 call connect a call?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You embed a small LimeCall widget on your website. When a visitor clicks the button, they enter their phone number (or it is captured automatically on mobile). LimeCall simultaneously dials your sales or support team and the visitor, connecting both parties within seconds. No hold music, no phone tag — just an instant live conversation.',
+        text: 'LimeCall connects click-to-call requests in under 28 seconds on average. When a visitor clicks the widget, LimeCall simultaneously dials your team and the visitor. Both parties pick up a live call — no hold music, no delays. This speed is the key to higher conversion: studies show leads contacted within the first minute are 391% more likely to convert.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Is click to call free?',
+      name: 'Does click 2 call work on mobile devices?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'LimeCall offers a free trial so you can test click-to-call on your website before committing to a paid plan. Paid plans start at accessible price points and include call routing, recording, analytics, and CRM integrations. Visit the LimeCall pricing page for current plan details.',
+        text: 'Yes. LimeCall\'s click-to-call widget is fully mobile-optimised. On mobile, the visitor can tap the button and enter their number, or LimeCall can use the number associated with their browser session. The callback then connects via a standard phone call — no app download required. Over 60% of LimeCall callbacks are initiated from mobile devices.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What is the difference between click to call and callback?',
+      name: 'Does click 2 call integrate with my CRM?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Click to call initiates a real-time, immediate connection — the visitor clicks and is connected to your team within seconds. Callback typically refers to scheduling a call for a future time, though LimeCall\'s instant callback also connects the call in under 28 seconds. In practice, both terms are often used interchangeably to describe tools that connect visitors with your team faster than traditional phone numbers or forms.',
+        text: 'Yes. LimeCall integrates natively with HubSpot, Salesforce, Zoho CRM, Pipedrive, and Zendesk. Every click-to-call conversation is automatically logged with the caller\'s details, call duration, recording link, and outcome. Zapier support extends this to 5,000+ additional tools. No manual data entry required.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Which businesses benefit most from click to call?',
+      name: 'How much does click 2 call software cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Any business where phone conversations drive conversions benefits from click to call. This includes healthcare (appointment booking), real estate (property inquiries), legal services (case consultations), financial services (investment or insurance advice), automotive dealerships, home services, and e-commerce for high-value items. Essentially, if a phone call is the most likely path to a sale or appointment, click to call will increase your conversion rate.',
+        text: 'LimeCall offers a free trial so you can test click-to-call on your website before committing to a paid plan. Paid plans include call routing, recording, analytics, and CRM integrations. Visit the LimeCall pricing page for current plan details and to compare features across tiers.',
       },
     },
   ],
@@ -225,15 +225,17 @@ const faqSchema = {
     </div>
   </section>
 
-  <div class="py-8">
-    <CrossLinks
-      heading="Explore More"
-      links={[
-        { href: '/click-to-call-software/', title: 'Click to Call Software', desc: 'Full click-to-call feature page.' },
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Schedule and automate callbacks.' },
-        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in seconds wins more deals.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
-      ]}
-    />
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Explore More"
+        links={[
+          { href: '/click-to-call-software/', title: 'Click to Call Software', desc: 'Full click-to-call feature page with advanced routing.' },
+          { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture every inbound lead automatically.' },
+          { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in seconds wins more deals.' },
+          { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+        ]}
+      />
+    </div>
   </div>
 </Base>

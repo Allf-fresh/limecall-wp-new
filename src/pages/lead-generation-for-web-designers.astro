@@ -9,10 +9,50 @@ const industry = "Web Designers";
 const icon = "💻";
 
 const seo = {
-  title: `Lead Generation for Web Designers & Agencies | LimeCall`,
+  title: `Lead Generation for Web Designers — More Project Inquiries | LimeCall`,
   description: `Win more web design projects by responding to client inquiries instantly. LimeCall's callback software helps freelance designers and agencies connect with project requests in under 28 seconds.`,
   canonical: `https://www.limecall.com/lead-generation-for-web-designers/`,
 };
+
+const stats = [
+  { value: "3x", label: "More project inquiries converted" },
+  { value: "28s", label: "Average callback time" },
+  { value: "300%", label: "Conversion lift" },
+  { value: "5 min", label: "Setup time" },
+];
+
+const features = [
+  {
+    title: "Instant Consultation Callbacks",
+    desc: "Portfolio visitors can request an instant callback from any page. LimeCall calls you and the prospect simultaneously, connecting you in under 28 seconds — before they contact another studio.",
+    icon: "⚡",
+  },
+  {
+    title: "Project Inquiry Callbacks",
+    desc: "Capture project scoping requests 24/7. When a prospect describes their project and clicks callback, you're on the phone with them while your competitors are still checking email.",
+    icon: "📋",
+  },
+  {
+    title: "Webflow & WordPress Integration",
+    desc: "LimeCall integrates natively with Webflow and WordPress. Paste one embed code or install the plugin — your callback widget is live on your portfolio in under 5 minutes.",
+    icon: "🔌",
+  },
+  {
+    title: "White-Label Widget for Client Sites",
+    desc: "Add branded callback widgets to client websites as part of your design deliverable. The widget matches the client's brand and all calls route to their team — not yours.",
+    icon: "🏷️",
+  },
+  {
+    title: "Client Callbacks as a Service",
+    desc: "Offer lead generation as an agency service. Manage multiple client accounts from one LimeCall dashboard, white-label the reports, and bill clients for the leads you generate.",
+    icon: "💼",
+  },
+  {
+    title: "Call Recording & Analytics",
+    desc: "Every discovery call is recorded and logged automatically. Review calls to improve your scoping process, track which portfolio pages generate the most inquiries, and prove ROI to clients.",
+    icon: "📊",
+  },
+];
 
 const useCases = [
   { title: "Instant Callback on Project Inquiries", desc: "Prospective clients searching for a web designer often reach out to several studios in the same session. LimeCall connects you with the prospect in under 28 seconds, ensuring you're the first designer to have a real conversation." },
@@ -21,55 +61,56 @@ const useCases = [
   { title: "Retainer & Maintenance Lead Capture", desc: "Monthly retainers and site maintenance agreements are high-value recurring revenue. Capture inbound interest from existing clients and warm leads with a seamless callback that feels personal, not transactional." },
 ];
 
-const stats = [
-  { value: "72%", label: "Design clients want to talk first" },
-  { value: "3x", label: "Higher project inquiry conversion" },
-  { value: "28s", label: "Average callback time" },
-  { value: "5 min", label: "Setup time" },
-];
-
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     {
       '@type': 'Question',
+      name: 'How do I install LimeCall on client sites?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Installing LimeCall on a client site takes under 5 minutes. Paste the LimeCall JavaScript snippet into the site\'s head or body tag (or use the WordPress plugin or Webflow embed). Each client gets their own LimeCall account with routing rules that send callbacks to their team. You manage all client accounts from a single agency dashboard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall offer white-label options for agencies?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports white-label widget branding — the callback button and pop-up match the client\'s brand colours, fonts, and logo. Reports and dashboards can also be white-labelled so you can present LimeCall data under your agency brand. Contact the LimeCall team to discuss agency white-label options.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall compatible with Webflow?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall works on Webflow sites. Paste the LimeCall embed code into your Webflow project\'s Custom Code section (under Project Settings > Custom Code). The widget appears on your published site and all callbacks are routed through your LimeCall account. Full widget customisation and analytics are available from the LimeCall dashboard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there agency pricing for multiple client accounts?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall offers agency plans that let you manage multiple client accounts under one billing relationship. Contact the LimeCall sales team for agency pricing — typically this provides significant cost savings compared to individual accounts for each client.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I bill clients for LimeCall callback leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Many agencies include LimeCall as part of a monthly retainer for lead generation services, billing clients a flat monthly fee that covers the LimeCall subscription plus their management time. Others charge a per-lead fee based on the number of qualified callbacks generated each month. LimeCall\'s call analytics make it straightforward to report on leads generated and justify the investment to clients.',
+      },
+    },
+    {
+      '@type': 'Question',
       name: 'How do web designers get more clients?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Web designers get more clients by combining inbound traffic (portfolio SEO, Dribbble, Behance, referrals) with a high-converting lead capture layer. LimeCall adds instant callback to your portfolio so that when a prospect is ready to hire, they can speak to you immediately — before they move on to another studio. Designers who respond in seconds rather than hours win disproportionately more projects.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is the best lead generation tool for design agencies?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'For design agencies, the best lead gen tool is one that turns portfolio visitors into conversations quickly. LimeCall\'s callback widget sits on your site, portfolio, or landing page and connects prospects with your team in under 28 seconds. Unlike contact forms that sit in an inbox for hours, LimeCall initiates a live call the moment the prospect expresses interest.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do I respond faster to design project enquiries?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'LimeCall automates the first response entirely. When a prospect clicks the callback widget on your portfolio or landing page, LimeCall dials you and the prospect simultaneously. You pick up a live call rather than checking email or a contact form — reducing your response time from hours to seconds without any manual effort.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can I use LimeCall on my portfolio site?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. LimeCall works on any website — including custom-coded portfolio sites, WordPress, Webflow, Squarespace, and Wix. You embed a small JavaScript snippet or use the LimeCall WordPress or Webflow plugin, and the callback widget appears on whichever pages you choose. Setup takes under 5 minutes.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Does LimeCall work with Webflow or WordPress?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. LimeCall has dedicated integrations for both Webflow and WordPress. The WordPress plugin installs in minutes from the plugin directory. For Webflow, you paste the LimeCall embed code into your site\'s custom code section. Both integrations give you full access to widget customisation, routing rules, and call analytics from the LimeCall dashboard.',
       },
     },
   ],
@@ -88,7 +129,7 @@ const faqSchema = {
         Lead Generation for <span class="text-lime-400">Web Designers</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Win more web design projects by being the first to respond. Connect with project inquiries and discovery call requests in under 28 seconds.
+        Win more web design projects by being the first to respond. Connect with project inquiries and discovery call requests in under 28 seconds — and offer callback as a service to your clients.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
@@ -103,10 +144,10 @@ const faqSchema = {
 
   <!-- Stats -->
   <section class="border-b border-dark-800 bg-dark-900/50 py-10">
-    <div class="mx-auto max-w-4xl px-4">
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
         {stats.map(s => (
-          <div class="text-center">
+          <div>
             <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
             <div class="mt-1 text-sm text-dark-400">{s.label}</div>
           </div>
@@ -115,14 +156,35 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Use cases -->
+  <!-- Features -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Built for freelancers and web design studios</h2>
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Built for freelancers and web design agencies
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        From solo designers to full-service agencies, LimeCall gives you the tools to win more projects and offer lead generation as a service.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases for designers and studios</h2>
       <div class="grid gap-6 sm:grid-cols-2">
         {useCases.map(uc => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <h3 class="mb-2 font-semibold text-lime-400">{uc.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
           </div>
         ))}
@@ -131,9 +193,9 @@ const faqSchema = {
   </section>
 
   <!-- How it works -->
-  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works for web designers</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Prospect visits your portfolio", desc: "A potential client lands on your portfolio from search, referral, or social — and sees the LimeCall callback offer while reviewing your work." },
@@ -151,7 +213,7 @@ const faqSchema = {
   </section>
 
   <!-- Comparison -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Callback widget vs contact form for design agencies</h2>
       <div class="grid gap-6 sm:grid-cols-2">
@@ -180,7 +242,7 @@ const faqSchema = {
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
       <div class="space-y-4">
@@ -199,18 +261,21 @@ const faqSchema = {
     <div class="mx-auto max-w-2xl px-4 text-center">
       <h2 class="text-3xl font-bold text-white">Ready to win more web design clients?</h2>
       <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
-      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
-        Start Free →
-      </a>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
     </div>
   </section>
 
-  <div class="py-8 mx-auto max-w-5xl px-4">
-    <CrossLinks heading="More LimeCall Solutions" links={[
-      { href: '/limecall-for-webflow/', title: 'LimeCall for Webflow', desc: 'Add callback to your Webflow site.' },
-      { href: '/limecall-for-wordpress/', title: 'LimeCall for WordPress', desc: 'WordPress plugin for instant callbacks.' },
-      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
-      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
-    ]} />
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More LimeCall Solutions" links={[
+        { href: '/limecall-for-webflow/', title: 'LimeCall for Webflow', desc: 'Add callback to your Webflow site.' },
+        { href: '/limecall-for-wordpress/', title: 'LimeCall for WordPress', desc: 'WordPress plugin for instant callbacks.' },
+        { href: '/lead-generation-tools/', title: 'Lead Generation Tools', desc: 'Compare the best lead gen tools.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

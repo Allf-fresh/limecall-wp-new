@@ -8,23 +8,56 @@ import { site } from '../site.config';
 const icon = "📈";
 
 const seo = {
-  title: `Generate More Leads with Instant Callbacks | LimeCall`,
+  title: `Generate More Leads From Your Website — 3x More With LimeCall`,
   description: `Stop losing high-intent website visitors. LimeCall's callback automation connects your sales team with leads in under 28 seconds — boosting conversions by up to 300%.`,
   canonical: `https://www.limecall.com/generate-more-leads/`,
 };
+
+const stats = [
+  { value: "3x", label: "More leads converted" },
+  { value: "10–12x", label: "Higher conversion vs forms" },
+  { value: "28s", label: "Average callback speed" },
+  { value: "80%", label: "Fewer missed leads" },
+];
+
+const features = [
+  {
+    title: "Instant Callback Widget",
+    desc: "Place a callback widget on any page — pricing, product, contact, or landing pages. When a visitor clicks, LimeCall calls your team and the visitor simultaneously and connects them in 28 seconds.",
+    icon: "⚡",
+  },
+  {
+    title: "Exit-Intent Popup",
+    desc: "Capture leads right before they leave. LimeCall's exit-intent overlay fires when a visitor moves to close the tab, offering an instant callback instead of losing them forever.",
+    icon: "🚪",
+  },
+  {
+    title: "Mobile Optimised",
+    desc: "Over 60% of web traffic is mobile. LimeCall's callback widget is optimised for mobile browsers and works seamlessly on any device — no app download required.",
+    icon: "📱",
+  },
+  {
+    title: "A/B Testing",
+    desc: "Test different widget positions, copy, and colours to find what converts best on your site. LimeCall's built-in A/B testing shows you exactly which variant generates more callbacks.",
+    icon: "🧪",
+  },
+  {
+    title: "Multi-Channel Lead Capture",
+    desc: "Capture leads from your website, landing pages, Google Ads, email campaigns, and social traffic — all funnelled into LimeCall and connected to your team in seconds.",
+    icon: "🔀",
+  },
+  {
+    title: "Real-Time Lead Alerts",
+    desc: "Every callback request triggers an instant notification to your sales team via SMS, email, or Slack — so no lead sits unactioned even during busy periods.",
+    icon: "🔔",
+  },
+];
 
 const useCases = [
   { title: "Capture Leads Before They Bounce", desc: "The average website visitor decides to leave within seconds. LimeCall's exit-intent callback widget engages high-intent visitors at the exact moment they're about to leave, turning bounces into conversations." },
   { title: "Respond in Under 28 Seconds", desc: "Speed is the single biggest factor in lead conversion. Studies show leads contacted within 5 minutes are 100x more likely to convert. LimeCall connects your team with inbound leads in under 28 seconds, automatically." },
   { title: "Never Miss an After-Hours Lead", desc: "Leads don't stop coming when your team clocks out. Capture callback requests 24/7 and schedule them for business hours. Wake up to a pipeline of warm, pre-qualified prospects ready to talk." },
   { title: "Works for Every Industry", desc: "Whether you're in healthcare, real estate, legal, e-commerce, or any other industry, LimeCall's callback platform adapts to your workflow. One platform, universal results across all verticals." },
-];
-
-const stats = [
-  { value: "28s", label: "Average callback time" },
-  { value: "3x", label: "More leads converted" },
-  { value: "80%", label: "Reduction in missed leads" },
-  { value: "5 min", label: "Setup time" },
 ];
 
 const industries = [
@@ -38,60 +71,37 @@ const industries = [
   { href: '/lead-generation-for-travel-companies/', label: 'Travel' },
 ];
 
-const leadMethods = [
-  { method: "Instant Callback (LimeCall)", conversion: "Highest", timing: "Under 28 seconds", notes: "Strikes at peak intent — human connection converts", highlight: true },
-  { method: "SEO / Organic Search", conversion: "Medium", timing: "Ongoing (days–months)", notes: "Drives traffic but needs a capture layer to convert" },
-  { method: "PPC / Google Ads", conversion: "Medium–High", timing: "Immediate traffic", notes: "Expensive without fast follow-up — leads go cold fast" },
-  { method: "Social Media", conversion: "Low–Medium", timing: "Days–weeks", notes: "Top-of-funnel awareness; needs nurturing to convert" },
-  { method: "Content Marketing", conversion: "Low", timing: "Months", notes: "Long-term compounding value; slow to convert" },
-  { method: "Email Marketing", conversion: "Medium", timing: "Days", notes: "Nurtures leads already in your list; not for new leads" },
+const faqs = [
+  {
+    q: 'How does LimeCall help generate more leads?',
+    a: 'LimeCall adds an instant callback layer to your website that connects high-intent visitors with your sales team in under 28 seconds. Unlike contact forms that generate leads you follow up hours later, LimeCall initiates a live phone conversation the moment a visitor expresses interest — dramatically increasing the percentage of visitors who convert into qualified leads.',
+  },
+  {
+    q: 'Why is callback better than a contact form for lead generation?',
+    a: 'Contact forms suffer from high abandonment rates, slow follow-up, and low conversion because leads go cold while waiting for a reply. LimeCall connects your team with a visitor in under 28 seconds — while intent is at its peak. Studies show leads contacted within 5 minutes are 100x more likely to convert than those contacted after 30 minutes. LimeCall automates that 28-second response every time.',
+  },
+  {
+    q: 'What is the best way to capture leads from a website?',
+    a: 'The most effective lead capture strategy combines multiple touchpoints: a persistent callback widget on key pages, an exit-intent popup for visitors about to leave, and after-hours capture for off-hours traffic. LimeCall handles all three and connects every captured lead to your team automatically — ensuring that the traffic you work hard to acquire is converted into real conversations.',
+  },
+  {
+    q: 'Does LimeCall work for both inbound and outbound lead generation?',
+    a: 'LimeCall primarily powers inbound lead generation by converting website visitors into instant phone conversations. For outbound, LimeCall\'s callback campaigns let you upload a list and trigger automated callbacks to re-engage dormant leads or follow up with event attendees. Both use cases route through the same platform and are logged in your CRM automatically.',
+  },
+  {
+    q: 'How quickly can I start generating more leads with LimeCall?',
+    a: 'Setup takes under 5 minutes. You paste one JavaScript snippet into your website (or install the WordPress/Webflow plugin), configure your routing rules, and the widget is live. Most teams see their first callback within hours of going live — and measurable conversion improvement within the first week.',
+  },
 ];
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'How do I generate more leads from my website?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'To generate more leads from your website, you need to both drive traffic (via SEO, PPC, and social) and convert that traffic efficiently. Most businesses over-invest in traffic and under-invest in conversion. LimeCall improves conversion by adding an instant callback widget to your site — capturing high-intent visitors and connecting them with your sales team in under 28 seconds, before they leave for a competitor.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What converts website visitors best?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'For bottom-of-funnel, high-intent visitors, instant callback consistently outperforms all other conversion tools. When a visitor is actively researching a solution, a live phone conversation with a sales rep is far more persuasive than a form, a chatbot, or an email. LimeCall connects these ready-to-buy visitors with your team in under 28 seconds — capturing them at the moment of highest intent.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is a good lead generation rate?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Average website lead conversion rates vary by industry, but most fall between 1–5% of all website visitors. Businesses using instant callback software like LimeCall typically see significantly higher conversion rates from the pages where the widget is deployed, because callbacks capture high-intent visitors who would otherwise leave without converting. A 2–3% lift in conversion rate can double or triple revenue for many businesses.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How much does lead generation cost?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Lead generation costs vary widely. SEO and content marketing have low per-lead costs but take months to build. PPC can generate leads immediately but costs can be high in competitive markets. LimeCall\'s callback software starts at an accessible monthly price and focuses on converting the traffic you are already paying for — making it one of the highest-ROI additions to any lead gen stack. Visit the pricing page for current plan details.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How does LimeCall generate more leads?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'LimeCall generates more leads by capturing high-intent website visitors before they leave. You embed the LimeCall widget on your key pages — homepage, pricing, product pages, or landing pages. When a visitor is ready to talk, they click the widget. LimeCall calls your sales team and the visitor simultaneously, connecting them in under 28 seconds. After-hours requests are captured and queued for the morning so you never miss a lead.',
-      },
-    },
-  ],
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
 };
 ---
 
@@ -104,7 +114,7 @@ const faqSchema = {
       <Breadcrumbs items={[{ name: `Generate More Leads`, url: seo.canonical }]} />
       <div class="mt-4 text-5xl">{icon}</div>
       <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Generate <span class="text-lime-400">More Leads</span> in Seconds
+        Generate <span class="text-lime-400">3x More Leads</span><br class="hidden sm:block" /> From Your Website
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
         Stop losing high-intent visitors. LimeCall connects your sales team with website leads in under 28 seconds — before they move on to a competitor.
@@ -122,10 +132,10 @@ const faqSchema = {
 
   <!-- Stats -->
   <section class="border-b border-dark-800 bg-dark-900/50 py-10">
-    <div class="mx-auto max-w-4xl px-4">
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
         {stats.map(s => (
-          <div class="text-center">
+          <div>
             <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
             <div class="mt-1 text-sm text-dark-400">{s.label}</div>
           </div>
@@ -134,66 +144,67 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Use cases -->
+  <!-- Features -->
   <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Everything you need to generate more leads
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Six tools that work together to capture more of the high-intent traffic already visiting your site.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why phone beats forms -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Why phone callbacks outperform forms</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/40 bg-lime-500/5 p-6">
+          <h3 class="mb-4 text-lg font-bold text-lime-400">LimeCall Instant Callback</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Connected in 28 seconds — while intent is at its peak</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Live conversation builds trust instantly</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>10–12x higher conversion rate vs contact forms</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>One click — no form fields, no friction</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>After-hours requests captured and queued automatically</span></li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-4 text-lg font-bold text-white">Traditional Contact Form</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Average reply time: 47 hours — lead has gone cold</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>High abandonment rate — too many fields, too much friction</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Email reply is impersonal — harder to build trust</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>No conversation — just a cold inbox message</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Competitor may have called while you were replying</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Why teams choose LimeCall to generate leads</h2>
       <div class="grid gap-6 sm:grid-cols-2">
         {useCases.map(uc => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <h3 class="mb-2 font-semibold text-lime-400">{uc.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall generates more leads</h2>
-      <div class="grid gap-8 sm:grid-cols-3">
-        {[
-          { step: "1", title: "Visitor shows interest", desc: "A potential lead lands on your site and clicks the LimeCall widget, or tries to leave and sees the exit-intent callback offer." },
-          { step: "2", title: "Instant connection", desc: "LimeCall calls your sales team and the visitor simultaneously, connecting them in under 28 seconds." },
-          { step: "3", title: "Lead captured", desc: "The conversation is recorded, logged, and followed up automatically if no answer — so nothing falls through the cracks." },
-        ].map(s => (
-          <div class="text-center">
-            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
-            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Lead gen comparison -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Callback vs 5 other lead generation methods</h2>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-dark-800">
-              <th class="pb-3 text-left text-dark-400 font-medium">Method</th>
-              <th class="pb-3 text-center text-dark-400 font-medium">Conversion</th>
-              <th class="pb-3 text-center text-dark-400 font-medium">Response time</th>
-              <th class="pb-3 text-left text-dark-400 font-medium">Notes</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-dark-800">
-            {leadMethods.map(row => (
-              <tr class={row.highlight ? 'bg-lime-500/5' : ''}>
-                <td class={`py-3 font-medium ${row.highlight ? 'text-lime-400' : 'text-white'}`}>{row.method}</td>
-                <td class={`py-3 text-center ${row.highlight ? 'text-lime-400 font-semibold' : 'text-dark-300'}`}>{row.conversion}</td>
-                <td class="py-3 text-center text-dark-400">{row.timing}</td>
-                <td class="py-3 text-dark-400">{row.notes}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   </section>
@@ -212,15 +223,35 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall generates more leads</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Visitor shows interest", desc: "A potential lead lands on your site and clicks the LimeCall widget, or tries to leave and sees the exit-intent callback offer." },
+          { step: "2", title: "Instant connection", desc: "LimeCall calls your sales team and the visitor simultaneously, connecting them in under 28 seconds." },
+          { step: "3", title: "Lead captured", desc: "The conversation is recorded, logged, and followed up automatically if no answer — so nothing falls through the cracks." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
       <div class="space-y-4">
-        {faqSchema.mainEntity.map(faq => (
+        {faqs.map(f => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
-            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{faq.name}</summary>
-            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{f.q}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{f.a}</p>
           </details>
         ))}
       </div>
@@ -231,19 +262,22 @@ const faqSchema = {
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
       <h2 class="text-3xl font-bold text-white">Ready to generate more leads starting today?</h2>
-      <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
-      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
-        Start Free →
-      </a>
+      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free Trial →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
     </div>
   </section>
 
-  <div class="py-8 mx-auto max-w-5xl px-4">
-    <CrossLinks heading="More LimeCall Solutions" links={[
-      { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture every inbound lead automatically.' },
-      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
-      { href: '/for-marketing-teams/', title: 'For Marketing Teams', desc: 'LimeCall for marketers and growth teams.' },
-      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
-    ]} />
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More LimeCall Solutions" links={[
+        { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture every inbound lead automatically.' },
+        { href: '/increase-your-website-conversions/', title: 'Increase Conversions', desc: 'Turn more visitors into customers.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Connect with leads in seconds, not hours.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

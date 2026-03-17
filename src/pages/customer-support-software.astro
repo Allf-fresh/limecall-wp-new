@@ -6,25 +6,68 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Customer Support Software | LimeCall`,
+  title: `Customer Support Software — Faster Resolution, Happier Customers | LimeCall`,
   description: `Deliver exceptional customer support with LimeCall. Instant callbacks, shared SMS inbox, virtual numbers, and full call analytics — all the tools your support team needs.`,
   canonical: `https://www.limecall.com/customer-support-software/`,
 };
 
-const features = [
-  { title: "Instant Callback Widget", desc: "Customers request a callback from your website and connect with a support agent in under 28 seconds. No hold music." },
-  { title: "Shared SMS Inbox", desc: "Your support team manages all customer text conversations in one shared inbox. Assign, reply, and resolve together." },
-  { title: "Call Routing & IVR", desc: "Route support calls to the right team or agent with smart IVR. Customers get help faster, teams work more efficiently." },
-  { title: "Call Recording", desc: "Record support calls automatically for quality assurance, training, and dispute resolution." },
-  { title: "Virtual Support Numbers", desc: "Get local support numbers in 50+ countries. Customers call a familiar local number — you manage everything from one dashboard." },
-  { title: "Helpdesk Integrations", desc: "Connect LimeCall to Zendesk, Intercom, Freshdesk, and other helpdesks. Every call and text logs automatically." },
+const stats = [
+  { value: "28s", label: "Avg. callback time" },
+  { value: "90%", label: "CSAT improvement" },
+  { value: "80%", label: "Faster resolution" },
+  { value: "5 min", label: "Setup time" },
 ];
 
-const benefits = [
-  { metric: "90%", desc: "Customers rate immediate response as important" },
-  { metric: "28s", desc: "Average callback connection time" },
-  { metric: "40%", desc: "Lower call abandonment with callback option" },
-  { metric: "95%", desc: "Routing accuracy to correct agent" },
+const features = [
+  {
+    title: "Instant Callback for Support",
+    desc: "Customers request a callback from your website, portal, or email footer and connect with a support agent in under 28 seconds. No hold music, no queue frustration.",
+    icon: "⚡",
+  },
+  {
+    title: "Call Routing to Specialists",
+    desc: "Route support calls to the right team or specialist automatically based on issue type, language, or customer tier. Customers get expert help faster — agents work more efficiently.",
+    icon: "🔀",
+  },
+  {
+    title: "Call Recording for QA",
+    desc: "Record every support call automatically for quality assurance, agent training, and dispute resolution. Accessible from your LimeCall dashboard and synced to your CRM.",
+    icon: "🎙️",
+  },
+  {
+    title: "Zendesk & HubSpot Sync",
+    desc: "Every call and callback is automatically logged in Zendesk, HubSpot, Freshdesk, or your CRM of choice — with call recording, duration, and agent notes. No manual data entry.",
+    icon: "🗂️",
+  },
+  {
+    title: "Shared Team Inbox",
+    desc: "Your support team manages all inbound callbacks and customer messages in one shared inbox. Assign, reply, and resolve together — with full visibility across the team.",
+    icon: "📥",
+  },
+  {
+    title: "SLA Timer Alerts",
+    desc: "Set SLA targets for callback response time and get real-time alerts when tickets are approaching breach. Never miss a support SLA commitment again.",
+    icon: "⏱️",
+  },
+];
+
+const useCases = [
+  {
+    title: "Tier-1 Support Callbacks",
+    desc: "Replace the hold queue with an instant callback. When a customer contacts support, they click the callback widget and LimeCall connects them to a Tier-1 agent in seconds. Satisfaction scores improve immediately.",
+  },
+  {
+    title: "Escalation Routing",
+    desc: "When a Tier-1 agent needs to escalate, LimeCall transfers the call instantly to a specialist — with a whisper summary so the receiving agent has full context without making the customer repeat themselves.",
+  },
+  {
+    title: "VIP Customer Callback Queue",
+    desc: "Create a priority callback queue for high-value accounts. VIP customers skip the standard queue and connect to a dedicated support rep, reinforcing the relationship and protecting retention.",
+  },
+  {
+    title: "After-Hours Call Capture",
+    desc: "Support requests come in around the clock. LimeCall captures after-hours callbacks and queues them for the morning shift. Every customer gets a confirmed callback — no request falls through the cracks.",
+  },
 ];
 
 const faqSchema = {
@@ -33,42 +76,42 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What is customer support software?',
+      name: 'How does LimeCall differ from traditional helpdesk software?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Customer support software is a category of tools that helps businesses manage, respond to, and resolve customer inquiries across channels including phone, email, SMS, and chat. LimeCall focuses on the phone and callback channel — giving customers an instant callback rather than a hold queue, and giving support teams smart routing, call recording, and CRM integrations to resolve issues faster.',
+        text: 'Traditional helpdesk software (Zendesk, Freshdesk) manages support tickets across email, chat, and phone. LimeCall specifically handles the phone and callback channel — giving customers an instant callback instead of a hold queue, and giving support teams smart call routing, call recording, and automatic CRM logging. LimeCall integrates with your existing helpdesk so both systems work together seamlessly.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How does callback improve customer support?',
+      name: 'Does LimeCall replace live chat for customer support?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Callback removes the frustration of hold queues — the most common source of customer dissatisfaction. Instead of waiting on hold, the customer enters their number and LimeCall calls them back within 28 seconds when an agent is available. This alone dramatically increases customer satisfaction scores. Callback also reduces abandonment rates and gives agents full context before picking up the call.',
+        text: 'No — LimeCall and live chat serve different needs. Live chat is ideal for quick text-based questions. LimeCall handles situations where a phone call resolves the issue faster — complex problems, billing disputes, or customers who prefer voice. Many support teams use LimeCall to escalate from chat to callback when the issue requires a human conversation.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Does LimeCall replace my helpdesk?',
+      name: 'What integrations does LimeCall support for customer support?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No — LimeCall complements your existing helpdesk rather than replacing it. LimeCall handles the phone and callback channel, while your helpdesk (Zendesk, Freshdesk, Intercom, etc.) handles ticket management. Every LimeCall call is automatically logged in your helpdesk with call recording, duration, agent notes, and customer details — so the two systems work together seamlessly.',
+        text: 'LimeCall integrates with Zendesk, HubSpot Service Hub, Freshdesk, Intercom, Salesforce Service Cloud, and Pipedrive. Every call is automatically logged with call recording, duration, and notes. Zapier support extends integration to 5,000+ additional tools. The Zendesk integration automatically creates tickets from every callback.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can support agents see call history?',
+      name: 'What pricing tiers are available for support teams?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall gives every agent a full call history view including past calls, recordings, notes, and ticket links. When a repeat customer calls, the agent sees their previous interactions before picking up — reducing the need for customers to repeat themselves and enabling faster resolution.',
+        text: 'LimeCall offers Starter, Pro, and Enterprise plans for support teams. Starter includes instant callback, call routing, and basic CRM integration. Pro adds call recording, advanced routing rules, SLA alerts, and priority support. Enterprise adds dedicated account management, custom SLAs, and white-glove onboarding. Visit the pricing page for current plan details.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What are the best customer support tools?',
+      name: 'How does LimeCall manage the call queue during high volume?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The best customer support stack typically includes a helpdesk for ticket management (Zendesk, Freshdesk), a live chat tool for real-time text support (Intercom, Crisp), and a phone/callback tool for voice support. LimeCall handles the phone layer — providing instant callbacks, smart routing, call recording, and CRM sync. Together these tools cover every support channel your customers need.',
+        text: 'During high-volume periods, LimeCall queues callback requests and connects them to agents in order of receipt. Customers receive an SMS confirmation with an estimated wait time — eliminating frustration from uncertainty. Managers can see real-time queue depth in the LimeCall dashboard and redistribute load across available agents or trigger overflow routing to additional teams.',
       },
     },
   ],
@@ -102,14 +145,14 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Benefits banner -->
-  <section class="border-b border-dark-800 py-10 bg-dark-900/40">
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
-        {benefits.map(b => (
+        {stats.map(s => (
           <div>
-            <p class="text-3xl font-extrabold text-lime-400">{b.metric}</p>
-            <p class="mt-1 text-sm text-dark-400">{b.desc}</p>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
           </div>
         ))}
       </div>
@@ -118,11 +161,15 @@ const faqSchema = {
 
   <!-- Features -->
   <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything your support team needs</h2>
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">Everything your support team needs</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Six core features designed to reduce resolution time, improve CSAT, and give managers full visibility over every support call.
+      </p>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {features.map(f => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
             <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
           </div>
@@ -131,14 +178,29 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- Use cases -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Support use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(u => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">A better support experience — step by step</h2>
       <div class="grid gap-6 sm:grid-cols-3">
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
-          <h3 class="mb-2 font-semibold text-white">Customer needs help — clicks callback</h3>
+          <h3 class="mb-2 font-semibold text-white">Customer clicks callback</h3>
           <p class="text-sm text-dark-400">Instead of sitting on hold, the customer clicks the callback button on your site, portal, or email footer. LimeCall captures their request instantly.</p>
         </div>
         <div class="text-center">
@@ -148,7 +210,7 @@ const faqSchema = {
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
-          <h3 class="mb-2 font-semibold text-white">Issue resolved — call recorded and logged</h3>
+          <h3 class="mb-2 font-semibold text-white">Issue resolved — logged automatically</h3>
           <p class="text-sm text-dark-400">The call is recorded, notes are synced to your helpdesk, and the customer receives an SMS summary. Every interaction is tracked for quality review.</p>
         </div>
       </div>
@@ -156,7 +218,7 @@ const faqSchema = {
   </section>
 
   <!-- Comparison -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall callback vs live chat vs email support</h2>
       <div class="overflow-x-auto">
@@ -191,7 +253,7 @@ const faqSchema = {
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
       <div class="space-y-4">
@@ -210,21 +272,24 @@ const faqSchema = {
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-white">Upgrade your customer support today</h2>
       <p class="mt-4 text-dark-400">Thousands of support teams use LimeCall to deliver faster, better support. Start your free trial.</p>
-      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
-        Start Free Trial →
-      </a>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">Start Free Trial →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
     </div>
   </section>
 
-  <div class="py-8">
-    <CrossLinks
-      heading="Explore More"
-      links={[
-        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Full callback automation platform.' },
-        { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Team SMS inbox for support.' },
-        { href: '/inbound-call-center-software/', title: 'Inbound Call Center', desc: 'Full inbound call center platform.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
-      ]}
-    />
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Explore More"
+        links={[
+          { href: '/integration-zendesk/', title: 'Zendesk Integration', desc: 'Auto-log every call as a Zendesk ticket.' },
+          { href: '/inbound-call-center-software/', title: 'Inbound Call Center', desc: 'Full inbound call center platform.' },
+          { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Team SMS inbox for support.' },
+          { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+        ]}
+      />
+    </div>
   </div>
 </Base>

@@ -14,18 +14,51 @@ const seo = {
   canonical: `https://www.limecall.com/healthcare-lead-generation/`,
 };
 
+const stats = [
+  { value: "40%", label: "Reduction in missed patient calls" },
+  { value: "28s", label: "Average callback time" },
+  { value: "3x", label: "More appointments booked" },
+  { value: "HIPAA", label: "Aware configuration" },
+];
+
+const features = [
+  {
+    title: "Instant Appointment Callbacks",
+    desc: "Patients who show intent to book are connected to your scheduling team in under 28 seconds. No voicemail, no hold queue — a live conversation at the moment of peak intent.",
+    icon: "📅",
+  },
+  {
+    title: "Multi-Location Routing",
+    desc: "Route patient calls to the right clinic, department, or specialist automatically. Cardiology inquiries go to the cardiology team, paediatrics to paediatrics — with no manual forwarding.",
+    icon: "🏥",
+  },
+  {
+    title: "After-Hours Capture",
+    desc: "Healthcare decisions don't stop at 5pm. Capture callback requests 24/7 and queue them for your scheduling team. Every patient gets a confirmed callback — no request lost overnight.",
+    icon: "🌙",
+  },
+  {
+    title: "HIPAA-Aware Call Handling",
+    desc: "Granular controls over call recording, data storage, and access permissions give your compliance team confidence. Configure the platform in line with your HIPAA obligations.",
+    icon: "🔒",
+  },
+  {
+    title: "Integration with Healthcare CRMs",
+    desc: "LimeCall integrates with Salesforce Health Cloud, HubSpot, and Zoho via native connectors or Zapier. Every patient callback is logged with full context — no manual data entry.",
+    icon: "🗂️",
+  },
+  {
+    title: "Appointment Confirmation SMS",
+    desc: "Automatically send appointment confirmation and reminder SMS messages to patients after a callback booking. Reduce no-shows and keep patients informed throughout their journey.",
+    icon: "💬",
+  },
+];
+
 const useCases = [
   { title: "Instant Callback for Appointment Booking", desc: "Patients who call within 5 minutes of showing interest are 100x more likely to book. LimeCall connects your staff with interested visitors in under 28 seconds while the intent is still fresh." },
   { title: "After-Hours Lead Capture", desc: "Healthcare decisions don't stop at 5pm. Collect callback requests 24/7 and schedule follow-up calls during business hours so no patient inquiry is ever lost." },
   { title: "Multi-Location & Specialist Routing", desc: "Route calls to the right clinic, department, or specialist automatically based on patient need and location. Reduce transfers and improve patient satisfaction from the first interaction." },
   { title: "HIPAA-Conscious Call Handling", desc: "Maintain secure call handling with granular recording controls that respect patient privacy requirements. Give your compliance team confidence while keeping the patient experience smooth." },
-];
-
-const stats = [
-  { value: "79%", label: "Patients research online before calling" },
-  { value: "200%", label: "More appointments with 5-min response" },
-  { value: "28s", label: "Average callback time" },
-  { value: "HIPAA", label: "Awareness built in" },
 ];
 
 const faqSchema = {
@@ -42,7 +75,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Is LimeCall HIPAA compliant?',
+      name: 'Is LimeCall HIPAA compliant for healthcare use?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'LimeCall is built with HIPAA-awareness in mind. You have granular control over call recording, data storage, and access permissions so your compliance team can configure the platform in line with your privacy obligations. We recommend consulting your compliance officer to confirm your specific configuration meets your HIPAA requirements.',
@@ -50,18 +83,18 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'How do medical offices use callback software?',
+      name: 'How do medical practices use callback software to book more appointments?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Medical offices use callback software like LimeCall to capture appointment requests from their website and respond instantly. The widget can be embedded on any page — including service pages, specialist profiles, and landing pages from Google Ads — so patients who show intent are connected to your scheduling staff within seconds, not hours.',
+        text: 'Medical practices embed LimeCall on service pages, specialist profiles, and Google Ads landing pages. When a prospective patient shows interest, they click the callback widget and LimeCall connects them with your scheduling team in under 28 seconds. Studies show that responding within 5 minutes of an online inquiry results in 3x more appointments booked compared to delayed follow-up.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can I route patients to the right department?',
+      name: 'Does LimeCall integrate with Salesforce Health Cloud?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall supports intelligent call routing based on the page the patient came from, the time of day, agent availability, and custom rules you define. You can route cardiology inquiries to one team, paediatrics to another, and general appointments to your main scheduling desk — all automatically.',
+        text: 'Yes. LimeCall integrates with Salesforce (including Health Cloud configurations) via the native Salesforce integration or Zapier. Every patient callback is logged with caller details, call duration, recording link, and notes — automatically updating the patient record in Salesforce without manual data entry.',
       },
     },
     {
@@ -88,7 +121,7 @@ const faqSchema = {
         <span class="text-lime-400">{industry}</span> Lead Generation Software
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Convert website visitors into patients with instant callbacks. Respond in under 28 seconds while healthcare intent is at its peak.
+        Convert website visitors into patients with instant callbacks. Respond in under 28 seconds while healthcare intent is at its peak — and book 3x more appointments.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
@@ -103,10 +136,10 @@ const faqSchema = {
 
   <!-- Stats -->
   <section class="border-b border-dark-800 bg-dark-900/50 py-10">
-    <div class="mx-auto max-w-4xl px-4">
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
         {stats.map(s => (
-          <div class="text-center">
+          <div>
             <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
             <div class="mt-1 text-sm text-dark-400">{s.label}</div>
           </div>
@@ -115,14 +148,33 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Use cases -->
+  <!-- Features -->
   <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">Built for {industry} providers</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        From single-practice clinics to multi-location health systems, LimeCall gives your team the tools to capture and convert more patient inquiries.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Built for {industry} teams</h2>
       <div class="grid gap-6 sm:grid-cols-2">
         {useCases.map(uc => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <h3 class="mb-2 font-semibold text-lime-400">{uc.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
           </div>
         ))}
@@ -131,7 +183,7 @@ const faqSchema = {
   </section>
 
   <!-- How it works -->
-  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
@@ -151,7 +203,7 @@ const faqSchema = {
   </section>
 
   <!-- Comparison -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Callback vs online booking form</h2>
       <div class="grid gap-6 sm:grid-cols-2">
@@ -180,7 +232,7 @@ const faqSchema = {
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
       <div class="space-y-4">
@@ -199,18 +251,21 @@ const faqSchema = {
     <div class="mx-auto max-w-2xl px-4 text-center">
       <h2 class="text-3xl font-bold text-white">Ready to grow your healthcare leads?</h2>
       <p class="mt-4 text-dark-400">Set up in 5 minutes. No credit card required.</p>
-      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
-        Start Free →
-      </a>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">Start Free →</a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">View Pricing</a>
+      </div>
     </div>
   </section>
 
-  <div class="py-8 mx-auto max-w-5xl px-4">
-    <CrossLinks heading="More LimeCall Solutions" links={[
-      { href: '/lead-generation-for-home-services/', title: 'Home Services Lead Gen', desc: 'Callbacks for home service businesses.' },
-      { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Full callback automation platform.' },
-      { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Connect with leads in seconds.' },
-      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
-    ]} />
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More LimeCall Solutions" links={[
+        { href: '/lead-generation-for-home-services/', title: 'Home Services Lead Gen', desc: 'Callbacks for home service businesses.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Full callback automation platform.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Connect with leads in seconds.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
+      ]} />
+    </div>
   </div>
 </Base>

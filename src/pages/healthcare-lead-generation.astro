@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Healthcare";
@@ -21,14 +22,63 @@ const useCases = [
 ];
 
 const stats = [
+  { value: "79%", label: "Patients research online before calling" },
+  { value: "200%", label: "More appointments with 5-min response" },
   { value: "28s", label: "Average callback time" },
-  { value: "3x", label: "More appointments booked" },
-  { value: "80%", label: "Reduction in missed leads" },
-  { value: "5 min", label: "Setup time" },
+  { value: "HIPAA", label: "Awareness built in" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help healthcare lead generation?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects prospective patients with your scheduling team in under 28 seconds. When a patient visits your website and clicks the callback widget, LimeCall simultaneously dials your front desk and the patient — connecting them before the intent fades. This dramatically increases appointment bookings compared to contact forms or voicemail.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall HIPAA compliant?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is built with HIPAA-awareness in mind. You have granular control over call recording, data storage, and access permissions so your compliance team can configure the platform in line with your privacy obligations. We recommend consulting your compliance officer to confirm your specific configuration meets your HIPAA requirements.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do medical offices use callback software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Medical offices use callback software like LimeCall to capture appointment requests from their website and respond instantly. The widget can be embedded on any page — including service pages, specialist profiles, and landing pages from Google Ads — so patients who show intent are connected to your scheduling staff within seconds, not hours.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I route patients to the right department?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports intelligent call routing based on the page the patient came from, the time of day, agent availability, and custom rules you define. You can route cardiology inquiries to one team, paediatrics to another, and general appointments to your main scheduling desk — all automatically.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens with after-hours medical enquiries?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'After-hours callback requests are captured and queued for the next available business-hours slot. LimeCall sends an SMS confirmation to the patient so they know their request was received, and your team sees a full list of queued callbacks when they start their shift — ensuring no enquiry is ever lost overnight or over weekends.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -86,15 +136,59 @@ const stats = [
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
-          { step: "1", title: "Patient shows interest", desc: "A prospective patient lands on your site and clicks the LimeCall widget to request a callback." },
-          { step: "2", title: "Instant connection", desc: "LimeCall calls your front desk and the patient simultaneously, connecting them in under 28 seconds." },
-          { step: "3", title: "Lead captured & logged", desc: "The conversation is recorded, logged, and automatically followed up if no one answers." },
+          { step: "1", title: "Patient searches for a provider", desc: "A prospective patient finds your practice online and sees the LimeCall callback offer — on your site, your ad landing page, or a specialist profile." },
+          { step: "2", title: "Connected to scheduling in 28s", desc: "The patient clicks the widget. LimeCall simultaneously calls your scheduling team and the patient, connecting them in under 28 seconds." },
+          { step: "3", title: "Appointment booked on the call", desc: "Your team books the appointment during the live conversation. No forms, no voicemail, no back-and-forth emails — just a confirmed slot." },
         ].map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Callback vs online booking form</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/40 bg-lime-500/5 p-6">
+          <h3 class="mb-4 text-lg font-bold text-lime-400">LimeCall Callback</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Patient speaks to a person in under 28 seconds</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Appointment confirmed during the conversation</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Personal, reassuring experience for the patient</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>No abandoned forms — intent captured at peak</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Works 24/7 — after-hours requests queued automatically</span></li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-4 text-lg font-bold text-white">Online Booking Form</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Patient waits hours for a confirmation email</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>High form abandonment — complex fields deter patients</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Impersonal — no human connection at a sensitive moment</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>No real-time answers to patient questions</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Competing practices may call the patient first</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{faq.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -113,9 +207,9 @@ const stats = [
 
   <div class="py-8 mx-auto max-w-5xl px-4">
     <CrossLinks heading="More LimeCall Solutions" links={[
-      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
+      { href: '/lead-generation-for-home-services/', title: 'Home Services Lead Gen', desc: 'Callbacks for home service businesses.' },
+      { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Full callback automation platform.' },
       { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Connect with leads in seconds.' },
-      { href: '/lead-generation-for-education/', title: 'Education Lead Gen', desc: 'Callbacks for enrollment inquiries.' },
       { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
     ]} />
   </div>

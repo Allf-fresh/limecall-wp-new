@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -9,9 +10,65 @@ const seo = {
   description: `Click 2 Call (also known as Click to Call) connects website visitors to your sales team instantly with one click. No hold times, no friction — just conversations that convert.`,
   canonical: `https://www.limecall.com/click-2-call/`,
 };
+
+const stats = [
+  { value: "28s", label: "Average connection time" },
+  { value: "10–12x", label: "Higher conversion vs forms" },
+  { value: "100%", label: "Mobile compatible" },
+  { value: "5 min", label: "Setup time" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is click to call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Click to call (also written as click-to-call or click 2 call) is a technology that lets website visitors initiate a phone call to your business with a single button click. Instead of finding and dialling a phone number manually, the visitor clicks a button on your website and is immediately connected to your team — usually in under 30 seconds.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does click to call work on a website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You embed a small LimeCall widget on your website. When a visitor clicks the button, they enter their phone number (or it is captured automatically on mobile). LimeCall simultaneously dials your sales or support team and the visitor, connecting both parties within seconds. No hold music, no phone tag — just an instant live conversation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is click to call free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall offers a free trial so you can test click-to-call on your website before committing to a paid plan. Paid plans start at accessible price points and include call routing, recording, analytics, and CRM integrations. Visit the LimeCall pricing page for current plan details.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between click to call and callback?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Click to call initiates a real-time, immediate connection — the visitor clicks and is connected to your team within seconds. Callback typically refers to scheduling a call for a future time, though LimeCall\'s instant callback also connects the call in under 28 seconds. In practice, both terms are often used interchangeably to describe tools that connect visitors with your team faster than traditional phone numbers or forms.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which businesses benefit most from click to call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Any business where phone conversations drive conversions benefits from click to call. This includes healthcare (appointment booking), real estate (property inquiries), legal services (case consultations), financial services (investment or insurance advice), automotive dealerships, home services, and e-commerce for high-value items. Essentially, if a phone call is the most likely path to a sale or appointment, click to call will increase your conversion rate.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -37,6 +94,20 @@ const seo = {
     </div>
   </section>
 
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- What is Click 2 Call -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -57,8 +128,28 @@ const seo = {
     </div>
   </section>
 
-  <!-- Features grid -->
+  <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How Click 2 Call works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Visitor clicks the button", desc: "A high-intent visitor sees your Click 2 Call button on any page — product, pricing, landing page, or exit-intent overlay — and clicks it." },
+          { step: "2", title: "LimeCall connects both parties", desc: "LimeCall simultaneously dials your team and the visitor. Both pick up a live call within 28 seconds — no hold music, no dialling, no delays." },
+          { step: "3", title: "Conversation converts", desc: "Your rep talks to a warm, ready-to-buy prospect. Every call is recorded, logged, and attributed so you know exactly which pages and campaigns drive calls." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">What's included with Click 2 Call</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -74,6 +165,50 @@ const seo = {
             <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Click 2 Call vs a phone number on your website</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/40 bg-lime-500/5 p-6">
+          <h3 class="mb-4 text-lg font-bold text-lime-400">LimeCall Click 2 Call</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Works on mobile without the visitor leaving the page</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>LimeCall connects the call — your rep just picks up</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Every call tracked, recorded, and attributed to a source</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Smart routing — right rep, right time, every time</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>After-hours: request queued and followed up next day</span></li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-4 text-lg font-bold text-white">Static Phone Number</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Visitor must dial manually — friction kills conversions</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>No call tracking — no idea which page or ad drove the call</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Calls ring on a single line — missed calls lost forever</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>No routing — whoever answers gets the call</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>After-hours calls go to voicemail — rarely returned</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{faq.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -96,7 +231,7 @@ const seo = {
       links={[
         { href: '/click-to-call-software/', title: 'Click to Call Software', desc: 'Full click-to-call feature page.' },
         { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Schedule and automate callbacks.' },
-        { href: '/lead-capture/', title: 'Lead Capture', desc: 'Capture every inbound lead.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in seconds wins more deals.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

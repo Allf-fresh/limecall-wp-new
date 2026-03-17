@@ -2,11 +2,12 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Limecall for Travel Tourism Aviation | Helpdesk Software`,
-  description: `Helpdesk software for Travel industry. Help to make great memories worldwide with LimeCall. Stay closer to your customers and help them faster.`,
+  title: `Callback Software for Travel & Tourism | LimeCall`,
+  description: `Airlines, travel agencies, and hotels use LimeCall to connect with travellers in under 28 seconds. Convert enquiries into bookings before the competition does.`,
   canonical: `https://www.limecall.com/limecall-for-travel-tourism-aviation/`,
 };
 
@@ -52,9 +53,58 @@ const stats = [
   { value: "50+", label: "Countries supported" },
   { value: "24/7", label: "Lead capture" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does callback software help travel companies?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Travel bookings — especially high-value packages, multi-destination tours, and complex itineraries — convert far better when a human expert answers questions in real time. LimeCall places a callback widget on your travel website. When a prospective traveller clicks it, LimeCall connects them with your nearest available travel advisor in under 28 seconds. This reduces comparison shopping and dramatically increases booking rates compared to relying on enquiry forms or email follow-up.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for airline bookings?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Airlines and aviation businesses use LimeCall to handle booking changes, upgrades, group travel enquiries, and rebooking for disrupted flights. The instant callback means passengers do not need to queue on a main phone line — they request a callback on your website and are connected to your rebooking or reservations team within seconds.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do travel agencies use callback?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Travel agencies add LimeCall\'s callback widget to their homepage, destination pages, and special offer landing pages. When a prospective customer shows interest in a holiday package, they click the widget. LimeCall connects them with the appropriate destination specialist within 28 seconds — while the excitement of that particular trip is at its highest. This approach consistently outperforms contact forms for converting travel enquiries into confirmed bookings.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the average value of a phone-booked travel package?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Phone-booked travel packages consistently command higher average order values than self-serve online bookings. Travel advisors can upsell room upgrades, travel insurance, excursions, and premium transfers during the call — all of which are difficult to present through a standard booking flow. Businesses using LimeCall in travel report that phone-converted bookings average 30–50% higher value than form-converted enquiries.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I route calls to destination specialists?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports advanced call routing rules. You can route callbacks based on the destination page the traveller was viewing, the language they selected, the time of day, or any custom parameter you define. A customer browsing Caribbean cruises gets routed to your Caribbean specialist. A French-speaking customer gets routed to a French-speaking agent. This ensures every traveller speaks to the most relevant expert from the first call.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: 'Travel, Tourism & Aviation', url: seo.canonical }]} />
@@ -104,8 +154,28 @@ const stats = [
     </div>
   </section>
 
-  <!-- Benefits -->
+  <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works for travel businesses</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Traveller searches a trip", desc: "A prospective traveller browses your destination pages or offer listings and sees the LimeCall callback offer while their excitement is at its peak." },
+          { step: "2", title: "Connected to travel advisor in 28s", desc: "They click the widget. LimeCall routes the call to the most relevant destination specialist and connects both parties in under 28 seconds." },
+          { step: "3", title: "Booking completed over the phone", desc: "Your travel advisor answers questions, upsells relevant add-ons, and confirms the booking during the live call — higher value, higher conversion." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">Key capabilities for travel businesses</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -115,6 +185,35 @@ const stats = [
             <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Callback vs online booking engine for high-value travel</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/40 bg-lime-500/5 p-6">
+          <h3 class="mb-4 text-lg font-bold text-lime-400">LimeCall Callback</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Traveller speaks to a human expert in under 28 seconds</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Advisor upsells upgrades, insurance, and excursions on the call</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Handles complex itineraries and bespoke requirements</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Builds trust and reduces comparison shopping</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>30–50% higher average booking value vs self-serve</span></li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-4 text-lg font-bold text-white">Online Booking Engine</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>High abandonment on complex multi-step booking flows</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Limited upsell capability within the booking flow</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Cannot answer bespoke questions or handle special requests</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>No emotional connection — travel is an aspirational purchase</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Price-sensitive customers more likely to compare OTAs</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -134,6 +233,21 @@ const stats = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{faq.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
@@ -146,9 +260,9 @@ const stats = [
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More solutions" links={[
-        { href: '/limecall-for-travel/', title: 'Travel Agency', desc: 'Focused guide for travel agency teams.' },
+        { href: '/lead-generation-for-travel-companies/', title: 'Travel Lead Generation', desc: 'Lead gen guide for travel companies.' },
         { href: '/limecall-for-real-estate/', title: 'Real Estate', desc: 'Convert property enquiries in under 28 seconds.' },
-        { href: '/use-cases/', title: 'All Use Cases', desc: 'See how LimeCall works across every industry.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in seconds wins more deals.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
       ]} />
     </div>

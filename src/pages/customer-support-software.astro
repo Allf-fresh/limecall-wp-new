@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
@@ -20,14 +21,63 @@ const features = [
 ];
 
 const benefits = [
+  { metric: "90%", desc: "Customers rate immediate response as important" },
   { metric: "28s", desc: "Average callback connection time" },
-  { metric: "4x", desc: "Higher customer satisfaction with callbacks vs hold queues" },
-  { metric: "98%", desc: "SMS read rate for support updates" },
-  { metric: "50+", desc: "Countries with local support numbers" },
+  { metric: "40%", desc: "Lower call abandonment with callback option" },
+  { metric: "95%", desc: "Routing accuracy to correct agent" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is customer support software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Customer support software is a category of tools that helps businesses manage, respond to, and resolve customer inquiries across channels including phone, email, SMS, and chat. LimeCall focuses on the phone and callback channel — giving customers an instant callback rather than a hold queue, and giving support teams smart routing, call recording, and CRM integrations to resolve issues faster.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does callback improve customer support?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Callback removes the frustration of hold queues — the most common source of customer dissatisfaction. Instead of waiting on hold, the customer enters their number and LimeCall calls them back within 28 seconds when an agent is available. This alone dramatically increases customer satisfaction scores. Callback also reduces abandonment rates and gives agents full context before picking up the call.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall replace my helpdesk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No — LimeCall complements your existing helpdesk rather than replacing it. LimeCall handles the phone and callback channel, while your helpdesk (Zendesk, Freshdesk, Intercom, etc.) handles ticket management. Every LimeCall call is automatically logged in your helpdesk with call recording, duration, agent notes, and customer details — so the two systems work together seamlessly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can support agents see call history?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall gives every agent a full call history view including past calls, recordings, notes, and ticket links. When a repeat customer calls, the agent sees their previous interactions before picking up — reducing the need for customers to repeat themselves and enabling faster resolution.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the best customer support tools?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The best customer support stack typically includes a helpdesk for ticket management (Zendesk, Freshdesk), a live chat tool for real-time text support (Intercom, Crisp), and a phone/callback tool for voice support. LimeCall handles the phone layer — providing instant callbacks, smart routing, call recording, and CRM sync. Together these tools cover every support channel your customers need.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -84,23 +134,73 @@ const benefits = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">A better support experience</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">A better support experience — step by step</h2>
       <div class="grid gap-6 sm:grid-cols-3">
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">1</div>
-          <h3 class="mb-2 font-semibold text-white">Customer reaches out</h3>
-          <p class="text-sm text-dark-400">Via callback button, SMS, or phone — customers choose how they want to reach you.</p>
+          <h3 class="mb-2 font-semibold text-white">Customer needs help — clicks callback</h3>
+          <p class="text-sm text-dark-400">Instead of sitting on hold, the customer clicks the callback button on your site, portal, or email footer. LimeCall captures their request instantly.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">2</div>
-          <h3 class="mb-2 font-semibold text-white">Routed to right agent</h3>
-          <p class="text-sm text-dark-400">LimeCall routes to the right support agent based on issue type, language, or availability.</p>
+          <h3 class="mb-2 font-semibold text-white">LimeCall routes to available agent</h3>
+          <p class="text-sm text-dark-400">LimeCall identifies the right support agent based on issue type, language, or availability — and connects the customer in under 28 seconds.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">3</div>
-          <h3 class="mb-2 font-semibold text-white">Issue resolved fast</h3>
-          <p class="text-sm text-dark-400">Call is recorded, notes sync to CRM, and the customer leaves satisfied — without holding.</p>
+          <h3 class="mb-2 font-semibold text-white">Issue resolved — call recorded and logged</h3>
+          <p class="text-sm text-dark-400">The call is recorded, notes are synced to your helpdesk, and the customer receives an SMS summary. Every interaction is tracked for quality review.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall callback vs live chat vs email support</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="pb-3 text-left text-dark-400 font-medium">Metric</th>
+              <th class="pb-3 text-center text-lime-400 font-semibold">LimeCall Callback</th>
+              <th class="pb-3 text-center text-dark-300 font-medium">Live Chat</th>
+              <th class="pb-3 text-center text-dark-300 font-medium">Email Support</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              { metric: "Response time", callback: "Under 28 seconds", chat: "1–5 minutes", email: "Hours to days" },
+              { metric: "Resolution rate (first contact)", callback: "High — full conversation", chat: "Medium — text limits depth", email: "Low — multi-message needed" },
+              { metric: "Customer satisfaction", callback: "Very high", chat: "High", email: "Medium" },
+              { metric: "Works after hours", callback: "Yes — queued callbacks", chat: "Bot only", email: "Yes — slow reply" },
+              { metric: "Call/chat recording", callback: "Full recording + transcript", chat: "Chat log", email: "Email thread" },
+            ].map(row => (
+              <tr>
+                <td class="py-3 text-dark-400">{row.metric}</td>
+                <td class="py-3 text-center text-lime-400 font-medium">{row.callback}</td>
+                <td class="py-3 text-center text-dark-300">{row.chat}</td>
+                <td class="py-3 text-center text-dark-400">{row.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{faq.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -120,9 +220,9 @@ const benefits = [
     <CrossLinks
       heading="Explore More"
       links={[
-        { href: '/inbound-call-center-software/', title: 'Inbound Call Center', desc: 'Full inbound call center platform.' },
-        { href: '/callbackautomation/', title: 'Callback Automation', desc: 'Automate customer callbacks.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Full callback automation platform.' },
         { href: '/shared-inbox/', title: 'Shared Inbox', desc: 'Team SMS inbox for support.' },
+        { href: '/inbound-call-center-software/', title: 'Inbound Call Center', desc: 'Full inbound call center platform.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
       ]}
     />

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Real Estate";
@@ -21,14 +22,63 @@ const useCases = [
 ];
 
 const stats = [
+  { value: "70%", label: "Buyers contact agents by phone" },
+  { value: "8x", label: "More closings with 5-min response" },
   { value: "28s", label: "Average callback time" },
-  { value: "3x", label: "More viewings booked" },
-  { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does callback software help real estate agents?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Callback software like LimeCall connects agents with buyers and sellers within seconds of them expressing interest online. When a prospect clicks the widget on a listing page or landing page, LimeCall dials the agent and the prospect simultaneously. This dramatically reduces the time between inquiry and first conversation — and agents who respond within 5 minutes are up to 8x more likely to close the deal than those who respond later.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best lead generation software for realtors?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The best real estate lead generation software combines traffic generation (SEO, PPC, portal listings) with a high-converting lead capture layer. LimeCall fills that second role: it converts website visitors and portal traffic into live phone conversations before the lead loses interest. Agents using LimeCall report significantly more booked showings and higher close rates compared to relying on forms or email follow-up alone.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How fast should a real estate agent respond to leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Studies consistently show that responding within 5 minutes of an online inquiry produces dramatically better results — up to 8x higher close rates compared to responding after 30 minutes. LimeCall automates this by connecting agents and prospects in under 28 seconds, removing the manual delay entirely. The agent does not need to notice the inquiry, pick up the phone, and dial — LimeCall handles all of that automatically.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall with my CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with popular real estate CRMs and general-purpose platforms including HubSpot, Salesforce, Pipedrive, and Zapier-connected tools. Every callback is automatically logged with the caller details, call duration, recording link, and outcome — so your pipeline stays accurate without manual data entry.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for property management?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Property management companies use LimeCall to handle maintenance request callbacks, tenant inquiries, and prospective tenant viewings. You can set routing rules so tenant calls go to the property management team while sales inquiries route to letting agents — all from the same LimeCall account.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -86,15 +136,59 @@ const stats = [
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
-          { step: "1", title: "Buyer shows interest", desc: "A prospective buyer browses a listing and clicks the LimeCall widget to request an instant callback." },
-          { step: "2", title: "Agent connected instantly", desc: "LimeCall calls your agent and the buyer at the same time, connecting them in under 28 seconds." },
-          { step: "3", title: "Lead logged automatically", desc: "The call is recorded, logged to your CRM, and auto-followed-up if the agent is unavailable." },
+          { step: "1", title: "Buyer fills enquiry or clicks", desc: "A buyer browses a listing, fills an enquiry form, or clicks the LimeCall callback widget on your site or portal landing page." },
+          { step: "2", title: "Agent and buyer connected instantly", desc: "LimeCall calls your agent and the buyer at the same time, connecting them in under 28 seconds — while the buyer is still engaged." },
+          { step: "3", title: "First conversation leads to a showing", desc: "The agent builds rapport, qualifies the buyer, and books a viewing during the live call — turning a cold inquiry into a warm appointment." },
         ].map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Callback vs email follow-up for real estate leads</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/40 bg-lime-500/5 p-6">
+          <h3 class="mb-4 text-lg font-bold text-lime-400">LimeCall Callback</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Agent speaks to buyer in under 28 seconds</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Builds relationship in the first interaction</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Showing booked during the call — no back-and-forth</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>8x higher conversion vs delayed response</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Works nights and weekends with after-hours capture</span></li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-4 text-lg font-bold text-white">Email Follow-Up</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Buyer waits hours or days for a reply</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Cold, impersonal — harder to build trust in text</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Requires multiple exchanges to schedule a showing</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Buyer has already called a competitor by the time you reply</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Low open rates on follow-up sequences</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{faq.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -114,8 +208,8 @@ const stats = [
   <div class="py-8 mx-auto max-w-5xl px-4">
     <CrossLinks heading="More LimeCall Solutions" links={[
       { href: '/limecall-for-real-estate/', title: 'LimeCall for Real Estate', desc: 'Full platform overview for realtors.' },
-      { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
-      { href: '/lead-distribution/', title: 'Lead Distribution', desc: 'Route leads to the right agent automatically.' },
+      { href: '/real-estate-marketing-tools/', title: 'Real Estate Marketing Tools', desc: 'Marketing tools for property professionals.' },
+      { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route leads to the right agent automatically.' },
       { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
     ]} />
   </div>

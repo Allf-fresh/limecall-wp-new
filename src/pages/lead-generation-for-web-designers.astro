@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Web Designers";
@@ -21,14 +22,63 @@ const useCases = [
 ];
 
 const stats = [
+  { value: "72%", label: "Design clients want to talk first" },
+  { value: "3x", label: "Higher project inquiry conversion" },
   { value: "28s", label: "Average callback time" },
-  { value: "3x", label: "More projects won" },
-  { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do web designers get more clients?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Web designers get more clients by combining inbound traffic (portfolio SEO, Dribbble, Behance, referrals) with a high-converting lead capture layer. LimeCall adds instant callback to your portfolio so that when a prospect is ready to hire, they can speak to you immediately — before they move on to another studio. Designers who respond in seconds rather than hours win disproportionately more projects.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best lead generation tool for design agencies?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For design agencies, the best lead gen tool is one that turns portfolio visitors into conversations quickly. LimeCall\'s callback widget sits on your site, portfolio, or landing page and connects prospects with your team in under 28 seconds. Unlike contact forms that sit in an inbox for hours, LimeCall initiates a live call the moment the prospect expresses interest.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I respond faster to design project enquiries?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall automates the first response entirely. When a prospect clicks the callback widget on your portfolio or landing page, LimeCall dials you and the prospect simultaneously. You pick up a live call rather than checking email or a contact form — reducing your response time from hours to seconds without any manual effort.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall on my portfolio site?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall works on any website — including custom-coded portfolio sites, WordPress, Webflow, Squarespace, and Wix. You embed a small JavaScript snippet or use the LimeCall WordPress or Webflow plugin, and the callback widget appears on whichever pages you choose. Setup takes under 5 minutes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work with Webflow or WordPress?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall has dedicated integrations for both Webflow and WordPress. The WordPress plugin installs in minutes from the plugin directory. For Webflow, you paste the LimeCall embed code into your site\'s custom code section. Both integrations give you full access to widget customisation, routing rules, and call analytics from the LimeCall dashboard.',
+      },
+    },
+  ],
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -86,15 +136,59 @@ const stats = [
       <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
-          { step: "1", title: "Client views your portfolio", desc: "A prospective client browses your work and clicks the LimeCall widget to request a project discussion callback." },
-          { step: "2", title: "You're connected instantly", desc: "LimeCall calls you and the prospect simultaneously, connecting you both in under 28 seconds." },
-          { step: "3", title: "Project scoped & logged", desc: "The call is recorded and noted automatically. Follow-up reminders keep warm prospects moving through your pipeline." },
+          { step: "1", title: "Prospect visits your portfolio", desc: "A potential client lands on your portfolio from search, referral, or social — and sees the LimeCall callback offer while reviewing your work." },
+          { step: "2", title: "One click to connect", desc: "They click the widget. LimeCall calls you and the prospect simultaneously, connecting you both in under 28 seconds — no phone tag, no email delays." },
+          { step: "3", title: "Discovery call booked — proposal sent", desc: "You scope the project on the live call. The discovery call is logged automatically, and you follow up with a proposal while you're still top of mind." },
         ].map(s => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Callback widget vs contact form for design agencies</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/40 bg-lime-500/5 p-6">
+          <h3 class="mb-4 text-lg font-bold text-lime-400">LimeCall Callback Widget</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Connects you with the prospect in under 28 seconds</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Personal conversation builds trust before a competitor can respond</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>No form abandonment — one click is all it takes</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Works 24/7 — after-hours requests queued for morning</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span><span>Calls logged automatically — no CRM data entry</span></li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-4 text-lg font-bold text-white">Contact Form</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Prospect waits hours or days for a reply</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>High abandonment — too many fields, too much friction</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Cold email lacks the warmth of a first conversation</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Another agency may have called them before you replied</span></li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-dark-500">✗</span><span>Requires manual follow-up to stay in touch</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white group-open:text-lime-400">{faq.name}</summary>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -113,9 +207,9 @@ const stats = [
 
   <div class="py-8 mx-auto max-w-5xl px-4">
     <CrossLinks heading="More LimeCall Solutions" links={[
-      { href: '/lead-generation-for-digital-marketing-agencies/', title: 'Agency Lead Gen', desc: 'Lead gen tools built for digital agencies.' },
+      { href: '/limecall-for-webflow/', title: 'LimeCall for Webflow', desc: 'Add callback to your Webflow site.' },
+      { href: '/limecall-for-wordpress/', title: 'LimeCall for WordPress', desc: 'WordPress plugin for instant callbacks.' },
       { href: '/click-to-call-software/', title: 'Click to Call', desc: 'Instant callbacks from your website.' },
-      { href: '/conversation-scheduling/', title: 'Schedule Callbacks', desc: 'Let clients book discovery calls at their convenience.' },
       { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans.' },
     ]} />
   </div>

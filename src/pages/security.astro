@@ -1,15 +1,271 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Security - LimeCall`,
-  description: `Customer trust and data security are critical to everything we do at Limecall. Grow sales through real-time customer conversations. Get Started Today!`,
+  title: `Security & Data Protection | LimeCall`,
+  description: `LimeCall is built with security at its core. SOC 2, GDPR compliance, encrypted data, and 99.9% uptime. Your customer data is always protected.`,
   canonical: `https://www.limecall.com/security/`,
 };
+
+const stats = [
+  { value: '99.9%', label: 'Uptime SLA' },
+  { value: 'AES-256', label: 'Data encryption' },
+  { value: 'GDPR', label: 'Compliant' },
+  { value: 'SOC 2', label: 'Aligned' },
+];
+
+const features = [
+  {
+    title: 'End-to-End Encryption',
+    desc: 'All data in transit is protected with TLS 1.2+ encryption. Data at rest is encrypted using AES-256. Your call recordings, contact details, and analytics are encrypted at every layer.',
+    icon: '🔒',
+  },
+  {
+    title: 'GDPR & CCPA Compliance',
+    desc: 'LimeCall is built for global compliance. We support GDPR data subject rights, CCPA opt-out mechanisms, and provide Data Processing Agreements (DPAs) for enterprise customers.',
+    icon: '🛡️',
+  },
+  {
+    title: 'Data Residency Options',
+    desc: 'Choose where your data lives. LimeCall supports EU and US data residency so you can meet local regulatory requirements without compromising on performance.',
+    icon: '🌍',
+  },
+  {
+    title: 'Role-Based Access Control',
+    desc: 'Grant the right level of access to the right people. Admins, managers, and agents each have scoped permissions. Sensitive data is only visible to those who need it.',
+    icon: '👥',
+  },
+  {
+    title: 'Audit Logs & Activity Tracking',
+    desc: 'Every admin action, configuration change, and login event is logged with a timestamp and user ID. Full audit trails are available for compliance reviews and incident investigation.',
+    icon: '📋',
+  },
+  {
+    title: 'Regular Security Audits',
+    desc: 'LimeCall undergoes regular third-party security assessments and penetration testing. Vulnerabilities are triaged, remediated, and disclosed according to responsible disclosure principles.',
+    icon: '🔍',
+  },
+];
+
+const compliance = [
+  {
+    badge: 'GDPR',
+    title: 'General Data Protection Regulation',
+    desc: 'LimeCall supports all GDPR obligations including the right to access, the right to erasure, data portability, and lawful basis for processing. We act as a data processor on your behalf and provide a signed DPA on request.',
+  },
+  {
+    badge: 'CCPA',
+    title: 'California Consumer Privacy Act',
+    desc: 'California residents using your product have the right to know, delete, and opt out of the sale of personal information. LimeCall\'s data handling is built to support these consumer rights end-to-end.',
+  },
+  {
+    badge: 'SOC 2',
+    title: 'SOC 2 Type II Aligned',
+    desc: 'LimeCall\'s infrastructure and controls are aligned with SOC 2 Trust Service Criteria covering security, availability, and confidentiality. Enterprise customers can request our security documentation under NDA.',
+  },
+];
+
+const dataPractices = [
+  {
+    title: 'What data does LimeCall store?',
+    desc: 'LimeCall stores the information needed to operate the service: contact details submitted through your widget (name, phone number, email), call records (timestamp, duration, outcome), call recordings where enabled, and account configuration data.',
+  },
+  {
+    title: 'Call recording retention',
+    desc: 'Call recordings are stored for 90 days by default on Standard plans. Pro and Enterprise plans can configure custom retention periods. You can delete individual recordings or bulk-delete all recordings from your dashboard at any time.',
+  },
+  {
+    title: 'Data deletion',
+    desc: 'You can delete your account and all associated data at any time from your account settings. Upon deletion, all personal data is removed within 30 days from active systems and within 90 days from backups, in accordance with GDPR Article 17.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is LimeCall GDPR compliant?',
+    a: 'Yes. LimeCall is built to support GDPR compliance for you and your customers. We act as a data processor under your instructions, provide a signed Data Processing Agreement (DPA), support data subject rights requests, and maintain records of all processing activities. Contact our team to obtain a DPA.',
+  },
+  {
+    q: 'Where is my data stored?',
+    a: 'LimeCall stores data on secure cloud infrastructure hosted in the EU (Frankfurt) and US (Virginia) depending on your account\'s data residency setting. Enterprise customers can specify their preferred region at onboarding.',
+  },
+  {
+    q: 'How are call recordings stored and protected?',
+    a: 'Call recordings are encrypted at rest using AES-256 and stored on isolated, access-controlled storage. Recordings are only accessible to authorised users within your account. They are never used to train AI models or shared with third parties.',
+  },
+  {
+    q: 'Can I delete my data and recordings?',
+    a: 'Yes. You can delete individual call recordings or bulk-delete all recordings from the LimeCall dashboard. To delete your entire account and all associated data, go to Account Settings then Delete Account. All personal data is purged within 30 days of deletion.',
+  },
+  {
+    q: 'Do you share data with third parties?',
+    a: 'LimeCall does not sell, rent, or share personal data with third parties for advertising or marketing purposes. Sub-processors used to operate the platform (such as cloud infrastructure providers) are listed in our Privacy Policy and are contractually bound to process data only as instructed.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Security', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Security & Trust
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Your Data.<br class="hidden sm:block" />
+        <span class="text-lime-400">Always Protected.</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall is built with security at its core — from encryption and access controls to compliance certifications. We protect your data so you can focus on your customers.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="mailto:security@limecall.com" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Contact Security Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Security features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Security built into every layer
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        From the moment a visitor submits their number to the moment you download a call recording, your data is protected end-to-end.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 text-2xl">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance section -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Compliance & Certifications
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        LimeCall aligns with the major data protection regulations and frameworks so you can confidently use our platform wherever your customers are located.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {compliance.map(c => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="mb-4 inline-flex items-center justify-center rounded-lg border border-lime-500/30 bg-lime-500/10 px-4 py-2">
+              <span class="text-lg font-extrabold text-lime-400">{c.badge}</span>
+            </div>
+            <h3 class="mb-3 font-semibold text-white">{c.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Data practices -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">
+        Data practices you can trust
+      </h2>
+      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">
+        Transparency matters. Here is exactly how LimeCall handles your data.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {dataPractices.map(d => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="mb-3 font-semibold text-lime-400">{d.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Security FAQ</h2>
+      <div class="space-y-4">
+        {faqs.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Questions about security?</h2>
+      <p class="mt-4 text-dark-400">
+        Our security team responds to all enquiries within one business day.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="mailto:security@limecall.com" class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          security@limecall.com
+        </a>
+        <a href="/gdpr/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Read GDPR Policy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <div class="py-8 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related resources" links={[
+        { href: '/gdpr/', title: 'GDPR', desc: 'Our commitment to GDPR compliance and data subject rights.' },
+        { href: '/privacy-policy/', title: 'Privacy Policy', desc: 'How LimeCall collects, uses, and protects your personal data.' },
+        { href: '/about-us/', title: 'About LimeCall', desc: 'Learn about the company behind the platform.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans with no hidden fees.' },
+      ]} />
+    </div>
   </div>
 </Base>

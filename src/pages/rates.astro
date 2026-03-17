@@ -1,15 +1,167 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Rates - LimeCall`,
-  description: ``,
-  canonical: `https://www.limecall.com/rates/`,
+  title: 'LimeCall Rates — Call & SMS Pricing | LimeCall',
+  description: 'View all LimeCall call and SMS rates. Transparent per-minute call charges and per-message SMS pricing for 40+ countries.',
+  canonical: `${site.url}/rates/`,
 };
+
+const rateCards = [
+  {
+    title: 'Outbound Call Rates',
+    desc: 'Per-minute rates for callback connections. LimeCall places outbound calls to connect your team with visitors. Rates vary by destination country.',
+    href: '/outbound-calling-charges/',
+    example: 'US: $0.015/min · UK: $0.018/min · AU: $0.025/min',
+    cta: 'View call rates',
+  },
+  {
+    title: 'SMS Rates',
+    desc: 'Per-message rates for outgoing SMS. Send follow-up texts, meeting reminders, and broadcasts. Inbound SMS is always free.',
+    href: '/outgoing-rates/',
+    example: 'US: $0.0075/msg · UK: $0.040/msg · AU: $0.065/msg',
+    cta: 'View SMS rates',
+  },
+];
+
+const summaryRates = [
+  { country: 'United States', callRate: '$0.015/min', smsRate: '$0.0075/msg' },
+  { country: 'United Kingdom', callRate: '$0.018/min', smsRate: '$0.040/msg' },
+  { country: 'Canada', callRate: '$0.015/min', smsRate: '$0.0075/msg' },
+  { country: 'Australia', callRate: '$0.025/min', smsRate: '$0.065/msg' },
+  { country: 'Germany', callRate: '$0.020/min', smsRate: '$0.075/msg' },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Rates', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Rates
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Simple, <span class="text-lime-400">Transparent Rates</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall charges per minute for outbound calls and per message for outgoing SMS. No hidden fees, no surprises. Every plan includes credits that cover most usage.
+      </p>
+    </div>
+  </section>
+
+  <!-- Rate Cards -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Choose a rate category</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {rateCards.map((card) => (
+          <a
+            href={card.href}
+            class="group rounded-2xl border border-dark-800 bg-dark-900/60 p-8 transition hover:border-lime-500/40 hover:bg-dark-900"
+          >
+            <h3 class="mb-3 text-xl font-extrabold text-white group-hover:text-lime-400 transition-colors">
+              {card.title}
+            </h3>
+            <p class="text-sm text-dark-400 leading-relaxed mb-4">{card.desc}</p>
+            <div class="rounded-lg border border-dark-700 bg-dark-800/60 px-4 py-2 text-xs font-mono text-lime-400 mb-5">
+              {card.example}
+            </div>
+            <div class="text-sm font-semibold text-lime-400">{card.cta} →</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary Table -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-2xl font-bold text-white text-center">Top 5 countries — calls & SMS</h2>
+
+      <div class="overflow-hidden rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-white">Country</th>
+              <th class="px-6 py-4 text-center font-semibold text-lime-400">Call Rate</th>
+              <th class="px-6 py-4 text-center font-semibold text-lime-400">SMS Rate</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800 bg-dark-900/40">
+            {summaryRates.map((r, i) => (
+              <tr class={i % 2 === 0 ? 'bg-dark-900/20' : ''}>
+                <td class="px-6 py-4 text-white font-medium">{r.country}</td>
+                <td class="px-6 py-4 text-center font-bold text-lime-400">{r.callRate}</td>
+                <td class="px-6 py-4 text-center font-bold text-lime-400">{r.smsRate}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-4 text-xs text-dark-500 text-center">
+        Rates are charged in USD. Your monthly plan includes calling and SMS credits. Additional usage is billed at the rates above.
+      </p>
+
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href="/outbound-calling-charges/" class="text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+          Full call rate table →
+        </a>
+        <span class="text-dark-600">·</span>
+        <a href="/outgoing-rates/" class="text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+          Full SMS rate table →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credits Note -->
+  <section class="pb-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-6">
+        <h3 class="mb-2 font-bold text-lime-400">Plan credits cover most usage</h3>
+        <p class="text-sm text-dark-300 leading-relaxed">
+          Every LimeCall plan includes a monthly credit that covers the majority of call and SMS usage at typical volumes. The Basic free plan covers 30 calls per month. Starter and Pro plans include higher credits proportional to their price. You only pay per-minute or per-message rates if you exceed your included credits.
+        </p>
+        <div class="mt-4">
+          <a href="/pricing/" class="inline-flex items-center gap-1 text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            See included credits per plan →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Get started with transparent pricing</h2>
+      <p class="mt-4 text-dark-400">Free plan includes 30 calls per month. No credit card required. No hidden charges.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+          Start Free →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing Plans
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Related Pages"
+      links={[
+        { href: '/pricing/', title: 'Pricing Plans', desc: 'Full plan details with included credits.' },
+        { href: '/outbound-calling-charges/', title: 'Outbound Call Rates', desc: 'Full per-minute call rate table by country.' },
+        { href: '/outgoing-rates/', title: 'SMS Rates', desc: 'Full per-message SMS rate table by country.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Local numbers in 50+ countries.' },
+      ]}
+    />
   </div>
 </Base>

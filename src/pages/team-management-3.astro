@@ -1,15 +1,225 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Team Managemen - LimeCall`,
-  description: `Team Management - Manage your teams quickly and at a glance using LimeCall’s team management feature. Get Started with our Callback Software.`,
-  canonical: `https://www.limecall.com/team-management-3/`,
+  title: 'Team Management — Manage Your Sales Team\'s Calls | LimeCall',
+  description: "Add team members, set availability, assign leads, and monitor call performance. LimeCall's team management keeps every rep accountable.",
+  canonical: `${site.url}/team-management-3/`,
+};
+
+const stats = [
+  { value: 'Unlimited', label: 'Team members', sub: 'On Pro plan — no per-seat limit' },
+  { value: '100%', label: 'Calls logged', sub: 'Every rep call recorded and tracked' },
+  { value: '28s', label: 'Response per rep', sub: 'Average connection time after lead arrival' },
+  { value: '5 min', label: 'Rep onboarding', sub: 'Add a new rep and go live in minutes' },
+];
+
+const features = [
+  { title: 'Team Member Management', desc: 'Add, remove, and manage all your sales reps from one dashboard. Assign roles, set permissions, and keep your team organised as you grow.' },
+  { title: 'Availability Scheduling', desc: 'Each rep sets their own availability windows — days, hours, time zones. LimeCall only routes calls and leads to reps who are actually available.' },
+  { title: 'Round-Robin Lead Assignment', desc: 'Distribute inbound leads evenly across your team with automatic round-robin. Every rep gets a fair share — no manual assignment needed.' },
+  { title: 'Rep Performance Dashboard', desc: 'Track calls answered, response time, conversion rate, and talk time for each rep. Identify your top performers and coach those who need support.' },
+  { title: 'Call Recording per Rep', desc: 'Every call is recorded and tagged to the rep who handled it. Managers can listen back to coach reps and review call quality at any time.' },
+  { title: 'Role-Based Permissions', desc: 'Control who can see what. Managers get full team visibility. Reps see only their own leads and calls. Admins control billing and settings.' },
+];
+
+const steps = [
+  { n: '1', title: 'Add your team members', desc: 'Invite reps by email. They set up their profile, availability, and connect their calendar — all in under 5 minutes.' },
+  { n: '2', title: 'Leads are automatically assigned', desc: 'When a lead arrives, LimeCall evaluates rep availability and assignment rules, then routes the lead instantly — no manager input needed.' },
+  { n: '3', title: 'Track performance in real time', desc: 'The manager dashboard shows live rep status, call volumes, response times, and conversion rates. Coach with data, not guesswork.' },
+];
+
+const useCases = [
+  { title: 'Onboarding New Reps', desc: 'Get a new team member live in minutes. Add them, set their availability, and LimeCall starts routing leads to them automatically.' },
+  { title: 'Monitoring Team Performance', desc: 'See every rep\'s call volume, response time, and conversion rate side-by-side. Know who\'s performing and who needs coaching.' },
+  { title: 'Setting Coverage Schedules', desc: 'Define exactly when each rep is available. LimeCall never routes to an unavailable rep — no missed calls, no frustrated leads.' },
+  { title: 'Distributing Inbound Leads Fairly', desc: 'Round-robin distribution ensures every rep gets the same lead volume. No favouritism, no bottlenecks, no manual assigning.' },
+];
+
+const faqs = [
+  {
+    '@type': 'Question',
+    name: 'How many user seats does LimeCall support?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'LimeCall\'s Pro plan supports unlimited team members at no extra per-seat charge. The Starter plan supports up to 5 users. The Basic free plan is designed for single users. Upgrade to Pro to add your full team without worrying about seat costs.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'What permissions can managers control?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'LimeCall uses role-based access control. Admins have full access including billing, settings, and all data. Managers can view the full team dashboard, listen to all call recordings, and adjust routing rules. Reps see only their own assigned leads, call history, and recordings. You can customise these roles from the settings panel.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'How does LimeCall track rep performance?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'The manager dashboard shows per-rep metrics including: total calls answered, missed calls, average response time, average call duration, and conversion rate (where CRM integration is active). All data is filterable by date range. You can also export reports for deeper analysis.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'Is there a manager dashboard separate from the rep view?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'Yes. Managers and admins see a team-level dashboard showing all reps\' activity, live status, and performance metrics. Reps see a personal dashboard showing only their own leads, calls, and schedule. The view automatically adjusts based on the user\'s role.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'Can I set different availability for different team members?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'Yes. Every rep controls their own availability independently — including days of the week, hours per day, time zone, and one-off overrides for holidays or meetings. LimeCall uses this availability data in real time to decide which reps are eligible to receive calls and leads at any given moment.',
+    },
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs,
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Team Management', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Team Management
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Manage Your Sales Team's <span class="text-lime-400">Calls & Leads</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Add team members, set availability, assign leads automatically, and monitor every rep's performance — all from one LimeCall dashboard.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">No credit card required · 5-minute setup · Unlimited reps on Pro</p>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map((s) => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm font-semibold text-white">{s.label}</p>
+            <p class="mt-0.5 text-xs text-dark-500">{s.sub}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">
+        Team management <span class="text-lime-400">features</span>
+      </h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map((s) => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map((u) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Build and manage your sales team</h2>
+      <p class="mt-4 text-dark-400">Add your whole team, set availability, and start routing leads automatically — in 5 minutes.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">No credit card required · Unlimited reps on Pro</p>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Related Features"
+      links={[
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Rules-based lead routing to the right rep.' },
+        { href: '/automatic-lead-distribution/', title: 'Automatic Lead Distribution', desc: 'Distribute leads evenly and automatically.' },
+        { href: '/for-sales-teams/', title: 'For Sales Teams', desc: 'How LimeCall helps sales teams close more deals.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans. Unlimited reps on Pro.' },
+      ]}
+    />
   </div>
 </Base>

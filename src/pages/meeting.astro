@@ -1,15 +1,225 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `Schedule Meetings with Ease: LimeCall's Meeting Scheduler`,
-  description: `Streamline your scheduling, never miss a meeting, LimeCall's intuitive meeting scheduler. Book appointments, send reminders, and manage your calendar efficiently.`,
-  canonical: `https://www.limecall.com/meeting/`,
+  title: 'Meeting Scheduler Software — Book Calls That Actually Happen | LimeCall',
+  description: "LimeCall's meeting scheduler books calls and automatically connects your team with prospects — cutting no-shows by 80%. Free to start.",
+  canonical: `${site.url}/meeting/`,
+};
+
+const stats = [
+  { value: '80%', label: 'No-show reduction', sub: 'Automated reminders keep prospects on the hook' },
+  { value: '2x', label: 'More meetings completed', sub: 'Compared to unconfirmed calendar links' },
+  { value: '28s', label: 'Instant connection option', sub: 'Skip scheduling — connect right now' },
+  { value: '5 min', label: 'Setup time', sub: 'Live in minutes, no dev work needed' },
+];
+
+const features = [
+  { title: 'Smart Meeting Scheduler', desc: 'Embed a sleek scheduler on any page or share a booking link. Prospects pick a time that works and you get it confirmed instantly.' },
+  { title: 'Instant + Scheduled Modes', desc: 'Offer both options: schedule a meeting for later or trigger an instant callback right now. Every visitor intent is covered.' },
+  { title: 'Automated SMS & Email Reminders', desc: 'LimeCall sends reminder messages before every scheduled call — reducing no-shows by up to 80% without any manual follow-up.' },
+  { title: 'Calendar Sync (Google & Outlook)', desc: 'Meetings sync automatically to your team\'s Google or Outlook calendars. No double-booking, no manual entry.' },
+  { title: 'CRM Meeting Logging', desc: 'Every booked meeting is logged automatically in your CRM — HubSpot, Salesforce, Pipedrive, and Zoho — with lead details attached.' },
+  { title: 'Post-Meeting Follow-up Automation', desc: 'Trigger follow-up SMS or email sequences after each call ends. Keep the conversation moving without lifting a finger.' },
+];
+
+const steps = [
+  { n: '1', title: 'Lead picks a time', desc: 'The prospect visits your booking page or widget and selects an available time slot from your real-time calendar.' },
+  { n: '2', title: 'LimeCall sends reminders', desc: 'Automated SMS and email reminders go out before the meeting — 24 hours before, 1 hour before, and 10 minutes out.' },
+  { n: '3', title: 'LimeCall connects the call', desc: 'At the scheduled time, LimeCall automatically dials both your rep and the prospect — connecting them in under 30 seconds.' },
+];
+
+const useCases = [
+  { title: 'Sales Demos', desc: 'Let qualified prospects self-schedule a product demo at their convenience — then show up to a warm, prepared call.' },
+  { title: 'Customer Onboarding', desc: 'Book onboarding kickoff calls automatically when a new customer signs up, reducing time-to-first-value.' },
+  { title: 'Discovery Calls', desc: 'Replace back-and-forth email chains with a direct booking link. Get qualified calls on the calendar in seconds.' },
+  { title: 'Renewal Meetings', desc: 'Automate renewal and upsell call scheduling for account managers — proactive outreach with zero manual effort.' },
+];
+
+const faqs = [
+  {
+    '@type': 'Question',
+    name: 'How is LimeCall meeting scheduling different from instant callback?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'Instant callback connects the prospect with a sales rep within 28 seconds of intent — ideal when they want to talk right now. Meeting scheduling lets them book a future time slot when neither party is immediately available. LimeCall offers both modes on the same widget, so you capture every lead regardless of when they want to talk.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'Which calendar integrations does LimeCall support?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'LimeCall integrates natively with Google Calendar and Microsoft Outlook. Booked meetings sync automatically to your connected calendar so your rep\'s availability stays accurate in real time. Team scheduling shows combined availability across multiple reps.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'How many reminder messages does LimeCall send before a meeting?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'LimeCall sends up to three reminders per scheduled meeting: 24 hours before, 1 hour before, and 10 minutes before the start time. Reminders are sent via SMS and email. You can customise the message content and timing from the LimeCall dashboard.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'Can multiple team members use the meeting scheduler?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'Yes. LimeCall supports team scheduling with round-robin or specific-rep booking. You can show availability for a single rep or distribute bookings across a team automatically. Each rep connects their own calendar and sets their own availability windows.',
+    },
+  },
+  {
+    '@type': 'Question',
+    name: 'Is meeting scheduling included in the free plan?',
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: 'Scheduled callbacks are available on all LimeCall plans including the free Basic plan. The free plan includes up to 30 calls per month. Upgrade to Starter or Pro for higher volumes, SMS reminders, and CRM logging.',
+    },
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs,
 };
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Meeting Scheduler', url: seo.canonical }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Meeting Scheduler
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Book Calls That <span class="text-lime-400">Actually Happen</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall's meeting scheduler lets prospects book calls at their convenience — then automatically connects your team at the scheduled time. Fewer no-shows. More conversations. More revenue.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">No credit card required · 5-minute setup · Free plan available</p>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map((s) => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm font-semibold text-white">{s.label}</p>
+            <p class="mt-0.5 text-xs text-dark-500">{s.sub}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">
+        Everything you need to <span class="text-lime-400">book and run calls</span>
+      </h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {steps.map((s) => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map((u) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Cut no-shows by 80% — starting today</h2>
+      <p class="mt-4 text-dark-400">Set up your meeting scheduler in 5 minutes. Prospects book calls, LimeCall handles the rest.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">No credit card required · Free plan available</p>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Related Features"
+      links={[
+        { href: '/call-scheduling-2/', title: 'Call Scheduling', desc: 'Schedule callbacks at the perfect time for every lead.' },
+        { href: '/conversation-scheduling/', title: 'Conversation Scheduling', desc: 'Book calls that fit both sides of the conversation.' },
+        { href: '/embed-calendly/', title: 'Embed Calendly', desc: 'Already using Calendly? Supercharge it with instant callback.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans starting free.' },
+      ]}
+    />
   </div>
 </Base>

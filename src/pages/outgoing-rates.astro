@@ -1,15 +1,147 @@
 ---
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { site } from '../site.config';
 
 const seo = {
-  title: `SMS pricing - LimeCall`,
-  description: ``,
-  canonical: `https://www.limecall.com/outgoing-rates/`,
+  title: 'SMS Sending Rates — LimeCall SMS Pricing Per Message',
+  description: 'LimeCall SMS sending rates by country. Transparent per-message pricing for business SMS. See rates for US, UK, EU, and 40+ countries.',
+  canonical: `${site.url}/outgoing-rates/`,
 };
+
+const smsRates = [
+  { country: 'United States', code: '+1', rate: '$0.0075', per: 'msg' },
+  { country: 'United Kingdom', code: '+44', rate: '$0.040', per: 'msg' },
+  { country: 'Canada', code: '+1', rate: '$0.0075', per: 'msg' },
+  { country: 'Australia', code: '+61', rate: '$0.065', per: 'msg' },
+  { country: 'Germany', code: '+49', rate: '$0.075', per: 'msg' },
+  { country: 'France', code: '+33', rate: '$0.075', per: 'msg' },
+  { country: 'India', code: '+91', rate: '$0.009', per: 'msg' },
+  { country: 'Singapore', code: '+65', rate: '$0.045', per: 'msg' },
+];
 ---
+
 <Base {...seo}>
-  <div class="wp-content max-w-5xl mx-auto px-4 py-12">
-    
-    <p class="text-dark-400">Content coming soon.</p>
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Rates', url: `${site.url}/rates/` },
+        { name: 'SMS Rates', url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        SMS Rates
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Transparent <span class="text-lime-400">SMS Rates</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        LimeCall charges per outgoing SMS message based on the destination country. Inbound SMS is free on all plans. Rates below cover standard outgoing SMS. MMS rates are higher.
+      </p>
+    </div>
+  </section>
+
+  <!-- Rates Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-2xl font-bold text-white text-center">SMS rates by country</h2>
+
+      <div class="overflow-hidden rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-white">Country</th>
+              <th class="px-6 py-4 text-left font-semibold text-white">Dialling Code</th>
+              <th class="px-6 py-4 text-right font-semibold text-lime-400">Rate per Message</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800 bg-dark-900/40">
+            {smsRates.map((r, i) => (
+              <tr class={i % 2 === 0 ? 'bg-dark-900/20' : ''}>
+                <td class="px-6 py-4 text-white font-medium">{r.country}</td>
+                <td class="px-6 py-4 text-dark-400">{r.code}</td>
+                <td class="px-6 py-4 text-right font-bold text-lime-400">{r.rate}<span class="text-dark-500 font-normal">/{r.per}</span></td>
+              </tr>
+            ))}
+            <tr class="border-t border-dark-700 bg-dark-800/40">
+              <td class="px-6 py-4 text-white font-medium">All other countries</td>
+              <td class="px-6 py-4 text-dark-400">Various</td>
+              <td class="px-6 py-4 text-right font-bold text-lime-400">from $0.009<span class="text-dark-500 font-normal">/msg</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-4 text-xs text-dark-500 text-center">
+        Rates are charged in USD and billed to your account balance. Standard SMS messages are up to 160 characters. Longer messages are split and billed as multiple segments.
+      </p>
+    </div>
+  </section>
+
+  <!-- Note Box -->
+  <section class="pb-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-6">
+        <h3 class="mb-2 font-bold text-lime-400">About SMS charges</h3>
+        <p class="text-sm text-dark-300 leading-relaxed">
+          Inbound SMS is free on all LimeCall plans. Rates above apply to outgoing SMS only — including follow-up messages, reminders, and SMS broadcasts. MMS messages (those containing images or media) are priced higher than standard SMS. See the pricing page for plan-level SMS credits and limits.
+        </p>
+        <div class="mt-4">
+          <a href="/pricing/" class="inline-flex items-center gap-1 text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View plan SMS credits →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMS Use Cases -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall uses SMS</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { title: 'Meeting reminders', desc: 'Automated SMS sent before every scheduled callback to reduce no-shows by up to 80%.' },
+          { title: 'Lead follow-up', desc: 'Trigger follow-up text messages after a call ends to keep the conversation going automatically.' },
+          { title: 'SMS broadcasts', desc: 'Send bulk text messages to your contact lists for promotions, announcements, and re-engagement campaigns.' },
+          { title: 'Two-way business texting', desc: 'Receive and reply to inbound texts from your LimeCall inbox. Inbound SMS is always free.' },
+        ].map((u) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{u.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Start sending business SMS today</h2>
+      <p class="mt-4 text-dark-400">Free plan includes inbound SMS. Upgrade to Starter or Pro for outgoing SMS, broadcasts, and automation.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+          Start Free →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Related Pages"
+      links={[
+        { href: '/pricing/', title: 'Pricing Plans', desc: 'Full plan details with SMS credits included.' },
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Two-way SMS for sales and support teams.' },
+        { href: '/sms-broadcasts/', title: 'SMS Broadcasts', desc: 'Bulk SMS campaigns to your contact lists.' },
+        { href: '/outbound-calling-charges/', title: 'Outbound Call Rates', desc: 'Per-minute rates for callback connections.' },
+      ]}
+    />
   </div>
 </Base>

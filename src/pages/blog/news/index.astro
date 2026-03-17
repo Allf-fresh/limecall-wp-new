@@ -10,6 +10,7 @@ const posts = await getContentByCategory('blog', 'news');
 <Base
   title={`News — ${site.name}`}
   description={`The latest news and updates from ${site.name}.`}
+  canonical={`${site.url}/blog/news/`}
 >
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

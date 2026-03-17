@@ -17,7 +17,7 @@ const { post } = Astro.props;
 const seo = {
   title: post.seo_title || post.title,
   description: post.seo_description || '',
-  canonical: post.canonical,
+  canonical: post.canonical || `https://www.limecall.com/post/${post.slug}/`,
 };
 
 // Related posts: same category or random 4 posts

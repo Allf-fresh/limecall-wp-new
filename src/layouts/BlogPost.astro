@@ -169,6 +169,7 @@ if (post.schema_type === 'HowTo' && post.how_to_steps && post.how_to_steps.lengt
 <Base
   title={post.title}
   description={post.meta_description || ''}
+  canonical={url}
   ogType="article"
   publishDate={post.publish_date}
   modifiedDate={post.updated_at}

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Travel";
@@ -26,9 +27,58 @@ const stats = [
   { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Why are phone calls so important for travel bookings?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '87% of travel bookings over $1,000 involve a phone call at some point in the purchase journey. High-value travel is a complex, emotional decision — customers want to speak to an expert to get reassurance about itineraries, pricing, and logistics. A 28-second callback triples travel package conversion compared to form-only follow-up.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help travel agencies convert more package inquiries?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall places a callback widget on your tour and destination pages. When a prospect is browsing a package and clicks "Speak to an Expert," LimeCall connects them with the right travel consultant in under 28 seconds — while their excitement about the trip is at its peak and before they visit a competitor\'s site.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can travel agencies route callbacks to destination specialists?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall routing rules let you direct Caribbean inquiries to your Caribbean specialists, Asia tours to your Asia team, and cruise bookings to your cruise consultants. Prospects always speak to someone with genuine destination knowledge, which dramatically improves conversion and booking value.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall handle last-minute travel inquiries?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Last-minute travel requests are time-critical. LimeCall connects the prospect to your consultant in under 28 seconds, allowing you to check availability, confirm pricing, and secure the booking before the customer goes elsewhere. You can also configure priority routing so last-minute requests reach your most available consultant instantly.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall capture international travel inquiries across different time zones?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Absolutely. LimeCall captures callback requests 24/7 and queues them for the next available consultant. For international markets, you can configure local business hours per region so prospects are always called back within a reasonable window. All inquiries are logged so no potential booking falls through the cracks.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +133,7 @@ const stats = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Travel Companies</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Traveller shows interest", desc: "A prospect browses your tour packages or destination pages and clicks the LimeCall widget to talk to a travel expert." },
@@ -95,6 +145,52 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why callbacks triple travel package conversion vs. online booking engines</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">87% of high-value travel bookings involve a phone call. An online booking engine captures simple trips — but a personal expert call closes complex, high-margin packages.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Online Booking Engine Only</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Complex itinerary questions go unanswered — prospect abandons</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> High-value packages rarely convert without personal consultation</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> No upsell opportunity for upgrades, extensions, or add-ons</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> International time zone gaps lose overnight leads</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Expert consultant on the phone in 28 seconds to answer every question</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Personal service converts high-value, complex itineraries</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Live upsell opportunity on every call — higher average booking value</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> International inquiries captured and queued 24/7</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Business Services";
@@ -26,9 +27,58 @@ const stats = [
   { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How important is response speed for B2B leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Extremely important. B2B buyers are 5x more likely to convert after a phone call, and 80% of B2B leads require follow-up within 5 minutes to avoid going cold. LimeCall connects your sales team with inbound prospects in under 28 seconds, putting you ahead of every competitor who relies on email.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route B2B inquiry calls to the right specialist automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports intelligent routing rules that direct inbound callback requests to the right team member based on service line, geography, company size, or any other criteria you define. This means prospects always speak to the most relevant specialist first.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for follow-up on proposal submissions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Absolutely. You can trigger a LimeCall callback sequence after a proposal is sent, ensuring your account executive follows up at exactly the right moment. Automated follow-up sequences mean no proposal ever goes ignored.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help with client onboarding calls?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall\'s scheduling feature lets new clients book their onboarding call directly from a confirmation email or client portal. Your onboarding team receives a structured queue of calls, and each session is recorded automatically for quality and training purposes.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I see which marketing campaigns are driving B2B phone conversations?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall captures UTM parameters and referral sources with every callback request, giving your marketing team full attribution data. You\'ll know exactly which campaigns, ads, and landing pages are generating the highest-value B2B conversations.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +133,7 @@ const stats = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Business Services</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Prospect shows interest", desc: "A business decision-maker visits your site and clicks the LimeCall widget to request a consultation callback." },
@@ -95,6 +145,52 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why phone callbacks beat email follow-up for B2B leads</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">B2B buyers are 5x more likely to convert after a phone call. Email is too slow and too easy to ignore when they're evaluating multiple vendors simultaneously.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Email Follow-Up</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Lead submits form; waits hours or days for a response</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Decision-maker has already chosen a vendor by the time you reply</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Complex service questions can't be answered in a templated email</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> No relationship or trust established in first contact</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Decision-maker connected to the right specialist in 28 seconds</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> You're first to speak — and first to build trust</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Service scope, pricing, and timelines discussed live</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Every call logged with attribution to the campaign that drove it</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

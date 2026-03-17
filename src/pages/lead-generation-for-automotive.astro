@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Automotive";
@@ -26,9 +27,58 @@ const stats = [
   { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How quickly can a dealership callback a car buyer using LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects your dealership sales rep with the car buyer in under 28 seconds. As soon as the shopper clicks the callback widget on your website or vehicle listing page, LimeCall simultaneously dials your sales team and the prospect, bridging them in real time.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall handle trade-in inquiry callbacks automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can route trade-in valuation requests directly to your appraisal team or a dedicated sales rep. You can set up routing rules so trade-in inquiries always reach the right person, reducing wait times and improving the customer experience.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for dealer groups with multiple locations?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Absolutely. LimeCall supports multi-location dealer groups with intelligent routing. Calls can be distributed to the nearest dealership, a specific brand location, or based on inventory type. You manage all locations from a single dashboard.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can we capture after-hours car buyer leads with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Car shoppers often browse in the evenings and weekends. LimeCall captures callback requests 24/7 and schedules them for your sales team during business hours, so your team starts every day with a warm pipeline of interested buyers.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall compare to just having a phone number on a dealership website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A phone number requires the buyer to make the effort to call — and most won\'t. LimeCall\'s callback widget removes that friction: the shopper enters their number and LimeCall calls them back in 28 seconds. Dealerships using LimeCall see 3x more test drive bookings compared to passive phone numbers alone.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +133,7 @@ const stats = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Automotive</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Shopper shows interest", desc: "A car buyer browses your inventory online and clicks the LimeCall widget to request a callback or test drive." },
@@ -95,6 +145,52 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why phone callbacks beat online enquiry forms</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">68% of car buyers want to speak to a dealer before visiting a showroom. A web form makes them wait — a callback wins the moment.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Web Enquiry Form</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Buyer submits form and waits hours for a reply</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> By the time you respond, they've booked a test drive elsewhere</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> No ability to handle trade-in or financing questions in real time</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Leads arrive in an unmanaged email inbox</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Buyer is connected to a sales rep in under 28 seconds</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> You're the first dealership they speak to — every time</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Trade-in, financing, and test drive questions answered live</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> All leads logged in your CRM automatically</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

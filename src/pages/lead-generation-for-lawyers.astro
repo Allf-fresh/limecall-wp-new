@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Legal";
@@ -26,9 +27,58 @@ const stats = [
   { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How quickly should a law firm respond to a legal inquiry?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Law firms that respond within 5 minutes convert 10x more leads than those that respond after an hour. 65% of legal leads call to check availability first — if you\'re not first to respond, they\'ll retain a competitor. LimeCall connects your intake team with the prospect in under 28 seconds, ensuring you\'re always first.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route legal inquiries to the right attorney by practice area?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall routing rules let you direct personal injury inquiries to your PI team, family law matters to family attorneys, and criminal defense cases to the right specialist. Every prospective client speaks to the most relevant lawyer from the first call, improving intake conversion rates.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall handle urgent or out-of-hours legal emergency calls?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall supports after-hours routing for urgent legal matters such as arrests, accidents, or injunctions. You can configure emergency request types to route directly to an on-call attorney\'s mobile at any time. Non-urgent requests are queued for the next business day.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall help law firms book more free consultation calls?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Absolutely. LimeCall can be placed on free consultation landing pages and practice area pages. When a prospect clicks the callback widget, they\'re connected to your intake coordinator in under 28 seconds while their intent to seek legal help is at its highest — dramatically increasing the consultation booking rate compared to contact forms.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall compliant with law firm data handling requirements?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall stores call data securely and provides complete call recordings and logs. Law firms can access all records for compliance and audit purposes. LimeCall integrates with legal CRM systems to ensure every client interaction is documented and traceable as part of your case management workflow.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +133,7 @@ const stats = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Lawyers</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Prospect seeks legal help", desc: "Someone with a legal matter visits your firm's website and clicks the LimeCall widget to request an urgent callback." },
@@ -95,6 +145,52 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why phone callbacks sign 10x more legal clients than contact forms</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">65% of legal leads call to check availability first. A contact form delays the conversation — a callback starts the relationship immediately.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Contact Form / Live Chat</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Prospect fills a form and waits for someone to get back to them</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> They retain the first firm that actually picks up the phone</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> After-hours legal emergencies are completely missed</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Complex case details get lost in email threads</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Prospect speaks to your intake team in under 28 seconds</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Your firm is first — and most memorable — in a stressful moment</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Emergency routing ensures urgent matters are handled any time</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Call is recorded and logged for CRM and compliance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

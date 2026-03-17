@@ -2,10 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Sales Enablement software for Finance & Insurance | LimeCall`,
+  title: `Sales Enablement for Finance & Insurance | LimeCall`,
   description: `Sales Enablement software for Finance & Insurance. Invest in your customers with class-leading help desk by LimeCall`,
   canonical: `https://www.limecall.com/limecall-for-finance-insurance/`,
 };
@@ -31,9 +32,58 @@ const stats = [
   { value: "80%", label: "Fewer missed leads" },
   { value: "100%", label: "Calls logged automatically" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does response speed affect financial lead conversion?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Financial leads contacted within 1 minute are 21x more likely to qualify than those reached after 5 minutes. LimeCall connects your financial advisor or insurance broker with the prospect in under 28 seconds — while they are still on your website and their intent to purchase is at its highest. Phone consultation also increases policy and financial product purchase rates by up to 380% compared to digital-only journeys.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route financial callback requests to the right advisor by product type?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall routing rules let you direct mortgage inquiries to mortgage advisors, life insurance queries to your insurance team, and investment callbacks to your wealth management specialists. Routing can also be configured by territory, customer tier, or any other criteria that matches your organization\'s structure.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help with compliance in financial services?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall records every callback automatically and stores recordings securely. All call metadata — time, duration, agent, outcome — is logged and exportable for regulatory audit purposes. This eliminates the manual record-keeping burden and ensures your team meets FCA, FCA, or other financial regulatory requirements consistently.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall schedule financial consultations for clients who are not immediately available?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s scheduling feature lets prospects who aren\'t ready for an immediate call book a consultation at a specific time. Your advisor receives a structured calendar of pre-booked calls, reducing no-shows and ensuring conversations happen at the optimal moment for the client.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall handle insurance quote callback requests?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'When a prospect requests an insurance quote on your website, LimeCall immediately connects them with an available broker in under 28 seconds. If your team is outside business hours, the request is captured and queued for the next morning with full context about the prospect\'s inquiry. This ensures every insurance quote request is followed up personally rather than lost to a generic auto-responder.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: 'Finance & Insurance', url: seo.canonical }]} />
@@ -98,6 +148,54 @@ const stats = [
     </div>
   </section>
 
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Finance & Insurance</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Prospect requests advice", desc: "A prospect visits your mortgage calculator, insurance quote page, or financial advisor landing page and clicks the LimeCall callback widget." },
+          { step: "2", title: "Advisor connected in seconds", desc: "LimeCall simultaneously dials your advisor and the prospect, bridging them in under 28 seconds — while intent to purchase is at its peak." },
+          { step: "3", title: "Call logged for compliance", desc: "The full call is recorded and automatically synced to your CRM. Audit-ready records created with zero manual effort." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why callbacks convert 21x more financial leads than web forms</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">Financial leads contacted within 1 minute are 21x more likely to qualify. Web forms make prospects wait. LimeCall makes them feel like a priority.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Web Form / Email Follow-Up</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Prospect submits a quote request and waits for a reply</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Competitor calls them first — prospect signs with the faster firm</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Complex product questions can't be answered in an email</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> No compliant call records from email conversations</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Prospect is talking to your advisor in under 28 seconds</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> You're first to build trust — and first to close the sale</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Live conversation answers complex product and pricing questions</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Every call automatically recorded and stored for compliance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Scenario -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -109,6 +207,24 @@ const stats = [
         <p class="text-dark-400 text-sm">
           Competitors using web forms are still sending their "thanks for your enquiry" email.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>

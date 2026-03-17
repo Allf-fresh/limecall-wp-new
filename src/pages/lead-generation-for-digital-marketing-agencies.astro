@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Digital Marketing Agencies";
@@ -26,9 +27,58 @@ const stats = [
   { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Client setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help digital marketing agencies prove PPC campaign ROI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall captures UTM parameters, ad source, and keyword data with every callback request. This lets agencies show clients a direct line between their PPC spend and actual phone conversations. Callbacks deliver up to 400% more ROI on PPC campaigns compared to form-only conversion tracking.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can agencies manage LimeCall across multiple client accounts?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall offers an agency dashboard where you can manage all client accounts in one place. Each client gets their own sub-account with separate widgets, routing rules, and reporting. Onboarding a new client takes under 5 minutes.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall available as a white-label product for agencies?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall offers white-label and reseller options for agencies. You can brand the widget with your agency or client branding, set your own pricing, and offer callback automation as part of your service packages. Contact our partnerships team for reseller pricing.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Why do 30% of agency clients churn due to poor lead follow-up?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Agency clients judge performance on leads and revenue, not just traffic. When campaigns generate inquiries that go unanswered or receive slow follow-up, clients blame the agency — even if the campaign itself performed well. LimeCall ensures every lead is followed up in under 28 seconds, protecting campaign performance and client retention.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can an agency deploy LimeCall on a client website?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Setup takes under 5 minutes. Agencies add a single JavaScript snippet to the client\'s website or landing page. The LimeCall widget is immediately active. Routing rules, business hours, and team member assignments can all be configured from the agency dashboard.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +133,7 @@ const stats = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Digital Marketing Agencies</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Visitor clicks the widget", desc: "A prospect lands on your client's site from a campaign ad and clicks the LimeCall callback widget." },
@@ -95,6 +145,52 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why callbacks deliver 400% more PPC ROI than form fills</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">30% of agency clients churn due to poor lead follow-up. Adding LimeCall to your campaigns protects client retention and proves your value beyond traffic metrics.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">PPC Campaign with Form Fill Only</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Lead submits form; enters a slow email nurture sequence</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> By the time sales calls back, intent has dropped significantly</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Attribution stops at form submission — no call data for reports</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Client can't see direct revenue impact of campaigns</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">PPC Campaign with LimeCall Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Lead connected to sales within 28 seconds of clicking the ad</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Conversion happens while purchase intent is at its peak</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Full call attribution data for every campaign and keyword</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Client reports show calls, conversions, and revenue — not just clicks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

@@ -2,10 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Callback Software for Real Estate Industry I LimeCall`,
+  title: `Callback Software for Real Estate | LimeCall`,
   description: `Looking for Real Estate Sales Enablement & Callback Software? Convert and help your website visitors to find them a new home.`,
   canonical: `https://www.limecall.com/limecall-for-real-estate/`,
 };
@@ -31,9 +32,58 @@ const stats = [
   { value: "80%", label: "Fewer missed leads" },
   { value: "24/7", label: "Lead capture coverage" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help real estate agents win more listings?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '70% of home buyers contact agents by phone first, and agents who callback in under 5 minutes close 8x more listings than those who respond hours later. LimeCall connects your agent with the buyer or seller in under 28 seconds — before they reach a competitor. The first agent to have a real conversation almost always wins the relationship.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route property viewing requests to the right agent automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall routing rules let you direct buyer callbacks based on property area, listing type, price bracket, or any other criteria. Luxury property enquiries go to your luxury specialist, first-time buyer queries to your dedicated first-time buyer team. No manual handoffs and no delays.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall capture real estate leads outside business hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most property searches happen evenings and weekends. LimeCall captures all after-hours callback requests and queues them with timestamps for Monday morning. Agents arrive to a prioritized list of warm leads who are still actively looking. Without this system, these weekend leads typically go to agencies that respond faster.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall help qualify buyer budgets and preferences before the call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s callback widget can collect key information from the buyer before connecting the call — such as budget range, property type, and preferred area. This means your agent arrives on the call with context, turning the first conversation into a productive qualification and relationship-building session.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with real estate CRM platforms?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with major CRM platforms including HubSpot, Salesforce, and property-specific systems. Every callback, call recording, and call outcome is automatically synced to the buyer or vendor record, giving agents a complete interaction history without any manual data entry.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: 'Real Estate', url: seo.canonical }]} />
@@ -98,6 +148,54 @@ const stats = [
     </div>
   </section>
 
+  <!-- How it works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Real Estate</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: "1", title: "Buyer or seller shows interest", desc: "A prospect browses your listings page and clicks the LimeCall widget to request an immediate callback from one of your agents." },
+          { step: "2", title: "Agent connected in seconds", desc: "LimeCall simultaneously calls your agent and the prospect, bridging them in under 28 seconds — before they visit another agency's site." },
+          { step: "3", title: "Viewing booked & logged", desc: "The conversation is recorded, synced to your CRM, and a viewing is booked. Automatic follow-up handles missed calls." },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.step}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why callbacks book 8x more viewings than email follow-up</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">70% of home buyers contact agents by phone first. Email delays the conversation. A callback starts the relationship immediately — on the buyer's terms.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Email / Contact Form Follow-Up</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Buyer submits enquiry and moves on to browse more listings</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Generic email reply fails to address specific property questions</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Weekend leads go unanswered until Monday — buyer is gone</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> No routing — enquiries land in a shared inbox with no ownership</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Buyer is talking to your agent in under 28 seconds</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Personal conversation answers every property question on the spot</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Weekend enquiries queued and actioned first thing Monday</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Smart routing ensures the right agent takes every call</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Scenario -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -109,6 +207,24 @@ const stats = [
         <p class="text-dark-400 text-sm">
           Without LimeCall, that lead fills out a contact form and waits. By Monday they've already booked a viewing with another agency.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>

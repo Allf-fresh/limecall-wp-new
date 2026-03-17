@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Home Services";
@@ -26,9 +27,58 @@ const stats = [
   { value: "80%", label: "Reduction in missed leads" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help home service companies win more jobs?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '75% of home service customers call within 1 hour of searching online, and instant callback wins 2x more jobs compared to email follow-up. LimeCall connects your technician or estimator with the homeowner in under 28 seconds — before they call the next company on the list.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall handle emergency plumbing or HVAC callback requests?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports priority routing for emergency requests. When a homeowner marks their inquiry as urgent — burst pipe, no heating, electrical fault — LimeCall can route that callback directly to your on-call technician at any hour, ensuring you never miss a high-value emergency job.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help with repeat booking for home service customers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates with your CRM so every callback is associated with a customer record. You can trigger scheduled callbacks for annual boiler services, HVAC maintenance reminders, and repeat cleaning bookings — turning one-time customers into long-term accounts automatically.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I route home service callbacks to the right technician by trade or area?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Absolutely. LimeCall routing rules let you direct plumbing inquiries to plumbers, electrical jobs to electricians, and HVAC requests to HVAC technicians. You can also route by service area or postcode to ensure the closest available technician receives the callback.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to home service leads that come in after hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall captures all after-hours callback requests and queues them for the next morning. Your team arrives to a prioritized list of warm leads ready to action. For genuine emergencies you configure, LimeCall can immediately route to an on-call number regardless of the hour.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +133,7 @@ const stats = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Home Services</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Homeowner needs help", desc: "A homeowner searches for a plumber, electrician, or HVAC tech and clicks the LimeCall widget on your site." },
@@ -95,6 +145,52 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why instant callbacks win 2x more home service jobs than email follow-up</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">75% of home service customers call within 1 hour of searching. Email is too slow. The company that calls back first wins the job.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Email / Form Follow-Up</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Homeowner fills a form and requests are seen hours later</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> By the time you email back, they've already booked a competitor</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Emergency jobs are lost — there's no urgent routing</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> After-hours leads are never followed up</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Homeowner is talking to your technician in under 28 seconds</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> You're first to respond — and first to book the job</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Emergency routing connects urgent calls to on-call crew instantly</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> After-hours leads queued and ready for first thing in the morning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

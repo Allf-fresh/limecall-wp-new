@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const industry = "Education";
@@ -26,9 +27,58 @@ const stats = [
   { value: "80%", label: "Reduction in missed inquiries" },
   { value: "5 min", label: "Setup time" },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall improve student enrollment rates?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '79% of prospective students want to speak with an advisor before enrolling, and a 5-minute callback response increases enrollment conversion by up to 200%. LimeCall connects your admissions team with inquiring students in under 28 seconds, ensuring you have a real conversation before they commit to another institution.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall handle enrollment callbacks for international students in different time zones?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall captures callback requests 24/7, regardless of time zone. International inquiries made outside of your office hours are logged and queued for your admissions team to action at the start of the next business day. Students receive confirmation that their request was received, keeping them engaged.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do admissions teams use LimeCall during open days and recruitment events?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall can be embedded in event follow-up emails, virtual open day landing pages, and prospectus download pages. Prospective students who attended an event can request a personal callback with an admissions counselor in a single click, significantly reducing drop-off between event attendance and enrollment application.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route course inquiry calls to the right faculty or department?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Absolutely. LimeCall supports routing rules based on the page or program a student was viewing when they requested the callback. Engineering inquiries route to engineering admissions, business school inquiries to business faculty — ensuring every student speaks to the most relevant person first.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with education CRM systems like Salesforce or HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Salesforce, HubSpot, and other CRM platforms used in education. Every callback, call recording, and outcome is automatically synced to the student record, giving admissions teams a complete view of each prospect\'s engagement history without manual data entry.'
+      }
+    },
+  ]
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +133,7 @@ const stats = [
   <!-- How it works -->
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">How it works</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How LimeCall works for Education</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
           { step: "1", title: "Student requests info", desc: "A prospective student browses your programs page and clicks the LimeCall widget to request a callback from admissions." },
@@ -95,6 +145,52 @@ const stats = [
             <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why instant callbacks beat waiting list forms for student enrollment</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">79% of prospective students want to speak with an advisor before enrolling. A waiting list form makes them feel like a number — a callback makes them feel valued.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-4 text-sm font-bold text-dark-400 uppercase tracking-wider">Waiting List / Enquiry Form</div>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Student submits interest and waits for a generic response email</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Impersonal follow-up fails to address specific course questions</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> Student enrolls at a competing institution that called them first</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-red-400">✕</span> International students fall through time zone gaps</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-950/10 p-6">
+          <div class="mb-4 text-sm font-bold text-lime-400 uppercase tracking-wider">LimeCall Instant Callback</div>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Student is speaking to admissions in under 28 seconds</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> Personal, expert conversation answers specific course concerns</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> You're the first institution to build a real relationship</li>
+            <li class="flex items-start gap-2"><span class="mt-0.5 text-lime-400">✓</span> International inquiries captured 24/7 and queued for morning action</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <summary class="cursor-pointer list-none font-semibold text-white flex justify-between items-center gap-4">
+              <span>{faq.name}</span>
+              <span class="shrink-0 text-lime-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>

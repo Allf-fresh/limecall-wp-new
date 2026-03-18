@@ -1,0 +1,537 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs CloudTalk: Callback Widget vs Call Centre 2026 | LimeCall',
+  description: 'LimeCall vs CloudTalk: flat $99/500 calls vs CloudTalk\'s €25/agent/mo per-seat model. Website callback widget, WhatsApp, free plan, 5-min setup. Full comparison.',
+  canonical: 'https://www.limecall.com/limecall-vs-cloudtalk/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price (monthly)', limecall: '$0 free / $35 Starter', cloudtalk: '€25/agent/mo min (~$27)', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat call-volume plans', cloudtalk: 'Per-agent (scales steeply)', advantage: 'limecall' },
+  { feature: 'Free plan', limecall: '✅ 30 calls/mo', cloudtalk: '❌ None', advantage: 'limecall' },
+  { feature: 'Minimum spend', limecall: '$0/mo', cloudtalk: '€25/agent/mo (minimum 1 agent)', advantage: 'limecall' },
+  { feature: 'Website callback widget', limecall: '✅ 28-second instant connect', cloudtalk: '❌ Not available', advantage: 'limecall' },
+  { feature: 'Speed to lead', limecall: '28 seconds average', cloudtalk: 'Agent manually dials', advantage: 'limecall' },
+  { feature: 'WhatsApp integration', limecall: '✅ Native', cloudtalk: '❌ Not available', advantage: 'limecall' },
+  { feature: 'SMS / text messaging', limecall: '✅ Included', cloudtalk: '✅ Available (add-on)', advantage: 'limecall' },
+  { feature: 'Multi-agent call centre', limecall: 'Basic routing', cloudtalk: '✅ Full call centre suite', advantage: 'cloudtalk' },
+  { feature: 'Workforce management', limecall: '❌ Not available', cloudtalk: '✅ Enterprise WFM tools', advantage: 'cloudtalk' },
+  { feature: 'Advanced analytics', limecall: 'Standard dashboards', cloudtalk: '✅ Advanced analytics + AI', advantage: 'cloudtalk' },
+  { feature: 'HubSpot integration', limecall: '✅', cloudtalk: '✅', advantage: 'neutral' },
+  { feature: 'Salesforce integration', limecall: '✅', cloudtalk: '✅', advantage: 'neutral' },
+  { feature: 'Facebook Lead Ads CRM', limecall: '✅', cloudtalk: '❌', advantage: 'limecall' },
+  { feature: 'Setup time', limecall: '~5 minutes', cloudtalk: '2–5 days (complex setup)', advantage: 'limecall' },
+  { feature: 'Small business friendly', limecall: '✅ Solo-user OK', cloudtalk: '❌ Enterprise-focused', advantage: 'limecall' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '$0/mo', calls: '30', model: 'Flat volume', note: 'No credit card required' },
+      { name: 'Starter', price: '$35/mo', calls: '100', model: 'Flat volume', note: 'Lead distribution, SMS' },
+      { name: 'Pro', price: '$99/mo', calls: '500', model: 'Flat volume', note: 'Virtual numbers, API access' },
+    ],
+  },
+  {
+    tool: 'CloudTalk',
+    highlight: false,
+    tiers: [
+      { name: 'Starter', price: '€25/agent/mo', calls: 'Unlimited*', model: 'Per-agent', note: '*Domestic only' },
+      { name: 'Essential', price: '€30/agent/mo', calls: 'Unlimited*', model: 'Per-agent', note: 'Advanced analytics' },
+      { name: 'Expert', price: '€50/agent/mo', calls: 'Unlimited*', model: 'Per-agent', note: 'WFM, AI features' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'Speed-to-lead is your #1 priority — CloudTalk has no website callback widget; LimeCall connects prospects in 28 seconds automatically',
+  'You need a website callback widget to capture inbound interest the moment visitors are ready to talk',
+  'You want WhatsApp or multi-channel follow-up without a separate tool — CloudTalk doesn\'t offer WhatsApp',
+  'You are a small team or solo operator — CloudTalk\'s per-agent pricing and enterprise focus adds unnecessary complexity',
+  'Your budget is under $100/mo — LimeCall\'s free and Pro plans cover your whole team; CloudTalk costs more per agent each month',
+  'You want a 5-minute setup, not a multi-day admin project involving IT and configuration',
+  'Facebook Lead Ads are a key lead source — LimeCall\'s CRM sync handles them natively; CloudTalk does not',
+];
+
+const chooseCloudTalk = [
+  'You run a large inbound call centre with 10+ agents handling high call volumes across multiple queues',
+  'Workforce management, shift scheduling, and real-time agent monitoring are critical operational needs',
+  'You need advanced call analytics, AI-powered transcription, and enterprise-grade reporting',
+  'Your team is deeply embedded in CloudTalk\'s ecosystem of integrations and call flows',
+  'Compliance and enterprise security requirements demand CloudTalk\'s certified infrastructure',
+];
+
+const testimonials = [
+  {
+    quote: 'We were quoted €1,200/year for CloudTalk just for our 4-person team. LimeCall\'s Pro plan at $99/mo gave us the callback widget we actually needed — the one feature CloudTalk simply doesn\'t have. Our lead response time went from hours to 28 seconds.',
+    name: 'Tom R.',
+    title: 'Head of Sales, SaaS Startup',
+    metric: 'Response time: hours → 28 seconds',
+  },
+  {
+    quote: 'CloudTalk is built for call centres. We\'re a 2-person marketing consultancy. LimeCall gave us a professional instant callback for our clients\' websites at a fraction of the cost, plus WhatsApp follow-up our clients love.',
+    name: 'Priya S.',
+    title: 'Founder, Digital Agency',
+    metric: '3× more callbacks converted',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the main difference between LimeCall and CloudTalk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is a speed-to-lead platform built around an instant website callback widget — when a prospect clicks it, both sides are connected in 28 seconds automatically. CloudTalk is an enterprise call centre platform designed for large multi-agent teams managing high call volumes. LimeCall uses flat call-volume pricing with a free plan and no per-agent fees. CloudTalk charges per agent per month (starting €25/agent) and has no instant callback widget for websites.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does CloudTalk have a website callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. CloudTalk does not offer an instant callback widget for websites. CloudTalk is a cloud call centre platform where agents handle inbound and outbound calls manually. LimeCall\'s core product is the instant callback widget — a visitor clicks a button, enters their number, and LimeCall automatically connects them with your team in under 28 seconds. This is a fundamental feature difference that cannot be bridged by CloudTalk add-ons.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall cheaper than CloudTalk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For most SMBs, yes. LimeCall offers a free plan (30 calls/month) and a Pro plan at $99/month covering unlimited team members. CloudTalk starts at €25/agent/month — a 5-agent team costs €125/month minimum, and that scales linearly with every agent added. LimeCall\'s flat pricing means your cost stays predictable regardless of team size, while CloudTalk\'s per-seat model becomes expensive as your team grows.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does CloudTalk support WhatsApp?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'As of 2026, CloudTalk does not offer native WhatsApp integration. LimeCall includes native WhatsApp on paid plans, allowing you to follow up with leads via WhatsApp immediately after a callback. If multi-channel follow-up combining phone, WhatsApp, and SMS is important to your sales process, LimeCall covers all three channels without requiring additional tools.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall replace CloudTalk for a call centre?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall handles basic call routing and lead distribution but is not a full call centre platform. If you run a high-volume inbound call centre with 10+ agents, complex IVR routing, workforce management, and real-time supervisor monitoring, CloudTalk is the better fit for that specific use case. LimeCall excels at speed-to-lead: converting website visitors into live conversations in seconds. For teams whose primary need is capturing and converting inbound website leads, LimeCall is the right tool at a fraction of the cost.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I switch from CloudTalk to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Switching from CloudTalk to LimeCall takes about 10 minutes. Sign up for LimeCall (free, no credit card required), then install the LimeCall widget script on your website by pasting one script tag before the closing body tag. Connect your CRM — HubSpot, Salesforce, Pipedrive, or any tool via Zapier — using LimeCall\'s one-click integrations. Activate WhatsApp and SMS follow-up on your dashboard. Your agents receive callback alerts via the LimeCall app or mobile. Most teams are fully live the same day.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs CloudTalk', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2026 Comparison · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs CloudTalk:<br />
+        <span class="text-lime-400">Callback Widget vs Enterprise Call Centre</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        CloudTalk starts at €25/agent/month with no website callback widget. LimeCall starts free with a 28-second instant callback widget, WhatsApp, and flat-rate pricing. Here is the full comparison.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Pro</div>
+          <div class="text-5xl font-extrabold text-lime-400">$99</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat</div>
+          <div class="mt-3 text-lg font-bold text-white">28s callback widget</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">No per-agent fees · Free plan available</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">CloudTalk Starter</div>
+          <div class="text-5xl font-extrabold text-dark-300">€25</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per agent/month</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">Manual dialling only</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Per-seat pricing · No callback widget</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
+        <h2 class="text-lg font-bold text-white mb-4">Quick Verdict</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">LimeCall wins on website lead capture and price for SMBs.</strong> The 28-second callback widget is LimeCall's defining advantage — CloudTalk simply doesn't offer this. For teams converting website visitors into sales conversations, this feature alone justifies choosing LimeCall.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">Flat $99/500 calls vs €25+ per agent.</strong> CloudTalk's per-agent pricing scales linearly — a 5-agent team costs €125/month minimum. LimeCall's Pro plan stays at $99/month regardless of how many team members you add. No per-seat tax, ever.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">⚠️</span>
+            <span><strong class="text-white">Choose CloudTalk for large enterprise call centres.</strong> If you manage 15+ agents with workforce management, advanced IVR routing, real-time supervisor monitoring, and complex compliance needs, CloudTalk's enterprise infrastructure is purpose-built for that scale. LimeCall is not a full call centre replacement.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a speed-to-lead platform built around an instant callback widget. When a prospect visits your website and clicks the widget, LimeCall simultaneously dials your sales rep and the prospect — connecting them in an average of 28 seconds. It adds WhatsApp, SMS, virtual numbers across 40+ countries, and 13 free sales tools in one flat-rate package starting at $0/month.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Built for SMBs and growth-stage sales teams</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing — no per-agent fees</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Free plan with 30 calls/month, no credit card</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">CloudTalk</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            CloudTalk is a cloud call centre platform designed for enterprise and mid-market sales and support operations. It offers advanced IVR routing, workforce management, real-time analytics, AI-powered transcription, and over 50 CRM integrations. CloudTalk is used by larger teams that require sophisticated call centre infrastructure, compliance tooling, and per-agent performance reporting.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Designed for enterprise and mid-market call centres</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-agent pricing starting €25/agent/month</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No free plan, no website callback widget</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2026.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">CloudTalk</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'cloudtalk' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'cloudtalk' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.cloudtalk}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-agent: understand the true cost as your team grows.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-800">
+                    <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Plan</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Price</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Calls</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Model</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.tiers.map((t, i) => (
+                    <tr class:list={["border-b border-dark-800/40", i === p.tiers.length - 1 ? "border-0" : ""]}>
+                      <td class="py-3 pr-2">
+                        <div class="font-semibold text-white text-xs">{t.name}</div>
+                        <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                      </td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</td>
+                      <td class="py-3 text-center text-dark-300 text-xs">{t.calls}</td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.model}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">The per-agent trap:</strong> A 5-agent CloudTalk team on Starter costs €125/month minimum, scaling to €250/month at 10 agents and €500/month at 20. LimeCall's Pro plan stays at $99/month regardless of team size — no per-agent tax, ever.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CloudTalk Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">CloudTalk: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">CloudTalk Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Best-in-class enterprise call centre infrastructure with IVR, queuing, and intelligent routing',
+              'Workforce management tools for scheduling, forecasting, and agent performance monitoring',
+              'Advanced real-time analytics and AI-powered call transcription and coaching',
+              'Deep CRM integrations with Salesforce, HubSpot, Pipedrive, and 50+ tools',
+              'Strong compliance and security certifications for regulated industries',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">CloudTalk Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No website callback widget — cannot auto-connect website visitors with your team in seconds',
+              'Per-agent pricing scales expensively — a 10-agent team costs €250–€500/month before add-ons',
+              'No WhatsApp integration, limiting multi-channel follow-up for modern sales teams',
+              'No free plan — every customer pays from the first day',
+              'Complex setup often requires IT involvement and multi-day implementation',
+              'Enterprise-focused UX is overkill for small and medium businesses with simple needs',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose CloudTalk if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseCloudTalk.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://www.cloudtalk.io" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit CloudTalk →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Steps -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Switch from CloudTalk to LimeCall in 5 Minutes</h2>
+      <p class="mb-10 text-center text-dark-400">No downtime. No developer required. Most teams are live the same day they sign up.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Sign up for LimeCall — no credit card needed',
+            desc: 'Create your account at limecall.com in under 60 seconds. You immediately access the widget builder, dashboard, and integrations hub. Your 14-day full-feature trial starts automatically. No per-agent limits — invite your whole team from day one.',
+          },
+          {
+            step: '2',
+            title: 'Install the LimeCall callback widget on your website',
+            desc: 'Copy your unique LimeCall widget script from the dashboard. Paste it before the closing </body> tag on your website. Works with WordPress, Webflow, Shopify, HubSpot CMS, or any custom site. The widget goes live instantly — visitors can request a callback within minutes of installation.',
+          },
+          {
+            step: '3',
+            title: 'Connect your CRM and activate WhatsApp + SMS channels',
+            desc: 'Use LimeCall\'s one-click integrations to connect HubSpot, Salesforce, Pipedrive, or any tool via Zapier. All lead data flows automatically into your CRM. WhatsApp and SMS follow-up channels activate on paid plans. Your CloudTalk phone numbers can be ported — contact LimeCall support for porting assistance.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Teams Who Switched Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and CloudTalk.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Stop Paying Per Agent.<br />Start Connecting in 28 Seconds.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Join thousands of sales teams who chose LimeCall for instant website callbacks, flat pricing, and multi-channel follow-up — without CloudTalk's per-agent cost model and complex setup.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/why-limecall/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          Why LimeCall
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore LimeCall" links={[
+      { href: '/compare/', title: 'Compare All Alternatives', desc: 'LimeCall vs every major competitor.' },
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Flat pricing vs per-seat call centre.' },
+      { href: '/limecall-vs-justcall/', title: 'LimeCall vs JustCall', desc: 'Flat pricing vs per-user cloud phone.' },
+      { href: '/limecall-vs-ringover/', title: 'LimeCall vs Ringover', desc: 'Instant callback vs European VoIP.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

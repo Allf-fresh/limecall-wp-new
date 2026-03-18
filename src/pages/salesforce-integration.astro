@@ -126,6 +126,34 @@ const useCases = [
   },
 ];
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Salesforce',
+  description: 'Step-by-step guide to integrating LimeCall with Salesforce for automated lead creation, call logging, and workflow triggers.',
+  totalTime: 'PT5M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Connect accounts via OAuth',
+      text: 'Go to LimeCall → Integrations → Salesforce. Click "Connect" and authorise with your Salesforce credentials. Done in under 2 minutes.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Map your fields',
+      text: 'Choose which LimeCall data maps to which Salesforce Lead, Contact, or Activity field — including custom fields unique to your org.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Go live',
+      text: 'Enable the integration and make a test call. Your Lead and Activity will appear in Salesforce within seconds. You\'re done.',
+      position: 3,
+    },
+  ],
+};
+
 const comparisonRows = [
   { feature: "Auto-create Lead/Contact", limecall: true, manual: false, others: "Partial" },
   { feature: "Call recording in Activity log", limecall: true, manual: false, others: false },
@@ -139,6 +167,7 @@ const comparisonRows = [
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

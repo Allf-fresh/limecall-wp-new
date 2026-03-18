@@ -97,6 +97,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Slack',
+  description: 'Step-by-step guide to integrating LimeCall with Slack for real-time callback alerts, missed call notifications, and channel routing.',
+  totalTime: 'PT10M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Add LimeCall to Slack via OAuth',
+      text: 'Go to LimeCall → Integrations → Slack. Click "Add to Slack" and authorise via OAuth. Grant LimeCall permission to post to your workspace channels. The connection is live in under 30 seconds — no API tokens or webhooks to configure manually.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Configure channel routing',
+      text: 'Set up routing rules to send different notification types to different channels. Pricing page callbacks to #sales-leads, missed calls to #missed-calls, enterprise leads to #exec-alerts. Set a default channel for any callback that matches no specific rule.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Set notification preferences',
+      text: 'Choose which events send Slack alerts — callback requested, call completed, missed call, voicemail received. Configure digest frequency and target channel. Make a test callback and verify the Slack message arrives in the right channel within seconds.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "< 3s", label: "Slack alert delivery time" },
   { value: "2 clicks", label: "OAuth connect — no developers" },
@@ -191,6 +219,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={appSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

@@ -92,6 +92,40 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Zapier',
+  description: 'Step-by-step guide to integrating LimeCall with Zapier to send call data to any of 5,000+ apps automatically.',
+  totalTime: 'PT10M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Connect via Zapier OAuth',
+      text: 'Search for LimeCall in Zapier and click Connect. Authorise with your LimeCall credentials in under 2 minutes.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Choose trigger event',
+      text: 'Select from Call Started, Completed, Missed, Callback Requested, Demo Booked, or Follow-Up Requested.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Map fields',
+      text: 'Drag caller data fields — name, phone, UTMs, outcome, duration — to the corresponding fields in your target app.',
+      position: 3,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Activate your Zap',
+      text: 'Turn on the Zap and make a test call. Your downstream app receives the data within seconds. Done.',
+      position: 4,
+    },
+  ],
+};
+
 const stats = [
   { value: "5,000+", label: "Apps in the Zapier library" },
   { value: "Real-time", label: "Webhook-based triggers" },
@@ -192,6 +226,7 @@ const useCases = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={softwareSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

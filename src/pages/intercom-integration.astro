@@ -97,6 +97,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Intercom',
+  description: 'Step-by-step guide to integrating LimeCall with Intercom for chat-to-call escalation, contact sync, and post-call Intercom message triggers.',
+  totalTime: 'PT10M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Intercom OAuth connect',
+      text: 'Go to LimeCall → Integrations → Intercom. Click "Connect Intercom" and authorise via OAuth. No API keys, no developer work — the connection is live in under 30 seconds.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Configure escalation button',
+      text: 'Add the LimeCall Messenger App to your Intercom workspace. Configure which conversations show the escalation button — by page, by user segment, or by conversation tag. Set routing rules for which rep receives escalated calls.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Map call events to Intercom',
+      text: 'Configure which LimeCall events fire Intercom messages or Series triggers. Map call outcomes to Intercom contact attributes. Test with a live escalation and verify the timeline update appears in Intercom within seconds.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "28s", label: "Average call connect time" },
   { value: "1-click", label: "Chat-to-call escalation" },
@@ -191,6 +219,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={appSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

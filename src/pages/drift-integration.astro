@@ -97,6 +97,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Salesloft (Drift)',
+  description: 'Step-by-step guide to integrating LimeCall with Salesloft (formerly Drift) for chat-to-call conversion, playbook triggers, and Salesloft CRM sync.',
+  totalTime: 'PT10M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Drift webhook → LimeCall trigger',
+      text: 'Go to LimeCall → Integrations → Salesloft / Drift. Authorise via OAuth or configure the Drift webhook endpoint. LimeCall provides the webhook URL and the Drift App Block to add to your playbooks. Connection takes under 2 minutes.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Configure which playbooks offer callback',
+      text: 'Add the LimeCall App Block to the playbook steps where you want the callback offer to appear — post-qualification, on pricing pages, or for enterprise visitors. Configure routing rules to match Drift qualification attributes to LimeCall agent groups.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Test and go live',
+      text: 'Trigger a test playbook from the LimeCall integration settings. Verify the callback offer appears in the Drift chat, the call connects to the correct agent, and the outcome is logged to both the Drift conversation and the Salesloft contact record.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "28s", label: "Call connect after Drift qualification" },
   { value: "2 clicks", label: "OAuth connect — no developers" },
@@ -191,6 +219,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={appSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

@@ -92,6 +92,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Google Ads',
+  description: 'Step-by-step guide to integrating LimeCall with Google Ads for GCLID tracking, offline conversion import, and Smart Bidding optimisation.',
+  totalTime: 'PT10M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Add LimeCall tracking script',
+      text: 'Paste the LimeCall tracking snippet into your site\'s <head> — or install via Google Tag Manager. LimeCall begins capturing GCLIDs and UTM parameters immediately.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Set up conversion import',
+      text: 'In LimeCall → Integrations → Google Ads, connect your Google Ads account and select or create a conversion action. Map call outcomes to conversion events and set optional conversion values.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Enable Smart Bidding for calls',
+      text: 'Switch your campaigns to Target CPA or Target ROAS and include your LimeCall call conversion action in the bidding signal. Smart Bidding starts learning from call data within days.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "GCLID", label: "Captured on every PPC click" },
   { value: "Real-time", label: "Offline conversion import" },
@@ -164,6 +192,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={softwareSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

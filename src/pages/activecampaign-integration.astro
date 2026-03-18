@@ -93,6 +93,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with ActiveCampaign',
+  description: 'Step-by-step guide to integrating LimeCall with ActiveCampaign for automated contact creation, nurture sequence triggers, and lead score updates.',
+  totalTime: 'PT15M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Connect via OAuth',
+      text: 'Go to LimeCall → Integrations → ActiveCampaign. Click "Connect" and authorise with your ActiveCampaign credentials. The OAuth handshake completes in under 2 minutes with no developer involvement.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Map call outcomes to automations',
+      text: 'Select which ActiveCampaign automation each LimeCall outcome triggers. Map custom fields, configure score adjustments, and set up tag rules — all from the LimeCall dashboard.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Test with a live call',
+      text: 'Trigger a test callback and watch the contact appear in ActiveCampaign, the score update, and the automation enrol — all within seconds. You\'re live.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "28s", label: "Average callback speed" },
   { value: "3 steps", label: "To connect ActiveCampaign" },
@@ -165,6 +193,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={softwareSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

@@ -97,6 +97,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Microsoft Teams',
+  description: 'Step-by-step guide to integrating LimeCall with Microsoft Teams for real-time callback alerts, missed call notifications, and daily summaries.',
+  totalTime: 'PT10M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Install from Microsoft AppSource',
+      text: 'Search "LimeCall" in Microsoft AppSource and click Install. The LimeCall Teams app is verified and listed on AppSource — no manual webhook setup or IT approval required for standard Teams plans.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Authorise and configure channels',
+      text: 'Open the LimeCall app in Teams and sign in with your LimeCall credentials. Select which Teams channels receive which notification types — callback requests, missed calls, daily summaries. Set @mention rules for hot leads.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Test and go live',
+      text: 'Send a test notification from the LimeCall integration panel. Verify the card appears in the correct Teams channel with all caller details. Enable live notifications and your team starts receiving alerts immediately.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "< 5s", label: "Notification delivery to Teams" },
   { value: "10 min", label: "Average setup time" },
@@ -168,6 +196,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={appSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

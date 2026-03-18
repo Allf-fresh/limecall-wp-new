@@ -69,6 +69,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Zoho CRM',
+  description: 'Step-by-step guide to integrating LimeCall with Zoho CRM for automated Lead creation, call Activity logging, and workflow triggers.',
+  totalTime: 'PT5M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Connect via OAuth',
+      text: 'Go to LimeCall → Integrations → Zoho CRM. Click "Connect" and authorise with your Zoho credentials. No developer required — done in under 2 minutes.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Map fields and modules',
+      text: 'Select which Zoho CRM modules to sync — Leads, Contacts, or Deals. Map LimeCall data fields to your Zoho standard and custom fields using the visual field mapper.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Go live',
+      text: 'Enable the integration and make a test callback. Your Lead and Activity will appear in Zoho CRM within seconds, with the recording in your Document Library.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "28s", label: "Average callback speed" },
   { value: "5 min", label: "Setup time — no developer" },
@@ -139,6 +167,7 @@ const comparisonRows = [
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

@@ -97,6 +97,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Google Analytics 4',
+  description: 'Step-by-step guide to integrating LimeCall with Google Analytics 4 for callback event tracking, conversion setup, and UTM attribution.',
+  totalTime: 'PT10M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Add the LimeCall GA4 snippet',
+      text: 'Copy your LimeCall GA4 Measurement ID from the LimeCall dashboard and paste the snippet before your closing body tag — or deploy it as a Custom HTML tag in Google Tag Manager. The snippet auto-detects UTM parameters from the page URL.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Configure events in GA4',
+      text: 'In GA4, go to Admin → Events. After your first test callback, find "limecall_callback_completed" in the event list and toggle it as a conversion. Optionally set a conversion value to enable revenue-based reporting in Google Ads.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Verify in GA4 DebugView',
+      text: 'Open GA4 DebugView and make a test callback. Within 30 seconds, all three LimeCall events should appear with their parameters. Once verified, your conversion data flows into GA4 reports and Google Ads automatically.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "100%", label: "Callback calls attributed to source" },
   { value: "< 30s", label: "Event fires in GA4 DebugView" },
@@ -187,6 +215,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={appSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

@@ -97,6 +97,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with HubSpot',
+  description: 'Step-by-step guide to integrating LimeCall with HubSpot for automated contact creation, call activity logging, and deal stage updates.',
+  totalTime: 'PT14M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'OAuth connect in 2 clicks',
+      text: 'Go to LimeCall → Integrations → HubSpot. Click "Connect HubSpot" and authorise via OAuth. No API keys, no developer work — the connection is live in under 30 seconds.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Field mapping wizard',
+      text: 'Use the visual field mapping wizard to map LimeCall data — UTM source, call duration, outcome, page URL — to your HubSpot contact and deal properties. Drag-and-drop, no code required.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Test call and go live',
+      text: 'Make a test callback from the integration settings. Verify the contact and activity appear in HubSpot within seconds. Enable the integration and every future call syncs automatically.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "2.3x", label: "More demos booked with HubSpot sync" },
   { value: "14 min", label: "Average setup time" },
@@ -191,6 +219,7 @@ const comparisonRows = [
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={appSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

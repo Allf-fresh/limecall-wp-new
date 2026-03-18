@@ -69,6 +69,34 @@ const faqSchema = {
   ],
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Connect LimeCall with Pipedrive',
+  description: 'Step-by-step guide to integrating LimeCall with Pipedrive for automated Person and Deal creation, call logging, and pipeline stage updates.',
+  totalTime: 'PT5M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Connect via OAuth',
+      text: 'Go to LimeCall → Integrations → Pipedrive. Click "Connect" and authorise with your Pipedrive credentials. Takes under 2 minutes with no developer needed.',
+      position: 1,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Map fields and pipelines',
+      text: 'Choose which Pipedrive pipeline and stage new Deals land in. Map LimeCall fields to Pipedrive custom fields and configure call-outcome-to-stage rules.',
+      position: 2,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Go live',
+      text: 'Enable the integration and make a test callback. Your Person, Deal, and Activity will appear in Pipedrive within seconds. You\'re ready.',
+      position: 3,
+    },
+  ],
+};
+
 const stats = [
   { value: "28s", label: "Average callback speed" },
   { value: "5 min", label: "Setup time — no developer" },
@@ -139,6 +167,7 @@ const comparisonRows = [
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={howToSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

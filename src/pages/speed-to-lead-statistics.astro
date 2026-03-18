@@ -100,6 +100,20 @@ const aiStats = [
   { stat: '42%', desc: 'Of inbound web leads arrive outside business hours — AI callback is the only way to capture these without expanding headcount' },
 ];
 
+const datasetSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'Speed to Lead Statistics & Benchmarks 2025',
+  description: '47 data points on lead response time benchmarks across 10 industries, with conversion rate correlations.',
+  creator: { '@type': 'Organization', name: 'LimeCall', url: 'https://limecall.com' },
+  datePublished: '2024-06-01',
+  dateModified: '2025-01-15',
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  keywords: ['speed to lead', 'lead response time', 'conversion benchmarks', 'B2B sales data'],
+  variableMeasured: ['lead response time', 'conversion rate', 'industry benchmark'],
+  temporalCoverage: '2020/2025',
+};
+
 const mobileStats = [
   { stat: '61%', desc: 'Of all inbound sales enquiries now originate from mobile devices (Google/Deloitte, 2025)' },
   { stat: '76%', desc: 'Of mobile users who search for something local contact a business within 24 hours (Google Consumer Insights)' },
@@ -112,6 +126,7 @@ const mobileStats = [
 <Base {...seo}>
   <JsonLd schema={faqSchema(faqs)} />
   <JsonLd schema={articleJsonLd} />
+  <JsonLd schema={datasetSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">

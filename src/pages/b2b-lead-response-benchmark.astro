@@ -101,6 +101,20 @@ const industryData = [
   { industry: 'Professional Services', avgResponse: '8 hours', topQuartile: '15 minutes', percentNeverRespond: '30%', urgency: 'Medium-High' },
 ];
 
+const datasetSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'B2B Lead Response Time Benchmark Report 2025',
+  description: 'Comprehensive B2B lead response time benchmarks by company size, channel, and industry, with conversion rate correlations.',
+  creator: { '@type': 'Organization', name: 'LimeCall', url: 'https://limecall.com' },
+  datePublished: '2024-06-01',
+  dateModified: '2025-01-15',
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  keywords: ['B2B lead response time', 'lead response benchmark', 'sales response data', 'B2B conversion rates'],
+  variableMeasured: ['lead response time', 'conversion rate', 'contact rate', 'company size benchmark'],
+  temporalCoverage: '2020/2025',
+};
+
 const bestPractices = [
   {
     title: 'Set Response Time SLAs',
@@ -138,6 +152,7 @@ const bestPractices = [
 <Base {...seo}>
   <JsonLd schema={faqSchema(faqs)} />
   <JsonLd schema={articleJsonLd} />
+  <JsonLd schema={datasetSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">

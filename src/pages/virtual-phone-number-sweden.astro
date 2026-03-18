@@ -12,37 +12,67 @@ const slug = "virtual-phone-number-sweden";
 const flag = "🇸🇪";
 
 const seo = {
-  title: `Sweden Virtual Phone Number — Get a +46 Number | LimeCall`,
-  description: `Get a Sweden virtual phone number (+46) from $35/mo. Stockholm, Gothenburg, Malmö numbers. Instant 5-min setup, no SIM required. Receive calls from anywhere.`,
+  title: `Virtual Phone Number Sweden | Swedish +46 Numbers | LimeCall`,
+  description: `Get a Swedish virtual phone number (+46) instantly. Stockholm, Gothenburg, Malmö area codes. Present locally in Sweden without a physical office.`,
   canonical: `https://www.limecall.com/${slug}/`,
+};
+
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "LimeCall – Sweden Virtual Phone Number",
+  "operatingSystem": "Web, iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "35",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "35",
+      "priceCurrency": "USD",
+      "unitText": "month"
+    }
+  },
+  "description": "Get a Swedish virtual phone number (+46) with Stockholm, Gothenburg, Malmö, Uppsala, Västerås and Örebro area codes. GDPR compliant. Instant setup.",
+  "url": "https://www.limecall.com/virtual-phone-number-sweden/"
 };
 
 const faqs = [
   {
-    question: `Can I get a Sweden virtual number without being in Sweden?`,
-    answer: `Yes. LimeCall provisions genuine Swedish numbers (+46) that you can use from anywhere in the world. Swedish callers dial a local number and your team answers via the LimeCall app, browser, or any forwarded device — no physical presence in Sweden required.`,
+    question: `Can I get a Stockholm (08) virtual number without being in Sweden?`,
+    answer: `Yes. LimeCall provisions genuine Swedish numbers (+46) — including Stockholm 08, Gothenburg 031, Malmö 040, Uppsala 018, Västerås 021, and Örebro 019 area codes — that you can use from anywhere in the world. Swedish callers dial a local number and your team answers via the LimeCall app, browser, or any forwarded device.`,
   },
   {
-    question: `What is the country code for Sweden?`,
-    answer: `Sweden's international dialling code is +46. Swedish landline numbers begin with a regional area code: Stockholm (08), Gothenburg (031), Malmö (040), Uppsala (018), and Linköping (013). Mobile numbers begin with 07. When dialling from outside Sweden, dial +46 and drop the leading 0 from the area code.`,
+    question: `Do I need a Swedish company or personnummer to get a +46 number?`,
+    answer: `No. LimeCall does not require a Swedish company registration (organisationsnummer) or a Swedish personal identity number (personnummer). You can obtain a Swedish virtual number as a foreign business. All you need is a LimeCall account, and your +46 number is active within minutes.`,
   },
   {
-    question: `How much does a Sweden virtual phone number cost?`,
-    answer: `LimeCall's Sweden virtual numbers start from $35 per month. This includes the number rental plus per-minute rates for inbound calls. There are no setup fees and you can cancel at any time. See the pricing page for a full breakdown of rates.`,
+    question: `Does LimeCall support Swedish-language IVR?`,
+    answer: `Yes. LimeCall supports custom IVR greetings and menus in Swedish. You can upload your own Swedish-language audio recordings or use text-to-speech to create professional IVR menus. Greet callers with 'Välkommen till [Företagsnamn]', present menu options in Swedish, and route calls to the right agent.`,
   },
   {
-    question: `Can I make outbound calls showing a Swedish caller ID?`,
-    answer: `Yes. LimeCall lets you place outbound calls displaying your Swedish +46 number as the caller ID. Swedish recipients see a familiar local number, which significantly improves answer rates for sales and support teams calling into Sweden.`,
+    question: `Is a Swedish virtual number GDPR compliant?`,
+    answer: `Yes. LimeCall's platform is fully GDPR-compliant. Sweden enforces GDPR through the IMY (Integritetsskyddsmyndigheten). LimeCall provides built-in consent prompts for call recording, data residency options within the EU, and audit logs to support your GDPR compliance obligations in Sweden.`,
   },
   {
-    question: `How quickly can I get a Sweden virtual number?`,
-    answer: `Your Sweden virtual number is active within 5 minutes of signing up. No hardware, no SIM card, and no waiting for postal delivery. Choose your Swedish city prefix, configure call routing, and start receiving calls immediately.`,
+    question: `Can I integrate with Fortnox or Swedish CRM tools?`,
+    answer: `LimeCall integrates with HubSpot, Salesforce, Pipedrive, and 50+ CRM platforms. While Fortnox is primarily an accounting tool, LimeCall's open API and Zapier/Make integration layer allows call events and contact data to be synced with Fortnox workflows. All call records and recordings are accessible via the LimeCall dashboard.`,
+  },
+  {
+    question: `How much does a Swedish virtual phone number cost?`,
+    answer: `LimeCall's Swedish virtual numbers start from $35 per month. SEK-denominated pricing is available on request. There are no setup fees and you can cancel at any time. The monthly fee includes the number rental plus inbound call routing. Per-minute rates for inbound calls are billed separately.`,
+  },
+  {
+    question: `Can I display a Swedish caller ID on outbound calls?`,
+    answer: `Yes. LimeCall lets you place outbound calls displaying your Swedish +46 number as the caller ID. Swedish recipients see a familiar local area code — for example a Stockholm 08 number — which significantly improves answer rates for sales and support teams calling into Sweden.`,
   },
 ];
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={softwareApplicationSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
@@ -56,13 +86,13 @@ const faqs = [
         Get a <span class="text-lime-400">Sweden Virtual Phone Number</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Get a local Sweden number ({code}) without being physically present in Sweden. Instant 5-minute setup, no hardware, no SIM card required.
+        Get a local Swedish number ({code}) with Stockholm, Gothenburg, or Malmö area codes — without a physical office in Sweden. Instant 5-minute setup, no SIM required.
       </p>
       <!-- Trust signals -->
       <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
         <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Active in 5 minutes</span>
-        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
-        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> GDPR compliant</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> SEK pricing available</span>
       </div>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
@@ -92,8 +122,8 @@ const faqs = [
           <div class="mt-1 text-xs text-dark-400">Starting from</div>
         </div>
         <div>
-          <div class="text-2xl font-bold text-lime-400">40+</div>
-          <div class="mt-1 text-xs text-dark-400">Countries covered</div>
+          <div class="text-2xl font-bold text-lime-400">6</div>
+          <div class="mt-1 text-xs text-dark-400">Swedish cities covered</div>
         </div>
       </div>
     </div>
@@ -104,13 +134,13 @@ const faqs = [
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-6 text-3xl font-bold text-white">What is a Sweden virtual phone number?</h2>
       <p class="text-dark-300 leading-relaxed mb-4">
-        A Sweden virtual phone number is a real Swedish telephone number — with a genuine +46 country code — that is hosted in the cloud rather than tied to a physical SIM card or landline in Sweden. Calls to your Swedish number are routed over the internet to any device you choose: your mobile phone, laptop, desk phone, or SIP endpoint anywhere in the world.
+        A Sweden virtual phone number is a genuine Swedish telephone number — with a real +46 country code and a city-specific area code — hosted entirely in the cloud. Calls made to your Swedish number are routed over the internet to any device you choose: a mobile phone, laptop, desk phone, or SIP endpoint, anywhere in the world.
       </p>
       <p class="text-dark-300 leading-relaxed mb-4">
-        Sweden is one of Europe's leading technology and innovation ecosystems — home to Spotify, Klarna, King, and hundreds of SaaS companies. A Stockholm (08) or Gothenburg (031) prefix signals to Swedish callers that you are a local, accessible business. Sweden's exceptionally high internet penetration and early technology adoption make virtual numbers particularly effective there.
+        Sweden is a leading Scandinavian business hub, home to global companies including IKEA, Spotify, Ericsson, and H&amp;M. The Swedish B2B market places high value on local presence — a Stockholm (08) or Gothenburg (031) prefix immediately signals to Swedish clients and partners that you are an accessible, locally-committed business.
       </p>
       <p class="text-dark-300 leading-relaxed">
-        LimeCall virtual numbers include call routing, recording, CRM integration, and the same callback widget technology that connects website visitors to your team in under 28 seconds.
+        LimeCall virtual numbers for Sweden include call routing, Swedish-language IVR, call recording, CRM integration with HubSpot and more, and the same callback widget technology that connects website visitors to your team in under 28 seconds.
       </p>
     </div>
   </section>
@@ -122,18 +152,18 @@ const faqs = [
       <div class="grid gap-8 sm:grid-cols-3">
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
-          <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Pick a Swedish city prefix — Stockholm (08), Gothenburg (031), Malmö (040), Uppsala (018), Linköping (013), Örebro (019) — or a national Swedish mobile-style number.</p>
+          <h3 class="mb-2 font-semibold text-white">Choose your city code</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Pick a Swedish city prefix — Stockholm (08), Gothenburg (031), Malmö (040), Uppsala (018), Västerås (021), or Örebro (019) — or a national Swedish number.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
-          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, agent, or phone number globally. Set up IVR menus, voicemail, ring groups, or time-based routing rules.</p>
+          <h3 class="mb-2 font-semibold text-white">Configure routing &amp; IVR</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any agent or device globally. Set up Swedish-language IVR menus, voicemail, ring groups, or time-based routing rules.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
           <h3 class="mb-2 font-semibold text-white">Receive calls anywhere</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Your Sweden number goes live in minutes. Swedish customers call a local number and your team answers from any country in the world.</p>
+          <p class="text-sm text-dark-400 leading-relaxed">Your Sweden number goes live in minutes. Swedish customers dial a local number and your team answers from any country in the world.</p>
         </div>
       </div>
     </div>
@@ -145,28 +175,28 @@ const faqs = [
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your Sweden number</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">Receive calls on any device</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Answer Swedish calls on your mobile, laptop, browser, or SIP phone. Switch between devices without missing a call.</p>
+          <h3 class="mb-2 font-semibold text-white">Instant +46 number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Get a genuine Swedish +46 number active within 5 minutes. No SIM card, no hardware, no Swedish address required.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">City-specific DIDs</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose from Stockholm (08), Gothenburg (031), Malmö (040), Uppsala (018), Västerås (021), and Örebro (019) area codes.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Swedish IVR</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Greet Swedish callers in their native language. Upload custom Swedish audio or use text-to-speech for professional IVR menus in Swedish.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <h3 class="mb-2 font-semibold text-white">Call recording</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Record every incoming and outgoing Sweden call automatically. Review calls for quality assurance and coaching from your dashboard.</p>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every incoming and outgoing Swedish call automatically. Recordings are stored securely and accessible from your LimeCall dashboard with GDPR consent tooling.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">CRM sync</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Every Swedish call is logged automatically in HubSpot, Salesforce, Pipedrive, and 50+ CRM integrations. No manual data entry.</p>
+          <h3 class="mb-2 font-semibold text-white">Fortnox &amp; HubSpot integration</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Every Swedish call is logged automatically in HubSpot, Salesforce, Pipedrive, and 50+ CRM integrations. Connect to Fortnox workflows via API or Zapier.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">Nordics expansion</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Sweden is the gateway to the Nordic market. Pair your Swedish +46 number with LimeCall's Norway and Denmark numbers for full Scandinavian coverage.</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">No physical SIM required</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">100% cloud-based. No SIM card, no hardware, no Swedish address required. Fully compliant and operational from day one.</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">Callback widget</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Show your Sweden +46 number on your website callback widget. Visitors click to call and connect to your team in under 28 seconds.</p>
+          <h3 class="mb-2 font-semibold text-white">GDPR &amp; IMY compliance</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Built-in consent prompts, EU data residency options, and audit logs aligned with IMY (Swedish DPA) requirements keep you compliant.</p>
         </div>
       </div>
     </div>
@@ -176,26 +206,21 @@ const faqs = [
   <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses Sweden virtual numbers?</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
-          <div class="mb-3 text-2xl">🚀</div>
-          <h3 class="mb-2 font-semibold text-white">SaaS companies</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Sweden's thriving tech ecosystem means there is a large SaaS-buying market. A Stockholm number helps you reach decision makers at Swedish startups and enterprises.</p>
+          <div class="mb-3 text-2xl">🤝</div>
+          <h3 class="mb-2 font-semibold text-white">B2B sales into Sweden</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">The Swedish B2B market values local presence. Sales teams calling Swedish enterprises use a Stockholm 08 number to signal commitment and achieve higher answer rates.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
-          <div class="mb-3 text-2xl">📞</div>
-          <h3 class="mb-2 font-semibold text-white">Callback widget</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Display your Sweden +46 number in the LimeCall callback widget. Convert Swedish website visitors into calls within 28 seconds.</p>
+          <div class="mb-3 text-2xl">🛒</div>
+          <h3 class="mb-2 font-semibold text-white">E-commerce support</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Swedish online shoppers expect a local contact number. A Swedish virtual number reduces support friction and builds trust with Swedish customers.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
-          <div class="mb-3 text-2xl">💼</div>
-          <h3 class="mb-2 font-semibold text-white">Sales teams</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Outbound sales teams calling Swedish prospects see dramatically higher answer rates when calling from a recognised +46 local number.</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
-          <div class="mb-3 text-2xl">🎧</div>
-          <h3 class="mb-2 font-semibold text-white">Customer support</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Route Swedish customer support calls to your global team. Swedish callers pay local rates while your agents work remotely worldwide.</p>
+          <div class="mb-3 text-2xl">🏢</div>
+          <h3 class="mb-2 font-semibold text-white">Remote Swedish presence</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Distributed teams use a Swedish virtual number to project local presence in Stockholm or Gothenburg without relocating staff or opening a Swedish office.</p>
         </div>
       </div>
     </div>
@@ -207,9 +232,10 @@ const faqs = [
       <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
         <h2 class="mb-6 text-xl font-bold text-white">Sweden phone system facts</h2>
         <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
-          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Sweden's international dialling code is <strong class="text-white">+46</strong>. When dialling from abroad, drop the leading 0 from the Swedish area code.</span></li>
-          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Major Swedish city codes: <strong class="text-white">Stockholm 08</strong>, <strong class="text-white">Gothenburg 031</strong>, <strong class="text-white">Malmö 040</strong>, <strong class="text-white">Uppsala 018</strong>, <strong class="text-white">Linköping 013</strong>, <strong class="text-white">Örebro 019</strong>.</span></li>
-          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Sweden has one of the world's highest internet penetration rates (over 95%) and a mobile-first population. Swedish consumers are highly comfortable with digital commerce and expect instant, responsive businesses.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Sweden's international dialling code is <strong class="text-white">+46</strong>. When dialling from abroad, drop the leading 0 from the area code (e.g. 08 becomes +46 8).</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Major Swedish city codes: <strong class="text-white">Stockholm 08</strong>, <strong class="text-white">Gothenburg 031</strong>, <strong class="text-white">Malmö 040</strong>, <strong class="text-white">Uppsala 018</strong>, <strong class="text-white">Västerås 021</strong>, <strong class="text-white">Örebro 019</strong>.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Sweden's data protection authority is the <strong class="text-white">IMY</strong> (Integritetsskyddsmyndigheten), which enforces GDPR. LimeCall provides IMY-aligned consent and data handling tooling.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Sweden has one of Europe's highest rates of digital business adoption. A local Swedish number combined with BankID-friendly verification workflows is a strong trust signal for Swedish B2B buyers.</span></li>
         </ul>
       </div>
     </div>
@@ -260,11 +286,11 @@ const faqs = [
               <td class="py-3 px-4 text-dark-400">Yes</td>
             </tr>
             <tr>
-              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
-              <td class="py-3 px-4 text-white">Yes — unlimited</td>
-              <td class="py-3 px-4 text-dark-400">One per SIM</td>
-              <td class="py-3 px-4 text-dark-400">Limited</td>
-              <td class="py-3 px-4 text-dark-400">One per device</td>
+              <td class="py-3 pr-6 text-dark-300">GDPR / IMY compliant</td>
+              <td class="py-3 px-4 text-white">Yes — built-in</td>
+              <td class="py-3 px-4 text-dark-400">Manual</td>
+              <td class="py-3 px-4 text-dark-400">Varies</td>
+              <td class="py-3 px-4 text-dark-400">Manual</td>
             </tr>
           </tbody>
         </table>
@@ -305,13 +331,12 @@ const faqs = [
 
   <div class="py-8">
     <CrossLinks
-      heading="Explore Virtual Numbers"
+      heading="Explore Virtual Numbers &amp; Features"
       links={[
-        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Business-grade virtual numbers.' },
-        { href: '/virtual-phone-number-netherlands/', title: 'Netherlands Virtual Number', desc: 'Get a Netherlands +31 number.' },
-        { href: '/virtual-phone-number-spain/', title: 'Spain Virtual Number', desc: 'Get a Spain +34 number.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Business-grade virtual numbers worldwide.' },
+        { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud PBX with IVR and call routing.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route inbound leads to the right agent instantly.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans and number costs.' },
       ]}
     />
   </div>

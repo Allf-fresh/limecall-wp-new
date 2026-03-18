@@ -12,37 +12,67 @@ const slug = "virtual-phone-number-poland";
 const flag = "🇵🇱";
 
 const seo = {
-  title: `Poland Virtual Phone Number — Get a +48 Number | LimeCall`,
-  description: `Get a Poland virtual phone number (+48) from $35/mo. Warsaw, Kraków, Wrocław numbers. Instant 5-min setup, no SIM required. Receive calls from anywhere.`,
+  title: `Virtual Phone Number Poland | Polish +48 Numbers | LimeCall`,
+  description: `Get a Polish virtual phone number (+48) instantly. Warsaw, Kraków, Wrocław area codes. No physical office needed — answer calls from anywhere.`,
   canonical: `https://www.limecall.com/${slug}/`,
+};
+
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "LimeCall – Poland Virtual Phone Number",
+  "operatingSystem": "Web, iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "35",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "35",
+      "priceCurrency": "USD",
+      "unitText": "month"
+    }
+  },
+  "description": "Get a Polish virtual phone number (+48) with Warsaw, Kraków, Wrocław, Poznań, Gdańsk and Łódź area codes. GDPR/UODO compliant. Instant setup.",
+  "url": "https://www.limecall.com/virtual-phone-number-poland/"
 };
 
 const faqs = [
   {
-    question: `Can I get a Poland virtual number without being in Poland?`,
-    answer: `Yes. LimeCall provisions genuine Polish numbers (+48) that you can use from anywhere in the world. Polish callers dial a local number and your team answers via the LimeCall app, browser, or any forwarded device — no physical presence in Poland required.`,
+    question: `Can I get a Warsaw (22) virtual number without being in Poland?`,
+    answer: `Yes. LimeCall provisions genuine Polish numbers (+48) — including Warsaw 22, Kraków 12, Wrocław 71, Poznań 61, Gdańsk 58, and Łódź 42 area codes — that you can use from anywhere in the world. Polish callers dial a local number and your team answers via the LimeCall app, browser, or any forwarded device.`,
   },
   {
-    question: `What is the country code for Poland?`,
-    answer: `Poland's international dialling code is +48. Polish numbers are 9 digits long after the country code. Warsaw numbers begin with 22, Kraków with 12, Wrocław with 71, Poznań with 61, and Gdańsk with 58. Mobile numbers begin with 5, 6, 7, or 8. When dialling from outside Poland, dial +48 followed by the 9-digit number (no leading 0).`,
+    question: `Do I need a Polish company or address to get a +48 number?`,
+    answer: `No. LimeCall does not require a Polish company registration or a physical Polish address. You can obtain a Polish virtual number as a foreign business or individual. All you need is a LimeCall account, and your +48 number is active within minutes.`,
   },
   {
-    question: `How much does a Poland virtual phone number cost?`,
-    answer: `LimeCall's Poland virtual numbers start from $35 per month. This includes the number rental plus per-minute rates for inbound calls. There are no setup fees and you can cancel at any time. See the pricing page for a full breakdown of rates.`,
+    question: `Is a Polish virtual number UODO and GDPR compliant?`,
+    answer: `Yes. LimeCall's platform is GDPR-compliant across all EU markets. For Poland specifically, we align with UODO (Urząd Ochrony Danych Osobowych) requirements regarding call recording consent and personal data processing. You can configure consent prompts directly in the IVR flow.`,
   },
   {
-    question: `Can I make outbound calls showing a Polish caller ID?`,
-    answer: `Yes. LimeCall lets you place outbound calls displaying your Polish +48 number as the caller ID. Polish recipients see a familiar local number, which significantly improves answer rates for sales and support teams calling into Poland.`,
+    question: `How much does a Polish virtual phone number cost?`,
+    answer: `LimeCall's Polish virtual numbers start from $35 per month. PLN-denominated pricing is available on request. There are no setup fees and you can cancel at any time. The monthly fee includes the number rental plus inbound call routing. Per-minute rates for inbound calls are billed separately.`,
   },
   {
-    question: `How quickly can I get a Poland virtual number?`,
-    answer: `Your Poland virtual number is active within 5 minutes of signing up. No hardware, no SIM card, and no waiting for postal delivery. Choose your Polish city prefix, configure call routing, and start receiving calls immediately.`,
+    question: `Can I make outbound calls showing a Polish (+48) caller ID?`,
+    answer: `Yes. LimeCall lets you place outbound calls displaying your Polish +48 number as the caller ID. Polish recipients see a familiar local area code — for example a Warsaw 22 number — which significantly improves answer rates for sales and support teams calling into Poland.`,
+  },
+  {
+    question: `Can I set up a Polish-language IVR (interactive voice response)?`,
+    answer: `Yes. LimeCall supports custom IVR greetings and menus in Polish. You can upload your own Polish-language audio recordings or use text-to-speech in Polish. This lets you greet callers in Polish, present menu options, and route calls to the appropriate agent or department — all in the caller's native language.`,
+  },
+  {
+    question: `Which Polish city area codes are available?`,
+    answer: `LimeCall offers city-specific DIDs (Direct Inward Dialling) for Poland's major cities: Warsaw (22), Kraków (12), Wrocław (71), Poznań (61), Gdańsk (58), and Łódź (42). Additional Polish geographic numbers and national numbers are also available on request.`,
   },
 ];
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={softwareApplicationSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
@@ -56,13 +86,13 @@ const faqs = [
         Get a <span class="text-lime-400">Poland Virtual Phone Number</span>
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Get a local Poland number ({code}) without being physically present in Poland. Instant 5-minute setup, no hardware, no SIM card required.
+        Get a local Polish number ({code}) with Warsaw, Kraków, or Wrocław area codes — without a physical office in Poland. Instant 5-minute setup, no SIM required.
       </p>
       <!-- Trust signals -->
       <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
         <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Active in 5 minutes</span>
-        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
-        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> GDPR &amp; UODO compliant</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> PLN pricing available</span>
       </div>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
@@ -84,16 +114,16 @@ const faqs = [
           <div class="mt-1 text-xs text-dark-400">Poland prefix</div>
         </div>
         <div>
-          <div class="text-2xl font-bold text-lime-400">5 min</div>
-          <div class="mt-1 text-xs text-dark-400">Setup time</div>
+          <div class="text-2xl font-bold text-lime-400">3.4×</div>
+          <div class="mt-1 text-xs text-dark-400">More likely to answer local</div>
         </div>
         <div>
           <div class="text-2xl font-bold text-lime-400">$35/mo</div>
           <div class="mt-1 text-xs text-dark-400">Starting from</div>
         </div>
         <div>
-          <div class="text-2xl font-bold text-lime-400">40+</div>
-          <div class="mt-1 text-xs text-dark-400">Countries covered</div>
+          <div class="text-2xl font-bold text-lime-400">6</div>
+          <div class="mt-1 text-xs text-dark-400">Polish cities covered</div>
         </div>
       </div>
     </div>
@@ -104,13 +134,13 @@ const faqs = [
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-6 text-3xl font-bold text-white">What is a Poland virtual phone number?</h2>
       <p class="text-dark-300 leading-relaxed mb-4">
-        A Poland virtual phone number is a real Polish telephone number — with a genuine +48 country code — that is hosted in the cloud rather than tied to a physical SIM card or landline in Poland. Calls to your Polish number are routed over the internet to any device you choose: your mobile phone, laptop, desk phone, or SIP endpoint anywhere in the world.
+        A Poland virtual phone number is a genuine Polish telephone number — with a real +48 country code and a city-specific area code — hosted entirely in the cloud. Calls made to your Polish number are routed over the internet to any device you choose: a mobile phone, laptop, desk phone, or SIP endpoint, anywhere in the world.
       </p>
       <p class="text-dark-300 leading-relaxed mb-4">
-        Poland is one of Central Europe's fastest-growing economies and technology hubs. A Warsaw (22) or Kraków (12) prefix signals to Polish callers that you are a local, accessible business. For companies serving the Polish market — or the large Polish diaspora — a virtual number builds immediate trust.
+        Poland is one of Central Europe's largest economies, with over 38 million people and a fast-growing e-commerce and B2B market. Polish callers are 3.4× more likely to answer or trust a call from a local number. A Warsaw (22) or Kraków (12) prefix immediately signals to Polish customers that you are a credible, accessible local business.
       </p>
       <p class="text-dark-300 leading-relaxed">
-        LimeCall virtual numbers include call routing, recording, CRM integration, and the same callback widget technology that connects website visitors to your team in under 28 seconds.
+        LimeCall virtual numbers for Poland include call routing, IVR in Polish, call recording, CRM integration, and the same callback widget technology that connects website visitors to your team in under 28 seconds.
       </p>
     </div>
   </section>
@@ -122,18 +152,18 @@ const faqs = [
       <div class="grid gap-8 sm:grid-cols-3">
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
-          <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Pick a Polish city prefix — Warsaw (22), Kraków (12), Wrocław (71), Poznań (61), Gdańsk (58), Łódź (42) — or a national Polish mobile-style number.</p>
+          <h3 class="mb-2 font-semibold text-white">Choose your city code</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Pick a Polish city prefix — Warsaw (22), Kraków (12), Wrocław (71), Poznań (61), Gdańsk (58), or Łódź (42) — or a national Polish number.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
-          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, agent, or phone number globally. Set up IVR menus, voicemail, ring groups, or time-based routing rules.</p>
+          <h3 class="mb-2 font-semibold text-white">Configure routing &amp; IVR</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any agent or device globally. Set up Polish-language IVR menus, voicemail, ring groups, or time-based routing rules.</p>
         </div>
         <div class="text-center">
           <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
           <h3 class="mb-2 font-semibold text-white">Receive calls anywhere</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Your Poland number goes live in minutes. Polish customers call a local number and your team answers from any country in the world.</p>
+          <p class="text-sm text-dark-400 leading-relaxed">Your Poland number goes live in minutes. Polish customers dial a local number and your team answers from any country in the world.</p>
         </div>
       </div>
     </div>
@@ -145,28 +175,28 @@ const faqs = [
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your Poland number</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">Receive calls on any device</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Answer Polish calls on your mobile, laptop, browser, or SIP phone. Switch between devices without missing a call.</p>
+          <h3 class="mb-2 font-semibold text-white">Instant +48 number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Get a genuine Polish +48 number active within 5 minutes. No SIM card, no hardware, no Polish address required.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">City-specific DIDs</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose from Warsaw (22), Kraków (12), Wrocław (71), Poznań (61), Gdańsk (58), and Łódź (42) area codes to match your target market.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Polish-language IVR</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Greet Polish callers in their native language. Upload custom Polish audio or use text-to-speech to create professional IVR menus.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <h3 class="mb-2 font-semibold text-white">Call recording</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Record every incoming and outgoing Poland call automatically. Review calls for quality assurance and coaching from your dashboard.</p>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every incoming and outgoing Polish call automatically. Recordings are stored securely and accessible from your LimeCall dashboard.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <h3 class="mb-2 font-semibold text-white">CRM sync</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Every Polish call is logged automatically in HubSpot, Salesforce, Pipedrive, and 50+ CRM integrations. No manual data entry.</p>
+          <p class="text-sm text-dark-400 leading-relaxed">Every Polish call is logged automatically in HubSpot, Salesforce, Pipedrive, and 50+ CRM integrations. No manual data entry required.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">Diaspora reach</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Poland has one of Europe's largest diasporas. A Polish +48 number helps you connect with Polish-speaking communities abroad who prefer calling Polish numbers.</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">No physical SIM required</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">100% cloud-based. No SIM card, no hardware, no Polish address required. Fully compliant and operational from day one.</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-          <h3 class="mb-2 font-semibold text-white">Callback widget</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Show your Poland +48 number on your website callback widget. Visitors click to call and connect to your team in under 28 seconds.</p>
+          <h3 class="mb-2 font-semibold text-white">GDPR &amp; UODO compliance</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Built-in consent prompts, data residency options, and UODO-aligned call recording policies keep you compliant with Polish data protection law.</p>
         </div>
       </div>
     </div>
@@ -176,26 +206,21 @@ const faqs = [
   <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses Poland virtual numbers?</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
-          <div class="mb-3 text-2xl">🏢</div>
-          <h3 class="mb-2 font-semibold text-white">Market entry</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Establish a credible Polish presence without a physical office. A Warsaw or Kraków number builds instant trust with local prospects and partners.</p>
-        </div>
-        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
-          <div class="mb-3 text-2xl">📞</div>
-          <h3 class="mb-2 font-semibold text-white">Callback widget</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Display your Poland +48 number in the LimeCall callback widget. Convert Polish website visitors into calls within 28 seconds.</p>
+          <div class="mb-3 text-2xl">🛒</div>
+          <h3 class="mb-2 font-semibold text-white">E-commerce customer support</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Polish online shoppers expect a local number for returns and queries. A Warsaw or Kraków number reduces cart abandonment and increases post-purchase trust.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
           <div class="mb-3 text-2xl">💼</div>
-          <h3 class="mb-2 font-semibold text-white">Sales teams</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Outbound sales teams calling Polish prospects see dramatically higher answer rates when calling from a recognised +48 local number.</p>
+          <h3 class="mb-2 font-semibold text-white">B2B sales into Poland</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Sales teams calling Polish enterprises see significantly higher answer rates using a local +48 city number. Outbound calls show a recognised Polish area code.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
-          <div class="mb-3 text-2xl">🎧</div>
-          <h3 class="mb-2 font-semibold text-white">Customer support</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Route Polish customer support calls to your global team. Polish callers pay local rates while your agents work remotely worldwide.</p>
+          <div class="mb-3 text-2xl">🏢</div>
+          <h3 class="mb-2 font-semibold text-white">Remote team local presence</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Remote and distributed teams use a Polish virtual number to project a local presence in Poland without relocating staff or opening a Warsaw office.</p>
         </div>
       </div>
     </div>
@@ -207,9 +232,10 @@ const faqs = [
       <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
         <h2 class="mb-6 text-xl font-bold text-white">Poland phone system facts</h2>
         <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
-          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Poland's international dialling code is <strong class="text-white">+48</strong>. All Polish numbers are 9 digits long after the country code — no leading zero is used.</span></li>
-          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Major Polish city codes: <strong class="text-white">Warsaw 22</strong>, <strong class="text-white">Kraków 12</strong>, <strong class="text-white">Wrocław 71</strong>, <strong class="text-white">Poznań 61</strong>, <strong class="text-white">Gdańsk 58</strong>, <strong class="text-white">Łódź 42</strong>, <strong class="text-white">Katowice 32</strong>.</span></li>
-          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Poland is one of the EU's largest economies by GDP and a major technology outsourcing hub, with a tech workforce exceeding 300,000 developers — making Polish virtual numbers valuable for tech companies.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Poland's international dialling code is <strong class="text-white">+48</strong>. When dialling from abroad, drop the leading 0 from the area code.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Major Polish city codes: <strong class="text-white">Warsaw 22</strong>, <strong class="text-white">Kraków 12</strong>, <strong class="text-white">Wrocław 71</strong>, <strong class="text-white">Poznań 61</strong>, <strong class="text-white">Gdańsk 58</strong>, <strong class="text-white">Łódź 42</strong>.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Polish callers are <strong class="text-white">3.4× more likely</strong> to answer a call from a local number than an unrecognised foreign number.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Poland's data protection authority is the <strong class="text-white">UODO</strong> (Urząd Ochrony Danych Osobowych), which enforces GDPR requirements locally. LimeCall's call recording features include UODO-aligned consent tooling.</span></li>
         </ul>
       </div>
     </div>
@@ -249,7 +275,7 @@ const faqs = [
               <td class="py-3 pr-6 text-dark-300">Local Polish number</td>
               <td class="py-3 px-4 text-white">Yes (+48)</td>
               <td class="py-3 px-4 text-dark-400">Yes</td>
-              <td class="py-3 px-4 text-dark-400">No (800 prefix)</td>
+              <td class="py-3 px-4 text-dark-400">No (0800 prefix)</td>
               <td class="py-3 px-4 text-dark-400">Foreign number</td>
             </tr>
             <tr>
@@ -260,11 +286,11 @@ const faqs = [
               <td class="py-3 px-4 text-dark-400">Yes</td>
             </tr>
             <tr>
-              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
-              <td class="py-3 px-4 text-white">Yes — unlimited</td>
-              <td class="py-3 px-4 text-dark-400">One per SIM</td>
-              <td class="py-3 px-4 text-dark-400">Limited</td>
-              <td class="py-3 px-4 text-dark-400">One per device</td>
+              <td class="py-3 pr-6 text-dark-300">GDPR / UODO compliant</td>
+              <td class="py-3 px-4 text-white">Yes — built-in</td>
+              <td class="py-3 px-4 text-dark-400">Manual</td>
+              <td class="py-3 px-4 text-dark-400">Varies</td>
+              <td class="py-3 px-4 text-dark-400">Manual</td>
             </tr>
           </tbody>
         </table>
@@ -305,13 +331,12 @@ const faqs = [
 
   <div class="py-8">
     <CrossLinks
-      heading="Explore Virtual Numbers"
+      heading="Explore Virtual Numbers &amp; Features"
       links={[
-        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
-        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Business-grade virtual numbers.' },
-        { href: '/virtual-phone-number-netherlands/', title: 'Netherlands Virtual Number', desc: 'Get a Netherlands +31 number.' },
-        { href: '/virtual-phone-number-spain/', title: 'Spain Virtual Number', desc: 'Get a Spain +34 number.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Business-grade virtual numbers worldwide.' },
+        { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud PBX with IVR and call routing.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route inbound leads to the right agent instantly.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans and number costs.' },
       ]}
     />
   </div>

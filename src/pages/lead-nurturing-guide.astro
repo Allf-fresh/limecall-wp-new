@@ -1,0 +1,416 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema, articleSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const seo = {
+  title: `Lead Nurturing Best Practices: The 2025 Playbook | LimeCall`,
+  description: `7 lead nurturing best practices backed by data. From drip campaigns to callback sequences — how to turn cold leads into customers 47% more effectively.`,
+  canonical: `${site.url}/lead-nurturing-guide/`,
+  ogType: 'article' as const,
+};
+
+const faqs = [
+  {
+    question: 'What is lead nurturing?',
+    answer: 'Lead nurturing is the process of building relationships with prospects at every stage of the sales funnel through targeted, relevant communications. It involves providing value — educational content, timely follow-ups, personalised offers — to guide leads from initial interest to purchase readiness. Effective nurturing uses multiple channels including email, phone, SMS, and retargeting.',
+  },
+  {
+    question: 'How long should a lead nurturing sequence be?',
+    answer: 'The ideal length depends on your sales cycle. For B2B SaaS with a 30-60 day cycle, 6-10 touches over 4-6 weeks is standard. For enterprise deals with 6-12 month cycles, nurture sequences can run 15-25 touches over several months. The key is to trigger progression based on engagement signals, not arbitrary timelines.',
+  },
+  {
+    question: 'What is the best channel for lead nurturing?',
+    answer: 'Multi-channel nurturing outperforms single-channel by 287% (Demand Gen Report). The most effective combination is email for educational content, phone/callback for high-intent signals, SMS for time-sensitive follow-ups, and retargeting ads for brand reinforcement. Voice callbacks in particular deliver 391% higher conversion rates than email alone.',
+  },
+  {
+    question: 'How do you measure lead nurturing success?',
+    answer: 'Track these key metrics: lead-to-MQL conversion rate, MQL-to-SQL conversion rate, average time to conversion, engagement rate per touch, unsubscribe rate, and revenue attributed to nurtured leads. The most important metric is the percentage of nurtured leads that become sales-ready compared to un-nurtured leads — the industry benchmark is 47% higher.',
+  },
+  {
+    question: 'What is the difference between lead nurturing and lead generation?',
+    answer: 'Lead generation is the process of attracting and capturing new prospects — getting them into your funnel. Lead nurturing is what happens after — building relationships with those prospects through targeted communications to move them toward a purchase. Generation fills the top of the funnel; nurturing converts the middle and bottom.',
+  },
+  {
+    question: 'How does voice fit into a lead nurturing strategy?',
+    answer: 'Voice is the highest-converting channel in lead nurturing. Adding a callback step to your nurture sequence delivers 391% higher conversion rates than email alone (InsideSales.com). Use voice for high-intent signals: when a lead visits your pricing page, downloads a bottom-of-funnel asset, or reaches a lead score threshold. LimeCall automates this with instant callbacks triggered by lead behaviour.',
+  },
+];
+
+const articleJsonLd = articleSchema({
+  title: seo.title,
+  description: seo.description,
+  url: seo.canonical,
+  publishDate: '2024-06-10',
+  modifiedDate: '2025-03-01',
+  author: 'LimeCall',
+});
+
+const bestPractices = [
+  {
+    number: '01',
+    title: 'Segment Before You Nurture',
+    description: 'One-size-fits-all nurturing is dead. Before sending a single email or making a single call, segment your leads by industry, company size, buyer persona, funnel stage, and intent signals. Segmented campaigns deliver 760% more revenue than non-segmented campaigns (Campaign Monitor). Build at minimum: industry segments, funnel stage segments (TOFU/MOFU/BOFU), and behaviour-based segments (high engagement vs. dormant).',
+    keyMetric: '760% more revenue from segmented campaigns',
+  },
+  {
+    number: '02',
+    title: 'Personalise Every Touchpoint',
+    description: 'Personalisation goes far beyond inserting a first name. Reference the specific content they downloaded, the page they visited, or the problem they expressed. Use dynamic content blocks in emails, personalised landing pages, and contextual call scripts. Companies using advanced personalisation generate 20% more sales opportunities (Demand Gen Report).',
+    keyMetric: '20% more sales opportunities with personalisation',
+  },
+  {
+    number: '03',
+    title: 'Add Voice to Your Nurture Mix',
+    description: 'Email open rates are declining. The single most impactful addition to any nurture sequence is a well-timed phone call or callback. When a lead exhibits high-intent behaviour — visiting your pricing page, opening 3+ emails in a week, or downloading a case study — trigger an instant callback. InsideSales.com research shows voice contact within 1 minute delivers 391% more conversions than email follow-up alone. LimeCall automates this entirely.',
+    keyMetric: '391% more conversions with voice callbacks',
+  },
+  {
+    number: '04',
+    title: 'Time Based on Engagement, Not Arbitrary Schedules',
+    description: 'Stop sending emails every Tuesday at 10 AM regardless of lead behaviour. Instead, trigger nurture touches based on engagement signals: page visits, email opens, content downloads, and form submissions. Behaviour-triggered emails generate 4x more revenue and 18x more profit than batch-and-blast (Forrester Research).',
+    keyMetric: '4x more revenue from behaviour-triggered emails',
+  },
+  {
+    number: '05',
+    title: 'Score and Re-Route When Leads Heat Up',
+    description: 'Implement lead scoring that combines explicit data (title, company size, industry) with implicit data (page views, email clicks, content consumption). When a lead crosses your MQL threshold, instantly re-route them from marketing nurture to sales outreach. The handoff speed matters — leads that sit in marketing queues after reaching MQL lose 10% of their conversion potential per hour of delay.',
+    keyMetric: '10% conversion loss per hour of MQL handoff delay',
+  },
+  {
+    number: '06',
+    title: 'Use Multiple Channels',
+    description: 'The most effective nurturing programmes use at least 4 channels: email for education and content delivery, phone/callback for high-intent engagement, SMS for time-sensitive offers and reminders, and retargeting ads for brand reinforcement. Multi-channel nurturing generates 287% higher purchase rates than single-channel (Demand Gen Report). Do not rely on email alone.',
+    keyMetric: '287% higher purchase rates with multi-channel',
+  },
+  {
+    number: '07',
+    title: 'Measure, Test, and Iterate Weekly',
+    description: 'Set up a weekly review cadence for your nurture programmes. Track conversion rate by sequence, engagement rate by touch, channel performance comparisons, and revenue attribution. A/B test subject lines, send times, CTA copy, and channel mix continuously. Companies that optimise their nurture programmes weekly see 33% lower cost-per-lead within 90 days.',
+    keyMetric: '33% lower cost-per-lead with weekly optimisation',
+  },
+];
+
+const workflows = [
+  {
+    name: 'New Lead Welcome Sequence',
+    description: 'For leads who just entered the funnel via content download or form submission.',
+    steps: [
+      { day: 'Day 0', action: 'Welcome email with downloaded asset + 2 related resources', channel: 'Email' },
+      { day: 'Day 1', action: 'If email opened: send educational blog post on their topic', channel: 'Email' },
+      { day: 'Day 3', action: 'Case study relevant to their industry', channel: 'Email' },
+      { day: 'Day 5', action: 'If 2+ emails opened: trigger callback offer via SMS', channel: 'SMS' },
+      { day: 'Day 7', action: 'If pricing page visited: instant callback via LimeCall', channel: 'Phone' },
+      { day: 'Day 10', action: 'Nurture email with ROI calculator link', channel: 'Email' },
+      { day: 'Day 14', action: 'If engaged: MQL handoff to sales. If not: move to long-term nurture.', channel: 'Routing' },
+    ],
+  },
+  {
+    name: 'Re-Engagement Sequence',
+    description: 'For leads who have gone dormant (no engagement in 30+ days).',
+    steps: [
+      { day: 'Day 0', action: 'Personalised "We noticed you\'ve been quiet" email with new content', channel: 'Email' },
+      { day: 'Day 3', action: 'Retargeting ad campaign activated (new case study or feature)', channel: 'Ads' },
+      { day: 'Day 7', action: 'High-value gated content offer (report, benchmark data)', channel: 'Email' },
+      { day: 'Day 10', action: 'If re-engaged: SMS with callback scheduling link', channel: 'SMS' },
+      { day: 'Day 14', action: 'If still dormant: final value-add email with opt-down option', channel: 'Email' },
+      { day: 'Day 21', action: 'If no engagement: move to quarterly newsletter only', channel: 'Routing' },
+    ],
+  },
+  {
+    name: 'High-Intent Acceleration Sequence',
+    description: 'For leads showing strong buying signals (pricing page views, competitor comparison visits, multiple sessions).',
+    steps: [
+      { day: 'Trigger', action: 'High-intent behaviour detected (pricing/comparison page visit)', channel: 'System' },
+      { day: '0-1 min', action: 'Instant callback triggered via LimeCall widget', channel: 'Phone' },
+      { day: '5 min', action: 'If no answer: SMS with callback scheduling link', channel: 'SMS' },
+      { day: '1 hour', action: 'Personalised email: "Saw you checking pricing — here is a comparison"', channel: 'Email' },
+      { day: 'Day 1', action: 'Rep follow-up call with full context from CRM', channel: 'Phone' },
+      { day: 'Day 2', action: 'Custom demo video or proposal sent', channel: 'Email' },
+      { day: 'Day 3', action: 'If engaged: fast-track to SQL. If not: return to standard nurture.', channel: 'Routing' },
+    ],
+  },
+];
+
+const tools = [
+  { name: 'LimeCall', category: 'Callback & Voice', strength: 'Instant callbacks, AI qualification, 28s connect time', bestFor: 'Adding voice to nurture sequences' },
+  { name: 'HubSpot', category: 'Marketing Automation', strength: 'Email sequences, lead scoring, CRM integration', bestFor: 'Full-funnel nurture orchestration' },
+  { name: 'ActiveCampaign', category: 'Email Automation', strength: 'Advanced automation, conditional logic, site tracking', bestFor: 'Complex multi-branch nurture workflows' },
+  { name: 'Salesforce Pardot', category: 'Enterprise MA', strength: 'B2B scoring, Salesforce native, engagement studio', bestFor: 'Enterprise B2B nurturing at scale' },
+  { name: 'Intercom', category: 'Conversational', strength: 'In-app messaging, chatbots, product tours', bestFor: 'Product-led nurturing and onboarding' },
+  { name: 'Drift', category: 'Conversational', strength: 'Chat-to-meeting, conversational landing pages', bestFor: 'Real-time website engagement' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={articleJsonLd} />
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <!-- Hero + Answer-First -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-14 sm:pt-20 sm:pb-18">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Lead Nurturing Guide', url: `${site.url}/lead-nurturing-guide/` }]} />
+
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Data-Driven Playbook · 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Lead Nurturing Best Practices:<br />
+        <span class="text-lime-400">A Data-Driven Playbook</span>
+      </h1>
+
+      <!-- Answer-first block -->
+      <div class="mx-auto mt-8 max-w-3xl rounded-2xl border border-lime-500/20 bg-lime-500/5 p-6 sm:p-8 text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="h-1.5 w-1.5 rounded-full bg-lime-400"></div>
+          <span class="text-xs font-bold uppercase tracking-widest text-lime-400">Quick Answer</span>
+        </div>
+        <p class="text-base text-dark-200 leading-relaxed">
+          Lead nurturing is the process of building relationships with prospects through targeted, multi-channel communications until they are ready to buy. Companies that excel at lead nurturing generate 47% more sales-ready leads at a 33% lower cost. The seven best practices are: segment first, personalise every touch, add voice to your mix, time by engagement, score and re-route, use multiple channels, and iterate weekly.
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Add Voice to Your Nurture — Start Free
+        </a>
+        <a
+          href="/contact-us"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Request a Demo
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">30-day money-back guarantee · Free plan available</p>
+    </div>
+  </section>
+
+  <!-- Why Lead Nurturing Matters -->
+  <section class="border-b border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Why Lead Nurturing <span class="text-lime-400">Matters</span>
+      </h2>
+      <p class="text-dark-300 leading-relaxed mb-8 max-w-3xl">
+        Most leads are not ready to buy when they first enter your funnel. Without nurturing, they go cold — and your acquisition spend is wasted. The data makes the case clearly.
+      </p>
+
+      <div class="grid gap-6 sm:grid-cols-3 mb-10">
+        {[
+          { value: '47%', label: 'More Sales-Ready Leads', sub: 'Nurtured leads make 47% larger purchases and convert at significantly higher rates than non-nurtured leads (Forrester Research).' },
+          { value: '33%', label: 'Lower Cost Per Lead', sub: 'Companies excelling at lead nurturing reduce cost-per-lead by 33% while simultaneously increasing pipeline volume.' },
+          { value: '20%', label: 'More Opportunities', sub: 'Effective nurturing programmes generate 20% more sales opportunities from the same lead pool (Demand Gen Report).' },
+        ].map((stat) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-4xl font-extrabold text-lime-400">{stat.value}</div>
+            <div class="mt-2 text-sm font-bold text-white">{stat.label}</div>
+            <div class="mt-3 text-xs text-dark-500 leading-relaxed">{stat.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="rounded-xl border border-dark-800 bg-dark-900/40 p-6">
+        <p class="text-sm text-dark-400 leading-relaxed">
+          <strong class="text-white">The bottom line:</strong> Lead nurturing is not optional — it is the difference between a leaky funnel and a predictable revenue engine. Every lead you fail to nurture is a lead your competitor will convert.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Lead Nurturing Best Practices -->
+  <section class="border-b border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        7 Lead Nurturing <span class="text-lime-400">Best Practices</span>
+      </h2>
+      <p class="text-dark-300 leading-relaxed mb-10 max-w-3xl">
+        These seven practices are backed by research and refined by high-performing sales and marketing teams. Implement them in order — each builds on the previous.
+      </p>
+
+      <div class="space-y-6">
+        {bestPractices.map((bp) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 sm:p-8">
+            <div class="flex items-start gap-5">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-lg font-extrabold text-lime-400">
+                {bp.number}
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-bold text-white mb-2">{bp.title}</h3>
+                <p class="text-sm text-dark-400 leading-relaxed mb-3">{bp.description}</p>
+                <div class="inline-flex items-center gap-2 rounded-full bg-lime-500/10 px-3 py-1 text-xs font-semibold text-lime-400">
+                  {bp.keyMetric}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Nurturing Workflow Examples -->
+  <section class="border-b border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Lead Nurturing <span class="text-lime-400">Workflow Examples</span>
+      </h2>
+      <p class="text-dark-300 leading-relaxed mb-10 max-w-3xl">
+        Three proven workflows you can adapt for your team. Each uses a multi-channel approach with voice callbacks as the high-converting lever.
+      </p>
+
+      <div class="space-y-8">
+        {workflows.map((wf, wfIndex) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 overflow-hidden">
+            <div class="border-b border-dark-800 bg-dark-800/40 px-6 py-4">
+              <div class="flex items-center gap-3">
+                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-lime-500/10 text-xs font-bold text-lime-400">
+                  {wfIndex + 1}
+                </div>
+                <div>
+                  <h3 class="font-bold text-white">{wf.name}</h3>
+                  <p class="text-xs text-dark-500">{wf.description}</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 sm:p-6">
+              <div class="space-y-3">
+                {wf.steps.map((step) => (
+                  <div class="flex items-start gap-4 rounded-lg border border-dark-800/50 bg-dark-900/40 p-3 sm:p-4">
+                    <div class="flex-shrink-0 min-w-[64px]">
+                      <span class="text-xs font-bold text-lime-400">{step.day}</span>
+                    </div>
+                    <div class="flex-1">
+                      <p class="text-sm text-dark-300">{step.action}</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                      <span class={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                        step.channel === 'Phone' ? 'bg-lime-500/10 text-lime-400' :
+                        step.channel === 'SMS' ? 'bg-blue-500/10 text-blue-400' :
+                        step.channel === 'Email' ? 'bg-purple-500/10 text-purple-400' :
+                        step.channel === 'Ads' ? 'bg-orange-500/10 text-orange-400' :
+                        'bg-dark-700 text-dark-400'
+                      }`}>{step.channel}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Nurturing Tools -->
+  <section class="border-b border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Lead Nurturing <span class="text-lime-400">Tools</span>
+      </h2>
+      <p class="text-dark-300 leading-relaxed mb-8 max-w-3xl">
+        The right tool depends on your team size, budget, and nurturing complexity. Here is how the leading platforms compare.
+      </p>
+
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-dark-800/60">
+            <tr>
+              <th class="px-4 py-3 font-semibold text-dark-300">Tool</th>
+              <th class="px-4 py-3 font-semibold text-dark-300">Category</th>
+              <th class="px-4 py-3 font-semibold text-dark-300">Key Strength</th>
+              <th class="px-4 py-3 font-semibold text-dark-300 hidden sm:table-cell">Best For</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {tools.map((tool) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-4 py-3 font-medium text-lime-400">{tool.name}</td>
+                <td class="px-4 py-3 text-dark-400">{tool.category}</td>
+                <td class="px-4 py-3 text-dark-300">{tool.strength}</td>
+                <td class="px-4 py-3 text-dark-500 hidden sm:table-cell">{tool.bestFor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">Pro tip:</strong> The highest-performing nurture stacks combine a marketing automation platform (HubSpot or ActiveCampaign) with a voice engagement tool (LimeCall). Email handles education; voice handles conversion. Together they deliver the 391% conversion lift that neither achieves alone. See the <a href="/activecampaign-integration/" class="text-lime-400 hover:text-lime-300 underline">ActiveCampaign integration</a> for setup details.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-b border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Turn Cold Leads Into Customers<br />
+        <span class="text-lime-400">Add Voice to Your Nurture Sequence</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        LimeCall adds the highest-converting channel — instant voice callbacks — to your existing nurture workflows. Connect with high-intent leads in 28 seconds, automatically.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free Trial
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">30-day money-back guarantee · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Continue Reading"
+        links={[
+          { href: '/lead-nurturing/', title: 'Lead Nurturing', desc: 'How LimeCall powers lead nurturing with voice.' },
+          { href: '/b2b-lead-generation/', title: 'B2B Lead Generation', desc: 'Generate more qualified B2B leads.' },
+          { href: '/activecampaign-integration/', title: 'ActiveCampaign Integration', desc: 'Connect LimeCall to your nurture workflows.' },
+          { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans. Start free.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

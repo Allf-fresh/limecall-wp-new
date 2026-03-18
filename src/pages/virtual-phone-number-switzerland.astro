@@ -1,0 +1,318 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const country = "Switzerland";
+const code = "+41";
+const slug = "virtual-phone-number-switzerland";
+const flag = "🇨🇭";
+
+const seo = {
+  title: `Switzerland Virtual Phone Number — Get +41 | LimeCall`,
+  description: `Get a Switzerland virtual phone number (+41) from $35/mo. Zurich, Geneva, Basel numbers. Instant 5-min setup, no SIM required. Receive calls from anywhere.`,
+  canonical: `https://www.limecall.com/${slug}/`,
+};
+
+const faqs = [
+  {
+    question: `Can I get a Switzerland virtual number without being in Switzerland?`,
+    answer: `Yes. LimeCall provisions genuine Swiss numbers (+41) that you can use from anywhere in the world. Swiss callers dial a local number and your team answers via the LimeCall app, browser, or any forwarded device — no physical presence in Switzerland required.`,
+  },
+  {
+    question: `What is the country code for Switzerland?`,
+    answer: `Switzerland's international dialling code is +41. Swiss numbers are 9 digits after the country code. Zurich numbers begin with 044, Geneva with 022, Basel with 061, and Bern with 031. Mobile numbers begin with 07. When dialling from outside Switzerland, dial +41 and drop the leading 0 from the area code.`,
+  },
+  {
+    question: `How much does a Switzerland virtual phone number cost?`,
+    answer: `LimeCall's Switzerland virtual numbers start from $35 per month. This includes the number rental plus per-minute rates for inbound calls. There are no setup fees and you can cancel at any time. See the pricing page for a full breakdown of rates.`,
+  },
+  {
+    question: `Can I make outbound calls showing a Swiss caller ID?`,
+    answer: `Yes. LimeCall lets you place outbound calls displaying your Swiss +41 number as the caller ID. Swiss recipients see a familiar local number, which significantly improves answer rates for sales and support teams calling into Switzerland. Swiss callers are highly cautious about answering unknown foreign numbers.`,
+  },
+  {
+    question: `How quickly can I get a Switzerland virtual number?`,
+    answer: `Your Switzerland virtual number is active within 5 minutes of signing up. No hardware, no SIM card, and no waiting for postal delivery. Choose your Swiss city prefix, configure call routing, and start receiving calls immediately.`,
+  },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Virtual Numbers', url: 'https://www.limecall.com/virtual-numbers/' },
+        { name: 'Switzerland Virtual Number', url: seo.canonical }
+      ]} />
+      <div class="mt-4 text-5xl">{flag}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Get a <span class="text-lime-400">Switzerland Virtual Phone Number</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Get a local Switzerland number ({code}) without being physically present in Switzerland. Instant 5-minute setup, no hardware, no SIM card required.
+      </p>
+      <!-- Trust signals -->
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Active in 5 minutes</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Get Your Switzerland Number →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/80 py-6">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        <div>
+          <div class="text-2xl font-bold text-lime-400">+41</div>
+          <div class="mt-1 text-xs text-dark-400">Switzerland prefix</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-lime-400">5 min</div>
+          <div class="mt-1 text-xs text-dark-400">Setup time</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-lime-400">$35/mo</div>
+          <div class="mt-1 text-xs text-dark-400">Starting from</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-lime-400">40+</div>
+          <div class="mt-1 text-xs text-dark-400">Countries covered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is a Switzerland virtual number -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-3xl font-bold text-white">What is a Switzerland virtual phone number?</h2>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        A Switzerland virtual phone number is a real Swiss telephone number — with a genuine +41 country code — that is hosted in the cloud rather than tied to a physical SIM card or landline in Switzerland. Calls to your Swiss number are routed over the internet to any device you choose: your mobile phone, laptop, desk phone, or SIP endpoint anywhere in the world.
+      </p>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        Switzerland is one of Europe's wealthiest and most business-friendly markets, home to major financial institutions, pharmaceutical companies, and international organisations. A Zurich (044) or Geneva (022) prefix signals to Swiss callers that you are a trusted, local business. Swiss consumers are among the most discerning in the world — and a local number makes all the difference.
+      </p>
+      <p class="text-dark-300 leading-relaxed">
+        LimeCall virtual numbers include call routing, recording, CRM integration, and the same callback widget technology that connects website visitors to your team in under 28 seconds.
+      </p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20 border-t border-dark-800 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How to get your Switzerland number in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
+          <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Pick a Swiss city prefix — Zurich (044), Geneva (022), Basel (061), Bern (031), Lausanne (021), Lucerne (041) — or a national Swiss mobile-style number.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, agent, or phone number globally. Set up IVR menus, voicemail, ring groups, or time-based routing rules.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
+          <h3 class="mb-2 font-semibold text-white">Receive calls anywhere</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your Switzerland number goes live in minutes. Swiss customers call a local number and your team answers from any country in the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your Switzerland number</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Receive calls on any device</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Answer Swiss calls on your mobile, laptop, browser, or SIP phone. Switch between devices without missing a call.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Call recording</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every incoming and outgoing Switzerland call automatically. Review calls for quality assurance and coaching from your dashboard.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">CRM sync</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Every Swiss call is logged automatically in HubSpot, Salesforce, Pipedrive, and 50+ CRM integrations. No manual data entry.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Multilingual IVR</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Switzerland has four national languages — German, French, Italian, and Romansh. LimeCall's IVR supports language-based routing to serve all Swiss callers in their preferred language.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">No physical SIM required</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">100% cloud-based. No SIM card, no hardware, no Swiss address required. Fully compliant and operational from day one.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Callback widget</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Show your Switzerland +41 number on your website callback widget. Visitors click to call and connect to your team in under 28 seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses Switzerland virtual numbers?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🏦</div>
+          <h3 class="mb-2 font-semibold text-white">Finance & banking</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Switzerland is home to the world's leading wealth management and banking institutions. A Swiss number builds the credibility and trust essential in financial services.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">📞</div>
+          <h3 class="mb-2 font-semibold text-white">Callback widget</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Display your Switzerland +41 number in the LimeCall callback widget. Convert Swiss website visitors into calls within 28 seconds.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">💼</div>
+          <h3 class="mb-2 font-semibold text-white">Sales teams</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Outbound sales teams calling Swiss prospects see dramatically higher answer rates when calling from a recognised +41 local number. Swiss callers rarely answer foreign numbers.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🎧</div>
+          <h3 class="mb-2 font-semibold text-white">Customer support</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route Swiss customer support calls to your global team. Swiss callers pay local rates while your agents work remotely worldwide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Did you know -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-6 text-xl font-bold text-white">Switzerland phone system facts</h2>
+        <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Switzerland's international dialling code is <strong class="text-white">+41</strong>. When dialling from abroad, drop the leading 0 from the Swiss area code.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Major Swiss city codes: <strong class="text-white">Zurich 044</strong>, <strong class="text-white">Geneva 022</strong>, <strong class="text-white">Basel 061</strong>, <strong class="text-white">Bern 031</strong>, <strong class="text-white">Lausanne 021</strong>, <strong class="text-white">Lucerne 041</strong>, <strong class="text-white">St. Gallen 071</strong>.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Switzerland has four national languages: <strong class="text-white">German</strong> (63%), <strong class="text-white">French</strong> (23%), <strong class="text-white">Italian</strong> (8%), and <strong class="text-white">Romansh</strong> (0.5%). Effective Swiss operations require multilingual capability.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">Virtual number vs other Switzerland number options</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="py-3 pr-6 text-left font-semibold text-dark-400">Feature</th>
+              <th class="py-3 px-4 text-left font-semibold text-lime-400">LimeCall Virtual</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Local SIM</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Toll-free</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Existing mobile</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Setup time</td>
+              <td class="py-3 px-4 text-white">5 minutes</td>
+              <td class="py-3 px-4 text-dark-400">Days to weeks</td>
+              <td class="py-3 px-4 text-dark-400">1–3 days</td>
+              <td class="py-3 px-4 text-dark-400">Immediate</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Physical presence needed</td>
+              <td class="py-3 px-4 text-white">No</td>
+              <td class="py-3 px-4 text-dark-400">Yes — must be in Switzerland</td>
+              <td class="py-3 px-4 text-dark-400">Partial</td>
+              <td class="py-3 px-4 text-dark-400">No</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Local Swiss number</td>
+              <td class="py-3 px-4 text-white">Yes (+41)</td>
+              <td class="py-3 px-4 text-dark-400">Yes</td>
+              <td class="py-3 px-4 text-dark-400">No (0800 prefix)</td>
+              <td class="py-3 px-4 text-dark-400">Foreign number</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Works from anywhere</td>
+              <td class="py-3 px-4 text-white">Yes — globally</td>
+              <td class="py-3 px-4 text-dark-400">Roaming charges apply</td>
+              <td class="py-3 px-4 text-dark-400">Yes</td>
+              <td class="py-3 px-4 text-dark-400">Yes</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
+              <td class="py-3 px-4 text-white">Yes — unlimited</td>
+              <td class="py-3 px-4 text-dark-400">One per SIM</td>
+              <td class="py-3 px-4 text-dark-400">Limited</td>
+              <td class="py-3 px-4 text-dark-400">One per device</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Ready to get your Switzerland number?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to connect with Swiss customers — from anywhere in the world.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore Virtual Numbers"
+      links={[
+        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Business-grade virtual numbers.' },
+        { href: '/virtual-phone-number-netherlands/', title: 'Netherlands Virtual Number', desc: 'Get a Netherlands +31 number.' },
+        { href: '/virtual-phone-number-spain/', title: 'Spain Virtual Number', desc: 'Get a Spain +34 number.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans.' },
+      ]}
+    />
+  </div>
+</Base>

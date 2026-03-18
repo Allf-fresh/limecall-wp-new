@@ -1,0 +1,552 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Virtual Receptionist Service | AI-Powered Phone Answering | LimeCall',
+  description: 'LimeCall\'s virtual receptionist service answers calls 24/7 with AI intelligence. From £57/mo flat — no per-call fees. Replace expensive phone answering services.',
+  canonical: 'https://www.limecall.com/virtual-receptionist/',
+};
+
+const stats = [
+  { value: '6,600+', label: 'Businesses searching monthly' },
+  { value: '24/7/365', label: 'Always-on phone answering' },
+  { value: '£57/mo', label: 'Flat rate vs £800/mo average' },
+  { value: '28s', label: 'Avg transfer to your team' },
+];
+
+const features = [
+  { icon: '📞', title: 'Instant Call Answering', desc: 'Every call answered in under 1 second — no hold music, no voicemail. Your callers speak to a professional virtual receptionist immediately.' },
+  { icon: '🎯', title: 'Lead Qualification Built In', desc: 'Unlike basic phone answering services, LimeCall qualifies every caller on Budget, Authority, Need, and Timeline before routing or scheduling.' },
+  { icon: '📅', title: 'Appointment Scheduling', desc: 'AI books appointments directly into your calendar system. Callers pick a time, get confirmation via SMS, and your team gets full context.' },
+  { icon: '⚡', title: 'Instant Hot Transfer', desc: 'High-priority callers connect to your team in 28 seconds. The AI passes full qualification data so your rep is prepared before they say hello.' },
+  { icon: '🔗', title: 'CRM & Tool Integration', desc: 'Every call auto-syncs to Salesforce, HubSpot, Pipedrive, and 1,000+ tools via Zapier. Zero manual data entry, zero missed records.' },
+  { icon: '💬', title: 'SMS & Email Follow-Up', desc: 'Callers who can\'t be transferred get instant SMS with callback links or email confirmations. No lead slips through the cracks.' },
+  { icon: '🌍', title: '12-Language Support', desc: 'Serve callers in English, Spanish, French, German, and 8 more languages. One virtual receptionist for your entire global operation.' },
+  { icon: '📊', title: 'Real-Time Analytics', desc: 'Dashboard showing call volumes, peak times, qualification rates, and conversion metrics. Make data-driven staffing decisions.' },
+];
+
+const pricingRows = [
+  ['LimeCall AI', '£57/mo', '£0', '£0', 'None', '✅ Yes'],
+  ['Ruby Receptionist', '£349/mo', '£1.50+ overflow', '£95', '12 months', '💰 Extra'],
+  ['Moneypenny', '£200/mo', '£1–3 per call', '£150', '6 months', '⚠️ Limited'],
+  ['AnswerConnect', '£179/mo', '£0.99 per call', '£50', 'Monthly', '✅ Yes'],
+  ['Davinci Virtual', '£129/mo', '£1.75 per min', '£0', 'Monthly', '❌ No'],
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a virtual receptionist?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A virtual receptionist is a phone answering service that handles incoming business calls remotely — greeting callers, taking messages, qualifying leads, scheduling appointments, and routing calls to the right team member. Virtual receptionists can be human-operated, AI-powered, or a hybrid of both. LimeCall offers an AI-powered virtual receptionist that costs 90% less than human alternatives while providing 24/7 coverage.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does a virtual receptionist cost?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Virtual receptionist costs vary widely. Human-operated virtual receptionist services typically charge £200–800 per month with per-call or per-minute fees on top. AI-powered virtual receptionists like LimeCall start at £57/mo flat with no per-call fees. Traditional phone answering services charge £1–4 per call. When evaluating cost, factor in setup fees, contract length, after-hours surcharges, and per-call overflow charges — LimeCall has none of these.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between a virtual receptionist and an answering service?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A traditional answering service primarily takes messages and forwards them to you. A virtual receptionist provides a more comprehensive service: greeting callers professionally, qualifying enquiries, scheduling appointments, transferring calls, and integrating with your business tools. LimeCall\'s AI-powered virtual receptionist goes further by qualifying leads using BANT methodology and scoring callers in real-time — something neither basic answering services nor most human virtual receptionists can do.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best virtual receptionist for small business?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The best virtual receptionist for small business combines low cost, 24/7 availability, no per-call fees, and zero long-term contracts. LimeCall meets all four criteria at £57/mo flat. For small businesses, key requirements are: answering calls outside business hours (when 35% of purchase-intent calls happen), qualifying leads before they reach you (saving time), and CRM integration (eliminating manual data entry). AI-powered options like LimeCall are particularly well-suited because they scale instantly without hiring.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can a virtual receptionist schedule appointments?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. LimeCall\'s AI virtual receptionist integrates with Google Calendar, Outlook, Calendly, and other scheduling tools. When a caller wants to book an appointment, the AI checks availability in real-time, offers available slots, confirms the booking, and sends SMS/email confirmation to both the caller and your team. The appointment appears in your calendar with full caller details and qualification notes attached.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need to change my phone number to use a virtual receptionist?',
+      acceptedAnswer: { '@type': 'Answer', text: 'No. LimeCall works with your existing phone number. You can set up call forwarding from your current number to LimeCall, or use our widget on your website. Setup takes under 5 minutes with no engineering work, no hardware changes, and no disruption to your current phone system. Your callers experience a seamless, professional interaction from the first call.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does an AI virtual receptionist compare to a human one?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI virtual receptionists answer instantly (under 1 second vs 15-90 seconds for humans), handle unlimited concurrent calls (vs one call per person), provide perfect consistency 24/7, and cost 90% less. Human virtual receptionists excel at complex emotional conversations, nuanced negotiations, and VIP relationship management. LimeCall\'s approach: AI handles 95% of calls with instant qualification and routing, then seamlessly escalates complex situations to your human team with full context.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a virtual receptionist GDPR compliant?',
+      acceptedAnswer: { '@type': 'Answer', text: 'LimeCall\'s virtual receptionist is fully GDPR compliant. All call data is processed and stored within EU-compliant infrastructure. Caller data is encrypted in transit and at rest. You control data retention periods, and callers can request data deletion at any time. LimeCall also supports custom data processing agreements (DPAs) for enterprise customers. Call recordings and transcripts are accessible only to authorised team members within your account.' }
+    },
+  ],
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Virtual Receptionist',
+  description: 'AI-powered virtual receptionist service and phone answering solution that handles calls 24/7, qualifies leads, and integrates with your CRM.',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    priceValidUntil: '2026-12-31',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '312',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Virtual Receptionist', url: `${site.url}/virtual-receptionist/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        📞 AI-Powered Phone Answering Service
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Virtual Receptionist Service<br class="hidden sm:block" />
+        <span class="text-lime-400">— AI That Never Sleeps</span>
+      </h1>
+      <div class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        <p>A virtual receptionist is a phone answering service that handles incoming business calls remotely — greeting callers, taking messages, qualifying leads, and routing calls to the right team member. LimeCall's AI-powered virtual receptionist answers in under 1 second, costs 90% less than human operators, and qualifies leads with BANT methodology before transferring.</p>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Credit Card
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          See It in Action →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ 4.5 · 10,000+ businesses · From £57/mo flat</p>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- What is a Virtual Receptionist -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">What Is a Virtual Receptionist?</h2>
+      </div>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 sm:p-10">
+        <p class="text-dark-300 leading-relaxed text-lg">A <strong class="text-white">virtual receptionist</strong> is a remote phone answering service that handles your incoming business calls professionally — without requiring a physical receptionist at your office. Virtual receptionists greet callers, take messages, qualify enquiries, schedule appointments, transfer calls to the right person, and log everything in your CRM.</p>
+        <p class="mt-4 text-dark-300 leading-relaxed">Traditional virtual receptionist services use human operators working from call centres. LimeCall takes a different approach: our AI-powered virtual receptionist uses natural language processing to handle calls with the quality of a trained human — at a fraction of the cost, with true 24/7/365 availability.</p>
+        <p class="mt-4 text-dark-300 leading-relaxed">The result: every call answered instantly, every lead qualified systematically, and your team only speaks to prospects who are ready to buy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types of Virtual Receptionist Services -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Types of Virtual Receptionist Services</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-dark-800 text-2xl mb-4">👤</div>
+          <h3 class="text-xl font-bold text-white mb-3">Human-Operated</h3>
+          <p class="text-sm text-dark-400 mb-4">Live operators answer calls from a remote call centre. Professional but expensive, limited by staffing hours, and constrained to 1 call per operator at a time.</p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li>✓ Personal touch for sensitive calls</li>
+            <li>✗ £300–800/mo for 100 calls</li>
+            <li>✗ Limited after-hours availability</li>
+            <li>✗ Cannot scale instantly</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-8">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-2xl mb-4">🤖</div>
+          <h3 class="text-xl font-bold text-lime-400 mb-3">AI-Powered (LimeCall)</h3>
+          <p class="text-sm text-dark-300 mb-4">Natural language AI answers calls instantly, qualifies leads, schedules appointments, and integrates with your CRM. True 24/7 coverage at a flat monthly rate.</p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="text-lime-400">✓ £57/mo flat — unlimited calls</li>
+            <li class="text-lime-400">✓ True 24/7/365 availability</li>
+            <li class="text-lime-400">✓ 500 concurrent calls</li>
+            <li class="text-lime-400">✓ Full BANT lead qualification</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-dark-800 text-2xl mb-4">🔄</div>
+          <h3 class="text-xl font-bold text-white mb-3">Hybrid</h3>
+          <p class="text-sm text-dark-400 mb-4">AI handles first-touch qualification and routine calls, then escalates complex situations to human operators. Best of both worlds — if you can afford both.</p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li>✓ AI efficiency + human empathy</li>
+            <li>✗ Higher cost than pure AI</li>
+            <li>✓ Covers all call types</li>
+            <li>✓ LimeCall supports this model</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Virtual Receptionist Pricing Comparison -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-6">Virtual Receptionist Pricing Comparison</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">We compared the leading phone answering service providers so you don't have to. LimeCall's AI-powered virtual receptionist delivers more features at a fraction of the cost.</p>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Provider', 'Monthly Cost', 'Per-Call Fee', 'Setup Fee', 'Contract', '24/7'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'Provider' ? 'text-dark-300' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {pricingRows.map((row, i) => (
+              <tr class={`${i === 0 ? 'bg-lime-500/5' : ''} hover:bg-dark-800/30 transition`}>
+                <td class={`px-5 py-4 font-medium ${i === 0 ? 'text-lime-400 font-bold' : 'text-dark-200'}`}>{row[0]}</td>
+                <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{row[1]}</td>
+                <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{row[2]}</td>
+                <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{row[3]}</td>
+                <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{row[4]}</td>
+                <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{row[5]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-dark-500 text-center">Pricing as of March 2026. All prices approximate and may vary by plan tier. LimeCall pricing verified.</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Virtual Receptionist Features</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Everything a phone answering service should include — and features that traditional virtual receptionist services can't match.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Virtual Receptionist for Small Business -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">Virtual Receptionist for Small Business</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">Small businesses lose an estimated 62% of incoming calls during business hours — and 78% of callers who reach voicemail never call back. An answering service for small business changes that equation entirely.</p>
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <h3 class="text-xl font-bold text-white mb-4">Why Small Businesses Need a Virtual Receptionist</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0 font-bold">01</span> You're too busy serving clients to answer every call</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0 font-bold">02</span> After-hours calls go to voicemail — and 78% don't leave one</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0 font-bold">03</span> Hiring a full-time receptionist costs £25,000+/yr</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0 font-bold">04</span> Every missed call is revenue walking to a competitor</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0 font-bold">05</span> You need professional call handling to build trust</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-8">
+          <h3 class="text-xl font-bold text-lime-400 mb-4">How LimeCall Solves It</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0">✓</span> AI answers every call instantly — you focus on your work</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0">✓</span> 24/7/365 coverage captures every lead, day and night</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0">✓</span> £57/mo flat — 97% cheaper than hiring a receptionist</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0">✓</span> Qualified leads transferred to you in 28 seconds</li>
+            <li class="flex gap-3"><span class="text-lime-400 shrink-0">✓</span> Professional, consistent greeting on every single call</li>
+          </ul>
+        </div>
+      </div>
+      <p class="mt-8 text-center text-dark-300">For small businesses, a virtual receptionist isn't a luxury — it's the difference between growing and losing leads to competitors who answer faster. At £57/mo, LimeCall pays for itself with one converted call per month for most businesses.</p>
+    </div>
+  </section>
+
+  <!-- Industry Use Cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Virtual Receptionist by Industry</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { icon: '⚖️', title: 'Legal Firms', desc: 'Client intake qualification, case type routing, and after-hours coverage for urgent matters. Ensure no potential client goes unanswered.', href: '/legal/' },
+          { icon: '🦷', title: 'Dental & Medical', desc: 'Patient appointment booking, insurance verification, and triage-level routing. Reduce no-shows with SMS confirmations.', href: '/healthcare/' },
+          { icon: '🏠', title: 'Real Estate', desc: 'Property enquiry qualification — budget, timeline, location — before connecting to the listing agent. Capture leads from portal ads 24/7.', href: '/real-estate/' },
+          { icon: '🔧', title: 'Trades & Contractors', desc: 'Emergency call routing, job booking, and quote request qualification. Never miss an emergency plumbing call at 2am again.', href: '/trades/' },
+          { icon: '💰', title: 'Financial Services', desc: 'Compliant call handling, initial KYC collection, and qualified appointment scheduling with advisors.', href: '/financial-services/' },
+          { icon: '💻', title: 'SaaS & Tech', desc: 'Demo request qualification, trial signup callbacks, and instant routing to sales when a prospect is ready to buy.', href: '/saas/' },
+        ].map(item => (
+          <a href={item.href} class="group rounded-2xl border border-dark-800 bg-dark-900/60 p-8 hover:border-lime-500/30 transition block">
+            <div class="text-4xl mb-4">{item.icon}</div>
+            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-lime-400 transition">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-10">
+        <div class="text-xs font-semibold text-lime-400 uppercase tracking-wider mb-4">Case Study</div>
+        <h2 class="text-2xl font-extrabold text-white sm:text-3xl">Dental Practice Reduces Missed Patient Calls by 67%</h2>
+        <p class="mt-4 text-dark-300 leading-relaxed">A busy dental practice with 3 dentists was losing patients because their reception team couldn't keep up with call volume during peak hours. Calls during lunch breaks and after 5pm went to voicemail — and most patients simply called the next practice on the list.</p>
+        <p class="mt-4 text-dark-300 leading-relaxed">After deploying LimeCall's AI virtual receptionist, every call was answered instantly — including evenings and weekends. The AI books appointments directly into their practice management software, confirms via SMS, and flags emergency cases for immediate callback.</p>
+        <div class="mt-8 grid grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">67%</div>
+            <div class="mt-1 text-sm text-dark-400">Fewer missed calls</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">23%</div>
+            <div class="mt-1 text-sm text-dark-400">More appointments booked</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">£714</div>
+            <div class="mt-1 text-sm text-dark-400">Monthly savings vs old service</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison: Virtual Receptionist vs Answering Service vs In-House -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Virtual Receptionist vs Answering Service vs In-House Receptionist</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Factor</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">LimeCall AI Virtual Receptionist</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Answering Service</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">In-House Receptionist</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Annual cost', '£684/yr', '£2,400–18,000/yr', '£25,000–35,000/yr'],
+              ['Availability', '24/7/365', 'Business hours + limited OOH', 'Business hours only'],
+              ['Concurrent calls', 'Unlimited (500+)', '1 per operator', '1 at a time'],
+              ['Lead qualification', 'Full BANT methodology', 'Basic message-taking', 'Depends on training'],
+              ['CRM integration', 'Automatic', 'Manual / limited', 'Manual entry'],
+              ['Setup time', '5 minutes', '3–5 days', '2–4 weeks (hiring + training)'],
+              ['Consistency', '100% every call', 'Varies by operator', 'Varies by day/mood'],
+              ['Languages', '12 built-in', '1–3 (hiring dependent)', '1–2 typically'],
+              ['Sick days / holidays', 'Never', 'Cover arranged (extra cost)', 'You lose coverage'],
+              ['Scalability', 'Instant', 'Weeks (hire more operators)', 'Months (hire + train)'],
+            ].map(([feature, ai, as_, ih]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                <td class="px-5 py-4 text-white font-semibold">{ai}</td>
+                <td class="px-5 py-4 text-dark-400">{as_}</td>
+                <td class="px-5 py-4 text-dark-400">{ih}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">How LimeCall's Virtual Receptionist Works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">1</div>
+          <h3 class="font-bold text-white mb-2">Connect Your Lines</h3>
+          <p class="text-sm text-dark-400">Set up call forwarding from your existing number or add our widget to your website. Takes under 5 minutes — no engineering needed, no hardware required.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">2</div>
+          <h3 class="font-bold text-white mb-2">Customise Your Script</h3>
+          <p class="text-sm text-dark-400">Define your greeting, qualification questions, routing rules, and follow-up actions in the dashboard. Your virtual receptionist follows your playbook exactly.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">3</div>
+          <h3 class="font-bold text-white mb-2">AI Answers Every Call</h3>
+          <p class="text-sm text-dark-400">Your phone answering service is live 24/7. Hot leads get transferred in 28 seconds. Everyone else gets a scheduled callback or info sent via SMS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Why Businesses Choose LimeCall's Virtual Receptionist</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { quote: 'We tried three different virtual receptionist services before LimeCall. The human operators kept getting our qualification criteria wrong. The AI follows our script perfectly every single time — and it costs a fifth of what we were paying.', name: 'Helen P.', role: 'Practice Manager, Dental Group (4 Locations)' },
+          { quote: 'I run a small accounting firm and was losing potential clients who called during tax season when we were swamped. LimeCall\'s virtual receptionist catches every call, qualifies the enquiry, and books consultations into my calendar. Revenue up 28% this year.', name: 'Andrew K.', role: 'Managing Partner, AK Accountancy' },
+        ].map(t => (
+          <blockquote class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <p class="text-dark-200 italic leading-relaxed">"{t.quote}"</p>
+            <footer class="mt-6">
+              <p class="font-bold text-white">{t.name}</p>
+              <p class="text-sm text-dark-500">{t.role}</p>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Partners -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-6">Integrates With Your Business Tools</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">Your virtual receptionist connects to the CRM, calendar, and communication tools you already use — every call automatically logged and synced.</p>
+      <div class="grid gap-4 sm:grid-cols-4 lg:grid-cols-6">
+        {[
+          'Salesforce', 'HubSpot', 'Pipedrive', 'Google Calendar',
+          'Outlook', 'Slack', 'Zapier', 'Calendly',
+          'Zoho CRM', 'Monday.com', 'Microsoft Teams', 'Intercom',
+        ].map(tool => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-4 text-center hover:border-lime-500/30 transition">
+            <span class="text-sm font-medium text-dark-300">{tool}</span>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-sm text-dark-400">Plus 1,000+ more tools via Zapier and native API. All integrations included — no extra charges.</p>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">Security & Compliance Built In</h2>
+      <p class="text-dark-300 mb-10 max-w-2xl mx-auto">Your virtual receptionist handles sensitive caller data. LimeCall protects it with enterprise-grade security: GDPR compliance, end-to-end encryption, SOC 2 Type II audited controls, and configurable data retention. Custom DPAs available for regulated industries including legal, healthcare, and financial services.</p>
+    </div>
+  </section>
+
+  <!-- Common Mistakes When Choosing a Virtual Receptionist -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">5 Mistakes to Avoid When Choosing a Virtual Receptionist Service</h2>
+      <div class="space-y-4">
+        {[
+          { num: '1', title: 'Ignoring Per-Call Fees', desc: 'A £99/mo plan sounds cheap until you realise each call costs £1.75 extra. At 200 calls/month, that\'s £449/mo — not £99. Always calculate total cost including per-call and per-minute charges. LimeCall\'s flat £57/mo means your bill is the same whether you get 50 calls or 500.' },
+          { num: '2', title: 'Accepting Message-Taking as "Qualification"', desc: 'Taking a name and number is not lead qualification. If your phone answering service can\'t assess budget, authority, need, and timeline, your team still wastes time on unqualified leads. Demand BANT-level qualification from your provider.' },
+          { num: '3', title: 'Overlooking After-Hours Surcharges', desc: 'Many virtual receptionist services charge 1.5–2x rates for evenings and weekends. Since 35% of purchase-intent calls happen outside business hours, this can blow up your budget. Ensure 24/7 is included at no extra cost.' },
+          { num: '4', title: 'Signing Long-Term Contracts', desc: 'If a provider needs a 12-month contract to keep you, that\'s a red flag. Month-to-month services earn your business every month through results, not lock-in. LimeCall has no contracts — cancel anytime.' },
+          { num: '5', title: 'Neglecting CRM Integration', desc: 'If call data doesn\'t sync to your CRM automatically, your team spends hours on manual data entry — or worse, leads fall through the cracks entirely. Automated CRM sync should be non-negotiable.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 flex gap-4">
+            <div class="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-lime-500/10 text-lime-400 font-extrabold">{item.num}</div>
+            <div>
+              <h3 class="font-bold text-white mb-1">{item.title}</h3>
+              <p class="text-sm text-dark-400">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Phone Answering Service for Growing Companies -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">Phone Answering Service That Scales With You</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">Whether you're a solo operator or managing a team of 50, LimeCall's virtual receptionist adapts to your business — without changing your plan or increasing your costs.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="text-3xl mb-3">🏠</div>
+          <h3 class="font-bold text-white mb-2">Solo & Micro Businesses</h3>
+          <p class="text-sm text-dark-400">Professional call handling when you're busy with clients. Appointment booking, lead qualification, and SMS follow-up — all for £57/mo.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="text-3xl mb-3">📈</div>
+          <h3 class="font-bold text-white mb-2">Growing SMBs</h3>
+          <p class="text-sm text-dark-400">Route calls to the right department, handle overflow during peak periods, and capture after-hours leads without adding headcount.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="text-3xl mb-3">🏢</div>
+          <h3 class="font-bold text-white mb-2">Multi-Location</h3>
+          <p class="text-sm text-dark-400">One virtual receptionist for all locations. Geographic routing, per-branch analytics, and centralised management across your entire operation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Virtual Receptionist — Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Get Your AI Virtual Receptionist in 5 Minutes</h2>
+      <p class="mt-4 text-lg text-dark-300">Join 10,000+ businesses using LimeCall's virtual receptionist service. £57/mo flat — no per-call fees, no contracts, no setup costs.</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try LimeCall Free →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">14-day free trial · No credit card · No contracts · Cancel anytime</p>
+    </div>
+  </section>
+
+  <CrossLinks
+    heading="Explore LimeCall"
+    links={[
+      { href: '/ai-phone-agent/', title: 'AI Phone Agent', desc: 'AI-powered call handling.' },
+      { href: '/answering-service/', title: 'Answering Service', desc: '24/7 call answering from £57/mo.' },
+      { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Never lose a lead to hold time.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Plans from £57/month.' },
+    ]}
+  />
+</Base>

@@ -1,0 +1,501 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Phone Answering Service for Small Business | 24/7 AI | LimeCall',
+  description: 'Never miss a business call again. LimeCall\'s AI-powered answering service handles calls 24/7 for £57/mo flat — no per-call charges, no contracts. Start free.',
+  canonical: 'https://www.limecall.com/answering-service/',
+};
+
+const stats = [
+  { value: '78%', label: 'Of callers won\'t leave voicemail' },
+  { value: '24/7', label: 'Always-on call answering' },
+  { value: '£57/mo', label: 'Flat — no per-call fees' },
+  { value: '28s', label: 'Hot lead transfer time' },
+];
+
+const features = [
+  { icon: '📞', title: '24/7 Call Answering Service', desc: 'Every call answered in under 1 second, day or night. Your callers never hear voicemail, hold music, or busy signals — even at 3am on a bank holiday.' },
+  { icon: '🎯', title: 'Intelligent Lead Qualification', desc: 'Not just message-taking — our AI qualifies every caller on Budget, Authority, Need, and Timeline. Hot leads get transferred; others get scheduled callbacks.' },
+  { icon: '⚡', title: '28-Second Live Transfer', desc: 'When a caller meets your qualification criteria, they\'re connected to your team in 28 seconds with full context. No cold transfers, no repeated information.' },
+  { icon: '📅', title: 'Appointment Booking', desc: 'AI schedules appointments directly into your calendar, sends SMS confirmations, and reduces no-shows by 40% with automated reminders.' },
+  { icon: '💬', title: 'SMS & Email Follow-Up', desc: 'Every caller gets professional follow-up. Missed connections receive SMS callback links. Enquiries get info packages. Nothing falls through the cracks.' },
+  { icon: '🔗', title: 'CRM Auto-Sync', desc: 'Salesforce, HubSpot, Pipedrive, and 1,000+ integrations via Zapier. Every call logged automatically with transcript, score, and next steps.' },
+  { icon: '📊', title: 'Call Analytics Dashboard', desc: 'See call volumes, peak times, qualification rates, and conversion metrics in real-time. Know exactly where your leads are coming from.' },
+  { icon: '🌍', title: 'Multi-Language Answering', desc: 'Serve callers in 12 languages without hiring multilingual staff. One phone answering service for your entire operation.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How much does a phone answering service cost?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Phone answering service costs range from £100–1,500+ per month depending on the provider and call volume. Traditional answering services charge £1–4 per call plus a monthly base fee. Human virtual receptionists cost £300–800/mo for around 100 calls. LimeCall\'s AI-powered answering service costs £57/mo flat with no per-call fees, no setup costs, and no long-term contracts — making it the most affordable option for small businesses.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best answering service for small business?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The best answering service for small business combines affordability, 24/7 availability, no per-call fees, lead qualification, and CRM integration. LimeCall meets all these criteria at £57/mo flat. Key factors to compare: total monthly cost (including per-call fees), whether 24/7 coverage is included or costs extra, contract requirements, and whether the service can qualify leads or just take messages. AI-powered services like LimeCall offer the best value because they scale instantly without per-call pricing.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between a 24/7 answering service and a business-hours answering service?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A 24/7 answering service handles calls around the clock — nights, weekends, and holidays included. A business-hours answering service only covers standard working hours (typically 8am–6pm Monday–Friday). Since 35% of purchase-intent calls happen outside business hours, a 24/7 service captures significantly more leads. LimeCall provides true 24/7/365 coverage at no extra charge, while many traditional services charge premium rates for after-hours answering.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can an answering service qualify leads?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Traditional answering services primarily take messages — they don\'t qualify leads. Human virtual receptionists can follow basic scripts but lack consistent qualification methodology. LimeCall\'s AI-powered answering service qualifies every caller using BANT methodology (Budget, Authority, Need, Timeline), scores leads in real-time, and only transfers callers who meet your qualification threshold. This means your team only speaks to prospects who are ready to buy.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does a phone answering service work?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A phone answering service works by receiving your incoming business calls when you can\'t answer them. You set up call forwarding from your business number, or callers reach the service through a widget on your website. The service answers professionally, handles the caller\'s needs (message-taking, appointment booking, lead qualification), and notifies you of important calls. With LimeCall, the AI answers instantly, qualifies the caller, and either transfers hot leads to your team in 28 seconds or schedules a callback.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need an answering service if I have voicemail?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Research shows 78% of callers who reach voicemail hang up without leaving a message — and most call a competitor instead. Voicemail creates a poor first impression and loses urgent leads. An answering service ensures every caller speaks to someone (or an AI) immediately, gets their needs addressed, and receives professional follow-up. For businesses where phone calls generate revenue, voicemail is effectively a "closed" sign for 78% of your callers.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use an answering service for after-hours calls only?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. LimeCall can be configured to handle calls only during specific hours — for example, forwarding calls to the AI after 6pm and on weekends, while your team handles calls during business hours. Many small businesses start with after-hours coverage and then expand to 24/7 once they see the lead capture improvement. Since LimeCall charges a flat £57/mo regardless of usage pattern, there\'s no cost difference between after-hours only and full 24/7 coverage.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can I set up a phone answering service?',
+      acceptedAnswer: { '@type': 'Answer', text: 'LimeCall can be set up in under 5 minutes. You configure your greeting message, define qualification questions, set call routing rules, and activate the service. No engineering work, no hardware, no phone system changes. Traditional answering services typically require 3–5 days for onboarding and script configuration. Human virtual receptionist services may need 1–2 weeks for training. LimeCall\'s AI is ready to answer calls within minutes of setup.' }
+    },
+  ],
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Answering Service',
+  description: 'AI-powered phone answering service for small business. 24/7 call answering, lead qualification, and CRM integration from £57/mo flat.',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    priceValidUntil: '2026-12-31',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '312',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Answering Service', url: `${site.url}/answering-service/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        📞 24/7 AI-Powered Call Answering
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Phone Answering Service<br class="hidden sm:block" />
+        <span class="text-lime-400">That Never Misses a Call</span>
+      </h1>
+      <div class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        <p>A phone answering service handles incoming business calls when you can't — greeting callers, taking messages, qualifying enquiries, and scheduling callbacks. LimeCall's AI-powered answering service costs £57/mo flat with no per-call fees, answering unlimited calls 24/7 and qualifying leads before transferring to your team in 28 seconds.</p>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Credit Card
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          See It in Action →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ 4.5 · 10,000+ businesses · £57/mo flat, unlimited calls</p>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Why Small Businesses Need an Answering Service -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">Why Small Businesses Need a Phone Answering Service</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">If your business relies on phone calls for revenue, every missed call is money lost. Here's the reality most small business owners face:</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-2xl border border-red-500/20 bg-red-500/5 p-8">
+          <h3 class="text-xl font-bold text-white mb-4">The Problem</h3>
+          <ul class="space-y-4 text-sm text-dark-300">
+            <li class="flex gap-3">
+              <span class="text-red-400 shrink-0 font-bold text-lg">78%</span>
+              <span>of callers won't leave a voicemail — they call a competitor instead</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-red-400 shrink-0 font-bold text-lg">62%</span>
+              <span>of small businesses miss calls during business hours due to being busy with clients</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-red-400 shrink-0 font-bold text-lg">35%</span>
+              <span>of purchase-intent calls happen outside standard business hours</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-red-400 shrink-0 font-bold text-lg">85%</span>
+              <span>of callers who can't reach you the first time won't call back</span>
+            </li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+          <h3 class="text-xl font-bold text-lime-400 mb-4">The Solution</h3>
+          <ul class="space-y-4 text-sm text-dark-300">
+            <li class="flex gap-3">
+              <span class="text-lime-400 shrink-0">✓</span>
+              <span>AI answers every call in under 1 second — no caller ever reaches voicemail</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-lime-400 shrink-0">✓</span>
+              <span>Handle unlimited concurrent calls — even during your busiest periods</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-lime-400 shrink-0">✓</span>
+              <span>True 24/7/365 answering service captures every after-hours lead</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-lime-400 shrink-0">✓</span>
+              <span>Instant follow-up via SMS ensures callers stay engaged</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Comparison -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-6">How Much Does an Answering Service Cost?</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">The true cost of a call answering service depends on whether you're paying per call, per minute, or a flat monthly rate. Here's how the options compare for a typical small business handling 200 calls per month.</p>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Option</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Monthly Cost</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Annual Cost</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Qualification</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">24/7</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">In-House Receptionist</td>
+              <td class="px-5 py-4 text-dark-400">£2,083/mo (£25k salary)</td>
+              <td class="px-5 py-4 text-dark-400">£25,000+</td>
+              <td class="px-5 py-4 text-dark-400">Depends on training</td>
+              <td class="px-5 py-4 text-dark-400">❌ No</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Traditional Answering Service</td>
+              <td class="px-5 py-4 text-dark-400">£200–800/mo + per-call</td>
+              <td class="px-5 py-4 text-dark-400">£2,400–9,600+</td>
+              <td class="px-5 py-4 text-dark-400">❌ Message-taking only</td>
+              <td class="px-5 py-4 text-dark-400">⚠️ Extra charge</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Virtual Receptionist (Human)</td>
+              <td class="px-5 py-4 text-dark-400">£300–800/mo for 100 calls</td>
+              <td class="px-5 py-4 text-dark-400">£3,600–9,600</td>
+              <td class="px-5 py-4 text-dark-400">⚠️ Basic scripting</td>
+              <td class="px-5 py-4 text-dark-400">⚠️ Limited</td>
+            </tr>
+            <tr class="bg-lime-500/5 hover:bg-lime-500/10 transition">
+              <td class="px-5 py-4 font-bold text-lime-400">LimeCall AI Answering Service</td>
+              <td class="px-5 py-4 font-semibold text-white">£57/mo flat</td>
+              <td class="px-5 py-4 font-semibold text-white">£684</td>
+              <td class="px-5 py-4 font-semibold text-white">✅ Full BANT</td>
+              <td class="px-5 py-4 font-semibold text-white">✅ Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-dark-500 text-center">Costs based on typical UK small business with 200 calls/month. In-house receptionist includes employer NI and pension contributions.</p>
+    </div>
+  </section>
+
+  <!-- 24/7 Answering Service Section -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">24/7 Answering Service — Capture Every After-Hours Lead</h2>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 sm:p-10">
+        <p class="text-dark-300 leading-relaxed text-lg">A <strong class="text-white">24/7 answering service</strong> ensures your business never goes to voicemail — not at 6pm on Friday, not at 2am on Sunday, not on Christmas Day. For businesses that depend on phone leads, after-hours coverage isn't optional — it's where a significant portion of your revenue comes from.</p>
+        <p class="mt-4 text-dark-300 leading-relaxed">Research shows that 35% of purchase-intent calls happen outside standard business hours. Emergency services (plumbers, electricians, locksmiths) see up to 60% of calls outside 9-5. Legal firms report that some of their highest-value cases come from evening and weekend enquiries.</p>
+        <p class="mt-4 text-dark-300 leading-relaxed">LimeCall's AI-powered 24/7 answering service provides the same quality call handling at 3am as at 3pm — with full lead qualification, instant CRM logging, and SMS follow-up. There's no premium for after-hours coverage because the AI doesn't need sleep, overtime, or bank holiday pay.</p>
+        <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+          <div class="rounded-xl bg-dark-800/60 p-4">
+            <div class="text-2xl font-extrabold text-lime-400">35%</div>
+            <div class="text-xs text-dark-400 mt-1">Purchase calls after hours</div>
+          </div>
+          <div class="rounded-xl bg-dark-800/60 p-4">
+            <div class="text-2xl font-extrabold text-lime-400">60%</div>
+            <div class="text-xs text-dark-400 mt-1">Emergency calls after 5pm</div>
+          </div>
+          <div class="rounded-xl bg-dark-800/60 p-4">
+            <div class="text-2xl font-extrabold text-lime-400">£0</div>
+            <div class="text-xs text-dark-400 mt-1">Extra for 24/7 with LimeCall</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call Answering Service Features -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Call Answering Service Features</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">More than message-taking — LimeCall's phone answering service qualifies leads, books appointments, and integrates with your business tools.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cost Comparison: In-House vs Answering Service vs AI -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">The Real Cost of Answering Your Own Phones</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">Many small business owners answer calls themselves — costing them more in lost productivity than an answering service for small business would cost.</p>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 text-center">
+          <div class="text-sm text-dark-400 mb-2">In-House Receptionist</div>
+          <div class="text-3xl font-extrabold text-white">£25k<span class="text-base text-dark-400">/yr</span></div>
+          <p class="mt-3 text-xs text-dark-500">Salary + NI + pension + training + sick cover + holiday cover. Business hours only.</p>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 text-center">
+          <div class="text-sm text-dark-400 mb-2">Traditional Answering Service</div>
+          <div class="text-3xl font-extrabold text-white">£200–800<span class="text-base text-dark-400">/mo</span></div>
+          <p class="mt-3 text-xs text-dark-500">Plus £1–4 per call. 24/7 often costs extra. Limited qualification. Contract typically required.</p>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-8 text-center">
+          <div class="text-sm text-lime-400 mb-2">LimeCall AI</div>
+          <div class="text-3xl font-extrabold text-lime-400">£57<span class="text-base text-dark-400">/mo</span></div>
+          <p class="mt-3 text-xs text-dark-400">Flat rate. Unlimited calls. 24/7/365. Full BANT qualification. No contracts. No setup fees.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Answering Service for Every Industry</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { icon: '🔧', title: 'Trades & Contractors', desc: 'Emergency call routing for plumbers, electricians, and HVAC. Qualify job type, urgency, and location before dispatching. Capture after-hours emergency calls that competitors miss.', href: '/trades/' },
+          { icon: '🦷', title: 'Medical & Dental', desc: 'Patient appointment booking, insurance verification, and triage routing. Reduce no-shows with SMS confirmations and automated reminders.', href: '/healthcare/' },
+          { icon: '⚖️', title: 'Legal Firms', desc: 'Client intake qualification, case type routing, and conflict checking. After-hours coverage for urgent matters. Never miss a high-value case enquiry.', href: '/legal/' },
+          { icon: '🏠', title: 'Property Management', desc: 'Tenant maintenance requests, emergency call routing, and viewing appointment booking. Qualify urgency level before dispatching maintenance teams.', href: '/real-estate/' },
+          { icon: '🛒', title: 'E-Commerce', desc: 'Order status enquiries, returns processing, and high-value purchase routing to specialised sales reps. Reduce cart abandonment with instant callback.', href: '/ecommerce/' },
+          { icon: '💻', title: 'Professional Services', desc: 'Consultation booking, service enquiry qualification, and client routing. Present a professional front even as a one-person operation.', href: '/saas/' },
+        ].map(item => (
+          <a href={item.href} class="group rounded-2xl border border-dark-800 bg-dark-900/60 p-8 hover:border-lime-500/30 transition block">
+            <div class="text-4xl mb-4">{item.icon}</div>
+            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-lime-400 transition">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-10">
+        <div class="text-xs font-semibold text-lime-400 uppercase tracking-wider mb-4">Case Study</div>
+        <h2 class="text-2xl font-extrabold text-white sm:text-3xl">Plumbing Company Increases Booked Jobs by 43% with AI Answering Service</h2>
+        <p class="mt-4 text-dark-300 leading-relaxed">A plumbing company with 8 engineers was losing significant revenue from after-hours emergency calls. Their answering service could only take messages — by the time an engineer called back the next morning, the customer had already hired someone else. Weekend and evening calls were going to voicemail, where 78% of callers simply hung up.</p>
+        <p class="mt-4 text-dark-300 leading-relaxed">After switching to LimeCall's AI-powered answering service, every call was answered instantly — including 2am burst pipe emergencies. The AI qualifies urgency level, captures job details, and routes genuine emergencies to the on-call engineer immediately. Non-urgent requests get booked into the next available slot with SMS confirmation.</p>
+        <div class="mt-8 grid grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">43%</div>
+            <div class="mt-1 text-sm text-dark-400">More booked jobs</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">67%</div>
+            <div class="mt-1 text-sm text-dark-400">More after-hours captures</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">£540</div>
+            <div class="mt-1 text-sm text-dark-400">Monthly savings vs old service</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Answering Service for Small Business -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">Answering Service for Small Business — Built for Growth</h2>
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div class="space-y-6">
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-bold text-white mb-2">Solo Operators & Freelancers</h3>
+            <p class="text-sm text-dark-400">You can't answer calls while you're with a client. LimeCall's answering service handles calls professionally, qualifies enquiries, and books appointments directly into your calendar. Present a professional front without hiring staff.</p>
+          </div>
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-bold text-white mb-2">Growing Teams (2–20 People)</h3>
+            <p class="text-sm text-dark-400">Your team is too busy doing their jobs to answer every call. LimeCall catches overflow, handles after-hours, and routes qualified leads to the right person. Scale your phone handling without scaling your headcount.</p>
+          </div>
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-bold text-white mb-2">Multi-Location Businesses</h3>
+            <p class="text-sm text-dark-400">One AI answering service for all locations. Route calls based on postcode, department, or service type. Centralised reporting across all branches with per-location analytics.</p>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-bold text-white mb-2">Seasonal Businesses</h3>
+            <p class="text-sm text-dark-400">Call volume spikes during peak season? LimeCall handles unlimited concurrent calls at the same flat rate — no per-call penalties during your busiest months. Scale up instantly, scale down without waste.</p>
+          </div>
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-bold text-white mb-2">E-Commerce & Online Businesses</h3>
+            <p class="text-sm text-dark-400">Customers call with questions before buying. If nobody answers, they abandon their cart. LimeCall's phone answering service handles order enquiries, routes high-value purchases to sales, and reduces abandoned carts.</p>
+          </div>
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-bold text-white mb-2">Professional Services</h3>
+            <p class="text-sm text-dark-400">Accountants, consultants, architects — your time is billable. Every minute spent answering a cold call costs you revenue. LimeCall qualifies callers first, so you only spend time on genuine prospects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">What Small Business Owners Say About LimeCall</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { quote: 'I was paying £400/mo for a call answering service that could only take messages. LimeCall\'s AI actually qualifies my leads, books appointments, and sends follow-up texts. My conversion rate doubled and I\'m spending less than a sixth of what I was before.', name: 'Mike D.', role: 'Owner, Electrical Contracting Business' },
+          { quote: 'As a GP practice, we were drowning in appointment calls during morning surgery. LimeCall handles the booking calls, checks available slots, and sends patients SMS confirmations. Our reception team can focus on patients in the practice instead of being chained to the phone.', name: 'Dr. Lisa H.', role: 'Senior Partner, NHS GP Practice' },
+          { quote: 'We run a property management company and tenant calls used to pile up at weekends. Now the AI handles maintenance requests 24/7, qualifies emergency vs routine, and dispatches our contractors automatically for genuine emergencies.', name: 'Rebecca S.', role: 'Director, London Property Management Co.' },
+        ].map(t => (
+          <blockquote class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <p class="text-dark-200 italic leading-relaxed">"{t.quote}"</p>
+            <footer class="mt-6">
+              <p class="font-bold text-white">{t.name}</p>
+              <p class="text-sm text-dark-500">{t.role}</p>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Set Up Your Answering Service in 5 Minutes</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">1</div>
+          <h3 class="font-bold text-white mb-2">Create Your Account</h3>
+          <p class="text-sm text-dark-400">Sign up in 30 seconds. No credit card, no sales calls, no contracts. Your 14-day free trial starts immediately.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">2</div>
+          <h3 class="font-bold text-white mb-2">Configure & Customise</h3>
+          <p class="text-sm text-dark-400">Set your greeting, define qualification questions, configure routing rules, and connect your CRM. The setup wizard guides you through everything.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">3</div>
+          <h3 class="font-bold text-white mb-2">Start Answering Calls</h3>
+          <p class="text-sm text-dark-400">Add the widget to your website or set up call forwarding. Your 24/7 answering service is now live and handling every call professionally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Phone Answering Service — Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Never Miss a Business Call Again</h2>
+      <p class="mt-4 text-lg text-dark-300">Join 10,000+ small businesses using LimeCall's AI-powered answering service. £57/mo flat — no per-call fees, no contracts, no setup costs.</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try LimeCall Free →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">14-day free trial · No credit card · No contracts · Cancel anytime</p>
+    </div>
+  </section>
+
+  <CrossLinks
+    heading="Explore LimeCall"
+    links={[
+      { href: '/ai-phone-agent/', title: 'AI Phone Agent', desc: 'AI-powered call handling.' },
+      { href: '/virtual-receptionist/', title: 'Virtual Receptionist', desc: 'AI receptionist for your business.' },
+      { href: '/missed-call-software/', title: 'Missed Call Software', desc: 'Recover every missed opportunity.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Plans from £57/month.' },
+    ]}
+  />
+</Base>

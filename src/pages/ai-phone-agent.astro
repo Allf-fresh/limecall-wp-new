@@ -1,0 +1,600 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'AI Phone Agent: Virtual Receptionist & 24/7 Answering Service | LimeCall',
+  description: 'LimeCall\'s AI phone agent answers, qualifies, and routes calls 24/7. Replace expensive virtual receptionist services with AI that costs 90% less. Try free.',
+  canonical: 'https://www.limecall.com/ai-phone-agent/',
+};
+
+const stats = [
+  { value: '24/7', label: 'Always-on call coverage' },
+  { value: '28s', label: 'Avg transfer to human rep' },
+  { value: '90%', label: 'Cost reduction vs human receptionist' },
+  { value: '500', label: 'Concurrent calls handled' },
+];
+
+const features = [
+  { icon: '📞', title: '24/7 Call Answering', desc: 'Never miss a lead again. Your AI phone agent answers every call instantly — nights, weekends, and holidays included. No hold times, no voicemail.' },
+  { icon: '🗣️', title: 'Natural Language Understanding', desc: 'Forget clunky IVR menu trees. Our AI receptionist holds real conversations, understands context, and responds naturally to caller questions.' },
+  { icon: '🎯', title: 'BANT Lead Qualification', desc: 'Every caller is qualified on Budget, Authority, Need, and Timeline before reaching your team. Only hot leads get transferred — the rest get scheduled callbacks.' },
+  { icon: '⚡', title: '28-Second Hot Transfer', desc: 'When the AI identifies a sales-ready prospect, your rep is connected in 28 seconds flat. No warm-up needed — full context is passed along.' },
+  { icon: '📝', title: 'Custom Scripts Per Campaign', desc: 'Define unique qualification scripts for each department, ad campaign, or product line. Your AI answering service follows your playbook exactly.' },
+  { icon: '🔗', title: 'CRM Auto-Logging', desc: 'Every call — transcript, qualification score, contact details — syncs automatically to Salesforce, HubSpot, Pipedrive, and 1,000+ tools via Zapier.' },
+  { icon: '💬', title: 'SMS Follow-Up', desc: 'Missed connections get an instant SMS with callback scheduling link. Callers can book a time that works for them — no phone tag required.' },
+  { icon: '🌍', title: 'Multi-Language Support', desc: 'Serve callers in 12 languages including English, Spanish, French, German, Portuguese, Italian, Dutch, and more. One AI call center for global reach.' },
+];
+
+const comparisonRows = [
+  ['Monthly cost', '£57/mo flat', '£300–800/mo', '£200–1,500/mo'],
+  ['Per-call fee', '£0', '£0–2 per call', '£1–4 per call'],
+  ['Availability', '24/7/365', 'Business hours + limited after-hours', 'Business hours only (typically)'],
+  ['Scalability', 'Unlimited — 500 concurrent calls', 'Limited by staff count', 'Limited by operator count'],
+  ['Qualification ability', 'Full BANT methodology', 'Basic message taking', 'Script-based only'],
+  ['CRM integration', 'Automatic — Salesforce, HubSpot, etc.', 'Manual entry or limited', 'Rarely included'],
+  ['Hold time', '0 seconds — instant answer', '15–90 seconds average', '30–120 seconds average'],
+  ['Consistency', '100% — follows script exactly every time', 'Varies by person and mood', 'Varies by operator'],
+  ['Languages', '12 languages built-in', '1–2 (hiring dependent)', '1–3 (hiring dependent)'],
+  ['Setup time', '5 minutes', '1–2 weeks training', '3–5 days onboarding'],
+  ['Call capacity', 'Unlimited concurrent', '1 call per receptionist', '1 call per operator'],
+  ['Call recording & analytics', 'Full transcripts + AI scoring', 'Basic call logs', 'Basic call logs'],
+];
+
+const industries = [
+  { icon: '⚖️', title: 'Legal Firms', desc: 'After-hours client intake, case type qualification, and urgent matter routing. Never miss a potential client calling at 11pm.', href: '/legal/' },
+  { icon: '🏥', title: 'Healthcare', desc: 'Patient appointment booking, insurance verification, and triage-level routing to the right department or on-call provider.', href: '/healthcare/' },
+  { icon: '🏠', title: 'Real Estate', desc: 'Property enquiry qualification — budget, timeline, location preferences — before connecting to the right agent.', href: '/real-estate/' },
+  { icon: '💰', title: 'Financial Services', desc: 'FCA-compliant call handling, initial KYC collection, and appointment scheduling with qualified advisors.', href: '/financial-services/' },
+  { icon: '🛒', title: 'E-Commerce', desc: 'Order status updates, returns processing, and high-value purchase routing to specialised sales reps.', href: '/ecommerce/' },
+  { icon: '💻', title: 'SaaS', desc: 'Trial signup callbacks, demo request qualification, and instant connection to sales when a prospect is ready to buy.', href: '/saas/' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is an AI phone agent?',
+      acceptedAnswer: { '@type': 'Answer', text: 'An AI phone agent is an intelligent virtual receptionist that answers business calls using natural language processing. It greets callers, qualifies leads by asking questions about budget, authority, need, and timeline, and routes hot prospects to your sales team — all without human intervention. LimeCall\'s AI phone agent handles up to 500 concurrent calls 24/7.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does a virtual receptionist service cost?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Traditional virtual receptionist services cost between £300–800 per month for around 100 calls, with additional per-call fees of £1–4. Human answering services typically charge £200–1,500/mo plus per-minute rates. LimeCall\'s AI phone agent costs £57/mo flat with no per-call fees, no setup costs, and no contracts — representing up to 90% savings.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can AI replace a receptionist?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI can replace a receptionist for most routine call handling tasks: answering calls, taking messages, qualifying enquiries, scheduling appointments, and routing calls. AI excels at 24/7 availability, consistency, multi-language support, and handling high call volumes simultaneously. However, complex negotiations, emotionally sensitive situations, and nuanced relationship-building still benefit from human receptionists. Most businesses use AI for first-touch handling and humans for high-value interactions.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a 24/7 answering service worth it for small business?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes — research shows 78% of callers won\'t leave a voicemail and will call a competitor instead. For small businesses, every missed call is lost revenue. A 24/7 answering service ensures you capture leads around the clock, including evenings and weekends when 35% of purchase-intent calls occur. At £57/mo, LimeCall\'s AI answering service pays for itself with a single converted lead for most businesses.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does AI call qualification work?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI call qualification uses natural language processing to ask callers structured questions — typically following BANT methodology (Budget, Authority, Need, Timeline). The AI scores responses in real-time. Callers meeting your qualification threshold are instantly transferred to a human rep with full context. Those who don\'t qualify receive a scheduled callback, information via SMS or email, or are routed to self-service options.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can AI phone agents handle multiple languages?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. LimeCall\'s AI phone agent supports 12 languages including English, Spanish, French, German, Portuguese, Italian, Dutch, Swedish, Norwegian, Danish, Finnish, and Polish. The AI detects the caller\'s language automatically and responds accordingly — no need to hire multilingual receptionists or set up separate phone lines per language.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens when AI can\'t handle a call?',
+      acceptedAnswer: { '@type': 'Answer', text: 'When the AI encounters a request outside its scope, it seamlessly escalates to a human team member. If no human is available, it takes a detailed message, schedules a callback at a time convenient for the caller, and sends an SMS confirmation. The AI also flags these calls for review so you can expand its capabilities over time. Escalation rate typically drops below 5% within the first month.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does setup take?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Most businesses are live with LimeCall\'s AI phone agent within 5 minutes. You configure your greeting, define qualification questions in the dashboard, set routing rules, and activate. No engineering work, no hardware, no phone system changes required. The AI learns from your existing call patterns and improves its qualification accuracy over the first two weeks of operation.' }
+    },
+  ],
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall AI Phone Agent',
+  description: 'AI-powered virtual receptionist and 24/7 answering service that qualifies leads, routes calls, and replaces expensive human receptionists at 90% lower cost.',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    priceValidUntil: '2026-12-31',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '312',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'AI Phone Agent', url: `${site.url}/ai-phone-agent/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        📞 AI-Powered Virtual Receptionist
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        AI Phone Agent: Your 24/7<br class="hidden sm:block" />
+        <span class="text-lime-400">Virtual Receptionist</span>
+      </h1>
+      <div class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        <p>An AI phone agent is an intelligent virtual receptionist that answers business calls 24/7, qualifies leads using natural conversation, and routes hot prospects to your sales team in 28 seconds. LimeCall's AI phone agent replaces traditional answering services at 90% lower cost — handling up to 500 concurrent calls without hold times.</p>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Credit Card
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          See It in Action →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ 4.5 · 10,000+ businesses · Answers in under 1 second</p>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- The Problem with Traditional Answering Services -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">The Problem with Traditional Answering Services</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Virtual receptionist services and traditional answering services charge premium rates for basic message-taking. Most can't qualify leads, integrate with your CRM, or scale beyond a handful of simultaneous calls.</p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Provider Type</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Monthly Cost</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Per-Call Fee</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Qualification</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">24/7 Coverage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Human Virtual Receptionist</td>
+              <td class="px-5 py-4 text-dark-400">£300–800/mo for 100 calls</td>
+              <td class="px-5 py-4 text-dark-400">£0–2 per overflow call</td>
+              <td class="px-5 py-4 text-dark-400">❌ Basic message only</td>
+              <td class="px-5 py-4 text-dark-400">⚠️ Extra charge</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Traditional Answering Service</td>
+              <td class="px-5 py-4 text-dark-400">£200–1,500/mo</td>
+              <td class="px-5 py-4 text-dark-400">£1–4 per call</td>
+              <td class="px-5 py-4 text-dark-400">❌ Script-reading only</td>
+              <td class="px-5 py-4 text-dark-400">⚠️ Limited hours</td>
+            </tr>
+            <tr class="bg-lime-500/5 hover:bg-lime-500/10 transition">
+              <td class="px-5 py-4 font-bold text-lime-400">LimeCall AI Phone Agent</td>
+              <td class="px-5 py-4 font-semibold text-white">£57/mo flat</td>
+              <td class="px-5 py-4 font-semibold text-white">£0 — unlimited calls</td>
+              <td class="px-5 py-4 font-semibold text-white">✅ Full BANT qualification</td>
+              <td class="px-5 py-4 font-semibold text-white">✅ True 24/7/365</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-center text-sm text-dark-400">The maths is simple: traditional virtual receptionist services charge £300–800/mo for limited calls. LimeCall's AI phone agent costs £57/mo flat for unlimited calls — with better qualification, instant CRM sync, and zero hold times.</p>
+    </div>
+  </section>
+
+  <!-- How Our AI Phone Agent Works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">How Our AI Phone Agent Works</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Five steps from incoming call to qualified conversation — fully automated, no human bottleneck.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-5">
+        {[
+          { step: '01', title: 'AI Answers Instantly', desc: 'Call answered in under 1 second. No rings, no hold music, no IVR menus. The caller hears a natural, professional greeting immediately.' },
+          { step: '02', title: 'Natural Conversation', desc: 'AI captures caller name, company, and intent using real conversation — not robotic prompts. Callers feel heard, not processed.' },
+          { step: '03', title: 'BANT Qualification', desc: 'Budget, Authority, Need, Timeline — the AI qualifies every caller against your criteria and scores them in real-time.' },
+          { step: '04', title: 'Hot Lead Transfer', desc: 'Qualified prospects are transferred to your human rep in 28 seconds with full context. Your team only talks to ready buyers.' },
+          { step: '05', title: 'Follow-Up Handled', desc: 'Non-urgent callers get a callback scheduled or info sent via SMS/email. Zero leads fall through the cracks.' },
+        ].map(item => (
+          <div class="relative rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-sm">{item.step}</div>
+            <h3 class="text-base font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Phone Agent Features -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">AI Phone Agent Features</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Everything you need from a 24/7 answering service — powered by AI that gets smarter with every call.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Phone Agent vs Traditional Answering Services -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">AI Phone Agent vs Traditional Answering Services</h2>
+      <p class="text-center text-dark-300 mb-8 max-w-2xl mx-auto">See how LimeCall's AI receptionist compares to hiring a virtual receptionist or using a traditional call answering service.</p>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">AI Phone Agent</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Virtual Receptionist</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Answering Service</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {comparisonRows.map(([feature, ai, vr, as_]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                <td class="px-5 py-4 text-white font-semibold">{ai}</td>
+                <td class="px-5 py-4 text-dark-400">{vr}</td>
+                <td class="px-5 py-4 text-dark-400">{as_}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries Using AI Phone Agents -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Industries Using AI Phone Agents</h2>
+      <p class="text-center text-dark-300 mb-10 max-w-2xl mx-auto">From legal firms to SaaS companies, our AI call center technology handles industry-specific call flows with precision.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {industries.map(item => (
+          <a href={item.href} class="group rounded-2xl border border-dark-800 bg-dark-900/60 p-8 hover:border-lime-500/30 transition block">
+            <div class="text-4xl mb-4">{item.icon}</div>
+            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-lime-400 transition">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-10">
+        <div class="text-xs font-semibold text-lime-400 uppercase tracking-wider mb-4">Case Study</div>
+        <h2 class="text-2xl font-extrabold text-white sm:text-3xl">UK Law Firm Saves £25,200/Year by Replacing Traditional Answering Service with AI</h2>
+        <p class="mt-4 text-dark-300 leading-relaxed">A mid-sized UK law firm was spending £2,400/month on a traditional virtual receptionist service to handle after-hours client intake calls. The human operators could take messages but couldn't qualify case types, check conflicts, or assess urgency — leading to missed opportunities and delayed responses.</p>
+        <p class="mt-4 text-dark-300 leading-relaxed">After switching to LimeCall's AI phone agent, the firm automated first-touch client intake 24/7. The AI qualifies callers on case type, urgency level, and fee expectations before routing to the appropriate solicitor — or scheduling a callback for non-urgent matters.</p>
+        <div class="mt-8 grid grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">£25,200</div>
+            <div class="mt-1 text-sm text-dark-400">Annual savings</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">34%</div>
+            <div class="mt-1 text-sm text-dark-400">More client intakes</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-lime-400">24/7</div>
+            <div class="mt-1 text-sm text-dark-400">Coverage achieved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Receptionist vs Human Receptionist -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">AI Receptionist vs Human Receptionist — An Honest Comparison</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">AI doesn't replace humans everywhere. Here's where each excels — and why most businesses benefit from AI-first with human escalation.</p>
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div class="rounded-2xl border border-lime-500/20 bg-dark-900/60 p-8">
+          <h3 class="text-xl font-bold text-lime-400 mb-4">Where AI Wins</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">✓</span> 24/7/365 availability — never calls in sick</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">✓</span> 500 concurrent calls — no busy signals ever</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">✓</span> Perfect consistency — same quality at 3am as 3pm</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">✓</span> 90% lower cost — £57/mo vs £25,000+/yr salary</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">✓</span> Instant CRM logging — zero manual data entry</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">✓</span> 12 languages — no multilingual hiring needed</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">✓</span> Zero hold time — every call answered in under 1 second</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8">
+          <h3 class="text-xl font-bold text-white mb-4">Where Humans Still Excel</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">•</span> Complex emotional conversations (bereavement, complaints)</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">•</span> Nuanced negotiation requiring improvisation</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">•</span> VIP client relationship management</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">•</span> Situations requiring physical presence</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">•</span> Highly complex multi-party call coordination</li>
+          </ul>
+          <p class="mt-4 text-sm text-dark-400">LimeCall's hybrid approach handles 95% of calls with AI and seamlessly escalates the rest to your human team — with full context passed along.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Calculator -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Your Potential Savings with an AI Phone Agent</h2>
+      <p class="mt-4 text-lg text-dark-300">Most businesses switching from traditional answering services save thousands in their first year.</p>
+      <div class="mt-10 rounded-2xl border border-dark-700 bg-dark-900/60 p-8">
+        <div class="grid gap-8 sm:grid-cols-3">
+          <div>
+            <div class="text-sm text-dark-400 mb-2">Current answering service cost</div>
+            <div class="text-2xl font-extrabold text-white">£800<span class="text-base text-dark-400">/mo</span></div>
+            <div class="text-xs text-dark-500 mt-1">× 12 months = £9,600/yr</div>
+          </div>
+          <div>
+            <div class="text-sm text-dark-400 mb-2">LimeCall AI phone agent</div>
+            <div class="text-2xl font-extrabold text-lime-400">£57<span class="text-base text-dark-400">/mo</span></div>
+            <div class="text-xs text-dark-500 mt-1">× 12 months = £684/yr</div>
+          </div>
+          <div>
+            <div class="text-sm text-dark-400 mb-2">Your annual saving</div>
+            <div class="text-2xl font-extrabold text-lime-400">£8,916</div>
+            <div class="text-xs text-lime-400/60 mt-1">+ better qualification + 24/7 coverage</div>
+          </div>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-dark-400">Based on average UK virtual receptionist service pricing. Your actual savings depend on current provider and call volume.</p>
+    </div>
+  </section>
+
+  <!-- How AI Call Centre Technology Works -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">How AI Call Centre Technology Powers Your Phone Agent</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">LimeCall's AI phone agent combines cutting-edge natural language processing with intelligent call routing to deliver an AI call center experience that rivals — and often outperforms — human operators.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <h3 class="text-lg font-bold text-white mb-3">Natural Language Processing</h3>
+          <p class="text-sm text-dark-400 mb-4">Our AI receptionist understands context, intent, and nuance — not just keywords. It handles accents, interruptions, and complex multi-part questions with the same ease as a trained human operator.</p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Real-time speech recognition with 98%+ accuracy</li>
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Context-aware responses that feel conversational</li>
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Handles interruptions and topic changes gracefully</li>
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Learns from your specific business terminology</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <h3 class="text-lg font-bold text-white mb-3">Intelligent Call Routing</h3>
+          <p class="text-sm text-dark-400 mb-4">Every call is scored and routed based on your criteria. The AI answering service doesn't just transfer calls blindly — it ensures the right person gets the right lead at the right time.</p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Skills-based routing to the best-matched rep</li>
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Round-robin, weighted, or priority-based distribution</li>
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Overflow handling when primary reps are busy</li>
+            <li class="flex gap-2"><span class="text-lime-400">•</span> Geographic routing for multi-location businesses</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Ecosystem -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-6">Connects With Your Existing Tools</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">Your AI phone agent integrates with the CRM, calendar, and communication tools you already use — no custom development needed.</p>
+      <div class="grid gap-4 sm:grid-cols-4 lg:grid-cols-6">
+        {[
+          'Salesforce', 'HubSpot', 'Pipedrive', 'Google Calendar',
+          'Outlook', 'Slack', 'Zapier', 'Calendly',
+          'Zoho CRM', 'Monday.com', 'Microsoft Teams', 'Intercom',
+        ].map(tool => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-4 text-center hover:border-lime-500/30 transition">
+            <span class="text-sm font-medium text-dark-300">{tool}</span>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-sm text-dark-400">Plus 1,000+ more tools via Zapier and native API. All integrations included at no extra cost.</p>
+    </div>
+  </section>
+
+  <!-- Security & Compliance for AI Phone Agents -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">Enterprise-Grade Security for Your AI Answering Service</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">Trust is essential when an AI handles your business calls. LimeCall's AI phone agent is built with security and compliance at its core.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="text-3xl mb-3">🔒</div>
+          <h3 class="font-bold text-white mb-2">GDPR Compliant</h3>
+          <p class="text-sm text-dark-400">All call data encrypted in transit and at rest. EU-compliant infrastructure. Custom data retention policies. Caller deletion requests honoured automatically.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="text-3xl mb-3">🛡️</div>
+          <h3 class="font-bold text-white mb-2">SOC 2 Type II</h3>
+          <p class="text-sm text-dark-400">Independently audited security controls. Role-based access within your organisation. Comprehensive audit trails for every interaction.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="text-3xl mb-3">📋</div>
+          <h3 class="font-bold text-white mb-2">Industry Compliance</h3>
+          <p class="text-sm text-dark-400">Configurable for FCA, HIPAA, and industry-specific requirements. Custom DPAs for enterprise customers. Call recording consent management built in.</p>
+        </div>
+      </div>
+      <p class="mt-8 text-center text-sm text-dark-400">All security features included on every plan. No enterprise-only gating for compliance essentials.</p>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">What Our Customers Say About Their AI Phone Agent</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { quote: 'We replaced a £600/mo answering service with LimeCall and actually got better results. The AI qualifies leads in ways our old service never could — our sales team only gets genuinely interested prospects now.', name: 'James R.', role: 'Director, Property Management Firm' },
+          { quote: 'As a solo solicitor, I was missing calls constantly during client meetings. LimeCall\'s AI receptionist handles my intake calls, qualifies case types, and books consultations directly into my diary. It\'s like having a legal secretary for £57/mo.', name: 'Sarah M.', role: 'Principal Solicitor, Family Law Practice' },
+          { quote: 'Our emergency plumbing calls at 2am used to go to voicemail. Now the AI answers instantly, captures the emergency details, and routes to our on-call engineer. We\'ve picked up 43% more jobs since switching.', name: 'Dave T.', role: 'Owner, 24-Hour Plumbing Service' },
+        ].map(t => (
+          <blockquote class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <p class="text-dark-200 italic leading-relaxed">"{t.quote}"</p>
+            <footer class="mt-6">
+              <p class="font-bold text-white">{t.name}</p>
+              <p class="text-sm text-dark-500">{t.role}</p>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Businesses Switch from Traditional Virtual Receptionist Services -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-8">Why Businesses Switch from Traditional Virtual Receptionist Services</h2>
+      <p class="text-center text-dark-300 mb-12 max-w-2xl mx-auto">Thousands of businesses have moved from expensive human answering services to LimeCall's AI phone agent. Here are the most common reasons:</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-2">Inconsistent Quality</h3>
+          <p class="text-sm text-dark-400">Human operators have good days and bad days. They forget script points, rush through qualification, or put callers on hold while looking up information. AI delivers the same professional experience on every call — whether it's the first call of the day or the 500th.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-2">Hidden Per-Call Costs</h3>
+          <p class="text-sm text-dark-400">Most virtual receptionist services advertise a low base rate but charge £1–4 per call on top. A busy month can double or triple your bill. LimeCall charges £57/mo flat — unlimited calls, no surprises.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-2">No Real Qualification</h3>
+          <p class="text-sm text-dark-400">Traditional answering services take messages. They don't qualify leads on budget, authority, need, or timeline. LimeCall's AI phone agent runs full BANT qualification on every caller and scores leads in real-time.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-2">Poor CRM Integration</h3>
+          <p class="text-sm text-dark-400">With human services, call data enters your CRM hours (or days) later — if at all. LimeCall syncs every call instantly: transcript, qualification score, contact details, and next steps. Zero manual data entry.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-2">Limited After-Hours Coverage</h3>
+          <p class="text-sm text-dark-400">Many virtual receptionist services charge premium rates for evenings and weekends — or don't offer them at all. LimeCall's AI call center runs 24/7/365 at the same flat rate. No overtime, no bank holiday surcharges.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-2">Long Contracts</h3>
+          <p class="text-sm text-dark-400">Traditional services lock you into 6–12 month contracts with early termination fees. LimeCall is month-to-month. No contract, no commitment, no penalty for cancelling. Your results keep you, not a contract.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Getting Started Steps -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Get Started in 3 Simple Steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">1</div>
+          <h3 class="font-bold text-white mb-2">Sign Up Free</h3>
+          <p class="text-sm text-dark-400">Create your account in 30 seconds. No credit card required, no sales calls, no commitments.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">2</div>
+          <h3 class="font-bold text-white mb-2">Configure Your Agent</h3>
+          <p class="text-sm text-dark-400">Set your greeting, define qualification questions, and configure routing rules in the dashboard. Takes under 5 minutes.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-extrabold text-xl">3</div>
+          <h3 class="font-bold text-white mb-2">Go Live</h3>
+          <p class="text-sm text-dark-400">Add the widget to your site or set up call forwarding. Your AI phone agent is now answering calls 24/7.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">AI Phone Agent — Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Replace Your Answering Service in 5 Minutes</h2>
+      <p class="mt-4 text-lg text-dark-300">Stop paying £800/mo for basic message-taking. Get AI-powered lead qualification, 24/7 coverage, and instant CRM sync — from £57/mo.</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try LimeCall Free →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">14-day free trial · No credit card · No contracts · Cancel anytime</p>
+    </div>
+  </section>
+
+  <CrossLinks
+    heading="Explore LimeCall"
+    links={[
+      { href: '/ai-voice-agent/', title: 'AI Voice Agent', desc: 'Voice AI for lead qualification.' },
+      { href: '/virtual-receptionist/', title: 'Virtual Receptionist', desc: 'AI receptionist for your business.' },
+      { href: '/answering-service/', title: 'Answering Service', desc: '24/7 call answering from £57/mo.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Plans from £57/month.' },
+    ]}
+  />
+</Base>

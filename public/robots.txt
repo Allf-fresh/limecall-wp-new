@@ -17,23 +17,35 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# ── AI Crawlers (allow by default) ─────────────────────────────────────────
+# ── AI Crawlers - Welcome ──────────────────────────────────────────────────
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Claude-Web
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
 User-agent: anthropic-ai
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 # ── SEO Tools ──────────────────────────────────────────────────────────────
@@ -45,3 +57,6 @@ Allow: /
 
 # ── Sitemap ────────────────────────────────────────────────────────────────
 Sitemap: https://example.com/sitemap-index.xml
+
+# ── LLMs.txt ───────────────────────────────────────────────────────────────
+# See https://limecall.com/llms.txt for AI-readable site guide

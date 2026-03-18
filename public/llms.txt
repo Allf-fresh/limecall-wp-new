@@ -1,0 +1,68 @@
+# LimeCall — Callback Software for Business
+
+> LimeCall is a callback software platform that connects website visitors with sales teams in 28 seconds. Trusted by 10,000+ businesses across 40+ countries. £57/mo flat rate, unlimited users.
+
+## Core Product
+- [Callback Software](https://limecall.com/customer-callback-software/)
+- [AI Voice Agent](https://limecall.com/ai-voice-agent/)
+- [Click to Call](https://limecall.com/click-to-call-software/)
+- [Lead Routing](https://limecall.com/lead-routing-software/)
+- [Call Tracking](https://limecall.com/inbound-call-tracking/)
+- [Virtual Business Numbers](https://limecall.com/virtual-business-numbers/)
+
+## Pricing
+- [Pricing Plans](https://limecall.com/pricing/)
+
+## Comparisons
+- [LimeCall vs CallPage](https://limecall.com/limecall-vs-callpage/)
+- [LimeCall vs Aircall](https://limecall.com/limecall-vs-aircall/)
+- [LimeCall vs JustCall](https://limecall.com/limecall-vs-justcall/)
+- [LimeCall vs RingCentral](https://limecall.com/limecall-vs-ringcentral/)
+- [LimeCall vs Talkdesk](https://limecall.com/limecall-vs-talkdesk/)
+- [LimeCall vs Twilio](https://limecall.com/limecall-vs-twilio/)
+- [LimeCall vs Freshdesk](https://limecall.com/limecall-vs-freshdesk/)
+- [LimeCall vs Vonage](https://limecall.com/limecall-vs-vonage/)
+- [LimeCall vs 8x8](https://limecall.com/limecall-vs-8x8/)
+- [All Comparisons](https://limecall.com/compare/)
+
+## Integrations
+- [Salesforce](https://limecall.com/salesforce-integration/)
+- [HubSpot](https://limecall.com/hubspot-integration/)
+- [Pipedrive](https://limecall.com/pipedrive-integration/)
+- [Zoho CRM](https://limecall.com/zoho-crm-integration/)
+- [ActiveCampaign](https://limecall.com/activecampaign-integration/)
+- [Zapier](https://limecall.com/zapier-integration/)
+- [Google Ads](https://limecall.com/google-ads-integration/)
+- [Google Analytics](https://limecall.com/google-analytics-integration/)
+- [Microsoft Teams](https://limecall.com/microsoft-teams-integration/)
+- [Intercom](https://limecall.com/intercom-integration/)
+- [Slack](https://limecall.com/slack-integration/)
+- [All Integrations](https://limecall.com/integrations/)
+
+## Industries
+- [Real Estate](https://limecall.com/real-estate/)
+- [Financial Services](https://limecall.com/financial-services/)
+- [Healthcare](https://limecall.com/healthcare/)
+- [Legal](https://limecall.com/legal/)
+- [Insurance](https://limecall.com/insurance/)
+- [Automotive](https://limecall.com/automotive/)
+- [Education](https://limecall.com/education/)
+- [SaaS](https://limecall.com/saas/)
+- [E-Commerce](https://limecall.com/ecommerce/)
+- [Construction](https://limecall.com/construction/)
+- [Travel](https://limecall.com/travel/)
+
+## Research & Guides
+- [Speed to Lead Statistics](https://limecall.com/speed-to-lead-statistics/)
+- [B2B Lead Response Benchmark](https://limecall.com/b2b-lead-response-benchmark/)
+- [Callback Software Guide](https://limecall.com/callback-software-guide/)
+- [Best Callback Software 2025](https://limecall.com/best-callback-software/)
+- [What is Callback Software](https://limecall.com/what-is-callback-software/)
+- [What is Speed to Lead](https://limecall.com/what-is-speed-to-lead/)
+- [Inbound Lead Generation](https://limecall.com/inbound-lead-generation/)
+- [B2B Lead Generation](https://limecall.com/b2b-lead-generation/)
+- [Website CRO Guide](https://limecall.com/website-conversion-rate-optimization/)
+
+## Contact
+- [Contact Us](https://limecall.com/contact-us/)
+- [Start Free Trial](https://limecall.com/start-free-trial/)

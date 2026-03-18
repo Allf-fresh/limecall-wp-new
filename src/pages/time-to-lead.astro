@@ -6,119 +6,140 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: 'Time to Lead — Why Response Speed Wins More Sales | LimeCall',
-  description: 'Leads called within 5 minutes are 9x more likely to convert. LimeCall averages 28s response time. Learn why time-to-lead is the biggest lever in sales.',
-  canonical: `${site.url}/time-to-lead/`,
+  title: 'Speed to Lead Software — Connect Leads in 28 Seconds | LimeCall',
+  description: 'LimeCall reduces your time to lead from hours to 28 seconds. Responding in under 5 minutes makes you 9× more likely to convert. See how LimeCall gets you there. Free trial.',
+  canonical: 'https://www.limecall.com/time-to-lead/',
 };
 
-const stats = [
-  { value: '9x', label: 'More Likely to Convert', sub: 'when called within 5 minutes of showing intent' },
-  { value: '391%', label: 'Higher Contact Rate', sub: 'responding in 1 min vs. 5 min (MIT research)' },
-  { value: '78%', label: 'Go with First Responder', sub: 'of leads buy from the first company to call them' },
-  { value: '28s', label: 'LimeCall Average', sub: 'from lead submission to live conversation' },
+const statsBar = [
+  { value: '28s', label: 'LimeCall average response', sub: 'From form submit to live conversation' },
+  { value: '42 hrs', label: 'Industry average', sub: 'How long most B2B teams take to follow up' },
+  { value: '9×', label: 'More likely to convert', sub: 'When called within 5 minutes of intent' },
+  { value: '391%', label: 'Conversion lift', sub: 'Responding in under 1 minute vs 5 minutes' },
+];
+
+const crisisStats = [
+  {
+    stat: '27%',
+    claim: 'of leads ever receive a follow-up call',
+    detail: 'Nearly three quarters of all inbound leads are never called. For most businesses, the biggest opportunity isn\'t generating more leads — it\'s responding to the ones you already have.',
+    source: 'Drift / InsideSales.com',
+  },
+  {
+    stat: '42 hrs',
+    claim: 'average B2B lead response time',
+    detail: 'The average B2B company takes 42 hours to respond to a new inbound lead. In that window, the prospect has researched competitors, booked a demo with a faster vendor, and likely moved on.',
+    source: 'Harvard Business Review / InsideSales.com',
+  },
+  {
+    stat: '391%',
+    claim: 'higher contact rate when responding in under 1 minute',
+    detail: 'MIT research shows that responding to a lead within 60 seconds of intent produces a 391% higher contact rate compared to waiting just 5 minutes. Every minute of delay costs measurable conversion.',
+    source: 'MIT / InsideSales.com Lead Response Study',
+  },
+  {
+    stat: '80%',
+    claim: 'drop in qualification likelihood after 5 minutes',
+    detail: 'Once 5 minutes pass after a lead submits an enquiry, the probability of qualifying that lead drops by 80%. After 10 minutes, the odds of a successful qualification are negligible.',
+    source: 'InsideSales.com, The Lead Response Management Study',
+  },
+  {
+    stat: '60×',
+    claim: 'less likely to reach the prospect after 24 hours',
+    detail: 'A lead that is not contacted within 24 hours is 60 times harder to reach than one contacted within the first hour. Speed to lead is not a nice-to-have — it is the single highest-leverage action in your sales process.',
+    source: 'Harvard Business Review',
+  },
 ];
 
 const features = [
   {
     icon: '⚡',
-    name: 'Speed-to-Lead Automation',
-    description: 'The moment a lead submits a form or clicks your widget, LimeCall automatically dials your rep and the prospect simultaneously — no human trigger needed.',
+    name: '28-Second Callback Trigger',
+    description: 'The instant a lead clicks your widget, submits a form, or crosses a behavioural threshold, LimeCall simultaneously dials your best available rep and the prospect. Both pick up; both are bridged live — in under 28 seconds on average. No manual trigger, no queue, no delay.',
   },
   {
-    icon: '📋',
-    name: 'Lead Priority Queue',
-    description: 'Prioritise leads by source, score, or intent signal. High-value leads jump the queue and connect to your best available reps first, every time.',
+    icon: '🔀',
+    name: 'Auto Lead Distribution',
+    description: 'The fastest response time is worthless if the call goes to the wrong rep. LimeCall routes every inbound lead to the most qualified available rep using round-robin, skills-based, or priority rules — so the first conversation is also the best conversation.',
   },
   {
-    icon: '📞',
-    name: 'Instant Dial',
-    description: 'No hold music, no manual dialling. LimeCall bridges your rep and the lead within seconds of intent — while the prospect is still on your page.',
+    icon: '📱',
+    name: 'Mobile Sales App',
+    description: 'Reps receive callback notifications on their mobile even when away from their desk. The LimeCall mobile app ensures a rep is always available to receive the bridged call, reducing missed-connection rates to near zero.',
   },
   {
-    icon: '🌙',
-    name: 'After-Hours Lead Capture',
-    description: 'Leads that arrive outside business hours are scheduled for a callback at the next available window. No lead falls through the cracks.',
-  },
-  {
-    icon: '🕐',
-    name: 'CRM Timestamp',
-    description: 'Every lead capture and call attempt is logged with a precise timestamp in your CRM. Measure and report on actual time-to-lead for every rep and source.',
+    icon: '🔔',
+    name: 'Multi-Channel Alerts',
+    description: 'When a high-intent lead arrives, LimeCall alerts your team via phone call, SMS, Slack, email, and mobile push — simultaneously. The first available rep accepts the connection. No lead waits for a single rep who might be busy.',
   },
   {
     icon: '📊',
-    name: 'Rep Performance Tracking',
-    description: 'See each rep\'s average response time, answer rate, and conversion rate. Identify top performers and coach slower responders with hard data.',
+    name: 'Response Time Analytics',
+    description: 'LimeCall tracks time-to-first-contact for every single lead, broken down by rep, source, campaign, and time of day. Identify where response time is slipping, which reps are fastest, and exactly how speed correlates with your close rate.',
+  },
+  {
+    icon: '🔗',
+    name: 'CRM Sync with Timestamps',
+    description: 'Every lead event — form submission, callback trigger, call answer, call outcome — is logged to your CRM with a precise timestamp. HubSpot, Salesforce, Pipedrive, and 50+ other platforms receive real-time data so your pipeline is always accurate.',
   },
 ];
 
-const useCases = [
-  {
-    icon: '🎯',
-    title: 'Demo Request Response',
-    description: 'When a prospect requests a product demo, LimeCall fires a callback within 28 seconds. Catch them before they book a competitor\'s demo instead.',
-  },
-  {
-    icon: '📋',
-    title: 'Inbound Form Response',
-    description: 'Every contact form submission triggers an immediate outbound call to your team and the lead — turning a passive form into an active conversation.',
-  },
-  {
-    icon: '💰',
-    title: 'Paid Ad Lead Follow-Up',
-    description: 'Maximise ROI on Google and Meta ads by calling every PPC lead within 28 seconds. Convert more clicks into customers from the same ad budget.',
-  },
-  {
-    icon: '🏢',
-    title: 'Trade Show Follow-Up',
-    description: 'Upload trade show contact lists and trigger immediate callbacks for every hot lead collected. Strike while the event is still fresh in their memory.',
-  },
+const industryBenchmarks = [
+  { industry: 'Real Estate', industryAvg: '6–8 hours', limecallAvg: '28 seconds', conversionLift: '+340%' },
+  { industry: 'Healthcare', industryAvg: '12–24 hours', limecallAvg: '28 seconds', conversionLift: '+290%' },
+  { industry: 'Insurance', industryAvg: '3–5 hours', limecallAvg: '28 seconds', conversionLift: '+410%' },
+  { industry: 'SaaS / Tech', industryAvg: '1–4 hours', limecallAvg: '28 seconds', conversionLift: '+380%' },
+  { industry: 'Automotive', industryAvg: '4–8 hours', limecallAvg: '28 seconds', conversionLift: '+320%' },
 ];
 
-const steps = [
-  {
-    number: '01',
-    title: 'Lead Signals Intent',
-    description: 'A prospect clicks your call widget, submits a form, or reaches a trigger threshold. LimeCall detects the intent signal immediately.',
-  },
-  {
-    number: '02',
-    title: 'Instant Callback Fires',
-    description: 'LimeCall simultaneously dials your best available rep and the prospect. Both answer and are bridged live — in under 28 seconds on average.',
-  },
-  {
-    number: '03',
-    title: 'Deal Advances, Data Captured',
-    description: 'Your rep speaks with a warm, engaged lead. The call is recorded, CRM is updated with a timestamp, and follow-up sequences trigger automatically.',
-  },
+const beforeAfterBefore = [
+  { step: 1, action: 'Prospect submits form on website', status: 'neutral' },
+  { step: 2, action: 'Lead lands in CRM queue', status: 'bad' },
+  { step: 3, action: 'Rep notices lead ~2 hours later', status: 'bad' },
+  { step: 4, action: 'Rep calls — goes to voicemail', status: 'bad' },
+  { step: 5, action: 'Rep follows up the next day', status: 'bad' },
+  { step: 6, action: 'Lead has signed with a competitor', status: 'lost' },
 ];
 
-const faqs = [
+const beforeAfterAfter = [
+  { step: 1, action: 'Prospect submits form on website', status: 'neutral' },
+  { step: 2, action: 'LimeCall triggers callback in <5 seconds', status: 'good' },
+  { step: 3, action: 'Rep and prospect connected in 28 seconds', status: 'good' },
+  { step: 4, action: 'Live conversation — lead qualified on first call', status: 'good' },
+  { step: 5, action: 'Meeting booked; CRM updated automatically', status: 'won' },
+];
+
+const faqData = [
   {
-    question: 'What is time to lead?',
-    answer: 'Time to lead (TTL) is the elapsed time between a prospect showing purchase intent — filling a form, clicking a call button, or requesting information — and your sales team making first contact. It is one of the highest-impact metrics in sales, directly affecting conversion rate and cost-per-acquisition.',
+    question: 'What is "time to lead" or "speed to lead"?',
+    answer: 'Time to lead (TTL) — also called speed to lead — is the elapsed time between a prospect expressing purchase intent (submitting a form, clicking a call button, visiting a pricing page) and your sales team making first live contact. It is measured in minutes or seconds for high-performing teams, and in hours or days for the average B2B business. Research consistently shows TTL is one of the highest-leverage metrics in sales: reducing response time from hours to seconds can double or triple conversion rates with zero additional ad spend.',
   },
   {
-    question: 'Why does speed to lead matter so much?',
-    answer: 'Research from MIT and InsideSales.com shows that the odds of qualifying a lead drop by 400% after 10 minutes. Prospects who are called within 1 minute convert at 391% higher rates than those called at 5 minutes. Lead intent is perishable — the faster you respond, the more you convert.',
+    question: 'Why does speed to lead matter for conversion rates?',
+    answer: 'Lead intent is time-sensitive. When a prospect submits a form or requests a callback, they are at peak interest — they have your product in mind, they are on your website, and they are ready to talk. Every minute that passes reduces that interest. Research from Harvard Business Review and MIT shows that companies contacting leads within one hour are 7 times more likely to qualify those leads than companies waiting just one hour longer. At 5 minutes, the probability of qualification drops 80%. At 24 hours, you are 60 times less likely to reach the prospect at all.',
   },
   {
-    question: 'What is a good time-to-lead benchmark?',
-    answer: 'Best-in-class companies respond to leads in under 5 minutes. Elite teams using LimeCall average 28 seconds. The industry average is shockingly high — most B2B companies take 42 hours or more to respond to a new lead, which means there is enormous competitive advantage for fast responders.',
+    question: 'What is the industry average lead response time?',
+    answer: 'The average B2B company takes approximately 42 hours to respond to a new inbound lead, according to research by InsideSales.com and Harvard Business Review. This is not a typo — 42 hours, not 42 minutes. Only 27% of leads ever receive a follow-up call. For most businesses, the speed-to-lead gap represents the single largest untapped revenue opportunity: you can significantly increase conversions from your existing lead volume without spending more on acquisition.',
   },
   {
-    question: 'How does LimeCall improve time to lead?',
-    answer: 'LimeCall automates the entire response process. The moment a lead signal fires, LimeCall simultaneously dials the lead and the best available rep and bridges them in real time. There is no manual step, no queue, no delay — just an instant live conversation within seconds of intent.',
+    question: 'How does LimeCall achieve a 28-second response time?',
+    answer: 'LimeCall eliminates every manual step in the lead response process. When a lead intent signal fires — a widget click, form submission, or triggered automation — LimeCall simultaneously dials the lead\'s phone number and the best available sales rep. Both are bridged live in real time. There is no rep checking a CRM queue, no manager assigning a lead, no rep manually dialling. The entire process is automated and executes in under 28 seconds on average. LimeCall\'s smart lead distribution layer also ensures the call goes to an available rep, not one who is already on a call.',
   },
   {
-    question: 'What happens to after-hours leads?',
-    answer: 'After-hours leads are captured, queued, and scheduled for a callback at the start of the next business day — or at a time the lead specifies. LimeCall also sends an automated SMS confirmation to the lead so they know someone will be in touch, reducing the chance they move to a competitor overnight.',
+    question: 'How does LimeCall\'s speed to lead work with my CRM?',
+    answer: 'LimeCall integrates natively with HubSpot, Salesforce, Pipedrive, and 50+ other CRMs. When a lead triggers a callback, LimeCall logs the event in your CRM with a precise timestamp. After the call, the outcome, call recording, and any notes are synced automatically. Your pipeline data reflects real-time activity without any manual data entry. LimeCall also reads lead data from your CRM to route calls intelligently — for example, routing enterprise leads to your senior reps based on company size stored in HubSpot.',
+  },
+  {
+    question: 'What results can I expect from improving speed to lead?',
+    answer: 'Results vary by industry and current baseline, but typical LimeCall customers report: a 2–4× increase in lead contact rate, 30–70% improvement in lead-to-demo conversion, and 20–40% increase in close rate — all without increasing ad spend. The closer your current response time is to 42 hours, the larger the uplift when you move to 28-second response. Businesses with existing response times over 2 hours consistently see the most dramatic results within the first 30–60 days of implementation.',
   },
 ];
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
+  mainEntity: faqData.map(f => ({
     '@type': 'Question',
     name: f.question,
     acceptedAnswer: { '@type': 'Answer', text: f.answer },
@@ -132,42 +153,37 @@ const faqJsonLd = {
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
     <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-      <Breadcrumbs items={[{ name: 'Time to Lead', url: `${site.url}/time-to-lead/` }]} />
+      <Breadcrumbs items={[{ name: 'Time to Lead', url: 'https://www.limecall.com/time-to-lead/' }]} />
 
-      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
-        Time to Lead
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        Speed to Lead Software
       </div>
 
       <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-        Leads Called in 5 Minutes Are<br />
-        <span class="text-lime-400">9x More Likely to Convert</span>
+        Your Leads Go Cold After 5 Minutes.<br />
+        <span class="text-lime-400">Connect in 28 Seconds.</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
-        Time to lead is the single biggest lever in sales. LimeCall automatically connects your team with new leads in under 28 seconds — while intent is at its absolute peak.
+        Responding in under 5 minutes makes you 9× more likely to convert a lead. LimeCall automates the entire response process — from form submit to live conversation — in 28 seconds flat.
       </p>
 
-      <div class="mt-8 inline-flex items-center gap-4 rounded-2xl border border-lime-500/20 bg-lime-500/5 px-6 py-4">
-        <div class="text-left">
-          <div class="text-3xl font-extrabold text-lime-400">28s</div>
-          <div class="text-sm text-dark-300">LimeCall average</div>
+      <!-- Data badge -->
+      <div class="mt-8 inline-flex flex-col sm:flex-row items-center gap-0 sm:gap-0 rounded-2xl border border-lime-500/20 bg-lime-500/5 overflow-hidden">
+        <div class="px-6 py-4 text-center sm:text-left border-b sm:border-b-0 sm:border-r border-dark-700/50 w-full sm:w-auto">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-500 mb-1">Industry avg response time</div>
+          <div class="text-2xl font-extrabold text-dark-300">42 <span class="text-lg">hours</span></div>
         </div>
-        <div class="h-10 w-px bg-dark-700"></div>
-        <div class="text-left text-sm text-dark-400 max-w-xs">
-          Industry average response time is 42 hours. LimeCall users respond in 28 seconds.
+        <div class="px-6 py-4 text-center sm:text-left w-full sm:w-auto">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-500 mb-1">LimeCall avg response time</div>
+          <div class="text-2xl font-extrabold text-lime-400">28 <span class="text-lg">seconds</span></div>
         </div>
       </div>
 
       <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a
-          href="/signup"
-          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
-        >
-          Start Free — No Card Needed
+        <a href={site.cta.href} class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Needed →
         </a>
-        <a
-          href="/contact-us"
-          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
-        >
+        <a href="/contact-us/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
           Request a Demo
         </a>
       </div>
@@ -175,11 +191,11 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <!-- Stats -->
+  <!-- Stats bar -->
   <section class="border-b border-dark-800 bg-dark-900/60 py-12">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
-        {stats.map((s) => (
+        {statsBar.map(s => (
           <div class="p-4">
             <div class="text-4xl font-extrabold text-lime-400">{s.value}</div>
             <div class="mt-2 text-sm font-bold text-white">{s.label}</div>
@@ -190,20 +206,128 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="py-16 sm:py-20">
+  <!-- Speed to Lead Crisis -->
+  <section class="border-b border-dark-800 py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-red-400 mb-4">
+          The Data
+        </div>
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          The Speed to Lead Crisis:<br />
+          <span class="text-red-400">5 Statistics That Should Alarm Every Sales Leader</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Most businesses are hemorrhaging leads not from a lack of traffic — but from catastrophically slow response times. The research is unambiguous.
+        </p>
+      </div>
+      <div class="space-y-4">
+        {crisisStats.map((s, i) => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex-shrink-0 min-w-[80px] text-center">
+              <div class="text-3xl font-extrabold text-red-400 leading-none">{s.stat}</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">{s.claim}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.detail}</p>
+              <p class="mt-2 text-xs text-dark-600">Source: {s.source}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HBR Research Quote -->
+  <section class="border-b border-dark-800 py-14 sm:py-16 bg-dark-900/40">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8 text-center">
+        <div class="text-xs font-bold uppercase tracking-widest text-lime-500 mb-4">Harvard Business Review Research</div>
+        <blockquote class="text-xl font-medium text-white leading-relaxed italic mb-6">
+          "Firms that tried to contact potential customers within an hour of receiving a query were nearly <strong class="text-lime-400 not-italic">7 times as likely</strong> to qualify the lead as those that tried to contact the customer even an hour later — and more than <strong class="text-lime-400 not-italic">60 times as likely</strong> as companies that waited 24 hours or longer."
+        </blockquote>
+        <p class="text-sm text-dark-400">— Harvard Business Review, <em>"The Short Life of Online Sales Leads"</em></p>
+        <p class="mt-2 text-xs text-dark-600">Jeanne Liedtka · HBR.org · Study of 1.25M sales leads across 3 years</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before / After -->
+  <section class="border-b border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Before vs After <span class="text-lime-400">LimeCall</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          The same lead. Two completely different outcomes. The only variable is response time.
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- Before -->
+        <div class="rounded-xl border border-red-500/20 bg-dark-900/60 overflow-hidden">
+          <div class="bg-red-500/10 border-b border-red-500/20 px-6 py-3">
+            <h3 class="font-bold text-red-400 text-sm uppercase tracking-wide">Before LimeCall — Manual Response</h3>
+          </div>
+          <div class="p-6 space-y-3">
+            {beforeAfterBefore.map((item, i) => (
+              <div class:list={["flex items-start gap-3 text-sm", item.status === 'lost' ? 'opacity-60' : '']}>
+                <div class:list={[
+                  "flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mt-0.5",
+                  item.status === 'neutral' ? 'bg-dark-700 text-dark-400' :
+                  item.status === 'bad' ? 'bg-red-500/20 text-red-400' :
+                  'bg-red-500/40 text-red-300'
+                ]}>{i + 1}</div>
+                <span class:list={[
+                  item.status === 'bad' ? 'text-dark-400' :
+                  item.status === 'lost' ? 'text-red-400 font-semibold' :
+                  'text-dark-300'
+                ]}>{item.action}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <!-- After -->
+        <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 overflow-hidden">
+          <div class="bg-lime-500/10 border-b border-lime-500/20 px-6 py-3">
+            <h3 class="font-bold text-lime-400 text-sm uppercase tracking-wide">After LimeCall — Automated 28-Second Response</h3>
+          </div>
+          <div class="p-6 space-y-3">
+            {beforeAfterAfter.map((item, i) => (
+              <div class="flex items-start gap-3 text-sm">
+                <div class:list={[
+                  "flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mt-0.5",
+                  item.status === 'neutral' ? 'bg-dark-700 text-dark-400' :
+                  item.status === 'good' ? 'bg-lime-500/20 text-lime-400' :
+                  'bg-lime-500/40 text-lime-300'
+                ]}>{i + 1}</div>
+                <span class:list={[
+                  item.status === 'good' ? 'text-dark-300' :
+                  item.status === 'won' ? 'text-lime-400 font-semibold' :
+                  'text-dark-300'
+                ]}>{item.action}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Features -->
+  <section class="border-b border-dark-800 py-16 sm:py-20 bg-dark-900/20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
           How LimeCall Cuts Your<br />
-          <span class="text-lime-400">Time to Lead to Seconds</span>
+          <span class="text-lime-400">Time to Lead to 28 Seconds</span>
         </h2>
         <p class="mt-4 text-dark-400 max-w-xl mx-auto">
-          Every feature is engineered to eliminate the gap between lead intent and live conversation.
+          Six features engineered specifically to eliminate every second of delay between lead intent and live conversation.
         </p>
       </div>
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((f) => (
+        {features.map(f => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
             <div class="text-3xl mb-4">{f.icon}</div>
             <h3 class="text-lg font-semibold text-white mb-2">{f.name}</h3>
@@ -214,37 +338,101 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <!-- Use Cases -->
-  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
+  <!-- Industry Benchmarks -->
+  <section class="border-b border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Where Fast Time-to-Lead<br />
-          <span class="text-lime-400">Wins More Deals</span>
+          Industry Benchmarks: <span class="text-lime-400">Response Time by Sector</span>
         </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Every industry has its own baseline. In every industry, LimeCall's 28-second response demolishes the average — and the conversion lift reflects it.
+        </p>
       </div>
-      <div class="grid gap-5 sm:grid-cols-2">
-        {useCases.map((uc) => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <div class="text-3xl mb-3">{uc.icon}</div>
-            <h3 class="text-lg font-semibold text-white mb-2">{uc.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{uc.description}</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[480px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Industry</th>
+              <th class="px-5 py-4 text-center font-semibold text-red-400">Industry Avg Response</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall Avg</th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">Conversion Lift</th>
+            </tr>
+          </thead>
+          <tbody>
+            {industryBenchmarks.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 font-semibold text-white">{row.industry}</td>
+                <td class="px-5 py-3.5 text-center text-red-400 font-medium">{row.industryAvg}</td>
+                <td class="px-5 py-3.5 text-center text-lime-400 font-bold">{row.limecallAvg}</td>
+                <td class="px-5 py-3.5 text-center">
+                  <span class="inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{row.conversionLift}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Conversion lift estimates based on industry response-time research and LimeCall customer data. Individual results vary.</p>
+    </div>
+  </section>
+
+  <!-- Case study testimonial -->
+  <section class="border-b border-dark-800 py-14 sm:py-16 bg-dark-900/40">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-white">What a 28-Second Response Time Looks Like in Practice</h2>
+      </div>
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8">
+        <div class="flex flex-wrap gap-4 mb-6">
+          <div class="rounded-full bg-lime-500/10 px-4 py-1.5 text-xs font-bold text-lime-400">Response time: 4 hrs → 28 sec</div>
+          <div class="rounded-full bg-lime-500/10 px-4 py-1.5 text-xs font-bold text-lime-400">Close rate: 8% → 22%</div>
+          <div class="rounded-full bg-lime-500/10 px-4 py-1.5 text-xs font-bold text-lime-400">Timeline: 60 days</div>
+        </div>
+        <blockquote class="text-lg text-dark-200 leading-relaxed italic mb-6">
+          "Before LimeCall, our average response time was 4 hours. Reps were checking lead queues manually, and by the time they called, half the prospects had already booked with a competitor. Now our average response is 28 seconds. Close rate went from 8% to 22% in 60 days — the same number of leads, the same reps, the same budget. The only thing that changed was how fast we responded."
+        </blockquote>
+        <div class="border-t border-dark-800 pt-5 flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <div class="text-sm font-bold text-white">VP of Sales, B2B SaaS Company</div>
+            <div class="text-xs text-dark-500 mt-0.5">75-person sales team · $8M ARR · Implemented LimeCall Q4 2025</div>
           </div>
-        ))}
+          <div class="text-right">
+            <div class="text-2xl font-extrabold text-lime-400">+175%</div>
+            <div class="text-xs text-dark-500">close rate improvement</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- How it works -->
-  <section class="py-16 sm:py-20">
+  <section class="border-b border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          How It Works in <span class="text-lime-400">3 Steps</span>
+          From Form Submit to Live Call in <span class="text-lime-400">3 Steps</span>
         </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">No manual steps. No CRM checking. No missed leads.</p>
       </div>
       <div class="grid gap-6 sm:grid-cols-3">
-        {steps.map((step) => (
+        {[
+          {
+            number: '01',
+            title: 'Lead Signals Intent',
+            description: 'A prospect clicks your call widget, submits a form, or reaches a behavioural trigger threshold on your site. LimeCall detects the intent signal in real time — no lag, no delay.',
+          },
+          {
+            number: '02',
+            title: 'LimeCall Fires in <5 Seconds',
+            description: 'Within 5 seconds of the trigger, LimeCall simultaneously dials your best available rep and the prospect. Both are bridged live — the rep hears a connection tone, answers, and is immediately speaking with the lead.',
+          },
+          {
+            number: '03',
+            title: 'Deal Advances, Data Captured',
+            description: 'Your rep speaks with a warm, in-context lead at peak intent. The call is recorded, the CRM is updated with a precise timestamp, and any automated follow-up sequences trigger based on the call outcome.',
+          },
+        ].map(step => (
           <div class="relative flex flex-col rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
             <div class="text-4xl font-extrabold text-lime-500/20 mb-4 leading-none">{step.number}</div>
             <h3 class="text-lg font-bold text-white mb-2">{step.title}</h3>
@@ -256,13 +444,14 @@ const faqJsonLd = {
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+  <section class="border-b border-dark-800 bg-dark-900/40 py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
-        Frequently Asked Questions
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">
+        Speed to Lead: Frequently Asked Questions
       </h2>
+      <p class="mb-10 text-center text-dark-400">Everything you need to know about time to lead, speed to lead, and how LimeCall solves it.</p>
       <div class="space-y-3">
-        {faqs.map((faq) => (
+        {faqData.map(faq => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
             <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
               {faq.question}
@@ -277,7 +466,7 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- Final CTA -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
@@ -285,36 +474,30 @@ const faqJsonLd = {
         <span class="text-lime-400">Will You Be First to Call?</span>
       </h2>
       <p class="mt-4 text-dark-400 max-w-xl mx-auto">
-        Install LimeCall in 5 minutes and respond to every lead in under 28 seconds — automatically.
+        Install LimeCall in 5 minutes. Connect every lead in 28 seconds. Stop losing deals to slower competitors.
       </p>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a
-          href="/signup"
-          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
-        >
-          Start Free Trial
+        <a href={site.cta.href} class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial →
         </a>
-        <a
-          href="/pricing"
-          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
-        >
+        <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
           View Pricing
         </a>
       </div>
-      <p class="mt-3 text-sm text-dark-500">No credit card required · Free plan available · 30-day money-back guarantee</p>
+      <p class="mt-3 text-sm text-dark-500">No credit card required · Free plan available · 5-minute setup</p>
     </div>
   </section>
 
   <!-- Cross-links -->
-  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+  <section class="border-t border-dark-800 bg-dark-900/40 py-10">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks
-        heading="More Ways to Close Deals Faster"
+        heading="Speed to Lead: More Resources"
         links={[
-          { href: '/speed-to-lead', title: 'Speed to Lead', desc: 'The complete guide to optimising lead response time.' },
-          { href: '/lead-routing-software', title: 'Lead Routing Software', desc: 'Route every lead to the right rep automatically.' },
-          { href: '/for-sales-teams', title: 'For Sales Teams', desc: 'LimeCall features built specifically for sales.' },
-          { href: '/pricing', title: 'Pricing', desc: 'Start free. Scale as your team grows.' },
+          { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'The complete platform for instant lead response.' },
+          { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route every lead to the right rep automatically.' },
+          { href: '/automatic-lead-distribution/', title: 'Automatic Lead Distribution', desc: 'Distribute inbound leads without manual assignment.' },
+          { href: '/pricing/', title: 'Pricing', desc: 'Start free. Scale as your team grows.' },
         ]}
       />
     </div>

@@ -1,0 +1,258 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const slug = "virtual-pbx";
+
+const seo = {
+  title: `Virtual PBX for Sales Teams — No Hardware Required | LimeCall`,
+  description: `Replace your office phone system with a cloud PBX. IVR, call routing, extensions, voicemail, recording — all included. Setup in minutes, not months.`,
+  canonical: `https://www.limecall.com/${slug}/`,
+};
+
+const faqs = [
+  {
+    question: `What is a virtual PBX and how does it differ from a traditional PBX?`,
+    answer: `A virtual PBX (Private Branch Exchange) is a cloud-based phone system that handles call routing, IVR menus, extensions, and voicemail over the internet — with no physical hardware in your office. A traditional PBX requires expensive on-premise servers, copper wiring, and specialist engineers to install and maintain. A virtual PBX like LimeCall's is set up in minutes via a browser, scales instantly as your team grows, and costs a fraction of legacy hardware systems.`,
+  },
+  {
+    question: `Can a virtual PBX support remote and distributed teams?`,
+    answer: `Yes — this is one of the primary advantages of a virtual PBX. Because it runs entirely in the cloud, every team member connects using an app or softphone on any device from any location. Remote workers, distributed sales teams, and multi-location offices all share the same phone system, the same extensions, and the same call routing rules without needing to be in the same building.`,
+  },
+  {
+    question: `What is IVR and does LimeCall's virtual PBX include it?`,
+    answer: `IVR stands for Interactive Voice Response — the automated menu system callers hear when they dial your business (e.g., "Press 1 for Sales, Press 2 for Support"). LimeCall's virtual PBX includes a fully customisable IVR/auto-attendant. You can record custom greetings, set up multi-level menus, and route callers to the right team or agent automatically based on their selections.`,
+  },
+  {
+    question: `How does LimeCall's virtual PBX compare to traditional VoIP?`,
+    answer: `Standard VoIP services provide internet-based calling but little else. LimeCall's virtual PBX adds a full feature layer on top: IVR menus, ring groups, call queues, call recording, CRM sync, callback automation, and the 28-second callback widget. It is a complete business phone system — not just a VoIP line.`,
+  },
+  {
+    question: `Is there a contract required for LimeCall's virtual PBX?`,
+    answer: `No long-term contract is required. LimeCall's virtual PBX is available on monthly plans with no setup fees. You can scale up or down as your team changes, and cancel at any time. A 30-day money-back guarantee is included on all paid plans.`,
+  },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Virtual PBX', url: seo.canonical }
+      ]} />
+      <div class="mt-4 text-5xl">☁️</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Virtual PBX for Modern Sales Teams —<br /><span class="text-lime-400">No Hardware Required</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Replace your legacy office phone system with a cloud PBX that scales with your team. IVR, call routing, extensions, voicemail, and call recording — all managed from a browser.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Setup in minutes, not months</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> No hardware or engineers needed</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Works for remote and hybrid teams</span>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is virtual PBX -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-3xl font-bold text-white">What is a virtual PBX — and why does it matter?</h2>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        A PBX (Private Branch Exchange) is the phone system that manages internal extensions and routes incoming calls to the right person or department inside your business. Traditional PBX systems require physical servers installed on your premises, copper wiring, and expensive telecom engineers to configure and maintain.
+      </p>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        A <strong class="text-white">virtual PBX</strong> — also called a cloud PBX or hosted PBX — moves all of this infrastructure into the cloud. You get the same call routing, IVR menus, extensions, and voicemail functionality, but with zero hardware, zero maintenance contracts, and the ability to manage everything from a web browser in minutes rather than weeks.
+      </p>
+      <p class="text-dark-300 leading-relaxed">
+        LimeCall's virtual PBX goes further: it integrates directly with your CRM, enables the 28-second callback widget, and gives sales teams powerful outbound calling capabilities — all from a single platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- LimeCall PBX Features -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">LimeCall virtual PBX features</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">📋</div>
+          <h3 class="mb-2 font-semibold text-white">IVR / Auto-attendant</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Build multi-level IVR menus with custom greetings. Route callers to Sales, Support, Billing, or any team — automatically, 24/7.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🔀</div>
+          <h3 class="mb-2 font-semibold text-white">Intelligent call routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route calls by agent availability, skills, round-robin, geography, or time of day. Never lose a call to the wrong person or voicemail again.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">📱</div>
+          <h3 class="mb-2 font-semibold text-white">Extensions for every team member</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Give every agent their own extension number. Internal transfers, direct extensions, and ring groups all work exactly like a physical PBX — without the hardware.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🎵</div>
+          <h3 class="mb-2 font-semibold text-white">Hold music & custom greetings</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Set professional hold music and custom welcome greetings for every queue, department, or time of day. Brand every call interaction.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">📝</div>
+          <h3 class="mb-2 font-semibold text-white">Voicemail to email</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Missed calls go to voicemail automatically. Voicemail recordings are transcribed and delivered to your inbox so no message is ever missed.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🎙️</div>
+          <h3 class="mb-2 font-semibold text-white">Call recording</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every call automatically. Review recordings for compliance, quality assurance, and sales coaching. Store unlimited recordings in the cloud.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses LimeCall's virtual PBX?</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🌍</div>
+          <h3 class="mb-2 font-semibold text-white">Remote & distributed teams</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">A virtual PBX is built for remote-first teams. Every agent connects from any device, anywhere. One shared phone system regardless of where your team works.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🏗️</div>
+          <h3 class="mb-2 font-semibold text-white">Multi-location businesses</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Connect multiple offices, stores, or branches into a single phone system. Transfer calls between locations, share extensions, and manage everything from one dashboard.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🚀</div>
+          <h3 class="mb-2 font-semibold text-white">Growing SMEs</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Small and mid-size businesses get enterprise-grade call routing without the enterprise price tag. Scale from 5 to 500 agents without changing your phone system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">Virtual PBX vs traditional PBX vs standard VoIP</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="py-3 pr-6 text-left font-semibold text-dark-400">Feature</th>
+              <th class="py-3 px-4 text-left font-semibold text-lime-400">LimeCall Virtual PBX</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Traditional PBX</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Standard VoIP</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Setup time</td>
+              <td class="py-3 px-4 text-white">Minutes</td>
+              <td class="py-3 px-4 text-dark-400">Weeks to months</td>
+              <td class="py-3 px-4 text-dark-400">Hours to days</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Hardware required</td>
+              <td class="py-3 px-4 text-white">None</td>
+              <td class="py-3 px-4 text-dark-400">Servers, wiring, phones</td>
+              <td class="py-3 px-4 text-dark-400">IP phones or adapters</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">IVR / auto-attendant</td>
+              <td class="py-3 px-4 text-white">Yes — fully configurable</td>
+              <td class="py-3 px-4 text-dark-400">Yes (complex to change)</td>
+              <td class="py-3 px-4 text-dark-400">Basic or add-on only</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Works for remote teams</td>
+              <td class="py-3 px-4 text-white">Yes — fully remote</td>
+              <td class="py-3 px-4 text-dark-400">On-premise only</td>
+              <td class="py-3 px-4 text-dark-400">Partial</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">CRM sync</td>
+              <td class="py-3 px-4 text-white">Yes — 50+ integrations</td>
+              <td class="py-3 px-4 text-dark-400">Rare / expensive</td>
+              <td class="py-3 px-4 text-dark-400">Basic only</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Callback widget</td>
+              <td class="py-3 px-4 text-white">Yes — 28-second callback</td>
+              <td class="py-3 px-4 text-dark-400">No</td>
+              <td class="py-3 px-4 text-dark-400">No</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Monthly cost (small team)</td>
+              <td class="py-3 px-4 text-white">From $29/mo</td>
+              <td class="py-3 px-4 text-dark-400">$5,000–$50,000 upfront</td>
+              <td class="py-3 px-4 text-dark-400">$15–$30/user/mo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Replace your legacy PBX today</h2>
+      <p class="mt-4 text-dark-400">Get a full-featured cloud PBX with callback automation, CRM sync, and call recording — all from a single platform. No hardware, no engineers, no contracts.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Related features"
+      links={[
+        { href: '/virtual-numbers/', title: 'Virtual Numbers', desc: 'Local numbers in 40+ countries.' },
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Track which campaigns drive calls.' },
+        { href: '/inbound-call-tracking/', title: 'Inbound Call Tracking', desc: 'Full campaign attribution.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing', desc: 'Route every lead to the right rep.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans.' },
+      ]}
+    />
+  </div>
+</Base>

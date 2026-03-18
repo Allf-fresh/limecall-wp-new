@@ -1,0 +1,317 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const country = "Portugal";
+const code = "+351";
+const slug = "virtual-phone-number-portugal";
+const flag = "🇵🇹";
+
+const seo = {
+  title: `Portugal Virtual Phone Number — Get +351 | LimeCall`,
+  description: `Get a Portugal virtual phone number (+351) from $35/mo. Lisbon, Porto numbers available. 5-minute setup, no SIM required. Receive calls from anywhere worldwide.`,
+  canonical: `https://www.limecall.com/${slug}/`,
+};
+
+const faqs = [
+  {
+    question: `Can I get a Portugal virtual number without being in Portugal?`,
+    answer: `Yes. LimeCall provisions genuine Portuguese numbers (+351) that you can use from anywhere in the world. Portuguese callers dial a local number and your team answers via the LimeCall app, browser, or any forwarded device — no physical presence in Portugal required.`,
+  },
+  {
+    question: `What is the country code for Portugal?`,
+    answer: `Portugal's international dialling code is +351. Key city codes include Lisbon (21), Porto (22), Braga (253), Coimbra (239), and Faro (289). When dialling from outside Portugal, dial +351 followed by the full 9-digit number including the area code.`,
+  },
+  {
+    question: `How much does a Portugal virtual phone number cost?`,
+    answer: `LimeCall's Portugal virtual numbers start from $35 per month. This includes the number rental with transparent per-minute rates for inbound calls. There are no setup fees and you can cancel at any time without a long-term contract.`,
+  },
+  {
+    question: `Can I make outbound calls with a Portuguese caller ID?`,
+    answer: `Yes. LimeCall lets you place outbound calls displaying your Portuguese +351 number as the caller ID. Portuguese recipients see a familiar local number, which significantly improves answer rates for sales and support calls made into Portugal.`,
+  },
+  {
+    question: `Is a Portugal virtual number useful for reaching Brazilian customers too?`,
+    answer: `While Portugal (+351) and Brazil (+55) are different countries with separate number ranges, LimeCall can provision numbers in both countries. If you serve both Portuguese and Brazilian markets, you can get a +351 number for Portugal and a separate +55 number for Brazil from the same LimeCall account.`,
+  },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Virtual Numbers', url: 'https://www.limecall.com/virtual-numbers/' },
+        { name: 'Portugal Virtual Number', url: seo.canonical }
+      ]} />
+      <div class="mt-4 text-5xl">{flag}</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Get a <span class="text-lime-400">Portugal Virtual Phone Number</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Get a local Portugal number ({code}) without being physically present in Portugal. Instant 5-minute setup, no hardware, no SIM card required.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Active in 5 minutes</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> 30-day money-back guarantee</span>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Get Your Portugal Number →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/80 py-6">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        <div>
+          <div class="text-2xl font-bold text-lime-400">+351</div>
+          <div class="mt-1 text-xs text-dark-400">Portugal prefix</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-lime-400">5 min</div>
+          <div class="mt-1 text-xs text-dark-400">Setup time</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-lime-400">$35/mo</div>
+          <div class="mt-1 text-xs text-dark-400">Starting from</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-lime-400">40+</div>
+          <div class="mt-1 text-xs text-dark-400">Countries covered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is a Portugal virtual number -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-3xl font-bold text-white">What is a Portugal virtual phone number?</h2>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        A Portugal virtual phone number is a genuine Portuguese telephone number — with a real +351 country code — hosted in the cloud rather than tied to a physical SIM card or landline inside Portugal. Calls to your Portuguese number are routed over the internet to any device you choose: mobile phone, laptop, desk phone, or SIP endpoint anywhere in the world.
+      </p>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        Portugal has become one of Europe's fastest-growing tech and business hubs, especially Lisbon. A local Lisbon (21) or Porto (22) number establishes your credibility with Portuguese customers and partners without the need for a physical office or local staff.
+      </p>
+      <p class="text-dark-300 leading-relaxed">
+        LimeCall virtual numbers include call routing, automatic recording, CRM integration, and the callback widget that connects website visitors to your team in under 28 seconds.
+      </p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20 border-t border-dark-800 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How to get your Portugal number in 3 steps</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
+          <h3 class="mb-2 font-semibold text-white">Choose your number</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Pick a Portuguese city prefix — Lisbon (21), Porto (22), Braga (253), Coimbra (239), Faro (289) — or a Portuguese national mobile number.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Forward calls to any device, agent, or phone number globally. Set up IVR menus, voicemail, ring groups, or business-hours routing rules.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
+          <h3 class="mb-2 font-semibold text-white">Receive calls anywhere</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Your Portugal number is live within minutes. Portuguese customers call a local number while your team answers from any country in the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Features included with your Portugal number</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Receive calls on any device</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Answer Portuguese calls on your mobile, laptop, browser, or SIP phone from anywhere in the world without missing a call.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Call recording</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record every call automatically for quality control, team training, and compliance. All recordings accessible from your LimeCall dashboard.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">CRM sync</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">All Portuguese calls are automatically logged in HubSpot, Salesforce, Pipedrive, and 50+ CRM integrations. Zero manual data entry.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">WhatsApp available</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Portugal has very high WhatsApp penetration. LimeCall supports WhatsApp messaging alongside your Portuguese virtual voice number.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">No physical SIM required</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Fully cloud-based. No SIM card, no hardware, no Portuguese address needed. Compliant with ANACOM (Portuguese telecom regulator) regulations.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Callback widget integration</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Show your Portugal +351 number in the LimeCall callback widget. Convert Portuguese website visitors to calls in under 28 seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Who uses Portugal virtual numbers?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🏢</div>
+          <h3 class="mb-2 font-semibold text-white">Local presence</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Build a credible Portuguese presence without a physical office. A Lisbon or Porto number establishes instant local trust with Portuguese customers.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">📞</div>
+          <h3 class="mb-2 font-semibold text-white">Callback widget</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Display your Portugal +351 number on your website. Convert Portuguese visitors into sales calls in under 28 seconds with LimeCall's widget.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">💼</div>
+          <h3 class="mb-2 font-semibold text-white">Sales teams</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Sales teams calling Portuguese prospects see significantly higher answer rates when dialling from a local +351 number vs a foreign number.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🎧</div>
+          <h3 class="mb-2 font-semibold text-white">Customer support</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Route Portuguese customer support calls to your remote global team. Portuguese callers pay local rates while agents work from anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Did you know -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-6 text-xl font-bold text-white">Portugal phone system facts</h2>
+        <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Portugal's international dialling code is <strong class="text-white">+351</strong>. All Portuguese numbers are 9 digits long after the country code.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Key Portuguese city codes: <strong class="text-white">Lisbon 21</strong>, <strong class="text-white">Porto 22</strong>, <strong class="text-white">Braga 253</strong>, <strong class="text-white">Coimbra 239</strong>, <strong class="text-white">Faro 289</strong>, <strong class="text-white">Setúbal 265</strong>.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Lisbon has become one of Europe's top technology startup hubs, hosting the Web Summit and attracting global tech investment. A Portuguese virtual number is increasingly valuable for companies entering this growing market.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">Virtual number vs other Portugal number options</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800">
+              <th class="py-3 pr-6 text-left font-semibold text-dark-400">Feature</th>
+              <th class="py-3 px-4 text-left font-semibold text-lime-400">LimeCall Virtual</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Local SIM</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Toll-free</th>
+              <th class="py-3 px-4 text-left font-semibold text-dark-400">Existing mobile</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Setup time</td>
+              <td class="py-3 px-4 text-white">5 minutes</td>
+              <td class="py-3 px-4 text-dark-400">Days to weeks</td>
+              <td class="py-3 px-4 text-dark-400">1–3 days</td>
+              <td class="py-3 px-4 text-dark-400">Immediate</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Physical presence needed</td>
+              <td class="py-3 px-4 text-white">No</td>
+              <td class="py-3 px-4 text-dark-400">Yes — must be in Portugal</td>
+              <td class="py-3 px-4 text-dark-400">Partial</td>
+              <td class="py-3 px-4 text-dark-400">No</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Local Portuguese number</td>
+              <td class="py-3 px-4 text-white">Yes (+351)</td>
+              <td class="py-3 px-4 text-dark-400">Yes</td>
+              <td class="py-3 px-4 text-dark-400">No (800 prefix)</td>
+              <td class="py-3 px-4 text-dark-400">Foreign number</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Works from anywhere</td>
+              <td class="py-3 px-4 text-white">Yes — globally</td>
+              <td class="py-3 px-4 text-dark-400">Roaming charges</td>
+              <td class="py-3 px-4 text-dark-400">Yes</td>
+              <td class="py-3 px-4 text-dark-400">Yes</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 text-dark-300">Multiple numbers</td>
+              <td class="py-3 px-4 text-white">Yes — unlimited</td>
+              <td class="py-3 px-4 text-dark-400">One per SIM</td>
+              <td class="py-3 px-4 text-dark-400">Limited</td>
+              <td class="py-3 px-4 text-dark-400">One per device</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Ready to get your Portugal number?</h2>
+      <p class="mt-4 text-dark-400">Join thousands of businesses using LimeCall to connect with Portuguese customers — from anywhere in the world.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore Virtual Numbers"
+      links={[
+        { href: '/virtual-numbers/', title: 'All Virtual Numbers', desc: 'Browse all available countries.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Business-grade virtual numbers.' },
+        { href: '/virtual-phone-number-spain/', title: 'Spain Virtual Number', desc: 'Get a Spain +34 number.' },
+        { href: '/virtual-phone-number-mexico/', title: 'Mexico Virtual Number', desc: 'Get a Mexico +52 number.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans.' },
+      ]}
+    />
+  </div>
+</Base>

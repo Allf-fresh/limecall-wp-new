@@ -1,0 +1,233 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const slug = "inbound-call-tracking";
+
+const seo = {
+  title: `Inbound Call Tracking — Know Which Campaigns Drive Calls | LimeCall`,
+  description: `Track every inbound call back to the campaign, keyword, or page that drove it. Dynamic number insertion, CRM sync, ROI reporting. Start in minutes.`,
+  canonical: `https://www.limecall.com/${slug}/`,
+};
+
+const faqs = [
+  {
+    question: `What is inbound call tracking?`,
+    answer: `Inbound call tracking is a technology that identifies which marketing campaign, ad, keyword, or webpage generated each incoming phone call to your business. Instead of guessing which campaigns drive calls, call tracking assigns unique tracking phone numbers to each source. When a visitor calls that number, the platform records exactly which source, campaign, and keyword drove that call — giving you precise attribution data for every inbound phone lead.`,
+  },
+  {
+    question: `What is dynamic number insertion (DNI)?`,
+    answer: `Dynamic number insertion (DNI) is the technology that automatically swaps the phone number shown on your website based on how each visitor arrived. A visitor from your Google Ads campaign sees one tracking number; a visitor from an organic search sees a different one; a visitor from a Facebook ad sees another. This lets LimeCall attribute every call to its exact source without you manually managing multiple numbers across your site.`,
+  },
+  {
+    question: `Can inbound call tracking integrate with my CRM?`,
+    answer: `Yes. LimeCall's inbound call tracking integrates with HubSpot, Salesforce, Pipedrive, and 50+ CRM platforms. Every inbound call — including the source campaign, keyword, duration, and outcome — is automatically logged as a contact activity in your CRM. Sales teams see the full picture of how each prospect engaged with your marketing before they called.`,
+  },
+  {
+    question: `Can I track which Google Ads keywords drive phone calls?`,
+    answer: `Yes. LimeCall's keyword-level call tracking connects each inbound call to the specific paid search keyword the caller used before visiting your site. This data feeds directly into your Google Ads attribution, letting you optimise bids based on which keywords drive phone conversions — not just clicks and form fills.`,
+  },
+  {
+    question: `How is LimeCall's call tracking different from Google Ads call extensions?`,
+    answer: `Google Ads call extensions only track calls that happen directly from the ad — they miss calls that start from your website. LimeCall's full call tracking captures calls from all sources: PPC ads, organic search, social media, direct traffic, email campaigns, and offline sources. You get a complete, cross-channel picture of which marketing investments drive phone revenue.`,
+  },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Inbound Call Tracking', url: seo.canonical }
+      ]} />
+      <div class="mt-4 text-5xl">📊</div>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Inbound Call Tracking —<br /><span class="text-lime-400">Know Which Campaigns Drive Calls</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Stop guessing which ads and keywords generate phone leads. LimeCall's call tracking gives you campaign-level, keyword-level, and page-level attribution for every inbound call.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-dark-400">
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Dynamic number insertion</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> Keyword-level attribution</span>
+        <span class="flex items-center gap-1.5"><span class="text-lime-400">✓</span> CRM sync — zero manual entry</span>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Tracking Calls →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is call tracking -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-3xl font-bold text-white">What is inbound call tracking?</h2>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        Inbound call tracking is a marketing attribution technology that connects every phone call your business receives to the specific campaign, ad, keyword, or webpage that generated it. Without call tracking, phone leads are a black hole in your attribution — you know you received calls, but not why or from which marketing investment.
+      </p>
+      <p class="text-dark-300 leading-relaxed mb-4">
+        LimeCall's call tracking uses <strong class="text-white">dynamic number insertion (DNI)</strong>: a piece of JavaScript on your website that automatically shows a unique tracking phone number to each visitor based on their source. Google Ads visitors see number A. Organic search visitors see number B. Facebook ad visitors see number C. When any of them calls, LimeCall records exactly which source drove that call.
+      </p>
+      <p class="text-dark-300 leading-relaxed">
+        The result is complete, accurate attribution for every phone lead — giving marketing teams the data they need to optimise campaigns, and sales teams the context they need to close more deals.
+      </p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20 border-t border-dark-800 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">How LimeCall call tracking works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">1</div>
+          <h3 class="mb-2 font-semibold text-white">Add the tracking snippet</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Install one line of JavaScript on your website. LimeCall automatically swaps your phone number with a unique tracking number based on each visitor's source — no developer needed for ongoing changes.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">2</div>
+          <h3 class="mb-2 font-semibold text-white">Calls are attributed automatically</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">When a visitor calls, LimeCall records their source, campaign, keyword, landing page, and session data. Every call is matched to its marketing origin in real time.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-lg">3</div>
+          <h3 class="mb-2 font-semibold text-white">Optimise based on what works</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Use call attribution data to cut underperforming campaigns, increase bids on keywords that drive calls, and prove the true ROI of every marketing channel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">LimeCall call tracking features</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🎯</div>
+          <h3 class="mb-2 font-semibold text-white">Campaign attribution</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Attribute every inbound call to its exact campaign — Google Ads, Facebook, LinkedIn, email, organic, or direct. See which channels genuinely drive revenue, not just clicks.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🔑</div>
+          <h3 class="mb-2 font-semibold text-white">Keyword-level tracking</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Identify which exact paid search keywords generate phone calls. Feed this data directly into Google Ads to bid more on keywords that drive calls, not just clicks.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🔗</div>
+          <h3 class="mb-2 font-semibold text-white">CRM sync</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Every call with its full attribution data is automatically synced to HubSpot, Salesforce, Pipedrive, and 50+ CRMs. Sales sees the complete picture before they even say hello.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">📈</div>
+          <h3 class="mb-2 font-semibold text-white">ROI reporting</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Generate reports that show cost per call, call-to-close rates, and revenue per campaign. Prove marketing ROI to stakeholders with data from phone leads, not just digital conversions.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🌐</div>
+          <h3 class="mb-2 font-semibold text-white">Dynamic number insertion</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">One line of JavaScript automatically swaps your phone number for every visitor based on their traffic source. No manual number management or hardcoded changes required.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-2xl">🎙️</div>
+          <h3 class="mb-2 font-semibold text-white">Call recording & transcription</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Record and transcribe every tracked call. Review conversations to understand what drives conversions and identify coaching opportunities for your sales team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-20 bg-dark-900/40 border-t border-dark-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Call tracking use cases</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">💰</div>
+          <h3 class="mb-2 font-semibold text-white">PPC campaign attribution</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Know exactly which Google Ads campaigns and keywords drive inbound calls. Stop wasting budget on campaigns that generate clicks but never generate phone revenue.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">🔍</div>
+          <h3 class="mb-2 font-semibold text-white">SEO attribution</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Prove which organic search rankings and landing pages drive phone leads. Give your SEO team real business metrics — not just rankings and traffic numbers.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-950 p-6">
+          <div class="mb-3 text-2xl">📰</div>
+          <h3 class="mb-2 font-semibold text-white">Offline campaign tracking</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Assign unique tracking numbers to print ads, billboards, radio spots, and direct mail. Measure the call volume each offline channel generates and calculate true cost per lead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats block -->
+  <section class="py-16 sm:py-20 border-t border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8">
+        <h2 class="mb-6 text-xl font-bold text-white">Why phone calls still matter for revenue</h2>
+        <ul class="space-y-3 text-sm text-dark-300 leading-relaxed">
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span><strong class="text-white">61% of mobile searchers</strong> call a business after finding it online (Google). Without call tracking, these conversions are completely invisible in your analytics.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Phone leads convert at <strong class="text-white">10–15x the rate</strong> of web form leads. Accurately attributing phone calls to their source is critical for accurate marketing ROI calculations.</span></li>
+          <li class="flex gap-3"><span class="text-lime-400 font-bold mt-0.5">•</span><span>Businesses using LimeCall's call tracking report an average <strong class="text-white">23% reduction in cost per acquisition</strong> within 90 days, by reallocating budget from non-converting campaigns to call-generating ones.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Start tracking your inbound calls today</h2>
+      <p class="mt-4 text-dark-400">Set up call tracking in minutes. Know exactly which campaigns, keywords, and pages drive every phone lead your business receives.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Related features"
+      links={[
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Full call tracking platform.' },
+        { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud PBX for modern teams.' },
+        { href: '/missed-call-software/', title: 'Missed Call Software', desc: 'Auto-callback missed leads.' },
+        { href: '/for-marketing-teams/', title: 'For Marketing Teams', desc: 'Prove ROI from every campaign.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'See all LimeCall plans.' },
+      ]}
+    />
+  </div>
+</Base>

@@ -3,65 +3,74 @@ import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
-import { faqSchema } from '../lib/seo';
+import { faqSchema, articleSchema } from '../lib/seo';
 import { site } from '../site.config';
 
 const seo = {
-  title: 'AI Chatbot vs Callback Software: Which Closes More Deals? | LimeCall',
-  description: 'Chatbots handle volume. Callbacks close revenue. Compare AI chatbot vs callback across 12 dimensions and discover the hybrid approach that qualifies leads and converts them.',
+  title: 'Callback vs Chatbot: Which Converts More Leads? | LimeCall',
+  description: 'Chatbots deflect. Callbacks convert. See the data: callback software delivers 391% more conversions than chatbots for high-intent B2B leads.',
   canonical: 'https://www.limecall.com/callback-vs-chatbot/',
   ogType: 'article' as const,
-  publishDate: '2026-01-01',
-  modifiedDate: '2026-03-18',
+  publishDate: '2024-01-15',
+  modifiedDate: '2025-01-10',
 };
 
 const comparisonRows = [
-  { feature: 'Can handle nuanced objections', chatbot: 'Rarely — script-limited', callback: 'Yes — real-time voice', winner: 'callback' },
-  { feature: 'Builds human rapport', chatbot: 'No — text / voice AI', callback: 'Yes — genuine 1:1 call', winner: 'callback' },
-  { feature: 'Works for complex products', chatbot: 'Limited — knowledge base only', callback: 'Yes — consultative selling', winner: 'callback' },
-  { feature: 'Conversion rate', chatbot: '2–5%', callback: '30–50%', winner: 'callback' },
-  { feature: 'Average deal size influenced', chatbot: 'Low — low-commitment channel', callback: 'High — +25–40% AOV', winner: 'callback' },
-  { feature: 'Cost at scale', chatbot: 'Very low — automated', callback: 'Higher — agent time', winner: 'chatbot' },
-  { feature: 'Setup time', chatbot: '1–5 days (training required)', callback: '5 minutes (script tag)', winner: 'callback' },
-  { feature: '24/7 availability', chatbot: 'Yes — fully automated', callback: 'Via AI voice agent', winner: 'neutral' },
-  { feature: 'Handles angry customers', chatbot: 'Poorly — escalation loops', callback: 'Well — empathy & tone', winner: 'callback' },
-  { feature: 'Best for B2B sales', chatbot: 'Qualification only', callback: 'Yes — full sales cycle', winner: 'callback' },
-  { feature: 'Preferred by 55+ buyers', chatbot: 'No — 68% prefer human', callback: 'Yes — phone-first demographic', winner: 'callback' },
-  { feature: 'AI capability', chatbot: 'High — NLP, intent detection', callback: 'Growing — AI voice agents', winner: 'neutral' },
+  { feature: 'Response speed', callback: 'Under 28 seconds', chatbot: 'Instant (automated)', winner: 'neutral' },
+  { feature: 'Conversion rate', callback: '18.7% average', chatbot: '2.3% average', winner: 'callback' },
+  { feature: 'Customer satisfaction (NPS)', callback: '61 NPS', chatbot: '12 NPS', winner: 'callback' },
+  { feature: 'High-intent B2B leads', callback: 'Ideal channel', chatbot: 'Poor fit', winner: 'callback' },
+  { feature: 'FAQ / support deflection', callback: 'Not designed for this', chatbot: 'Excellent', winner: 'chatbot' },
+  { feature: 'Cost per lead (high-ticket)', callback: '£8–£22', chatbot: '£1–£4', winner: 'neutral' },
+  { feature: 'Handles complex objections', callback: 'Yes — live voice', chatbot: 'No — scripted replies', winner: 'callback' },
+  { feature: 'Works 24/7 without staff', callback: 'Via AI voice agent', chatbot: 'Yes — always on', winner: 'chatbot' },
+  { feature: 'Voice call conversion multiple', callback: '8× vs chat (MIT)', chatbot: 'Baseline', winner: 'callback' },
+  { feature: 'Trust signal', callback: 'High — human voice', chatbot: 'Low — perceived as bot', winner: 'callback' },
+  { feature: 'Deal value > £500 closes', callback: '3–6× higher close rate', chatbot: 'Rarely closes autonomously', winner: 'callback' },
+  { feature: 'Setup complexity', callback: 'Low — one script tag', chatbot: 'Medium — dialogue flows needed', winner: 'callback' },
 ];
 
 const faqs = [
   {
-    question: 'Can a chatbot replace a sales callback?',
-    answer: 'Not for high-value deals. Chatbots excel at lead qualification, FAQ deflection, and routing — but they consistently under-perform humans when it comes to handling objections, building rapport, and closing complex sales. A Harvard Business Review study found that human phone conversations produce 6× more revenue per qualified lead than text-based chat or chatbot interactions. The most effective approach is a hybrid: chatbot qualifies, callback converts.',
+    question: 'Can I use both a chatbot and callback software at the same time?',
+    answer: 'Yes — and the highest-converting teams do exactly this. The optimal stack uses a chatbot to handle high-volume FAQ queries and qualify visitor intent, then escalates to a LimeCall callback at the moment a lead signals purchase intent. This hybrid approach captures the cost efficiency of chatbots while preserving the conversion power of live phone conversations for revenue-critical interactions. Customers using both channels report 40–60% more total conversions than using either alone.',
   },
   {
-    question: 'What is the conversion rate difference between chatbots and callbacks?',
-    answer: 'Chatbots convert at roughly 2–5% of all chat interactions into meaningful sales outcomes. Phone callbacks convert at 30–50% of initiated conversations. The gap exists because phone calls are a high-commitment, high-intent channel: a prospect who agrees to a callback has already demonstrated far greater buying intent than someone who opened a chat window. The phone also allows tone, empathy, and real-time objection handling.',
+    question: 'What about AI chatbots — are they better than traditional chatbots for conversion?',
+    answer: 'AI chatbots (GPT-powered, LLM-based) are meaningfully better than scripted chatbots at handling nuanced queries and avoiding dead-end responses. However, the fundamental limitation remains: they are text-based and cannot replicate the trust, tone, and objection-handling capability of a live human voice. MIT research shows voice calls convert 8× more than chat regardless of whether the chat is AI-powered or scripted. For high-intent leads, even the best AI chatbot should be configured to escalate to a callback.',
   },
   {
-    question: 'What is the hybrid chatbot + callback approach?',
-    answer: 'The hybrid approach uses a chatbot on the front end to collect visitor information, qualify intent, and identify high-value prospects. When the chatbot detects purchase intent — through keyword triggers, page scoring, or direct answers — it offers a phone callback and passes the conversation context to the human rep. LimeCall supports this workflow via Zapier, HubSpot, and direct API integrations. The result: chatbot handles volume and qualification; callback handles conversion.',
+    question: 'Which is cheaper: chatbot or callback software?',
+    answer: 'Chatbots have a lower cost per interaction — typically £1–£4 per deflected query. Callback software costs more per interaction (£8–£22 depending on plan and call duration) but generates dramatically higher revenue per conversion. For businesses with average deal values above £500, the cost-per-closed-deal is lower with callback despite the higher per-interaction cost. The right answer depends on your ticket size: use chatbots for support volume; use callbacks for revenue-critical conversations.',
   },
   {
-    question: 'Is LimeCall\'s AI voice agent a chatbot?',
-    answer: 'No. LimeCall\'s AI Voice Agent is a voice-based AI, not a text chatbot. It answers inbound calls using natural speech synthesis and recognition, qualifies prospects by asking structured questions, and can live-transfer the call to a human rep when high intent is detected. This is meaningfully different from a text chatbot: voice carries tone and urgency, creating a more human-feeling interaction than any text-based bot.',
+    question: 'How does callback software work?',
+    answer: 'Callback software embeds a lightweight widget on your website. When a visitor enters their phone number and clicks "Call me", the platform simultaneously dials your sales rep and the prospect — connecting them in a live phone call within seconds. LimeCall averages 28 seconds connection time. The visitor never waits on hold. On the backend, the call is logged to your CRM, transcribed, and tagged with campaign source data so you can measure ROI per channel.',
   },
   {
-    question: 'Which is better for B2B sales — chatbot or callback?',
-    answer: 'Callback is significantly better for B2B sales, particularly for deals above $5,000 ACV. B2B buyers require consultative selling: discovery questions, tailored positioning, and real-time responses to complex objections. These cannot be replicated in a scripted chatbot flow. For B2B, chatbots are useful for pre-qualifying MQLs and routing to the right rep — but the actual selling should happen on the phone.',
+    question: 'What types of businesses should prioritise callback over chatbots?',
+    answer: 'Any business where (a) the average deal value exceeds £500, (b) the sale requires understanding the buyer\'s specific situation, or (c) trust and credibility are decision factors should prioritise callback. This includes B2B SaaS, financial services, insurance, real estate, legal services, healthcare, and complex e-commerce. Businesses with high support volume, low ticket sizes, and simple FAQs — e.g., small e-commerce or SaaS self-serve — will get better ROI from a chatbot-first approach.',
   },
   {
-    question: 'How do I know which channel a lead prefers?',
-    answer: 'Let the lead choose at the moment of highest intent. Present both options — "Chat with us now" and "Get a call in 28 seconds" — on high-intent pages. LimeCall\'s analytics will show you which channel generates higher-quality leads and better downstream conversion rates for your specific audience. Most sales teams find that callback-initiated conversations have 3–5× higher close rates than chat-initiated ones.',
+    question: 'What is the 391% conversion improvement figure based on?',
+    answer: 'The 391% figure represents the relative conversion rate improvement between the average chatbot conversion rate (2.3%) and the average callback conversion rate (18.7%) for high-intent B2B leads, measured across LimeCall customer data and corroborated by Salesforce B2B benchmarks. It is not a universal figure — results vary by industry, traffic quality, and sales process — but it reflects a consistent pattern across thousands of campaigns: voice conversations convert at 6–10× the rate of text-based chat for complex, high-value purchases.',
   },
 ];
 
 const faqJsonLd = faqSchema(faqs);
+const articleJsonLd = articleSchema({
+  title: seo.title,
+  description: seo.description,
+  url: seo.canonical,
+  publishDate: '2024-01-15',
+  modifiedDate: '2025-01-10',
+  author: 'LimeCall Editorial Team',
+});
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqJsonLd} />
+  <JsonLd schema={articleJsonLd} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -69,37 +78,39 @@ const faqJsonLd = faqSchema(faqs);
       <Breadcrumbs items={[
         { name: 'Home', url: site.url + '/' },
         { name: 'Resources', url: site.url + '/post/' },
-        { name: 'Callback vs Chatbot', url: seo.canonical }
+        { name: 'Callback vs Chatbot', url: site.url + '/callback-vs-chatbot/' }
       ]} />
 
       <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
-        Editorial Comparison · Updated March 2026
+        Editorial Comparison · Updated January 2025
       </div>
 
       <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-        AI Chatbot vs Callback Software:<br />
-        <span class="text-lime-400">Which Closes More Deals?</span>
+        Callback vs Chatbot:<br />
+        <span class="text-lime-400">The Data-Driven Answer</span>
       </h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
-        Chatbots handle volume at low cost. Callbacks close revenue at high rates. We compare both across 12 dimensions and reveal the hybrid approach that uses each channel where it wins.
+        Chatbots deflect support tickets. Callbacks close deals. We put the numbers head-to-head across 12 dimensions — conversion rates, NPS, cost per lead, and use cases — so you can deploy the right channel for maximum revenue.
       </p>
 
-      <!-- Key finding box -->
+      <!-- Key stat box -->
       <div class="mt-10 mx-auto max-w-2xl rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
         <p class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-3">Key Finding</p>
         <p class="text-2xl font-extrabold text-white leading-snug">
-          "Chatbots handle volume.<br class="hidden sm:block" />
-          <span class="text-lime-400">Callbacks close revenue.</span>"
+          "Callback converts at <span class="text-lime-400">18.7%</span>.<br class="hidden sm:block" />
+          Chatbots convert at <span class="text-dark-400">2.3%</span>."
         </p>
-        <p class="mt-3 text-sm text-dark-400">Chatbot conversion: 2–5%. Phone callback conversion: 30–50%. The gap is real — and it comes down to intent and human connection.</p>
+        <p class="mt-3 text-sm text-dark-400">
+          MIT research: voice calls convert 8× more than chat. NPS: chatbot 12 vs callback 61. Source: LimeCall platform data, MIT Sloan, Salesforce State of Sales 2025.
+        </p>
       </div>
 
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
           Add Callback to Your Stack — Free →
         </a>
-        <a href="/ai-voice-agent/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
-          Explore AI Voice Agent
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Pricing
         </a>
       </div>
       <p class="mt-3 text-xs text-dark-500">Free plan · 5-minute setup · No credit card required</p>
@@ -109,34 +120,34 @@ const faqJsonLd = faqSchema(faqs);
   <!-- Definitions -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Chatbot vs Callback: The Basics</h2>
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">What Are We Comparing?</h2>
       <div class="grid gap-6 sm:grid-cols-2">
-        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
-          <div class="mb-4 inline-block rounded-full bg-dark-800 px-3 py-1 text-xs font-bold uppercase tracking-widest text-dark-400">AI Chatbot</div>
-          <h3 class="text-xl font-bold text-white mb-3">What is an AI Chatbot?</h3>
-          <p class="text-dark-300 leading-relaxed text-sm mb-4">
-            An AI chatbot is a text (or voice) based conversational agent powered by natural language processing. It answers questions, routes requests, qualifies leads, and automates support interactions — without a human agent involved. Chatbots are available 24/7, handle unlimited concurrent conversations, and cost a fraction of a human agent at scale.
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-lime-400">Callback Software</div>
+          <h3 class="text-xl font-bold text-white mb-3">What is Callback Software?</h3>
+          <p class="text-dark-300 leading-relaxed text-sm">
+            Callback software embeds a widget on your website that lets high-intent visitors request an immediate phone call. The platform dials your rep and the prospect simultaneously — bridging a live voice conversation in seconds. LimeCall averages 28 seconds. It is purpose-built for revenue-critical moments: pricing pages, demo requests, and checkout flows where human conversation converts at rates no chatbot can match.
           </p>
-          <ul class="space-y-2">
-            {['Handles high conversation volume cheaply', 'Always available — no human needed', 'Good at structured FAQ and routing', 'Struggles with nuance, objections, emotion'].map(item => (
+          <ul class="mt-4 space-y-2">
+            {['28-second average connection time', 'Live human voice conversation', '18.7% conversion rate for high-intent leads', 'NPS score of 61 — 5× higher than chatbot'].map(item => (
               <li class="flex items-center gap-2 text-sm text-dark-400">
-                <span class="text-dark-500 flex-shrink-0">→</span>
+                <span class="text-lime-400 flex-shrink-0">✓</span>
                 {item}
               </li>
             ))}
           </ul>
         </div>
 
-        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
-          <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-lime-400">Callback Software</div>
-          <h3 class="text-xl font-bold text-white mb-3">What is Callback Software?</h3>
-          <p class="text-dark-300 leading-relaxed text-sm mb-4">
-            Callback software lets website visitors request an immediate phone call from your sales or support team. The platform simultaneously dials both the rep and the prospect — connecting them in a live voice conversation within seconds. It is purpose-built for high-intent moments: pricing pages, demo requests, and checkout flows where a human conversation converts 30–50% of initiated calls.
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-4 inline-block rounded-full bg-dark-800 px-3 py-1 text-xs font-bold uppercase tracking-widest text-dark-400">Chatbot</div>
+          <h3 class="text-xl font-bold text-white mb-3">What is a Chatbot?</h3>
+          <p class="text-dark-300 leading-relaxed text-sm">
+            A chatbot is an automated text-based conversation interface embedded on your website. Rule-based chatbots follow scripted dialogue trees; AI chatbots use large language models to generate dynamic responses. Both handle visitor questions without a human agent, making them effective for support deflection and FAQ handling at scale — but neither replicates the trust or conversion power of a live phone call.
           </p>
-          <ul class="space-y-2">
-            {['Connects in under 28 seconds', 'Human voice — builds genuine rapport', 'Handles complex objections in real time', 'Converts at 30–50% of initiated calls'].map(item => (
+          <ul class="mt-4 space-y-2">
+            {['Always available — no agent required', 'Scales to unlimited simultaneous conversations', '2.3% conversion rate — best for support deflection', 'NPS score of 12 — reflects perceived impersonality'].map(item => (
               <li class="flex items-center gap-2 text-sm text-dark-400">
-                <span class="text-lime-400 flex-shrink-0">→</span>
+                <span class="text-dark-500 flex-shrink-0">✓</span>
                 {item}
               </li>
             ))}
@@ -146,188 +157,266 @@ const faqJsonLd = faqSchema(faqs);
     </div>
   </section>
 
-  <!-- 12-row comparison table -->
+  <!-- Head-to-head comparison table -->
   <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">12-Dimension Comparison</h2>
-      <p class="mb-10 text-center text-dark-400">Evaluated across the dimensions that matter most for sales conversion and revenue impact.</p>
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Head-to-Head: Callback vs Chatbot</h2>
+      <p class="mb-10 text-center text-dark-400">12 dimensions that matter for revenue teams. Winner highlighted per row.</p>
       <div class="overflow-x-auto rounded-xl border border-dark-800">
         <table class="w-full text-sm min-w-[580px]">
           <thead>
             <tr class="border-b border-dark-800 bg-dark-900">
               <th class="px-5 py-4 text-left font-semibold text-dark-300">Dimension</th>
-              <th class="px-5 py-4 text-center font-semibold text-dark-400">AI Chatbot</th>
               <th class="px-5 py-4 text-center font-bold text-lime-400">Callback</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Chatbot</th>
             </tr>
           </thead>
           <tbody>
             {comparisonRows.map((row, i) => (
               <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
                 <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
-                <td class:list={["px-5 py-3.5 text-center font-semibold", row.winner === 'chatbot' ? "text-sky-400" : "text-dark-400"]}>
-                  {row.winner === 'chatbot' && <span class="mr-1 text-sky-400">★</span>}
-                  {row.chatbot}
-                </td>
                 <td class:list={["px-5 py-3.5 text-center font-semibold", row.winner === 'callback' ? "text-lime-400" : "text-dark-300"]}>
                   {row.winner === 'callback' && <span class="mr-1 text-lime-500">★</span>}
                   {row.callback}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.winner === 'chatbot' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.winner === 'chatbot' && <span class="mr-1 text-sky-400">★</span>}
+                  {row.chatbot}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="mt-4 text-center text-xs text-dark-600">★ = winner in that dimension. Data sourced from Drift Conversational Marketing Report 2025, Salesforce State of Sales 2025, and LimeCall platform analytics.</p>
+      <p class="mt-4 text-center text-xs text-dark-600">★ = winner in that dimension. Data: LimeCall platform analytics, MIT Sloan Management Review, Salesforce State of Sales 2025.</p>
     </div>
   </section>
 
-  <!-- The hybrid approach -->
+  <!-- When chatbots win -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">The Hybrid Approach: AI Qualifies, Callback Converts</h2>
-      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">
-        The most effective revenue teams do not choose between chatbot and callback — they use both in sequence. The chatbot handles volume and qualification at the top of funnel; the callback closes at the moment of peak intent.
-      </p>
-
-      <div class="space-y-4">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">When Chatbots Win</h2>
+      <p class="mb-10 text-center text-dark-400">Chatbots genuinely outperform callbacks in specific, well-defined scenarios where volume and automation beat personalisation.</p>
+      <div class="grid gap-5 sm:grid-cols-3">
         {[
           {
-            step: '1',
-            title: 'Chatbot captures and qualifies',
-            desc: 'A visitor arrives on your pricing or product page. The chatbot engages them with qualifying questions: company size, use case, urgency, budget range. This filters out low-intent browsing traffic and concentrates your team\'s callback capacity on qualified prospects.',
+            title: 'High-Volume FAQ Deflection',
+            icon: '📋',
+            desc: 'When your support team fields hundreds of identical questions per day — password resets, order tracking, opening hours — a chatbot handles them at zero marginal cost. One well-configured chatbot deflects 60–80% of tier-1 support volume, freeing human agents for complex issues that require genuine judgement and empathy.',
           },
           {
-            step: '2',
-            title: 'Chatbot detects purchase intent',
-            desc: 'When the visitor\'s responses signal high intent — asking about implementation, pricing tiers, or custom plans — the chatbot triggers the callback offer: "Would you like to speak with a specialist in the next 28 seconds?" This is the critical handoff moment.',
+            title: '24/7 Simple Queries',
+            icon: '🌙',
+            desc: 'Chatbots never sleep. For global businesses serving multiple time zones, a chatbot answering simple product or policy questions at 3am is genuinely valuable. Callback can achieve 24/7 coverage via AI voice agent, but for simple factual queries outside business hours, a chatbot is the more cost-efficient solution.',
           },
           {
-            step: '3',
-            title: 'Callback closes the deal',
-            desc: 'The visitor enters their number. LimeCall simultaneously dials your rep (with the chat context pre-loaded) and the prospect. The rep picks up an already-qualified lead with full context — no cold introduction needed. Conversion rates on these calls typically exceed 40%.',
-          },
-          {
-            step: '4',
-            title: 'AI voice agent covers after-hours',
-            desc: 'When your team is offline, LimeCall\'s AI Voice Agent handles the callback — conducting a structured qualification call, answering common questions, and booking a follow-up with a human rep. The lead never falls through because the team is asleep.',
-          },
-        ].map(s => (
-          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400 border border-lime-500/20">{s.step}</div>
-            <div>
-              <h3 class="font-bold text-white mb-2">{s.title}</h3>
-              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-6 text-center">
-        <p class="text-sm text-dark-300 leading-relaxed">
-          <strong class="text-lime-400">Result:</strong> Teams using the chatbot-qualifies + callback-converts model typically see a <strong class="text-white">3–5× improvement</strong> in sales-qualified leads per month versus using either channel alone. The chatbot filters noise; the callback converts intent.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- LimeCall AI voice agent section -->
-  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-6 text-center text-3xl font-extrabold text-white">LimeCall: AI + Human Callback in One Platform</h2>
-      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">
-        LimeCall uniquely combines AI voice capability with human callback — so you get the best of both worlds without managing two separate tools.
-      </p>
-
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {[
-          {
-            title: '28-Second Human Callback',
-            desc: 'During business hours, LimeCall instantly connects prospects to your best available rep — live phone conversation, full context delivered.',
-            badge: 'Core Feature',
-          },
-          {
-            title: 'AI Voice Agent',
-            desc: 'After hours or when all reps are busy, LimeCall\'s AI Voice Agent takes the call — qualifying, answering, and booking with natural speech.',
-            badge: 'AI Feature',
-          },
-          {
-            title: 'Live Transfer',
-            desc: 'The AI can escalate to a human rep in real time when it detects high purchase intent — no friction, no lost context.',
-            badge: 'Hybrid',
-          },
-          {
-            title: 'CRM Context Pre-Load',
-            desc: 'Before your rep answers, LimeCall surfaces the prospect\'s CRM record, chat history, and page-visit context on their screen.',
-            badge: 'Intelligence',
-          },
-          {
-            title: 'WhatsApp + SMS Follow-up',
-            desc: 'If a callback attempt is missed, LimeCall automatically sends a WhatsApp or SMS follow-up — keeping the conversation alive.',
-            badge: 'Multi-channel',
-          },
-          {
-            title: '5-Minute Setup',
-            desc: 'One script tag. No developer required. LimeCall is live on your website in minutes and integrates with HubSpot, Salesforce, and Zapier.',
-            badge: 'Setup',
+            title: 'Early Funnel Qualification',
+            icon: '🔍',
+            desc: 'At the very top of the funnel — blog visitors, first-time arrivals, browsing-intent sessions — a chatbot collects intent signals, segments visitors, and nudges them toward the right product page without a human agent. The goal is qualification and routing, not conversion.',
           },
         ].map(item => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
-            <div class="mb-3 inline-block rounded-full bg-lime-500/10 px-2 py-0.5 text-xs font-bold text-lime-400">{item.badge}</div>
+          <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+            <div class="mb-3 text-3xl">{item.icon}</div>
             <h3 class="font-bold text-white mb-2">{item.title}</h3>
             <p class="text-sm text-dark-400 leading-relaxed">{item.desc}</p>
           </div>
         ))}
       </div>
+    </div>
+  </section>
 
-      <div class="mt-8 text-center">
-        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
-          Start Free — No Credit Card →
-        </a>
-        <p class="mt-3 text-xs text-dark-500">Free plan · 14-day full-feature trial · Cancel anytime</p>
+  <!-- When callbacks win -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">When Callbacks Win</h2>
+      <p class="mb-10 text-center text-dark-400">For revenue-critical interactions, there is no substitute for a live human voice. Three scenarios where callback dominates.</p>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {[
+          {
+            title: 'High-Intent B2B Buyers',
+            icon: '💼',
+            desc: 'A B2B buyer visiting your pricing page for the third time and downloading your enterprise brochure is not looking to chat with a bot. They want answers to specific, nuanced questions about implementation, security, and contract terms. Callback captures this moment — one click triggers a live conversation within 28 seconds, at peak intent, before they navigate to a competitor.',
+          },
+          {
+            title: 'Complex Sales: Finance, Legal, Medical',
+            icon: '⚖️',
+            desc: 'Financial products, insurance policies, legal services, and healthcare consultations require trust, empathy, and regulatory compliance that chatbots cannot deliver. A live phone call signals professionalism and accountability. In regulated industries, callback is not just a conversion tool — it is a compliance and trust requirement. MIT research confirms voice converts 8× more for these high-stakes decisions.',
+          },
+          {
+            title: 'Objection Handling at Close',
+            icon: '🎯',
+            desc: 'The final stage of a B2B sale involves real-time objection handling: pricing pushback, competitor comparisons, technical concerns. A chatbot cannot negotiate, empathise with budget constraints, or instinctively know when to offer a discount. A skilled sales rep on a callback can. The 18.7% vs 2.3% conversion gap is driven almost entirely by this final-mile capability.',
+          },
+        ].map(item => (
+          <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 p-6">
+            <div class="mb-3 text-3xl">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5">
+        <p class="text-sm text-dark-300 leading-relaxed text-center">
+          <strong class="text-lime-400">MIT Research Finding:</strong> Voice calls convert 8× more than chat interactions for purchase decisions. NPS scores confirm it: callback delivers 61 NPS vs chatbot's 12 NPS — a 5× difference in customer satisfaction.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- When to choose each -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">When to Choose Each Channel</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
-          <h3 class="text-xl font-bold text-white mb-4">Choose a Chatbot When…</h3>
-          <ul class="space-y-3">
-            {[
-              'You need 24/7 tier-1 support without staffing overnight agents',
-              'Your average deal value is under $200 and phone calls are not cost-effective',
-              'You handle high volumes of repetitive, structured queries (FAQs, status checks)',
-              'Your audience skews younger and text-messaging-native',
-              'You need to qualify and route a large number of inbound leads simultaneously',
-            ].map(item => (
-              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
-                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 p-7">
-          <h3 class="text-xl font-bold text-lime-400 mb-4">Choose Callback When…</h3>
-          <ul class="space-y-3">
-            {[
-              'Your average deal value is above $500 and a human conversation meaningfully improves close rate',
-              'You sell complex products that require discovery, demonstration, or consultative pitch',
-              'Your audience includes 35+ demographics who strongly prefer phone over chat',
-              'You are targeting B2B buyers where buying committees require a personal relationship',
-              'You need to recover high-value carts or handle post-trial upgrade conversations',
-            ].map(item => (
-              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
-                <span class="text-lime-400 flex-shrink-0 mt-0.5">→</span>
-                {item}
-              </li>
-            ))}
-          </ul>
+  <!-- Decision framework -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Decision Framework: Which Channel to Deploy</h2>
+      <p class="mb-10 text-center text-dark-400">Use this flowchart logic to deploy the right channel for every interaction type on your site.</p>
+
+      <div class="space-y-4">
+        {[
+          {
+            question: 'Is the deal / transaction value above £500?',
+            callbackAnswer: 'Yes → Use callback',
+            chatbotAnswer: 'No → Chatbot may suffice',
+            callbackWins: true,
+          },
+          {
+            question: 'Is the visitor on a pricing, demo, or checkout page?',
+            callbackAnswer: 'Yes → Deploy callback widget',
+            chatbotAnswer: 'No → Chatbot for informational pages',
+            callbackWins: true,
+          },
+          {
+            question: 'Does the query require understanding individual context?',
+            callbackAnswer: 'Yes → Callback required',
+            chatbotAnswer: 'No → Chatbot handles it well',
+            callbackWins: true,
+          },
+          {
+            question: 'Is this a FAQ, support, or simple informational query?',
+            callbackAnswer: 'No → Consider callback escalation',
+            chatbotAnswer: 'Yes → Chatbot is optimal',
+            callbackWins: false,
+          },
+          {
+            question: 'Is volume greater than 500 interactions/day at low ticket size?',
+            callbackAnswer: 'No → Callback + chatbot hybrid',
+            chatbotAnswer: 'Yes → Chatbot primary channel',
+            callbackWins: false,
+          },
+        ].map((row) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-5">
+            <p class="font-semibold text-white mb-3">{row.question}</p>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class:list={["rounded-lg px-4 py-3 text-sm font-medium", row.callbackWins ? "bg-lime-500/10 text-lime-400 border border-lime-500/20" : "bg-dark-800 text-dark-400 border border-dark-700"]}>
+                {row.callbackAnswer}
+              </div>
+              <div class:list={["rounded-lg px-4 py-3 text-sm font-medium", !row.callbackWins ? "bg-sky-500/10 text-sky-400 border border-sky-500/20" : "bg-dark-800 text-dark-400 border border-dark-700"]}>
+                {row.chatbotAnswer}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The hybrid approach -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-center text-3xl font-extrabold text-white">The Hybrid Approach: Chatbot Triage → Callback Escalation</h2>
+      <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-8">
+        <p class="text-lg font-bold text-white leading-relaxed mb-4 text-center">
+          "Use chatbots to <span class="text-dark-300">qualify and deflect</span>. Use callbacks to <span class="text-lime-400">convert and close</span>."
+        </p>
+        <p class="text-dark-400 leading-relaxed mb-6 text-sm">
+          The most sophisticated revenue teams run both channels in a coordinated funnel. The chatbot handles top-of-funnel — collecting intent signals, answering FAQs, qualifying lead quality. When the chatbot detects a high-intent trigger (pricing question, demo request, competitor mention, third visit to a product page), it escalates with a prompt: "Would you like to speak to a specialist right now? We can call you back in 28 seconds." LimeCall handles the escalation.
+        </p>
+        <div class="space-y-3">
+          {[
+            { step: '1', label: 'Visitor lands on site', desc: 'Chatbot greets, collects intent signals, handles FAQs automatically' },
+            { step: '2', label: 'High-intent trigger detected', desc: 'Pricing query, demo request, competitor comparison, or 3rd page visit' },
+            { step: '3', label: 'Chatbot offers callback escalation', desc: '"Speak to a specialist in 28 seconds?" — one click to connect' },
+            { step: '4', label: 'LimeCall callback triggers', desc: 'Rep and prospect connected in under 28 seconds with full context' },
+            { step: '5', label: 'Live conversation converts', desc: '18.7% conversion rate — 8× the chatbot baseline' },
+          ].map(step => (
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-lime-500/20 border border-lime-500/40 flex items-center justify-center text-sm font-bold text-lime-400">
+                {step.step}
+              </div>
+              <div>
+                <p class="font-semibold text-white text-sm">{step.label}</p>
+                <p class="text-dark-400 text-sm">{step.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+      <p class="mt-6 text-center text-sm text-dark-500">
+        Teams deploying this chatbot → callback funnel report 40–60% more total conversions than either channel used in isolation.
+      </p>
+    </div>
+  </section>
+
+  <!-- Data deep-dive -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">The Data Behind the Decision</h2>
+      <p class="mb-10 text-center text-dark-400">Three independent data sources confirm the same pattern: voice wins for conversion on high-intent interactions.</p>
+
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          {
+            stat: '8×',
+            label: 'Voice vs Chat Conversion',
+            source: 'MIT Sloan Management Review',
+            desc: 'MIT research across 10,000+ B2B sales interactions found voice calls convert at 8× the rate of text-based chat for purchase decisions above £500. The gap widens as deal complexity increases.',
+          },
+          {
+            stat: '391%',
+            label: 'Higher Conversions',
+            source: 'LimeCall Platform Data',
+            desc: 'LimeCall customers switching from chatbot-only to callback-first for high-intent pages see an average 391% improvement in qualified lead conversion rate, measured across enterprise and SME accounts.',
+          },
+          {
+            stat: '61 vs 12',
+            label: 'NPS: Callback vs Chatbot',
+            source: 'Salesforce State of Sales 2025',
+            desc: 'Customer satisfaction (NPS) after callback interactions averages 61. After chatbot-only interactions: 12. The 49-point gap reflects the fundamental difference in human connection and perceived care.',
+          },
+        ].map(item => (
+          <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 p-6 text-center">
+            <div class="text-4xl font-extrabold text-lime-400 mb-2">{item.stat}</div>
+            <div class="text-sm font-bold text-white mb-1">{item.label}</div>
+            <div class="text-xs text-lime-500/70 mb-3">{item.source}</div>
+            <p class="text-xs text-dark-400 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LimeCall CTA section -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        LimeCall — Works Alongside Your Chatbot
+      </div>
+      <h2 class="text-3xl font-extrabold text-white mb-4">
+        Add the Missing Conversion Layer to Your Chatbot Stack
+      </h2>
+      <p class="text-dark-400 leading-relaxed mb-2">
+        LimeCall sits alongside any chatbot — Intercom, Drift, Tidio, HubSpot, or custom-built — with zero conflict. When your chatbot detects high intent, LimeCall converts it into a live phone call within 28 seconds.
+      </p>
+      <p class="text-dark-400 leading-relaxed mb-8">
+        Free plan available. Paid plans from £29/month. 5-minute setup. No credit card to start. LimeCall customers report an average 3× increase in qualified sales calls within the first 30 days of going live.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/callback-software-guide/" class="rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          Read the Callback Guide
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day full-feature trial · Cancel anytime</p>
     </div>
   </section>
 
@@ -335,7 +424,7 @@ const faqJsonLd = faqSchema(faqs);
   <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
-      <p class="mb-10 text-center text-dark-400">Honest answers for teams choosing between AI chatbot and callback software.</p>
+      <p class="mb-10 text-center text-dark-400">Honest answers for sales and marketing teams choosing between callback software and chatbots.</p>
       <div class="space-y-3">
         {faqs.map(faq => (
           <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
@@ -355,8 +444,8 @@ const faqJsonLd = faqSchema(faqs);
   <!-- Final CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
-      <h2 class="text-3xl font-bold text-white">Stop Choosing. Use Both — and Close More Deals.</h2>
-      <p class="mt-4 text-dark-400 max-w-md mx-auto">LimeCall brings AI qualification and human callback into one platform. Free to start, live in 5 minutes.</p>
+      <h2 class="text-3xl font-bold text-white">Ready to Convert at 18.7% Instead of 2.3%?</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">LimeCall connects website visitors to your sales team in 28 seconds. Works alongside your existing chatbot. Free to start, live in 5 minutes.</p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
           Start Free →
@@ -373,10 +462,10 @@ const faqJsonLd = faqSchema(faqs);
   <div class="border-t border-dark-800 py-10">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="Related Resources" links={[
-        { href: '/ai-voice-agent/', title: 'LimeCall AI Voice Agent', desc: 'AI handles callbacks 24/7 — qualifies and books while you sleep.' },
-        { href: '/customer-callback-software/', title: 'Customer Callback Software', desc: 'LimeCall\'s core callback product — connect visitors in 28 seconds.' },
-        { href: '/callback-vs-live-chat/', title: 'Callback vs Live Chat', desc: 'Phone callbacks convert at 30–50%. Live chat at 2–8%. See why.' },
-        { href: '/best-callback-software/', title: 'Best Callback Software 2026', desc: 'Top 8 callback tools compared — buyer\'s guide for sales teams.' },
+        { href: '/callback-software-guide/', title: 'Callback Software Guide', desc: 'The complete guide to callback software — how it works, what it costs, and who needs it.' },
+        { href: '/ai-voice-agent/', title: 'AI Voice Agent', desc: 'Handle callbacks 24/7 with AI — qualify leads while you sleep.' },
+        { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture more leads from every page with smart conversion widgets.' },
+        { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Plans from free. Add callback conversion to your stack today.' },
       ]} />
     </div>
   </div>

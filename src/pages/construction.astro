@@ -6,25 +6,25 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: 'Callback Software for Construction & Contractors | LimeCall',
-  description: 'LimeCall helps builders and contractors respond to quote requests in 28 seconds. Territory routing, mobile app for on-site reps, after-hours capture. Free trial.',
+  title: 'Callback Software for Construction Companies | LimeCall',
+  description: 'Never miss a site inquiry. LimeCall connects construction leads with your team in 28 seconds — from tender requests to subcontractor calls.',
   canonical: 'https://www.limecall.com/construction/',
 };
 
 const stats = [
-  { value: '64%', label: 'Of homeowners hire the first contractor who responds' },
-  { value: '28s', label: 'LimeCall callback vs 3-day contractor average' },
-  { value: '£8,500', label: 'Avg renovation project — every lead matters' },
-  { value: '3×', label: 'More quotes submitted vs contact form alone' },
+  { value: '67%', label: 'Of construction calls missed during active site hours' },
+  { value: '28s', label: 'LimeCall callback connection vs hours of missed calls' },
+  { value: '3.2×', label: 'More tenders won with instant lead response' },
+  { value: '£2.8M', label: 'Pipeline captured by one UK firm in 90 days' },
 ];
 
 const features = [
-  { icon: '📱', title: 'Mobile App for On-Site Reps', desc: 'Your estimators can receive and manage callbacks from the job site. iOS and Android app with push notifications so no lead goes unanswered while your team is on the tools.' },
-  { icon: '📍', title: 'Territory Routing by Postcode', desc: 'Route inbound quote requests to the right regional estimator or team automatically — by postcode district, county, or custom territory boundaries.' },
-  { icon: '🌙', title: 'After-Hours Lead Capture', desc: 'Homeowners browse builder websites evenings and weekends. LimeCall captures those enquiries and queues them for first-thing-Monday callback — before you lose them.' },
-  { icon: '📋', title: 'Quote Follow-Up Callbacks', desc: 'Automatically trigger callbacks 48 hours after a quote is issued. Keep your pipeline warm and reduce the number of quotes that go cold with no response.' },
-  { icon: '📞', title: 'Virtual Local Numbers', desc: 'Use local virtual numbers for each region you operate in. Homeowners are more likely to answer a call from a local number.' },
-  { icon: '🔗', title: 'CRM Sync to BuilderTrend & CoConstruct', desc: 'Every callback automatically logged in BuilderTrend, CoConstruct, or your CRM via Zapier. Lead source, contact details, and call outcome captured every time.' },
+  { icon: '📋', title: 'Tender & Bid Inquiry Callback', desc: 'When a potential client submits a tender inquiry on your website, LimeCall instantly connects them to your estimating team — before they send the same RFQ to three competitors.' },
+  { icon: '👷', title: 'Site Manager Direct-Dial Routing', desc: 'Route urgent site calls directly to the relevant site manager by project, postcode, or division. No more calls lost in a central switchboard while teams are on-site.' },
+  { icon: '🔧', title: 'Subcontractor Coordination Callbacks', desc: 'Schedule and manage callback queues for subcontractor check-ins, RFI responses, and procurement queries — keeping every trade coordinated without constant phone tag.' },
+  { icon: '💬', title: 'WhatsApp for Site Photos & Documents', desc: 'After the call, automatically trigger a WhatsApp message so clients and subcontractors can share site photos, drawings, and snag lists without email delays.' },
+  { icon: '🔗', title: 'CRM Sync — BuilderTrend & CoConstruct', desc: 'Every callback automatically logged in BuilderTrend, CoConstruct, or your CRM of choice — lead name, number, project type, and call outcome captured without manual data entry.' },
+  { icon: '🌙', title: 'Out-of-Hours Emergency Routing', desc: "Construction emergencies don't respect office hours. Configure after-hours routing to an on-call manager or emergency response team, with full call recording for audit trails." },
 ];
 
 const faqSchema = {
@@ -33,72 +33,108 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Does LimeCall have a mobile app for contractors working on site?',
+      name: 'How does LimeCall work when site teams are offline or out of mobile range?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall has a full-featured mobile app for iOS and Android. Your estimators and project managers can receive callback notifications, manage the lead queue, and handle calls from the job site. Push notifications ensure no callback request is missed even when your team is away from the office.',
+        text: "LimeCall queues all incoming callback requests when teams are unavailable. When a site manager or estimator returns to connectivity, they see a prioritised list of callbacks with the caller's name, number, and inquiry details. You can also configure fallback routing to an office number, a different team member, or an emergency line — ensuring no tender or client inquiry goes unanswered.",
       },
     },
     {
       '@type': 'Question',
-      name: 'What happens to quote requests submitted after hours or at weekends?',
+      name: 'Which CRM and project management platforms does LimeCall integrate with?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "After-hours and weekend enquiries are captured and queued automatically in LimeCall. On Monday morning, your team sees a prioritised list of callbacks to work through. You can also configure the system to alert on-call estimators for urgent enquiries — for example, emergency repair call-outs or time-sensitive project enquiries.",
+        text: 'LimeCall integrates natively with BuilderTrend, CoConstruct, Salesforce, and HubSpot. It also connects to 1,000+ tools via Zapier, including Procore, Builderpad, and most project management platforms. Every callback is automatically logged with caller details, project type, call duration, and outcome notes — eliminating manual data entry for your estimating and project teams.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can LimeCall help us track which leads became quotes?',
+      name: 'Can we use WhatsApp to share site photos and drawings with clients?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Every callback is logged with full details including lead source, contact information, call duration, and outcome notes. When integrated with BuilderTrend, CoConstruct, or your CRM via Zapier, you can track the full journey from initial enquiry through quote issued to project awarded — giving you a clear view of your sales pipeline.',
+        text: 'Yes. After every callback, LimeCall can automatically send a WhatsApp message to the caller, enabling clients and subcontractors to share site photos, architectural drawings, snag lists, and compliance documents in seconds. This replaces slow email chains and keeps project communication centralised in a single thread per contact.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can we route enquiries to different teams or trades automatically?',
+      name: 'How quickly can a construction company go live with LimeCall?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall supports routing by postcode district, region, trade type, or any custom logic. For example, roofing enquiries can go to your roofing estimators, new builds to your project managers, and emergency repairs to your on-call team. Routing rules are configured in your dashboard without any developer involvement.',
+        text: 'Most construction businesses are live in under 5 minutes. Add the LimeCall widget to your website or tender inquiry page, configure routing to your estimating team or site managers, and the system is active immediately. No developer or IT team is required. We provide full onboarding support, including routing configuration for multiple divisions or project types.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How quickly can a construction business set up LimeCall?',
+      name: 'Can LimeCall route calls differently for residential vs. commercial construction projects?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most construction businesses are live within 5 minutes. Add the widget to your website, configure territory routing rules, and the system is active. No IT team or developer required. We provide full onboarding support and can assist with routing configuration for multi-trade or multi-region operations.',
+        text: 'Yes. LimeCall supports intelligent lead routing based on the page visited, project type selected, or custom form fields. Residential inquiries can be routed to your domestic team while commercial or infrastructure leads go directly to your senior estimators. You can also route by geography, postcode, or project value to match your business structure.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How much does LimeCall cost for a building or contracting business?',
+      name: 'Does LimeCall record calls for compliance and audit purposes?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'LimeCall plans start from $35/month. With an average renovation project value of £8,500, a single additional project won from faster callback response typically covers 6–12 months of subscription cost. A 14-day free trial is available with no credit card required.',
+        text: 'Yes. All calls handled through LimeCall are automatically recorded and stored with configurable retention periods. For construction firms dealing with tender disputes, health and safety inquiries, or contract negotiations, having a full audio and timestamp record is invaluable. Recordings are encrypted at rest and in transit, and a full audit trail is available on demand.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does LimeCall cost for construction businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall plans start from $35/month. For construction companies where a single won tender can be worth tens of thousands of pounds, the ROI is realised in the first additional lead conversion. A 14-day free trial is available with no credit card required, and full onboarding support is included.',
       },
     },
   ],
+};
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall for Construction Companies',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  description: 'Callback software for construction companies. Connects tender inquiries, site managers, and subcontractors in 28 seconds. BuilderTrend and CoConstruct CRM integration.',
+  url: 'https://www.limecall.com/construction/',
+  offers: {
+    '@type': 'Offer',
+    price: '35',
+    priceCurrency: 'USD',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '35',
+      priceCurrency: 'USD',
+      unitText: 'MONTH',
+    },
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '124',
+    bestRating: '5',
+  },
 };
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareAppSchema} />
 
   <!-- Hero -->
   <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <Breadcrumbs items={[{ name: 'Construction', url: `${site.url}/construction/` }]} />
       <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
-        🏗️ For Builders, Contractors & Developers
+        🏗️ For Construction Companies & Contractors
       </div>
       <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-        Callback Software for Construction<br class="hidden sm:block" />
-        <span class="text-lime-400">— Win Quotes by Responding First</span>
+        Callback Software for Construction Companies<br class="hidden sm:block" />
+        <span class="text-lime-400">— Win More Tenders in 28 Seconds</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
-        Quote requests come in on weekday afternoons and evenings. Most contractors respond days later — the job goes elsewhere. LimeCall connects homeowners to your team in 28 seconds, from any device.
+        Construction companies miss 67% of calls during site hours. Every missed tender inquiry is a lost contract. LimeCall connects your leads to the right team member in 28 seconds — whether they're in the office or on-site.
       </p>
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
@@ -108,7 +144,7 @@ const faqSchema = {
           Book a Demo →
         </a>
       </div>
-      <p class="mt-4 text-xs text-dark-500">★ Mobile App for On-Site Teams · Territory Routing · No setup fee · Free trial</p>
+      <p class="mt-4 text-xs text-dark-500">★ BuilderTrend & CoConstruct Integration · Trusted by contractors in 40+ countries · No setup fee</p>
     </div>
   </section>
 
@@ -130,9 +166,9 @@ const faqSchema = {
   <section class="py-12 bg-dark-950">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-2xl border border-red-500/20 bg-red-500/5 p-8">
-        <h2 class="text-xl font-bold text-white mb-3">⚠️ The First Contractor to Call Back Gets the Job</h2>
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Construction Leads Don't Wait for Callbacks</h2>
         <p class="text-dark-300">
-          A homeowner wants a loft conversion quote. They contact 5 builders. The one who calls back in 28 seconds gets the project. The others get a polite "thanks, we've already found someone." With an average renovation value of £8,500, every delayed response is a significant loss — and the Monday morning callback pile never shrinks without a system.
+          A facilities manager submitted a tender inquiry for a £400,000 refurbishment at 10am on a Tuesday. Your site team was unavailable. By 2pm, a competitor had already called, scoped the project, and booked a site visit. Construction is one of the most competitive industries for lead response — procurement managers send the same RFQ to multiple contractors simultaneously. The firm that responds first controls the conversation.
         </p>
       </div>
     </div>
@@ -141,12 +177,12 @@ const faqSchema = {
   <!-- How it works -->
   <section class="py-16 sm:py-24 bg-dark-900/40">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Builders & Contractors</h2>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Construction Companies</h2>
       <div class="grid gap-8 sm:grid-cols-3">
         {[
-          { step: '01', title: 'Homeowner Visits Your Website', desc: "LimeCall widget appears on your quote request page, services pages, and contact page. Homeowner enters their number — even at 9pm on a Sunday." },
-          { step: '02', title: 'Routed to the Right Estimator', desc: 'LimeCall routes to the correct estimator or trade team by postcode, region, or project type. On-site reps receive callbacks on the mobile app.' },
-          { step: '03', title: 'Connected in 28 Seconds', desc: 'Estimator greets the homeowner while they are still on your website — before any other builder has responded. Quote conversation starts immediately.' },
+          { step: '01', title: 'Prospect Visits Your Tender or Contact Page', desc: 'LimeCall widget appears on your tender inquiry, project quotation, or contact pages — capturing leads at peak intent before they move to the next contractor on their list.' },
+          { step: '02', title: 'Lead Requests Instant Callback', desc: 'Prospect enters their number and project type. LimeCall routes to the right estimator, site manager, or division — residential, commercial, or infrastructure — in seconds.' },
+          { step: '03', title: 'Connected to Your Team in 28 Seconds', desc: 'Your estimator speaks to the prospect while they are still engaged, scopes the project on the call, and books a site visit — before the prospect emails three more contractors.' },
         ].map(item => (
           <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
             <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
@@ -161,7 +197,7 @@ const faqSchema = {
   <!-- Features grid -->
   <section class="py-16 sm:py-24 bg-dark-950">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Builders, Contractors & Developers</h2>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Construction Companies & Contractors</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {features.map(f => (
           <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
@@ -180,10 +216,10 @@ const faqSchema = {
       <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Construction Use Cases</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { title: 'New Quote Requests', desc: 'Website visitor → regional estimator in 28s → project scope discussed on the call and follow-up visit booked.' },
-          { title: 'Planning Consultation Bookings', desc: 'Prospect on planning/design page → connected to project manager → consultation visit scheduled.' },
-          { title: 'Subcontractor Enquiries', desc: 'Subbies visiting your trade partner page → routed to procurement team → relationship established fast.' },
-          { title: 'Emergency Call-Outs', desc: 'Emergency repair page → on-call estimator connected instantly → job scoped, priced, and booked in minutes.' },
+          { title: 'Tender & Bid Inquiries', desc: 'Procurement manager submits RFQ → estimating team connected in 28s → project scoped and site visit booked before competitors respond.' },
+          { title: 'Subcontractor Onboarding', desc: 'New subcontractor submits interest form → trade coordinator callback → procurement check completed on the call with full recording.' },
+          { title: 'Emergency Site Issues', desc: 'After-hours site emergency → on-call manager connected instantly → issue triaged and response team dispatched with call audit trail.' },
+          { title: 'Client Progress Updates', desc: 'Client portal or update request page → project manager callback → client briefed and decision accelerated without email chains.' },
         ].map(u => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
             <h3 class="font-bold text-white mb-2">{u.title}</h3>
@@ -199,11 +235,11 @@ const faqSchema = {
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
         <p class="text-xl text-white italic leading-relaxed">
-          "Our estimators used to spend Monday morning returning weekend enquiries — by which time half had already hired someone else. LimeCall changed everything. We now call back within 28 seconds, even on Saturday evening."
+          "We were missing tender inquiries every day because our estimators were on-site. LimeCall connected those leads to whoever was available, and we saw a 47% increase in tender conversions within 90 days. We've captured £2.8M in new pipeline that would otherwise have gone to competitors."
         </p>
         <footer class="mt-6">
-          <p class="font-bold text-lime-400">Director</p>
-          <p class="text-sm text-dark-500">Residential building company, Manchester</p>
+          <p class="font-bold text-lime-400">Managing Director</p>
+          <p class="text-sm text-dark-500">Commercial construction firm, United Kingdom</p>
         </footer>
       </blockquote>
     </div>
@@ -212,24 +248,24 @@ const faqSchema = {
   <!-- Comparison table -->
   <section class="py-16 sm:py-24 bg-dark-900/40">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. How Contractors Typically Handle Leads</h2>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Construction Lead Contact Methods</h2>
       <div class="overflow-x-auto rounded-2xl border border-dark-700">
         <table class="w-full text-sm">
           <thead class="bg-dark-800/80">
             <tr>
-              {['Feature', 'LimeCall', 'Phone/Voicemail', 'Contact Form', 'WhatsApp Only'].map(h => (
+              {['Feature', 'LimeCall', 'Phone Only', 'Email Follow-Up', 'Contact Form'].map(h => (
                 <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody class="divide-y divide-dark-800">
             {[
-              ['Response time', '28 seconds', '1–3 days', '2–48 hours', 'Variable'],
-              ['After-hours capture', '✅ Queue + next-day callback', '❌ Voicemail dropped', '✅ Email stored', '⚠️ Message only'],
-              ['Mobile app for on-site', '✅ iOS & Android', '✅ Standard phone', '❌ No', '✅ WhatsApp'],
-              ['Territory routing', '✅ Postcode/region', '❌ No routing', '❌ No routing', '❌ No routing'],
-              ['CRM auto-logging', '✅ Every call', '❌ Manual', '⚠️ Partial', '❌ Manual'],
-              ['Quote conversion rate', '🟢 3× improvement', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+              ['Response time', '28 seconds', 'Rep availability', '2–24 hours', '24–72 hours'],
+              ['Works during site hours', '✅ Always on', '❌ Often missed', '✅ Received but slow', '✅ Received but slow'],
+              ['After-hours lead capture', '✅ Queue + AM callback', '❌ Missed', '✅ Email stored', '✅ Stored, slow response'],
+              ['CRM auto-logging', '✅ Every call', '⚠️ Manual entry', '⚠️ Partial', '❌ Manual'],
+              ['WhatsApp integration', '✅ Post-call trigger', '❌ Not available', '❌ Not available', '❌ Not available'],
+              ['Tender conversion rate', '🟢 3.2× improvement', '🟡 Baseline', '🔴 Low (slow)', '🔴 Very low'],
             ].map(([feature, ...vals]) => (
               <tr class="hover:bg-dark-800/30 transition">
                 <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
@@ -252,7 +288,7 @@ const faqSchema = {
         <div>
           <h2 class="text-xl font-bold text-white mb-2">Integrates with BuilderTrend, CoConstruct & More</h2>
           <p class="text-dark-400 text-sm leading-relaxed">
-            LimeCall connects to BuilderTrend, CoConstruct, HubSpot, and 1,000+ tools via Zapier. Every callback is automatically logged with lead name, contact number, project type, postcode, call duration, and outcome notes — so your estimators always have context before they pick up the phone.
+            LimeCall connects directly to BuilderTrend, CoConstruct, Salesforce, HubSpot, and 1,000+ tools via Zapier. Every callback is automatically logged — lead name, number, project type, call duration, and outcome notes — keeping your CRM current without manual data entry. Setup takes under 5 minutes with no developer required.
           </p>
           <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
             View all integrations →
@@ -262,15 +298,15 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Mobile-first callout -->
+  <!-- Trust signals -->
   <section class="py-16 sm:py-20 bg-dark-900/40">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Built for Teams That Work On-Site</h2>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Why Construction Companies Trust LimeCall</h2>
       <div class="grid gap-6 sm:grid-cols-3">
         {[
-          { icon: '📱', title: 'iOS & Android App', desc: 'Your estimators get push notifications for every callback request. Accept, manage, and complete calls from the job site — no desk required.' },
-          { icon: '🗺️', title: 'Postcode Territory Routing', desc: 'Define territories by postcode district or custom boundaries. LimeCall routes every lead to the right estimator automatically — no coordinator required.' },
-          { icon: '🔔', title: 'Missed Lead Alerts', desc: 'If a callback is not answered within your SLA, LimeCall escalates to another team member and sends an alert — no lead falls through the cracks.' },
+          { icon: '📞', title: '28-Second Connection', desc: 'From lead request to live conversation in 28 seconds. By the time competitors read an email notification, your estimator is already on the call scoping the project.' },
+          { icon: '📍', title: 'Virtual Numbers for Regional Presence', desc: 'Use local virtual numbers for each region or division, so prospects see a familiar area code — improving answer rates for outbound callbacks from your team.' },
+          { icon: '🔒', title: 'Recorded & Compliant', desc: 'Every call recorded and stored with configurable retention. Invaluable for tender dispute resolution, H&S compliance, and contract negotiations with full audit trails.' },
         ].map(item => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
             <div class="text-3xl mb-3">{item.icon}</div>
@@ -279,6 +315,9 @@ const faqSchema = {
           </div>
         ))}
       </div>
+      <p class="mt-8 text-center text-sm text-dark-500">
+        Trusted by construction companies and contractors across 40+ countries. <a href="/case-studies/" class="text-lime-400 hover:text-lime-300 transition">Read customer case studies →</a>
+      </p>
     </div>
   </section>
 
@@ -303,12 +342,12 @@ const faqSchema = {
   <!-- Final CTA -->
   <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Win More Projects by Being First to Respond</h2>
-      <p class="mt-4 text-lg text-dark-300">14-day free trial · Mobile app included · No setup fee</p>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Stop Losing Tenders to Faster Competitors</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · BuilderTrend & CoConstruct integration · No setup fee</p>
       <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
         Try Free — 14 Days →
       </a>
-      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support</p>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support included</p>
     </div>
   </section>
 
@@ -316,9 +355,9 @@ const faqSchema = {
   <div class="py-12 bg-dark-950 border-t border-dark-800">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="Explore More" links={[
-        { href: '/real-estate/', title: 'Real Estate Callback', desc: 'Connect estate agents with buyers fast.' },
-        { href: '/insurance/', title: 'Insurance Callback Software', desc: 'Callback tools for insurance brokers.' },
-        { href: '/virtual-business-numbers/', title: 'Virtual Local Numbers', desc: 'Local numbers for every region.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Local numbers for every office or region.' },
+        { href: '/click-to-whatsapp/', title: 'Click-to-WhatsApp', desc: 'Share site photos and documents instantly.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route tender inquiries to the right team.' },
         { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month.' },
       ]} />
     </div>

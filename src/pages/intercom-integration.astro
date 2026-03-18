@@ -1,0 +1,452 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const integration = "Intercom";
+const slug = "intercom-integration";
+
+const seo = {
+  title: 'LimeCall + Intercom Integration | Escalate Chats to Instant Calls',
+  description: 'Connect LimeCall with Intercom to offer instant callbacks from live chats, create contacts on call, and trigger Intercom messages post-call automatically.',
+  canonical: 'https://www.limecall.com/intercom-integration/',
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Intercom Integration',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Native integration between LimeCall callback software and Intercom. Escalate live chats to instant callbacks, auto-create contacts on call, and trigger Intercom messages post-call in real time.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Included on LimeCall Pro plan and above',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does the LimeCall Intercom integration work with Intercom Starter?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall connects to all Intercom plans including Intercom Starter. The OAuth connection and core features — chat-to-call escalation, contact creation, and call logging — are available regardless of which Intercom plan you are on. Some advanced features such as firing Intercom Events or triggering multi-step Series require an Intercom plan that includes those capabilities. The LimeCall side of the integration is included on Pro plan and above.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I set up the chat-to-call escalation button in Intercom Messenger?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'After connecting LimeCall to Intercom via OAuth, go to LimeCall → Integrations → Intercom → Escalation Setup. LimeCall generates a custom Intercom Messenger App button that you add to your Messenger home screen or active conversation in minutes. When a visitor clicks the button, the LimeCall callback widget appears inside the Intercom chat window, and the call is connected within 28 seconds. No custom coding is required — LimeCall provides the Messenger App configuration.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support two-way contact sync with Intercom?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports two-way contact sync with Intercom. When a visitor requests a callback, LimeCall checks whether a matching Intercom contact exists by phone number or email. If found, LimeCall updates the existing contact record and logs the call event on their conversation timeline. If no match is found, a new Intercom contact is created. In the reverse direction, when a known Intercom contact calls in, LimeCall pulls their Intercom data — last seen page, last conversation, custom attributes — into the agent screen before the call connects.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What Intercom events does LimeCall fire after a call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall fires the following Intercom events on the contact record after call activity: "callback_requested" when a visitor submits their number, "callback_completed" when the call connects and ends, "callback_missed" when a call attempt goes unanswered, and "callback_outcome_set" when a rep records a call outcome. Each event includes metadata — call duration, outcome label, page URL, and agent name — that you can use to trigger Intercom Series, Messages, or as filter conditions in Intercom segments.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall replace Intercom for my business?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. LimeCall and Intercom are complementary, not competing tools. Intercom excels at text-based customer communication — live chat, in-app messages, email sequences, and support tickets. LimeCall handles voice — instant callbacks, scheduled calls, and call routing. Together they cover the full conversion surface: a visitor who prefers text uses Intercom chat; a visitor who is ready to talk gets a LimeCall callback in 28 seconds. The integration means neither channel operates in isolation — call events feed directly into Intercom contact timelines and sequences.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall trigger Intercom messages after a missed call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. When a LimeCall callback attempt goes unanswered, LimeCall fires a "callback_missed" event on the Intercom contact. You can use this event as an Intercom Series trigger to automatically send a message such as "Sorry we missed your call — here is a link to book a time that works for you." This automation runs without any manual intervention and ensures every missed call gets a follow-up message within minutes, not hours.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I segment Intercom users by whether they have made a call?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall sets a custom Intercom attribute "last_call_date" and "total_calls" on every contact it syncs. You can use these attributes to create Intercom segments — for example, "users who have never made a call" to target with a callback prompt, or "users who called in the last 7 days" to exclude from a re-engagement campaign. These segments update automatically as call activity happens, so your audience lists stay current without manual imports.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "28s", label: "Average call connect time" },
+  { value: "1-click", label: "Chat-to-call escalation" },
+  { value: "2 clicks", label: "OAuth connect — no developers" },
+  { value: "7 events", label: "Intercom events fired per call lifecycle" },
+];
+
+const features = [
+  {
+    title: "Escalate Intercom chat to callback with one click",
+    desc: "Add a LimeCall escalation button inside Intercom Messenger. When a chat visitor is ready to talk, one click launches the callback widget inside the chat window — no phone number copy-paste, no new tab. The call connects in 28 seconds.",
+  },
+  {
+    title: "Auto-create or update Intercom contacts on call",
+    desc: "Every LimeCall callback automatically creates a new Intercom contact — or updates an existing one — with phone number, name, email, and the page they called from. Duplicate check on phone and email prevents contact bloat.",
+  },
+  {
+    title: "Trigger Intercom messages post-call",
+    desc: "Fire Intercom Series or one-off messages based on call outcome. A completed demo call triggers an onboarding sequence; a missed call fires a 'Sorry we missed you' message automatically within seconds of the call ending.",
+  },
+  {
+    title: "Log call outcomes to Intercom conversation timeline",
+    desc: "After every call, LimeCall posts a note to the Intercom conversation timeline with call outcome, duration, agent name, and UTM source. Your support and sales teams have full call history inside Intercom with zero manual entry.",
+  },
+  {
+    title: "Segment Intercom users by called / not-called",
+    desc: "LimeCall writes 'last_call_date' and 'total_calls' attributes to every Intercom contact. Use these to build segments — 'never called' visitors for callback prompts, 'called this week' to suppress re-engagement emails — all updating automatically.",
+  },
+  {
+    title: "Fire Intercom events for callback request and completion",
+    desc: "LimeCall fires 'callback_requested', 'callback_completed', 'callback_missed', and 'callback_outcome_set' events on the Intercom contact. Use these events as Series triggers, filter conditions in messages, or segment membership criteria.",
+  },
+];
+
+const automations = [
+  {
+    trigger: "Visitor clicks Escalate in Intercom chat",
+    action: "LimeCall callback widget opens in Messenger",
+    desc: "The Intercom-native escalation button surfaces LimeCall's callback widget directly inside the chat. The visitor enters their number, and a rep is connected within 28 seconds — without leaving the conversation.",
+  },
+  {
+    trigger: "Trial user call completed",
+    action: "Enrol in Intercom onboarding Series",
+    desc: "When a trial user's first callback completes, LimeCall fires the 'callback_completed' event on their Intercom contact. An Intercom Series triggers automatically, sending onboarding messages tailored to users who have already spoken to sales.",
+  },
+  {
+    trigger: "Missed call",
+    action: "Intercom auto-message 'Sorry we missed you'",
+    desc: "A missed callback fires a 'callback_missed' event. An Intercom message sends within minutes: 'Sorry we missed your call — click here to book a time that works.' Automated follow-up, zero manual effort.",
+  },
+  {
+    trigger: "Call outcome: 'Demo scheduled'",
+    action: "Tag contact and trigger confirmation Series",
+    desc: "When a rep marks a call as 'Demo scheduled', LimeCall updates the Intercom contact's custom attribute and fires an event that triggers a confirmation email Series — keeping the prospect engaged between now and the demo.",
+  },
+];
+
+const useCases = [
+  {
+    role: "Live Chat Teams",
+    title: "Convert stuck chats to live calls instantly",
+    desc: "Some prospects need to talk — not type. The LimeCall escalation button gives chat agents a one-click way to offer a callback the moment they sense buyer intent. No awkward 'can I call you?' exchange — the widget handles it inside the chat.",
+  },
+  {
+    role: "Sales Teams",
+    title: "Full Intercom context before every call",
+    desc: "Before a rep picks up a LimeCall callback, they see the caller's Intercom data — last page visited, last conversation, custom attributes — inside the LimeCall dashboard. Reps start every call with context, not a blank slate.",
+  },
+  {
+    role: "Customer Success",
+    title: "Automatic onboarding sequences after first call",
+    desc: "Trial users who call sales get automatically enrolled in tailored onboarding Intercom Series based on their call outcome. CS teams set the automation once; it runs for every new trial call without manual intervention.",
+  },
+  {
+    role: "Marketing Teams",
+    title: "Attribute inbound calls to Intercom campaigns",
+    desc: "LimeCall captures UTM source and referring page on every callback and syncs it to the Intercom contact. Marketing can measure which Intercom campaigns drove phone conversations — directly in Intercom reporting.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Chat-to-call escalation inside Intercom Messenger", limecall: true, manual: false, others: false },
+  { feature: "Auto-create / update Intercom contacts on call", limecall: true, manual: false, others: "Partial" },
+  { feature: "Log call activity on Intercom conversation timeline", limecall: true, manual: false, others: false },
+  { feature: "Fire Intercom events per call lifecycle stage", limecall: true, manual: false, others: false },
+  { feature: "Trigger Intercom Series post-call", limecall: true, manual: false, others: false },
+  { feature: "Two-way sync (Intercom → LimeCall caller profile)", limecall: true, manual: false, others: false },
+  { feature: "Segment users by called / not-called", limecall: true, manual: false, others: "Partial" },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: integration, url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Native Integration · 1-Click Escalation · 28-Second Connect
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">Intercom</span>:<br class="hidden sm:block" />
+        Escalate Chats to Instant Calls
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Connect LimeCall with Intercom to offer instant callbacks from live chats, auto-create contacts on call, and trigger Intercom messages post-call automatically. Intercom handles text — LimeCall handles voice — together you cover the full conversion surface.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect Intercom Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it matters -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">Why LimeCall + Intercom together</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        Intercom is built for text. LimeCall is built for voice. Neither alone covers every buyer. Together they close the gap.
+      </p>
+      <div class="grid gap-6 sm:grid-cols-3 mb-14">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-xl font-extrabold text-lime-400">💬</div>
+          <h3 class="mb-2 font-semibold text-white">Intercom handles text</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Live chat, in-app messages, email sequences, support tickets — Intercom is the backbone of text-based customer communication.</p>
+        </div>
+        <div class="rounded-xl border border-lime-500/30 bg-lime-500/5 p-6 text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-xl font-extrabold text-lime-400">+</div>
+          <h3 class="mb-2 font-semibold text-white">Together: full coverage</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">A single integration links both channels. Call events flow into Intercom timelines. Intercom data flows into LimeCall caller profiles. Nothing falls through.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-xl font-extrabold text-lime-400">📞</div>
+          <h3 class="mb-2 font-semibold text-white">LimeCall handles voice</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Instant callbacks, scheduled calls, call routing, and call outcome logging — LimeCall connects buyers and reps in 28 seconds.</p>
+        </div>
+      </div>
+
+      <!-- How it flows -->
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How a chat escalates to a call</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From Intercom chat to connected call to Intercom timeline update — every step is automatic.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Visitor chats in Intercom</h3>
+          <p class="mt-1 text-xs text-dark-400">Engages via live chat or Intercom Messenger</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Clicks "Call me" button</h3>
+          <p class="mt-1 text-xs text-dark-400">LimeCall widget opens inside Messenger</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Call connects in 28s</h3>
+          <p class="mt-1 text-xs text-dark-400">LimeCall bridges visitor and rep instantly</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Intercom updates</h3>
+          <p class="mt-1 text-xs text-dark-400">Contact updated, call logged, events fired</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Intercom OAuth connect</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Go to LimeCall → Integrations → Intercom. Click "Connect Intercom" and authorise via OAuth. No API keys, no developer work — the connection is live in under 30 seconds.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure escalation button</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Add the LimeCall Messenger App to your Intercom workspace. Configure which conversations show the escalation button — by page, by user segment, or by conversation tag. Set routing rules for which rep receives escalated calls.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Map call events to Intercom</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Configure which LimeCall events fire Intercom messages or Series triggers. Map call outcomes to Intercom contact attributes. Test with a live escalation and verify the timeline update appears in Intercom within seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + Intercom integration does</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that connect your Intercom chat channel directly to LimeCall voice — and back.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular automations -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Popular LimeCall + Intercom automations</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">The most-used chat-to-call automation recipes our customers set up on day one.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {automations.map(a => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 flex flex-wrap items-center gap-3">
+              <span class="rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">When: {a.trigger}</span>
+              <span class="text-dark-600 text-xs">→</span>
+              <span class="rounded-full bg-dark-800 px-3 py-1 text-xs font-semibold text-dark-300">Then: {a.action}</span>
+            </div>
+            <p class="text-sm text-dark-400 leading-relaxed">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + Intercom and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall + Intercom vs the alternatives</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + Intercom</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual handoff</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300">{row.feature}</td>
+                <td class="py-3 px-5 text-center">
+                  {row.limecall === true
+                    ? <span class="text-lime-400 font-bold">Yes</span>
+                    : <span class="text-dark-500">{row.limecall}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.manual === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.manual}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.others === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.others}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with Intercom?</h2>
+      <p class="mt-4 text-dark-400">2-click OAuth · 1-click chat escalation · Free trial included</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations & Resources" links={[
+        { href: '/activecampaign-integration/', title: 'LimeCall + ActiveCampaign', desc: 'Trigger ActiveCampaign automations from call events.' },
+        { href: '/hubspot-integration/', title: 'LimeCall + HubSpot', desc: 'Auto-create contacts and log call activities in HubSpot.' },
+        { href: '/callback-vs-live-chat/', title: 'Callback vs Live Chat', desc: 'When to escalate from chat to voice — and how.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include Intercom integration.' },
+      ]} />
+    </div>
+  </div>
+</Base>

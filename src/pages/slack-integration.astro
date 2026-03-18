@@ -1,0 +1,429 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const integration = "Slack";
+const slug = "slack-integration";
+
+const seo = {
+  title: 'LimeCall + Slack Integration | Real-Time Call Alerts in Slack',
+  description: 'Get instant LimeCall notifications in Slack. New callback requests, missed calls, and call summaries delivered to your sales or support channels automatically.',
+  canonical: 'https://www.limecall.com/slack-integration/',
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Slack Integration',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Native integration between LimeCall callback software and Slack. Receive real-time callback alerts, missed call notifications, call summaries, and daily digests in your Slack channels automatically.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Included on LimeCall Pro plan and above',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does the LimeCall Slack integration work with Slack Free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall connects to all Slack plans including Slack Free. The OAuth connection and core notification features — real-time callback alerts, missed call notifications, and call summaries — work across all Slack tiers. Channel routing to multiple channels and @mention functionality require that those channels exist in your Slack workspace, but there is no Slack plan restriction imposed by LimeCall. The LimeCall side of the integration is included on Pro plan and above.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I route LimeCall notifications to different Slack channels based on the page a visitor called from?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports channel routing by lead source and page URL. You configure routing rules in LimeCall → Integrations → Slack → Channel Routing. For example, callbacks from your pricing page route to #sales-leads, callbacks from your support docs route to #support-queue, and callbacks from enterprise landing pages route to #enterprise-deals. Each rule can match on exact URL, URL path prefix, UTM campaign, or UTM source. Multiple rules can be active simultaneously, and a callback matching no rule falls back to a default channel you configure.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What data is included in LimeCall Slack notifications?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall Slack notifications include: caller name and phone number, the page URL they called from, UTM source and campaign, the LimeCall widget that triggered the call, the time of the callback request, and the assigned agent (if round-robin or rule-based routing is configured). For completed call notifications, the message also includes call duration, call outcome as set by the rep, and any disposition notes. For missed call notifications, the message includes a direct link to the LimeCall dashboard to listen to the voicemail if one was left.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I @mention specific team members in Slack when a high-value lead calls?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports @mention routing in Slack notifications. You configure @mention rules based on lead characteristics — for example, if the callback is from your enterprise pricing page, @mention the enterprise AE. If the caller is a returning contact with a deal over a threshold value (pulled from your connected CRM), @mention the account owner. @mentions appear inside the Slack notification message, so the right person is alerted the moment the lead calls — even if they are not actively watching the channel.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall send daily or weekly Slack digests?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can send a daily or weekly call digest to any Slack channel you configure. The digest includes: total callbacks received, total calls answered, total missed calls, average call duration, top pages that generated callbacks, and a breakdown by agent. Daily digests are sent at a time you set in LimeCall → Integrations → Slack → Digest Settings. Weekly digests are sent on Monday morning by default. Digest messages are formatted as Slack Block Kit messages for clean, scannable summaries.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is this Slack integration page different from the existing LimeCall for Slack page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The LimeCall for Slack page provides a general overview of how LimeCall works with Slack, including the basic setup and use cases. This integration page goes deeper into the technical configuration: channel routing rules, @mention logic, notification payload details, digest setup, and the full list of trigger events that generate Slack notifications. If you are evaluating whether LimeCall and Slack work together, start with the general page. If you are setting up the integration and need configuration detail, this page has everything you need.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does the Slack integration setup take?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most teams complete the LimeCall Slack integration setup in under 10 minutes. The OAuth authorisation takes two clicks and under 30 seconds. Configuring your first channel routing rule takes 2 minutes. Setting notification preferences — which events trigger alerts and which channels receive them — takes another 5 minutes. After configuration, make a test callback from the LimeCall dashboard and verify the Slack message arrives in the correct channel within seconds. The average setup time from start to first verified notification is under 10 minutes.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "< 3s", label: "Slack alert delivery time" },
+  { value: "2 clicks", label: "OAuth connect — no developers" },
+  { value: "6+", label: "Notification trigger events" },
+  { value: "10 min", label: "Average setup time" },
+];
+
+const features = [
+  {
+    title: "Real-time callback request alert to Slack channel",
+    desc: "The moment a visitor submits their number in the LimeCall widget, a Slack message fires to your configured channel — caller name, phone, page URL, UTM source, and assigned agent — before the call even connects.",
+  },
+  {
+    title: "Missed call notification with caller details and page URL",
+    desc: "When a callback attempt goes unanswered, LimeCall sends a missed call alert to your #missed-calls channel — or whichever channel you configure. Includes caller details, page URL, and a link to the LimeCall dashboard for immediate follow-up.",
+  },
+  {
+    title: "Call completed summary with duration, outcome, and caller",
+    desc: "After every call, LimeCall posts a completion summary to Slack: call duration, outcome as marked by the rep, caller name, and any disposition notes. Your team has a real-time log of every call in Slack without opening a separate dashboard.",
+  },
+  {
+    title: "@mention specific team members on high-value leads",
+    desc: "Configure @mention rules so the right rep is tagged the moment a high-value lead calls. Enterprise pricing page visitor? @mention the enterprise AE. Returning customer with a large open deal? @mention the account owner. Rules fire automatically.",
+  },
+  {
+    title: "Daily and weekly call digest in Slack",
+    desc: "LimeCall sends a formatted call digest to any channel on a daily or weekly schedule — total callbacks, answer rate, missed calls, average duration, top pages, and per-agent breakdown. Management visibility with zero manual reporting.",
+  },
+  {
+    title: "Route notifications to different channels by lead source or page",
+    desc: "Configure routing rules to send callbacks from your pricing page to #sales-leads, support page callbacks to #support-queue, and enterprise landing page callbacks to #enterprise-deals. Each rule matches on URL, UTM, or widget name.",
+  },
+];
+
+const channelSetups = [
+  {
+    channel: "#sales-leads",
+    trigger: "New callback request",
+    desc: "Every new callback request fires here instantly — caller details, page URL, UTM campaign. The sales team sees every new lead in real time without checking a dashboard or email.",
+  },
+  {
+    channel: "#missed-calls",
+    trigger: "Missed / no-answer callbacks",
+    desc: "Unanswered callbacks route here automatically with full caller details and a direct link to listen to any voicemail. Ensures no lead falls through because someone was on another call.",
+  },
+  {
+    channel: "#exec-alerts",
+    trigger: "Enterprise or high-value leads",
+    desc: "Callbacks from enterprise landing pages or visitors matching high-value criteria (large company, known account) route here with @mention of the AE. Leadership stays informed without watching every channel.",
+  },
+  {
+    channel: "#metrics",
+    trigger: "Daily / weekly digest",
+    desc: "LimeCall posts a formatted call digest every morning — total calls, answer rate, missed rate, average duration, top pages. Management gets call data without asking for it.",
+  },
+];
+
+const useCases = [
+  {
+    role: "Sales Teams",
+    title: "See every new lead in #sales-leads instantly",
+    desc: "Sales reps no longer need to check the LimeCall dashboard to know when a new lead has requested a callback. The Slack alert fires before the call connects — so reps have context before they pick up, and they never miss a lead while between calls.",
+  },
+  {
+    role: "Support Teams",
+    title: "No-answer callbacks flagged in #follow-up immediately",
+    desc: "Support teams use the missed call channel as their follow-up queue. The Slack notification includes the caller's number, page, and time — enough to make a proactive outbound call or send an email within minutes of the missed callback.",
+  },
+  {
+    role: "Management",
+    title: "Daily call summary without asking for it",
+    desc: "The daily Slack digest gives managers total call volume, answer rate, missed rate, and per-agent performance every morning. No manual reports, no dashboard logins — the data arrives in the channel they already check.",
+  },
+  {
+    role: "Revenue Operations",
+    title: "Real-time call data as the source of truth",
+    desc: "RevOps teams use the Slack integration to monitor callback volume against targets in real time. When the #sales-leads channel goes quiet, they know immediately — not at end of day when the damage is done.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Real-time callback alert to Slack", limecall: true, email: "Delayed", others: "Partial" },
+  { feature: "Missed call notification with page URL", limecall: true, email: false, others: false },
+  { feature: "Channel routing by page / UTM / lead source", limecall: true, email: false, others: false },
+  { feature: "@mention on high-value lead criteria", limecall: true, email: false, others: false },
+  { feature: "Call completed summary with outcome", limecall: true, email: "Delayed", others: "Partial" },
+  { feature: "Daily / weekly digest to Slack channel", limecall: true, email: true, others: false },
+  { feature: "OAuth connect — 2 clicks", limecall: true, email: "N/A", others: false },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: integration, url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Native Integration · Real-Time Alerts · 10-Minute Setup
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">Slack</span>:<br class="hidden sm:block" />
+        Real-Time Call Alerts in Slack
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Get instant LimeCall notifications in Slack. New callback requests, missed calls, and call summaries delivered to your sales or support channels automatically — so your team never misses a lead.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect Slack Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it flows -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How a callback becomes a Slack alert</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From the moment a visitor requests a callback to the Slack message landing in the right channel — every step is automatic.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Visitor requests callback</h3>
+          <p class="mt-1 text-xs text-dark-400">Clicks LimeCall widget on your website</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">LimeCall routes alert</h3>
+          <p class="mt-1 text-xs text-dark-400">Evaluates routing rules against page URL and UTM</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Slack message fires</h3>
+          <p class="mt-1 text-xs text-dark-400">Alert lands in the right channel within 3 seconds</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Rep takes action</h3>
+          <p class="mt-1 text-xs text-dark-400">Picks up call or follows up on missed callback instantly</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Add LimeCall to Slack via OAuth</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Go to LimeCall → Integrations → Slack. Click "Add to Slack" and authorise via OAuth. Grant LimeCall permission to post to your workspace channels. The connection is live in under 30 seconds — no API tokens or webhooks to configure manually.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure channel routing</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Set up routing rules to send different notification types to different channels. Pricing page callbacks to #sales-leads, missed calls to #missed-calls, enterprise leads to #exec-alerts. Set a default channel for any callback that matches no specific rule.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Set notification preferences</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose which events send Slack alerts — callback requested, call completed, missed call, voicemail received. Configure digest frequency and target channel. Make a test callback and verify the Slack message arrives in the right channel within seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + Slack integration does</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six notification and routing capabilities that keep your team in sync with every call — without leaving Slack.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular channel setups -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Popular LimeCall Slack channel setups</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">The most common channel routing configurations our customers use from day one.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {channelSetups.map(c => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 flex flex-wrap items-center gap-3">
+              <span class="rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{c.channel}</span>
+              <span class="text-dark-600 text-xs">←</span>
+              <span class="rounded-full bg-dark-800 px-3 py-1 text-xs font-semibold text-dark-300">{c.trigger}</span>
+            </div>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + Slack and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall + Slack vs the alternatives</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + Slack</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Email alerts</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300">{row.feature}</td>
+                <td class="py-3 px-5 text-center">
+                  {row.limecall === true
+                    ? <span class="text-lime-400 font-bold">Yes</span>
+                    : <span class="text-dark-500">{row.limecall}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.email === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.email}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.others === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.others}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with Slack?</h2>
+      <p class="mt-4 text-dark-400">2-click OAuth · Real-time alerts · Free trial included</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations & Resources" links={[
+        { href: '/microsoft-teams-integration/', title: 'LimeCall + Microsoft Teams', desc: 'Real-time call alerts and callback routing in Microsoft Teams.' },
+        { href: '/zapier-integration/', title: 'LimeCall + Zapier', desc: 'Connect LimeCall to 5,000+ apps via Zapier automations.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route every lead to the right rep automatically.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include Slack integration.' },
+      ]} />
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,611 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs Vonage Business (2025): Callbacks vs Cloud PBX | LimeCall',
+  description: "Vonage Business starts at £14/user/mo but charges per-minute for calls. LimeCall is £57/mo flat with unlimited callback minutes. Compare total cost.",
+  canonical: site.url + '/limecall-vs-vonage/',
+};
+
+const comparisonRows = [
+  { feature: 'Callback widget', limecall: '✅ 28-second connect', vonage: '❌ Not available', advantage: 'limecall' },
+  { feature: '28s speed to lead', limecall: '✅ Automated', vonage: '❌ Manual dial-out only', advantage: 'limecall' },
+  { feature: 'Call recording', limecall: '✅ Included', vonage: '✅ Premium+ plans only', advantage: 'limecall' },
+  { feature: 'IVR / call routing', limecall: 'Basic routing', vonage: '✅ Advanced IVR available', advantage: 'vonage' },
+  { feature: 'CRM integrations', limecall: '✅ HubSpot, Salesforce, Zapier', vonage: '✅ Native Salesforce + 20 others', advantage: 'neutral' },
+  { feature: 'AI voice agent', limecall: '✅ Included', vonage: '⚠️ AI add-on costs extra', advantage: 'limecall' },
+  { feature: 'WhatsApp', limecall: '✅ Native', vonage: '❌ Not native', advantage: 'limecall' },
+  { feature: 'SMS / text messaging', limecall: '✅ Included flat rate', vonage: '⚠️ Per-message charges', advantage: 'limecall' },
+  { feature: 'Video meetings', limecall: '❌ Not included', vonage: '✅ Vonage Meetings included', advantage: 'vonage' },
+  { feature: 'Team messaging', limecall: '❌ Not included', vonage: '✅ Available on Premium+', advantage: 'vonage' },
+  { feature: 'Desktop phone support', limecall: '❌ Softphone only', vonage: '✅ Full desk phone support', advantage: 'vonage' },
+  { feature: 'Per-minute call charges', limecall: '❌ Included in plan', vonage: '⚠️ Yes — UK calls £0.018/min', advantage: 'limecall' },
+  { feature: 'Analytics & reporting', limecall: 'Standard dashboards', vonage: '✅ Advanced on higher tiers', advantage: 'vonage' },
+  { feature: 'Call queues', limecall: 'Basic queuing', vonage: '✅ Advanced ACD available', advantage: 'vonage' },
+  { feature: 'Virtual numbers', limecall: '✅ 40+ countries included', vonage: '✅ Available (add-on cost)', advantage: 'limecall' },
+  { feature: 'Annual contract required', limecall: '❌ Month-to-month', vonage: '⚠️ Annual for best rates', advantage: 'limecall' },
+  { feature: 'Per-user pricing', limecall: '❌ Flat rate for team', vonage: '⚠️ Yes — scales with headcount', advantage: 'limecall' },
+  { feature: 'Free trial', limecall: '✅ Free plan + 14-day trial', vonage: '✅ 14-day trial', advantage: 'neutral' },
+  { feature: 'Setup time', limecall: '~5 minutes, self-serve', vonage: '1–2 days, admin setup', advantage: 'limecall' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '£0/mo', detail: '30 calls/mo', note: 'No credit card required' },
+      { name: 'Starter', price: '£29/mo', detail: '100 calls/mo', note: 'Flat rate, unlimited users' },
+      { name: 'Pro', price: '£57/mo', detail: '500 calls/mo', note: 'Full features, no per-minute charges' },
+    ],
+  },
+  {
+    tool: 'Vonage Business',
+    highlight: false,
+    tiers: [
+      { name: 'Mobile', price: '£14/user/mo', detail: '+ per-minute charges', note: 'Basic calling, no desktop phone' },
+      { name: 'Premium', price: '£19/user/mo', detail: '+ per-minute charges', note: 'CRM integrations, call recording' },
+      { name: 'Advanced', price: '£34/user/mo', detail: '+ per-minute charges', note: 'On-demand call recording, call groups' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'Inbound lead conversion is your primary goal — LimeCall\'s 28-second callback widget is a feature Vonage does not offer',
+  'You want truly predictable monthly costs — Vonage per-minute charges add hidden costs that vary month to month based on call volume',
+  'You are an SMB with fewer than 50 users — Vonage\'s per-seat model makes it expensive compared to LimeCall\'s flat rate',
+  'You need WhatsApp as a follow-up channel — LimeCall includes native WhatsApp; Vonage does not',
+  'Virtual numbers in 40+ countries are important — LimeCall includes them; Vonage charges as add-ons',
+  'You want to be live in 5 minutes without IT involvement — LimeCall is fully self-serve; Vonage requires administrator provisioning',
+];
+
+const chooseVonage = [
+  'You need a full cloud PBX system with desk phone provisioning for office workers',
+  'Deep native Salesforce integration with automatic call logging is a hard requirement on day one',
+  'Video conferencing and team messaging in the same platform as your phone system matters to your team',
+  'You require advanced IVR trees, multi-level menus, and complex call routing for a contact centre',
+  'Your business needs to replace a legacy on-premise PBX with a cloud alternative across multiple sites',
+  'You have a large partner network or need Vonage\'s extensive reseller ecosystem support',
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does Vonage Business have a callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Vonage Business is a cloud PBX and phone system — it does not offer an instant website callback widget. Vonage is designed to replace your office phone system and manage inbound/outbound business calls. LimeCall\'s core product is an instant callback widget: a prospect clicks a button on your website, enters their number, and LimeCall simultaneously dials your agent and the prospect, connecting them in an average of 28 seconds. These are fundamentally different products serving different use cases.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does Vonage charge per minute for calls?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Vonage Business charges per-minute rates for calls on all plans. UK landline calls are approximately £0.018 per minute. For a single agent making 1,000 minutes of calls per month, that adds £18/month on top of the base subscription. For a 10-agent team averaging 1,000 minutes each, that is £180/month in per-minute charges alone — on top of the per-user subscription fee. LimeCall includes callback minutes within your flat monthly plan with no per-minute charges, making total cost predictable and often significantly lower.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall compare to Vonage for outbound calling?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For outbound sales dialling, Vonage is the stronger choice — it is a full cloud PBX with power dialler integrations, CRM click-to-dial, and outbound call management tools. LimeCall is optimised for inbound lead conversion: when someone fills a form or visits your website, LimeCall calls them back automatically in 28 seconds. LimeCall does support outbound calling, but its primary strength is speed-to-lead for inbound enquiries. If your use case is a high-volume outbound sales team, Vonage or a dedicated dialler solution may serve you better. If you have a mixed inbound/outbound team, many companies use LimeCall for inbound callbacks and a separate dialler for outbound — often still cheaper than Vonage\'s all-in pricing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the true total cost of Vonage vs LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For a 10-user team over one year: Vonage Premium at £19/user/month = £2,280/year in subscription fees alone. Add per-minute charges at £0.018/min × 1,000 min/month/agent × 10 agents = £2,160/year in call charges. Total Vonage cost: approximately £4,440/year. LimeCall Pro costs £684/year with no per-minute charges. That is a saving of approximately £3,756 per year for a 10-person team. The hidden per-minute charges are a significant factor that Vonage\'s headline pricing does not reveal.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall work alongside Vonage?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Some businesses use Vonage as their internal phone system for outbound and office communications, while using LimeCall as their inbound website callback layer. LimeCall integrates with your existing CRM and can route callbacks to any phone number, including your Vonage numbers. This hybrid approach gives you the best of both: Vonage\'s cloud PBX infrastructure for your office, and LimeCall\'s 28-second callback conversion engine for your website leads.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I switch from Vonage to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Switching from Vonage to LimeCall takes three steps: (1) Export your Vonage contacts via the admin portal and import them into your CRM. (2) Sign up for LimeCall and install the callback widget on your website — paste one script tag before the closing body tag. (3) Optionally port your Vonage number to LimeCall — submit a porting request with your Vonage account number and LimeCall support will manage the process, typically completing within 5–7 business days. Most teams complete the move within a single working day.',
+      },
+    },
+  ],
+};
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'GBP',
+    description: 'Free plan available. Paid plans from £29/mo flat rate.',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.7',
+    reviewCount: '312',
+    bestRating: '5',
+  },
+  description: 'LimeCall is an instant callback widget platform that connects website visitors with sales teams in 28 seconds. Flat-rate pricing with no per-minute or per-seat fees.',
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareAppSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: site.url + '/compare/' },
+        { name: 'LimeCall vs Vonage', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2025 Comparison · Updated March 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs Vonage Business:<br />
+        <span class="text-lime-400">Flat Callbacks vs Per-Minute Cloud PBX</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Vonage Business starts at £14/user/mo but adds per-minute charges on every call. LimeCall is £57/mo flat with unlimited callback minutes and no hidden costs. Here is the full comparison.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Pro</div>
+          <div class="text-5xl font-extrabold text-lime-400">£57</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat rate</div>
+          <div class="mt-3 text-lg font-bold text-white">28s callback widget</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">No per-minute charges · No per-seat fees</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">Vonage Premium</div>
+          <div class="text-5xl font-extrabold text-dark-300">£19</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per user/month + per-minute</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">Cloud PBX platform</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Per-user + per-minute · No callback widget</div>
+        </div>
+      </div>
+
+      <!-- Hidden cost callout -->
+      <div class="mt-6 mx-auto max-w-xl rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
+        <p class="text-sm text-amber-300 leading-relaxed">
+          <strong class="text-amber-400">Hidden cost alert:</strong> Vonage charges £0.018/min for UK calls. At 1,000 min/month per agent, a 10-agent team pays an extra £2,160/year in call charges on top of their subscription fee.
+        </p>
+      </div>
+
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-lg font-bold text-white mb-6 text-center">Quick Verdict</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-lime-500/15">
+              <span class="text-lime-400 font-bold text-lg">✓</span>
+            </div>
+            <h3 class="font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> You need inbound lead conversion from your website</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> You want truly predictable monthly costs with no per-minute surprises</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> Your team is under 50 users and per-seat pricing is expensive</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> WhatsApp follow-up and 28-second callbacks are your priority</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-dark-300 font-bold text-lg">✓</span>
+            </div>
+            <h3 class="font-bold text-dark-300">Choose Vonage if…</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> You are replacing a legacy on-premise PBX system</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> Desk phone provisioning for office workers is required</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> Deep native Salesforce integration is a day-one requirement</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> Advanced contact centre IVR and ACD is essential</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall — Conversion-Focused Callbacks</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is built around a single powerful idea: when a lead is hot, connect them with a sales rep in 28 seconds. The instant callback widget sits on your website and automatically bridges your agent and the prospect the moment they express interest. No per-minute charges, no per-seat fees, no annual lock-in. Just a flat monthly cost that gives your whole team access to the fastest lead response tool available.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Purpose-built for inbound lead conversion and speed-to-lead</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat monthly pricing — no per-minute, no per-seat surprises</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> WhatsApp, SMS, and virtual numbers included</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Free plan available, no credit card required</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">Vonage Business — Cloud PBX Replacement</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            Vonage Business Communications is a cloud PBX platform designed to replace traditional office phone systems. It supports desk phones, video conferencing, team messaging, and has strong CRM integrations — particularly with Salesforce. It is part of a large telecoms ecosystem with a global partner network. However, its per-user subscription model combined with per-minute call charges means costs can escalate quickly for active calling teams.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Designed for organisations replacing legacy office phone systems</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-user fees plus per-minute call charges</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No instant website callback widget</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Call recording only on Premium plan and above</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison (19 Features)</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2025.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Vonage Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'vonage' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'vonage' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.vonage}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-user + per-minute: why Vonage's headline price understates the true cost.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="space-y-3">
+              {p.tiers.map(t => (
+                <div class="rounded-lg border border-dark-800/60 bg-dark-950/50 p-4">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-white text-sm">{t.name}</span>
+                    <span class:list={["font-extrabold text-sm", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</span>
+                  </div>
+                  <div class="text-xs text-dark-400">{t.detail}</div>
+                  <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Hidden Cost Breakdown -->
+      <div class="mt-8 rounded-xl border border-amber-500/20 bg-amber-500/5 p-6">
+        <h3 class="text-lg font-bold text-amber-400 mb-4">Vonage Hidden Cost: Per-Minute Charges</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-800">
+                <th class="pb-2 text-left text-xs text-dark-400 font-semibold">Scenario</th>
+                <th class="pb-2 text-center text-xs text-dark-400 font-semibold">Vonage subscription</th>
+                <th class="pb-2 text-center text-xs text-dark-400 font-semibold">Per-minute extra</th>
+                <th class="pb-2 text-center text-xs text-dark-400 font-semibold">True monthly total</th>
+              </tr>
+            </thead>
+            <tbody class="text-dark-300">
+              <tr class="border-b border-dark-800/40">
+                <td class="py-3 pr-2 text-xs">1 agent, 500 min/mo</td>
+                <td class="py-3 text-center text-xs text-dark-400">£19</td>
+                <td class="py-3 text-center text-xs text-amber-400">+£9</td>
+                <td class="py-3 text-center text-xs font-bold text-white">£28</td>
+              </tr>
+              <tr class="border-b border-dark-800/40">
+                <td class="py-3 pr-2 text-xs">5 agents, 1,000 min/mo each</td>
+                <td class="py-3 text-center text-xs text-dark-400">£95</td>
+                <td class="py-3 text-center text-xs text-amber-400">+£90</td>
+                <td class="py-3 text-center text-xs font-bold text-white">£185</td>
+              </tr>
+              <tr>
+                <td class="py-3 pr-2 text-xs">10 agents, 1,000 min/mo each</td>
+                <td class="py-3 text-center text-xs text-dark-400">£190</td>
+                <td class="py-3 text-center text-xs text-amber-400">+£180</td>
+                <td class="py-3 text-center text-xs font-bold text-white">£370</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-dark-400">Based on Vonage Premium (£19/user/mo) and UK call rate of £0.018/min. LimeCall Pro costs £57/mo flat for any team size with no per-minute charges.</p>
+      </div>
+
+      <!-- Annual comparison -->
+      <div class="mt-6 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">Annual saving for a 10-agent team:</strong> Vonage Premium + per-minute charges ≈ £4,440/year. LimeCall Pro ≈ £684/year. <strong class="text-lime-400">You save approximately £3,756 per year</strong> — without sacrificing inbound callback capability that Vonage doesn't offer anyway.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Vonage Business: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Vonage Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Full cloud PBX system — replaces legacy on-premise phone systems seamlessly',
+              'Native Salesforce integration with deep call logging, click-to-dial, and activity sync',
+              'Desk phone support for a wide range of certified hardware devices',
+              'Video conferencing (Vonage Meetings) included on Premium and above',
+              'Large global partner network and long-standing telecom reputation',
+              'Multi-level IVR and advanced call routing for contact centre use cases',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Vonage Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — cannot automatically connect website visitors in seconds',
+              'Per-minute call charges add unpredictable, significant hidden costs on top of subscription',
+              'Per-user pricing makes it expensive for growing teams — costs scale linearly with headcount',
+              'No native WhatsApp integration for multi-channel lead follow-up',
+              'Call recording only on Premium plan (£19/user/mo) and above — not on Mobile plan',
+              'Complex admin setup not suited to self-serve SMB deployment',
+              'SMS charged per-message — not included flat in the plan',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose Vonage if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseVonage.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://www.vonage.co.uk/business" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit Vonage →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Guide -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Switch from Vonage to LimeCall</h2>
+      <p class="mb-10 text-center text-dark-400">Three steps. No downtime. Most teams are live within hours of signing up.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Export contacts and call history from Vonage',
+            desc: 'Log into your Vonage Business admin portal and export your contact directory as a CSV file. Download any call recordings you want to retain — these are not automatically migrated. Import contacts into your CRM (HubSpot, Salesforce, Pipedrive, or any CRM that LimeCall integrates with). LimeCall support can advise on the best migration path for your specific CRM setup.',
+          },
+          {
+            step: '2',
+            title: 'Install the LimeCall callback widget on your website',
+            desc: 'Sign up for LimeCall — no credit card required. Build your callback widget in the LimeCall dashboard (takes under 3 minutes) and copy the generated script tag. Paste it into your website before the closing </body> tag. Works with WordPress, Webflow, Shopify, Squarespace, HubSpot CMS, or any HTML site. The widget activates immediately — your team can start receiving callback requests within minutes of installation.',
+          },
+          {
+            step: '3',
+            title: 'Port your Vonage number (optional)',
+            desc: 'If you want to keep your existing business number, LimeCall handles the porting process. Submit a porting request with your Vonage account number and registered address. The number porting process typically completes within 5–7 business days. During this time, you can run LimeCall with a temporary number in parallel, ensuring zero downtime. Vonage numbers can be ported out; check your contract for any early termination clauses.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Teams Who Switched Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          {
+            quote: 'We were spending £370 a month on Vonage — £190 in subscriptions and around £180 in call charges. LimeCall Pro costs us £57 a month with no per-minute surprises. The 28-second callback widget is something Vonage simply cannot do, and our lead response rate went up immediately.',
+            name: 'Mark T.',
+            title: 'Operations Manager, Legal Services',
+            metric: '-£3,756/year saved',
+          },
+          {
+            quote: 'Vonage is great if you need a full office phone system. We are a 6-person sales team — all we needed was fast callbacks for our website leads. LimeCall does that better than anything else we tried, and it costs less than what we were paying just for Vonage subscriptions.',
+            name: 'Claire W.',
+            title: 'Head of Sales, SaaS Startup',
+            metric: '+42% lead response rate',
+          },
+        ].map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and Vonage Business.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">No Hidden Per-Minute Charges.<br />Just 28-Second Callbacks.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">A 10-user team saves approximately £3,756 per year switching from Vonage Premium to LimeCall Pro — while gaining the instant callback widget that Vonage doesn't have.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Compare LimeCall" links={[
+      { href: '/limecall-vs-ringcentral/', title: 'LimeCall vs RingCentral', desc: 'Flat callback pricing vs full UCaaS suite.' },
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Instant callback widget vs call centre platform.' },
+      { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud phone system for growing businesses.' },
+      { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

@@ -1,0 +1,608 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs 8x8 (2025): Inbound Lead Tool vs Enterprise UCaaS | LimeCall',
+  description: "8x8 targets enterprise contact centres. LimeCall serves SMB sales teams. See which platform wins on speed, price, and lead conversion for growing businesses.",
+  canonical: site.url + '/limecall-vs-8x8/',
+};
+
+const comparisonRows = [
+  { feature: 'Callback widget', limecall: '✅ 28-second connect', eightx8: '❌ Not available', advantage: 'limecall' },
+  { feature: '28s speed to lead', limecall: '✅ Automated', eightx8: '❌ Manual dial-out only', advantage: 'limecall' },
+  { feature: 'Call recording', limecall: '✅ Included', eightx8: '✅ All plans', advantage: 'neutral' },
+  { feature: 'IVR / call routing', limecall: 'Basic routing', eightx8: '✅ Enterprise multi-level IVR', advantage: 'eightx8' },
+  { feature: 'CRM integrations', limecall: '✅ HubSpot, Salesforce, Zapier', eightx8: '✅ Salesforce, Microsoft, Google', advantage: 'neutral' },
+  { feature: 'AI voice agent', limecall: '✅ Included', eightx8: '✅ Intelligent IVA (enterprise tier)', advantage: 'neutral' },
+  { feature: 'WhatsApp', limecall: '✅ Native', eightx8: '❌ Not standard', advantage: 'limecall' },
+  { feature: 'SMS / text messaging', limecall: '✅ Included flat rate', eightx8: '✅ Available on X-series', advantage: 'neutral' },
+  { feature: 'Video meetings', limecall: '❌ Not included', eightx8: '✅ 8x8 Meet included', advantage: 'eightx8' },
+  { feature: 'Team messaging', limecall: '❌ Not included', eightx8: '✅ 8x8 Work included', advantage: 'eightx8' },
+  { feature: 'Desktop phone support', limecall: '❌ Softphone only', eightx8: '✅ Full hardware provisioning', advantage: 'eightx8' },
+  { feature: 'Contact centre analytics', limecall: 'Standard dashboards', eightx8: '✅ Enterprise-grade analytics suite', advantage: 'eightx8' },
+  { feature: 'Workforce management', limecall: '❌ Not available', eightx8: '✅ X6 and above', advantage: 'eightx8' },
+  { feature: 'Call queues', limecall: 'Basic queuing', eightx8: '✅ Full ACD with skills-based routing', advantage: 'eightx8' },
+  { feature: 'Professional services required', limecall: '❌ Fully self-serve', eightx8: '⚠️ Recommended for enterprise setup', advantage: 'limecall' },
+  { feature: 'Annual contract required', limecall: '❌ Month-to-month', eightx8: '⚠️ Annual contracts standard', advantage: 'limecall' },
+  { feature: 'Per-user pricing', limecall: '❌ Flat rate for team', eightx8: '⚠️ Yes — scales with headcount', advantage: 'limecall' },
+  { feature: 'Free trial', limecall: '✅ Free plan + 14-day trial', eightx8: '✅ 30-day trial', advantage: 'neutral' },
+  { feature: 'Setup time', limecall: '~5 minutes, self-serve', eightx8: '1–4 weeks with professional services', advantage: 'limecall' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '£0/mo', detail: '30 calls/mo', note: 'No credit card required, self-serve' },
+      { name: 'Starter', price: '£29/mo', detail: '100 calls/mo', note: 'Flat rate, unlimited users' },
+      { name: 'Pro', price: '£57/mo', detail: '500 calls/mo', note: 'Full features, 5-min setup' },
+    ],
+  },
+  {
+    tool: '8x8',
+    highlight: false,
+    tiers: [
+      { name: 'X2', price: '£28/user/mo', detail: 'Annual contract required', note: 'UCaaS: voice, video, chat' },
+      { name: 'X4', price: '£57/user/mo', detail: 'Annual contract required', note: 'Advanced analytics, call centre' },
+      { name: 'X6', price: '£120/user/mo', detail: 'Annual contract required', note: 'Full CCaaS with WFM' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'You are an SMB with fewer than 50 users — 8x8\'s enterprise pricing (£28–£120/user/mo) is designed for large organisations, not growing teams',
+  'You need to be live in minutes, not weeks — 8x8 enterprise deployments typically require professional services and take 1–4 weeks; LimeCall is fully self-serve in 5 minutes',
+  'Your priority is converting inbound website leads — LimeCall\'s 28-second callback widget is the best tool for this use case, and 8x8 has no equivalent feature',
+  'You want to avoid annual contracts and high upfront commitment — LimeCall is month-to-month with no professional services fees',
+  'WhatsApp follow-up is important to your sales process — LimeCall includes native WhatsApp; 8x8 does not offer this standard',
+  'Budget predictability matters — LimeCall Pro is £684/year flat for any team size; 8x8 X2 for 10 users is £3,360/year minimum',
+];
+
+const chooseEightX8 = [
+  'You are an enterprise organisation (200+ users) replacing a legacy global PSTN infrastructure across multiple countries',
+  'You run a large contact centre requiring enterprise-grade workforce management, real-time dashboards, and supervisor monitoring',
+  'ISO 27001, SOC 2 Type II, HIPAA, and other strict enterprise compliance certifications are non-negotiable',
+  'You need 8x8\'s global voice reach — they support PSTN replacement in 55+ countries, which is difficult for most competitors to match',
+  'Advanced contact centre features like intelligent virtual agents, speech analytics, and quality management are required',
+  'Your IT team has the resources to manage a complex enterprise deployment with vendor professional services',
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is 8x8 good for small businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '8x8 is primarily designed for mid-market and enterprise organisations. While 8x8 does offer SMB-oriented plans, the pricing starts at £28/user/month on annual contracts, and enterprise features like contact centre analytics, workforce management, and global PSTN replacement are most cost-effective at scale. For a small business with 5–20 employees focused on inbound lead conversion, 8x8 is likely overkill. LimeCall Pro at £57/month flat offers the specific capability small businesses need most — instant callback and speed-to-lead — without the enterprise overhead, long contracts, or per-seat pricing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does 8x8 have a callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. 8x8 does not offer an instant website callback widget. 8x8 is a UCaaS (Unified Communications as a Service) and CCaaS (Contact Centre as a Service) platform designed for internal communications and contact centre operations. When a prospect visits your website, 8x8 cannot automatically trigger a two-way connection in seconds. LimeCall\'s defining feature is exactly this: a website visitor clicks a button, enters their number, and LimeCall automatically connects them with your agent in an average of 28 seconds — no manual dialling required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall replace 8x8 for SMBs?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For inbound lead conversion, yes — LimeCall replaces and improves on what most SMBs use 8x8 for. If your team primarily handles inbound website enquiries and needs fast callback capability, LimeCall does this better at a fraction of the cost. However, if you use 8x8 for enterprise contact centre operations, global PSTN replacement, workforce management, or strict compliance requirements, LimeCall is not a full replacement. LimeCall is a precision tool for lead conversion; 8x8 is an enterprise communications platform. Many SMBs discover they were paying enterprise prices for features they never used, and that LimeCall covers their actual use case at £57/month versus £3,360+/year for 8x8.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does 8x8 take to set up?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '8x8 enterprise deployments typically take 1–4 weeks and often involve 8x8 professional services or a certified reseller partner. The setup includes provisioning user accounts, configuring IVR and call flows, porting numbers, provisioning hardware phones, setting up integrations, and training administrators. For complex contact centre deployments, this can extend further. LimeCall, by contrast, is self-serve. From sign-up to your first live callback widget on your website takes approximately 5 minutes — no IT team, no professional services, and no special knowledge required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the cost difference between 8x8 and LimeCall for a 10-user team?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Over 2 years, the difference is striking. 8x8 X2 for a 10-user team at £28/user/month on an annual contract costs £6,720 over 24 months (£28 × 10 × 24). LimeCall Pro costs £1,368 over the same period (£57 × 24). That is a saving of £5,352 — and LimeCall gives you the 28-second callback widget that 8x8 doesn\'t have. At the 8x8 X4 tier (£57/user/mo), a 10-user team pays £13,680 over 2 years versus LimeCall\'s £1,368 — a saving of £12,312.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I migrate from 8x8 to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Migrating from 8x8 to LimeCall involves three steps: (1) Export your 8x8 contact directory and call data via the 8x8 admin console. Import contacts into your CRM. (2) Sign up for LimeCall, build your callback widget in the dashboard (3 minutes), and install the one-line script on your website. (3) Contact LimeCall support to initiate number porting from 8x8 — this typically takes 5–7 business days. During porting, you can run LimeCall with a temporary number in parallel to avoid any disruption. Note: check your 8x8 contract for annual commitment terms and early termination provisions before switching.',
+      },
+    },
+  ],
+};
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'GBP',
+    description: 'Free plan available. Paid plans from £29/mo flat rate with no per-seat fees.',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.7',
+    reviewCount: '312',
+    bestRating: '5',
+  },
+  description: 'LimeCall is an instant callback widget platform that connects website visitors with sales teams in 28 seconds. Agile, affordable alternative to enterprise UCaaS for SMB sales teams.',
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareAppSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: site.url + '/compare/' },
+        { name: 'LimeCall vs 8x8', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2025 Comparison · Updated March 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs 8x8:<br />
+        <span class="text-lime-400">SMB Lead Tool vs Enterprise UCaaS</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        8x8 is built for enterprise contact centres with complex requirements and multi-week deployments. LimeCall is built for SMB sales teams who need to start converting leads in 5 minutes. Here is the full comparison.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Pro</div>
+          <div class="text-5xl font-extrabold text-lime-400">£57</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat rate</div>
+          <div class="mt-3 text-lg font-bold text-white">Live in 5 minutes</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">No per-seat · No annual contract · No pro services</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">8x8 X2</div>
+          <div class="text-5xl font-extrabold text-dark-300">£28</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per user/month (annual contract)</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">Enterprise UCaaS</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Per-user · Annual contract · Pro services recommended</div>
+        </div>
+      </div>
+
+      <!-- Enterprise cost warning -->
+      <div class="mt-6 mx-auto max-w-xl rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
+        <p class="text-sm text-amber-300 leading-relaxed">
+          <strong class="text-amber-400">Enterprise pricing alert:</strong> 8x8 X2 for 10 users over 2 years = £6,720. LimeCall Pro for the same period = £1,368. That is a saving of £5,352 — plus you get the callback widget 8x8 doesn't have.
+        </p>
+      </div>
+
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-lg font-bold text-white mb-6 text-center">Quick Verdict</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-lime-500/15">
+              <span class="text-lime-400 font-bold text-lg">✓</span>
+            </div>
+            <h3 class="font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> You are an SMB needing inbound lead conversion, not an enterprise contact centre</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> You need to be live today, not in 4 weeks after a professional services engagement</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> Flat, predictable pricing matters — no per-seat, no annual lock-in</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> 28-second callback speed is your competitive differentiator</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-dark-300 font-bold text-lg">✓</span>
+            </div>
+            <h3 class="font-bold text-dark-300">Choose 8x8 if…</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> You are an enterprise replacing global PSTN across 55+ countries</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> Enterprise compliance (SOC 2, HIPAA) and workforce management are required</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> You need a fully integrated contact centre with 100+ agents</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> You have an IT team to manage a complex enterprise deployment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall — Agile SMB Lead Conversion</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is the antithesis of enterprise complexity. It is a precision, self-serve platform built for one job: getting your sales team on the phone with inbound website leads in 28 seconds. No professional services engagement, no multi-week deployment, no IT team required. Sign up, install a one-line script on your website, and your first callback request arrives the same day. For SMBs who need to move fast and spend smart, LimeCall is the clear choice.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Self-serve setup in 5 minutes, no IT involvement needed</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing — £57/mo for your whole team, any size</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> 28-second callback widget — the feature 8x8 doesn't offer</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Month-to-month — cancel anytime, no penalties</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">8x8 — Enterprise UCaaS &amp; CCaaS</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            8x8 is one of the longest-standing enterprise UCaaS and CCaaS providers. It offers global PSTN replacement in 55+ countries, an integrated contact centre platform, workforce management, speech analytics, and enterprise-grade compliance certifications. 8x8 serves organisations with 200+ employees who need to consolidate global communications infrastructure under one vendor. The platform is powerful but requires professional services for deployment and is priced accordingly.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Built for enterprise contact centres and large organisations</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-user pricing (£28–£120/mo) on annual contracts</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Professional services recommended for deployment</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No instant website callback widget</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison (19 Features)</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2025.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">8x8</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'eightx8' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'eightx8' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.eightx8}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Enterprise per-seat vs SMB flat rate: the total cost over 2 years tells the full story.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="space-y-3">
+              {p.tiers.map(t => (
+                <div class="rounded-lg border border-dark-800/60 bg-dark-950/50 p-4">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-white text-sm">{t.name}</span>
+                    <span class:list={["font-extrabold text-sm", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</span>
+                  </div>
+                  <div class="text-xs text-dark-400">{t.detail}</div>
+                  <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 2-year cost comparison -->
+      <div class="mt-8 rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+        <h3 class="text-lg font-bold text-white mb-4">Total Cost: 10-User Team, 2 Years</h3>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div class="rounded-lg border border-lime-500/30 bg-lime-500/5 p-4 text-center">
+            <div class="text-xs font-bold uppercase text-lime-400 mb-2">LimeCall Pro</div>
+            <div class="text-2xl font-extrabold text-lime-400">£1,368</div>
+            <div class="text-xs text-dark-400 mt-1">£57 × 24 months</div>
+            <div class="text-xs text-lime-400 font-semibold mt-2">Any team size</div>
+          </div>
+          <div class="rounded-lg border border-dark-700 bg-dark-900/50 p-4 text-center">
+            <div class="text-xs font-bold uppercase text-dark-400 mb-2">8x8 X2</div>
+            <div class="text-2xl font-extrabold text-dark-300">£6,720</div>
+            <div class="text-xs text-dark-500 mt-1">£28 × 10 users × 24 mo</div>
+            <div class="text-xs text-red-500 font-semibold mt-2">£5,352 more</div>
+          </div>
+          <div class="rounded-lg border border-dark-700 bg-dark-900/50 p-4 text-center">
+            <div class="text-xs font-bold uppercase text-dark-400 mb-2">8x8 X4</div>
+            <div class="text-2xl font-extrabold text-dark-300">£13,680</div>
+            <div class="text-xs text-dark-500 mt-1">£57 × 10 users × 24 mo</div>
+            <div class="text-xs text-red-500 font-semibold mt-2">£12,312 more</div>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-center text-dark-500">LimeCall pricing does not scale with users. 8x8 pricing multiplies for every user added.</p>
+      </div>
+
+      <!-- Setup cost -->
+      <div class="mt-6 rounded-xl border border-dark-700 bg-dark-900/40 p-5">
+        <h3 class="text-sm font-bold text-white mb-3">Don't Forget: 8x8 Professional Services Costs</h3>
+        <p class="text-sm text-dark-400 leading-relaxed">
+          8x8 recommends professional services for enterprise deployments, which can add thousands in one-time implementation fees on top of the per-user subscription. LimeCall has zero professional services costs — the setup is fully self-serve and takes 5 minutes. When comparing total cost of ownership, factor in implementation costs, ongoing admin overhead, and the time value of a multi-week deployment versus going live the same day.
+        </p>
+      </div>
+
+      <div class="mt-6 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">Bottom line:</strong> 8x8 X2 costs 4.9× more than LimeCall Pro over 2 years for a 10-user team — and 8x8 still doesn't include the 28-second callback widget. LimeCall does.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">8x8: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">8x8 Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Global PSTN replacement in 55+ countries — ideal for multinational organisations',
+              'Full enterprise contact centre (CCaaS) with ACD, IVR, skills-based routing, and supervisor tools',
+              'Workforce management and quality monitoring on X6 — enterprise-grade operations',
+              'Strict compliance certifications: SOC 2 Type II, ISO 27001, HIPAA, GDPR',
+              'Integrated UCaaS: voice, video (8x8 Meet), and team messaging (8x8 Work) in one platform',
+              'Speech analytics and AI-powered sentiment analysis for contact centre quality assurance',
+              '99.999% uptime SLA with financial penalties for downtime',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">8x8 Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — cannot automatically connect website visitors with agents in seconds',
+              'Enterprise pricing (£28–£120/user/mo) makes it inaccessible for most SMBs',
+              'Annual contracts with significant financial commitment before you know if it fits',
+              'Professional services recommended for deployment — adds cost and weeks of setup time',
+              'No native WhatsApp integration for multi-channel lead follow-up',
+              'Overkill for SMBs who only need inbound callback and basic lead routing',
+              'Complex platform with a steep learning curve for non-technical administrators',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose 8x8 if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseEightX8.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://www.8x8.com" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit 8x8 →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Guide -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Migrate from 8x8 to LimeCall</h2>
+      <p class="mb-2 text-center text-dark-400">Three steps. No professional services needed. Most teams are live the same day.</p>
+      <p class="mb-10 text-center text-xs text-dark-600">Note: Check your 8x8 annual contract terms before migrating — early termination provisions may apply.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Export your 8x8 contact directory and data',
+            desc: 'Log into your 8x8 Admin Console and export your contact directory as a CSV file. Download any call recordings you want to retain. Import contacts into your CRM (HubSpot, Salesforce, Pipedrive, or any system that LimeCall integrates with). LimeCall support can help map your existing call routing logic to the simpler LimeCall configuration if needed.',
+          },
+          {
+            step: '2',
+            title: 'Install the LimeCall callback widget on your website',
+            desc: 'Sign up for LimeCall — no credit card needed. Use the widget builder in the LimeCall dashboard to configure your callback form (takes 3 minutes). Copy the generated script tag and paste it into your website before the closing </body> tag. Compatible with WordPress, Webflow, Shopify, HubSpot CMS, Wix, Squarespace, and any custom HTML site. Your callback widget is live instantly. No developer, no IT ticket, no waiting.',
+          },
+          {
+            step: '3',
+            title: 'Port your 8x8 number to LimeCall (optional)',
+            desc: 'If you want to retain your existing business number, LimeCall manages the porting process. Submit a port request through LimeCall support with your 8x8 account reference. Number porting typically takes 5–7 business days. During porting, run both systems in parallel using a temporary LimeCall number, ensuring no disruption to incoming calls. Once porting completes, your existing number will ring through LimeCall automatically.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Teams Who Switched Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          {
+            quote: 'Our parent company used 8x8 globally. For our 12-person UK sales team, we were paying enterprise prices for a contact centre platform we used 10% of. LimeCall Pro costs us £684 a year and our inbound callback response time went from hours to 28 seconds. That is all we needed.',
+            name: 'David R.',
+            title: 'UK Sales Manager, Technology Distributor',
+            metric: '-£5,000+/year saved',
+          },
+          {
+            quote: '8x8 quoted us 3 weeks and professional services fees just to get started. LimeCall was live in under 10 minutes. Our first callback request came in the same afternoon. For a 15-person SMB, there is genuinely no comparison.',
+            name: 'Amy L.',
+            title: 'Founder, Digital Marketing Agency',
+            metric: 'Live in 10 minutes vs 3 weeks',
+          },
+        ].map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and 8x8.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Enterprise Price.<br /><span class="text-lime-400">SMB Simplicity.</span> Or Forget Both.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">A 10-user SMB saves £5,352 over 2 years choosing LimeCall Pro over 8x8 X2 — plus gets a 28-second callback widget that 8x8 doesn't offer. No professional services needed. Live in 5 minutes.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Compare LimeCall" links={[
+      { href: '/limecall-vs-talkdesk/', title: 'LimeCall vs Talkdesk', desc: 'SMB-friendly vs enterprise contact centre.' },
+      { href: '/limecall-vs-ringcentral/', title: 'LimeCall vs RingCentral', desc: 'Flat callback pricing vs full UCaaS suite.' },
+      { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud phone system for growing businesses.' },
+      { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

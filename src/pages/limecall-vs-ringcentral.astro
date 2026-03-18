@@ -1,0 +1,597 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs RingCentral (2025): Callback Focus vs UCaaS Suite | LimeCall',
+  description: "RingCentral costs £20-£35/user/mo and locks you into annual contracts. LimeCall is £57/mo flat for unlimited users. Compare ROI, speed, and fit.",
+  canonical: site.url + '/limecall-vs-ringcentral/',
+};
+
+const comparisonRows = [
+  { feature: 'Callback widget', limecall: '✅ 28-second connect', ringcentral: '❌ Not available', advantage: 'limecall' },
+  { feature: '28s speed to lead', limecall: '✅ Automated', ringcentral: '❌ Manual dial-out only', advantage: 'limecall' },
+  { feature: 'Call recording', limecall: '✅ Included', ringcentral: '✅ Core+ plans', advantage: 'neutral' },
+  { feature: 'IVR / call routing', limecall: 'Basic routing', ringcentral: '✅ Advanced multi-level IVR', advantage: 'ringcentral' },
+  { feature: 'CRM integrations', limecall: '✅ HubSpot, Salesforce, Zapier', ringcentral: '✅ 300+ integrations', advantage: 'neutral' },
+  { feature: 'AI voice agent', limecall: '✅ Included', ringcentral: '✅ RingSense AI (add-on cost)', advantage: 'limecall' },
+  { feature: 'WhatsApp', limecall: '✅ Native', ringcentral: '❌ Not native', advantage: 'limecall' },
+  { feature: 'SMS / text messaging', limecall: '✅ Included', ringcentral: '✅ Available', advantage: 'neutral' },
+  { feature: 'Video meetings', limecall: '❌ Not included', ringcentral: '✅ RingCentral Video built-in', advantage: 'ringcentral' },
+  { feature: 'Team messaging', limecall: '❌ Not included', ringcentral: '✅ RingCentral Message built-in', advantage: 'ringcentral' },
+  { feature: 'Desktop phone support', limecall: '❌ Softphone only', ringcentral: '✅ Full desk phone support', advantage: 'ringcentral' },
+  { feature: 'Fax', limecall: '❌ Not available', ringcentral: '✅ Digital fax included', advantage: 'ringcentral' },
+  { feature: 'Analytics & reporting', limecall: 'Standard dashboards', ringcentral: '✅ Advanced analytics suite', advantage: 'ringcentral' },
+  { feature: 'Call queues', limecall: 'Basic queuing', ringcentral: '✅ Full ACD queuing', advantage: 'ringcentral' },
+  { feature: 'Hot desking', limecall: '❌ Not available', ringcentral: '✅ Supported', advantage: 'ringcentral' },
+  { feature: 'Annual contract required', limecall: '❌ Month-to-month', ringcentral: '⚠️ Annual for best price', advantage: 'limecall' },
+  { feature: 'Per-user pricing', limecall: '❌ Flat rate for team', ringcentral: '⚠️ Yes — scales with headcount', advantage: 'limecall' },
+  { feature: 'Free trial', limecall: '✅ Free plan + 14-day trial', ringcentral: '✅ 14-day trial', advantage: 'neutral' },
+  { feature: 'Setup time', limecall: '~5 minutes, self-serve', ringcentral: '1–3 days, admin required', advantage: 'limecall' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    currency: '£',
+    tiers: [
+      { name: 'Free', price: '£0/mo', detail: '30 calls/mo', note: 'No credit card required' },
+      { name: 'Starter', price: '£29/mo', detail: '100 calls/mo', note: 'Flat rate, unlimited users' },
+      { name: 'Pro', price: '£57/mo', detail: '500 calls/mo', note: 'Full features, no per-seat fees' },
+    ],
+  },
+  {
+    tool: 'RingCentral',
+    highlight: false,
+    currency: '£',
+    tiers: [
+      { name: 'Core', price: '£20/user/mo', detail: 'Min 2 users, annual contract', note: 'Basic UCaaS' },
+      { name: 'Advanced', price: '£25/user/mo', detail: 'Annual contract', note: 'Video, analytics' },
+      { name: 'Ultra', price: '£35/user/mo', detail: 'Annual contract', note: 'Full platform' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'Your primary goal is converting inbound website leads into calls — LimeCall\'s 28-second callback widget does this automatically, RingCentral has no equivalent feature',
+  'You run an SMB with fewer than 50 seats — LimeCall\'s flat pricing saves you thousands per year compared to RingCentral\'s per-user model',
+  'You want to avoid annual contracts — LimeCall is month-to-month; RingCentral charges 15–20% more for monthly billing',
+  'You need WhatsApp follow-up built in — LimeCall includes native WhatsApp; RingCentral does not',
+  'You want to be live in 5 minutes without IT involvement — LimeCall is fully self-serve; RingCentral requires administrator provisioning',
+  'Your team is under 10 users — at that size, RingCentral Core costs £2,400+/year before add-ons; LimeCall Pro is £684/year flat',
+];
+
+const chooseRingCentral = [
+  'You need a full UCaaS platform — video conferencing, team messaging, and desk phone support all in a single product',
+  'You manage a large distributed workforce with 50+ users who need video meetings, team chat, and telephony unified',
+  'Desk phone provisioning is a hard requirement — RingCentral supports hundreds of certified hardware devices',
+  'Enterprise compliance, 99.999% uptime SLA, and dedicated account management are non-negotiable',
+  'Your team already uses RingCentral and the switching cost exceeds the savings',
+  'You need advanced call centre features like ACD, workforce management, and real-time wallboards',
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall replace RingCentral?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'It depends on what you use RingCentral for. If you use RingCentral primarily for inbound call handling and lead conversion from your website, LimeCall replaces and improves on it with the 28-second callback widget, flat pricing, and easier setup. However, if you rely on RingCentral for video conferencing, team messaging, fax, or desk phone support across a large organisation, LimeCall does not replace those UCaaS capabilities. LimeCall is a purpose-built callback and lead conversion platform — think of it as a scalpel versus RingCentral\'s Swiss army knife.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is RingCentral\'s minimum contract?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'RingCentral\'s advertised per-user prices (£20–£35/user/mo) are based on annual contracts billed monthly. If you choose month-to-month billing, prices are typically 15–20% higher. There is also a minimum of 2 users on most plans. This means the true minimum annual commitment on RingCentral Core is approximately £480/year (2 users × £20 × 12 months) — and that scales linearly with every user you add. LimeCall has no annual contract requirement and no minimum user count.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does RingCentral have a callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. RingCentral does not offer an instant website callback widget. RingCentral is a UCaaS (Unified Communications as a Service) platform focused on internal communications — phone, video, and messaging for your team. When a prospect visits your website, RingCentral cannot automatically trigger a two-way connection in seconds. LimeCall\'s core feature is exactly this: a visitor clicks the widget, enters their number, and both the prospect and your agent are connected in an average of 28 seconds automatically.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does the total cost compare for a 10-person team?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Over 2 years, the difference is significant. A 10-user team on RingCentral Core (£20/user/mo, annual contract) costs £4,800 total (10 × £20 × 24 months). LimeCall Pro at £57/mo flat costs £1,368 over the same period — a saving of £3,432. As your team grows past 10 users, the gap widens further since LimeCall does not charge per seat. RingCentral costs continue scaling linearly with headcount.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I migrate from RingCentral to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Migrating from RingCentral to LimeCall takes three steps: (1) Export your contacts from RingCentral and import them into your CRM (HubSpot, Salesforce, etc.). (2) Sign up for LimeCall and install the callback widget on your website — paste one script tag before the closing body tag. (3) Optionally port your RingCentral number to LimeCall — the porting process typically takes 5–7 business days and LimeCall support handles it for you. Most teams are fully live the same day they sign up.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall have video meetings or team chat like RingCentral?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. LimeCall is not a unified communications platform and does not include video conferencing or team messaging. LimeCall is a specialised callback and inbound lead conversion tool. If you need video meetings, use a dedicated tool like Google Meet, Zoom, or Microsoft Teams alongside LimeCall. Many customers use LimeCall for website lead capture and callbacks, while using Slack or Teams for internal communication — getting the best of both worlds at a lower combined cost than a full UCaaS suite.',
+      },
+    },
+  ],
+};
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'GBP',
+    description: 'Free plan available. Paid plans from £29/mo.',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.7',
+    reviewCount: '312',
+    bestRating: '5',
+  },
+  description: 'LimeCall is an instant callback widget platform that connects website visitors with sales teams in 28 seconds. Flat-rate pricing with no per-seat fees.',
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareAppSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: site.url + '/compare/' },
+        { name: 'LimeCall vs RingCentral', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2025 Comparison · Updated March 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs RingCentral:<br />
+        <span class="text-lime-400">Callback Scalpel vs UCaaS Swiss Army Knife</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        RingCentral is a full unified communications suite — video, chat, phones, fax. LimeCall is a purpose-built inbound lead conversion tool. Here is which one wins for your use case, and why the price difference is dramatic.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Pro</div>
+          <div class="text-5xl font-extrabold text-lime-400">£57</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat rate</div>
+          <div class="mt-3 text-lg font-bold text-white">28s callback widget</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">Unlimited users · No annual contract</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">RingCentral Core</div>
+          <div class="text-5xl font-extrabold text-dark-300">£20</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per user/month (annual)</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">Full UCaaS platform</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Per-user pricing · Annual contract · No callback widget</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-lg font-bold text-white mb-6 text-center">Quick Verdict</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-lime-500/15">
+              <span class="text-lime-400 font-bold text-lg">✓</span>
+            </div>
+            <h3 class="font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> You need inbound lead conversion from your website</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> You have fewer than 50 seats and want flat pricing</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> You refuse to lock into an annual contract</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 flex-shrink-0 mt-0.5">→</span> Speed to lead (28 seconds) is your competitive edge</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-dark-300 font-bold text-lg">✓</span>
+            </div>
+            <h3 class="font-bold text-dark-300">Choose RingCentral if…</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> You need video, team chat, and phone in one UCaaS platform</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> Desk phone provisioning is a hard requirement</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> You have 50+ users and need enterprise SLA (99.999% uptime)</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500 flex-shrink-0 mt-0.5">→</span> Full contact centre analytics and workforce management required</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall — The Conversion Scalpel</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a precision tool built for one job: converting website visitors into live phone conversations in 28 seconds. When a prospect clicks your widget, LimeCall automatically dials both your agent and the prospect simultaneously. No hold music, no form fills, no waiting — just an instant live connection. It is the fastest speed-to-lead technology available for inbound sales teams.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Built for SMBs and growth-stage companies focused on lead conversion</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing — one team pays £57/mo whether you have 3 or 30 agents</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> WhatsApp, SMS, and virtual numbers included</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> No annual contract, no per-seat tax</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">RingCentral — The UCaaS Swiss Army Knife</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            RingCentral is a full Unified Communications as a Service (UCaaS) platform. It combines voice, video conferencing, team messaging, SMS, fax, and desk phone support into a single enterprise-grade platform. Trusted by large enterprises, it offers a 99.999% uptime SLA and deep integrations with 300+ business applications. It is designed for organisations that want to replace their entire communications infrastructure with one vendor.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Designed for organisations of 10 to 10,000+ employees</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-user pricing — cost scales with every seat added</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Annual contracts for headline prices</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No instant website callback widget</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison (19 Features)</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2025.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">RingCentral</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'ringcentral' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'ringcentral' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.ringcentral}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-seat: the true cost as your team grows beyond 3 users.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="space-y-3">
+              {p.tiers.map(t => (
+                <div class="rounded-lg border border-dark-800/60 bg-dark-950/50 p-4">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-white text-sm">{t.name}</span>
+                    <span class:list={["font-extrabold text-sm", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</span>
+                  </div>
+                  <div class="text-xs text-dark-400">{t.detail}</div>
+                  <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Cost Comparison Calculator -->
+      <div class="mt-8 rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+        <h3 class="text-lg font-bold text-white mb-4">Total Cost: 10-User Team, 2 Years</h3>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border border-lime-500/30 bg-lime-500/5 p-4">
+            <div class="text-xs font-bold uppercase text-lime-400 mb-2">LimeCall Pro</div>
+            <div class="text-3xl font-extrabold text-lime-400">£1,368</div>
+            <div class="text-xs text-dark-400 mt-1">£57/mo × 24 months — unlimited users</div>
+            <ul class="mt-3 space-y-1 text-xs text-dark-300">
+              <li class="flex items-start gap-1.5"><span class="text-lime-400">✓</span> No per-seat charges</li>
+              <li class="flex items-start gap-1.5"><span class="text-lime-400">✓</span> 28s callback widget included</li>
+              <li class="flex items-start gap-1.5"><span class="text-lime-400">✓</span> WhatsApp + SMS included</li>
+              <li class="flex items-start gap-1.5"><span class="text-lime-400">✓</span> Cancel anytime</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-dark-700 bg-dark-900/50 p-4">
+            <div class="text-xs font-bold uppercase text-dark-400 mb-2">RingCentral Core</div>
+            <div class="text-3xl font-extrabold text-dark-300">£4,800</div>
+            <div class="text-xs text-dark-500 mt-1">£20/user × 10 users × 24 months (annual)</div>
+            <ul class="mt-3 space-y-1 text-xs text-dark-400">
+              <li class="flex items-start gap-1.5"><span class="text-dark-500">→</span> Cost grows with every new hire</li>
+              <li class="flex items-start gap-1.5"><span class="text-dark-500">→</span> No callback widget</li>
+              <li class="flex items-start gap-1.5"><span class="text-dark-500">→</span> Annual contract required for price</li>
+              <li class="flex items-start gap-1.5"><span class="text-red-500">→</span> £3,432 more than LimeCall</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">The per-seat trap:</strong> RingCentral costs £4,800 for 10 users over 2 years. Add 5 more users and you're at £7,200. LimeCall stays at £1,368 — regardless of whether you have 10 or 50 users on your team. That is a saving of £3,432 to £5,832 for a 10–15 person team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">RingCentral: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">RingCentral Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Full UCaaS platform: voice, video, chat, fax, and SMS in a single unified product',
+              '99.999% uptime SLA — enterprise-grade reliability for business-critical communications',
+              'Video conferencing (RingCentral Video) included — replaces Zoom for many organisations',
+              'Team messaging built-in — replaces Slack for internal communication',
+              'Desk phone support for 200+ certified hardware devices from Poly, Yealink, Cisco',
+              '300+ native integrations including deep Salesforce, Microsoft 365, and Google Workspace',
+              'Advanced IVR, call queuing, and contact centre capabilities on higher tiers',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">RingCentral Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — cannot automatically connect website visitors with agents in seconds',
+              'Per-user pricing scales cost linearly — expensive for growing teams beyond 10 users',
+              'Annual contracts required to access advertised prices — significant financial commitment',
+              'Complex setup requires IT admin time — not a 5-minute self-serve product',
+              'No native WhatsApp integration for multi-channel lead follow-up',
+              'RingSense AI is a paid add-on, not included in base plans',
+              'Overkill for SMBs who only need inbound call handling and lead conversion',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose RingCentral if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseRingCentral.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://www.ringcentral.com" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit RingCentral →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Guide -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Migrate from RingCentral to LimeCall</h2>
+      <p class="mb-10 text-center text-dark-400">Three steps. No downtime. Most teams are live the same day they sign up.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Export RingCentral contacts',
+            desc: 'Log into your RingCentral admin portal and export your contact directory as a CSV. Import this into your CRM (HubSpot, Salesforce, or Pipedrive). All call history and recordings can also be exported before you close your RingCentral account. LimeCall support can assist with bulk contact migration if needed.',
+          },
+          {
+            step: '2',
+            title: 'Install the LimeCall callback widget',
+            desc: 'Sign up for LimeCall (no credit card needed). Copy your unique widget script from the LimeCall dashboard and paste it into your website before the closing </body> tag. Works with WordPress, Webflow, Shopify, HubSpot CMS, or any custom HTML site. The widget is live instantly — your team will start receiving callback requests within minutes of installation.',
+          },
+          {
+            step: '3',
+            title: 'Number porting (optional)',
+            desc: 'If you want to keep your existing business number from RingCentral, LimeCall handles the porting process for you. Submit a porting request through LimeCall support with your RingCentral account details. Porting typically takes 5–7 business days. You can run both systems in parallel during the transition, ensuring zero downtime for your callers.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Teams Who Switched Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          {
+            quote: 'We were on RingCentral Advanced paying £25 per user per month. For our 8-person team that was £2,400 a year — and we never used the video conferencing or desk phone features. LimeCall Pro costs us £684 a year and our inbound lead response time dropped from 2 hours to 28 seconds.',
+            name: 'Tom B.',
+            title: 'Sales Director, Property Tech',
+            metric: '-£1,716/year saved',
+          },
+          {
+            quote: 'RingCentral is a brilliant platform if you need all those features. We didn\'t. We needed fast callbacks for website leads. LimeCall does exactly that, costs a fraction of the price, and our close rate from inbound enquiries went up 35% in the first month.',
+            name: 'Rachel S.',
+            title: 'Head of Sales, Financial Services',
+            metric: '+35% inbound close rate',
+          },
+        ].map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and RingCentral.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Stop Paying Per Seat.<br />Start Connecting in 28 Seconds.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">A 10-user team saves £3,432 over 2 years by switching from RingCentral Core to LimeCall Pro — while getting the callback widget that RingCentral doesn't have.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Compare LimeCall" links={[
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Flat callback pricing vs call centre per-seat model.' },
+      { href: '/limecall-vs-dialpad/', title: 'LimeCall vs Dialpad', desc: 'SMB-friendly vs AI enterprise phone system.' },
+      { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud phone system for growing businesses.' },
+      { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

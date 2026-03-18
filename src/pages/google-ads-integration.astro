@@ -1,0 +1,342 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Track Google Ads Callbacks — Know Which Campaigns Drive Calls | LimeCall',
+  description: 'Connect LimeCall to Google Ads for keyword-level callback attribution. Track cost-per-callback by campaign, import call conversions, and build remarketing audiences from callers.',
+  canonical: 'https://www.limecall.com/google-ads-integration/',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall integrate with Google Ads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates with Google Ads in two ways. First, LimeCall captures UTM parameters (utm_source, utm_medium, utm_campaign, utm_content, utm_term) from every callback request, giving you campaign and keyword-level attribution for every phone lead. Second, LimeCall can send callback conversion events to Google Ads via Google Tag Manager or the Google Ads Conversion API, allowing Google Ads to use real call conversion data for automated bid strategies like Target CPA and Target ROAS.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I track which Google Ads keywords drive callback requests?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. When a visitor arrives from a Google Ads click, the gclid (Google Click ID) and utm_term parameters are captured and stored with the LimeCall callback record. This gives you keyword-level attribution: you can see exactly which search keyword, ad group, and campaign drove each callback. LimeCall also supports dynamic number insertion (DNI) patterns that allow you to attribute callbacks at the session level.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I import LimeCall call conversions into Google Ads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall can send callback completion events to Google Tag Manager via a webhook. From GTM, configure a Google Ads conversion tag that fires when the LimeCall webhook triggers. Alternatively, use LimeCall\'s Zapier integration to send completed call data to Google Ads via the offline conversion import format. This imports your call conversions directly into Google Ads, making them visible in your conversion columns and available for Smart Bidding optimisation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I build Google Ads remarketing audiences from LimeCall callers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can export caller phone numbers and email addresses for upload to Google Ads as Customer Match audiences. Upload these lists to create a remarketing audience of people who have already called your business — then run targeted display, search, or YouTube campaigns specifically to past callers. You can also create separate audiences for callers by outcome: target "demo booked" callers differently from "browsing" callers.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is dynamic number insertion and does LimeCall support it?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Dynamic number insertion (DNI) shows a different phone number to each visitor based on their traffic source. LimeCall supports session-level DNI: visitors arriving from Google Ads see a unique number associated with the Google Ads session, while organic visitors see a different number. This allows you to attribute callbacks to the exact traffic source — including paid vs organic — without relying on UTM parameters alone.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is the Google Ads integration available on all LimeCall plans?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'UTM parameter capture and basic Google Ads attribution are available on all LimeCall plans, including the free tier. Google Tag Manager webhook integration, offline conversion import, and Customer Match audience export are available on the LimeCall Pro plan and above. Dynamic number insertion is available on Pro and above. Start a free trial to test attribution before upgrading.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "28s", label: "Average callback speed" },
+  { value: "100%", label: "Callback attribution rate" },
+  { value: "5 min", label: "Setup time — no developer" },
+  { value: "Keyword", label: "Level attribution included" },
+];
+
+const features = [
+  {
+    title: "Track which Google Ads campaigns drive callbacks",
+    desc: "Every LimeCall callback captures UTM parameters from the referring page. See which campaign, ad group, and ad creative drove each phone lead — directly in your LimeCall dashboard or your CRM.",
+  },
+  {
+    title: "Keyword-level attribution with gclid capture",
+    desc: "LimeCall stores the Google Click ID (gclid) from every paid visit. Match callbacks to the exact search keyword that drove them, enabling keyword-level ROI analysis for your Google Ads spend.",
+  },
+  {
+    title: "Import call conversions to Google Ads for bid optimisation",
+    desc: "Send completed callback events back to Google Ads as offline conversions. Smart Bidding strategies — Target CPA, Target ROAS — use this call conversion data to automatically optimise bids toward campaigns that drive real phone leads.",
+  },
+  {
+    title: "Build remarketing audiences from callers",
+    desc: "Export LimeCall caller lists as Google Ads Customer Match audiences. Re-engage people who called but did not convert, or exclude existing customers from acquisition campaigns to reduce wasted spend.",
+  },
+  {
+    title: "Send callback events to Google Tag Manager",
+    desc: "LimeCall fires a webhook on every callback event. Point the webhook at a GTM container to trigger Google Ads conversion tags, GA4 events, and any other tags in your GTM workspace — without modifying your website code.",
+  },
+  {
+    title: "See cost-per-callback by campaign, ad group, keyword",
+    desc: "Combine LimeCall callback counts with Google Ads spend data to calculate true cost-per-callback at every level: campaign, ad group, keyword, and ad. Identify the most efficient paid sources and reallocate budget accordingly.",
+  },
+];
+
+const useCases = [
+  {
+    role: "PPC Attribution",
+    title: "Know exactly which keywords drive phone leads",
+    desc: "Without LimeCall attribution, PPC teams fly blind on phone conversions. With gclid capture and UTM sync, every callback is matched to the campaign, ad group, and keyword that drove it — enabling accurate keyword-level ROI analysis.",
+  },
+  {
+    role: "Bid Optimisation",
+    title: "Feed call conversions to Smart Bidding",
+    desc: "Import LimeCall callback completions as Google Ads offline conversions. Target CPA and Target ROAS bidding strategies use these signals to increase bids on search terms that historically drive phone leads, reducing cost-per-acquisition.",
+  },
+  {
+    role: "Audience Building",
+    title: "Remarket to past callers with Google Ads",
+    desc: "Upload LimeCall caller lists as Customer Match audiences. Run tailored search and display campaigns to people who have already shown high intent by calling your business — often your highest-converting remarketing segment.",
+  },
+  {
+    role: "Offline Conversions",
+    title: "Connect phone leads to closed deals",
+    desc: "When a LimeCall callback results in a closed deal, import the conversion value back to Google Ads. This closes the attribution loop between ad spend and actual revenue, enabling true ROAS measurement for phone-heavy campaigns.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Campaign-level callback attribution", withLimecall: "Automatic — every callback tagged", without: "Unknown — zero attribution" },
+  { feature: "Keyword-level attribution (gclid)", withLimecall: "Yes — stored per callback", without: "Not possible" },
+  { feature: "Import call conversions to Google Ads", withLimecall: "Yes — via GTM or API", without: "Manual and incomplete" },
+  { feature: "Cost-per-callback by campaign", withLimecall: "Yes — in LimeCall dashboard", without: "Manual spreadsheet work" },
+  { feature: "Remarketing audiences from callers", withLimecall: "Yes — Customer Match upload", without: "Not available" },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: 'Google Ads', url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Google Ads Integration · Keyword-level attribution · 5-minute setup
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Track Google Ads Callbacks —<br class="hidden sm:block" />
+        <span class="text-lime-400">Know Which Campaigns Drive Calls</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Connect LimeCall to Google Ads and see cost-per-callback by campaign, ad group, and keyword. Import call conversions for Smart Bidding and build remarketing audiences from your callers.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Start Attribution Tracking Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Data flow diagram -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How Google Ads attribution flows through LimeCall</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From ad click to closed deal — every step is tracked and attributed back to the campaign that drove it.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Prospect clicks Google Ad</h3>
+          <p class="mt-1 text-xs text-dark-400">gclid and UTMs captured on landing</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Requests callback</h3>
+          <p class="mt-1 text-xs text-dark-400">LimeCall widget stores gclid with request</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Call connected</h3>
+          <p class="mt-1 text-xs text-dark-400">28-second callback, outcome recorded</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Conversion imported</h3>
+          <p class="mt-1 text-xs text-dark-400">Call conversion sent to Google Ads for bidding</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Enable UTM and gclid capture</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">In your LimeCall dashboard, enable UTM parameter capture and gclid storage. LimeCall will automatically read these values from the page URL on every callback request.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure conversion webhook</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Set up a LimeCall webhook pointing to your Google Tag Manager container. In GTM, create a conversion tag that fires on the LimeCall callback completion trigger and sends the conversion to Google Ads.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Verify and activate bidding</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Make a test callback from a Google Ads visit and verify the conversion appears in Google Ads within 24 hours. Then enable Target CPA or Target ROAS bidding to use call conversions for automated optimisation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything LimeCall does for Google Ads attribution</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that give you complete visibility over which ad spend drives real phone leads.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Use cases: Google Ads + LimeCall callback attribution</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table: with vs without LimeCall -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Google Ads attribution: with vs without LimeCall</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">Without LimeCall, every phone lead is an attribution black hole. With LimeCall, every callback is tied to the campaign, ad group, and keyword that drove it.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Attribution Point</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">With LimeCall</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Without LimeCall</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300 font-medium">{row.feature}</td>
+                <td class="py-3 px-5 text-center text-lime-400 font-semibold">{row.withLimecall}</td>
+                <td class="py-3 px-5 text-center text-dark-500">{row.without}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Stop losing Google Ads attribution on phone leads.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Track every callback back to the campaign, keyword, and ad that drove it — and feed that data back to Google Ads to optimise your bids automatically.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations" links={[
+        { href: '/zapier-integration/', title: 'LimeCall + Zapier', desc: 'Connect LimeCall to 6,000+ apps with Zapier.' },
+        { href: '/activecampaign-integration/', title: 'LimeCall + ActiveCampaign', desc: 'Trigger automations on call outcome.' },
+        { href: '/salesforce-integration/', title: 'LimeCall + Salesforce', desc: 'Auto-create Leads and log Activities.' },
+        { href: '/limecall-for-hubspot/', title: 'LimeCall + HubSpot', desc: 'Log every call in HubSpot automatically.' },
+        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include attribution tools.' },
+      ]} />
+    </div>
+  </div>
+</Base>

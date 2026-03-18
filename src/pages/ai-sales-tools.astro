@@ -1,0 +1,490 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'AI Sales Tools: The Complete Guide to AI for Sales Teams (2025) | LimeCall',
+  description: 'Discover the best AI tools for sales in 2025. From AI SDRs to conversation intelligence — plus how LimeCall\'s AI sales agent books 3x more meetings.',
+  canonical: 'https://www.limecall.com/ai-sales-tools/',
+};
+
+const categories = [
+  { icon: '⚡', name: 'AI SDR / Lead Qualification', tools: 'LimeCall, Conversica, Drift', desc: 'Automates first-touch qualification, instant lead response, and meeting booking. The highest-ROI category for inbound-heavy teams.' },
+  { icon: '🎙️', name: 'Conversation Intelligence', tools: 'Gong, Chorus, Clari', desc: 'Records, transcribes, and analyses sales calls to identify winning patterns, coaching opportunities, and deal risks.' },
+  { icon: '📧', name: 'Sales Engagement', tools: 'Outreach, Salesloft, Apollo', desc: 'Automates outbound email sequences, call cadences, and multi-channel outreach workflows at scale.' },
+  { icon: '✍️', name: 'AI Writing & Content', tools: 'ChatGPT, Jasper, Copy.ai', desc: 'Generates email copy, call scripts, proposals, and sales content using large language models.' },
+  { icon: '🔍', name: 'Lead Enrichment', tools: 'ZoomInfo, Apollo, Clay', desc: 'Enriches lead data with firmographic, technographic, and intent signals for better targeting and personalisation.' },
+  { icon: '📊', name: 'Revenue Intelligence', tools: 'Clari, People.ai, Aviso', desc: 'Uses AI to forecast revenue, identify pipeline risks, and provide visibility into deal health across the organisation.' },
+];
+
+const toolComparison = [
+  { rank: 1, tool: 'LimeCall', category: 'AI SDR / Speed-to-Lead', price: '£57/mo', bestFor: 'Inbound lead qualification & instant callback', ai: 'Full AI qualification, BANT/MEDDIC, auto-booking', featured: true },
+  { rank: 2, tool: 'Gong', category: 'Conversation Intelligence', price: '$100/user/mo', bestFor: 'Call recording and sales coaching', ai: 'AI call analysis, deal risk scoring, coaching insights', featured: false },
+  { rank: 3, tool: 'Outreach', category: 'Sales Engagement', price: '$100/user/mo', bestFor: 'Outbound sequences and cadences', ai: 'AI email optimisation, send-time prediction', featured: false },
+  { rank: 4, tool: 'Apollo.io', category: 'Prospecting + Engagement', price: '$49/user/mo', bestFor: 'Contact data + outbound automation', ai: 'AI lead scoring, email writing, prospecting', featured: false },
+  { rank: 5, tool: 'Clari', category: 'Revenue Intelligence', price: 'Enterprise pricing', bestFor: 'Pipeline forecasting and revenue ops', ai: 'AI forecasting, deal inspection, pipeline analytics', featured: false },
+  { rank: 6, tool: 'Salesloft', category: 'Sales Engagement', price: '$125/user/mo', bestFor: 'Enterprise sales cadences', ai: 'AI-guided selling, conversation intelligence', featured: false },
+  { rank: 7, tool: 'Conversica', category: 'AI SDR', price: '$1,500/mo', bestFor: 'Enterprise AI sales assistants', ai: 'AI email/SMS conversations, lead follow-up', featured: false },
+  { rank: 8, tool: 'Clay', category: 'Lead Enrichment', price: '$149/mo', bestFor: 'Data enrichment workflows', ai: 'AI data cleaning, enrichment, and scoring', featured: false },
+  { rank: 9, tool: 'ZoomInfo', category: 'Lead Intelligence', price: '$15,000/yr', bestFor: 'Enterprise contact and company data', ai: 'Intent data, buyer signals, technographics', featured: false },
+  { rank: 10, tool: 'People.ai', category: 'Revenue Intelligence', price: 'Enterprise pricing', bestFor: 'Activity capture and analytics', ai: 'AI activity scoring, relationship mapping', featured: false },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What are the best AI tools for sales?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The best AI tools for sales in 2025 span several categories: LimeCall for AI-powered lead qualification and instant callback (from £57/mo), Gong for conversation intelligence and coaching, Outreach for AI-enhanced sales engagement, Apollo.io for AI-powered prospecting, and Clari for revenue intelligence and forecasting. The most impactful category for most teams is speed-to-lead automation, which delivers 391% more conversions by connecting with leads in seconds.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can AI replace salespeople?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI will not replace salespeople, but salespeople who use AI will replace those who do not. AI excels at automating repetitive tasks: lead qualification, data entry, meeting scheduling, email writing, and follow-up sequences. This frees human reps to focus on relationship building, complex negotiations, strategic account management, and closing — the high-value activities that require human judgement and empathy.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How much do AI sales tools cost?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI sales tools range from free to enterprise pricing. AI writing tools like ChatGPT offer free tiers. Speed-to-lead tools like LimeCall start at £57/month. Sales engagement platforms like Outreach and Salesloft range from $100-150 per user/month. Conversation intelligence tools like Gong start around $100 per user/month. Enterprise platforms like ZoomInfo and Clari typically require annual contracts of $15,000 or more.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What is an AI sales agent?',
+      acceptedAnswer: { '@type': 'Answer', text: 'An AI sales agent is software that autonomously handles sales tasks that would traditionally require a human representative. This includes engaging with inbound leads via voice or text, qualifying prospects against your criteria (BANT, MEDDIC), booking meetings, logging CRM data, and following up with nurture sequences. LimeCall\'s AI sales agent connects with leads in 28 seconds, qualifies them in real-time, and transfers hot prospects to your human closers.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How is AI changing sales in 2025?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI is transforming sales in several ways in 2025: AI SDRs are handling first-touch qualification at a fraction of the cost of human reps, conversation intelligence is making coaching data-driven rather than anecdotal, AI writing tools are personalising outreach at scale, and speed-to-lead automation is becoming a competitive moat. The most significant shift is that teams adopting AI for lead qualification are seeing 3-5x more qualified pipeline at 90% lower cost.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What AI tools do SDRs need?',
+      acceptedAnswer: { '@type': 'Answer', text: 'SDRs benefit most from: speed-to-lead tools like LimeCall for instant inbound response (the highest-ROI tool for inbound teams), email sequencing tools like Outreach or Salesloft for outbound cadences, lead enrichment tools like Apollo or ZoomInfo for prospecting data, AI writing tools for email personalisation, and CRM integration tools for automated data entry. Many teams are now replacing junior SDRs entirely with AI SDR tools that handle qualification 24/7.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I build an AI sales stack?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Start with the highest-impact tools first. For most teams, the priority order is: 1) Speed-to-lead / AI SDR (LimeCall — immediate ROI from faster lead response), 2) CRM (Salesforce or HubSpot — foundation for all data), 3) Sales engagement (Outreach or Salesloft — for outbound), 4) Conversation intelligence (Gong — for coaching), 5) Lead enrichment (Apollo or ZoomInfo — for prospecting data). Start with layers 1-2 and add tools as your team scales.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What ROI can I expect from AI sales tools?',
+      acceptedAnswer: { '@type': 'Answer', text: 'ROI varies by category. Speed-to-lead tools like LimeCall deliver the fastest ROI — most teams see 391% more conversions within the first month at a cost of £57/month (vs £45k/year for a human SDR). Conversation intelligence tools typically take 2-3 months to show measurable coaching improvements. Sales engagement platforms show ROI within 1-2 months through increased outbound activity. Overall, Gartner reports that organisations using AI in sales see 50% more leads and 60% cost reduction.' }
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall AI Sales Agent',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'AI-powered sales agent that qualifies inbound leads in 28 seconds, books meetings, and connects prospects with your sales team 24/7.',
+  url: 'https://www.limecall.com/ai-sales-tools/',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    priceValidUntil: '2025-12-31',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '310',
+    bestRating: '5',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable'],
+  },
+  url: seo.canonical,
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: seo.title,
+  description: seo.description,
+  url: seo.canonical,
+  author: {
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+  },
+  datePublished: '2025-01-15',
+  dateModified: '2025-03-18',
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+  <JsonLd schema={speakableSchema} />
+  <JsonLd schema={articleSchema} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'AI Sales Tools', url: `${site.url}/ai-sales-tools/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        🤖 The Complete AI Sales Guide — 2025
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        AI for Sales: The Tools Transforming<br class="hidden sm:block" />
+        <span class="text-lime-400">How Teams Close Deals</span>
+      </h1>
+      <div class="speakable mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        <p>AI sales tools use artificial intelligence to automate prospecting, qualify leads, analyse sales conversations, and accelerate deal velocity. The most impactful AI sales tool category in 2025 is speed-to-lead automation — AI that connects reps with prospects in seconds rather than hours, increasing conversion rates by 391%.</p>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Try the #1 AI Sales Tool — Free
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          See LimeCall in Action →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">From £57/mo · No credit card · 5-minute setup</p>
+    </div>
+  </section>
+
+  <!-- AI Sales Tools Landscape -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">The AI Sales Tools Landscape</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Six categories of AI tools are reshaping how sales teams prospect, qualify, engage, and close in 2025.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {categories.map(c => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{c.icon}</div>
+            <h3 class="text-lg font-bold text-white mb-1">{c.name}</h3>
+            <p class="text-xs text-lime-400 font-semibold mb-3">{c.tools}</p>
+            <p class="text-sm text-dark-400">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Best AI Sales Tools 2025 — Ranked Table -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Best AI Sales Tools 2025 — Ranked</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['#', 'Tool', 'Category', 'Starting Price', 'Best For', 'AI Capability'].map(h => (
+                <th class="px-4 py-4 text-left font-semibold text-dark-300">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {toolComparison.map(t => (
+              <tr class={`hover:bg-dark-800/30 transition ${t.featured ? 'bg-lime-500/5' : ''}`}>
+                <td class="px-4 py-3 text-dark-500 font-bold">{t.rank}</td>
+                <td class={`px-4 py-3 font-medium ${t.featured ? 'text-lime-400 font-bold' : 'text-dark-200'}`}>{t.tool}</td>
+                <td class="px-4 py-3 text-dark-400">{t.category}</td>
+                <td class="px-4 py-3 text-dark-400">{t.price}</td>
+                <td class="px-4 py-3 text-dark-400">{t.bestFor}</td>
+                <td class="px-4 py-3 text-dark-400">{t.ai}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Sales Agent — Deep Dive -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">AI Sales Agent: What It Is and How It Works</h2>
+      <div class="space-y-8">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <h3 class="text-xl font-bold text-white mb-4">What Is an AI Sales Agent?</h3>
+          <p class="text-dark-300 leading-relaxed mb-4">An AI sales agent is autonomous software that handles sales development tasks without human intervention. Unlike chatbots that follow rigid decision trees, AI sales agents use natural language processing and machine learning to engage in dynamic, context-aware conversations with prospects.</p>
+          <p class="text-dark-300 leading-relaxed">LimeCall's AI sales agent can qualify leads via voice or text, score them against your BANT or MEDDIC framework, book meetings into your calendar, log every interaction in your CRM, and hand off hot prospects to your human closers — all within 28 seconds of a lead expressing interest.</p>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <h3 class="text-xl font-bold text-white mb-4">How AI Sales Agents Differ from Chatbots</h3>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {[
+              { label: 'Conversation Type', agent: 'Dynamic, context-aware voice + text', chatbot: 'Rigid decision tree, text only' },
+              { label: 'Qualification Depth', agent: 'Full BANT/MEDDIC scoring', chatbot: 'Basic intent detection' },
+              { label: 'Lead Routing', agent: 'Real-time transfer to AE in 28s', chatbot: 'Form submission or email notification' },
+              { label: 'Learning', agent: 'Improves from every conversation', chatbot: 'Static unless manually updated' },
+            ].map(row => (
+              <div class="rounded-xl border border-dark-700 bg-dark-800/40 p-4">
+                <p class="text-xs text-dark-500 font-semibold uppercase mb-2">{row.label}</p>
+                <p class="text-sm text-lime-400 mb-1"><strong>AI Agent:</strong> {row.agent}</p>
+                <p class="text-sm text-dark-400"><strong>Chatbot:</strong> {row.chatbot}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How AI Is Changing Sales in 2025 -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">How AI Is Changing Sales in 2025</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Five trends reshaping sales organisations — and the tools driving each shift.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { trend: 'AI SDRs Replacing Junior Reps', desc: 'Companies are deploying AI to handle first-touch qualification at 1% of the cost of a human SDR. The remaining reps are promoted to closer roles, focusing exclusively on qualified conversations.', impact: 'LimeCall customers save £40-60k per replaced SDR annually.' },
+          { trend: 'Conversation Intelligence Becomes Standard', desc: 'Recording and analysing every sales call is no longer optional. AI identifies winning talk patterns, deal risks, and coaching opportunities from thousands of conversations automatically.', impact: 'Teams using call analytics see 15-20% higher win rates.' },
+          { trend: 'Speed-to-Lead as Competitive Moat', desc: 'The gap between companies that respond in seconds versus hours is widening. AI-powered instant response is becoming a strategic differentiator that competitors cannot easily replicate.', impact: '78% of buyers choose the first vendor to respond.' },
+          { trend: 'Hyper-Personalisation at Scale', desc: 'AI writing tools combined with enrichment data enable truly personalised outreach to thousands of prospects — with each message referencing specific company events, tech stack, or pain points.', impact: 'Personalised AI emails see 2-3x higher response rates.' },
+          { trend: 'Revenue Forecasting Gets Accurate', desc: 'AI-powered revenue intelligence replaces gut-feel forecasting with data-driven predictions. Models analyse deal signals, rep behaviour, and buyer engagement to predict close probability.', impact: 'AI forecasting reduces variance by 40-60% vs manual.' },
+          { trend: 'The No-SDR Sales Model Emerges', desc: 'Forward-thinking companies are eliminating the SDR layer entirely — using AI for all first-touch qualification and deploying only senior AEs who close. This model reduces headcount while increasing qualified pipeline.', impact: 'No-SDR teams report 3-5x better unit economics.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <h3 class="text-base font-bold text-white mb-3">{item.trend}</h3>
+            <p class="text-sm text-dark-400 mb-3">{item.desc}</p>
+            <p class="text-xs text-lime-400 font-semibold">{item.impact}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Building Your AI Sales Stack -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Building Your AI Sales Stack</h2>
+      <p class="text-center text-dark-300 max-w-2xl mx-auto mb-10">The right stack depends on your team size and sales motion. Here is what we recommend for each stage.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          {
+            segment: 'SMB (1-10 reps)',
+            budget: '£200-500/mo',
+            stack: [
+              { tool: 'LimeCall', role: 'Speed-to-lead + AI qualification', priority: 'Essential' },
+              { tool: 'HubSpot CRM', role: 'Contact and deal management', priority: 'Essential' },
+              { tool: 'Apollo.io', role: 'Prospecting data + outbound', priority: 'Recommended' },
+              { tool: 'ChatGPT', role: 'Email and content generation', priority: 'Nice to have' },
+            ],
+          },
+          {
+            segment: 'Mid-Market (10-50 reps)',
+            budget: '£2,000-8,000/mo',
+            stack: [
+              { tool: 'LimeCall', role: 'Speed-to-lead + AI SDR', priority: 'Essential' },
+              { tool: 'Salesforce', role: 'Enterprise CRM', priority: 'Essential' },
+              { tool: 'Outreach', role: 'Sales engagement + cadences', priority: 'Essential' },
+              { tool: 'Gong', role: 'Conversation intelligence', priority: 'Recommended' },
+            ],
+          },
+          {
+            segment: 'Enterprise (50+ reps)',
+            budget: '£15,000-50,000/mo',
+            stack: [
+              { tool: 'LimeCall', role: 'Speed-to-lead + AI qualification', priority: 'Essential' },
+              { tool: 'Salesforce', role: 'Enterprise CRM + CPQ', priority: 'Essential' },
+              { tool: 'Outreach + Gong', role: 'Engagement + intelligence', priority: 'Essential' },
+              { tool: 'Clari + ZoomInfo', role: 'Revenue intelligence + data', priority: 'Recommended' },
+            ],
+          },
+        ].map(stack => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <h3 class="text-lg font-bold text-white mb-1">{stack.segment}</h3>
+            <p class="text-xs text-lime-400 font-semibold mb-4">Budget: {stack.budget}</p>
+            <div class="space-y-3">
+              {stack.stack.map(item => (
+                <div class="flex items-start gap-3">
+                  <span class={`mt-0.5 inline-flex shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${item.priority === 'Essential' ? 'bg-lime-500/20 text-lime-400' : item.priority === 'Recommended' ? 'bg-blue-500/20 text-blue-400' : 'bg-dark-700 text-dark-400'}`}>{item.priority}</span>
+                  <div>
+                    <p class="text-sm font-semibold text-white">{item.tool}</p>
+                    <p class="text-xs text-dark-400">{item.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Sales Tools Buyer's Guide -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">AI Sales Tools Buyer's Guide: What to Look For</h2>
+      <div class="space-y-6">
+        {[
+          { criterion: 'Time-to-Value', desc: 'The best AI sales tools deliver ROI within the first week, not the first quarter. Avoid tools that require months of implementation, data migration, or custom development. LimeCall is live in 5 minutes — you should expect similar from any AI tool you evaluate.', verdict: 'Target: ROI within 7 days' },
+          { criterion: 'Integration Depth', desc: 'A tool that does not integrate with your CRM is a tool your reps will not use. Look for native integrations (not just Zapier) with your core stack: CRM, calendar, email, and communication platforms. Two-way sync is essential.', verdict: 'Must-have: Native CRM sync' },
+          { criterion: 'AI Transparency', desc: 'You should be able to see exactly what the AI said, how it scored a lead, and why it made routing decisions. Black-box AI is not acceptable in sales. Look for full conversation transcripts, scoring explanations, and audit trails.', verdict: 'Must-have: Full conversation logs' },
+          { criterion: 'Customisation Flexibility', desc: 'Your qualification criteria, conversation scripts, and routing rules should be configurable without engineering support. The AI should adapt to your sales process — not the other way around.', verdict: 'Must-have: No-code configuration' },
+          { criterion: 'Pricing Transparency', desc: 'Beware of per-seat pricing that scales linearly with team size, or enterprise-only pricing that requires a sales conversation. The best AI tools offer predictable, team-level pricing that makes ROI calculation straightforward.', verdict: 'Target: Predictable team pricing' },
+          { criterion: 'Data Security', desc: 'AI tools handling sales conversations process sensitive business data. Look for SOC 2 compliance, GDPR adherence, data encryption at rest and in transit, and clear data retention policies.', verdict: 'Must-have: SOC 2 + GDPR compliance' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-bold text-white mb-2">{item.criterion}</h3>
+                <p class="text-sm text-dark-400">{item.desc}</p>
+              </div>
+              <span class="shrink-0 inline-flex rounded-lg bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{item.verdict}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Sales ROI Calculator -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">AI Sales Tools: ROI by Category</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['AI Tool Category', 'Typical Investment', 'Time to ROI', 'Expected Impact', 'Risk Level'].map(h => (
+                <th class="px-5 py-4 text-left font-semibold text-dark-300">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Speed-to-Lead (LimeCall)', '£57-99/mo', '1-2 weeks', '391% more conversions', 'Very low'],
+              ['Sales Engagement', '$100-150/user/mo', '1-2 months', '20-40% more activity', 'Low'],
+              ['Conversation Intelligence', '$100-200/user/mo', '2-3 months', '15-20% higher win rate', 'Low'],
+              ['AI Writing Tools', '$20-100/user/mo', '1-2 weeks', '2-3x email output', 'Very low'],
+              ['Lead Enrichment', '$49-500/mo', '1 month', 'Improved targeting accuracy', 'Medium'],
+              ['Revenue Intelligence', 'Enterprise pricing', '3-6 months', '40-60% better forecasting', 'Medium'],
+            ].map(([category, ...vals]) => (
+              <tr class={`hover:bg-dark-800/30 transition ${category.includes('LimeCall') ? 'bg-lime-500/5' : ''}`}>
+                <td class={`px-5 py-3 font-medium ${category.includes('LimeCall') ? 'text-lime-400 font-bold' : 'text-dark-200'}`}>{category}</td>
+                {vals.map(v => (
+                  <td class="px-5 py-3 text-dark-400">{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-8 rounded-xl bg-lime-500/10 border border-lime-500/20 p-6 text-center">
+        <p class="text-sm text-dark-300">The fastest path to AI sales ROI</p>
+        <p class="text-2xl font-extrabold text-lime-400 mt-2">Start with speed-to-lead. Add complexity later.</p>
+        <p class="text-xs text-dark-500 mt-2">LimeCall delivers measurable ROI in week one — before you evaluate any other AI tool.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">What Sales Leaders Say About AI Tools</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { quote: 'We evaluated every AI sales tool on the market. The biggest surprise was that the highest-ROI tool was not the most expensive one. LimeCall at £57 a month outperformed tools costing 20x more because speed-to-lead is the lever that moves pipeline the most.', name: 'Alex P.', role: 'CRO, Mid-Market SaaS, 80 reps' },
+          { quote: 'Our team was drowning in AI tools that each solved one piece of the puzzle. LimeCall was the missing piece — the speed-to-lead layer that made our entire stack more effective. Gong now has more conversations to analyse, Outreach has better data to sequence on.', name: 'Maria C.', role: 'VP Revenue Operations, B2B Services' },
+        ].map(t => (
+          <blockquote class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <p class="text-dark-200 italic leading-relaxed">"{t.quote}"</p>
+            <footer class="mt-6">
+              <p class="font-bold text-white">{t.name}</p>
+              <p class="text-sm text-dark-500">{t.role}</p>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Sales Tools Implementation Checklist -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Your AI Sales Tools Implementation Checklist</h2>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-10">
+        <div class="space-y-4">
+          {[
+            { phase: 'Week 1: Foundation', tasks: ['Deploy LimeCall for instant inbound lead response (28 seconds)', 'Connect your CRM (Salesforce, HubSpot, or Pipedrive)', 'Configure AI qualification scripts with your BANT/MEDDIC criteria', 'Set up calendar sync for automated meeting booking', 'Define lead routing rules for your team'] },
+            { phase: 'Week 2: Engagement', tasks: ['Add outbound sales engagement tool (Outreach or Salesloft)', 'Create initial email sequences and call cadences', 'Integrate with LimeCall for coordinated inbound/outbound coverage', 'Set up Slack notifications for real-time lead alerts'] },
+            { phase: 'Month 2: Intelligence', tasks: ['Deploy conversation intelligence (Gong or Chorus)', 'Record and analyse the higher volume of qualified conversations', 'Identify winning talk patterns and coaching opportunities', 'Build rep scorecards based on AI-derived insights'] },
+            { phase: 'Quarter 2: Optimisation', tasks: ['Add lead enrichment for better targeting (Apollo, ZoomInfo, or Clay)', 'Layer revenue intelligence for pipeline forecasting', 'Refine AI qualification criteria based on close-rate data', 'Scale winning playbooks across teams and geographies'] },
+          ].map(phase => (
+            <div class="border-b border-dark-700 pb-4 last:border-0 last:pb-0">
+              <h3 class="font-bold text-lime-400 mb-3">{phase.phase}</h3>
+              <ul class="space-y-2">
+                {phase.tasks.map(task => (
+                  <li class="flex items-start gap-2 text-sm text-dark-300">
+                    <span class="text-lime-400 shrink-0 mt-0.5">✓</span>
+                    {task}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start With the Highest-ROI AI Sales Tool</h2>
+      <p class="mt-4 text-lg text-dark-300">LimeCall connects leads to your team in 28 seconds. From £57/mo. No credit card required.</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try LimeCall Free →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">14-day free trial · No credit card · Cancel anytime</p>
+    </div>
+  </section>
+
+  <CrossLinks
+    heading="Explore LimeCall"
+    links={[
+      { href: '/ai-sdr/', title: 'AI SDR Software', desc: 'Automate lead qualification.' },
+      { href: '/ai-phone-agent/', title: 'AI Phone Agent', desc: 'AI-powered phone conversations.' },
+      { href: '/sales-enablement/', title: 'Sales Enablement', desc: 'Arm your team to close more.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'From £57/month.' },
+    ]}
+  />
+</Base>

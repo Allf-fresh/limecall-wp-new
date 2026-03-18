@@ -1,0 +1,554 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'AI SDR Software: Automate Lead Generation & Outbound Sales | LimeCall',
+  description: 'LimeCall\'s AI SDR qualifies inbound leads in 28 seconds, books meetings automatically, and never takes a day off. Replace agency costs with AI — from £57/mo.',
+  canonical: 'https://www.limecall.com/ai-sdr/',
+};
+
+const stats = [
+  { value: '28s', label: 'Lead connection time' },
+  { value: '£57/mo', label: 'vs £45k/yr human SDR' },
+  { value: '24/7', label: 'Qualification coverage' },
+  { value: '391%', label: 'More conversions' },
+];
+
+const features = [
+  { icon: '⚡', title: 'Instant Inbound Lead Qualification', desc: 'AI connects with inbound leads within 28 seconds of form submission, chat message, or call request — before they lose interest or call a competitor.' },
+  { icon: '🎯', title: 'BANT/MEDDIC Conversation Scripts', desc: 'Configure custom qualification frameworks. The AI runs your exact playbook — budget, authority, need, timeline — in natural voice conversations.' },
+  { icon: '📅', title: 'Automated Meeting Booking', desc: 'Qualified leads get booked directly into your AE calendars via Calendly, HubSpot Meetings, or Google Calendar. Zero back-and-forth emails.' },
+  { icon: '🔗', title: 'CRM Auto-Logging', desc: 'Every conversation, qualification score, and contact detail synced automatically to Salesforce, HubSpot, or Pipedrive. No manual data entry ever.' },
+  { icon: '📊', title: 'Lead Scoring & Prioritisation', desc: 'AI scores every lead in real-time based on your custom criteria, ensuring your closers only spend time on deals that are ready to move.' },
+  { icon: '📱', title: 'Multi-Channel Follow-Up', desc: 'Engage prospects via call, SMS, email, and WhatsApp — all from a single AI-powered workflow that adapts to each lead\'s preferred channel.' },
+  { icon: '🛠️', title: 'Custom Qualification Criteria', desc: 'Set different qualification rules per campaign, geography, or product line. The AI adapts its conversation to match each segment.' },
+  { icon: '📈', title: 'Real-Time Pipeline Analytics', desc: 'Live dashboard showing leads qualified, meetings booked, conversion rates, and pipeline value — updated in real-time, not end-of-day.' },
+];
+
+const useCases = [
+  { title: 'SaaS Demo Booking', desc: 'AI qualifies trial signups and inbound demo requests in real-time, books discovery calls directly into AE calendars, and filters out unqualified leads before they waste closer time.' },
+  { title: 'B2B Services', desc: 'Professional services firms use AI SDR to qualify project enquiries, assess budget fit, and schedule consultations with the right partner or manager.' },
+  { title: 'Recruitment', desc: 'Staffing agencies deploy AI to qualify candidate applications and employer requirements simultaneously, booking interviews only when both sides match.' },
+  { title: 'Financial Services', desc: 'AI qualifies loan applications, insurance enquiries, and wealth management prospects against compliance-ready criteria before connecting to licensed advisors.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is an AI SDR?',
+      acceptedAnswer: { '@type': 'Answer', text: 'An AI SDR (Sales Development Representative) is software that uses artificial intelligence to automate lead qualification, outbound outreach, and meeting booking. It handles the first-touch conversations that a human SDR would typically manage — qualifying leads against criteria like BANT or MEDDIC, then routing qualified prospects to account executives or booking meetings directly.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can AI replace SDRs?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI can replace the repetitive, high-volume qualification tasks that consume 70-80% of a human SDR\'s time — initial outreach, lead qualification, meeting scheduling, and CRM logging. However, complex relationship-building, enterprise account strategy, and nuanced objection handling still benefit from human reps. Most teams use AI SDR to handle inbound qualification while human reps focus on strategic outbound and complex accounts.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does an AI SDR compare to a lead generation agency?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A lead generation agency typically charges £2,000-10,000/month with 3-6 month contracts, delivers leads in batches with variable quality, and requires significant management overhead. An AI SDR like LimeCall costs from £57/month, qualifies leads in real-time 24/7, follows your exact qualification criteria consistently, and requires no management. Most businesses see 10-50x better cost per qualified lead with AI SDR vs agency.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does AI SDR software cost?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI SDR software pricing varies widely. Enterprise platforms like Conversica start at £1,500-2,000/month. Mid-market tools range from £200-800/month. LimeCall offers AI SDR capabilities starting at £57/month, making it accessible for SMBs and startups. Compared to the £40-60k annual cost of a human SDR (plus benefits, training, and management), even premium AI SDR tools deliver significant ROI.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the best AI SDR tools in 2025?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The leading AI SDR tools in 2025 include LimeCall (best for speed-to-lead and inbound qualification), Conversica (enterprise AI assistants), Apollo.io (AI-powered prospecting), Outreach (sales engagement with AI), and Salesloft (AI-guided selling). The best choice depends on your primary use case: LimeCall excels at inbound lead qualification and instant callback, while tools like Apollo focus on outbound prospecting.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can I set up an AI SDR?',
+      acceptedAnswer: { '@type': 'Answer', text: 'LimeCall\'s AI SDR can be live in under 5 minutes. Add the widget to your website, configure your qualification script in the dashboard, connect your CRM and calendar, and the AI begins qualifying leads immediately. There is no engineering work, no long implementation project, and no training period — unlike a human SDR who takes 3.2 months on average to ramp up.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does AI SDR software integrate with my CRM?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. LimeCall integrates natively with Salesforce, HubSpot, and Pipedrive, plus 1,000+ additional tools via Zapier. Every AI conversation — including full transcripts, qualification scores, lead data, and meeting outcomes — is automatically synced to your CRM. This eliminates the manual data entry that typically consumes 20-30% of a human SDR\'s time.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What qualification frameworks does AI SDR support?',
+      acceptedAnswer: { '@type': 'Answer', text: 'LimeCall\'s AI SDR supports BANT (Budget, Authority, Need, Timeline), MEDDIC (Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion), and fully custom qualification frameworks. You define the questions, scoring thresholds, and routing rules in the dashboard. The AI adapts its conversation flow based on prospect responses in real-time.' }
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall AI SDR',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'AI-powered Sales Development Representative software that qualifies inbound leads in 28 seconds, books meetings automatically, and replaces the cost of human SDRs.',
+  url: 'https://www.limecall.com/ai-sdr/',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    priceValidUntil: '2025-12-31',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '310',
+    bestRating: '5',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'AI SDR', url: `${site.url}/ai-sdr/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        🤖 AI-Powered Sales Development
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        AI SDR: Automate Lead Generation<br class="hidden sm:block" />
+        <span class="text-lime-400">Without the Agency Fees</span>
+      </h1>
+      <div class="speakable mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        <p>An AI SDR (Sales Development Representative) is software that automates lead qualification, outbound outreach, and meeting booking using artificial intelligence. LimeCall's AI SDR connects with inbound leads in 28 seconds, runs BANT qualification conversations, and books demos directly into your calendar — replacing the £40-60k annual cost of a human SDR.</p>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Replace Your SDR Costs — Start Free
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          See AI SDR in Action →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">From £57/mo · No credit card · Live in 5 minutes</p>
+      <div class="mt-6 flex items-center justify-center gap-6 text-xs text-dark-500">
+        <span>★ 4.5 rating</span>
+        <span>·</span>
+        <span>10,000+ sales teams</span>
+        <span>·</span>
+        <span>Responds in 28 seconds</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- The SDR Problem -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">The SDR Problem: Why Teams Are Switching to AI</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Human SDRs are expensive, inconsistent, and limited to business hours. Here is what the data shows.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { stat: '35%', label: 'Average annual SDR turnover', desc: 'Over a third of your SDR team will leave each year, taking institutional knowledge and pipeline context with them.' },
+          { stat: '3.2 mo', label: 'Average ramp time to productivity', desc: 'New SDRs take over three months before they hit quota — that is £15k+ in salary before a single qualified meeting.' },
+          { stat: '£40-60k', label: 'Annual cost per SDR', desc: 'Base salary plus benefits, tools, management overhead, office space, and training — before they generate a single lead.' },
+          { stat: '8 hrs', label: 'Limited to business hours', desc: 'Human SDRs work 9-5. Your website generates leads 24/7. Every after-hours lead is a missed opportunity or a cold follow-up.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="text-3xl font-extrabold text-red-400 mb-2">{item.stat}</div>
+            <h3 class="text-base font-bold text-white mb-2">{item.label}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How AI SDR Software Works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">How AI SDR Software Works</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Five steps from lead arrival to booked meeting — all automatic, all instant, all logged.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-5">
+        {[
+          { step: '01', title: 'Lead Arrives', desc: 'Prospect submits a form, starts a chat, or requests a callback on your website.' },
+          { step: '02', title: 'AI Qualifies in Real-Time', desc: 'AI engages the lead in natural conversation, asking your BANT or MEDDIC questions.' },
+          { step: '03', title: 'BANT Scoring', desc: 'Lead is scored against your criteria — budget, authority, need, and timeline.' },
+          { step: '04', title: 'Hot Lead Transfer', desc: 'Qualified leads are transferred to your AE in 28 seconds. Unqualified leads enter nurture.' },
+          { step: '05', title: 'Meeting Booked', desc: 'AI books the discovery call directly into your calendar. No email ping-pong required.' },
+        ].map(item => (
+          <div class="relative rounded-2xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-sm">{item.step}</div>
+            <h3 class="text-sm font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-xs text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SDR vs Human SDR vs Lead Gen Agency -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">AI SDR vs Human SDR vs Lead Generation Agency</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Factor', 'AI SDR (LimeCall)', 'Human SDR', 'Lead Gen Agency'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'AI SDR (LimeCall)' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Monthly cost', '£57/mo', '£3,300-5,000/mo', '£2,000-10,000/mo'],
+              ['Availability', '24/7/365', '8hrs/day, weekdays', 'Business hours'],
+              ['Ramp time', 'Instant (5 min setup)', '3.2 months average', '1-3 months'],
+              ['Consistency', '100% script adherence', 'Variable by rep/mood', 'Variable by agency'],
+              ['Scalability', 'Unlimited concurrent leads', '40-60 activities/day', 'Fixed deliverables'],
+              ['CRM logging', 'Automatic, real-time', 'Manual, often incomplete', 'Weekly batch reports'],
+              ['Qualification speed', '28 seconds', '5-30 minutes', '24-72 hours'],
+              ['Meeting booking', 'Instant calendar sync', 'Manual email chain', 'CSV handoff'],
+              ['Multi-language', '40+ languages', '1-2 languages', '1-3 languages'],
+              ['Turnover risk', 'Zero', '35% annual average', 'Account manager changes'],
+              ['Training cost', '£0', '£5,000-10,000 per rep', 'Included in retainer'],
+              ['Data accuracy', '99.9% — automated', '70-80% — human error', '60-75% — outsourced'],
+              ['Response time', '28 seconds', '1-4 hours average', '24-48 hours'],
+              ['Pipeline coverage', '100% of inbound leads', 'Cherry-picked leads', 'Contract-defined volume'],
+              ['ROI timeline', 'Week 1', '4-6 months', '3-6 months'],
+            ].map(([factor, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-3 font-medium text-dark-200">{factor}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-3 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SDR Features -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">AI SDR Features That Replace Your Agency</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Everything a human SDR does — faster, cheaper, and without sick days.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Generation Software Comparison -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Lead Generation Software Comparison</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Tool', 'Best For', 'Starting Price', 'Speed-to-Lead', 'AI Qualification', 'CRM Sync'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'Tool' ? 'text-dark-300' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['LimeCall', 'Inbound lead qualification', '£57/mo', '28 seconds', '✅ Full BANT/MEDDIC', '✅ Native'],
+              ['Outreach', 'Outbound sequences', '$100/user/mo', 'N/A — outbound', '⚠️ Basic scoring', '✅ Native'],
+              ['Salesloft', 'Sales engagement', '$125/user/mo', 'N/A — outbound', '⚠️ Basic scoring', '✅ Native'],
+              ['Apollo.io', 'Prospecting + data', '$49/user/mo', 'N/A — outbound', '⚠️ Lead scoring', '✅ Native'],
+              ['Clay', 'Data enrichment', '$149/mo', 'N/A — enrichment', '❌ No qualification', '⚠️ Via Zapier'],
+            ].map(([tool, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class={`px-5 py-3 font-medium ${tool === 'LimeCall' ? 'text-lime-400 font-bold' : 'text-dark-200'}`}>{tool}</td>
+                {vals.map(v => (
+                  <td class="px-5 py-3 text-dark-400">{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Where Teams Deploy AI SDR Software</h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {useCases.map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-10">
+        <div class="text-xs font-semibold text-lime-400 uppercase tracking-wider mb-4">Case Study — B2B SaaS</div>
+        <h2 class="text-2xl font-extrabold text-white sm:text-3xl mb-6">How a B2B SaaS Company Replaced 2 SDRs and Booked 3.4x More Qualified Meetings</h2>
+        <div class="grid gap-8 sm:grid-cols-3 mb-8">
+          {[
+            { metric: '3.4x', label: 'More qualified meetings booked per month' },
+            { metric: '£78k', label: 'Annual savings vs two human SDRs' },
+            { metric: '28s', label: 'Average lead connection time (was 4.2 hours)' },
+          ].map(item => (
+            <div class="text-center">
+              <div class="text-3xl font-extrabold text-lime-400">{item.metric}</div>
+              <p class="mt-2 text-sm text-dark-400">{item.label}</p>
+            </div>
+          ))}
+        </div>
+        <div class="space-y-4 text-dark-300 text-sm leading-relaxed">
+          <p><strong class="text-white">The Challenge:</strong> A mid-market B2B SaaS company with 200 employees was spending £90k/year on two SDRs who averaged 4.2 hours to respond to inbound demo requests. Lead-to-meeting conversion was just 8%, and 62% of leads were contacted outside the buying window.</p>
+          <p><strong class="text-white">The Solution:</strong> They deployed LimeCall's AI SDR to handle all inbound lead qualification. The AI engaged every demo request within 28 seconds, ran BANT qualification conversations, and booked meetings directly into AE calendars.</p>
+          <p><strong class="text-white">The Result:</strong> In the first 90 days, qualified meetings increased from 34/month to 116/month (3.4x). Annual cost dropped from £90k to £684. The two former SDRs were promoted to account executive roles, where they now close the higher volume of qualified pipeline the AI generates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Calculator -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">AI SDR ROI Calculator</h2>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-10">
+        <div class="grid gap-8 sm:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-red-400 mb-4">Current SDR Costs (Annual)</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between text-dark-300"><span>2 SDRs x £45,000 salary</span><span class="text-white font-semibold">£90,000</span></div>
+              <div class="flex justify-between text-dark-300"><span>Benefits & taxes (25%)</span><span class="text-white font-semibold">£22,500</span></div>
+              <div class="flex justify-between text-dark-300"><span>Tools & tech stack</span><span class="text-white font-semibold">£4,800</span></div>
+              <div class="flex justify-between text-dark-300"><span>Management overhead (10%)</span><span class="text-white font-semibold">£9,000</span></div>
+              <div class="flex justify-between text-dark-300"><span>Training & ramp</span><span class="text-white font-semibold">£6,000</span></div>
+              <div class="flex justify-between text-dark-300 border-t border-dark-700 pt-3"><span class="font-bold text-white">Total Annual Cost</span><span class="text-red-400 font-bold text-lg">£132,300</span></div>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-lime-400 mb-4">LimeCall AI SDR (Annual)</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between text-dark-300"><span>LimeCall Pro plan</span><span class="text-white font-semibold">£684</span></div>
+              <div class="flex justify-between text-dark-300"><span>Setup & configuration</span><span class="text-white font-semibold">£0</span></div>
+              <div class="flex justify-between text-dark-300"><span>Training time</span><span class="text-white font-semibold">£0</span></div>
+              <div class="flex justify-between text-dark-300"><span>Management overhead</span><span class="text-white font-semibold">£0</span></div>
+              <div class="flex justify-between text-dark-300"><span>Turnover & recruiting</span><span class="text-white font-semibold">£0</span></div>
+              <div class="flex justify-between text-dark-300 border-t border-dark-700 pt-3"><span class="font-bold text-white">Total Annual Cost</span><span class="text-lime-400 font-bold text-lg">£684</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 rounded-xl bg-lime-500/10 border border-lime-500/20 p-6 text-center">
+          <p class="text-sm text-dark-300">Annual Savings with AI SDR</p>
+          <p class="text-4xl font-extrabold text-lime-400 mt-2">£131,616</p>
+          <p class="text-xs text-dark-500 mt-2">That is 99.5% cost reduction with 24/7 coverage and 391% more conversions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How AI SDR Integrates -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Seamless Integration With Your Sales Stack</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">LimeCall AI SDR connects to the tools your team already uses — no engineering required.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { title: 'CRM Integration', desc: 'Native two-way sync with Salesforce, HubSpot, and Pipedrive. Every AI conversation, qualification score, transcript, and contact detail is logged automatically in real-time. Your CRM stays perfectly up to date without any manual data entry from your reps.', tools: 'Salesforce · HubSpot · Pipedrive' },
+          { title: 'Calendar Sync', desc: 'AI books meetings directly into your AE calendars through Google Calendar, Outlook, or Calendly. Leads see available time slots, choose their preferred time, and receive confirmation with a calendar invite — all within the same conversation.', tools: 'Google Calendar · Outlook · Calendly · HubSpot Meetings' },
+          { title: 'Workflow Automation', desc: 'Connect LimeCall to 1,000+ tools via Zapier and Make. Trigger Slack notifications when a hot lead is qualified, update project management boards, enrich lead data with third-party sources, or launch nurture sequences automatically.', tools: 'Zapier · Slack · Make · n8n · Webhooks' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <h3 class="text-lg font-bold text-white mb-3">{item.title}</h3>
+            <p class="text-sm text-dark-400 mb-4">{item.desc}</p>
+            <p class="text-xs text-lime-400 font-semibold">{item.tools}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SDR for Different Industries -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">AI SDR Across Industries</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { industry: 'Technology & SaaS', icon: '💻', desc: 'AI SDR qualifies trial signups and demo requests against technical fit, company size, and budget criteria. Handles the high volume of inbound leads generated by product-led growth motions without adding headcount.', result: 'Average 3.4x increase in qualified demo bookings.' },
+          { industry: 'Professional Services', icon: '🏢', desc: 'Consulting firms, agencies, and service providers use AI SDR to qualify project enquiries, assess scope and budget fit, and route prospects to the right practice lead or partner based on specialisation.', result: 'Average 2.8x faster time-to-first-meeting.' },
+          { industry: 'Financial Services', icon: '🏦', desc: 'Banks, insurance companies, and wealth managers deploy AI SDR to qualify loan applications, policy enquiries, and investment prospects against regulatory and compliance-ready criteria before connecting to licensed advisors.', result: 'Compliance-ready qualification at 90% lower cost.' },
+          { industry: 'Healthcare & Wellness', icon: '🏥', desc: 'Healthcare providers use AI SDR to qualify patient appointment requests, assess insurance compatibility, and route to the correct department or specialist — all while maintaining HIPAA-compliant conversation handling.', result: 'Reduces no-show rates by qualifying intent upfront.' },
+          { industry: 'Real Estate', icon: '🏠', desc: 'Agents and brokers deploy AI SDR to qualify buyer and seller enquiries against budget, timeline, location preferences, and financing status before connecting to the right agent for a showing or listing consultation.', result: 'Average 4.1x more qualified property viewings.' },
+          { industry: 'Education & Training', icon: '🎓', desc: 'Universities, bootcamps, and corporate training providers use AI SDR to qualify prospective students and corporate buyers against programme fit, budget, and timeline before routing to admissions or sales.', result: 'Enrolment conversion rates doubled.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.industry}</h3>
+            <p class="text-sm text-dark-400 mb-3">{item.desc}</p>
+            <p class="text-xs text-lime-400 font-semibold">{item.result}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">What Sales Leaders Say About AI SDR</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { quote: 'We were spending £90k a year on two SDRs who took 4 hours to respond to demo requests. LimeCall AI SDR responds in 28 seconds, qualifies with our exact BANT criteria, and books 3x more meetings. We promoted both SDRs to AE roles.', name: 'James R.', role: 'VP of Sales, B2B SaaS, 45 reps' },
+          { quote: 'Our lead gen agency was charging us £5k a month and delivering inconsistent quality. We switched to LimeCall AI SDR for £57 a month and the leads are better qualified because the AI follows our criteria every single time, without exception.', name: 'Sarah M.', role: 'Head of Growth, Series A Startup' },
+        ].map(t => (
+          <blockquote class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <p class="text-dark-200 italic leading-relaxed">"{t.quote}"</p>
+            <footer class="mt-6">
+              <p class="font-bold text-white">{t.name}</p>
+              <p class="text-sm text-dark-500">{t.role}</p>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SDR Implementation Guide -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">How to Deploy AI SDR in 5 Minutes</h2>
+      <div class="space-y-6">
+        {[
+          { step: 'Step 1: Add the Widget', time: '60 seconds', desc: 'Copy a single line of JavaScript and paste it into your website header. Works with any CMS — WordPress, Webflow, Shopify, custom builds. No developer needed.' },
+          { step: 'Step 2: Configure Qualification Script', time: '2 minutes', desc: 'Choose BANT, MEDDIC, or create a custom qualification framework in the dashboard. Define your questions, scoring thresholds, and routing rules. The AI will follow your playbook exactly.' },
+          { step: 'Step 3: Connect CRM & Calendar', time: '90 seconds', desc: 'Authenticate your Salesforce, HubSpot, or Pipedrive account. Connect Google Calendar or Outlook. LimeCall handles the rest — syncing every conversation and booking meetings automatically.' },
+          { step: 'Step 4: Set Routing Rules', time: '60 seconds', desc: 'Define which reps receive which leads. Route by geography, product line, deal size, or round-robin. Set availability schedules so AI handles after-hours qualification.' },
+          { step: 'Step 5: Go Live', time: '0 seconds', desc: 'Click activate. Your AI SDR is now qualifying every inbound lead 24/7. Monitor the real-time dashboard to see leads qualified, meetings booked, and pipeline generated.' },
+        ].map(item => (
+          <div class="flex gap-6 rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <div class="shrink-0">
+              <div class="inline-flex rounded-lg bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{item.time}</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">{item.step}</h3>
+              <p class="text-sm text-dark-400">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Teams Choose LimeCall AI SDR -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Why 10,000+ Teams Choose LimeCall AI SDR</h2>
+      <div class="grid gap-6 sm:grid-cols-4">
+        {[
+          { value: '28s', title: 'Fastest Response Time', desc: 'No other AI SDR tool connects leads to your team as fast. 28 seconds from form submission to live conversation — 500x faster than the industry average.' },
+          { value: '£57', title: 'Lowest Starting Price', desc: 'Enterprise AI SDR capabilities at SMB pricing. No per-seat fees, no long contracts, no hidden costs. Start for less than a team lunch.' },
+          { value: '5 min', title: 'Fastest Setup', desc: 'From signup to live AI SDR in under 5 minutes. No engineering, no data migration, no implementation project. Just paste a snippet and configure your script.' },
+          { value: '391%', title: 'Proven Conversion Lift', desc: 'Across 10,000+ sales teams, LimeCall delivers 391% more conversions versus traditional lead response methods. The data speaks for itself.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-2xl font-extrabold text-lime-400 mb-2">{item.value}</div>
+            <h3 class="text-sm font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-xs text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Replace Your SDR Costs in 5 Minutes</h2>
+      <p class="mt-4 text-lg text-dark-300">From £57/mo. No credit card. No engineering. Live today.</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Start Free — Deploy AI SDR →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">14-day free trial · No credit card · Cancel anytime</p>
+    </div>
+  </section>
+
+  <CrossLinks
+    heading="Explore LimeCall"
+    links={[
+      { href: '/ai-phone-agent/', title: 'AI Phone Agent', desc: 'AI-powered phone conversations.' },
+      { href: '/ai-voice-agent/', title: 'AI Voice Agent', desc: 'Qualify leads 24/7 with voice AI.' },
+      { href: '/lead-routing-software/', title: 'Lead Routing', desc: 'Right rep, right time.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'From £57/month.' },
+    ]}
+  />
+</Base>

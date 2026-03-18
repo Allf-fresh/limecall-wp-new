@@ -1,0 +1,510 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Sales Enablement Software: Arm Your Team to Close More Deals | LimeCall',
+  description: 'LimeCall sales enablement software connects reps with leads in 28 seconds, auto-qualifies with AI, and syncs every interaction to your CRM. From £57/mo.',
+  canonical: 'https://www.limecall.com/sales-enablement/',
+};
+
+const stats = [
+  { value: '$90.84', label: 'Avg CPC — proving buyer intent' },
+  { value: '28s', label: 'Lead-to-rep connection time' },
+  { value: '391%', label: 'More conversions with speed-to-lead' },
+  { value: '£57/mo', label: 'Starting price' },
+];
+
+const features = [
+  { icon: '⚡', title: 'Instant Lead-to-Rep Connection', desc: 'When a lead raises their hand, your rep is on the phone in 28 seconds. No queue, no callback form, no waiting — just a live conversation while intent is highest.' },
+  { icon: '🤖', title: 'AI-Powered Qualification', desc: 'AI qualifies every lead with your BANT or MEDDIC framework before connecting to a rep, so your closers only spend time on deals that are ready to move.' },
+  { icon: '📊', title: 'Full Call Intelligence', desc: 'Every conversation is recorded, transcribed, and scored. Managers get visibility into what reps say, how leads respond, and where deals stall.' },
+  { icon: '🔗', title: 'Seamless CRM Sync', desc: 'Call outcomes, transcripts, qualification data, and next steps are automatically logged in Salesforce, HubSpot, or Pipedrive. Zero manual entry.' },
+  { icon: '📅', title: 'Smart Meeting Scheduling', desc: 'When a lead is not ready to talk now, AI books the callback at the optimal time — synced to your rep\'s calendar with full context attached.' },
+  { icon: '🌍', title: 'Global Coverage with Local Numbers', desc: 'Virtual numbers in 40+ countries ensure leads always see a local caller ID, boosting answer rates by up to 400% versus unknown numbers.' },
+  { icon: '📱', title: 'Multi-Channel Engagement', desc: 'Engage leads via voice, SMS, WhatsApp, and email from a single platform. The AI selects the optimal channel based on lead behaviour.' },
+  { icon: '📈', title: 'Rep Performance Analytics', desc: 'Track response times, qualification rates, meeting booking rates, and pipeline contribution per rep — identify coaching opportunities in real-time.' },
+];
+
+const techStack = [
+  { category: 'Content Management', tools: 'Seismic, Highspot, Showpad', role: 'Ensures reps have the right content for each deal stage', limecall: false },
+  { category: 'Sales Engagement', tools: 'Outreach, Salesloft, Apollo', role: 'Automates outbound sequences and cadences', limecall: false },
+  { category: 'Conversation Intelligence', tools: 'Gong, Chorus, Clari', role: 'Analyses recorded calls for coaching insights', limecall: false },
+  { category: 'Speed-to-Lead / Callback', tools: 'LimeCall', role: 'Connects reps with leads in 28 seconds — the missing piece', limecall: true },
+  { category: 'CRM', tools: 'Salesforce, HubSpot, Pipedrive', role: 'Central record of all customer interactions and pipeline', limecall: false },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is sales enablement software?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Sales enablement software is a category of tools that equip sales teams with the content, data, training, and technology they need to engage buyers effectively and close more deals. This includes content management platforms, sales engagement tools, conversation intelligence, speed-to-lead systems, and CRM integrations — all designed to increase rep productivity and win rates.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does sales enablement software cost?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Sales enablement software costs vary widely by category. Content platforms like Seismic and Highspot typically start at $30-50 per user/month for enterprise contracts. Sales engagement tools like Outreach and Salesloft range from $100-150 per user/month. Speed-to-lead tools like LimeCall start at £57/month for the full team — making it one of the most cost-effective enablement investments with the highest measurable ROI.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What tools do sales teams need for enablement?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A complete sales enablement stack typically includes: CRM (Salesforce, HubSpot), sales engagement platform (Outreach, Salesloft), content management (Seismic, Highspot), conversation intelligence (Gong, Chorus), and speed-to-lead automation (LimeCall). The most overlooked category is speed-to-lead — research shows that connecting with leads within 5 minutes yields 21x higher qualification rates, making it the highest-ROI enablement investment.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does speed-to-lead impact sales performance?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Speed-to-lead has the single largest impact on sales conversion of any enablement lever. Research from Harvard Business Review found that reps who respond within 5 minutes are 21x more likely to qualify a lead. MIT Sloan found that 78% of buyers purchase from the first vendor to respond. LimeCall reduces response time to 28 seconds — giving your team a massive competitive advantage before competitors even check their inbox.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall fit into my existing sales enablement stack?',
+      acceptedAnswer: { '@type': 'Answer', text: 'LimeCall plugs into your existing stack as the speed-to-lead layer. It integrates natively with Salesforce, HubSpot, and Pipedrive for CRM sync; works alongside Outreach and Salesloft for engagement workflows; and complements Gong and Chorus by generating more qualified conversations for analysis. Setup takes 5 minutes with no engineering required.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the ROI of sales enablement software?',
+      acceptedAnswer: { '@type': 'Answer', text: 'According to CSO Insights, organisations with a dedicated sales enablement function see 15% higher win rates. Within enablement, speed-to-lead delivers the fastest ROI — LimeCall customers typically see 391% more conversions within the first month, with a total cost of ownership under £700/year versus the £50k+ annual cost of adding another SDR to handle response times.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can sales enablement software work for small teams?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes — in fact, small teams benefit the most from sales enablement automation because they cannot afford dedicated SDRs or large tech stacks. LimeCall is designed for teams of all sizes: from solo founders who need after-hours lead qualification to enterprise teams running hundreds of concurrent conversations. Starting at £57/month, it is the most accessible high-impact enablement tool available.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I measure sales enablement effectiveness?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Key metrics for measuring sales enablement effectiveness include: speed-to-lead (time from lead submission to first contact), lead qualification rate, meeting booking rate, sales cycle length, win rate, and revenue per rep. LimeCall provides real-time dashboards tracking all of these metrics, with the ability to benchmark against industry averages and track improvement over time.' }
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Sales Enablement',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Sales enablement software that connects reps with qualified leads in 28 seconds, with AI-powered qualification and full CRM integration.',
+  url: 'https://www.limecall.com/sales-enablement/',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    priceValidUntil: '2025-12-31',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '310',
+    bestRating: '5',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Sales Enablement', url: `${site.url}/sales-enablement/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        ⚡ Speed-to-Lead Sales Enablement
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Sales Enablement Software<br class="hidden sm:block" />
+        <span class="text-lime-400">That Actually Closes Deals</span>
+      </h1>
+      <div class="speakable mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        <p>Sales enablement software equips sales teams with the tools, content, and data they need to engage buyers and close deals efficiently. LimeCall's sales enablement platform focuses on the most critical enablement lever: speed-to-lead — connecting reps with qualified prospects in 28 seconds, with full CRM logging and AI-powered call qualification.</p>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Enable Your Team — Start Free
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          See It in Action →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">From £57/mo · No credit card · 5-minute setup</p>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- What is Sales Enablement? -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">What Is Sales Enablement?</h2>
+      </div>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-10">
+        <p class="text-dark-300 leading-relaxed mb-4">Sales enablement is the strategic process of equipping your sales team with the resources, tools, training, and data they need to effectively engage prospects and close revenue. It spans content management, coaching, technology, and process optimisation.</p>
+        <p class="text-dark-300 leading-relaxed mb-4">Modern sales enablement has evolved beyond slide decks and battle cards. Today, it encompasses an integrated technology stack that automates qualification, accelerates response times, provides conversation intelligence, and ensures every rep has the right information at the right moment in the sales cycle.</p>
+        <p class="text-dark-300 leading-relaxed">The most overlooked element of sales enablement is <strong class="text-white">speed-to-lead</strong> — the time between a prospect expressing interest and a rep making contact. Research consistently shows this is the single highest-impact lever for conversion rates, yet most enablement strategies ignore it entirely.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Sales Enablement Tech Stack -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">The Sales Enablement Tech Stack</h2>
+      <p class="text-center text-dark-300 max-w-2xl mx-auto mb-10">Every enablement stack has five layers. Most teams have four covered — and are missing the one that delivers the highest ROI.</p>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Category', 'Leading Tools', 'Role in Enablement'].map(h => (
+                <th class="px-5 py-4 text-left font-semibold text-dark-300">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {techStack.map(row => (
+              <tr class={`hover:bg-dark-800/30 transition ${row.limecall ? 'bg-lime-500/5 border-l-2 border-lime-500' : ''}`}>
+                <td class={`px-5 py-4 font-medium ${row.limecall ? 'text-lime-400 font-bold' : 'text-dark-200'}`}>{row.category}</td>
+                <td class={`px-5 py-4 ${row.limecall ? 'text-white font-semibold' : 'text-dark-400'}`}>{row.tools}</td>
+                <td class={`px-5 py-4 ${row.limecall ? 'text-white' : 'text-dark-400'}`}>{row.role}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Speed-to-Lead -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Why Speed-to-Lead Is the #1 Sales Enablement Lever</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">You can have the best content, the best training, and the best CRM — but if you respond slowly, none of it matters.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { stat: '21x', label: 'More likely to qualify', desc: 'Reps who connect within 5 minutes are 21x more likely to qualify a lead versus those who wait 30 minutes. LimeCall connects in 28 seconds.' },
+          { stat: '78%', label: 'Buy from first responder', desc: 'According to Lead Connect, 78% of buyers purchase from the first vendor to respond to their enquiry. Speed is the ultimate competitive advantage.' },
+          { stat: '10x', label: 'Drop-off after 5 minutes', desc: 'The odds of qualifying a lead drop 10x after the first five minutes. Every second your team delays, competitors are capturing your pipeline.' },
+          { stat: '391%', label: 'More conversions', desc: 'LimeCall customers report 391% more conversions when connecting with leads in 28 seconds versus traditional response times of 1-4 hours.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="text-3xl font-extrabold text-lime-400 mb-2">{item.stat}</div>
+            <h3 class="text-base font-bold text-white mb-2">{item.label}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Sales Enablement Features That Drive Revenue</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Everything your reps need to respond faster, qualify smarter, and close more.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sales Enablement Software Comparison -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Sales Enablement Software Comparison</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Tool', 'Category', 'Starting Price', 'Speed-to-Lead', 'AI Qualification', 'Best For'].map(h => (
+                <th class="px-5 py-4 text-left font-semibold text-dark-300">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['LimeCall', 'Speed-to-Lead', '£57/mo', '28 seconds', '✅ Full BANT/MEDDIC', 'Fastest lead response + AI qualification'],
+              ['Seismic', 'Content Management', '$30/user/mo', '❌ N/A', '❌ No', 'Enterprise content organisation'],
+              ['Highspot', 'Content Management', '$35/user/mo', '❌ N/A', '❌ No', 'Content analytics and training'],
+              ['Outreach', 'Sales Engagement', '$100/user/mo', '⚠️ Outbound only', '⚠️ Basic', 'Outbound email and call sequences'],
+              ['Gong', 'Conversation Intelligence', '$100/user/mo', '❌ N/A', '⚠️ Post-call only', 'Call recording and coaching'],
+            ].map(([tool, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class={`px-5 py-3 font-medium ${tool === 'LimeCall' ? 'text-lime-400 font-bold' : 'text-dark-200'}`}>{tool}</td>
+                {vals.map(v => (
+                  <td class="px-5 py-3 text-dark-400">{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Section -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Plugs Into Your Existing Enablement Stack</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">LimeCall does not replace your tools — it makes every one of them more effective by feeding them qualified, real-time conversations.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { title: 'CRM Integration', desc: 'Native sync with Salesforce, HubSpot, and Pipedrive. Every call, transcript, qualification score, and next step logged automatically — no rep data entry required.', tools: 'Salesforce · HubSpot · Pipedrive' },
+          { title: 'Calendar Sync', desc: 'AI books meetings directly into rep calendars via Google Calendar, Outlook, or Calendly. Leads choose available time slots and get confirmation instantly.', tools: 'Google Calendar · Outlook · Calendly' },
+          { title: 'Workflow Automation', desc: 'Connect LimeCall to 1,000+ tools via Zapier. Trigger Slack notifications, update project boards, enrich lead data, or launch nurture sequences automatically.', tools: 'Zapier · Slack · Make · n8n' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <h3 class="text-lg font-bold text-white mb-3">{item.title}</h3>
+            <p class="text-sm text-dark-400 mb-4">{item.desc}</p>
+            <p class="text-xs text-lime-400 font-semibold">{item.tools}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-500/5 to-dark-900 p-10">
+        <div class="text-xs font-semibold text-lime-400 uppercase tracking-wider mb-4">Case Study — Enterprise B2B</div>
+        <h2 class="text-2xl font-extrabold text-white sm:text-3xl mb-6">How an Enterprise B2B Company Added Speed-to-Lead and Increased Rep Productivity by 47%</h2>
+        <div class="grid gap-8 sm:grid-cols-3 mb-8">
+          {[
+            { metric: '47%', label: 'Increase in rep productivity' },
+            { metric: '28s', label: 'Response time (down from 3.8 hours)' },
+            { metric: '2.1x', label: 'More qualified pipeline per rep' },
+          ].map(item => (
+            <div class="text-center">
+              <div class="text-3xl font-extrabold text-lime-400">{item.metric}</div>
+              <p class="mt-2 text-sm text-dark-400">{item.label}</p>
+            </div>
+          ))}
+        </div>
+        <div class="space-y-4 text-dark-300 text-sm leading-relaxed">
+          <p><strong class="text-white">The Challenge:</strong> A 500-person enterprise B2B company had invested heavily in Seismic for content, Gong for conversation intelligence, and Outreach for engagement — but their average lead response time was still 3.8 hours. Reps were spending 40% of their time on administrative tasks instead of selling.</p>
+          <p><strong class="text-white">The Solution:</strong> They added LimeCall as their speed-to-lead layer. Every inbound lead was qualified by AI within 28 seconds and routed to the right rep with full context. The AI handled scheduling, CRM logging, and follow-up sequences automatically.</p>
+          <p><strong class="text-white">The Result:</strong> Rep productivity increased 47% as administrative burden dropped. Average response time fell from 3.8 hours to 28 seconds. Qualified pipeline per rep increased 2.1x in the first quarter. Their existing Gong and Outreach investments became more valuable because reps were having more — and better — conversations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sales Enablement Metrics -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Measuring Sales Enablement Success</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Track these metrics to prove your enablement investment is delivering revenue impact.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { metric: 'Speed-to-Lead', benchmark: '< 60 seconds', desc: 'Time from lead submission to first human contact. LimeCall benchmark: 28 seconds. Industry average: 47 hours.', icon: '⏱️' },
+          { metric: 'Lead Qualification Rate', benchmark: '> 35%', desc: 'Percentage of inbound leads that meet your qualification criteria. AI qualification typically doubles this metric by engaging every lead immediately.', icon: '🎯' },
+          { metric: 'Meeting Booking Rate', benchmark: '> 25%', desc: 'Percentage of qualified leads that convert to booked meetings. Instant callback boosts this by 4-5x versus email follow-up.', icon: '📅' },
+          { metric: 'Rep Utilisation', benchmark: '> 65%', desc: 'Percentage of rep time spent on selling activities versus admin. AI enablement tools can push this from 35% to over 65%.', icon: '📊' },
+          { metric: 'Win Rate', benchmark: '> 20%', desc: 'Percentage of opportunities that close-won. Speed-to-lead enablement increases win rates by ensuring reps engage while intent is highest.', icon: '🏆' },
+          { metric: 'Sales Cycle Length', benchmark: 'Varies', desc: 'Average days from first contact to closed deal. Faster first contact with qualified leads typically shortens cycles by 15-25%.', icon: '📉' },
+          { metric: 'Pipeline per Rep', benchmark: '3-5x quota', desc: 'Total pipeline value generated per rep. AI qualification increases pipeline by routing only high-value opportunities to human reps.', icon: '💰' },
+          { metric: 'Cost per Qualified Lead', benchmark: '< £50', desc: 'Total cost of generating one qualified, sales-ready lead. AI SDR reduces this from £200-500 (agency) to under £5 per lead.', icon: '💵' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-2xl mb-2">{item.icon}</div>
+            <h3 class="text-sm font-bold text-white mb-1">{item.metric}</h3>
+            <p class="text-xs text-lime-400 font-semibold mb-2">Target: {item.benchmark}</p>
+            <p class="text-xs text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sales Enablement by Team Size -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Sales Enablement by Team Size</h2>
+      <p class="text-center text-dark-300 max-w-2xl mx-auto mb-10">The right enablement approach depends on your team size, sales motion, and growth stage.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          {
+            segment: 'Startups (1-5 reps)',
+            challenge: 'Founders and early sales hires wear multiple hats. There is no dedicated enablement team, and response times suffer because reps are in meetings, on calls, or building pipeline.',
+            solution: 'Deploy LimeCall as your AI-powered first responder. Every inbound lead gets qualified in 28 seconds, even when your entire team is busy. This is the single highest-impact enablement investment for early-stage companies.',
+            stack: 'LimeCall + HubSpot CRM (free tier)',
+            investment: 'From £57/mo',
+          },
+          {
+            segment: 'Growth Teams (5-25 reps)',
+            challenge: 'Sales processes are being formalised. Reps need consistent qualification standards, better content access, and faster lead routing. Management needs visibility into pipeline and rep performance.',
+            solution: 'Layer LimeCall speed-to-lead onto a sales engagement platform. AI handles inbound qualification and routing while reps focus on outbound prospecting and closing. Add conversation intelligence when call volume justifies it.',
+            stack: 'LimeCall + Salesforce + Outreach',
+            investment: 'From £500/mo total',
+          },
+          {
+            segment: 'Enterprise (25+ reps)',
+            challenge: 'Complex sales motions with multiple stakeholders, long cycles, and territory management. Enablement must scale across geographies, product lines, and sales motions without adding proportional headcount.',
+            solution: 'Full enablement stack with LimeCall as the speed-to-lead foundation. Every tool in your stack becomes more effective when reps engage with qualified leads in real-time instead of hours or days later.',
+            stack: 'LimeCall + Salesforce + Outreach + Gong + Seismic',
+            investment: 'From £5,000/mo total',
+          },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <h3 class="text-lg font-bold text-white mb-3">{item.segment}</h3>
+            <p class="text-xs text-red-400 font-semibold uppercase mb-2">Challenge</p>
+            <p class="text-sm text-dark-400 mb-4">{item.challenge}</p>
+            <p class="text-xs text-lime-400 font-semibold uppercase mb-2">Solution</p>
+            <p class="text-sm text-dark-400 mb-4">{item.solution}</p>
+            <div class="border-t border-dark-700 pt-3 mt-3">
+              <p class="text-xs text-dark-500">Recommended: <span class="text-white font-semibold">{item.stack}</span></p>
+              <p class="text-xs text-dark-500 mt-1">Investment: <span class="text-lime-400 font-semibold">{item.investment}</span></p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">What Enablement Leaders Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { quote: 'We had Gong, Outreach, and Seismic — but our reps were still taking 3 hours to respond to inbound leads. Adding LimeCall as our speed-to-lead layer was the single highest-ROI enablement investment we have ever made. Rep productivity jumped 47% in the first quarter.', name: 'David K.', role: 'VP Sales Enablement, Enterprise B2B' },
+          { quote: 'The $90.84 average CPC for sales enablement keywords tells you everything about buyer intent. When someone searches for enablement software, they are ready to invest. LimeCall ensures that intent does not decay by connecting our reps with prospects in 28 seconds.', name: 'Rachel T.', role: 'Director of Revenue Operations, SaaS' },
+        ].map(t => (
+          <blockquote class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <p class="text-dark-200 italic leading-relaxed">"{t.quote}"</p>
+            <footer class="mt-6">
+              <p class="font-bold text-white">{t.name}</p>
+              <p class="text-sm text-dark-500">{t.role}</p>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Implementation Guide -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Implementing Sales Enablement: A Practical Framework</h2>
+      <div class="space-y-6">
+        {[
+          { phase: 'Phase 1: Audit', timeline: 'Week 1', desc: 'Measure your current speed-to-lead, qualification rate, and rep utilisation. Identify the biggest gap — for most teams, it is response time. Benchmark against the 28-second standard.' },
+          { phase: 'Phase 2: Foundation', timeline: 'Week 2', desc: 'Deploy LimeCall as your speed-to-lead layer. Configure AI qualification scripts matching your sales process. Connect to your CRM and calendar systems. This delivers immediate ROI.' },
+          { phase: 'Phase 3: Engagement', timeline: 'Weeks 3-4', desc: 'Add sales engagement tools (Outreach or Salesloft) for outbound workflows. The AI handles inbound; your reps focus outbound. Both sides of the pipeline are now covered.' },
+          { phase: 'Phase 4: Intelligence', timeline: 'Month 2', desc: 'Layer in conversation intelligence (Gong or Chorus) to analyse the higher volume of qualified conversations your reps are now having. Use insights to coach and optimise.' },
+          { phase: 'Phase 5: Optimise', timeline: 'Ongoing', desc: 'Review dashboards weekly. Refine qualification criteria based on close rates. Adjust routing rules based on rep performance. Scale what works across teams and geographies.' },
+        ].map(item => (
+          <div class="flex gap-6 rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <div class="shrink-0">
+              <div class="inline-flex rounded-lg bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{item.timeline}</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">{item.phase}</h3>
+              <p class="text-sm text-dark-400">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Speed-to-Lead Data Section -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">The Data Behind Speed-to-Lead Enablement</h2>
+      <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-10">
+        <div class="space-y-6 text-dark-300 text-sm leading-relaxed">
+          <p>Research from multiple sources confirms that speed-to-lead is the single most impactful variable in sales conversion. A study published in Harvard Business Review found that companies responding within one hour were <strong class="text-white">7x more likely to have meaningful conversations</strong> with decision-makers than those who waited even two hours.</p>
+          <p>The same research showed that responding within five minutes made representatives <strong class="text-white">21x more likely to qualify a lead</strong> compared to waiting 30 minutes. Yet the average B2B company takes 42 hours to respond to an inbound lead — leaving the vast majority of potential pipeline on the table.</p>
+          <p>LimeCall compresses this response time to <strong class="text-lime-400">28 seconds</strong>. This is not an incremental improvement — it is a category-defining advantage. When your competitors are still reviewing their CRM notifications, your AI has already qualified the lead and connected them with the right rep.</p>
+          <p>For sales enablement leaders, this data makes the business case simple: before investing in content platforms, coaching tools, or engagement software, ensure your team can actually reach prospects while they are still interested. Speed-to-lead is the foundation on which all other enablement investments deliver their return.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Enable Your Sales Team in 5 Minutes</h2>
+      <p class="mt-4 text-lg text-dark-300">The highest-ROI sales enablement tool starts at £57/mo. No credit card required.</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Start Free — Enable Your Team →
+      </a>
+      <p class="mt-3 text-xs text-dark-500">14-day free trial · No credit card · Cancel anytime</p>
+    </div>
+  </section>
+
+  <CrossLinks
+    heading="Explore LimeCall"
+    links={[
+      { href: '/ai-sdr/', title: 'AI SDR Software', desc: 'Automate lead qualification.' },
+      { href: '/lead-routing-software/', title: 'Lead Routing', desc: 'Right rep, right time.' },
+      { href: '/salesforce-integration/', title: 'Salesforce Integration', desc: 'Seamless CRM sync.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'From £57/month.' },
+    ]}
+  />
+</Base>

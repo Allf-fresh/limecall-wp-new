@@ -1,0 +1,367 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Manchester Businesses | LimeCall',
+  description: 'Trusted by 500+ Manchester businesses. LimeCall connects website leads with your team in 28 seconds — from MediaCityUK to the Northern Quarter.',
+  canonical: 'https://www.limecall.com/callback-software-manchester/',
+};
+
+const stats = [
+  { value: '500+', label: 'Manchester businesses use LimeCall' },
+  { value: '28s', label: 'Average connection time for Manchester leads' },
+  { value: 'Northern', label: 'Powerhouse hub for business growth' },
+  { value: '5×', label: 'More conversions vs slow follow-up' },
+];
+
+const features = [
+  { icon: '⚡', title: 'Instant Callback Widget', desc: 'Deploy on your Manchester website in under 5 minutes. When a prospect clicks, LimeCall connects them to your team in 28 seconds — no hold music, no missed enquiries.' },
+  { icon: '🔗', title: 'CRM Integrations — HubSpot & Salesforce', desc: 'Every Manchester lead automatically logged in HubSpot, Salesforce, Zoho, or your existing CRM. Capture contact, source page, and call outcome without manual data entry.' },
+  { icon: '🗂️', title: 'Lead Routing by Team or Department', desc: 'Automatically route digital agency enquiries to your client services team, financial leads to your Spinningfields advisers, and tech enquiries to your product specialists.' },
+  { icon: '💬', title: 'WhatsApp Click-to-Chat', desc: "Manchester's SME owners and decision-makers increasingly use WhatsApp for business. LimeCall's click-to-chat captures leads who prefer messaging, adding another conversion channel." },
+  { icon: '🌙', title: 'Out-of-Hours Lead Capture', desc: 'Northern Powerhouse businesses work hard hours. LimeCall queues evening and weekend enquiries so your team can call back first thing Monday — before any competitor does.' },
+  { icon: '🔒', title: 'GDPR Compliant — UK Data Handling', desc: 'All data encrypted in transit and at rest. ICO registered, DPAs signed as standard. Manchester businesses in regulated sectors can deploy with full confidence.' },
+];
+
+const sectors = [
+  { area: 'MediaCityUK', sector: 'Digital Agencies & Media', desc: 'MediaCityUK\'s creative and digital businesses use LimeCall to convert inbound new business enquiries into booked discovery calls before competitors respond.' },
+  { area: 'Northern Quarter', sector: 'Tech Startups & SaaS', desc: "Manchester's growing tech scene relies on LimeCall to convert demo requests and trial sign-ups into qualified sales conversations within seconds of the enquiry." },
+  { area: 'Spinningfields', sector: 'Financial & Professional Services', desc: 'Manchester\'s financial district firms use LimeCall to connect high-value prospects with relationship managers and advisers — instantly, every time.' },
+  { area: 'City Centre', sector: 'Property Developers', desc: "Manchester's booming property market demands instant response. Estate agents and developers use LimeCall to connect buyers and tenants with agents before they move on." },
+  { area: 'Greater Manchester', sector: 'Manufacturing & Industry', desc: "The region's manufacturing firms use LimeCall to capture trade enquiries and connect procurement contacts with account managers without delays." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall popular with Manchester businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. Over 500 Manchester businesses use LimeCall to convert website visitors into calls and meetings. Our Manchester customers include digital agencies in MediaCityUK, tech startups in the Northern Quarter, financial services firms in Spinningfields, property developers, and manufacturing businesses across Greater Manchester. LimeCall is the UK's leading callback software for ambitious regional businesses.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall have a UK-based support team for Manchester businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall has a UK-based customer success team available during UK business hours. Manchester businesses receive onboarding support, integration assistance, and ongoing help from team members who understand UK working practices, UK CRM ecosystems, and the specific challenges of growing businesses in the North West.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work well for Northern Powerhouse businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Absolutely. Northern Powerhouse businesses — from Manchester's professional services firms to its manufacturing base — face the same challenge: high-quality inbound leads that go cold because follow-up is too slow. LimeCall solves that with 28-second callback connection, out-of-hours lead capture, and CRM integrations that keep your pipeline moving. Our fastest-growing Manchester customers report 5× more conversions from existing website traffic.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can Manchester digital agencies use LimeCall to win more new business?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Manchester digital agencies are among our most active users. Agencies use LimeCall on their own websites to convert inbound new business enquiries into discovery calls, and recommend LimeCall to clients as a conversion rate optimisation tool. When a prospective client submits a brief, LimeCall connects them with a new business lead within 28 seconds — dramatically improving the impression and conversion rate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall GDPR compliant for UK businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is fully UK GDPR compliant and ICO registered. All customer data is encrypted using AES-256 encryption in transit and at rest. We sign Data Processing Agreements (DPAs) with all UK customers, offer configurable data retention periods, and provide full audit logs. Manchester businesses in regulated sectors — including financial services and healthcare — can deploy LimeCall with confidence.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a Manchester business get started with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Most Manchester businesses are live within 5 minutes. Add the LimeCall widget to your website using a single JavaScript snippet or via Google Tag Manager — no developer needed. Configure your team routing, out-of-hours capture settings, and CRM integration from the dashboard. Our UK onboarding team is available to help if needed. 14-day free trial, no credit card required.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with CRMs used by Manchester businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with HubSpot, Salesforce, Zoho CRM, Pipedrive, and 1,000+ tools via Zapier and native connectors. Every callback is automatically logged — contact name, phone number, source page, call duration, and outcome notes — eliminating manual data entry and keeping your pipeline accurate. Most Manchester SMEs are fully integrated within 15 minutes.',
+      },
+    },
+  ],
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Callback Software',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: 'https://www.limecall.com',
+  description: 'Callback software for Manchester businesses. Connect website leads with your team in 28 seconds. Trusted by 500+ Manchester businesses across digital, tech, financial services, property, and manufacturing.',
+  offers: {
+    '@type': 'Offer',
+    price: '35',
+    priceCurrency: 'USD',
+    priceValidUntil: '2026-12-31',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Manchester, United Kingdom',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '312',
+  },
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={localBusinessSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Manchester', url: site.url + '/callback-software-manchester/' }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        📍 Trusted by 500+ Manchester Businesses
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Convert More Manchester Leads<br class="hidden sm:block" />
+        <span class="text-lime-400">with Instant Callback</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        From MediaCityUK to the Northern Quarter, Manchester's fastest-growing businesses use LimeCall to connect website visitors with their team in 28 seconds — turning ad spend into booked conversations before the competition wakes up.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ UK-Based Support · ICO Registered · GDPR Compliant · Northern Powerhouse Ready</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Manchester Leads Go Cold in Under 5 Minutes</h2>
+        <p class="text-dark-300">
+          Research shows that a lead who doesn't get a response within 5 minutes is 80% less likely to convert. Manchester's growing business market is competitive — your prospects are comparing multiple providers at once. LimeCall connects your team with inbound leads in 28 seconds, so you're the first voice they hear, the first relationship they build, and the first deal you close.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Manchester Businesses</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Prospect Visits Your Website', desc: 'The LimeCall widget appears on your service pages, pricing pages, and campaign landing pages — capturing visitors at the moment of highest intent.' },
+          { step: '02', title: 'Lead Requests an Instant Callback', desc: 'They enter their number. LimeCall identifies the page, the lead source, and routes automatically to the right team member or department.' },
+          { step: '03', title: 'Your Manchester Team Connects in 28 Seconds', desc: "You speak with the prospect before they leave your site. After-hours and weekend enquiries are queued for your team's next available slot." },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Everything Manchester Businesses Need to Win More Leads</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Manchester sectors -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-4">LimeCall Across Manchester's Key Business Areas</h2>
+      <p class="text-center text-dark-400 mb-12 max-w-2xl mx-auto">From MediaCityUK to Spinningfields, Manchester's most ambitious sectors use LimeCall to turn website visitors into booked conversations.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sectors.map(s => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <div class="mb-2">
+              <span class="text-xs font-semibold text-lime-400 uppercase tracking-wide">{s.area}</span>
+              <h3 class="font-bold text-white mt-1">{s.sector}</h3>
+            </div>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We were getting good inbound interest but converting less than 20% of enquiries into calls. LimeCall changed that completely. We saw 38% more client enquiries converted to discovery calls in the first two months, which drove £95k in additional revenue for the agency. It paid for itself in the first week."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Managing Director</p>
+          <p class="text-sm text-dark-500">Manchester digital agency, MediaCityUK</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Contact Methods for Manchester Businesses</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone + Voicemail', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours or next day', '1–48 hours', 'Agent dependent'],
+              ['Out-of-hours capture', '✅ Queue + AM callback', '❌ Voicemail lost', '✅ Form stored', '❌ No agent'],
+              ['Department routing', '✅ Automatic by page', '⚠️ Manual transfer', '❌ None', '⚠️ Manual'],
+              ['WhatsApp integration', '✅ Click-to-chat', '❌ Not available', '❌ Not available', '⚠️ Add-on'],
+              ['CRM auto-logging', '✅ HubSpot, Salesforce', '⚠️ Manual logging', '⚠️ Basic only', '⚠️ Limited'],
+              ['Lead conversion rate', '🟢 Up to 5× higher', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust signals -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Trusted by Manchester's Most Ambitious Businesses</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '🇬🇧', title: 'UK-Based Support Team', desc: 'Our customer success team works UK hours. Manchester businesses get fast onboarding, training, and support from people who understand the UK market and Northern business culture.' },
+          { icon: '🔒', title: 'ICO Registered & GDPR Compliant', desc: 'Fully compliant with UK GDPR and registered with the Information Commissioner\'s Office. DPAs signed as standard for all UK business customers.' },
+          { icon: '📈', title: 'Built for Growth-Stage Businesses', desc: "Manchester's scale-up ecosystem demands tools that grow with you. LimeCall's team management, routing rules, and integrations scale from 2-person startups to 200-person agencies." },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with the Tools Manchester Businesses Already Use</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to HubSpot, Salesforce, Zoho CRM, Pipedrive, and 1,000+ tools via Zapier. Whether you're a MediaCityUK agency on HubSpot or a Spinningfields firm on Salesforce, every callback is automatically logged — contact details, source page, call duration, and outcome — so your pipeline stays accurate and your team stays focused on selling.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions — LimeCall for Manchester</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Winning More Manchester Clients Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · UK-based support · No IT team required · GDPR compliant</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Trusted by 500+ Manchester businesses</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/saas/', title: 'SaaS Callback Software', desc: 'Convert free trial sign-ups and demo requests into booked calls.' },
+        { href: '/financial-services/', title: 'Financial Services Callback', desc: 'Callback software for IFAs, mortgage brokers, and fintech firms.' },
+        { href: '/construction/', title: 'Construction Callback Software', desc: 'Capture trade and project enquiries before competitors respond.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month. UK businesses welcome.' },
+      ]} />
+    </div>
+  </div>
+</Base>

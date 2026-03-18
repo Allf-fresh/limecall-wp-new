@@ -1,0 +1,370 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Birmingham Businesses | LimeCall',
+  description: 'Join 400+ Birmingham businesses using LimeCall. Convert website enquiries to calls in 28 seconds — from the Jewellery Quarter to Solihull.',
+  canonical: 'https://www.limecall.com/callback-software-birmingham/',
+};
+
+const stats = [
+  { value: '400+', label: 'Birmingham businesses use LimeCall' },
+  { value: '28s', label: 'Average connection time for Birmingham leads' },
+  { value: 'UK\'s 2nd', label: 'Largest economy outside London' },
+  { value: '5×', label: 'More conversions vs slow follow-up' },
+];
+
+const features = [
+  { icon: '⚡', title: 'Instant Callback Widget', desc: 'Deploy on your Birmingham business website in under 5 minutes. When a visitor clicks, LimeCall connects them with your team in 28 seconds — capturing trade and commercial enquiries at peak intent.' },
+  { icon: '🔗', title: 'CRM Integrations — Salesforce & HubSpot', desc: 'Every Birmingham lead automatically logged in Salesforce, HubSpot, Zoho, or your CRM of choice. Trade enquiries, supplier contacts, and commercial leads tracked without manual data entry.' },
+  { icon: '🗂️', title: 'Lead Routing by Team or Department', desc: 'Route automotive enquiries to your technical sales team, Jewellery Quarter trade leads to your specialist advisers, and Colmore professional services enquiries to the right account manager — automatically.' },
+  { icon: '💬', title: 'WhatsApp Click-to-Chat', desc: "Birmingham's trade and manufacturing contacts increasingly use WhatsApp for business enquiries. LimeCall's click-to-chat captures leads who prefer messaging over forms, opening new conversion channels." },
+  { icon: '🌙', title: 'Out-of-Hours Lead Capture', desc: 'Birmingham manufacturers and automotive suppliers work early shifts. LimeCall captures enquiries outside standard office hours and surfaces them to your team first thing, so no trade lead goes cold overnight.' },
+  { icon: '🔒', title: 'GDPR Compliant — UK Data Handling', desc: 'All data encrypted in transit and at rest. ICO registered, DPAs signed as standard. Birmingham businesses in regulated and industrial sectors can deploy LimeCall with confidence.' },
+];
+
+const sectors = [
+  { area: 'Automotive Supply Chain', sector: 'Automotive & Manufacturing', desc: "Birmingham's automotive supply chain — from Tier 1 suppliers to specialist components — uses LimeCall to capture urgent trade enquiries and connect buyers with technical sales teams instantly." },
+  { area: 'Jewellery Quarter', sector: 'Trade & Retail', desc: "The Jewellery Quarter's unique mix of manufacturing, retail, and wholesale businesses uses LimeCall to convert website visitors into booked consultations and trade enquiries." },
+  { area: 'Colmore Business District', sector: 'Professional Services', desc: "Birmingham's professional services hub — accountants, solicitors, consultancies, and financial advisers — uses LimeCall to connect inbound enquiries with the right specialist immediately." },
+  { area: 'Digbeth', sector: 'Creative & Tech', desc: "Digbeth's regenerating creative and tech scene uses LimeCall to convert inbound interest into booked calls, supporting the area's growth as Birmingham's innovation district." },
+  { area: 'Solihull & M42 Corridor', sector: 'Corporate & Business Parks', desc: 'Corporate businesses in the M42 corridor and Solihull business parks use LimeCall to ensure inbound sales enquiries are followed up instantly, regardless of team location.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall used by Birmingham businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. Over 400 Birmingham businesses use LimeCall to convert website visitors into calls and meetings. Our Birmingham customers span the automotive supply chain, professional services in the Colmore Business District, Jewellery Quarter trade businesses, Digbeth tech and creative firms, and corporate businesses across the M42 corridor. LimeCall is the UK's leading callback software for ambitious regional businesses.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support automotive industry businesses in Birmingham?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. LimeCall is used by automotive suppliers, dealerships, and related businesses across the Birmingham and West Midlands region. Automotive businesses use LimeCall to capture urgent trade enquiries, connect procurement contacts with technical sales teams, and follow up inbound website enquiries from buyers before competitors do. After-hours capture is particularly valuable for automotive businesses, where urgent supply needs don't follow standard office hours.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for manufacturing businesses in Birmingham?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. Manufacturing businesses across Birmingham and the wider West Midlands are among LimeCall's most active users. Manufacturers use LimeCall to capture inbound trade and supply enquiries on their websites, route them to the correct product or technical specialist, and ensure no enquiry from a potential customer goes unanswered. Out-of-hours capture is particularly effective for manufacturers responding to urgent supply chain needs outside standard business hours.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help Birmingham businesses benefit from HS2 investment?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "HS2 is driving significant investment in Birmingham's business community, attracting new businesses and increasing demand for professional services, construction, and supply chain providers. LimeCall helps Birmingham businesses capitalise on this growth by ensuring they're the first to respond to inbound enquiries from new clients and contracts. When a procurement team or property developer lands on your website, LimeCall connects them with your team in 28 seconds — before they move on to the next supplier.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall GDPR compliant for UK businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is fully UK GDPR compliant and ICO registered. All customer data is encrypted using AES-256 encryption in transit and at rest. We sign Data Processing Agreements (DPAs) with all UK customers, offer configurable data retention periods, and maintain full audit logs. Birmingham businesses in regulated sectors — including financial services, healthcare, and professional services — can deploy LimeCall with confidence.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a Birmingham business get started with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Most Birmingham businesses are live within 5 minutes. Add the LimeCall widget to your website using a single JavaScript snippet or via Google Tag Manager — no developer required. Configure your team routing, out-of-hours capture, and CRM integration from the dashboard. Our UK-based onboarding team is available to help if needed. 14-day free trial with no credit card required.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall have a UK-based support team for Birmingham businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall has a UK-based customer success and support team available during UK business hours. Birmingham businesses receive onboarding support, integration assistance, and ongoing help from team members who understand UK working practices and the specific needs of businesses in manufacturing, automotive, professional services, and trade sectors.',
+      },
+    },
+  ],
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Callback Software',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: 'https://www.limecall.com',
+  description: 'Callback software for Birmingham businesses. Convert website enquiries to calls in 28 seconds. Trusted by 400+ Birmingham businesses across automotive, manufacturing, professional services, and trade.',
+  offers: {
+    '@type': 'Offer',
+    price: '35',
+    priceCurrency: 'USD',
+    priceValidUntil: '2026-12-31',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Birmingham, United Kingdom',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '312',
+  },
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={localBusinessSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Birmingham', url: site.url + '/callback-software-birmingham/' }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        📍 Trusted by 400+ Birmingham Businesses
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Birmingham's Fastest Way<br class="hidden sm:block" />
+        <span class="text-lime-400">to Connect with Website Leads</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        From the Jewellery Quarter to Solihull, Birmingham's most ambitious businesses use LimeCall to connect website visitors with their team in 28 seconds — capturing trade enquiries, commercial leads, and new business before competitors even notice.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ UK-Based Support · ICO Registered · GDPR Compliant · Built for Trade &amp; Professional Services</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Birmingham's Growth Is Creating More Competition for Every Enquiry</h2>
+        <p class="text-dark-300">
+          Birmingham is the UK's largest city outside London, with HS2 investment accelerating business growth and competition. As more businesses compete for the same customers, the speed of your first response is now a key differentiator. Buyers and procurement teams researching suppliers will instruct whoever calls them first. LimeCall makes that business yours — 28-second connection, every time, from any page on your website.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Birmingham Businesses</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Prospect Visits Your Website', desc: 'The LimeCall widget appears on your product pages, service pages, and trade enquiry pages — wherever high-intent Birmingham prospects land after finding you online.' },
+          { step: '02', title: 'Lead Requests an Instant Callback', desc: 'They enter their number. LimeCall identifies the page they\'re on, the enquiry source, and routes to the correct team member or department — without any manual handling.' },
+          { step: '03', title: 'Your Birmingham Team Connects in 28 Seconds', desc: 'You speak with the prospect before they move on to a competitor. After-hours trade enquiries are queued and surfaced to your team at the start of the next working day.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Everything Birmingham Businesses Need to Convert More Enquiries</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Birmingham sectors -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-4">LimeCall Across Birmingham's Key Business Sectors</h2>
+      <p class="text-center text-dark-400 mb-12 max-w-2xl mx-auto">From the automotive supply chain to the Jewellery Quarter, Birmingham's most competitive sectors use LimeCall to win more enquiries with instant follow-up.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sectors.map(s => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <div class="mb-2">
+              <span class="text-xs font-semibold text-lime-400 uppercase tracking-wide">{s.area}</span>
+              <h3 class="font-bold text-white mt-1">{s.sector}</h3>
+            </div>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We supply automotive parts to Tier 1 manufacturers across the Midlands. Procurement teams don't wait around — if you don't answer in minutes, they've moved on. LimeCall gave us 44% more trade enquiries captured and connected to our technical sales team. That translated to £210k in additional pipeline in the first quarter."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Sales Director</p>
+          <p class="text-sm text-dark-500">Birmingham automotive parts supplier, West Midlands</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Contact Methods for Birmingham Businesses</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone + Voicemail', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours or next day', '1–48 hours', 'Agent dependent'],
+              ['Out-of-hours capture', '✅ Queue + AM callback', '❌ Voicemail lost', '✅ Form stored', '❌ No agent'],
+              ['Department routing', '✅ Automatic by page', '⚠️ Manual transfer', '❌ None', '⚠️ Manual'],
+              ['Trade enquiry handling', '✅ Priority queuing', '⚠️ Shared inbox', '❌ Delayed', '⚠️ Agent needed'],
+              ['CRM auto-logging', '✅ Salesforce, HubSpot', '⚠️ Manual logging', '⚠️ Basic only', '⚠️ Limited'],
+              ['Lead conversion rate', '🟢 Up to 5× higher', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust signals -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Trusted by Birmingham's Leading Businesses</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '🇬🇧', title: 'UK-Based Support Team', desc: "Our customer success team works UK hours. Birmingham businesses get fast onboarding, training, and ongoing support from people who understand UK business culture and the West Midlands' industrial heritage." },
+          { icon: '🔒', title: 'ICO Registered & GDPR Compliant', desc: 'Fully compliant with UK GDPR and registered with the Information Commissioner\'s Office. DPAs signed as standard for all UK business customers, including trade and industrial businesses.' },
+          { icon: '🏭', title: 'Built for Trade & Industrial Businesses', desc: "LimeCall handles trade enquiry volumes, shift-pattern routing, and out-of-hours capture that industrial and manufacturing businesses in Birmingham's supply chains demand." },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-dark-500">
+        LimeCall is trusted by businesses across the UK and 40+ countries. <a href="/gdpr/" class="text-lime-400 hover:text-lime-300 transition">Read our GDPR documentation →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with the Tools Birmingham Businesses Already Use</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to Salesforce, HubSpot, Zoho CRM, and 1,000+ tools via Zapier. Whether you're an automotive supplier using a specialist ERP, a Colmore professional services firm on Salesforce, or a trade business tracking enquiries in a spreadsheet, LimeCall logs every callback automatically — contact details, source, duration, and outcome — keeping your pipeline accurate and your team closing.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions — LimeCall for Birmingham</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Converting Birmingham Website Enquiries Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · UK-based support · No IT team required · GDPR compliant</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Trusted by 400+ Birmingham businesses</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/automotive/', title: 'Automotive Callback Software', desc: 'Callback software for dealerships and automotive suppliers.' },
+        { href: '/construction/', title: 'Construction Callback Software', desc: 'Capture trade and project enquiries before competitors respond.' },
+        { href: '/financial-services/', title: 'Financial Services Callback', desc: 'Callback software for IFAs, mortgage brokers, and financial advisers.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month. UK businesses welcome.' },
+      ]} />
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,370 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for London Businesses | LimeCall',
+  description: "London's fastest callback software. Connect website leads with your team in 28 seconds — trusted by 2,000+ London businesses from Canary Wharf to Shoreditch.",
+  canonical: 'https://www.limecall.com/callback-software-london/',
+};
+
+const stats = [
+  { value: '2,000+', label: 'London businesses use LimeCall' },
+  { value: '28s', label: 'Average connection time for London leads' },
+  { value: '£4.50', label: 'Avg London CPC — protect every click' },
+  { value: '5×', label: 'More conversions vs slow follow-up' },
+];
+
+const features = [
+  { icon: '⚡', title: 'Instant Callback Widget', desc: 'Deploy a branded callback widget on any page in under 5 minutes. When a London visitor clicks, LimeCall connects them with your team in 28 seconds — while their intent is highest.' },
+  { icon: '🔗', title: 'CRM Integrations — Salesforce & HubSpot', desc: 'Every London lead automatically logged in Salesforce, HubSpot, Zoho, or your CRM of choice. No manual data entry; every callback tracked with contact detail, source page, and call outcome.' },
+  { icon: '🗂️', title: 'Lead Routing by Team or Department', desc: 'Route Canary Wharf enquiries to your finance team, Shoreditch leads to your tech account managers, and property enquiries to your Mayfair specialists — automatically, every time.' },
+  { icon: '💬', title: 'WhatsApp Click-to-Chat', desc: "London professionals increasingly prefer WhatsApp. LimeCall's click-to-chat widget captures leads who won't fill in forms, converting them into warm conversations with your team." },
+  { icon: '🌙', title: 'Out-of-Hours Lead Capture', desc: "London's busiest professionals research at 9pm. LimeCall queues after-hours requests and surfaces them to your team first thing, so you call back before any competitor." },
+  { icon: '🔒', title: 'GDPR Compliant — ICO Registered', desc: 'All data encrypted in transit and at rest. UK-based data handling, ICO-registered, DPAs signed as standard. Built for London businesses operating in regulated sectors.' },
+];
+
+const sectors = [
+  { area: 'Canary Wharf', sector: 'Financial Services', desc: 'Banks, fintech firms, and investment managers use LimeCall to connect high-value prospects with relationship managers before competitors respond.' },
+  { area: 'Shoreditch / Tech City', sector: 'Tech Startups & SaaS', desc: 'London\'s tech startup scene relies on LimeCall to convert inbound demo requests and trial sign-ups into qualified sales calls within seconds.' },
+  { area: 'Mayfair & Kensington', sector: 'Property & Real Estate', desc: 'Prime London estate agents use LimeCall to connect property enquiries with agents instantly — because a £2M buyer won\'t wait on hold.' },
+  { area: 'EC4 / Gray\'s Inn Road', sector: 'Legal Services', desc: 'Law firms and solicitors in London\'s legal quarter use LimeCall to capture new client enquiries and route them to the right practice area team.' },
+  { area: 'Harley Street', sector: 'Private Healthcare', desc: 'Private clinics and healthcare providers use LimeCall to convert patient enquiries into booked appointments — minimising missed consultations.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall used by London businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Over 2,000 London businesses use LimeCall to convert website visitors into booked calls and demos. Our customers span financial services in Canary Wharf, tech startups in Shoreditch, property agencies in Mayfair, law firms in EC4, and private healthcare providers on Harley Street. LimeCall is the UK\'s leading callback software for competitive urban markets.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall have a UK-based support team?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall has a UK-based customer success and support team available during UK business hours. London businesses receive onboarding support, implementation assistance, and ongoing help from team members who understand the UK market, UK working hours, and the specific needs of businesses operating in London\'s key sectors.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall GDPR compliant and ICO registered?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is fully GDPR compliant and ICO registered. All customer data is encrypted in transit and at rest using AES-256 encryption. We sign Data Processing Agreements (DPAs) with all UK customers, maintain configurable data retention periods, and provide full audit logs. London businesses in regulated industries — including financial services and healthcare — can use LimeCall with confidence.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall be used by FCA-regulated businesses in London?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. LimeCall is used by FCA-regulated firms including IFAs, mortgage brokers, and fintech companies based in London's financial districts. Our call recording feature supports COBS and SYSC compliance obligations, and all data handling meets FCA expectations for client communication records. We recommend all regulated firms review our compliance documentation and consult their compliance officer before deployment.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why is instant callback so important for London businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "London is the UK's most competitive business market, with average CPCs of £4.50 and over 1.1 million businesses competing for the same customers. A prospect who clicks your ad and waits more than 5 minutes will find a competitor. LimeCall connects your team with that prospect in 28 seconds — while they're still on your website, still interested, and still available. Research shows businesses that respond within 5 minutes are 21× more likely to convert the lead.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a London business set up LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Most London businesses are live within 5 minutes. Add the LimeCall widget using a single JavaScript snippet or via Google Tag Manager — no developer required. Configure your routing rules, team assignments, and out-of-hours settings from the dashboard. Our UK-based onboarding team can walk you through setup on a call if needed. Free 14-day trial available with no credit card required.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for London businesses with multiple office locations?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. LimeCall supports multi-location businesses with routing rules that direct inbound leads to the correct office, team, or department. A property firm with offices in Mayfair, Canary Wharf, and Shoreditch can route leads to local agents based on the page visited or the postcode entered. Each location can have its own team schedule, out-of-hours settings, and call recording configuration.",
+      },
+    },
+  ],
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Callback Software',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: 'https://www.limecall.com',
+  description: "Callback software for London businesses. Connect website leads with your sales team in 28 seconds. Trusted by 2,000+ London businesses across financial services, tech, property, legal, and healthcare.",
+  offers: {
+    '@type': 'Offer',
+    price: '35',
+    priceCurrency: 'USD',
+    priceValidUntil: '2026-12-31',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'London, United Kingdom',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '312',
+  },
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={localBusinessSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'London', url: site.url + '/callback-software-london/' }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        📍 Trusted by 2,000+ London Businesses
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Convert London Website Leads<br class="hidden sm:block" />
+        <span class="text-lime-400">5× Faster</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        London's most competitive market demands instant response. LimeCall connects website visitors with your team in 28 seconds — from Canary Wharf to Shoreditch — so you win the lead before any competitor picks up the phone.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ UK-Based Support · ICO Registered · GDPR Compliant · FCA-Aware</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ London's £4.50 CPCs Are Wasted Without Instant Follow-Up</h2>
+        <p class="text-dark-300">
+          With over 1.1 million businesses competing in London and average CPCs of £4.50, every website visitor represents significant ad spend. Yet most London businesses take hours — or days — to respond to inbound enquiries. By then, your lead has booked with a competitor. LimeCall eliminates that gap: 28-second connection, every time, so your ad spend converts.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for London Businesses</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Visitor Lands on Your Website', desc: 'The LimeCall widget appears on your key pages — services, pricing, contact, and campaign landing pages — wherever high-intent London prospects land.' },
+          { step: '02', title: 'Lead Requests an Instant Callback', desc: 'They enter their number. LimeCall identifies the page, the lead source, and routes to the right team member or department — instantly.' },
+          { step: '03', title: 'Your Team Connected in 28 Seconds', desc: 'Your London team speaks with the prospect before they leave your site. After-hours requests are queued for first-thing-AM follow-up.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Everything London Businesses Need to Convert More Leads</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- London sectors -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-4">LimeCall Across London's Key Business Districts</h2>
+      <p class="text-center text-dark-400 mb-12 max-w-2xl mx-auto">From the City to Shoreditch, London's most competitive sectors trust LimeCall to convert website traffic into booked conversations.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sectors.map(s => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <div class="mb-2">
+              <span class="text-xs font-semibold text-lime-400 uppercase tracking-wide">{s.area}</span>
+              <h3 class="font-bold text-white mt-1">{s.sector}</h3>
+            </div>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We were spending £8,000 a month on Google Ads and losing half the inbound leads because no one was fast enough to call back. LimeCall changed that overnight. We saw 47% more qualified leads booked for demos in the first 90 days — that translated to £180k in additional revenue in Q1 alone."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Head of Growth</p>
+          <p class="text-sm text-dark-500">London fintech firm, Canary Wharf</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Contact Methods for London Businesses</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone + Voicemail', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours or next day', '1–48 hours', 'Agent dependent'],
+              ['Out-of-hours capture', '✅ Queue + AM callback', '❌ Voicemail lost', '✅ Form stored', '❌ No agent'],
+              ['Department routing', '✅ Automatic by page', '⚠️ Manual transfer', '❌ None', '⚠️ Manual'],
+              ['WhatsApp integration', '✅ Click-to-chat', '❌ Not available', '❌ Not available', '⚠️ Add-on'],
+              ['CRM auto-logging', '✅ Salesforce, HubSpot', '⚠️ Manual logging', '⚠️ Basic only', '⚠️ Limited'],
+              ['London CPC protection', '🟢 Every click followed up', '🟡 Standard', '🔴 Slow response', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust signals -->
+  <section class="py-16 sm:py-20 bg-dark-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Built for London's Regulated Business Environment</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '🇬🇧', title: 'UK-Based Support Team', desc: 'Our customer success team operates on UK time. London businesses get onboarding, training, and ongoing support from people who understand the UK market.' },
+          { icon: '🔒', title: 'ICO Registered & GDPR Compliant', desc: 'Fully compliant with UK GDPR and registered with the Information Commissioner\'s Office. DPAs signed as standard for all UK business customers.' },
+          { icon: '📋', title: 'FCA-Aware for Regulated Industries', desc: 'Used by financial services firms in Canary Wharf. Call recording and data handling designed with awareness of FCA obligations for regulated communications.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-dark-500">
+        LimeCall is trusted by businesses across the UK and 40+ countries. <a href="/gdpr/" class="text-lime-400 hover:text-lime-300 transition">Read our GDPR documentation →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-900/40">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with London's Favourite Business Tools</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to Salesforce, HubSpot, Zoho CRM, and 1,000+ tools via Zapier and native integrations. London businesses using Microsoft Teams, Slack, or any major CRM can sync every callback automatically — contact detail, lead source, call duration, and outcome — without lifting a finger.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions — LimeCall for London</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Converting London Website Leads Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · UK-based support · No IT team required · GDPR compliant</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Trusted by 2,000+ London businesses</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/financial-services/', title: 'Financial Services Callback', desc: 'Callback software for IFAs, mortgage brokers, and fintech firms.' },
+        { href: '/legal/', title: 'Legal Callback Software', desc: 'Callback software for law firms and solicitors.' },
+        { href: '/real-estate/', title: 'Real Estate Callback Software', desc: 'Convert property enquiries into booked viewings instantly.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month. UK businesses welcome.' },
+      ]} />
+    </div>
+  </div>
+</Base>

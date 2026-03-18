@@ -1,0 +1,363 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const crm = "Salesforce";
+const slug = "salesforce-integration";
+
+const seo = {
+  title: `LimeCall + Salesforce Integration | LimeCall`,
+  description: `Connect LimeCall callbacks to Salesforce in 5 minutes. Auto-create Leads, sync call recordings to Activity logs, and trigger Salesforce workflows on every call.`,
+  canonical: `https://www.limecall.com/salesforce-integration/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall integrate with Salesforce?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects to Salesforce via a native OAuth integration. Authorise the connection from your LimeCall dashboard and every callback is automatically logged as a call Activity in Salesforce with caller name, number, duration, recording link, and outcome — no Zapier or developer required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall automatically create Salesforce Leads or Contacts?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. When a new visitor requests a callback, LimeCall checks Salesforce for a matching Lead or Contact by phone number or email. If none exists, LimeCall creates a new Lead and populates all available fields. If a record already exists, LimeCall updates it and logs the call Activity against the existing record.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can call recordings be stored in Salesforce?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. After every LimeCall callback, a call Activity is logged in the Salesforce record that includes a direct link to the call recording hosted in LimeCall. Your reps can listen to any call directly from within the Salesforce contact or lead record without leaving the CRM.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall trigger Salesforce workflows or Process Builder flows?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Because LimeCall creates and updates Salesforce records in real time, any Salesforce workflow, Process Builder flow, or Flow that is triggered by Lead or Activity creation will fire automatically. You can use call outcomes to update Lead Status, assign tasks, send emails, or progress Opportunities.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I map custom LimeCall fields to Salesforce custom fields?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports custom field mapping in the integration settings. You can map any LimeCall data point — such as campaign source, widget name, call outcome, or agent name — to any standard or custom field in your Salesforce Lead, Contact, or Activity objects.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is the Salesforce integration available on all LimeCall plans?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Salesforce integration is available on the LimeCall Pro plan and above, which includes 500 calls per month, custom integrations, and API access. You can start a free trial of the Pro plan to test the integration before committing.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "28s", label: "Average callback speed" },
+  { value: "5 min", label: "Setup time — no developer" },
+  { value: "78%", label: "Of lost deals due to slow follow-up" },
+  { value: "500", label: "Calls/mo on Pro plan" },
+];
+
+const features = [
+  {
+    title: "Auto-create Lead or Contact on callback",
+    desc: "Every callback request from a new visitor automatically creates a Salesforce Lead or Contact, populated with phone number, name, traffic source, and the page they called from.",
+  },
+  {
+    title: "Sync call recordings to Activity log",
+    desc: "After each call, LimeCall logs a completed Call Activity in Salesforce with duration, outcome, and a direct link to the recording — giving reps full context before their next touch.",
+  },
+  {
+    title: "Map LimeCall fields to Salesforce custom fields",
+    desc: "Use the field mapper in LimeCall to push any data point — widget name, agent ID, call disposition, campaign UTM — into any standard or custom Salesforce object field.",
+  },
+  {
+    title: "Trigger Salesforce workflows from call outcomes",
+    desc: "Call outcomes update Salesforce records in real time, firing your existing workflows and flows: update Lead Status, create follow-up Tasks, send nurture emails, or progress an Opportunity stage.",
+  },
+  {
+    title: "View LimeCall call history inside Salesforce",
+    desc: "Every call appears in the Salesforce Activity timeline chronologically. Reps see the complete call history for any lead or contact without leaving Salesforce.",
+  },
+  {
+    title: "Report on speed-to-lead by Salesforce campaign source",
+    desc: "Correlate LimeCall callback speed with Salesforce Campaign source to identify which campaigns produce the fastest, highest-converting leads — and optimise budget accordingly.",
+  },
+];
+
+const useCases = [
+  {
+    role: "Sales Reps",
+    title: "Full context before every call",
+    desc: "LimeCall pops the Salesforce Lead or Contact record the moment a callback is initiated. Reps see the prospect's history, open opportunities, and previous call notes before they say hello.",
+  },
+  {
+    role: "Marketing",
+    title: "Trace which campaigns drive callbacks",
+    desc: "UTM parameters captured by LimeCall sync to Salesforce Campaign fields. Marketing can report precisely which campaigns generate the most phone leads and the fastest follow-up times.",
+  },
+  {
+    role: "Operations",
+    title: "Automated deal progression",
+    desc: "Connect call outcomes to Salesforce workflow rules. A 'Demo Booked' outcome can auto-create an Opportunity, set a stage, and assign a follow-up task — all without human intervention.",
+  },
+  {
+    role: "Reporting",
+    title: "Speed-to-lead by campaign source",
+    desc: "Build Salesforce reports that show average callback time segmented by Lead Source or Campaign. Identify the channels where fast response drives the most closed deals.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Auto-create Lead/Contact", limecall: true, manual: false, others: "Partial" },
+  { feature: "Call recording in Activity log", limecall: true, manual: false, others: false },
+  { feature: "Custom field mapping", limecall: true, manual: false, others: "Partial" },
+  { feature: "Trigger Salesforce workflows", limecall: true, manual: false, others: false },
+  { feature: "Bidirectional sync", limecall: true, manual: false, others: false },
+  { feature: "5-minute setup", limecall: true, manual: "N/A", others: false },
+  { feature: "Speed-to-lead reporting", limecall: true, manual: false, others: false },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: crm, url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Official Integration · 5-minute setup · No developers
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">Salesforce</span>:<br class="hidden sm:block" />
+        Connect Callbacks to Your CRM in Minutes
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Every LimeCall callback automatically creates a Salesforce Lead, logs a call Activity, and fires your existing workflows — so your team spends time selling, not entering data.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/get-started/" class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect Salesforce Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Data flow diagram -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How data flows from your website into Salesforce</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From the moment a visitor requests a callback to the Lead being created in Salesforce — everything is automatic.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Website visitor</h3>
+          <p class="mt-1 text-xs text-dark-400">Clicks LimeCall widget and requests a callback</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">LimeCall callback</h3>
+          <p class="mt-1 text-xs text-dark-400">Connects visitor to your rep in 28 seconds</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Call recorded</h3>
+          <p class="mt-1 text-xs text-dark-400">Duration, outcome, and recording captured</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <!-- Step 4 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Synced to Salesforce</h3>
+          <p class="mt-1 text-xs text-dark-400">Lead created + Activity logged automatically</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Connect accounts via OAuth</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Go to LimeCall → Integrations → Salesforce. Click "Connect" and authorise with your Salesforce credentials. Done in under 2 minutes.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Map your fields</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Choose which LimeCall data maps to which Salesforce Lead, Contact, or Activity field — including custom fields unique to your org.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Go live</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Enable the integration and make a test call. Your Lead and Activity will appear in Salesforce within seconds. You're done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + Salesforce integration does</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that eliminate manual CRM work and keep your pipeline moving.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + Salesforce and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall + Salesforce vs the alternatives</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + Salesforce</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual logging</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300">{row.feature}</td>
+                <td class="py-3 px-5 text-center">
+                  {row.limecall === true
+                    ? <span class="text-lime-400 font-bold">Yes</span>
+                    : <span class="text-dark-500">{row.limecall}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.manual === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.manual}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.others === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.others}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with Salesforce?</h2>
+      <p class="mt-4 text-dark-400">5-minute setup · No developers · Free trial included</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/get-started/" class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More CRM Integrations" links={[
+        { href: '/pipedrive-integration/', title: 'LimeCall + Pipedrive', desc: 'Auto-create Persons and Deals from every callback.' },
+        { href: '/zoho-crm-integration/', title: 'LimeCall + Zoho CRM', desc: 'Sync callbacks to Zoho Leads, Contacts, and Deals.' },
+        { href: '/limecall-for-hubspot/', title: 'LimeCall + HubSpot', desc: 'Log every call in HubSpot automatically.' },
+        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in 28 seconds wins more deals.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include CRM integrations.' },
+      ]} />
+    </div>
+  </div>
+</Base>

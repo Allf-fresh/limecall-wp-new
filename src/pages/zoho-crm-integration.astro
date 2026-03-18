@@ -1,0 +1,363 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const crm = "Zoho CRM";
+const slug = "zoho-crm-integration";
+
+const seo = {
+  title: `LimeCall + Zoho CRM Integration | LimeCall`,
+  description: `Connect LimeCall to Zoho CRM in 5 minutes. Auto-create Leads from callbacks, log call notes to Activities, sync Contacts and Deals, and trigger Zoho workflows.`,
+  canonical: `https://www.limecall.com/zoho-crm-integration/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall integrate with Zoho CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall connects to Zoho CRM via a native OAuth integration. Authorise the connection from your LimeCall dashboard and every callback is automatically logged as a call Activity in Zoho CRM. New visitors create Leads automatically; existing contacts are matched and updated. No Zapier, no developer, no manual entry.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall create Zoho CRM Leads automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. When a new website visitor requests a callback, LimeCall searches Zoho CRM for a matching Lead or Contact. If none is found, LimeCall creates a new Lead in Zoho CRM populated with the visitor phone number, name, traffic source, and the page they called from. If a match exists, LimeCall logs the call against the existing record.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are call recordings stored in Zoho CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can store full call recordings in the Zoho CRM Document Library, attached to the relevant Lead or Contact record. Each Activity logged by LimeCall also includes a direct link to the recording so your team can review any call from within Zoho without switching tools.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall trigger Zoho CRM workflows or Blueprint transitions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Because LimeCall creates and updates Zoho CRM records in real time, any Zoho workflow rule, Blueprint transition, or CommandCenter flow triggered by Lead creation, Activity logging, or record field updates will fire automatically. Map call outcomes to Zoho field values to drive automated pipeline progression.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I map custom LimeCall fields to Zoho CRM custom fields?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports full custom field mapping to Zoho CRM. You can push any LimeCall data — campaign UTM, widget name, call duration, agent ID, or call disposition — into any standard or custom field across Zoho CRM modules including Leads, Contacts, and Deals.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which LimeCall plan includes the Zoho CRM integration?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Zoho CRM integration is available on the LimeCall Pro plan, which includes 500 calls per month, custom integrations, and API access. Start a free Pro trial to test the full integration with your Zoho CRM account — no credit card required to get started.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "28s", label: "Average callback speed" },
+  { value: "5 min", label: "Setup time — no developer" },
+  { value: "57%", label: "Of SMB teams use Zoho CRM globally" },
+  { value: "500", label: "Calls/mo on Pro plan" },
+];
+
+const features = [
+  {
+    title: "Auto-create Lead on callback request",
+    desc: "Every callback from a new visitor automatically creates a Zoho CRM Lead, populated with phone number, name, traffic source, page URL, and campaign data — before the call even connects.",
+  },
+  {
+    title: "Log call notes to Zoho Activities",
+    desc: "After each call, LimeCall logs a completed Call Activity in Zoho CRM with full details: duration, outcome, agent name, call notes, and a link to the call recording.",
+  },
+  {
+    title: "Sync to Zoho Contacts and Deals modules",
+    desc: "LimeCall doesn't just create Leads — it can also create or update Contacts and Deals in Zoho CRM, ensuring converted leads have full call history across all three modules.",
+  },
+  {
+    title: "Trigger Zoho workflows on call outcome",
+    desc: "Map LimeCall call dispositions to Zoho CRM field values that fire your existing workflow rules and Blueprint transitions automatically — advancing deals without any manual rep input.",
+  },
+  {
+    title: "Map custom fields between LimeCall and Zoho",
+    desc: "Use LimeCall's field mapper to push any captured data — UTM source, medium, campaign, widget name, or agent — into any standard or custom field in your Zoho CRM org.",
+  },
+  {
+    title: "Full call recordings stored in Zoho Document Library",
+    desc: "Call recordings are automatically attached to the Zoho CRM Lead or Contact record in the Document Library. Every recording is searchable and accessible directly from within Zoho.",
+  },
+];
+
+const useCases = [
+  {
+    role: "Sales Reps",
+    title: "Full CRM context before every callback",
+    desc: "LimeCall surfaces the Zoho CRM Lead or Contact record the moment a callback is initiated. Reps see previous activities, deal history, and custom field data before picking up the call.",
+  },
+  {
+    role: "Marketing",
+    title: "Trace which campaigns drive the most callbacks",
+    desc: "Campaign UTM data captured by LimeCall syncs directly to Zoho CRM Lead Source and custom campaign fields. Marketing can attribute phone conversions to specific campaigns and ad groups with precision.",
+  },
+  {
+    role: "Operations",
+    title: "Automated deal progression with zero admin",
+    desc: "LimeCall call outcomes update Zoho CRM fields that trigger your existing workflow rules — moving Leads through stages, firing email alerts, and creating follow-up tasks with no manual effort.",
+  },
+  {
+    role: "Reporting",
+    title: "Speed-to-lead measurement by CRM source",
+    desc: "Combine LimeCall's callback timing data with Zoho CRM Lead Source and Campaign fields to build dashboards that show how fast your team responds to leads from each marketing channel.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Auto-create Lead on callback", limecall: true, manual: false, others: "Partial" },
+  { feature: "Log call notes to Activities", limecall: true, manual: false, others: false },
+  { feature: "Sync to Contacts and Deals modules", limecall: true, manual: false, others: false },
+  { feature: "Trigger Zoho workflows", limecall: true, manual: false, others: false },
+  { feature: "Custom field mapping", limecall: true, manual: false, others: "Partial" },
+  { feature: "Recordings in Document Library", limecall: true, manual: false, others: false },
+  { feature: "5-minute OAuth setup", limecall: true, manual: "N/A", others: false },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: crm, url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Official Integration · 5-minute setup · No developers
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">Zoho CRM</span>:<br class="hidden sm:block" />
+        Connect Calls to Your CRM in Minutes
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Connect LimeCall to Zoho CRM in 5 minutes. Auto-create Leads from every callback, log call notes and recordings to Activities, and trigger Zoho workflows based on real call outcomes.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/get-started/" class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect Zoho CRM Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Data flow diagram -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How data flows from your website into Zoho CRM</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From the first widget click to a fully-populated Zoho Lead and Activity — completely automatic in real time.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Website visitor</h3>
+          <p class="mt-1 text-xs text-dark-400">Clicks LimeCall widget and requests a callback</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">LimeCall callback</h3>
+          <p class="mt-1 text-xs text-dark-400">Connects visitor to your rep in 28 seconds</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Call recorded</h3>
+          <p class="mt-1 text-xs text-dark-400">Duration, outcome, notes, and recording captured</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <!-- Step 4 -->
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Synced to Zoho CRM</h3>
+          <p class="mt-1 text-xs text-dark-400">Lead created, Activity logged, recording stored</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Connect via OAuth</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Go to LimeCall → Integrations → Zoho CRM. Click "Connect" and authorise with your Zoho credentials. No developer required — done in under 2 minutes.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Map fields and modules</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Select which Zoho CRM modules to sync — Leads, Contacts, or Deals. Map LimeCall data fields to your Zoho standard and custom fields using the visual field mapper.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Go live</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Enable the integration and make a test callback. Your Lead and Activity will appear in Zoho CRM within seconds, with the recording in your Document Library.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + Zoho CRM integration does</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that eliminate data entry and keep your Zoho CRM perfectly up to date.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + Zoho CRM and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall + Zoho CRM vs the alternatives</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + Zoho CRM</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual logging</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300">{row.feature}</td>
+                <td class="py-3 px-5 text-center">
+                  {row.limecall === true
+                    ? <span class="text-lime-400 font-bold">Yes</span>
+                    : <span class="text-dark-500">{row.limecall}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.manual === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.manual}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.others === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.others}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with Zoho CRM?</h2>
+      <p class="mt-4 text-dark-400">5-minute setup · No developers · Free trial included</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/get-started/" class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More CRM Integrations" links={[
+        { href: '/salesforce-integration/', title: 'LimeCall + Salesforce', desc: 'Auto-create Leads and log Activities in Salesforce.' },
+        { href: '/pipedrive-integration/', title: 'LimeCall + Pipedrive', desc: 'Auto-create Persons and Deals from every callback.' },
+        { href: '/limecall-for-hubspot/', title: 'LimeCall + HubSpot', desc: 'Log every call in HubSpot automatically.' },
+        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
+        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in 28 seconds wins more deals.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include CRM integrations.' },
+      ]} />
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,264 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Car Dealerships — Turn Website Visitors into Test Drive Bookings | LimeCall',
+  description: 'LimeCall connects dealership website visitors to sales reps in 28 seconds. Get 3× more test drive bookings, reduce lost leads, and close more vehicles. 14-day free trial.',
+  canonical: 'https://www.limecall.com/automotive/',
+};
+
+const stats = [
+  { value: '28s', label: 'Avg callback — vs 4hr dealership avg' },
+  { value: '3×', label: 'More test drive bookings vs contact forms' },
+  { value: '68%', label: 'Of buyers choose the dealer who responds first' },
+  { value: '5 min', label: 'Setup — no IT required' },
+];
+
+const features = [
+  { icon: '⚡', title: 'Speed to Lead', desc: 'Connect while buyer is still on your inventory page — before they visit a competitor.' },
+  { icon: '🚗', title: 'Territory & Model Routing', desc: 'Route leads by vehicle interest, location, or sales rep specialty automatically.' },
+  { icon: '📱', title: 'Mobile Sales App', desc: 'Reps get notified and connect from anywhere on the lot.' },
+  { icon: '📞', title: 'Local Virtual Numbers', desc: 'Display local area code numbers — buyers are 68% more likely to answer.' },
+  { icon: '🎙️', title: 'Call Recording & Coaching', desc: 'Review every sales call for coaching, compliance, and deal review.' },
+  { icon: '🔗', title: 'DMS/CRM Integration', desc: 'Every call logged to DealerSocket, VinSolutions, or Salesforce automatically.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall work for car dealerships?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall places a callback widget on your dealership website. When a prospective buyer clicks it, they enter their number and LimeCall bridges them to the next available sales rep within 28 seconds — while they\'re still actively browsing your inventory.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall integrate with dealership CRMs like DealerSocket or VinSolutions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with all major dealership management systems and CRMs including DealerSocket, VinSolutions, Salesforce, and HubSpot. Every callback is logged automatically with contact details, call duration, and outcome.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What if a customer enquires outside of business hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'After-hours enquiries are queued and the customer is called back first thing the next morning. You can also set up your after-hours routing to go to an on-call manager or your BDC team.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do we handle multiple franchises or dealership locations?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall supports multi-location routing. Leads from each dealership website go to the correct location\'s team, with separate reporting per franchise so you can track performance across your group.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there a setup fee or long-term contract for dealerships?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No setup fee and no long-term contract required. LimeCall starts at $35/month with a 14-day free trial. Most dealerships are live within 5 minutes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly will we see results from LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most dealerships see measurable improvement in test drive bookings within the first week. The 28-second response time means you\'re reaching buyers while their intent is at its highest — typically leading to a 3× improvement in contact-to-booking rate within 30 days.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Automotive', url: `${site.url}/automotive/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">🚗 For Car Dealerships</div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Stop Losing Car Buyers to<br class="hidden sm:block" /> <span class="text-lime-400">Faster Dealerships</span></h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">LimeCall connects your website visitors to a sales rep in 28 seconds — before they click to a competitor. Turn more browsing sessions into test drives.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">Start Free Trial — 14 Days</a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">See a Demo →</a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ Used by 1,000+ automotive dealerships · No setup fee · No long-term contract</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-red-500/20 bg-red-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ The Average Dealership Loses 60% of Website Leads</h2>
+        <p class="text-dark-300">A visitor researches 3 dealers simultaneously. They click "Get a Quote" on all 3. Whoever calls back first gets the appointment. If your team takes hours — or doesn't call at all — you've lost the sale before it started. The average dealership response time is 4 hours. LimeCall's is 28 seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Dealerships</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Buyer Visits Inventory Page', desc: 'LimeCall widget appears: "Get a callback in 28 seconds." Buyer clicks while intent is highest.' },
+          { step: '02', title: 'Rep Connected Instantly', desc: 'Buyer enters number; nearest available rep is bridged within 28 seconds — while they\'re still on your site.' },
+          { step: '03', title: 'Test Drive Booked on the Call', desc: 'Rep greets buyer by name, references the vehicle, and books the test drive before the call ends.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Automotive Sales</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Dealership Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'New Vehicle Inquiries', desc: 'Buyer on new inventory → connected to new car specialist in 28s.' },
+          { title: 'Trade-In Valuations', desc: 'Customer requests trade-in quote → instant callback starts valuation conversation.' },
+          { title: 'Finance Enquiries', desc: 'Visitor on finance page → routed to F&I manager for deal structuring.' },
+          { title: 'Service Bookings', desc: 'Service page visitor → connected to service advisor immediately.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">"We went from missing half our web leads to booking 3× more test drives per week. The ROI in the first quarter was $240k in additional vehicle sales."</p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">David R.</p>
+          <p class="text-sm text-dark-500">Sales Manager, Multi-franchise automotive group</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Traditional Lead Process</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Metric', 'LimeCall', 'Phone Only', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Rep availability', '1–48 hours', 'Agent dependent'],
+              ['Buyer drop-off rate', '🟢 Very low', '🟡 Moderate', '🔴 Very high', '🟡 Moderate'],
+              ['Test drive booking rate', '🟢 3× higher', '🟡 Standard', '🔴 Low', '🟡 Standard'],
+              ['After-hours capture', '✅ Queue + callback', '❌ Missed', '✅ Form stored', '❌ No agent'],
+              ['CRM logging', '✅ Automatic', '❌ Manual', '⚠️ Partial', '⚠️ Partial'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Booking More Test Drives Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial. No setup fee. No long-term contract.</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">Try Free — 14 Days →</a>
+    </div>
+  </section>
+
+  <CrossLinks heading="Explore More" links={[
+    { href: '/for-sales-teams/', title: 'For Sales Teams', desc: 'Built for high-velocity sales.' },
+    { href: '/lead-routing-software/', title: 'Lead Routing', desc: 'Route to the right rep instantly.' },
+    { href: '/call-tracking/', title: 'Call Tracking', desc: 'Know which ads drive test drives.' },
+    { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month.' },
+  ]} />
+</Base>

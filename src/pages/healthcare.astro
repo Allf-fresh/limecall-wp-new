@@ -1,0 +1,329 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Healthcare — Convert Patient Enquiries into Booked Appointments | LimeCall',
+  description: 'LimeCall helps clinics and healthcare providers connect with patients in 28 seconds — boosting appointment bookings by 200%, reducing missed calls. GDPR compliant. Free trial.',
+  canonical: 'https://www.limecall.com/healthcare/',
+};
+
+const stats = [
+  { value: '28s', label: 'Patient connected to clinic team' },
+  { value: '200%', label: 'More appointments booked vs web forms' },
+  { value: '79%', label: 'Of patients research online before booking' },
+  { value: '40%', label: 'Of missed calls never call back' },
+];
+
+const features = [
+  { icon: '🏥', title: 'Department-Based Routing', desc: 'Route patient enquiries to GP, dental, physiotherapy, or specialist automatically based on the page they visited.' },
+  { icon: '📅', title: 'Appointment Booking on the Call', desc: 'Staff books directly into your scheduling system during the callback — no follow-up needed.' },
+  { icon: '🌙', title: 'After-Hours Callback Queue', desc: 'Patients requesting callbacks after hours get called first thing next morning, so no enquiry is lost.' },
+  { icon: '🔒', title: 'GDPR & Data Security', desc: 'All calls encrypted, patient data stored securely, full audit trail for compliance.' },
+  { icon: '📱', title: 'Multi-Location Support', desc: 'Central callback system across all your clinic sites with separate reporting per location.' },
+  { icon: '📊', title: 'Call Analytics', desc: 'Track which pages generate most patient enquiries and optimise your marketing accordingly.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall GDPR compliant for healthcare use?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is fully GDPR compliant. All call recordings and patient contact data are encrypted in transit and at rest. Data retention periods are configurable, and we sign data processing agreements (DPAs) with all healthcare customers. Full audit logs are available for compliance reviews.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route calls to different departments or specialists?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. LimeCall's intelligent routing can direct patient enquiries to the correct department — GP, dental, physiotherapy, specialist referrals, or emergency triage — based on which page triggered the callback or the patient's stated need during the AI qualification step.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to patient enquiries outside office hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'After-hours enquiries are queued in LimeCall. At the start of the next business day, staff see a prioritised list of callbacks and can work through them systematically. For urgent matters, you can set up emergency routing to an on-call line.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall integrate with our practice management software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates with major healthcare practice management systems and CRMs via direct integrations and Zapier (1,000+ tools). Every call is logged automatically with patient name, contact number, call duration, and outcome notes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall handle urgent or emergency enquiries?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For urgent enquiries, LimeCall can be configured to route immediately to an emergency or on-call line, bypassing the standard queue. We recommend clearly communicating to patients that LimeCall callbacks are for non-emergency appointment bookings and directing emergencies to 999/911.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a healthcare practice get started with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most practices are live within 5 minutes. Add the widget to your website, configure your routing rules and department assignments, and the system is active. No IT team or developer required. We provide full onboarding support for healthcare customers.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Healthcare', url: `${site.url}/healthcare/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        🏥 For Healthcare Providers
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Turn Patient Enquiries into<br class="hidden sm:block" />
+        <span class="text-lime-400">Booked Appointments — in 28 Seconds</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        When a patient searches for a clinic and can't get through, they call your competitor. LimeCall connects your website visitors to the right department instantly — 24/7, GDPR compliant.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ GDPR Compliant · Secure · Trusted by healthcare providers in 40+ countries</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-red-500/20 bg-red-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Every Missed Call is a Lost Patient</h2>
+        <p class="text-dark-300">
+          Patients searching for healthcare have urgency. When they reach a voicemail or a form, most move on to the next provider. The cost isn't just one appointment — it's the lifetime value of a patient relationship. 40% of patients who don't get an answer on the first try never call back.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Healthcare</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Patient Searches for Your Service', desc: 'LimeCall widget appears on key pages — book appointment, contact, and services pages.' },
+          { step: '02', title: 'Patient Requests Callback', desc: 'Enters number; routed to the right department (GP, dental, specialist, physiotherapy).' },
+          { step: '03', title: 'Connected in 28 Seconds', desc: 'Staff greets patient, answers questions, and books appointment on the call.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Healthcare Providers</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Healthcare Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'New Patient Registration', desc: 'Website visitor → reception in 28s → registered and first appointment booked.' },
+          { title: 'Specialist Referral Requests', desc: 'GP referral page → patient connected to specialist booking team immediately.' },
+          { title: 'Urgent Care Triage', desc: 'Urgent care page → patient assessed by phone → directed to correct service level.' },
+          { title: 'Follow-Up Appointments', desc: 'Automated callback queue for post-treatment follow-up scheduling.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study / testimonial -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We reduced missed patient calls by 60% and increased new patient bookings by 200% within 90 days. The GDPR compliance gave us confidence to deploy immediately."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Dr. James H.</p>
+          <p class="text-sm text-dark-500">Practice Manager, multi-site medical clinic group</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Patient Contact Methods</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone Only', 'Online Booking Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Rep availability', '1–48 hours', 'Agent dependent'],
+              ['After-hours capture', '✅ Queue + AM callback', '❌ Missed', '✅ Form stored', '❌ No agent'],
+              ['Department routing', '✅ Automatic', '⚠️ Manual', '❌ None', '⚠️ Manual'],
+              ['GDPR compliant', '✅ Full compliance', '⚠️ Manual', '⚠️ Config needed', '⚠️ Config needed'],
+              ['Appointment booking', '✅ On the call', '✅ On the call', '⚠️ Separate step', '❌ Text only'],
+              ['Patient satisfaction', '🟢 Very high', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with Your Existing Systems</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to HubSpot, Salesforce, major practice management platforms, and 1,000+ tools via Zapier. Every patient callback is automatically logged — name, number, duration, outcome — so nothing falls through the cracks. Setup takes under 5 minutes with no developer needed.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GDPR trust section -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Compliant by Design for Healthcare</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '🔒', title: 'End-to-End Encryption', desc: 'All call data and recordings are encrypted in transit and at rest using industry-standard AES-256 encryption.' },
+          { icon: '📋', title: 'DPA Agreements', desc: 'We sign Data Processing Agreements (DPAs) with all healthcare customers as standard — required for GDPR compliance.' },
+          { icon: '🗂️', title: 'Configurable Retention', desc: 'Set data retention periods that match your compliance obligations. Delete patient data on request with full audit trail.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-dark-500">
+        LimeCall is trusted by healthcare providers across 40+ countries. <a href="/gdpr/" class="text-lime-400 hover:text-lime-300 transition">Read our GDPR documentation →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Booking More Patient Appointments Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · GDPR compliant · No IT team required</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/healthcare-lead-generation/', title: 'Healthcare Lead Generation', desc: 'Generate more patient leads.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Core callback features.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Numbers', desc: 'Local numbers for every clinic.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month.' },
+      ]} />
+    </div>
+  </div>
+</Base>

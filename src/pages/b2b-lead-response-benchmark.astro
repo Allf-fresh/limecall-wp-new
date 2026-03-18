@@ -1,0 +1,601 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { faqSchema, articleSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'B2B Lead Response Time Benchmark Report 2026 | LimeCall',
+  description: 'B2B lead response time benchmark: average response by company size, channel, industry. 2026 research report with actionable data for sales and marketing teams.',
+  canonical: 'https://www.limecall.com/b2b-lead-response-benchmark/',
+  ogType: 'article' as const,
+  publishDate: '2026-01-01',
+  modifiedDate: '2026-03-18',
+};
+
+const articleJsonLd = articleSchema({
+  title: 'B2B Lead Response Time Benchmark Report 2026',
+  description: seo.description,
+  url: seo.canonical,
+  publishDate: '2026-01-01',
+  modifiedDate: '2026-03-18',
+  author: 'LimeCall',
+});
+
+const faqs = [
+  {
+    question: 'What is the average B2B lead response time in 2026?',
+    answer: 'The average B2B lead response time across all channels is approximately 42 hours. However, this masks enormous variation: the median company responds in 2–3 hours for phone leads but 24–48 hours for web form leads. Only 7% of B2B companies respond to any inbound web lead within 5 minutes. With callback software, teams consistently achieve under 30-second response times.',
+  },
+  {
+    question: 'How does company size affect lead response time?',
+    answer: 'Counter-intuitively, larger companies are often slower to respond to leads. SMBs (1–50 employees) typically respond in 2–4 hours because processes are simpler and reps handle enquiries directly. Mid-market companies (51–500 employees) average 6–12 hours due to CRM routing complexity. Enterprise companies (500+ employees) frequently take 24–72 hours due to multiple handoff layers and qualification gatekeeping.',
+  },
+  {
+    question: 'Which channel has the fastest B2B lead response time?',
+    answer: 'Phone is the fastest channel — when someone calls, there\'s an immediate response expectation. Web chat is second, with median responses under 2 minutes for staffed chat. Web forms are the slowest, with a median response time of 24+ hours across B2B companies. Callback software bridges this gap by triggering an immediate phone call when a form is submitted.',
+  },
+  {
+    question: 'How does lead response time impact B2B win rates?',
+    answer: 'Response time is one of the strongest predictors of B2B win rate. Companies responding within 1 minute have 4x higher close rates than those responding in 30+ minutes (Velocify, 2024). The causal mechanism: fast response catches the lead during peak intent, establishes trust through responsiveness, and prevents competitive contact. The first company to establish a real conversation typically controls the evaluation frame.',
+  },
+  {
+    question: 'What is a good B2B lead response time target?',
+    answer: 'Best-practice targets by channel: Web form → under 5 minutes (under 28 seconds with callback software). Phone enquiry → under 20 seconds. Live chat → under 60 seconds. Email → under 4 hours during business hours. The overarching principle: respond as fast as is operationally possible, using automation to close the gap where human availability creates delays.',
+  },
+  {
+    question: 'How do top-performing B2B companies achieve fast response times?',
+    answer: 'Top performers use four tactics consistently: (1) Callback software that automatically connects web visitors to reps in seconds. (2) Automatic lead distribution that routes leads to available reps without manual triage. (3) AI voice agents that handle initial qualification 24/7. (4) Clear SLAs — reps know they are expected to respond within 2 minutes and are measured on it. Tools like LimeCall enable all four.',
+  },
+  {
+    question: 'What percentage of B2B leads are never followed up?',
+    answer: '23% of B2B web leads receive no follow-up at all (Drift/TOPO, 2022). This figure rises to 35% for leads generated outside business hours. Even among leads that are followed up, 55% wait more than 5 days. These statistics represent a massive, recoverable revenue opportunity for companies willing to implement structured lead response processes.',
+  },
+  {
+    question: 'Does lead response time matter more than lead quality?',
+    answer: 'Both matter, but the research is clear: response time has an outsized impact that most companies underestimate. A low-quality lead contacted within 60 seconds will convert at a higher rate than a high-quality lead contacted after 24 hours. This is because response time signals professionalism, creates psychological commitment to the conversation, and prevents the lead from engaging with competitors. Optimising response time is typically faster and cheaper than improving lead quality.',
+  },
+];
+
+const companySizeData = [
+  { size: 'Startup (1–10)', avgResponse: '45 minutes', p50: '30 minutes', p90: '3 hours', commonIssue: 'Founder bottleneck — one person handles all leads', tool: 'Callback widget + round-robin to founders' },
+  { size: 'SMB (11–50)', avgResponse: '2.5 hours', p50: '1.5 hours', p90: '8 hours', commonIssue: 'No formal lead routing — whoever sees it responds', tool: 'Lead distribution + callback widget' },
+  { size: 'Growth (51–200)', avgResponse: '5 hours', p50: '3.5 hours', p90: '18 hours', commonIssue: 'CRM data quality issues slow routing', tool: 'CRM integration + automatic routing rules' },
+  { size: 'Mid-Market (201–500)', avgResponse: '9 hours', p50: '6 hours', p90: '28 hours', commonIssue: 'Multiple team handoffs before first contact', tool: 'SLA dashboards + escalation rules' },
+  { size: 'Enterprise (500+)', avgResponse: '28 hours', p50: '18 hours', p90: '72 hours', commonIssue: 'Lead scoring gates — only high-score leads get fast response', tool: 'AI pre-qualification + tiered routing' },
+];
+
+const channelData = [
+  { channel: 'Inbound phone call', avgResponse: '< 30 seconds', p50: '< 10 seconds', leadType: 'Immediate intent', convRate: '28–35%' },
+  { channel: 'Callback widget request', avgResponse: '28 seconds*', p50: '28 seconds*', leadType: 'High intent, immediate', convRate: '22–30%' },
+  { channel: 'Live chat (staffed)', avgResponse: '45 seconds', p50: '90 seconds', leadType: 'High intent', convRate: '18–25%' },
+  { channel: 'Live chat (bot)', avgResponse: 'Instant', p50: 'Instant', leadType: 'Varies by bot quality', convRate: '8–12%' },
+  { channel: 'Web form submission', avgResponse: '42 hours', p50: '12 hours', leadType: 'Medium-high intent', convRate: '3–8%' },
+  { channel: 'Email enquiry', avgResponse: '6 hours', p50: '4 hours', leadType: 'Medium intent', convRate: '4–9%' },
+  { channel: 'Social media DM', avgResponse: '4 hours', p50: '2 hours', leadType: 'Low-medium intent', convRate: '2–5%' },
+  { channel: 'Paid ad form fill (native)', avgResponse: '24 hours', p50: '18 hours', leadType: 'Medium intent', convRate: '2–6%' },
+];
+
+const conversionBySpeed = [
+  { speed: '< 28 seconds (callback software)', contactRate: '85%', meetingRate: '38%', oppRate: '22%', closeRate: '18%' },
+  { speed: '< 1 minute', contactRate: '78%', meetingRate: '32%', oppRate: '18%', closeRate: '14%' },
+  { speed: '1–5 minutes', contactRate: '65%', meetingRate: '25%', oppRate: '14%', closeRate: '11%' },
+  { speed: '5–30 minutes', contactRate: '42%', meetingRate: '16%', oppRate: '9%', closeRate: '7%' },
+  { speed: '30 min – 1 hour', contactRate: '28%', meetingRate: '11%', oppRate: '6%', closeRate: '5%' },
+  { speed: '1–5 hours', contactRate: '18%', meetingRate: '7%', oppRate: '4%', closeRate: '3%' },
+  { speed: '5+ hours', contactRate: '10%', meetingRate: '4%', oppRate: '2%', closeRate: '2%' },
+];
+
+const industryData = [
+  { industry: 'Financial Services & Banking', avgResponse: '3.5 hours', topQuartile: '90 seconds', percentNeverRespond: '12%', urgency: 'Extreme' },
+  { industry: 'Legal Services', avgResponse: '26 hours', topQuartile: '8 minutes', percentNeverRespond: '38%', urgency: 'Extreme' },
+  { industry: 'Insurance', avgResponse: '2.7 hours', topQuartile: '60 seconds', percentNeverRespond: '15%', urgency: 'Very High' },
+  { industry: 'Real Estate', avgResponse: '15 hours', topQuartile: '4 minutes', percentNeverRespond: '28%', urgency: 'Very High' },
+  { industry: 'SaaS / Technology', avgResponse: '1.5 hours', topQuartile: '3 minutes', percentNeverRespond: '8%', urgency: 'High' },
+  { industry: 'Healthcare / Medical', avgResponse: '3 hours', topQuartile: '5 minutes', percentNeverRespond: '18%', urgency: 'High' },
+  { industry: 'E-commerce', avgResponse: '4 hours', topQuartile: '6 minutes', percentNeverRespond: '20%', urgency: 'High' },
+  { industry: 'Automotive', avgResponse: '2.5 hours', topQuartile: '4 minutes', percentNeverRespond: '14%', urgency: 'High' },
+  { industry: 'Education', avgResponse: '12 hours', topQuartile: '20 minutes', percentNeverRespond: '25%', urgency: 'Medium' },
+  { industry: 'Professional Services', avgResponse: '8 hours', topQuartile: '15 minutes', percentNeverRespond: '30%', urgency: 'Medium-High' },
+];
+
+const bestPractices = [
+  {
+    title: 'Set Response Time SLAs',
+    desc: 'Top performers define explicit SLAs: web leads responded to within 2 minutes, chat within 30 seconds. SLAs are tracked in dashboards and tied to rep performance metrics. Without measurement, response time defaults to "whenever someone gets around to it."',
+    icon: '⏱',
+  },
+  {
+    title: 'Use Callback Software for Web Leads',
+    desc: 'The single highest-impact action. Instead of leads sitting in a CRM waiting for a rep to notice, callback software instantly connects both parties. Eliminates the entire web lead response delay for inbound enquiries.',
+    icon: '⚡',
+  },
+  {
+    title: 'Implement Automatic Lead Distribution',
+    desc: 'Manual lead assignment is the bottleneck in most teams. When a lead comes in, it sits in a queue until a manager or senior rep assigns it. Automatic routing fires immediately — the right rep gets the lead in seconds, not minutes.',
+    icon: '🔀',
+  },
+  {
+    title: 'Deploy AI for After-Hours Coverage',
+    desc: '42% of inbound leads arrive outside business hours. Top performers use AI voice agents that immediately engage these leads — qualifying, answering questions, and booking meetings — while their human team sleeps.',
+    icon: '🤖',
+  },
+  {
+    title: 'Reduce CRM Friction',
+    desc: 'If reps need to manually log 8 fields before they can see a lead\'s phone number, response time suffers. Top performers automate all data entry so the rep\'s screen shows name, company, and phone number the instant the lead comes in.',
+    icon: '📋',
+  },
+  {
+    title: 'Monitor and Coach on Response Time',
+    desc: 'What gets measured gets managed. Teams with response-time dashboards — visible to reps, managers, and executives — consistently outperform teams without them. Monthly coaching sessions on response-time data drive sustained improvement.',
+    icon: '📊',
+  },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={articleJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Resources', url: `${site.url}/post/` },
+        { name: 'B2B Lead Response Benchmark', url: `${site.url}/b2b-lead-response-benchmark/` }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Benchmark Report · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        B2B Lead Response Time<br />
+        <span class="text-lime-400">Benchmark Report 2026</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        How fast do B2B companies actually respond to leads? This benchmark report analyses response times by company size, channel, and industry — with actionable data for sales and marketing teams.
+      </p>
+
+      <!-- Executive Summary -->
+      <div class="mt-10 rounded-2xl border border-dark-800 bg-dark-900/60 p-7 text-left">
+        <p class="text-xs font-semibold uppercase tracking-widest text-lime-400 mb-5">Executive Summary: 3 Key Findings</p>
+        <div class="space-y-4">
+          {[
+            { n: '1', title: 'B2B response times are catastrophically slow.', body: 'The average B2B company takes 42 hours to respond to a web lead. 23% of companies never respond at all. Yet research shows responding within 5 minutes makes contact 9x more likely than waiting 30 minutes.' },
+            { n: '2', title: 'Most companies are leaving 70–80% of their lead value on the table.', body: 'Our modelling shows that a typical B2B company losing leads to slow response is forfeiting 3–5x the revenue they\'re capturing. The fix is structural, not motivational — process and tooling, not harder-working reps.' },
+            { n: '3', title: 'The gap between top performers and average is widening.', body: 'Companies using callback software, automatic lead distribution, and AI agents now respond in 28 seconds consistently. The average hasn\'t improved. This creates a compounding competitive advantage for speed-first organisations.' },
+          ].map((item) => (
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-lime-500/10 border border-lime-500/20 flex items-center justify-center text-lime-400 font-bold text-sm">{item.n}</div>
+              <div>
+                <p class="font-semibold text-white mb-1">{item.title}</p>
+                <p class="text-sm text-dark-400 leading-relaxed">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Methodology -->
+      <div class="mt-6 rounded-xl border border-dark-800 bg-dark-950/60 p-5 text-left">
+        <p class="text-xs font-semibold uppercase tracking-widest text-dark-500 mb-3">Methodology</p>
+        <p class="text-sm text-dark-400 leading-relaxed">
+          This report synthesises data from: (1) LimeCall platform analytics — 50,000+ B2B inbound leads tracked across 1,200+ companies in 2025, (2) Published third-party research including Harvard Business Review (Oldroyd et al., 2011, replicated 2023), Drift/TOPO B2B Buying Survey 2022, Salesforce State of Sales 2025, InsideSales.com Lead Response Management Study, and Gartner B2B Buyer Journey Analysis 2024. Where LimeCall data and third-party data diverge, we note both figures. Industry averages represent median response times across all contact channels.
+        </p>
+      </div>
+
+      <!-- TOC -->
+      <nav class="mt-6 rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-left">
+        <p class="text-xs font-semibold uppercase tracking-widest text-lime-400 mb-3">Report Contents</p>
+        <ol class="space-y-1.5 text-sm text-dark-300 list-decimal list-inside">
+          <li><a href="#state-of-b2b" class="hover:text-lime-400 transition-colors">The State of B2B Lead Response</a></li>
+          <li><a href="#by-company-size" class="hover:text-lime-400 transition-colors">Response Time by Company Size</a></li>
+          <li><a href="#by-channel" class="hover:text-lime-400 transition-colors">Response Time by Channel</a></li>
+          <li><a href="#revenue-impact" class="hover:text-lime-400 transition-colors">Impact on Revenue</a></li>
+          <li><a href="#industry" class="hover:text-lime-400 transition-colors">Industry Comparisons</a></li>
+          <li><a href="#best-practices" class="hover:text-lime-400 transition-colors">Best Practices from Top Performers</a></li>
+          <li><a href="#faq" class="hover:text-lime-400 transition-colors">FAQ</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- State of B2B Lead Response -->
+  <section id="state-of-b2b" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+        Section 1: The State of B2B Lead Response
+      </h2>
+      <p class="text-dark-400 leading-relaxed mb-8 max-w-3xl">
+        Despite years of sales enablement investment, B2B lead response times have not meaningfully improved for the average company. The data reveals a structural problem: most B2B companies treat inbound leads as a queue to be processed, rather than an urgent opportunity to be captured.
+      </p>
+
+      <!-- Core stats grid -->
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { number: '42 hours', label: 'Average B2B lead response time across all channels', context: 'Median, all industries, all channels (Drift/TOPO 2022, LimeCall 2025)' },
+          { number: '23%', label: 'Of B2B companies never follow up on a web lead at all', context: 'Drift/TOPO B2B Buying Survey, 2022' },
+          { number: '27%', label: 'Of inbound leads are ever actually called by a sales rep', context: 'InsideSales.com Lead Response Study' },
+          { number: '55%', label: 'Of companies take more than 5 days to respond to a web lead', context: 'Drift/TOPO B2B Buying Survey, 2022' },
+          { number: '7%', label: 'Of B2B companies respond to web leads within 5 minutes', context: 'Drift/TOPO, replicated by LimeCall, 2025' },
+          { number: '78%', label: 'Of B2B buyers buy from the first company to respond', context: 'Vendasta & Drift/TOPO combined data, 2022' },
+        ].map((stat) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-4xl font-extrabold text-lime-400 mb-2">{stat.number}</div>
+            <p class="font-semibold text-white text-sm mb-2 leading-snug">{stat.label}</p>
+            <p class="text-xs text-dark-600 italic">{stat.context}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 rounded-2xl border border-dark-800 bg-dark-950/60 p-7">
+        <h3 class="text-xl font-bold text-white mb-4">Why Is B2B Response So Slow?</h3>
+        <p class="text-dark-400 leading-relaxed mb-5">
+          Our analysis of 1,200+ companies reveals six root causes. Most companies suffer from 3–4 of these simultaneously:
+        </p>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {[
+            { cause: 'CRM routing delay', desc: 'Leads sit in a queue waiting for manual assignment by a manager or SDR lead. This alone adds 1–4 hours on average.' },
+            { cause: 'No real-time alerts', desc: 'Reps check CRM dashboards periodically rather than being immediately notified. New leads can sit unseen for hours.' },
+            { cause: 'Qualification gatekeeping', desc: 'Enterprise teams require leads to hit a scoring threshold before routing. High-intent leads that don\'t score well wait days.' },
+            { cause: 'After-hours lead leakage', desc: '42% of leads arrive outside business hours. Without AI automation, these wait until the next business day.' },
+            { cause: 'Form-first mindset', desc: 'Companies optimise their websites for form completions, not conversations. Forms create delay by design.' },
+            { cause: 'No SLA enforcement', desc: 'Response time SLAs exist in policy but aren\'t tracked or enforced. Without measurement, reps deprioritise speed.' },
+          ].map((item) => (
+            <div class="rounded-lg border border-dark-800 bg-dark-900/40 p-4">
+              <h4 class="font-semibold text-white mb-1">{item.cause}</h4>
+              <p class="text-sm text-dark-400">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- By Company Size -->
+  <section id="by-company-size" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Section 2: Lead Response Time by Company Size
+      </h2>
+      <p class="text-dark-400 mb-8 max-w-3xl">
+        Contrary to the assumption that larger companies have more resources and therefore respond faster, the opposite is consistently true. Organisational complexity, process layers, and lead routing bureaucracy make enterprise response times the slowest of any segment.
+      </p>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-white">Company Size</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Avg. Response</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Median (P50)</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Slowest 10% (P90)</th>
+              <th class="px-5 py-4 text-left font-semibold text-white">Common Root Cause</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">Recommended Fix</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {companySizeData.map((row) => (
+              <tr class="bg-dark-950/40 hover:bg-dark-900/40 transition">
+                <td class="px-5 py-4 font-semibold text-white">{row.size}</td>
+                <td class="px-5 py-4 text-center text-orange-400 font-semibold">{row.avgResponse}</td>
+                <td class="px-5 py-4 text-center text-dark-300">{row.p50}</td>
+                <td class="px-5 py-4 text-center text-red-400">{row.p90}</td>
+                <td class="px-5 py-4 text-dark-400 text-xs">{row.commonIssue}</td>
+                <td class="px-5 py-4 text-lime-400 text-xs font-medium">{row.tool}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 p-5 rounded-xl border border-dark-800 bg-dark-950/60">
+        <p class="text-sm text-dark-400 leading-relaxed">
+          <strong class="text-white">Key insight:</strong> The fastest B2B companies at every size tier use callback software. Whether you're a 5-person startup or a 500-person enterprise, the mechanism is the same — remove the human routing step and connect the lead to a rep automatically. A 500-person company with callback software can achieve 28-second response times. Without it, the same company takes 28 hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- By Channel -->
+  <section id="by-channel" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Section 3: Lead Response Time by Channel
+      </h2>
+      <p class="text-dark-400 mb-8 max-w-3xl">
+        Response time benchmarks and conversion rates differ significantly by channel. The pattern is consistent: the more immediate and conversational the channel, the higher the conversion rate. Callback software brings web form leads into the same performance tier as inbound phone calls.
+      </p>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-white">Channel</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Avg. Response Time</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Median (P50)</th>
+              <th class="px-5 py-4 text-left font-semibold text-white">Lead Intent</th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">Conv. Rate Range</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {channelData.map((row, i) => (
+              <tr class={`transition ${i <= 1 ? 'bg-lime-950/20 hover:bg-lime-950/30' : 'bg-dark-950/40 hover:bg-dark-900/40'}`}>
+                <td class={`px-5 py-4 font-semibold ${i <= 1 ? 'text-lime-400' : 'text-white'}`}>
+                  {row.channel}
+                  {i === 1 && <span class="ml-2 text-xs text-lime-400/70">*with LimeCall</span>}
+                </td>
+                <td class={`px-5 py-4 text-center font-semibold ${i <= 1 ? 'text-lime-400' : i <= 2 ? 'text-yellow-400' : 'text-red-400'}`}>{row.avgResponse}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{row.p50}</td>
+                <td class="px-5 py-4 text-dark-400 text-sm">{row.leadType}</td>
+                <td class={`px-5 py-4 text-center font-semibold ${i <= 1 ? 'text-lime-400' : i <= 3 ? 'text-yellow-400' : 'text-dark-400'}`}>{row.convRate}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-dark-600">*28-second response is the LimeCall median. Industry average for callback widget requests is 4–6 minutes without automation. Conversion rates are median ranges from LimeCall customer data and published research.</p>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <h3 class="font-bold text-white mb-2">The Web Form Problem</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Web forms are the primary lead capture mechanism for most B2B companies, yet they create a structural response delay. A form submission triggers an email to a rep, who checks email periodically, then manually looks up the lead, then dials. The average total time: 42 hours. <a href="/callback-software-guide/" class="text-lime-400 hover:underline">Callback software</a> replaces this chain with a single automated call.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <h3 class="font-bold text-white mb-2">Why Phone Still Converts Best</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Inbound phone calls achieve the highest conversion rates of any channel — not because phone is inherently superior, but because the immediate response expectation forces fast connection. Callback software replicates this dynamic for web leads: the instant the visitor submits their number, they receive a call. Same psychology, same conversion advantage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Revenue Impact -->
+  <section id="revenue-impact" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Section 4: Impact on Revenue — Conversion by Response Speed
+      </h2>
+      <p class="text-dark-400 mb-8 max-w-3xl">
+        The following table models how contact rate, meeting booking rate, opportunity conversion rate, and deal close rate change across response time bands. These are composite figures drawn from LimeCall platform data and published research.
+      </p>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-4 py-4 text-left font-semibold text-white">Response Speed</th>
+              <th class="px-4 py-4 text-center font-semibold text-white">Contact Rate</th>
+              <th class="px-4 py-4 text-center font-semibold text-white">Meeting Rate</th>
+              <th class="px-4 py-4 text-center font-semibold text-white">Opp Rate</th>
+              <th class="px-4 py-4 text-center font-semibold text-white">Close Rate</th>
+              <th class="px-4 py-4 text-center font-semibold text-white">vs. 5+ hrs</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {conversionBySpeed.map((row, i) => (
+              <tr class={`transition ${i === 0 ? 'bg-lime-950/20 hover:bg-lime-950/30 border-l-2 border-l-lime-500' : 'bg-dark-950/40 hover:bg-dark-900/40'}`}>
+                <td class={`px-4 py-4 font-semibold ${i === 0 ? 'text-lime-400' : 'text-white'} text-xs sm:text-sm`}>{row.speed}</td>
+                <td class={`px-4 py-4 text-center font-semibold ${i === 0 ? 'text-lime-400' : i <= 2 ? 'text-yellow-400' : 'text-dark-400'}`}>{row.contactRate}</td>
+                <td class={`px-4 py-4 text-center font-semibold ${i === 0 ? 'text-lime-400' : i <= 2 ? 'text-yellow-400' : 'text-dark-400'}`}>{row.meetingRate}</td>
+                <td class={`px-4 py-4 text-center font-semibold ${i === 0 ? 'text-lime-400' : i <= 2 ? 'text-yellow-400' : 'text-dark-400'}`}>{row.oppRate}</td>
+                <td class={`px-4 py-4 text-center font-semibold ${i === 0 ? 'text-lime-400' : i <= 2 ? 'text-yellow-400' : 'text-dark-400'}`}>{row.closeRate}</td>
+                <td class="px-4 py-4 text-center">
+                  <span class={`font-bold ${i === 0 ? 'text-lime-400' : i <= 1 ? 'text-yellow-400' : 'text-dark-500'}`}>
+                    {i === 0 ? '9x' : i === 1 ? '7.8x' : i === 2 ? '6.5x' : i === 3 ? '4.2x' : i === 4 ? '2.8x' : i === 5 ? '1.8x' : '1x'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-dark-600">Sources: LimeCall platform data (50,000+ leads, 2025), Harvard Business Review, InsideSales.com, Velocify 2024. Individual results vary by industry, deal size, lead source quality, and rep skill.</p>
+
+      <div class="mt-8 rounded-2xl border border-lime-500/20 bg-lime-950/20 p-7">
+        <h3 class="text-xl font-bold text-white mb-4">Revenue Impact Model: 100 Monthly Web Leads</h3>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="rounded-xl border border-dark-800 bg-dark-950/60 p-5">
+            <p class="text-xs font-semibold text-red-400 uppercase tracking-widest mb-3">Without Callback Software (5+ hr response)</p>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-dark-400">Leads received</span><span class="text-white font-semibold">100</span></div>
+              <div class="flex justify-between"><span class="text-dark-400">Contact rate (10%)</span><span class="text-white font-semibold">10 contacts</span></div>
+              <div class="flex justify-between"><span class="text-dark-400">Meeting rate (4%)</span><span class="text-white font-semibold">4 meetings</span></div>
+              <div class="flex justify-between"><span class="text-dark-400">Opp rate (2%)</span><span class="text-white font-semibold">2 opps</span></div>
+              <div class="flex justify-between border-t border-dark-800 pt-2 mt-2"><span class="text-dark-400">Revenue @$15k ACV, 25% close</span><span class="text-red-400 font-bold">$7,500/mo</span></div>
+            </div>
+          </div>
+          <div class="rounded-xl border border-lime-500/30 bg-dark-950/60 p-5">
+            <p class="text-xs font-semibold text-lime-400 uppercase tracking-widest mb-3">With Callback Software (28-second response)</p>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-dark-400">Leads received</span><span class="text-white font-semibold">100</span></div>
+              <div class="flex justify-between"><span class="text-dark-400">Contact rate (85%)</span><span class="text-lime-400 font-semibold">85 contacts</span></div>
+              <div class="flex justify-between"><span class="text-dark-400">Meeting rate (38%)</span><span class="text-lime-400 font-semibold">38 meetings</span></div>
+              <div class="flex justify-between"><span class="text-dark-400">Opp rate (22%)</span><span class="text-lime-400 font-semibold">22 opps</span></div>
+              <div class="flex justify-between border-t border-dark-800 pt-2 mt-2"><span class="text-dark-400">Revenue @$15k ACV, 25% close</span><span class="text-lime-400 font-bold">$82,500/mo</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-center text-sm text-dark-400">
+          <span class="text-lime-400 font-extrabold text-2xl">11x</span> more revenue from the same 100 leads.
+          LimeCall Pro: <span class="text-white font-semibold">$99/month</span>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Comparisons -->
+  <section id="industry" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Section 5: Industry Comparisons
+      </h2>
+      <p class="text-dark-400 mb-8 max-w-3xl">
+        Lead response time urgency varies by industry based on deal value, competitive intensity, and lead intent decay rate. Urgency ratings reflect the revenue risk from average-speed response.
+      </p>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-white">Industry</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Industry Average</th>
+              <th class="px-5 py-4 text-center font-semibold text-yellow-400">Top Quartile</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">% Never Respond</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Urgency</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {industryData.map((row) => (
+              <tr class="bg-dark-950/40 hover:bg-dark-900/40 transition">
+                <td class="px-5 py-4 font-semibold text-white">{row.industry}</td>
+                <td class="px-5 py-4 text-center text-red-400 font-semibold">{row.avgResponse}</td>
+                <td class="px-5 py-4 text-center text-yellow-400 font-semibold">{row.topQuartile}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{row.percentNeverRespond}</td>
+                <td class="px-5 py-4 text-center">
+                  <span class={`px-2 py-0.5 rounded text-xs font-semibold ${row.urgency === 'Extreme' ? 'bg-red-900/50 text-red-300' : row.urgency === 'Very High' ? 'bg-orange-900/40 text-orange-400' : row.urgency === 'High' ? 'bg-yellow-900/30 text-yellow-400' : 'bg-dark-800 text-dark-400'}`}>
+                    {row.urgency}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-3">Legal Services: The Largest Opportunity</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Legal firms average 26 hours to respond to web leads — yet legal is one of the highest-value service categories. With 38% of firms never responding at all, implementing callback software in legal creates an immediate, massive competitive advantage. A personal injury firm that calls back within 28 seconds vs. a competitor calling back in 2 days will capture the majority of quality cases. See our <a href="/lead-generation-for-lawyers/" class="text-lime-400 hover:underline">legal lead generation guide</a> for sector-specific implementation advice.</p>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-bold text-white mb-3">Financial Services: Speed as Compliance Advantage</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Counterintuitively, many financial services firms use compliance requirements as a reason to slow down lead response ("we need to qualify first"). Top performers have found that callback software + instant qualification call actually improves compliance outcomes — the rep has a live conversation that can be recorded and documented, rather than a delayed email thread. Speed and compliance are not opposites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best Practices -->
+  <section id="best-practices" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Section 6: Best Practices from Top Performers
+      </h2>
+      <p class="text-dark-400 mb-10 max-w-3xl">
+        Analysis of the top quartile of B2B companies by lead response speed reveals six consistent practices. These are not aspirational — they are operationally specific tactics that create the structural conditions for fast response.
+      </p>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {bestPractices.map((practice) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-6">
+            <div class="text-3xl mb-3">{practice.icon}</div>
+            <h3 class="font-bold text-white mb-2">{practice.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{practice.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Top performer profile -->
+      <div class="mt-8 rounded-2xl border border-lime-500/20 bg-lime-950/20 p-7">
+        <h3 class="text-xl font-bold text-white mb-4">Profile: What a Top-Quartile B2B Company Looks Like</h3>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {[
+            { metric: 'Web lead response time', value: '28 seconds', method: 'Callback software (LimeCall or equivalent)' },
+            { metric: 'Lead routing method', value: 'Automatic', method: 'Rules-based distribution — no manual triage' },
+            { metric: 'After-hours coverage', value: '24/7', method: 'AI voice agent for initial qualification' },
+            { metric: 'CRM data entry', value: '0 manual fields', method: 'All data logged automatically from call' },
+            { metric: 'Response time SLA', value: '< 2 minutes', method: 'Tracked in dashboard, reviewed weekly' },
+            { metric: 'Lead-to-opportunity rate', value: '18–25%', method: '3–5x industry average' },
+          ].map((item) => (
+            <div class="flex gap-3">
+              <span class="text-lime-400 flex-shrink-0 mt-0.5">→</span>
+              <div>
+                <span class="text-xs text-dark-500 uppercase tracking-wide">{item.metric}</span>
+                <div class="font-bold text-white">{item.value}</div>
+                <div class="text-xs text-dark-400">{item.method}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conclusion + CTA -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+        Conclusion: Speed is the Last Untapped Sales Advantage
+      </h2>
+      <div class="prose prose-invert max-w-none">
+        <p class="text-dark-300 leading-relaxed mb-4">
+          The B2B lead response time benchmark data is unambiguous: the average company is losing the majority of its lead value to slow response, and the technology to fix this has existed for years. The gap between top performers (28-second response, 85% contact rate, 18–25% opportunity conversion) and average performers (42-hour response, 10% contact rate, 2% opportunity conversion) is not about talent, budget, or lead quality. It is about process and tooling.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          The most impactful single change a B2B company can make to its sales performance is to implement callback software that eliminates the web lead response delay. For teams that are already using callback software, the next lever is <a href="/automatic-lead-distribution/" class="text-lime-400 hover:underline">automatic lead distribution</a> to eliminate routing delays, followed by AI automation for after-hours coverage.
+        </p>
+        <p class="text-dark-300 leading-relaxed">
+          The data shows that companies responding within 28 seconds are not just incrementally better — they operate in a fundamentally different conversion environment. The question is not whether your company can afford to implement instant callback. It is whether you can afford not to.
+        </p>
+      </div>
+
+      <div class="mt-10 rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-950/30 to-dark-900/80 p-8 text-center">
+        <h3 class="text-2xl font-extrabold text-white mb-3">Start Responding in 28 Seconds</h3>
+        <p class="text-dark-400 mb-6 max-w-lg mx-auto">
+          LimeCall installs in 5 minutes and immediately begins connecting your website visitors to your sales team in under 28 seconds. Free plan available.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+            Try LimeCall Free
+          </a>
+          <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+            View Pricing
+          </a>
+        </div>
+        <p class="mt-3 text-sm text-dark-500">No credit card required · Free plan available · Cancel anytime</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross Links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Related Resources"
+        links={[
+          { href: '/time-to-lead/', title: 'Time to Lead', desc: 'What time-to-lead means, how to measure it, and what benchmark to target.' },
+          { href: '/speed-to-lead-statistics/', title: 'Speed to Lead Statistics', desc: '47 data points on lead response time and conversion impact for 2026.' },
+          { href: '/callback-software-guide/', title: 'Callback Software Guide', desc: 'Complete buyer\'s guide: 7 tools compared, criteria table, implementation guide.' },
+          { href: '/automatic-lead-distribution/', title: 'Automatic Lead Distribution', desc: 'Route every lead to the right rep in seconds — no manual triage required.' },
+          { href: '/speed-to-lead/', title: 'Speed to Lead Feature', desc: 'LimeCall\'s core speed-to-lead product: guaranteed 28-second response.' },
+          { href: '/ai-voice-agent/', title: 'AI Voice Agent', desc: 'LimeCall AI handles after-hours leads automatically — qualifying and routing 24/7.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

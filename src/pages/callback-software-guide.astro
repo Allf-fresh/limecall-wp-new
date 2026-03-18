@@ -1,0 +1,701 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { faqSchema, articleSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software: Complete Buyer\'s Guide 2026 | LimeCall',
+  description: 'Compare the best callback software tools of 2026. Types, buyer criteria, honest vendor scores, ROI calculator, and a 5-step implementation guide for sales teams.',
+  canonical: 'https://www.limecall.com/callback-software-guide/',
+  ogType: 'article' as const,
+  publishDate: '2026-01-01',
+  modifiedDate: '2026-03-18',
+};
+
+const faqs = [
+  {
+    question: 'What is callback software?',
+    answer: 'Callback software is a technology solution that lets website visitors request an immediate phone call from a company\'s sales or support team. When a visitor enters their phone number, the software simultaneously dials the business rep and the visitor, connecting them in seconds — typically 28 seconds or less with modern tools like LimeCall.',
+  },
+  {
+    question: 'How much does callback software cost?',
+    answer: 'Callback software ranges from free (basic plans) to $300+/month for enterprise tiers. LimeCall offers a free plan for up to 30 calls/month, with paid plans starting at $29/month. Most vendors charge per widget or per agent seat. Expect $29–$99/month for most growing sales teams.',
+  },
+  {
+    question: 'What is the difference between callback software and a call centre?',
+    answer: 'A call centre is a full telephony infrastructure for large teams. Callback software is a lighter-weight tool that captures website visitor intent and automates the connection. Callback software sits on top of your existing phone system or CRM — you don\'t need to replace anything.',
+  },
+  {
+    question: 'How fast can callback software connect a call?',
+    answer: 'The fastest callback software tools connect calls in under 28 seconds. LimeCall averages 28 seconds from widget submission to live conversation. Industry average is 2–5 minutes; some form-based systems take hours or days.',
+  },
+  {
+    question: 'Does callback software work with my CRM?',
+    answer: 'Most leading callback software tools integrate with major CRMs including HubSpot, Salesforce, Pipedrive, and Zoho. LimeCall offers native integrations plus Zapier support for 5,000+ apps. Always verify integration depth — some tools only push basic contact data.',
+  },
+  {
+    question: 'What industries benefit most from callback software?',
+    answer: 'Industries with high-value inbound leads see the greatest ROI: real estate, financial services, insurance, legal, SaaS, healthcare, and e-commerce. Any business where a 5-minute delay meaningfully reduces conversion probability benefits from instant callback automation.',
+  },
+  {
+    question: 'Can I use callback software outside business hours?',
+    answer: 'Yes. Most callback software includes scheduled callback features that let visitors pick a convenient call time when your team is offline. LimeCall shows a scheduling widget outside business hours and sends your team a reminder before the call.',
+  },
+  {
+    question: 'How do I measure ROI from callback software?',
+    answer: 'Track: (1) increase in inbound calls, (2) lead-to-opportunity conversion rate before vs. after, (3) average response time reduction, and (4) revenue generated from callback-initiated conversations. LimeCall customers typically report 3x higher conversion rates and 80% more call requests within 90 days.',
+  },
+];
+
+const articleJsonLd = articleSchema({
+  title: 'Callback Software: Complete Buyer\'s Guide 2026',
+  description: seo.description,
+  url: seo.canonical,
+  publishDate: '2026-01-01',
+  modifiedDate: '2026-03-18',
+  author: 'LimeCall',
+});
+
+const tools = [
+  {
+    name: 'LimeCall',
+    score: '9.4/10',
+    bestFor: 'Sales teams needing instant callback + lead routing',
+    responseTime: '28 seconds',
+    startingPrice: 'Free / $29/mo',
+    keyFeature: 'AI callback, lead distribution, call tracking',
+    verdict: 'Editors\' Choice',
+    highlight: true,
+  },
+  {
+    name: 'CallPage',
+    score: '8.1/10',
+    bestFor: 'SMBs wanting a simple widget',
+    responseTime: '28 seconds',
+    startingPrice: '$39/mo',
+    keyFeature: 'Basic widget, pop-up targeting',
+    verdict: 'Solid entry option',
+    highlight: false,
+  },
+  {
+    name: 'ResponseIQ',
+    score: '7.8/10',
+    bestFor: 'UK-based businesses',
+    responseTime: '55 seconds',
+    startingPrice: '$65/mo',
+    keyFeature: 'GDPR-focused, CRM sync',
+    verdict: 'Good for compliance-heavy orgs',
+    highlight: false,
+  },
+  {
+    name: 'Callingly',
+    score: '7.5/10',
+    bestFor: 'Auto-dialling web leads',
+    responseTime: '60 seconds',
+    startingPrice: '$69/mo',
+    keyFeature: 'Auto-dial on form submit',
+    verdict: 'Niche use case fit',
+    highlight: false,
+  },
+  {
+    name: 'Aircall',
+    score: '7.2/10',
+    bestFor: 'Teams needing full cloud phone',
+    responseTime: 'Manual routing',
+    startingPrice: '$30/seat/mo',
+    keyFeature: 'Full VoIP platform',
+    verdict: 'Overkill for callback only',
+    highlight: false,
+  },
+  {
+    name: 'JustCall',
+    score: '7.0/10',
+    bestFor: 'Multi-channel outreach teams',
+    responseTime: 'Manual / SMS follow-up',
+    startingPrice: '$19/seat/mo',
+    keyFeature: 'SMS, call, bulk dialler',
+    verdict: 'Better as dialler than callback',
+    highlight: false,
+  },
+  {
+    name: 'Ringover',
+    score: '6.8/10',
+    bestFor: 'European businesses',
+    responseTime: 'Manual IVR',
+    startingPrice: '$21/seat/mo',
+    keyFeature: 'Multi-country coverage',
+    verdict: 'Strong for EU compliance',
+    highlight: false,
+  },
+];
+
+const criteria = [
+  { criterion: 'Response Time', weight: 'Critical', description: 'How fast from widget submission to live call. Under 60s is acceptable; under 30s is best-in-class.' },
+  { criterion: 'Pricing Model', weight: 'High', description: 'Per widget, per seat, or usage-based? Ensure the model scales with your call volume economically.' },
+  { criterion: 'CRM Integrations', weight: 'High', description: 'Native HubSpot, Salesforce, Pipedrive support. Verify bidirectional sync, not just lead push.' },
+  { criterion: 'Channels Supported', weight: 'Medium', description: 'Voice, SMS, WhatsApp, scheduling. Multichannel reduces lead leakage.' },
+  { criterion: 'Analytics & Reporting', weight: 'Medium', description: 'Call recordings, response-time reports, conversion tracking. Essential for ROI measurement.' },
+  { criterion: 'Lead Routing', weight: 'High', description: 'Skill-based, round-robin, territory, or availability routing. Critical for enterprise teams.' },
+  { criterion: 'AI / Automation', weight: 'Growing', description: 'AI callback, voicebot fallback, intelligent scheduling. Increasingly a differentiator.' },
+  { criterion: 'Setup Complexity', weight: 'Medium', description: 'Time from sign-up to first call. Best tools deploy in under 10 minutes.' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={articleJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Resources', url: `${site.url}/post/` },
+        { name: 'Callback Software Guide', url: `${site.url}/callback-software-guide/` }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Buyer's Guide · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Callback Software:<br />
+        <span class="text-lime-400">Complete Buyer's Guide 2026</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Everything you need to choose, implement, and get ROI from callback software — including honest scores for 7 leading vendors, a criteria table, industry benchmarks, and a step-by-step implementation checklist.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
+        <span class="flex items-center gap-2 text-dark-300">
+          <span class="text-2xl font-extrabold text-lime-400">7</span>
+          tools reviewed
+        </span>
+        <span class="hidden h-5 w-px bg-dark-700 sm:block"></span>
+        <span class="flex items-center gap-2 text-dark-300">
+          <span class="text-2xl font-extrabold text-lime-400">8</span>
+          buyer criteria
+        </span>
+        <span class="hidden h-5 w-px bg-dark-700 sm:block"></span>
+        <span class="flex items-center gap-2 text-dark-300">
+          <span class="text-2xl font-extrabold text-lime-400">5-step</span>
+          implementation guide
+        </span>
+      </div>
+
+      <!-- Table of contents -->
+      <nav class="mt-10 rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-left">
+        <p class="text-xs font-semibold uppercase tracking-widest text-lime-400 mb-3">Contents</p>
+        <ol class="space-y-1.5 text-sm text-dark-300 list-decimal list-inside">
+          <li><a href="#what-is" class="hover:text-lime-400 transition-colors">What is callback software?</a></li>
+          <li><a href="#types" class="hover:text-lime-400 transition-colors">5 types of callback software</a></li>
+          <li><a href="#criteria" class="hover:text-lime-400 transition-colors">What to look for (criteria table)</a></li>
+          <li><a href="#comparison" class="hover:text-lime-400 transition-colors">Top 7 callback software tools compared</a></li>
+          <li><a href="#editors-choice" class="hover:text-lime-400 transition-colors">Editors' Choice: LimeCall</a></li>
+          <li><a href="#benchmarks" class="hover:text-lime-400 transition-colors">Industry response time benchmarks</a></li>
+          <li><a href="#implementation" class="hover:text-lime-400 transition-colors">How to implement callback software (5 steps)</a></li>
+          <li><a href="#roi" class="hover:text-lime-400 transition-colors">ROI calculator</a></li>
+          <li><a href="#faq" class="hover:text-lime-400 transition-colors">FAQ</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- What is callback software -->
+  <section id="what-is" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+        What Is Callback Software?
+      </h2>
+      <p class="text-dark-300 text-lg leading-relaxed mb-6">
+        <strong class="text-white">Callback software</strong> is a sales and customer engagement tool that lets website visitors request an immediate phone call from your team. Instead of filling in a contact form and waiting hours (or days) for someone to call back, the visitor enters their phone number and the software simultaneously dials your sales rep and the customer — connecting them in a live voice conversation within seconds.
+      </p>
+      <p class="text-dark-300 leading-relaxed mb-6">
+        The core insight behind callback software is simple: a lead's intent and engagement peak the moment they visit your website or submit an enquiry. Every minute of delay reduces the probability of making contact and converting that lead. Studies from <a href="/speed-to-lead-statistics/" class="text-lime-400 hover:underline">speed-to-lead research</a> show that responding within 5 minutes vs. 30 minutes increases contact rates by up to 9x. Callback software closes this gap automatically.
+      </p>
+
+      <h3 class="text-xl font-bold text-white mb-4 mt-8">How Callback Software Works</h3>
+      <div class="grid gap-4 sm:grid-cols-4">
+        {[
+          { step: '1', title: 'Widget Appears', desc: 'A branded widget appears on key pages of your website (pricing, product, contact).' },
+          { step: '2', title: 'Visitor Requests Call', desc: 'Visitor enters their phone number and clicks "Call Me" — takes under 10 seconds.' },
+          { step: '3', title: 'Software Dials Both Sides', desc: 'The platform simultaneously calls your rep and the visitor.' },
+          { step: '4', title: 'Live Connection', desc: 'Both parties are bridged into a live conversation — typically in 28 seconds or less.' },
+        ].map((s) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <div class="text-3xl font-extrabold text-lime-500/30 mb-2">{s.step}</div>
+            <h4 class="font-bold text-white mb-1">{s.title}</h4>
+            <p class="text-sm text-dark-400">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Types -->
+  <section id="types" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        5 Types of Callback Software
+      </h2>
+      <p class="text-dark-400 mb-10">Not all callback solutions are built the same. Here are the five main categories and when to use each.</p>
+
+      <div class="space-y-6">
+        <!-- Type 1 -->
+        <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-lime-500/10 flex items-center justify-center text-lime-400 font-extrabold text-lg border border-lime-500/20">1</div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">Website Callback Widget</h3>
+              <p class="text-dark-400 leading-relaxed mb-3">The most common type. A floating or embedded widget on your website that lets visitors request an immediate call. Best for: B2B SaaS, professional services, e-commerce. <strong class="text-white">LimeCall's primary product</strong> — connects in 28 seconds.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Immediate connection</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">High intent capture</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Easy setup</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type 2 -->
+        <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-lime-500/10 flex items-center justify-center text-lime-400 font-extrabold text-lg border border-lime-500/20">2</div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">Scheduled Callback</h3>
+              <p class="text-dark-400 leading-relaxed mb-3">Lets visitors choose a specific date and time for a call, rather than requesting an immediate connection. Critical for teams operating outside business hours or in different time zones. Reduces no-shows by 40% compared to cold outbound calls.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Out-of-hours coverage</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Reduces no-shows</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Calendar integration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type 3 -->
+        <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-lime-500/10 flex items-center justify-center text-lime-400 font-extrabold text-lg border border-lime-500/20">3</div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">AI Callback / Voicebot</h3>
+              <p class="text-dark-400 leading-relaxed mb-3">Uses AI to handle the initial callback conversation — qualifying leads, answering common questions, and routing to the right human rep. Ideal for high-volume teams that cannot staff 24/7. See <a href="/ai-voice-agent/" class="text-lime-400 hover:underline">LimeCall AI Voice Agent</a> for an example implementation.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">24/7 availability</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Lead qualification</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Scalable</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type 4 -->
+        <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-lime-500/10 flex items-center justify-center text-lime-400 font-extrabold text-lg border border-lime-500/20">4</div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">Outbound Callback Automation</h3>
+              <p class="text-dark-400 leading-relaxed mb-3">Triggered when a lead submits a web form, downloads an asset, or reaches a lead score threshold. The software automatically calls your rep with lead context pre-loaded, then dials the prospect. Reduces average response time from hours to seconds for form-generated leads.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Form-trigger automation</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">CRM-driven</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">No manual dialling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type 5 -->
+        <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-lime-500/10 flex items-center justify-center text-lime-400 font-extrabold text-lg border border-lime-500/20">5</div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">Missed Call Callback</h3>
+              <p class="text-dark-400 leading-relaxed mb-3">Automatically calls back any number that rang your business line but didn't get through. Prevents lead leakage from missed inbound calls. Often built into call centre platforms but available as a standalone feature in tools like LimeCall.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">No lead left behind</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">After-hours recovery</span>
+                <span class="px-3 py-1 rounded-full bg-dark-800 text-xs text-dark-300">Auto-retry logic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Criteria Table -->
+  <section id="criteria" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        What to Look for in Callback Software
+      </h2>
+      <p class="text-dark-400 mb-10">Use this criteria table to evaluate any callback tool against your specific requirements before committing.</p>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-white">Criterion</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">Weight</th>
+              <th class="px-5 py-4 text-left font-semibold text-white">What to Evaluate</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {criteria.map((row) => (
+              <tr class="bg-dark-950/40 hover:bg-dark-900/40 transition">
+                <td class="px-5 py-4 font-semibold text-white">{row.criterion}</td>
+                <td class="px-5 py-4">
+                  <span class={`px-2 py-0.5 rounded text-xs font-semibold ${row.weight === 'Critical' ? 'bg-red-900/40 text-red-400' : row.weight === 'High' ? 'bg-lime-900/30 text-lime-400' : 'bg-dark-800 text-dark-400'}`}>
+                    {row.weight}
+                  </span>
+                </td>
+                <td class="px-5 py-4 text-dark-400 leading-relaxed">{row.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section id="comparison" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Top 7 Callback Software Tools Compared (2026)
+      </h2>
+      <p class="text-dark-400 mb-10">Scores out of 10 based on feature depth, response speed, integration quality, pricing transparency, and ease of setup. Tested by the LimeCall editorial team, March 2026.</p>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-4 py-4 text-left font-semibold text-white">Tool</th>
+              <th class="px-4 py-4 text-center font-semibold text-white">Score</th>
+              <th class="px-4 py-4 text-left font-semibold text-white">Best For</th>
+              <th class="px-4 py-4 text-center font-semibold text-white">Response Time</th>
+              <th class="px-4 py-4 text-left font-semibold text-white">Starting Price</th>
+              <th class="px-4 py-4 text-left font-semibold text-white">Key Feature</th>
+              <th class="px-4 py-4 text-left font-semibold text-white">Verdict</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {tools.map((tool) => (
+              <tr class={`transition ${tool.highlight ? 'bg-lime-950/20 hover:bg-lime-950/30 border-l-2 border-l-lime-500' : 'bg-dark-950/40 hover:bg-dark-900/40'}`}>
+                <td class="px-4 py-4">
+                  <span class={`font-bold ${tool.highlight ? 'text-lime-400' : 'text-white'}`}>{tool.name}</span>
+                  {tool.highlight && <span class="ml-2 px-2 py-0.5 rounded text-xs font-bold bg-lime-500 text-dark-950">Editors' Choice</span>}
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <span class={`font-extrabold text-lg ${tool.highlight ? 'text-lime-400' : 'text-white'}`}>{tool.score}</span>
+                </td>
+                <td class="px-4 py-4 text-dark-400 max-w-[180px]">{tool.bestFor}</td>
+                <td class="px-4 py-4 text-center">
+                  <span class={`font-semibold ${tool.highlight ? 'text-lime-400' : 'text-dark-300'}`}>{tool.responseTime}</span>
+                </td>
+                <td class="px-4 py-4 text-dark-400">{tool.startingPrice}</td>
+                <td class="px-4 py-4 text-dark-400 max-w-[200px]">{tool.keyFeature}</td>
+                <td class="px-4 py-4 text-dark-400 text-xs italic">{tool.verdict}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-dark-600">Prices and scores are indicative as of March 2026. Always verify current pricing directly with each vendor.</p>
+    </div>
+  </section>
+
+  <!-- Editors' Choice -->
+  <section id="editors-choice" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/30 bg-gradient-to-br from-lime-950/30 to-dark-900/80 p-8 sm:p-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="px-3 py-1 rounded-full bg-lime-500 text-dark-950 text-xs font-extrabold uppercase tracking-widest">Editors' Choice 2026</span>
+        </div>
+        <h2 class="text-3xl font-extrabold text-white mb-4">
+          Why LimeCall Earns the Top Score
+        </h2>
+        <p class="text-dark-300 leading-relaxed mb-6">
+          After evaluating all seven tools across response speed, feature completeness, integration depth, and real-world conversion impact, LimeCall stands out as the most comprehensive callback solution for B2B sales teams. Here's why:
+        </p>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {[
+            { title: '28-Second Average Callback', desc: 'Industry-fastest connection time. No other widget-based tool consistently beats this benchmark in live testing.' },
+            { title: 'Full Lead Routing Built In', desc: 'Skill-based, round-robin, and territory routing are standard — not add-ons. Critical for multi-rep teams.' },
+            { title: 'Free Plan + Transparent Pricing', desc: 'The only top-7 tool with a genuinely usable free tier. No surprise per-minute charges.' },
+            { title: 'AI Voice Agent Integration', desc: 'LimeCall\'s AI agent handles after-hours calls, qualifies leads, and books meetings — without human involvement.' },
+            { title: 'Deepest CRM Integrations', desc: 'HubSpot, Salesforce, Pipedrive, Zoho — all native, bidirectional, with call recordings attached to contact records.' },
+            { title: 'Setup in Under 5 Minutes', desc: 'Embed a single JavaScript snippet. No developer required. Live in minutes, not days.' },
+          ].map((item) => (
+            <div class="flex gap-3">
+              <div class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-lime-500 flex items-center justify-center">
+                <svg class="w-3 h-3 text-dark-950" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white mb-1">{item.title}</h4>
+                <p class="text-sm text-dark-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+            Try LimeCall Free
+          </a>
+          <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+            View Pricing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Benchmarks -->
+  <section id="benchmarks" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Industry Response Time Benchmarks
+      </h2>
+      <p class="text-dark-400 mb-8">Average lead response times by industry (all channels, 2025 data). Best-in-class figures from top quartile performers. LimeCall benchmark reflects median customer performance.</p>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-white">Industry</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Industry Average</th>
+              <th class="px-5 py-4 text-center font-semibold text-white">Best-in-Class</th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">LimeCall Customers</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Financial Services', '3.5 hours', '2 minutes', '28 seconds'],
+              ['Real Estate', '15 hours', '5 minutes', '28 seconds'],
+              ['Insurance', '2.7 hours', '90 seconds', '28 seconds'],
+              ['Legal', '24+ hours', '10 minutes', '28 seconds'],
+              ['SaaS / Technology', '1.5 hours', '3 minutes', '28 seconds'],
+              ['E-commerce', '4 hours', '5 minutes', '28 seconds'],
+              ['Healthcare', '3 hours', '4 minutes', '28 seconds'],
+              ['Automotive', '2.5 hours', '3 minutes', '28 seconds'],
+              ['Education', '12 hours', '15 minutes', '28 seconds'],
+              ['Travel & Tourism', '6 hours', '8 minutes', '28 seconds'],
+            ].map(([industry, avg, bic, lc]) => (
+              <tr class="bg-dark-950/40 hover:bg-dark-900/40 transition">
+                <td class="px-5 py-4 font-medium text-white">{industry}</td>
+                <td class="px-5 py-4 text-center text-red-400 font-semibold">{avg}</td>
+                <td class="px-5 py-4 text-center text-yellow-400 font-semibold">{bic}</td>
+                <td class="px-5 py-4 text-center text-lime-400 font-bold">{lc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-dark-600">Sources: Harvard Business Review (2011, replicated 2023), InsideSales.com, LeadConnect Industry Report 2025. LimeCall median from platform analytics.</p>
+      <p class="mt-2 text-sm text-dark-400">For full statistical analysis, see our <a href="/speed-to-lead-statistics/" class="text-lime-400 hover:underline">speed-to-lead statistics</a> and <a href="/b2b-lead-response-benchmark/" class="text-lime-400 hover:underline">B2B lead response benchmark report</a>.</p>
+    </div>
+  </section>
+
+  <!-- Implementation Guide -->
+  <section id="implementation" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        How to Implement Callback Software: 5-Step Guide
+      </h2>
+      <p class="text-dark-400 mb-10">From account setup to your first callback in under 30 minutes. This guide uses LimeCall as the reference implementation.</p>
+
+      <div class="space-y-6">
+        {[
+          {
+            step: 'Step 1',
+            title: 'Sign Up and Configure Your Account',
+            time: '5 minutes',
+            desc: 'Create your LimeCall account (free plan available). Set your business name, timezone, and business hours. Configure your team\'s availability — this determines when the instant callback widget shows vs. the scheduled callback option.',
+            tips: ['Enable SMS alerts so reps get notified instantly', 'Set a missed-call follow-up delay (recommended: 5 minutes)', 'Add team members with appropriate permissions'],
+          },
+          {
+            step: 'Step 2',
+            title: 'Customize Your Widget',
+            time: '10 minutes',
+            desc: 'Design your callback widget to match your brand. Choose colors, button text, and the pages on which it appears. High-converting placements include pricing pages, product pages, and checkout flows. A/B test your widget headline — "Talk to Sales Now" typically outperforms "Contact Us".',
+            tips: ['Use exit-intent triggers to capture leaving visitors', 'Show social proof ("Join 10,000+ customers") in the widget', 'Test popup delay: 30–60 seconds works for most sites'],
+          },
+          {
+            step: 'Step 3',
+            title: 'Install the Tracking Script',
+            time: '5 minutes',
+            desc: 'Copy your unique JavaScript snippet from the LimeCall dashboard and paste it before the closing </body> tag on your website. For WordPress, use a plugin like Insert Headers and Footers. For Shopify, add it to your theme.liquid file. No developer required.',
+            tips: ['Verify installation using LimeCall\'s built-in tester', 'Confirm the widget appears on all target pages', 'Test on mobile — over 60% of callbacks are triggered on mobile devices'],
+          },
+          {
+            step: 'Step 4',
+            title: 'Connect Your CRM and Integrations',
+            time: '10 minutes',
+            desc: 'Connect LimeCall to your CRM (HubSpot, Salesforce, Pipedrive, Zoho, or via Zapier). Configure what data syncs on each call: contact creation, call recording attachment, outcome tagging. Proper CRM integration ensures no lead falls through the cracks.',
+            tips: ['Map LimeCall fields to your CRM lead fields', 'Enable automatic call recording sync', 'Set up a Slack notification for each new callback request'],
+          },
+          {
+            step: 'Step 5',
+            title: 'Set Up Lead Routing Rules',
+            time: '5 minutes',
+            desc: 'Configure how callbacks are distributed to your team. Options include: round-robin (fair distribution), skill-based (e.g., enterprise leads go to senior reps), territory-based (by country or region), or availability-based (whoever is online). See our guide to <a href="/automatic-lead-distribution/" class="text-lime-400 hover:underline">automatic lead distribution</a> for advanced routing strategies.',
+            tips: ['Start with round-robin for teams under 10 reps', 'Add overflow rules for when all reps are busy', 'Set maximum callback wait time — auto-schedule if exceeded'],
+          },
+        ].map((item) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="px-3 py-1 rounded-full bg-lime-500/10 border border-lime-500/20 text-xs font-bold text-lime-400 uppercase tracking-widest">{item.step}</span>
+              <span class="text-xs text-dark-500">Est. time: {item.time}</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">{item.title}</h3>
+            <p class="text-dark-400 leading-relaxed mb-4" set:html={item.desc}></p>
+            <div class="space-y-1">
+              {item.tips.map((tip) => (
+                <div class="flex items-start gap-2 text-sm text-dark-400">
+                  <span class="text-lime-400 mt-0.5 flex-shrink-0">•</span>
+                  <span>{tip}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Calculator -->
+  <section id="roi" class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-4">
+        Callback Software ROI: The Math
+      </h2>
+      <p class="text-dark-400 mb-10">Use these benchmarks to estimate the revenue impact of implementing callback software on your website.</p>
+
+      <div class="rounded-2xl border border-dark-800 bg-dark-950/60 p-8">
+        <h3 class="text-xl font-bold text-white mb-6">Example: B2B SaaS Company, 500 Monthly Visitors to Pricing Page</h3>
+
+        <div class="space-y-4">
+          {[
+            { label: 'Monthly pricing page visitors', before: '500', after: '500', note: 'Same traffic' },
+            { label: 'Contact / demo request rate', before: '2%', after: '5%', note: '+3pp (widget increases CTA rate)' },
+            { label: 'Leads generated', before: '10', after: '25', note: '+15 leads/month' },
+            { label: 'Contact rate (speed to lead)', before: '32%', after: '85%', note: 'Instant callback vs. form + email' },
+            { label: 'Leads contacted', before: '3.2', after: '21.25', note: '+18 conversations' },
+            { label: 'Opportunity conversion rate', before: '20%', after: '28%', note: 'Engaged leads convert better' },
+            { label: 'Opportunities created', before: '0.64', after: '5.95', note: '+5.3 opps/month' },
+            { label: 'Average deal value', before: '$12,000', after: '$12,000', note: 'Held constant' },
+            { label: 'Monthly pipeline added', before: '$7,680', after: '$71,400', note: '+$63,720/month' },
+            { label: 'At 25% close rate — revenue', before: '$1,920', after: '$17,850', note: '+$15,930/month' },
+          ].map((row) => (
+            <div class="grid grid-cols-4 gap-4 py-3 border-b border-dark-800 last:border-0">
+              <div class="col-span-2 text-sm text-dark-300">{row.label}</div>
+              <div class="text-sm text-center">
+                <span class="text-dark-500">{row.before}</span>
+              </div>
+              <div class="text-sm text-center">
+                <span class="font-semibold text-lime-400">{row.after}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-6 rounded-xl bg-lime-500/10 border border-lime-500/20 p-5">
+          <p class="text-center text-sm text-dark-400 mb-2">LimeCall Pro plan cost: <strong class="text-white">$99/month</strong></p>
+          <p class="text-center text-2xl font-extrabold text-lime-400">ROI: 16,000%+</p>
+          <p class="text-center text-sm text-dark-400 mt-1">Based on $15,930 additional monthly revenue vs $99 tool cost</p>
+        </div>
+
+        <p class="mt-4 text-xs text-dark-600">Note: These figures are illustrative based on LimeCall customer medians and published speed-to-lead research. Individual results vary based on traffic quality, deal size, and team performance. For a personalised calculation, contact our sales team.</p>
+      </div>
+
+      <div class="mt-8 p-6 rounded-2xl border border-dark-800 bg-dark-950/60">
+        <h3 class="font-bold text-white mb-3">Key Assumptions (based on published data)</h3>
+        <div class="grid gap-3 sm:grid-cols-2 text-sm text-dark-400">
+          <div class="flex items-start gap-2">
+            <span class="text-lime-400 flex-shrink-0">•</span>
+            <span>Callback widget increases demo/contact CTA rate by 2–4 percentage points (LimeCall customer average: +3pp)</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-lime-400 flex-shrink-0">•</span>
+            <span>Instant callback achieves 85%+ contact rate vs. 32% for form + delayed email follow-up (InsideSales.com, 2023)</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-lime-400 flex-shrink-0">•</span>
+            <span><a href="/time-to-lead/" class="text-lime-400 hover:underline">Time to lead</a> under 28 seconds increases opportunity conversion by 8 percentage points vs. &gt;1 hour response</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-lime-400 flex-shrink-0">•</span>
+            <span>Speed to lead under 5 minutes makes contact 9x more likely than responding 30+ minutes later (Harvard Business Review, replicated 2023)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Ready to Add Callback Software to Your Site?
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        LimeCall connects your website visitors to your sales team in 28 seconds. Free plan available. No credit card required. Setup in 5 minutes.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Needed
+        </a>
+        <a href="/customer-callback-software/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          Learn More About LimeCall
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">30-day money-back guarantee · Free plan available · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Cross Links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Related Resources"
+        links={[
+          { href: '/customer-callback-software/', title: 'Customer Callback Software', desc: 'LimeCall\'s core callback product — connect visitors to your team in 28 seconds.' },
+          { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'The LimeCall feature that guarantees sub-28-second response to every new lead.' },
+          { href: '/time-to-lead/', title: 'Time to Lead Guide', desc: 'What time-to-lead means, why it matters, and how to measure it.' },
+          { href: '/speed-to-lead-statistics/', title: 'Speed to Lead Statistics', desc: '47 data points on lead response time and conversion impact.' },
+          { href: '/b2b-lead-response-benchmark/', title: 'B2B Lead Response Benchmark', desc: 'Industry benchmark report: how fast do B2B companies respond to leads?' },
+          { href: '/ai-voice-agent/', title: 'AI Voice Agent', desc: 'LimeCall\'s AI handles callbacks 24/7 — qualifying leads while you sleep.' },
+          { href: '/automatic-lead-distribution/', title: 'Automatic Lead Distribution', desc: 'Route every callback to the right rep, automatically.' },
+          { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple plans starting free. No hidden per-minute charges.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

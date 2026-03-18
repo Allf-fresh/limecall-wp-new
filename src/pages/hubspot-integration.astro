@@ -1,0 +1,429 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const crm = "HubSpot";
+const slug = "hubspot-integration";
+
+const seo = {
+  title: 'LimeCall + HubSpot Integration | Sync Calls to CRM Automatically',
+  description: 'Connect LimeCall with HubSpot to auto-create contacts, log call activities, update deal stages, and trigger workflows — all in real time.',
+  canonical: 'https://www.limecall.com/hubspot-integration/',
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall HubSpot Integration',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Native integration between LimeCall callback software and HubSpot CRM. Auto-create contacts, log call activities, update deal stages, and trigger HubSpot workflows in real time.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Included on LimeCall Pro plan and above',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does the LimeCall HubSpot integration work with HubSpot Free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall connects to all HubSpot tiers including HubSpot Free (CRM), HubSpot Starter, Professional, and Enterprise. The OAuth connection works the same across all plans. However, some advanced features — such as enrolling contacts in HubSpot Sequences or triggering certain workflow types — require a HubSpot Sales Hub paid plan, as those features are gated by HubSpot itself, not by LimeCall. Core contact creation, activity logging, and deal stage updates work on HubSpot Free.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support two-way sync with HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports two-way sync with HubSpot. In addition to pushing call data into HubSpot — creating contacts, logging activities, and updating deals — LimeCall can pull existing HubSpot contact data into the LimeCall caller profile. When a known HubSpot contact calls in, the agent sees their HubSpot deal stage, lifecycle stage, last email open, and any custom properties you have configured — all surfaced inside the LimeCall dashboard before the call is answered.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Will the integration create duplicate contacts in HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. LimeCall performs a duplicate check before creating any contact in HubSpot. It matches on phone number and email address. If a contact with the same phone number or email already exists in HubSpot, LimeCall updates that record and logs the call activity on the existing timeline — it does not create a new contact. If no match is found, a new contact is created. This deduplication logic runs automatically on every callback without any manual configuration.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall update HubSpot deal stages automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. You can configure LimeCall to move a HubSpot deal to a specific pipeline stage based on the call outcome. For example, when a callback ends with the outcome "demo scheduled", LimeCall automatically moves the associated deal to the "Demo Scheduled" stage in your HubSpot pipeline. You map call outcomes to deal stages once in the LimeCall integration settings, and all future calls apply that mapping automatically. Deals can be moved across any pipeline you have in HubSpot.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall trigger HubSpot Workflows?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can trigger HubSpot Workflows by setting contact properties or enrollment triggers after a call event. For example, a completed callback sets a custom property "Last Call Outcome" to "Demo Booked", which you then use as an enrollment trigger in a HubSpot Workflow. This approach works across all HubSpot workflow types — contact-based, deal-based, and company-based — and requires HubSpot Marketing Hub Professional or above for workflow automation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What custom properties does LimeCall sync to HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall syncs the following data points to HubSpot contact and deal properties: UTM source, UTM medium, UTM campaign, UTM content, UTM term, referring page URL, call duration in seconds, call outcome, agent name, callback widget name, and call timestamp. All of these can be mapped to either standard HubSpot properties or custom properties you create. The field mapping wizard in the LimeCall integration settings lets you drag-and-drop each LimeCall field to the corresponding HubSpot property with no developer work required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does the HubSpot integration setup take?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most teams complete the full LimeCall HubSpot integration setup in under 14 minutes. The OAuth authorization takes two clicks and under 30 seconds. The field mapping wizard guides you through mapping LimeCall data fields to HubSpot properties step by step. After mapping, you make a test callback to verify the contact and activity appear in HubSpot correctly. The average measured setup time across LimeCall customers is 14 minutes from starting the integration to the first verified test callback.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "2.3x", label: "More demos booked with HubSpot sync" },
+  { value: "14 min", label: "Average setup time" },
+  { value: "2 clicks", label: "OAuth connect — no developers" },
+  { value: "500", label: "Calls/mo on Pro plan" },
+];
+
+const features = [
+  {
+    title: "Auto-create or update HubSpot contacts on every call",
+    desc: "Every LimeCall callback automatically creates a new HubSpot contact — or updates an existing one — with phone number, name, email, and the page they called from. Duplicate check runs on every sync so your CRM stays clean.",
+  },
+  {
+    title: "Log call outcome as Activity on contact timeline",
+    desc: "After each callback, LimeCall posts a call activity note to the HubSpot contact timeline. The note includes call outcome, duration, agent name, and any disposition notes — giving your team full call history inside HubSpot.",
+  },
+  {
+    title: "Update Deal stage on callback completion",
+    desc: "Map LimeCall call outcomes to HubSpot deal stages. A 'demo scheduled' callback automatically moves the deal to 'Demo Scheduled'. A 'closed won' outcome moves it to 'Closed Won'. Deal stage updates fire within seconds of the call ending.",
+  },
+  {
+    title: "Enrol contacts in HubSpot Sequences post-call",
+    desc: "After a callback, automatically enrol the contact in a HubSpot Sequence based on call outcome. A 'no answer' call enrols the contact in a re-engagement sequence; a 'interested' call enrols them in a sales follow-up track.",
+  },
+  {
+    title: "Two-way sync: HubSpot contact → LimeCall caller profile",
+    desc: "When a known HubSpot contact calls in, LimeCall pulls their CRM data — deal stage, lifecycle stage, last activity — directly into the agent's screen before the call is answered. Your reps have full context with zero tab-switching.",
+  },
+  {
+    title: "Custom property mapping: UTM source, page URL, call duration",
+    desc: "Map any LimeCall data field — UTM source, medium, campaign, referring page URL, call duration, widget name — to any standard or custom HubSpot property. The field mapping wizard requires no developer work and takes under 5 minutes.",
+  },
+];
+
+const automations = [
+  {
+    trigger: "Call completed",
+    action: "Move deal to \"Demo Scheduled\"",
+    desc: "When a callback ends with outcome 'demo scheduled', LimeCall moves the associated HubSpot deal to the Demo Scheduled stage instantly — no manual CRM update needed.",
+  },
+  {
+    trigger: "No answer",
+    action: "Enrol in re-engagement Sequence",
+    desc: "If a callback attempt goes unanswered, LimeCall enrols the HubSpot contact in a re-engagement email sequence automatically, so no lead falls through the cracks.",
+  },
+  {
+    trigger: "New lead calls",
+    action: "Create Deal in pipeline",
+    desc: "When a new contact requests a callback for the first time, LimeCall creates both a HubSpot contact and a new Deal in your chosen pipeline — all from a single phone interaction.",
+  },
+  {
+    trigger: "Callback booked",
+    action: "Set contact property + trigger Workflow",
+    desc: "A scheduled callback sets a custom HubSpot property 'Next Callback Date', which triggers a HubSpot Workflow to send a confirmation email to the prospect automatically.",
+  },
+];
+
+const useCases = [
+  {
+    role: "Sales Teams",
+    title: "Full deal context before every call",
+    desc: "Before a rep picks up a LimeCall callback, they see the caller's HubSpot deal stage, lifecycle stage, last email open, and any notes from previous interactions. Reps stop wasting the first 2 minutes asking 'how can I help' and start selling immediately.",
+  },
+  {
+    role: "Marketing Teams",
+    title: "Attribute phone leads to the exact campaign",
+    desc: "Every LimeCall callback captures the UTM source, medium, campaign, and referring URL and syncs them to the HubSpot contact record. Marketing can report on phone-lead volume by campaign directly inside HubSpot without any manual tagging.",
+  },
+  {
+    role: "Revenue Operations",
+    title: "Keep pipeline stage data accurate automatically",
+    desc: "Deal stages in HubSpot update the moment a callback happens — no relying on reps to manually update CRM after each call. RevOps teams get accurate pipeline forecasts because the data reflects real call activity in real time.",
+  },
+  {
+    role: "Customer Success",
+    title: "Escalate support calls based on deal value",
+    desc: "LimeCall reads HubSpot deal value and routes high-value customer callbacks to senior CSMs automatically. The HubSpot two-way sync means routing decisions are always based on the latest CRM data, not stale snapshots.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Auto-create / update HubSpot contacts", limecall: true, manual: false, others: "Partial" },
+  { feature: "Log call activity on contact timeline", limecall: true, manual: false, others: false },
+  { feature: "Update deal stage on call outcome", limecall: true, manual: false, others: false },
+  { feature: "Enrol in HubSpot Sequences post-call", limecall: true, manual: false, others: false },
+  { feature: "Two-way sync (HubSpot → LimeCall)", limecall: true, manual: false, others: false },
+  { feature: "Custom property mapping (UTM, page, duration)", limecall: true, manual: false, others: "Partial" },
+  { feature: "OAuth connect — 2 clicks", limecall: true, manual: "N/A", others: false },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: crm, url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Native Integration · 2-click OAuth · 14-minute setup
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">HubSpot</span>:<br class="hidden sm:block" />
+        Sync Calls to CRM Automatically
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Connect LimeCall with HubSpot to auto-create contacts, log call activities, update deal stages, and trigger workflows — all in real time. Teams using LimeCall + HubSpot book 2.3x more demos.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect HubSpot Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Data flow diagram -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How a callback flows into HubSpot</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From the moment a visitor clicks your widget to the deal stage updating in HubSpot — every step is automatic.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Visitor requests callback</h3>
+          <p class="mt-1 text-xs text-dark-400">Clicks LimeCall widget on your website</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Call connected</h3>
+          <p class="mt-1 text-xs text-dark-400">LimeCall bridges visitor and rep in 28 seconds</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Outcome recorded</h3>
+          <p class="mt-1 text-xs text-dark-400">Rep marks outcome: demo booked, follow-up, etc.</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">HubSpot updates</h3>
+          <p class="mt-1 text-xs text-dark-400">Contact created, activity logged, deal stage moved</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">OAuth connect in 2 clicks</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Go to LimeCall → Integrations → HubSpot. Click "Connect HubSpot" and authorise via OAuth. No API keys, no developer work — the connection is live in under 30 seconds.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Field mapping wizard</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Use the visual field mapping wizard to map LimeCall data — UTM source, call duration, outcome, page URL — to your HubSpot contact and deal properties. Drag-and-drop, no code required.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Test call and go live</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Make a test callback from the integration settings. Verify the contact and activity appear in HubSpot within seconds. Enable the integration and every future call syncs automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + HubSpot integration does</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that connect your phone channel directly to your HubSpot CRM pipeline.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular automations -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Popular LimeCall + HubSpot automations</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">The most-used call-to-CRM automation recipes our customers set up on day one.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {automations.map(a => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-3 flex items-center gap-3">
+              <span class="rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">When: {a.trigger}</span>
+              <span class="text-dark-600 text-xs">→</span>
+              <span class="rounded-full bg-dark-800 px-3 py-1 text-xs font-semibold text-dark-300">Then: {a.action}</span>
+            </div>
+            <p class="text-sm text-dark-400 leading-relaxed">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + HubSpot and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall + HubSpot vs the alternatives</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + HubSpot</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual logging</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300">{row.feature}</td>
+                <td class="py-3 px-5 text-center">
+                  {row.limecall === true
+                    ? <span class="text-lime-400 font-bold">Yes</span>
+                    : <span class="text-dark-500">{row.limecall}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.manual === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.manual}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.others === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.others}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with HubSpot?</h2>
+      <p class="mt-4 text-dark-400">2-click OAuth · 14-minute setup · Free trial included</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations & Resources" links={[
+        { href: '/salesforce-integration/', title: 'LimeCall + Salesforce', desc: 'Auto-create Leads and log call Activities in Salesforce.' },
+        { href: '/pipedrive-integration/', title: 'LimeCall + Pipedrive', desc: 'Sync callbacks directly into your Pipedrive pipeline.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route every lead to the right rep automatically.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include CRM integrations.' },
+      ]} />
+    </div>
+  </div>
+</Base>

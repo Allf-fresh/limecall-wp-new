@@ -1,0 +1,356 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Estate Agents & Property Developers | LimeCall',
+  description: 'Connect property enquiries to agents in 28 seconds. LimeCall helps estate agents capture more viewings, valuations, and completions from website leads.',
+  canonical: site.url + '/real-estate/',
+};
+
+const stats = [
+  { value: '28s', label: 'Average connection time from enquiry to agent' },
+  { value: '3.7×', label: 'More viewings booked vs unanswered enquiries' },
+  { value: '£285k', label: 'Average UK property value — every lead counts' },
+  { value: '67%', label: 'Of buyers call first before visiting a property' },
+];
+
+const features = [
+  { icon: '🏡', title: 'Instant Callback from Rightmove & Zoopla Leads', desc: 'Connect Rightmove and Zoopla lead notifications to LimeCall via webhook. The moment a buyer enquires on a portal, your agent gets a callback — before any other agency responds.' },
+  { icon: '🏷️', title: 'Valuation Request Widget', desc: 'Add a callback widget to your valuation landing page. Vendors who want a free valuation are connected to a local valuer in 28 seconds — no forms, no waiting, no drop-off.' },
+  { icon: '🌙', title: 'Out-of-Hours Lead Capture', desc: 'Property searches happen at 10pm. LimeCall queues every after-hours enquiry and surfaces them to your agents first thing — so you call before the vendor instructs a competitor.' },
+  { icon: '📍', title: 'Branch Routing by Postcode', desc: 'Multi-branch agencies route callbacks automatically by the property\'s postcode. SW1 goes to Chelsea, M1 to Manchester — zero manual triage, faster response every time.' },
+  { icon: '💬', title: 'WhatsApp Property Photo Sharing', desc: 'After connecting with a buyer, agents can send floor plans, photos, and video tours via WhatsApp in the same conversation thread — keeping engagement high post-call.' },
+  { icon: '🔗', title: 'CRM Sync — Reapit, Dezrez, Jupix & Alto', desc: 'Every callback is automatically logged in your estate agency CRM. Reapit, Dezrez, Jupix, Alto, and 1,000+ tools via Zapier. No manual data entry, full enquiry trail.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with Rightmove leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall connects to Rightmove lead notifications via webhook or email parsing. When a buyer submits an enquiry on Rightmove, the lead is automatically passed to LimeCall, which triggers an instant callback connecting your agent with the buyer within 28 seconds. The same integration works with Zoopla, OnTheMarket, and any other portal that sends lead emails or supports webhooks.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I set up the portal webhook integration?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Setup takes under 10 minutes. In your LimeCall dashboard, go to Integrations and copy your unique webhook URL. Paste this into your Rightmove or Zoopla lead delivery settings, or configure it via Zapier if you prefer a no-code approach. LimeCall then listens for incoming lead data and triggers the callback flow automatically. Full step-by-step documentation is available in our help centre, and our onboarding team will assist with setup.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall GDPR compliant for property leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is fully GDPR compliant. All contact data is encrypted in transit and at rest, stored on EU infrastructure, and subject to configurable retention periods. We sign Data Processing Agreements (DPAs) as standard. Property enquiries processed via Rightmove or Zoopla carry the buyer\'s portal consent; LimeCall processes this data only for the callback service and does not share it with third parties. Full GDPR documentation is available at limecall.com/gdpr.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route enquiries to the right branch automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s intelligent routing can direct calls based on postcode, property type, or the page that triggered the callback. For multi-branch agencies, this means SW1 enquiries go to your Kensington office, M1 to Manchester, and so on — automatically, without any manual triage. You configure routing rules in the dashboard, and agents at the correct branch are called first, with fallback to next available if unanswered.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to property enquiries that arrive after hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'After-hours enquiries are captured and queued in LimeCall. Your team sees them prioritised in the dashboard first thing in the morning, and LimeCall can trigger automatic callbacks the moment your agents go online. Research shows 78% of vendors instruct the first agent to call them back. By being first to call — even for last night\'s enquiries — your agency wins the instruction before the competition has opened its email.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which estate agency CRMs does LimeCall integrate with?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates natively with Reapit, Dezrez, Jupix, and Alto via API or Zapier. Every callback is automatically logged — contact name, number, property enquired, call duration, and agent outcome — keeping your CRM accurate and your pipeline up to date. For CRMs not on this list, Zapier connects LimeCall to 1,000+ tools with no developer required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can an estate agency go live with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most estate agencies are live within 5 minutes. Add the LimeCall widget to your website using a single code snippet or Google Tag Manager, configure your branch routing and agent assignments, and the system is active immediately. Portal webhook integrations typically take an additional 10 minutes. No developer or IT resource is required, and our onboarding team is available to assist every step of the way.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall — Callback Software for Estate Agents',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Instant callback software for estate agents and property developers. Connects Rightmove and Zoopla leads to agents in 28 seconds with branch routing, valuation widgets, and CRM sync.',
+  url: site.url + '/real-estate/',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'GBP',
+    description: '14-day free trial, no credit card required',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '312',
+  },
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Real Estate', url: site.url + '/real-estate/' }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        🏡 For Estate Agents &amp; Property Developers
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Convert Every Property Enquiry<br class="hidden sm:block" />
+        <span class="text-lime-400">into a Viewing</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        78% of vendors instruct the first agent to call them back. LimeCall connects Rightmove and Zoopla leads to your agents in 28 seconds — capturing viewings, valuations, and completions your competitors miss.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ Integrates with Rightmove &amp; Zoopla · GDPR Compliant · Trusted by Estate Agencies Across the UK</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ You Have a 28-Second Window to Win Every Instruction</h2>
+        <p class="text-dark-300">
+          A vendor submits a valuation request on your website at 9pm. They've also enquired with two other local agents. By 9am, all three agencies have seen the lead. The vendor instructs whoever calls first. Without LimeCall, that's a coin toss. With LimeCall, your agent calls in 28 seconds while the enquiry is still hot — and your competitors haven't even opened their email.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Estate Agents</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Buyer or Vendor Enquires Online', desc: 'Via your website valuation page, Rightmove lead email, Zoopla notification, or any portal webhook — LimeCall receives the enquiry instantly.' },
+          { step: '02', title: 'LimeCall Routes to the Right Agent', desc: 'Routing rules match the enquiry to the correct branch by postcode and alert the assigned agent — valuation team for vendors, sales for buyers.' },
+          { step: '03', title: 'Agent Connected in 28 Seconds', desc: 'Your agent speaks with the buyer or vendor before any competitor. First call wins the instruction — every time.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for UK Estate Agencies &amp; Property Developers</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Estate Agency Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'Valuation Lead Callbacks', desc: 'Vendor fills in valuation request → LimeCall triggers callback → valuer connected in 28s → appointment booked on the call.' },
+          { title: 'Rightmove Buyer Enquiries', desc: 'Buyer clicks "Contact Agent" on Rightmove → webhook fires → your agent is connected before any other agency has read the email.' },
+          { title: 'New Instruction Follow-Up', desc: 'Website vendor enquiry at 10pm → queued in LimeCall → first agent call at 9am → instruction secured before competitors respond.' },
+          { title: 'Lettings Enquiry Routing', desc: 'Lettings enquiries routed to your lettings team, sales to sales — no cross-team confusion, faster response, higher conversion.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We were losing valuations to competitors who called faster. LimeCall changed that overnight. Our agents now call within 28 seconds of a Rightmove lead arriving. In 6 months we've booked 42% more valuations and generated £1.8M in additional fees. The branch routing means the right person always handles the right area."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Managing Director</p>
+          <p class="text-sm text-dark-500">Independent estate agency, London — 42% more valuations booked, £1.8M additional fees in 6 months</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Traditional Enquiry Handling</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Email / Phone Tag', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours or next day', '1–48 hours', 'Agent dependent'],
+              ['Portal lead integration', '✅ Rightmove & Zoopla', '⚠️ Manual check', '❌ None', '❌ None'],
+              ['Out-of-hours capture', '✅ Queue + AM callback', '❌ Missed or voicemail', '✅ Form stored', '❌ No agent'],
+              ['Branch routing', '✅ By postcode', '⚠️ Manual transfer', '❌ None', '⚠️ Manual'],
+              ['CRM auto-logging', '✅ Reapit, Dezrez, Alto', '⚠️ Manual entry', '⚠️ Basic only', '⚠️ Limited'],
+              ['Viewings conversion', '🟢 3.7× more booked', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with Your Estate Agency Tech Stack</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to Reapit, Dezrez, Jupix, Alto, Rightmove, Zoopla, and 1,000+ tools via Zapier. Every callback is automatically logged — contact name, number, property address, call duration, and agent notes — keeping your CRM accurate without manual data entry. Setup takes under 5 minutes with no developer required.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry context -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Why Speed to Lead Wins Instructions</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '📊', title: '78% Instruct First to Call', desc: 'Research across UK estate agencies shows 78% of vendors instruct the first agent who calls them back. Speed is the single biggest differentiator in a competitive market.' },
+          { icon: '⏱️', title: 'The 28-Second Window', desc: 'LimeCall connects leads to agents in 28 seconds. Industry average response time is over 2 hours. That gap is where your agency wins — or loses — every instruction.' },
+          { icon: '🏠', title: '£285k Average Property Value', desc: 'At £285k average UK property value and 1.5% fee, each missed instruction costs your agency £4,275 in lost fees. LimeCall pays for itself with a single valuation booking.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Booking More Viewings &amp; Valuations Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · Rightmove &amp; Zoopla integration · No developer required</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support for estate agencies</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Core callback features for any business.' },
+        { href: '/click-to-whatsapp/', title: 'Click to WhatsApp', desc: 'Share property photos and floor plans via WhatsApp.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route enquiries to the right branch automatically.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month — pay for itself in one instruction.' },
+      ]} />
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,519 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema, articleSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Inbound Lead Generation: The Complete Guide (2025) | LimeCall',
+  description:
+    'How the fastest-growing B2B companies convert inbound leads 5x faster. Strategies, tools, and the 42-hour problem killing your pipeline.',
+  canonical: `${site.url}/inbound-lead-generation/`,
+};
+
+const faqs = [
+  {
+    question: 'What is the most effective inbound lead generation channel?',
+    answer:
+      'SEO-driven content marketing consistently delivers the highest-quality inbound leads at the lowest cost per lead over time. However, the most effective single lever is response speed — 78% of B2B buyers choose the first vendor to respond (Lead Connect study). Combining SEO traffic with an instant callback layer like LimeCall gives you both volume and conversion. See how <a href="/speed-to-lead/" class="text-lime-400 hover:underline">speed to lead</a> multiplies your inbound results.',
+  },
+  {
+    question: 'How fast should you respond to inbound leads?',
+    answer:
+      'MIT research shows responding within 1 minute increases conversions by 391% compared to responding in 5 minutes, and by 3,000% compared to responding after 1 hour. The ideal response window is under 60 seconds. LimeCall\'s callback software triggers an automatic call to your rep and prospect simultaneously, achieving average connect times of 28 seconds from form submission.',
+  },
+  {
+    question: 'What tools do I need for inbound lead generation?',
+    answer:
+      'A complete inbound lead gen stack includes: (1) a CRM like HubSpot or Salesforce to manage contacts, (2) callback software like LimeCall to instantly convert web visitors into calls, (3) live chat for async engagement, (4) a landing page builder for campaign pages, and (5) analytics to track channel performance. The callback layer is the most underinvested — yet most impactful — piece for B2B companies.',
+  },
+  {
+    question: 'What is the 42-hour problem in lead generation?',
+    answer:
+      'The average B2B company takes 42 hours to respond to a new inbound lead — by which point the prospect has likely already engaged with 2-3 competitors. Harvard Business Review research confirms companies that respond within an hour are 7x more likely to qualify the lead. The 42-hour problem costs US businesses an estimated $2.4 trillion annually in lost revenue. LimeCall eliminates this gap with instant automated callbacks.',
+  },
+  {
+    question: 'What is the lead decay curve?',
+    answer:
+      'The lead decay curve describes how conversion probability drops exponentially over time after a prospect shows intent. At 0–5 minutes, you get a 391% conversion boost over a 1-hour response. After 10 minutes, the odds of qualifying drop 400%. After 24 hours, conversion rates approach zero for most B2B contexts. This is why speed-to-lead infrastructure is the single highest-ROI investment for inbound teams.',
+  },
+  {
+    question: 'How does callback software fit into inbound lead generation?',
+    answer:
+      'Callback software acts as the conversion layer on top of every inbound channel. When a prospect arrives via SEO, PPC, social, or email — and shows intent on your site — a callback widget captures that intent and instantly connects them with a sales rep. LimeCall integrates with all major CRMs and triggers in under 28 seconds. It is the difference between a form fill that sits in a queue and a live conversation that closes deals.',
+  },
+];
+
+const articleJsonLd = articleSchema({
+  title: seo.title,
+  description: seo.description,
+  url: `${site.url}/inbound-lead-generation/`,
+  publishDate: '2024-02-01',
+  modifiedDate: '2025-01-15',
+  author: site.name,
+});
+
+const decayRows = [
+  { time: '0 – 5 minutes', effect: '+391% conversion boost', colour: 'text-lime-400', bar: '100' },
+  { time: '5 – 10 minutes', effect: '+160% conversion boost', colour: 'text-lime-300', bar: '60' },
+  { time: '10 – 30 minutes', effect: 'Baseline (1x)', colour: 'text-yellow-400', bar: '30' },
+  { time: '1 hour', effect: '36x less effective than 1-min response', colour: 'text-orange-400', bar: '12' },
+  { time: '24 hours', effect: 'Conversion probability near zero', colour: 'text-red-400', bar: '3' },
+  { time: '48+ hours (avg B2B)', effect: 'Lead considered dead', colour: 'text-red-600', bar: '1' },
+];
+
+const channels = [
+  {
+    icon: '🔍',
+    name: 'Organic Search (SEO)',
+    desc: 'Educational content and landing pages capture in-market buyers at peak intent. Highest lifetime ROI of any channel.',
+    callback: 'Callback widget on high-intent landing pages converts organic traffic into calls.',
+  },
+  {
+    icon: '💰',
+    name: 'Paid Search (PPC)',
+    desc: 'Immediate, scalable traffic for high-intent keywords. Works best combined with dedicated landing pages.',
+    callback: 'LimeCall widget on PPC landing pages lifts conversion 30–65% vs. form-only pages.',
+  },
+  {
+    icon: '📱',
+    name: 'Social Media',
+    desc: 'LinkedIn, Meta, and YouTube drive awareness and retargeting. Top-of-funnel but rich in intent signals.',
+    callback: 'Retargeting → landing page with callback widget converts warmed social audiences.',
+  },
+  {
+    icon: '📧',
+    name: 'Email Marketing',
+    desc: 'Nurture sequences move leads down the funnel. Highly measurable. Best for mid-funnel re-engagement.',
+    callback: 'Email CTA links directly to callback request page — converts faster than reply-to-email.',
+  },
+  {
+    icon: '🤝',
+    name: 'Referral & Partners',
+    desc: 'The highest-trust leads come referred. Partner ecosystems and affiliate programs scale this channel.',
+    callback: 'Dedicated referral landing pages with callback widget capture hot referral intent instantly.',
+  },
+  {
+    icon: '📝',
+    name: 'Content Marketing',
+    desc: 'Guides, webinars, and tools attract prospects actively researching solutions. Long purchase cycle but high quality.',
+    callback: 'In-content callback CTAs convert readers who hit \'aha moments\' mid-article.',
+  },
+  {
+    icon: '⭐',
+    name: 'Review Sites & Directories',
+    desc: 'G2, Capterra, and Trustpilot send high-intent comparison shoppers who are close to buying.',
+    callback: 'Profile links to dedicated callback landing page — fastest possible response to comparison shoppers.',
+  },
+];
+
+const toolsStack = [
+  { category: 'CRM', tools: 'HubSpot, Salesforce, Pipedrive', role: 'Store and manage lead data', limecall: false },
+  { category: 'Callback Software', tools: 'LimeCall', role: 'Instant call back — the #1 conversion layer', limecall: true },
+  { category: 'Live Chat', tools: 'Intercom, Drift, Crisp', role: 'Async web engagement', limecall: false },
+  { category: 'Landing Page Builder', tools: 'Unbounce, Webflow, HubSpot Pages', role: 'Convert paid and organic traffic', limecall: false },
+  { category: 'Analytics', tools: 'GA4, Segment, Hotjar', role: 'Track channel attribution and behaviour', limecall: false },
+  { category: 'Marketing Automation', tools: 'Marketo, HubSpot, ActiveCampaign', role: 'Nurture leads at scale', limecall: false },
+];
+
+const checklist = [
+  'Define your ICP (Ideal Customer Profile) before building any channel',
+  'Map content to each stage of the buyer journey (awareness → decision)',
+  'Build dedicated landing pages for every paid and organic campaign',
+  'Install LimeCall callback widget on all high-intent pages',
+  'Connect LimeCall to your CRM for automatic lead capture and routing',
+  'Set up lead scoring to prioritise inbound volume by quality',
+  'Configure intelligent call routing to match leads with the right rep',
+  'Implement automated SMS follow-up for missed calls',
+  'Build a nurture email sequence for leads who don\'t convert on first touch',
+  'Review response time analytics weekly — optimise toward sub-60-second contact',
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={articleJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Inbound Lead Generation', url: `${site.url}/inbound-lead-generation/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Inbound Lead Generation Guide 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Inbound Lead Generation:<br />
+        <span class="text-lime-400">Convert Faster or Lose to Competitors</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        78% of B2B buyers choose the first vendor to respond. MIT research proves responding in under 1 minute drives 391% more conversions. This guide shows you exactly how to build the inbound engine that wins — and the callback layer that closes it.
+      </p>
+
+      <!-- Stat trio -->
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-5">
+          <div class="text-3xl font-extrabold text-lime-400">78%</div>
+          <div class="mt-1 text-sm font-semibold text-white">Buy from the first responder</div>
+          <div class="mt-1 text-xs text-dark-500">Lead Connect study, B2B buyers</div>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-5">
+          <div class="text-3xl font-extrabold text-lime-400">391%</div>
+          <div class="mt-1 text-sm font-semibold text-white">More conversions in &lt;1 minute</div>
+          <div class="mt-1 text-xs text-dark-500">vs. 1-hour response (MIT research)</div>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-5">
+          <div class="text-3xl font-extrabold text-lime-400">$2.4T</div>
+          <div class="mt-1 text-sm font-semibold text-white">Lost annually to slow follow-up</div>
+          <div class="mt-1 text-xs text-dark-500">Estimated US B2B revenue loss</div>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free — Convert Leads Faster
+        </a>
+        <a
+          href="/contact-us"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Request a Demo
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">30-day money-back guarantee · Free plan available</p>
+    </div>
+  </section>
+
+  <!-- What is inbound lead generation -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+        What Is <span class="text-lime-400">Inbound Lead Generation?</span>
+      </h2>
+      <div class="space-y-5 text-dark-300 leading-relaxed text-base">
+        <p>
+          Inbound lead generation is the practice of attracting prospects to your business through content, search, social, and referral channels — rather than interrupting them with cold outreach. The prospect comes to you because they have a problem you solve. This means inbound leads are self-qualified, more likely to convert, and carry a lower cost-per-acquisition than most outbound methods at scale.
+        </p>
+        <p>
+          Where inbound lead generation breaks down is in the gap between <em class="text-white">lead acquisition</em> and <em class="text-white">lead conversion</em>. A visitor fills out a form, requests a demo, or clicks a call button — and the average business takes 42 hours to respond. By then, the lead has spoken to three competitors. The companies winning in 2025 have closed this gap with automated callback infrastructure that connects reps and prospects in under 60 seconds.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Decay Curve -->
+  <section class="border-t border-dark-800 bg-dark-900/50 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          The <span class="text-lime-400">Lead Decay Curve</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Lead conversion probability is not linear — it drops exponentially. Every minute without contact is pipeline evaporating.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Response Window</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Conversion Impact</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Visual</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800/60">
+            {decayRows.map((row) => (
+              <tr class="bg-dark-900/30 hover:bg-dark-800/40 transition-colors">
+                <td class="px-6 py-4 font-medium text-white">{row.time}</td>
+                <td class={`px-6 py-4 font-bold ${row.colour}`}>{row.effect}</td>
+                <td class="px-6 py-4">
+                  <div class="h-2 w-48 rounded-full bg-dark-800">
+                    <div class={`h-2 rounded-full bg-lime-500`} style={`width: ${row.bar}%`}></div>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-sm text-dark-300">
+        <span class="font-bold text-lime-400">Key insight:</span> The entire window for peak conversion is under 10 minutes. LimeCall connects your rep and prospect in an average of 28 seconds — capturing the full 391% conversion advantage on every inbound lead.
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Channels -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          The 7 Channels of <span class="text-lime-400">Inbound Lead Generation</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Each channel brings leads in. Callback software is the conversion layer that sits on top of all of them — turning intent into conversations.
+        </p>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {channels.map((ch) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6 flex flex-col gap-3">
+            <div class="text-3xl">{ch.icon}</div>
+            <h3 class="font-bold text-white text-base">{ch.name}</h3>
+            <p class="text-xs text-dark-400 leading-relaxed flex-1">{ch.desc}</p>
+            <div class="rounded-lg border border-lime-500/20 bg-lime-500/5 px-3 py-2">
+              <p class="text-xs text-lime-400 leading-relaxed">{ch.callback}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Speed to Lead section -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2 items-center">
+        <div>
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+            Speed-to-Lead: The <span class="text-lime-400">#1 Conversion Lever</span>
+          </h2>
+          <p class="mt-4 text-dark-400 leading-relaxed">
+            You can have the best SEO, the biggest PPC budget, and flawless content — and still lose every deal to a smaller competitor that answers the phone faster. Speed-to-lead is not a nice-to-have. It is the single highest-leverage variable in inbound conversion.
+          </p>
+          <p class="mt-4 text-dark-400 leading-relaxed">
+            The Harvard Business Review found companies that respond within an hour are 7x more likely to qualify the lead than those that wait even slightly longer. MIT's research puts the conversion improvement at 391% for sub-1-minute response. Yet the average B2B company takes 42 hours.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'LimeCall bridges the 42-hour gap with automated 28-second callback',
+              'Simultaneous dial to rep and prospect — no manual process',
+              'Intelligent routing sends each lead to the best available rep',
+              'Automated SMS follow-up if the first call attempt is missed',
+              'Full CRM sync — every call logged automatically',
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-sm text-dark-300">
+                <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="/speed-to-lead/" class="text-lime-400 hover:underline text-sm font-semibold">
+              Deep dive: Speed to Lead — the complete guide →
+            </a>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/80 p-8 space-y-5">
+          <h3 class="text-lg font-bold text-white">Response Time vs. Conversion Rate</h3>
+          {[
+            { label: 'Under 28 seconds (LimeCall)', pct: 97, colour: 'bg-lime-500' },
+            { label: '1 minute', pct: 78, colour: 'bg-lime-400' },
+            { label: '5 minutes', pct: 45, colour: 'bg-yellow-400' },
+            { label: '1 hour', pct: 18, colour: 'bg-orange-400' },
+            { label: '24 hours', pct: 6, colour: 'bg-red-500' },
+            { label: '42+ hours (industry avg)', pct: 2, colour: 'bg-red-700' },
+          ].map((r) => (
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-dark-400">{r.label}</span>
+                <span class="font-bold text-white">{r.pct}%</span>
+              </div>
+              <div class="h-2 rounded-full bg-dark-800">
+                <div class={`h-2 rounded-full ${r.colour}`} style={`width: ${r.pct}%`}></div>
+              </div>
+            </div>
+          ))}
+          <p class="text-xs text-dark-600 pt-2">Relative conversion probability index. Source: MIT/InsideSales, Lead Connect, LimeCall data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Stack Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          The Inbound Lead Gen <span class="text-lime-400">Tech Stack</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Six categories, one goal: every inbound lead captured and converted as fast as possible.
+        </p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Category</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Example Tools</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Role in the Stack</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800/60">
+            {toolsStack.map((row) => (
+              <tr class={`transition-colors ${row.limecall ? 'bg-lime-950/20 hover:bg-lime-950/30' : 'bg-dark-900/30 hover:bg-dark-800/40'}`}>
+                <td class="px-6 py-4 font-semibold text-white">
+                  {row.category}
+                  {row.limecall && (
+                    <span class="ml-2 rounded-full bg-lime-500/20 px-2 py-0.5 text-xs font-bold text-lime-400">Featured</span>
+                  )}
+                </td>
+                <td class="px-6 py-4 text-dark-300">{row.tools}</td>
+                <td class="px-6 py-4 text-dark-400">{row.role}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Implementation Checklist -->
+  <section class="border-t border-dark-800 bg-dark-900/50 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          10-Step Inbound Lead Gen <span class="text-lime-400">Implementation Checklist</span>
+        </h2>
+        <p class="mt-4 text-dark-400">Follow this sequence to build a system that generates and converts leads on autopilot.</p>
+      </div>
+      <div class="space-y-3">
+        {checklist.map((item, i) => (
+          <div class="flex items-start gap-4 rounded-xl border border-dark-800 bg-dark-900/60 px-5 py-4">
+            <div class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/15 text-xs font-extrabold text-lime-400">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <p class="text-sm text-dark-300 leading-relaxed pt-0.5">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Case Study: <span class="text-lime-400">2.7x Pipeline in 90 Days</span>
+        </h2>
+      </div>
+      <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-950/20 to-dark-900/80 p-8 lg:p-12">
+        <div class="grid gap-8 lg:grid-cols-2">
+          <div>
+            <div class="text-xs font-semibold uppercase tracking-widest text-lime-400 mb-3">B2B Technology Company — UK</div>
+            <h3 class="text-xl font-bold text-white mb-4">Challenge</h3>
+            <p class="text-dark-400 text-sm leading-relaxed mb-6">
+              A mid-market B2B SaaS company was running 6 inbound channels — SEO, Google Ads, LinkedIn, email nurture, webinars, and review sites — generating 200+ leads per month. Conversion to demo was sitting at 11% despite strong traffic. Sales team average response time: 4.2 hours. By the time reps called back, 60% of leads had already booked demos with competitors.
+            </p>
+            <h3 class="text-xl font-bold text-white mb-4">Solution</h3>
+            <p class="text-dark-400 text-sm leading-relaxed">
+              LimeCall was installed as the callback layer across all 6 channel landing pages. Intelligent routing directed each lead to the correct product specialist. Automated SMS follow-up was configured for after-hours leads. The CRM integration ensured every call was logged instantly with source attribution.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-6">Results — 90 Days</h3>
+            <div class="space-y-4">
+              {[
+                { metric: 'Average response time', before: '4.2 hours', after: '28 seconds', colour: 'text-lime-400' },
+                { metric: 'Demo conversion rate', before: '11%', after: '29.7%', colour: 'text-lime-400' },
+                { metric: 'Pipeline generated', before: 'Baseline', after: '2.7x increase', colour: 'text-lime-400' },
+                { metric: 'Leads lost to competitors', before: '60%', after: '12%', colour: 'text-lime-400' },
+              ].map((r) => (
+                <div class="rounded-lg bg-dark-900/60 border border-dark-800 px-5 py-3">
+                  <div class="text-xs text-dark-500 mb-1">{r.metric}</div>
+                  <div class="flex items-center gap-3">
+                    <span class="text-sm text-dark-400 line-through">{r.before}</span>
+                    <svg class="h-4 w-4 text-lime-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                    <span class={`text-sm font-bold ${r.colour}`}>{r.after}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <blockquote class="mt-6 border-l-2 border-lime-500 pl-4 text-sm italic text-dark-400">
+              "We were investing heavily in every inbound channel except the one that actually converts — the phone call. LimeCall changed that in 48 hours."
+              <cite class="mt-2 block not-italic text-dark-500">— VP of Marketing, B2B SaaS (name withheld)</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400" set:html={faq.answer} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Your Inbound Leads Are Waiting.<br />
+        <span class="text-lime-400">Are You Answering in 28 Seconds?</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Every inbound lead you take longer than 5 minutes to contact is a lead your competitor is closing. Install LimeCall in minutes and transform your inbound conversion rate.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free Trial
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">30-day money-back guarantee · Cancel anytime · No setup fees</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Related Resources"
+        links={[
+          { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Respond to every lead in under 28 seconds automatically.' },
+          { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture more inbound leads from every page.' },
+          { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Instant automated callbacks from your website.' },
+          { href: '/pricing/', title: 'Pricing', desc: 'Start free. Upgrade as your pipeline grows.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

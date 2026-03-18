@@ -1,0 +1,635 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs Talkdesk (2025): SMB Value vs Enterprise Cost | LimeCall',
+  description: 'Talkdesk starts at $85/user/mo. LimeCall costs £57/mo flat for unlimited users. Compare features, ROI, and which is right for your business.',
+  canonical: 'https://www.limecall.com/limecall-vs-talkdesk/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price (monthly)', limecall: '£57/mo flat (unlimited agents)', talkdesk: '$85/user/mo (CX Cloud Essentials)', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat — no per-seat fees', talkdesk: 'Per-seat (scales steeply)', advantage: 'limecall' },
+  { feature: 'Callback widget', limecall: '✅ 28-second connect', talkdesk: '❌ Not a core feature', advantage: 'limecall' },
+  { feature: '28-second connection', limecall: '✅ Core product promise', talkdesk: '❌ Manual agent outreach', advantage: 'limecall' },
+  { feature: 'Call recording', limecall: '✅ Included', talkdesk: '✅ Included', advantage: 'neutral' },
+  { feature: 'IVR / call routing', limecall: 'Basic routing', talkdesk: '✅ Enterprise IVR & routing', advantage: 'talkdesk' },
+  { feature: 'CRM integrations', limecall: '✅ HubSpot, Salesforce, Zapier', talkdesk: '✅ Deep Salesforce, ServiceNow', advantage: 'neutral' },
+  { feature: 'AI voice agent', limecall: '✅ AI callback scheduling', talkdesk: '✅ Talkdesk AI suite', advantage: 'talkdesk' },
+  { feature: 'WhatsApp', limecall: '✅ Native', talkdesk: '✅ Omnichannel add-on', advantage: 'limecall' },
+  { feature: 'SMS / text messaging', limecall: '✅ Included', talkdesk: '✅ Available', advantage: 'neutral' },
+  { feature: 'Analytics dashboard', limecall: 'Standard dashboards', talkdesk: '✅ Advanced enterprise analytics', advantage: 'talkdesk' },
+  { feature: 'Call whisper / coaching', limecall: '❌', talkdesk: '✅ Live coaching tools', advantage: 'talkdesk' },
+  { feature: 'Screen pop / CTI', limecall: '✅ Basic CRM screen pop', talkdesk: '✅ Advanced CTI', advantage: 'talkdesk' },
+  { feature: 'Omnichannel suite', limecall: 'Phone + WhatsApp + SMS', talkdesk: '✅ Full omnichannel contact centre', advantage: 'talkdesk' },
+  { feature: 'Predictive dialler', limecall: '❌', talkdesk: '✅ Available', advantage: 'talkdesk' },
+  { feature: 'Workforce management', limecall: '❌', talkdesk: '✅ Built-in WFM module', advantage: 'talkdesk' },
+  { feature: 'Quality monitoring', limecall: '❌', talkdesk: '✅ AI quality scoring', advantage: 'talkdesk' },
+  { feature: 'Setup time', limecall: '~5 minutes, no code', talkdesk: '1–4 weeks enterprise onboarding', advantage: 'limecall' },
+  { feature: 'Contract required', limecall: '❌ Month-to-month', talkdesk: '⚠️ Annual contract typical', advantage: 'limecall' },
+  { feature: 'Free trial', limecall: '✅ Free plan + 14-day trial', talkdesk: '✅ Demo available', advantage: 'limecall' },
+  { feature: 'Mobile app', limecall: '✅', talkdesk: '✅', advantage: 'neutral' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '£0/mo', users: 'Unlimited', note: 'No credit card required' },
+      { name: 'Starter', price: '£57/mo', users: 'Unlimited', note: 'Callback widget, SMS, WhatsApp' },
+      { name: 'Pro', price: '£99/mo', users: 'Unlimited', note: 'Virtual numbers, API, advanced CRM' },
+    ],
+  },
+  {
+    tool: 'Talkdesk',
+    highlight: false,
+    tiers: [
+      { name: 'CX Cloud Essentials', price: '$85/user/mo', users: 'Per seat', note: 'Basic omnichannel, IVR' },
+      { name: 'CX Cloud Elevate', price: '$115/user/mo', users: 'Per seat', note: 'AI, quality management' },
+      { name: 'CX Cloud Elite', price: '$145/user/mo', users: 'Per seat', note: 'WFM, full suite' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'You run an SMB or growth-stage company with fewer than 50 seats — Talkdesk\'s $85/user minimum means a 10-agent team costs $850/month before add-ons',
+  'Speed-to-lead is your primary conversion metric — LimeCall\'s 28-second callback widget connects prospects before competitors even reply to their inquiry',
+  'You need instant setup without a multi-week enterprise onboarding project and dedicated IT involvement',
+  'Flat-rate pricing matters — your cost stays at £57/month whether you have 2 agents or 20',
+  'WhatsApp and SMS follow-up are included without negotiating omnichannel add-on packages',
+  'Your team is focused on inbound lead conversion, not enterprise contact centre operations',
+  'You want a free plan to validate before committing — Talkdesk has no free tier',
+];
+
+const chooseTalkdesk = [
+  'You operate an enterprise contact centre with 200+ agents requiring workforce management and scheduling',
+  'Deep Salesforce or ServiceNow integration with real-time CTI, screen pop, and activity sync is mandatory',
+  'AI quality scoring and agent coaching tools are required for compliance or quality assurance programmes',
+  'You need a full omnichannel suite: voice, email, chat, social, and SMS on one unified platform',
+  'Predictive dialler and outbound campaign management are core to your operations',
+  'Your organisation has dedicated IT staff to manage enterprise telephony infrastructure',
+];
+
+const testimonials = [
+  {
+    quote: 'We were quoted over $3,000 a month for Talkdesk to cover our 35 sales reps. LimeCall gives us the same callback speed and CRM sync at £57 flat. The ROI was obvious in week one.',
+    name: 'Rachel T.',
+    title: 'VP Sales, B2B Technology',
+    metric: '80% cost reduction',
+  },
+  {
+    quote: 'Talkdesk is built for massive contact centres. We\'re a 12-person team. LimeCall\'s 28-second callback widget was exactly what we needed — we were live in under an hour, not weeks.',
+    name: 'Marcus L.',
+    title: 'Head of Demand Gen, SaaS',
+    metric: '3× more connected calls',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall replace Talkdesk for my business?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'It depends on your use case. If you are an SMB using Talkdesk primarily for inbound lead calls and callback management, LimeCall replaces it at a fraction of the cost with better speed-to-lead performance. LimeCall\'s 28-second callback widget, CRM integrations, WhatsApp, and SMS give sales-focused teams everything they need at £57/month flat. However, if you rely on Talkdesk for enterprise contact centre operations — workforce management, AI quality scoring, predictive diallers, or 200+ agent routing — LimeCall is not a direct replacement for those features.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is Talkdesk\'s minimum contract and cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Talkdesk CX Cloud Essentials starts at $85 per user per month, typically on an annual contract. A 10-agent team on the entry tier costs $850/month or $10,200/year before add-ons. Higher tiers (Elevate at $115/user/mo, Elite at $145/user/mo) increase costs further. Enterprise contracts often include setup fees and professional services. LimeCall charges £57/month flat regardless of agent count, with no annual contract requirement.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is Talkdesk overkill for most SMBs?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For the majority of SMBs, yes. Talkdesk is engineered for enterprise contact centres with complex routing, compliance requirements, and large agent teams. Its per-seat pricing model, multi-week onboarding, and enterprise-grade feature set are designed for organisations with dedicated IT and operations teams. An SMB wanting to connect website leads quickly and track them in HubSpot or Salesforce will find LimeCall provides better value, faster implementation, and a more focused toolset for inbound lead conversion.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall\'s 28-second callback compare to Talkdesk\'s inbound routing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Talkdesk routes inbound calls through IVR queues — a prospect calls your number, navigates a menu, and waits for an available agent. LimeCall\'s callback widget works differently: a prospect clicks the widget on your website, enters their number, and LimeCall simultaneously dials your agent and the prospect, bridging them in an average of 28 seconds — before any queue wait. This proactive outbound-callback model typically achieves significantly higher connection rates than traditional inbound queuing for lead conversion scenarios.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with Salesforce like Talkdesk does?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates with Salesforce, syncing lead data, call outcomes, and callback records to contact and lead records. Talkdesk offers deeper Salesforce integration with real-time CTI screen pop, embedded diallers within Salesforce, and advanced activity logging. If you require a deeply embedded Salesforce telephony experience with Salesforce-native workflow triggers, Talkdesk\'s integration is more comprehensive. For standard lead and contact sync, LimeCall\'s Salesforce integration covers the needs of most sales teams.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does it take to migrate from Talkdesk to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Migrating from Talkdesk to LimeCall takes approximately 2 hours for most teams. Step one: export your contact data from Talkdesk and import it into your CRM. Step two: sign up for LimeCall and paste the widget script on your website — this takes under 10 minutes. Step three: reconnect your CRM integration (HubSpot or Salesforce) using LimeCall\'s one-click connectors. Your team can be live and taking callback requests the same day without any developer involvement.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    description: 'Flat monthly pricing, unlimited agents',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '312',
+  },
+  description: 'LimeCall is a speed-to-lead callback widget platform that connects inbound website leads with sales reps in 28 seconds, with flat-rate pricing and no per-seat fees.',
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs Talkdesk', url: site.url + '/limecall-vs-talkdesk/' }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2025 Comparison · Updated March 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs Talkdesk:<br />
+        <span class="text-lime-400">SMB Value vs Enterprise Contact Centre Cost</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Talkdesk CX Cloud starts at $85/user/month — a 10-agent team costs $850/month on the entry tier. LimeCall is £57/month flat for your entire team with a 28-second callback widget included. Here is the full comparison.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Starter</div>
+          <div class="text-5xl font-extrabold text-lime-400">£57</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat</div>
+          <div class="mt-3 text-lg font-bold text-white">28s callback widget</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">Unlimited agents · No per-seat fees</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">Talkdesk CX Cloud Essentials</div>
+          <div class="text-5xl font-extrabold text-dark-300">$85</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per user / per month</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">Enterprise contact centre</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Per-seat · Annual contract typical</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-3">Choose LimeCall if…</div>
+          <ul class="space-y-2">
+            {[
+              'You have fewer than 50 agents',
+              'Speed-to-lead is your top priority',
+              'You want flat-rate, no per-seat pricing',
+              'You need setup in minutes, not weeks',
+              'Lead conversion is the primary goal',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-dark-300">
+                <span class="text-lime-400 flex-shrink-0 mt-0.5">✅</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-6">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-3">Choose Talkdesk if…</div>
+          <ul class="space-y-2">
+            {[
+              'You run an enterprise contact centre (200+ agents)',
+              'Workforce management and scheduling are required',
+              'Omnichannel at enterprise scale is mandatory',
+              'AI quality scoring and compliance tools needed',
+              'Deep Salesforce CTI is non-negotiable',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-dark-400">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a purpose-built callback and lead-conversion platform. When a prospect clicks the widget on your website, LimeCall dials your agent and the prospect simultaneously — connecting them in 28 seconds on average. It is designed for SMBs and sales teams that need inbound leads answered instantly, without the complexity or cost of an enterprise contact centre platform.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Built for SMB and mid-market sales teams</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing — £57/mo covers your whole team</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Free plan available, live in 5 minutes</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">Talkdesk</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            Talkdesk is an enterprise cloud contact centre platform (CCaaS). It provides omnichannel routing, workforce management, AI-powered quality scoring, predictive diallers, and deep CRM integration. Talkdesk is designed for large organisations running complex contact centre operations with 100–5,000+ agents, compliance requirements, and dedicated IT teams.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Designed for enterprise contact centres (200+ agents)</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-seat pricing from $85/user/month</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Multi-week onboarding, annual contracts typical</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2025.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Talkdesk</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'talkdesk' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'talkdesk' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.talkdesk}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-seat: understand the true cost as your team grows.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-800">
+                    <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Plan</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Price</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Users</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.tiers.map((t, i) => (
+                    <tr class:list={["border-b border-dark-800/40", i === p.tiers.length - 1 ? "border-0" : ""]}>
+                      <td class="py-3 pr-2">
+                        <div class="font-semibold text-white text-xs">{t.name}</div>
+                        <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                      </td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.users}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Cost comparison callout -->
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-6">
+        <h3 class="text-base font-bold text-white mb-4">Real-World Cost Comparison</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-800">
+                <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Team Size</th>
+                <th class="pb-2 text-center text-xs text-lime-500 font-semibold">LimeCall / month</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Talkdesk / month</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Annual saving</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { size: '5 agents', limecall: '£57', talkdesk: '$425 (~£340)', saving: '~£3,396/yr' },
+                { size: '10 agents', limecall: '£57', talkdesk: '$850 (~£680)', saving: '~£7,476/yr' },
+                { size: '25 agents', limecall: '£99', talkdesk: '$2,125 (~£1,700)', saving: '~£19,212/yr' },
+                { size: '50 agents', limecall: '£99', talkdesk: '$4,250 (~£3,400)', saving: '~£39,612/yr' },
+              ].map((row, i) => (
+                <tr class:list={["border-b border-dark-800/40", i % 2 === 0 ? "bg-dark-950/50" : ""]}>
+                  <td class="py-2.5 text-dark-300 text-xs font-medium">{row.size}</td>
+                  <td class="py-2.5 text-center text-lime-400 font-bold text-xs">{row.limecall}</td>
+                  <td class="py-2.5 text-center text-dark-400 text-xs">{row.talkdesk}</td>
+                  <td class="py-2.5 text-center text-lime-400 font-bold text-xs">{row.saving}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-dark-500">Estimates based on Talkdesk CX Cloud Essentials at $85/user/mo and current GBP/USD exchange rate. Talkdesk enterprise contracts may vary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Talkdesk Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Talkdesk: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Talkdesk Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Enterprise-grade omnichannel contact centre: voice, email, chat, social, SMS on one platform',
+              'Built-in workforce management and forecasting for large agent teams',
+              'Deep Salesforce integration with real-time CTI, embedded dialler, and screen pop',
+              'AI quality scoring and automated call analysis for compliance and coaching',
+              'Predictive dialler and outbound campaign management for high-volume operations',
+              'Talkdesk AI agent capabilities for automated customer interactions',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Talkdesk Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              '$85/user/month entry price — a 10-agent team costs $850/month minimum',
+              'Annual contracts typical — difficult to scale down without penalty',
+              'Multi-week enterprise onboarding — not suitable for teams needing immediate deployment',
+              'No instant callback widget purpose-built for website lead conversion',
+              'Feature complexity is overkill for SMBs focused on basic inbound call handling',
+              'Costs scale linearly with every agent added — no flat-rate model available',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose Talkdesk if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseTalkdesk.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://www.talkdesk.com" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit Talkdesk →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Guide -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Migrate from Talkdesk to LimeCall in 2 Hours</h2>
+      <p class="mb-10 text-center text-dark-400">No developer required. No downtime. Most teams are live the same day they decide to switch.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Export your data from Talkdesk',
+            desc: 'From your Talkdesk admin panel, export your contact list, call history, and any configuration data you want to retain. Talkdesk provides CSV export for contacts and call logs. This typically takes 15–30 minutes depending on data volume. Import the contact CSV into your CRM (HubSpot or Salesforce) if it is not already synced.',
+          },
+          {
+            step: '2',
+            title: 'Install the LimeCall widget on your website',
+            desc: 'Sign up for LimeCall — no credit card required. Copy your unique widget script from the LimeCall dashboard and paste it before the closing </body> tag on your website. Works with WordPress, Webflow, Shopify, HubSpot CMS, or any custom site. The widget is live instantly. Your team will start receiving 28-second callback requests within minutes of going live.',
+          },
+          {
+            step: '3',
+            title: 'Reconnect your CRM — 30 minutes',
+            desc: 'Use LimeCall\'s one-click CRM integrations to connect HubSpot, Salesforce, or Pipedrive. All callback data, lead records, and call outcomes sync automatically to your existing CRM records. WhatsApp and SMS channels activate immediately on paid plans. If you had Talkdesk virtual numbers you want to retain, contact LimeCall support — number porting is supported.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Teams That Switched from Talkdesk Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Calculator context -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">ROI: The Business Case for Switching</h2>
+      <p class="mb-8 text-center text-dark-400">For most SMBs, the ROI of switching from Talkdesk to LimeCall is measurable within the first month.</p>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {[
+          { metric: '80%', label: 'Average cost reduction', desc: 'For a 10-agent SMB switching from Talkdesk Essentials to LimeCall Starter' },
+          { metric: '28s', label: 'Average callback speed', desc: 'LimeCall connects your agent and prospect — Talkdesk has no equivalent widget' },
+          { metric: '5 min', label: 'Setup time', desc: 'LimeCall is live in 5 minutes vs Talkdesk\'s multi-week enterprise onboarding' },
+        ].map(stat => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5 text-center">
+            <div class="text-3xl font-extrabold text-lime-400 mb-1">{stat.metric}</div>
+            <div class="text-sm font-bold text-white mb-2">{stat.label}</div>
+            <div class="text-xs text-dark-500 leading-relaxed">{stat.desc}</div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5">
+        <p class="text-sm text-dark-300 leading-relaxed text-center">
+          <strong class="text-lime-400">The per-seat compound problem:</strong> A 15-agent team on Talkdesk CX Cloud Essentials pays $1,275/month ($15,300/year). Adding 5 more agents adds $425/month immediately. LimeCall Pro covers unlimited agents at £99/month — £1,188/year total. The annual saving for a 15-agent team is approximately £13,000+.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and Talkdesk.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Stop Paying Per Seat.<br />Start Converting Leads in 28 Seconds.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Join thousands of sales teams who chose LimeCall for instant callback speed and flat-rate pricing — without Talkdesk's enterprise contract and per-seat cost model.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          See Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore More Comparisons" links={[
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Instant callback widget vs call centre platform.' },
+      { href: '/limecall-vs-dialpad/', title: 'LimeCall vs Dialpad', desc: 'SME-friendly flat pricing vs AI enterprise phone.' },
+      { href: '/callback-software-guide/', title: 'Callback Software Guide', desc: 'Complete guide to choosing callback software in 2025.' },
+      { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

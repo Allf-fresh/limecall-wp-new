@@ -1,0 +1,386 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const integration = "Microsoft Teams";
+const slug = "microsoft-teams-integration";
+
+const seo = {
+  title: 'LimeCall + Microsoft Teams | Get Callback Alerts in Teams Instantly',
+  description: 'Post LimeCall callback notifications directly to Microsoft Teams channels. Sales reps see new leads in real time — no app switching required.',
+  canonical: 'https://www.limecall.com/microsoft-teams-integration/',
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Microsoft Teams Integration',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Post LimeCall callback notifications directly to Microsoft Teams channels. Real-time callback alerts, missed call notifications, daily call summaries, and click-to-call back from Teams.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Available on LimeCall Starter plan and above',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does the LimeCall Teams integration work with Microsoft Teams Free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. The LimeCall Microsoft Teams integration works with all Teams tiers — Microsoft Teams Free, Teams Essentials, Teams (included with Microsoft 365), and Teams Enterprise. The integration uses incoming webhooks to post notifications to channels, which is a standard Teams feature available across all plans. You do not need a paid Teams or Microsoft 365 plan to receive LimeCall callback alerts in your Teams channels.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I route LimeCall notifications to different Teams channels by product line?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall lets you configure separate routing rules that send callback notifications to different Microsoft Teams channels based on lead source, LimeCall widget, page URL, or any custom tag. For example, callbacks from your enterprise pricing page can post to your "Enterprise Sales" channel, while callbacks from your SMB page post to the "SMB Sales" channel. You configure these routing rules inside the LimeCall integration settings without any code or webhook configuration on the Teams side.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support two-way calling directly within Microsoft Teams?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall posts callback notifications and click-to-call-back links to Microsoft Teams channels. Clicking the call-back link opens the LimeCall dialer or initiates a callback through the LimeCall platform. Native two-way PSTN calling within Teams itself (placing calls directly in the Teams interface using your Teams phone number) requires Microsoft Teams Phone, which is a separate Microsoft add-on. LimeCall works alongside Teams Phone but does not replace or integrate into the Teams Phone system directly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I @mention specific team members in Teams notifications for hot leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall supports @mentions in Microsoft Teams notifications. You can configure lead routing rules that include a specific Teams user mention when a high-priority lead calls — for example, when a callback comes from a recognised key account or a VIP page on your website. The @mention sends a push notification to the mentioned team member directly, ensuring hot leads are responded to immediately even if the rep is not watching the channel.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall send daily or weekly call summary reports to Teams?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall can post automated daily and weekly call summary reports to a designated Microsoft Teams channel. The summary includes total callbacks received, calls answered, missed calls, average call duration, and top-performing agents for the period. Management and team leads can see call performance data without logging into the LimeCall dashboard. Summary reports post on a schedule you configure — daily at 9am or weekly on Monday morning, for example.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I install the LimeCall app for Microsoft Teams?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Install the LimeCall app directly from Microsoft AppSource — search for "LimeCall" in the AppSource marketplace and click Install. After installation, open the LimeCall app in Teams and authorise it with your LimeCall account credentials. Then configure which Teams channels should receive which types of notifications — callback requests, missed calls, daily summaries. The full setup takes under 10 minutes and requires no developer work or webhook configuration on your side.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What information is included in a LimeCall Teams notification?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Each LimeCall callback notification posted to Microsoft Teams includes: caller name and phone number (if available), the page or widget the callback was requested from, UTM source and campaign (if present), the time of the callback request, and a click-to-call-back button that initiates a return call via LimeCall. Missed call notifications additionally include the number of missed call attempts and a prompt to call back or send an SMS. All notification fields are configurable in the LimeCall integration settings.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "< 5s", label: "Notification delivery to Teams" },
+  { value: "10 min", label: "Average setup time" },
+  { value: "0", label: "App switching for reps" },
+  { value: "100%", label: "Missed calls captured" },
+];
+
+const features = [
+  {
+    title: "Real-time callback request alerts to Teams channels",
+    desc: "The instant a website visitor clicks your LimeCall widget, a notification fires to your chosen Microsoft Teams channel. Reps see the lead in real time — name, phone number, and the page they called from — before the call even connects.",
+  },
+  {
+    title: "Missed call notifications with full caller details",
+    desc: "When a callback goes unanswered, LimeCall posts a missed call alert to Teams including caller ID, the page they were browsing, and a one-click call-back button. No lead slips through just because a rep was busy.",
+  },
+  {
+    title: "@mention specific team members on hot leads",
+    desc: "Configure rules to @mention a specific rep or team in Teams when a high-priority lead calls — triggered by page URL, lead source, or custom tags. The @mention sends a push notification directly to the rep's device.",
+  },
+  {
+    title: "Daily and weekly call summary reports in Teams",
+    desc: "LimeCall posts automated performance summaries to a management Teams channel on your chosen schedule. Total calls, answered rate, missed calls, average duration, and top agents — all without logging into the LimeCall dashboard.",
+  },
+  {
+    title: "Click-to-call back from the Teams notification",
+    desc: "Every callback notification includes a 'Call Back' button. Clicking it initiates a return call via LimeCall instantly. Reps respond to leads from inside Teams without switching to another app or manually dialling.",
+  },
+  {
+    title: "Route to different Teams channels by lead source",
+    desc: "Send enterprise leads to the Enterprise Sales channel, SMB leads to the SMB channel, and support callbacks to the Customer Support channel. Routing rules are based on widget, page URL, UTM source, or any custom LimeCall tag.",
+  },
+];
+
+const useCases = [
+  {
+    role: "Sales Desk",
+    title: "Channel alerts for new B2B leads",
+    desc: "Your sales team's Teams channel lights up the moment a B2B lead requests a callback. Reps see company name, page visited, and lead source before picking up the phone. Response times drop from minutes to seconds.",
+  },
+  {
+    role: "Support Teams",
+    title: "Missed-call escalations to the right channel",
+    desc: "When a support callback is missed, LimeCall posts an escalation alert to the support Teams channel with all caller details. The team can assign the callback to the first available agent without anyone manually triaging a missed calls queue.",
+  },
+  {
+    role: "Management",
+    title: "Daily call performance digest in Teams",
+    desc: "Each morning, LimeCall posts a call performance summary to the management channel. Leaders see yesterday's callback volume, answer rate, missed calls, and top agents without opening a single report or dashboard.",
+  },
+  {
+    role: "Multi-team Routing",
+    title: "Route leads to the right team channel automatically",
+    desc: "A callback from your pricing page goes to the sales channel. A callback from your help centre goes to support. A callback tagged 'VIP' @mentions the account manager. All routing is configured once in LimeCall and works automatically thereafter.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Real-time callback alerts in Teams", limecall: true, manual: false, others: "Partial" },
+  { feature: "Missed call notifications with caller details", limecall: true, manual: false, others: false },
+  { feature: "@mention specific reps on hot leads", limecall: true, manual: false, others: false },
+  { feature: "Daily / weekly summary reports in Teams", limecall: true, manual: false, others: false },
+  { feature: "Click-to-call-back from notification", limecall: true, manual: false, others: false },
+  { feature: "Route to different channels by lead source", limecall: true, manual: false, others: false },
+  { feature: "Install from Microsoft AppSource", limecall: true, manual: "N/A", others: false },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: integration, url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Available on Microsoft AppSource · 10-minute setup · No developers
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">Microsoft Teams</span>:<br class="hidden sm:block" />
+        Callback Alerts in Teams Instantly
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Post LimeCall callback notifications directly to Microsoft Teams channels. Sales reps see new leads in real time — no app switching required. Missed calls, hot lead @mentions, and daily summaries all in Teams.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect Microsoft Teams Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Data flow diagram -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How a callback alert flows into Microsoft Teams</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From widget click to Teams notification — your reps are alerted in under 5 seconds.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Visitor requests callback</h3>
+          <p class="mt-1 text-xs text-dark-400">Clicks LimeCall widget on your site</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">LimeCall routes alert</h3>
+          <p class="mt-1 text-xs text-dark-400">Routing rules determine the right channel</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Teams notification fires</h3>
+          <p class="mt-1 text-xs text-dark-400">Card posted with caller info and call-back button</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Rep calls back in 1 click</h3>
+          <p class="mt-1 text-xs text-dark-400">Click-to-call-back from the Teams card — zero switching</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Install from Microsoft AppSource</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Search "LimeCall" in Microsoft AppSource and click Install. The LimeCall Teams app is verified and listed on AppSource — no manual webhook setup or IT approval required for standard Teams plans.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Authorise and configure channels</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Open the LimeCall app in Teams and sign in with your LimeCall credentials. Select which Teams channels receive which notification types — callback requests, missed calls, daily summaries. Set @mention rules for hot leads.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Test and go live</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Send a test notification from the LimeCall integration panel. Verify the card appears in the correct Teams channel with all caller details. Enable live notifications and your team starts receiving alerts immediately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + Teams integration does</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that bring your phone leads into Microsoft Teams in real time.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + Microsoft Teams and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall + Microsoft Teams vs the alternatives</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + Teams</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual process</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300">{row.feature}</td>
+                <td class="py-3 px-5 text-center">
+                  {row.limecall === true
+                    ? <span class="text-lime-400 font-bold">Yes</span>
+                    : <span class="text-dark-500">{row.limecall}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.manual === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.manual}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.others === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.others}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to get callback alerts in Microsoft Teams?</h2>
+      <p class="mt-4 text-dark-400">10-minute setup · Microsoft AppSource · Free trial included</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations & Resources" links={[
+        { href: '/zapier-integration/', title: 'LimeCall + Zapier', desc: 'Connect LimeCall to 6,000+ apps with Zapier.' },
+        { href: '/activecampaign-integration/', title: 'LimeCall + ActiveCampaign', desc: 'Trigger marketing automations on every call outcome.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route every lead to the right rep automatically.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include Teams notifications.' },
+      ]} />
+    </div>
+  </div>
+</Base>

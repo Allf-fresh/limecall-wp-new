@@ -9,9 +9,25 @@ const crm = "ActiveCampaign";
 const slug = "activecampaign-integration";
 
 const seo = {
-  title: 'LimeCall + ActiveCampaign Integration | LimeCall',
-  description: 'Connect LimeCall callbacks to ActiveCampaign in minutes. Auto-add contacts, trigger automations on call outcome, sync tags, and track which campaigns drove each call.',
-  canonical: 'https://www.limecall.com/activecampaign-integration/',
+  title: `LimeCall + ActiveCampaign Integration | Automate Lead Follow-Up`,
+  description: `Connect LimeCall with ActiveCampaign to auto-enrol callers in nurture sequences, update contact scores, and trigger deals — all in real time.`,
+  canonical: `${site.url}/activecampaign-integration/`,
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall ActiveCampaign Integration',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free trial available',
+  },
+  description: 'Connect LimeCall with ActiveCampaign to auto-enrol callers in nurture sequences, update contact scores, and trigger deals in real time.',
+  url: `${site.url}/activecampaign-integration/`,
 };
 
 const faqSchema = {
@@ -20,50 +36,58 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'How does LimeCall integrate with ActiveCampaign?',
+      name: 'Does the LimeCall + ActiveCampaign integration work with ActiveCampaign CRM?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'LimeCall connects to ActiveCampaign via a native integration available in your LimeCall dashboard. Authorise the connection with your ActiveCampaign API key and URL, then configure which automations, lists, and tags LimeCall should trigger. Every callback outcome — answered, missed, demo booked — fires the corresponding ActiveCampaign automation automatically without any developer work.',
+        text: 'Yes. LimeCall integrates with both ActiveCampaign Marketing and ActiveCampaign CRM (Deals). When a callback occurs, LimeCall can create or update a Contact, trigger an automation, update the lead score, and create or advance a Deal — all within a single workflow. You do not need a separate CRM tool if you use ActiveCampaign.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can LimeCall add contacts to ActiveCampaign lists automatically?',
+      name: 'Is the LimeCall + ActiveCampaign sync bidirectional?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. When a website visitor requests a LimeCall callback, their phone number, name, and any captured form fields are automatically added to your chosen ActiveCampaign list. If a contact already exists in ActiveCampaign, LimeCall updates the record and logs the call event rather than creating a duplicate. You can route contacts to different lists based on the widget they used or the page they called from.',
+        text: 'Yes. Contact updates made in ActiveCampaign — such as a rep adding a phone number, updating a custom field, or changing a Deal stage — are pulled back into LimeCall routing rules. This ensures LimeCall always routes calls to the right rep and surfaces the most current contact data before the call connects.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can I trigger ActiveCampaign automations based on call outcome?',
+      name: 'Can I map custom fields between LimeCall and ActiveCampaign?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall call outcomes — such as "demo booked", "not interested", "follow-up required", or "voicemail" — can each trigger a different ActiveCampaign automation. For example, a "demo booked" outcome can instantly enrol the contact in a pre-demo nurture sequence, while a "not interested" outcome can add a suppression tag to pause further email outreach. Each outcome maps to an automation you define in ActiveCampaign.',
+        text: 'Yes. The LimeCall integration UI lets you map any LimeCall field — including UTM parameters, call duration, agent name, page URL, and custom form fields from your widget — to any ActiveCampaign custom Contact or Deal field. You can also create new custom fields in ActiveCampaign directly from the LimeCall mapping screen.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Does LimeCall sync call tags to ActiveCampaign contact records?',
+      name: 'Which ActiveCampaign automation triggers does LimeCall support?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Any tag applied to a call in LimeCall — such as the agent name, call outcome, product discussed, or callback widget source — can be synced directly to the corresponding ActiveCampaign contact record as an ActiveCampaign tag. This enables you to segment your ActiveCampaign lists by call history and personalise email follow-ups based on what was discussed on the call.',
+        text: 'LimeCall fires ActiveCampaign automation entry triggers on the following events: callback requested, call started, call completed, call missed, demo booked, and follow-up requested. You can map each LimeCall call outcome to a different ActiveCampaign automation so your nurture sequences are perfectly matched to real call results.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can I use ActiveCampaign deal stages to prioritise LimeCall callbacks?',
+      name: 'Does LimeCall update ActiveCampaign lead scores automatically?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. LimeCall can read ActiveCampaign deal pipeline data to prioritise your callback queue. Contacts in high-value deal stages — such as "Proposal Sent" or "Negotiation" — can be surfaced to agents first via LimeCall\'s priority routing. This ensures your team calls back the warmest leads fastest, directly improving pipeline velocity.',
+        text: 'Yes. LimeCall can increment or decrement an ActiveCampaign contact score based on call outcomes. A completed demo call can add 25 points; a no-answer can add 5 points to trigger a re-engagement sequence. Score adjustments happen in real time as soon as LimeCall logs the call result.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Is the ActiveCampaign integration available on all LimeCall plans?',
+      name: 'How long does the LimeCall + ActiveCampaign setup take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The ActiveCampaign integration is available on the LimeCall Pro plan and above, which includes 500 calls per month, custom integrations, and full API access. You can start a free trial of the Pro plan to test the integration before committing. The Starter plan includes basic Zapier connectivity for ActiveCampaign if you prefer a Zapier-based approach.',
+        text: 'The initial OAuth connection takes under 2 minutes. Mapping call outcomes to automations and configuring custom field mappings typically takes 10–15 minutes depending on the complexity of your ActiveCampaign setup. No developer is required at any stage.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which LimeCall plan includes the ActiveCampaign integration?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The ActiveCampaign integration is available on the LimeCall Pro plan and above. Pro includes 500 calls per month, custom integrations, API access, and full automation mapping. You can trial the integration free before purchasing.',
       },
     },
   ],
@@ -71,93 +95,96 @@ const faqSchema = {
 
 const stats = [
   { value: "28s", label: "Average callback speed" },
-  { value: "5 min", label: "Setup time — no developer" },
-  { value: "6,000+", label: "ActiveCampaign automations triggered" },
-  { value: "500", label: "Calls/mo on Pro plan" },
+  { value: "3 steps", label: "To connect ActiveCampaign" },
+  { value: "7×", label: "More conversions vs email alone" },
+  { value: "Real-time", label: "Contact + score updates" },
 ];
 
 const features = [
   {
-    title: "Auto-add contacts to ActiveCampaign lists",
-    desc: "Every LimeCall callback request automatically adds the caller to your chosen ActiveCampaign list — name, phone, email, and the page they called from. No manual data entry, no missed contacts.",
+    title: "Auto-create or update contacts on every call",
+    desc: "LimeCall searches ActiveCampaign for a matching contact by phone number or email on every callback. New visitors create new contacts; returning callers update existing records — no duplicates, no manual entry.",
   },
   {
-    title: "Trigger automations on call outcome",
-    desc: "Map each LimeCall outcome — demo booked, not interested, follow-up required — to a different ActiveCampaign automation. A 'demo booked' call instantly starts a pre-demo nurture sequence without any manual steps.",
+    title: "Trigger automation sequences from call outcomes",
+    desc: "Map any LimeCall call result — completed, missed, demo booked, follow-up requested — to an ActiveCampaign automation entry point. Your nurture sequences fire the moment the call ends.",
   },
   {
-    title: "Sync call tags to contact records",
-    desc: "Tags applied in LimeCall — agent name, product, call disposition, widget source — sync directly to ActiveCampaign contact records, enabling precise list segmentation and personalised email campaigns.",
+    title: "Update lead scores based on call outcomes",
+    desc: "Automatically increment or decrement ActiveCampaign contact scores based on what happened on the call. High-intent signals like demo bookings add score; no-answers add lower scores to trigger re-engagement flows.",
   },
   {
-    title: "Use deal stages to prioritise callback queue",
-    desc: "Pull ActiveCampaign deal stage data into LimeCall's callback queue. Contacts in high-value pipeline stages are surfaced to agents first, ensuring your hottest opportunities are never left waiting.",
+    title: "Log call notes to contact timeline",
+    desc: "After each call, LimeCall appends a note to the ActiveCampaign contact timeline containing call duration, outcome, agent name, recording link, and source page. Reps always have full call history at a glance.",
   },
   {
-    title: "Track campaign attribution for each callback",
-    desc: "UTM parameters from the page where the callback was requested sync to ActiveCampaign as contact fields. See exactly which campaign, medium, and source drove each phone lead — no guesswork.",
+    title: "Auto-tag contacts with call context",
+    desc: "LimeCall applies ActiveCampaign tags based on call outcomes — 'called', 'callback-requested', 'demo-booked', 'no-answer', and more. Use these tags to segment contacts and personalise follow-up messaging.",
   },
   {
-    title: "Personalise email sequences with call outcome data",
-    desc: "Use call outcome tags in ActiveCampaign to branch email automation paths. A caller who requested a product demo receives different follow-ups than one who asked about pricing — automatically.",
+    title: "Sync deal stage on conversion",
+    desc: "When a call results in a conversion — demo booked, trial started, proposal requested — LimeCall advances the associated ActiveCampaign CRM Deal to the correct stage automatically, keeping your pipeline accurate.",
   },
 ];
 
 const useCases = [
   {
-    role: "Marketing Automation",
-    title: "Call outcome enters the right nurture track",
-    desc: "When a LimeCall callback ends with 'demo booked', ActiveCampaign instantly enrols the contact in a pre-demo sequence with confirmation emails, calendar invites, and preparation content — all triggered by the call outcome, zero manual steps.",
+    role: "Post-call nurture",
+    title: "Trigger a nurture sequence the moment a call ends",
+    desc: "Every completed call fires an ActiveCampaign automation. New leads enter a post-call nurture sequence with relevant content; existing contacts move to the next stage of their sequence — all without rep involvement.",
   },
   {
-    role: "Sales Teams",
-    title: "Priority callbacks for hot pipeline deals",
-    desc: "Contacts in ActiveCampaign deal stages 'Proposal Sent' or 'Negotiation' are automatically surfaced at the top of the LimeCall callback queue. Your reps always call back the highest-value prospects first.",
+    role: "Re-engagement",
+    title: "Auto-re-engage visitors who didn't answer",
+    desc: "Missed calls trigger a dedicated re-engagement automation in ActiveCampaign. The contact receives a personalised email within minutes, then an SMS if no response — dramatically reducing lost leads from timing issues.",
   },
   {
-    role: "Lead Nurturing",
-    title: "Segment email lists by call history",
-    desc: "Tag contacts in ActiveCampaign with their LimeCall call history — number of callbacks, last call outcome, products discussed. Build hyper-targeted email segments based on real phone conversations, not just web behaviour.",
+    role: "Demo onboarding",
+    title: "Instant onboarding sequence on demo booking",
+    desc: "When LimeCall detects a 'demo booked' outcome, it fires an ActiveCampaign automation that sends confirmation emails, prep materials, and calendar invites — all before your rep has finished writing up their notes.",
   },
   {
-    role: "Attribution Reporting",
-    title: "Trace callbacks to the campaign that drove them",
-    desc: "Every LimeCall callback captures the UTM source, medium, campaign, and keyword from the referring page. These sync to ActiveCampaign contact fields, giving marketing full visibility into which campaigns generate phone leads.",
+    role: "Lead scoring",
+    title: "Surface hot leads with call-driven scoring",
+    desc: "Phone conversations are the highest-intent signals in your funnel. By feeding call outcomes into ActiveCampaign lead scores, sales reps can sort their queue by engagement and prioritise the most phone-active contacts.",
   },
 ];
 
 const comparisonRows = [
-  { feature: "Auto-add contacts to lists", limecall: true, manual: false, others: "Partial" },
-  { feature: "Trigger automations on call outcome", limecall: true, manual: false, others: false },
-  { feature: "Sync call tags to contacts", limecall: true, manual: false, others: false },
-  { feature: "Campaign attribution sync", limecall: true, manual: false, others: "Partial" },
-  { feature: "Deal stage priority routing", limecall: true, manual: false, others: false },
-  { feature: "5-minute setup", limecall: true, manual: "N/A", others: false },
+  { feature: "Auto-create / update AC contacts", limecall: true, manual: false, others: "Partial" },
+  { feature: "Trigger AC automations on call outcome", limecall: true, manual: false, others: false },
+  { feature: "Update lead score from call result", limecall: true, manual: false, others: false },
+  { feature: "Log call notes to contact timeline", limecall: true, manual: false, others: false },
+  { feature: "Auto-tag with call context", limecall: true, manual: false, others: "Partial" },
+  { feature: "Sync Deal stage on conversion", limecall: true, manual: false, others: false },
+  { feature: "Bidirectional contact sync", limecall: true, manual: false, others: false },
+  { feature: "OAuth setup — no developer", limecall: true, manual: "N/A", others: false },
 ];
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[
-        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
-        { name: crm, url: seo.canonical },
+        { name: 'Integrations', url: `${site.url}/integrations/` },
+        { name: 'ActiveCampaign Integration', url: seo.canonical },
       ]} />
       <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
-        Native Integration · 5-minute setup · No developers
+        Native Integration · 3-step setup · No developers
       </div>
       <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
         LimeCall + <span class="text-lime-400">ActiveCampaign</span>:<br class="hidden sm:block" />
-        Turn Every Callback into an Automation
+        Automate Lead Follow-Up From Every Call
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Connect LimeCall callbacks to ActiveCampaign in minutes. Auto-add contacts to lists, trigger nurture automations on call outcome, and track which campaigns drove every phone lead.
+        Connect LimeCall with ActiveCampaign to auto-enrol callers in nurture sequences, update contact scores, and trigger deals — all in real time, the moment a call ends.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+        <a href="/get-started/" class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
           Connect ActiveCampaign Free →
         </a>
         <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
@@ -184,33 +211,33 @@ const comparisonRows = [
   <!-- Data flow diagram -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-4 text-center text-2xl font-bold text-white">How a callback flows into ActiveCampaign</h2>
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How call data flows from LimeCall into ActiveCampaign</h2>
       <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
-        From the moment a visitor clicks your widget to the automation firing in ActiveCampaign — every step is automatic.
+        From a visitor clicking your callback widget to a contact enrolled in a nurture sequence — fully automatic.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
         <div class="flex flex-col items-center text-center max-w-[180px]">
           <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
           <h3 class="mt-3 text-sm font-semibold text-white">Visitor requests callback</h3>
-          <p class="mt-1 text-xs text-dark-400">Clicks LimeCall widget on your website</p>
+          <p class="mt-1 text-xs text-dark-400">Clicks LimeCall widget on your site</p>
         </div>
         <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
         <div class="flex flex-col items-center text-center max-w-[180px]">
           <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
-          <h3 class="mt-3 text-sm font-semibold text-white">Call connected</h3>
-          <p class="mt-1 text-xs text-dark-400">LimeCall bridges visitor and rep in 28 seconds</p>
+          <h3 class="mt-3 text-sm font-semibold text-white">LimeCall connects call</h3>
+          <p class="mt-1 text-xs text-dark-400">Rep and visitor connected in 28 seconds</p>
         </div>
         <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
         <div class="flex flex-col items-center text-center max-w-[180px]">
           <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
-          <h3 class="mt-3 text-sm font-semibold text-white">Outcome tagged</h3>
-          <p class="mt-1 text-xs text-dark-400">Rep marks outcome: demo booked, follow-up, etc.</p>
+          <h3 class="mt-3 text-sm font-semibold text-white">Outcome captured</h3>
+          <p class="mt-1 text-xs text-dark-400">Duration, result, tags, and recording saved</p>
         </div>
         <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
         <div class="flex flex-col items-center text-center max-w-[180px]">
           <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
-          <h3 class="mt-3 text-sm font-semibold text-white">ActiveCampaign fires</h3>
-          <p class="mt-1 text-xs text-dark-400">Contact added, tags synced, automation triggered</p>
+          <h3 class="mt-3 text-sm font-semibold text-white">ActiveCampaign updated</h3>
+          <p class="mt-1 text-xs text-dark-400">Contact created, score updated, automation triggered</p>
         </div>
       </div>
 
@@ -218,18 +245,18 @@ const comparisonRows = [
       <div class="mt-14 grid gap-6 sm:grid-cols-3">
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
-          <h3 class="mb-2 font-semibold text-white">Connect with your API key</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Go to LimeCall → Integrations → ActiveCampaign. Enter your ActiveCampaign API URL and key. The connection verifies instantly — under 2 minutes.</p>
+          <h3 class="mb-2 font-semibold text-white">Connect via OAuth</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Go to LimeCall → Integrations → ActiveCampaign. Click "Connect" and authorise with your ActiveCampaign credentials. The OAuth handshake completes in under 2 minutes with no developer involvement.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
-          <h3 class="mb-2 font-semibold text-white">Map outcomes to automations</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Choose which LimeCall call outcome triggers which ActiveCampaign automation. Map tags, lists, and deal stage updates to each outcome in the visual mapper.</p>
+          <h3 class="mb-2 font-semibold text-white">Map call outcomes to automations</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Select which ActiveCampaign automation each LimeCall outcome triggers. Map custom fields, configure score adjustments, and set up tag rules — all from the LimeCall dashboard.</p>
         </div>
         <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
           <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
-          <h3 class="mb-2 font-semibold text-white">Go live and verify</h3>
-          <p class="text-sm text-dark-400 leading-relaxed">Enable the integration and make a test callback. Your ActiveCampaign contact will appear and the automation will fire within seconds. You're done.</p>
+          <h3 class="mb-2 font-semibold text-white">Test with a live call</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Trigger a test callback and watch the contact appear in ActiveCampaign, the score update, and the automation enrol — all within seconds. You're live.</p>
         </div>
       </div>
     </div>
@@ -239,7 +266,7 @@ const comparisonRows = [
   <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + ActiveCampaign integration does</h2>
-      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that connect your phone channel to your marketing automation stack.</p>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that keep your contact database accurate and your automations firing on real call data.</p>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f, i) => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
@@ -255,7 +282,7 @@ const comparisonRows = [
   <!-- Use cases -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + ActiveCampaign and how</h2>
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How teams use LimeCall + ActiveCampaign</h2>
       <div class="grid gap-6 sm:grid-cols-2">
         {useCases.map(uc => (
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
@@ -278,7 +305,7 @@ const comparisonRows = [
             <tr class="border-b border-dark-800 bg-dark-900">
               <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
               <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + ActiveCampaign</th>
-              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual logging</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual process</th>
               <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
             </tr>
           </thead>
@@ -330,10 +357,10 @@ const comparisonRows = [
   <!-- Final CTA -->
   <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
     <div class="mx-auto max-w-2xl px-4 text-center">
-      <h2 class="text-3xl font-bold text-white">Ready to connect LimeCall with ActiveCampaign?</h2>
-      <p class="mt-4 text-dark-400">5-minute setup · No developers · Free trial included</p>
+      <h2 class="text-3xl font-bold text-white">Ready to automate your follow-up with ActiveCampaign?</h2>
+      <p class="mt-4 text-dark-400">3-step setup · No developers · Free trial included</p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+        <a href="/get-started/" class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
           Start Free →
         </a>
         <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
@@ -346,12 +373,10 @@ const comparisonRows = [
   <div class="py-8">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <CrossLinks heading="More Integrations" links={[
-        { href: '/salesforce-integration/', title: 'LimeCall + Salesforce', desc: 'Auto-create Leads and log call Activities in Salesforce.' },
-        { href: '/zapier-integration/', title: 'LimeCall + Zapier', desc: 'Connect LimeCall to 6,000+ apps with Zapier.' },
-        { href: '/limecall-for-hubspot/', title: 'LimeCall + HubSpot', desc: 'Log every call in HubSpot automatically.' },
-        { href: '/google-ads-integration/', title: 'LimeCall + Google Ads', desc: 'Track which campaigns drive callback requests.' },
-        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
-        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include CRM integrations.' },
+        { href: '/salesforce-integration/', title: 'LimeCall + Salesforce', desc: 'Auto-create Leads and log Activities in Salesforce.' },
+        { href: '/pipedrive-integration/', title: 'LimeCall + Pipedrive', desc: 'Sync callbacks to Pipedrive Persons and Deals.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route inbound calls to the right rep instantly.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include all integrations.' },
       ]} />
     </div>
   </div>

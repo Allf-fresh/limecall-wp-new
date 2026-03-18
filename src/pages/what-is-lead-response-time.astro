@@ -121,11 +121,23 @@ const costOfSlow = [
   { stat: '42 hrs', desc: 'average industry response time — the opportunity for fast responders' },
   { stat: '35–50%', desc: 'of B2B sales go to the first vendor to make contact' },
 ];
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'What is Lead Response Time? Definition, Benchmarks & How to Improve',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
 ---
 
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -140,7 +152,7 @@ const costOfSlow = [
         What is <span class="text-lime-400">Lead Response Time?</span>
       </h1>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+      <p class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
         Lead response time is how quickly your sales team contacts a new inbound lead. The industry average is 42 hours — but businesses that respond in under 5 minutes are 100× more likely to reach the prospect and far more likely to close the deal.
       </p>
 
@@ -185,7 +197,7 @@ const costOfSlow = [
           Slow response time is not a small disadvantage. These are the numbers.
         </p>
       </div>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-center">
+      <div class="speakable-summary grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-center">
         {costOfSlow.map((item) => (
           <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
             <div class="text-4xl font-extrabold text-lime-400">{item.stat}</div>

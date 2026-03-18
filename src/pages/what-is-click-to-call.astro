@@ -130,11 +130,23 @@ const implementations = [
     note: 'Enables click-to-call directly from your search ads on mobile.',
   },
 ];
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'What is Click to Call? How It Works, Benefits & Best Practices',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
 ---
 
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -149,7 +161,7 @@ const implementations = [
         What is <span class="text-lime-400">Click to Call?</span>
       </h1>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+      <p class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
         Click to call is a website feature that lets visitors start a phone call with your business using a single click — no manual dialling required. It removes the friction between a high-intent visitor and a live conversation, converting up to 3× more leads than a contact form.
       </p>
 
@@ -209,7 +221,7 @@ const implementations = [
         </h2>
         <p class="mt-4 text-dark-400 max-w-xl mx-auto">Not all click-to-call implementations are equal. Here is how they compare.</p>
       </div>
-      <div class="grid gap-6 sm:grid-cols-3">
+      <div class="speakable-summary grid gap-6 sm:grid-cols-3">
         {types.map((t, i) => (
           <div class={`rounded-2xl border p-7 ${i === 2 ? 'border-lime-500/30 bg-lime-500/5' : 'border-dark-800 bg-dark-900/60'}`}>
             <div class="mb-3 inline-block rounded-full border border-dark-700 bg-dark-800 px-3 py-1 text-xs font-mono text-dark-400">

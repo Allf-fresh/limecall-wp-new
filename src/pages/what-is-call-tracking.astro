@@ -112,11 +112,23 @@ const benefits = [
   { icon: '🗑️', title: 'Reduce Wasted Ad Spend', desc: 'The average B2B advertiser wastes 25–40% of their PPC budget on campaigns that drive traffic but not calls. Call tracking makes this waste visible and eliminates it.' },
   { icon: '📊', title: 'Full Multi-Touch Attribution', desc: 'Understand the complete customer journey — from first click to phone call to closed deal. Session-level DNI captures every touchpoint and ties them to call outcomes.' },
 ];
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'What is Call Tracking? How It Works, Benefits & Tools (2025)',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
 ---
 
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -131,7 +143,7 @@ const benefits = [
         What is <span class="text-lime-400">Call Tracking?</span>
       </h1>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+      <p class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
         Call tracking assigns unique phone numbers to your marketing channels and campaigns, attributing every inbound call to the source that drove it. It shows you which ads, keywords, and pages generate phone enquiries — and which are wasting your budget.
       </p>
 
@@ -171,7 +183,7 @@ const benefits = [
         </h2>
         <p class="mt-4 text-dark-400 max-w-xl mx-auto">DNI is the engine of session-level call tracking. Here is the four-step flow.</p>
       </div>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="speakable-summary grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { n: '01', title: 'Visitor Arrives', desc: 'A visitor arrives at your website from a Google Ads campaign for the keyword "mortgage broker london".' },
           { n: '02', title: 'DNI Script Detects Source', desc: 'Your call tracking JavaScript reads the UTM parameters, referrer, and session data to identify the exact traffic source and keyword.' },

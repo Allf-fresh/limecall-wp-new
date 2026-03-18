@@ -174,6 +174,17 @@ const articleJsonLd = articleSchema({
   author: 'LimeCall Editorial Team',
 });
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: '7 Best Callback Software Tools in 2025 (Reviewed & Ranked)',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
+
 const itemListJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -193,6 +204,7 @@ const itemListJsonLd = {
   <JsonLd schema={faqJsonLd} />
   <JsonLd schema={articleJsonLd} />
   <JsonLd schema={itemListJsonLd} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -215,7 +227,7 @@ const itemListJsonLd = {
       </p>
 
       <!-- Editor's summary box -->
-      <div class="mt-10 mx-auto max-w-3xl rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7 text-left">
+      <div class="speakable-answer mt-10 mx-auto max-w-3xl rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7 text-left">
         <p class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-4 text-center">Editor's Summary — February 2025</p>
         <div class="grid sm:grid-cols-3 gap-4">
           <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-4 text-center">
@@ -355,7 +367,7 @@ const itemListJsonLd = {
       <div class="space-y-8">
 
         <!-- LimeCall — Editor's Choice -->
-        <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-8">
+        <div class="speakable-summary rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-8">
           <div class="flex items-center gap-3 mb-5 flex-wrap">
             <span class="rounded-full bg-lime-500 px-3 py-1 text-xs font-extrabold text-dark-950">Editor's Choice — #1 Best Overall</span>
             <span class="text-xs text-dark-500">£0–£99/mo · 28s avg speed</span>

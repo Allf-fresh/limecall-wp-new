@@ -94,11 +94,23 @@ const improvements = [
   { icon: '📱', title: 'Mobile Push Alerts', desc: 'Push notifications to reps\' phones the instant a lead arrives. Even remote and field reps can respond within minutes rather than hours.' },
   { icon: '📊', title: 'SLA Tracking & Dashboards', desc: 'Set speed-to-lead SLAs in your CRM and get alerted when any lead is not contacted within your target window. Track trends by team, rep, and lead source.' },
 ];
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'What is Speed to Lead? Definition, Benchmarks & Why It Matters',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
 ---
 
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -113,7 +125,7 @@ const improvements = [
         What is <span class="text-lime-400">Speed to Lead?</span>
       </h1>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+      <p class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
         Speed to lead is the elapsed time between a prospect submitting an inquiry and your sales team making first contact. It is the single most impactful variable in inbound sales conversion — responding in under 5 minutes makes you up to 100× more likely to close the deal.
       </p>
 
@@ -153,7 +165,7 @@ const improvements = [
         </h2>
         <p class="mt-4 text-dark-400 max-w-xl mx-auto">Three landmark studies from independent researchers all reach the same conclusion.</p>
       </div>
-      <div class="grid gap-6 sm:grid-cols-3">
+      <div class="speakable-summary grid gap-6 sm:grid-cols-3">
         <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
           <div class="text-3xl font-extrabold text-lime-400 mb-2">391%</div>
           <h3 class="font-bold text-white mb-2">MIT / InsideSales.com</h3>

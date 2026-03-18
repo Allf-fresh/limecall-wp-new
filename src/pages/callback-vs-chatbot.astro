@@ -66,11 +66,23 @@ const articleJsonLd = articleSchema({
   modifiedDate: '2025-01-10',
   author: 'LimeCall Editorial Team',
 });
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Callback vs Chatbot: Which Converts More Leads?',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqJsonLd} />
   <JsonLd schema={articleJsonLd} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -94,7 +106,7 @@ const articleJsonLd = articleSchema({
       </p>
 
       <!-- Key stat box -->
-      <div class="mt-10 mx-auto max-w-2xl rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
+      <div class="speakable-answer mt-10 mx-auto max-w-2xl rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
         <p class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-3">Key Finding</p>
         <p class="text-2xl font-extrabold text-white leading-snug">
           "Callback converts at <span class="text-lime-400">18.7%</span>.<br class="hidden sm:block" />
@@ -162,7 +174,7 @@ const articleJsonLd = articleSchema({
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Head-to-Head: Callback vs Chatbot</h2>
       <p class="mb-10 text-center text-dark-400">12 dimensions that matter for revenue teams. Winner highlighted per row.</p>
-      <div class="overflow-x-auto rounded-xl border border-dark-800">
+      <div class="speakable-summary overflow-x-auto rounded-xl border border-dark-800">
         <table class="w-full text-sm min-w-[580px]">
           <thead>
             <tr class="border-b border-dark-800 bg-dark-900">

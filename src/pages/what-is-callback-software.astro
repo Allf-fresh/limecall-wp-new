@@ -108,11 +108,23 @@ const comparison = [
   { feature: 'Mobile experience', callback: 'Native call quality', chat: 'Good', form: 'Good' },
   { feature: 'CRM integration', callback: 'Full auto-logging', chat: 'Partial', form: 'Partial' },
 ];
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'What is Callback Software? Definition, Benefits & How It Works',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
 ---
 
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -127,7 +139,7 @@ const comparison = [
         What is <span class="text-lime-400">Callback Software?</span>
       </h1>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+      <p class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
         Callback software is a web-based tool that lets website visitors request an immediate phone call from your sales or support team. Instead of waiting on hold or filling out a contact form, the visitor enters their number and the software connects them with an agent — typically in under 28 seconds.
       </p>
 
@@ -188,7 +200,7 @@ const comparison = [
           Why Businesses Use <span class="text-lime-400">Callback Software</span>
         </h2>
       </div>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-center">
+      <div class="speakable-summary grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-center">
         {benefits.map((b) => (
           <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
             <div class="text-4xl font-extrabold text-lime-400">{b.stat}</div>

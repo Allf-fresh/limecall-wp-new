@@ -97,6 +97,17 @@ const roles = [
   },
 ];
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `${site.name} — ${site.tagline}`,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: `${site.url}/`,
+};
+
 const testimonials = [
   {
     quote: 'LimeCall added 800 more qualified calls each month. We went from 2-minute response times to under 28 seconds — and our close rate tripled.',
@@ -128,6 +139,7 @@ const testimonials = [
   canonical={`${site.url}/`}
 >
   <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={speakableSchema} />
   <JsonLd schema={{
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -223,7 +235,7 @@ const testimonials = [
           Turn Website Visitors Into
           <span class="text-lime-400"> Sales Calls in 28 Seconds</span>
         </h1>
-        <p class="mt-6 text-lg leading-relaxed text-dark-300 sm:text-xl">
+        <p class="speakable-answer mt-6 text-lg leading-relaxed text-dark-300 sm:text-xl">
           Contact forms convert at 1–3%. LimeCall click-to-call widgets convert at <strong class="text-white">10–12x higher rates</strong> — connecting your team with buyers the moment their intent is highest.
         </p>
         <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -260,7 +272,7 @@ const testimonials = [
   <!-- Stats row -->
   <section class="border-b border-dark-800 bg-dark-900/50 py-12">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 gap-8 sm:grid-cols-4 text-center">
+      <div class="speakable-summary grid grid-cols-2 gap-8 sm:grid-cols-4 text-center">
         <div>
           <div class="text-4xl font-extrabold text-lime-400">10–12x</div>
           <div class="mt-1 text-sm text-dark-400">higher conversion vs. forms</div>

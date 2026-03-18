@@ -6,8 +6,8 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: 'AI Voice Agent for Sales — Qualify Leads 24/7 | LimeCall',
-  description: 'LimeCall\'s AI voice agent qualifies leads, books meetings, and connects hot prospects to your sales team in 28 seconds — 24/7. Start free today.',
+  title: 'AI Voice Agent: Smart Call Center & Answering Service | LimeCall',
+  description: 'LimeCall\'s AI voice agent replaces your traditional ai call center and ai answering service — qualifying leads, booking meetings, and connecting prospects 24/7. Start free.',
   canonical: 'https://www.limecall.com/ai-voice-agent/',
 };
 
@@ -68,15 +68,42 @@ const faqSchema = {
       name: 'How quickly can I set up an AI voice agent?',
       acceptedAnswer: { '@type': 'Answer', text: 'Most teams are live within 5 minutes. Add the LimeCall widget to your website, define your qualification script in the dashboard, and the AI agent is active. No engineering, no long implementation projects.' }
     },
+    {
+      '@type': 'Question',
+      name: 'What is an AI call center?',
+      acceptedAnswer: { '@type': 'Answer', text: 'An AI call center uses artificial intelligence — including voice agents, natural language processing, and real-time lead scoring — to handle inbound and outbound calls without requiring a large team of human agents. LimeCall\'s AI call center solution manages qualification, routing, and meeting booking at a fraction of the cost of traditional call center infrastructure.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does an AI answering service work?',
+      acceptedAnswer: { '@type': 'Answer', text: 'An AI answering service uses natural language understanding to greet callers, understand their intent, answer common questions, and route them to the right department or person — all without a human operator. Unlike legacy IVR systems, an AI answering service holds natural conversations, operates 24/7 without shift scheduling, and supports multiple languages out of the box.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'AI voice agent vs IVR — what\'s the difference?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Traditional IVR (Interactive Voice Response) forces callers through rigid menu trees using keypad presses ("press 1 for sales"). An AI voice agent understands natural speech, holds dynamic conversations, and adapts to caller intent in real time. The result is faster resolution, higher caller satisfaction, and significantly more qualified leads reaching your sales team.' }
+    },
   ],
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.hero-speakable', '.features-speakable'],
+  },
+  url: seo.canonical,
 };
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+  <section class="hero-speakable relative overflow-hidden bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <Breadcrumbs items={[{ name: 'AI Voice Agent', url: `${site.url}/ai-voice-agent/` }]} />
       <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
@@ -139,7 +166,7 @@ const faqSchema = {
   </section>
 
   <!-- Features Grid -->
-  <section class="py-16 sm:py-24 bg-dark-900/40">
+  <section class="features-speakable py-16 sm:py-24 bg-dark-900/40">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Everything Your AI Agent Does for You</h2>
@@ -245,6 +272,138 @@ const faqSchema = {
             </footer>
           </blockquote>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Voice Agent as Your Call Center -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">AI Voice Agent as Your Call Center</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">Replace expensive call center infrastructure with an AI call center that scales instantly and costs a fraction of the price.</p>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+          <h3 class="text-lg font-bold text-white mb-4">Traditional Call Center Costs</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">&#10007;</span> Hiring, training, and managing live agents</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">&#10007;</span> Office space, telephony infrastructure, software licences</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">&#10007;</span> Shift scheduling, overtime, and attrition</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">&#10007;</span> Inconsistent quality across agents and shifts</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-lime-500/30 bg-dark-900/60 p-8">
+          <h3 class="text-lg font-bold text-lime-400 mb-4">LimeCall AI Call Center</h3>
+          <ul class="space-y-3 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-lime-400 mt-0.5">&#10003;</span> Flat-rate pricing from $57/mo — no per-agent fees</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 mt-0.5">&#10003;</span> Handle 500+ concurrent calls without adding headcount</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 mt-0.5">&#10003;</span> Consistent qualification — AI follows your script perfectly every time</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400 mt-0.5">&#10003;</span> Zero ramp-up: deploy in minutes, not months</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Metric</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-300">Traditional Call Center</th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">LimeCall AI Call Center</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Cost per agent hour</td>
+              <td class="px-5 py-4 text-center text-dark-400">$15 – $25</td>
+              <td class="px-5 py-4 text-center text-white font-semibold">$57/mo flat</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Concurrent call capacity</td>
+              <td class="px-5 py-4 text-center text-dark-400">Limited by headcount</td>
+              <td class="px-5 py-4 text-center text-white font-semibold">500+ simultaneous</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Availability</td>
+              <td class="px-5 py-4 text-center text-dark-400">Shift-dependent</td>
+              <td class="px-5 py-4 text-center text-white font-semibold">24/7/365</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Script compliance</td>
+              <td class="px-5 py-4 text-center text-dark-400">Variable (human error)</td>
+              <td class="px-5 py-4 text-center text-white font-semibold">100% every call</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Time to scale</td>
+              <td class="px-5 py-4 text-center text-dark-400">Weeks to months</td>
+              <td class="px-5 py-4 text-center text-white font-semibold">Instant</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-sm text-dark-400 text-center max-w-2xl mx-auto">
+        An AI call center does not mean eliminating your human team. It means freeing them from repetitive qualification calls so they can focus on closing deals and building relationships with high-value accounts.
+      </p>
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        {[
+          { title: 'No Bad Days', desc: 'Your AI call center agent delivers the same quality on call 1 and call 500. No fatigue, no mood swings, no Monday-morning slump.' },
+          { title: 'Instant Surge Capacity', desc: 'Launch a new ad campaign at midnight? The AI handles the spike without you hiring a single extra agent or paying overtime.' },
+          { title: 'Complete Call Records', desc: 'Every AI call center interaction is transcribed, scored, and logged automatically — giving managers full visibility without listening to recordings.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Answering Service Features -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">AI Answering Service Features</h2>
+        <p class="mt-4 text-lg text-dark-300 max-w-2xl mx-auto">A modern AI answering service goes far beyond "press 1 for sales." LimeCall delivers intelligent, natural conversations that route callers to the right outcome every time.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { icon: '🌙', title: '24/7 Availability', desc: 'Your AI answering service never clocks out. Every call is handled immediately — nights, weekends, and holidays included — without shift scheduling or overtime.' },
+          { icon: '🧠', title: 'Natural Language Understanding', desc: 'Callers speak naturally. The AI understands intent, context, and nuance — no frustrating menu trees or "I didn\'t catch that" loops.' },
+          { icon: '🔀', title: 'Intelligent Routing by Intent', desc: 'The AI identifies whether a caller wants sales, support, billing, or something else, then routes them to the correct team or rep instantly.' },
+          { icon: '🌐', title: 'Multi-Language Support', desc: 'Serve global audiences in their preferred language. LimeCall\'s AI answering service supports multiple languages with native-level fluency.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+        <h3 class="text-lg font-bold text-white mb-3">How AI Answering Service Differs from Legacy IVR</h3>
+        <p class="text-sm text-dark-400 mb-4">Traditional IVR menus frustrate callers with rigid "press 1" trees. An AI answering service understands natural speech, adapts to caller intent, and resolves requests without forcing people through predetermined paths. The result: shorter call times, higher satisfaction, and more qualified transfers to your team.</p>
+        <div class="grid gap-3 sm:grid-cols-2 mt-4">
+          <div class="text-sm text-dark-400"><span class="text-red-400 font-semibold">IVR:</span> "Press 1 for sales, press 2 for support, press 3 for billing..."</div>
+          <div class="text-sm text-dark-400"><span class="text-lime-400 font-semibold">AI:</span> "Hi, how can I help you today?" — then routes based on what the caller actually says.</div>
+        </div>
+      </div>
+      <div class="mt-6 rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+        <h3 class="text-lg font-bold text-white mb-4">Why Businesses Switch from Traditional Answering Services to AI</h3>
+        <div class="grid gap-6 sm:grid-cols-3">
+          <div>
+            <p class="text-2xl font-extrabold text-lime-400">90%</p>
+            <p class="text-sm text-dark-400 mt-1">of routine calls resolved without human intervention</p>
+          </div>
+          <div>
+            <p class="text-2xl font-extrabold text-lime-400">0 sec</p>
+            <p class="text-sm text-dark-400 mt-1">hold time — callers are engaged immediately</p>
+          </div>
+          <div>
+            <p class="text-2xl font-extrabold text-lime-400">60%</p>
+            <p class="text-sm text-dark-400 mt-1">reduction in answering service costs</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

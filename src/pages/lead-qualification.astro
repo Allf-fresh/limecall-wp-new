@@ -6,8 +6,8 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Lead Qualification Software | LimeCall`,
-  description: `Qualify inbound leads automatically with LimeCall. Route calls to the right place, score leads in real time, and ensure your sales team only talks to ready-to-buy prospects.`,
+  title: `Lead Qualification: Frameworks, Automation & Software | LimeCall`,
+  description: `Master lead qualification with BANT, MEDDIC, and CHAMP frameworks. LimeCall's lead scoring software automates qualification in real time — so reps only talk to buyers.`,
   canonical: `https://www.limecall.com/lead-qualification/`,
 };
 
@@ -77,7 +77,34 @@ const faqSchema = {
         text: 'Yes. LimeCall automates qualification through IVR menus (voice-based qualifying questions), form scoring (automatically scoring form submissions), behavioral signals (pages viewed, session depth), and routing rules (sending high-score leads to senior reps instantly). This means low-quality leads are filtered before they reach your team.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between lead qualification and lead scoring?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead qualification is the process of determining whether a prospect is a good fit for your product or service based on criteria like budget, authority, need, and timeline. Lead scoring is a quantitative method that assigns numeric points to leads based on demographic data, firmographic data, and behavioral signals. Scoring is one tool used within the broader qualification process — a high score indicates a lead is likely qualified, but the final qualification decision may still require a human conversation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the most common lead qualification frameworks?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The four most common frameworks are BANT (Budget, Authority, Need, Timeline), MEDDIC (Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion), CHAMP (Challenges, Authority, Money, Prioritisation), and GPCTBA/C&I (Goals, Plans, Challenges, Timeline, Budget, Authority, Consequences, Implications). BANT is the most widely adopted for its simplicity. MEDDIC is favoured in enterprise sales. CHAMP puts challenges first, which is useful for solution-selling. LimeCall supports all of these via customisable qualification scripts.',
+      },
+    },
   ],
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.hero-speakable', '.features-speakable'],
+  },
+  url: seo.canonical,
 };
 
 const comparisonRows = [
@@ -91,9 +118,10 @@ const comparisonRows = [
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
-  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+  <section class="hero-speakable border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: "Lead Qualification", url: seo.canonical }]} />
       <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
@@ -131,7 +159,7 @@ const comparisonRows = [
   </section>
 
   <!-- Features -->
-  <section class="py-16 sm:py-20">
+  <section class="features-speakable py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Lead qualification features</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -184,6 +212,148 @@ const comparisonRows = [
             ))}
           </tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Qualification Frameworks -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Qualification Frameworks</h2>
+      <p class="mb-6 text-center text-dark-300 max-w-2xl mx-auto">Choosing the right lead qualification framework depends on your sales cycle, deal size, and team structure. Here are the four most widely adopted approaches.</p>
+      <p class="mb-12 text-center text-sm text-dark-500 max-w-2xl mx-auto">LimeCall supports all four frameworks via customisable qualification scripts. Configure your criteria in the dashboard and the AI handles the rest — asking the right questions, scoring responses, and routing leads accordingly.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { name: 'BANT', full: 'Budget, Authority, Need, Timeline', best: 'SMB and mid-market sales with shorter cycles', desc: 'The most widely used qualification framework, originally developed by IBM. BANT assesses whether a prospect can afford your solution, has decision-making authority, has a genuine need, and has a timeline for purchase. Best for teams that need a simple, repeatable qualification process.' },
+          { name: 'MEDDIC', full: 'Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion', best: 'Enterprise sales with complex buying committees', desc: 'MEDDIC goes deeper than BANT by mapping the entire buying committee and decision process. It requires reps to identify a champion inside the account who will advocate for the purchase. Ideal for high-value, long-cycle enterprise deals where multiple stakeholders are involved.' },
+          { name: 'CHAMP', full: 'Challenges, Authority, Money, Prioritisation', best: 'Solution-selling and consultative sales', desc: 'CHAMP leads with the prospect\'s challenges rather than budget, making it ideal for consultative selling. By understanding the prospect\'s pain first, reps can position the solution before discussing investment. Works well when your product solves a specific, measurable problem.' },
+          { name: 'GPCTBA/C&I', full: 'Goals, Plans, Challenges, Timeline, Budget, Authority, Consequences & Implications', best: 'Inbound-led sales teams (popularised by HubSpot)', desc: 'The most comprehensive framework, GPCTBA/C&I maps a prospect\'s goals and existing plans before assessing fit. It also evaluates the consequences of inaction. Best for inbound sales teams where prospects are already educated and expect a consultative approach.' },
+        ].map(fw => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="inline-flex items-center rounded-lg bg-lime-500/10 border border-lime-500/20 px-3 py-1 text-sm font-bold text-lime-400">{fw.name}</span>
+            </div>
+            <p class="text-xs text-dark-500 mb-2">{fw.full}</p>
+            <p class="text-sm text-dark-300 mb-3">{fw.desc}</p>
+            <p class="text-xs text-dark-500"><span class="font-semibold text-dark-300">Best for:</span> {fw.best}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Automated Lead Qualification with AI -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Automated Lead Qualification with AI</h2>
+      <p class="mb-6 text-center text-dark-300 max-w-2xl mx-auto">LimeCall automates every step of lead qualification — from first contact to CRM log — so your reps spend their time on conversations that close.</p>
+      <p class="mb-12 text-center text-sm text-dark-500 max-w-2xl mx-auto">Automated lead qualification combines AI voice agents with real-time lead scoring to evaluate prospects the moment they engage — eliminating hours of manual review.</p>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { step: '01', title: 'AI Asks Qualification Questions', desc: 'During the callback, LimeCall\'s AI agent asks your custom BANT or MEDDIC questions in a natural voice conversation — no forms, no friction.' },
+          { step: '02', title: 'Real-Time Lead Scoring', desc: 'Responses are scored instantly against your criteria. Budget too low? No authority? The AI knows immediately and adjusts the routing.' },
+          { step: '03', title: 'A-Leads Routed in 28 Seconds', desc: 'Prospects that meet your qualification threshold are connected to a senior account executive within 28 seconds. No queue, no delay.' },
+          { step: '04', title: 'Full Data Logged to CRM', desc: 'Every qualification answer, lead score, call transcript, and routing decision is synced to your CRM automatically — HubSpot, Salesforce, Pipedrive, or Zapier.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-sm">{item.step}</div>
+            <h3 class="text-base font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Automate Lead Qualification -->
+  <section class="border-t border-dark-800 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-dark-900/60 p-8">
+        <h3 class="text-xl font-bold text-white mb-4">Why Automate Lead Qualification?</h3>
+        <div class="grid gap-6 sm:grid-cols-3">
+          <div>
+            <p class="text-2xl font-extrabold text-lime-400">80%</p>
+            <p class="text-sm text-dark-400 mt-1">of leads qualified in the first AI conversation — no rep time required</p>
+          </div>
+          <div>
+            <p class="text-2xl font-extrabold text-lime-400">3x</p>
+            <p class="text-sm text-dark-400 mt-1">increase in qualified pipeline when lead scoring software is combined with AI qualification</p>
+          </div>
+          <div>
+            <p class="text-2xl font-extrabold text-lime-400">28s</p>
+            <p class="text-sm text-dark-400 mt-1">average time from lead submission to qualified rep connection with LimeCall</p>
+          </div>
+        </div>
+        <p class="mt-6 text-sm text-dark-400">Manual lead qualification is slow, inconsistent, and expensive. Lead scoring software and AI-powered qualification remove the guesswork and ensure every lead is evaluated against the same criteria, every time. Your reps stop wasting hours on unqualified prospects and start closing more deals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Qualification vs Lead Scoring -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Qualification vs Lead Scoring</h2>
+      <p class="mb-10 text-center text-dark-300 max-w-2xl mx-auto">These terms are often used interchangeably, but they serve different purposes in your sales process. Understanding the distinction helps you build a more effective pipeline.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Dimension</th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">Lead Qualification</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-300">Lead Scoring</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['Definition', 'Process of determining fit based on criteria', 'Numeric ranking based on data points'],
+              ['Approach', 'Qualitative + quantitative (conversation-based)', 'Quantitative only (points-based)'],
+              ['Output', 'Qualified / Not Qualified decision', 'Score (e.g. 0–100)'],
+              ['When used', 'During or after first contact', 'Before first contact (automated)'],
+              ['Best for', 'Complex sales with nuanced criteria', 'High-volume inbound with many leads'],
+              ['LimeCall feature', 'AI voice qualification + IVR', 'Real-time lead scoring engine'],
+            ].map(([dim, qual, score], i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-900/20'}`}>
+                <td class="px-5 py-4 font-medium text-dark-300">{dim}</td>
+                <td class="px-5 py-4 text-center text-lime-400 font-semibold">{qual}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-sm text-dark-400 text-center">The most effective teams use both: lead scoring software to prioritise volume, and lead qualification to make the final go/no-go decision before investing rep time.</p>
+      <div class="mt-6 text-center">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-3 text-sm font-bold text-dark-950 transition hover:bg-lime-400">
+          Try Automated Lead Qualification Free →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Qualification Checklist -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Qualification Checklist</h2>
+      <p class="mb-6 text-center text-dark-300">Use this 10-point checklist to ensure every lead is properly qualified before it reaches your sales team.</p>
+      <p class="mb-10 text-center text-sm text-dark-500">Tip: Configure your lead scoring software to automate steps 1 through 9 so reps only handle step 10 — the routing decision.</p>
+      <div class="space-y-3">
+        {[
+          'Confirm the prospect has a genuine problem your product solves',
+          'Verify budget range aligns with your pricing',
+          'Identify the decision-maker or confirm authority to buy',
+          'Establish a purchase timeline or triggering event',
+          'Determine current solution and switching costs',
+          'Assess company size and industry fit against your ICP',
+          'Evaluate engagement signals (pages visited, content downloaded)',
+          'Confirm geographic or regulatory eligibility',
+          'Score the lead against your framework (BANT, MEDDIC, or CHAMP)',
+          'Route to the appropriate rep or nurture sequence based on score',
+        ].map((item, i) => (
+          <div class="flex items-start gap-3 rounded-xl border border-dark-800 bg-dark-900/60 p-4">
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-xs font-bold text-lime-400 border border-lime-500/20">{i + 1}</span>
+            <p class="text-sm text-dark-300">{item}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>

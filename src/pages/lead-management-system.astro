@@ -6,8 +6,8 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Lead Management System — Close Deals Faster | LimeCall`,
-  description: `Streamline your sales process with LimeCall's lead management system. Capture, qualify, route, and track leads in one platform. Boost profitability and close deals faster.`,
+  title: `Lead Management System & Software: Capture to Conversion | LimeCall`,
+  description: `LimeCall's lead management system and lead management software organises capture, qualification, routing, and conversion in one platform. Streamline your pipeline and close more deals.`,
   canonical: `https://www.limecall.com/lead-management-system/`,
 };
 
@@ -79,15 +79,51 @@ const faqSchema = {
         text: 'After every call, LimeCall logs the outcome, call recording, and disposition to your CRM automatically. Based on the call result, automated follow-up sequences can be triggered — including scheduled callbacks, SMS follow-ups, or email sequences — keeping deals moving without manual rep action.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'What is lead management software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead management software is a tool that helps businesses capture, organise, qualify, route, and track sales leads from the moment they enter the pipeline through to conversion. Unlike a full CRM, lead management software focuses specifically on the pre-sale process — ensuring no lead is lost, every prospect is scored correctly, and the right rep connects at the right time.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between a lead management system and a CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A lead management system focuses on the pre-sale journey: capturing leads, scoring them, routing them to the right rep, and automating follow-up until they convert. A CRM (Customer Relationship Management) is broader — it manages the entire customer lifecycle including post-sale relationships, support tickets, and account management. Lead management is a subset of CRM, and the two work best together. LimeCall handles lead management and integrates seamlessly with CRMs like Salesforce, HubSpot, and Pipedrive.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I choose the right lead management software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Look for lead management software that offers multi-channel lead capture (web, phone, SMS, chat), real-time lead scoring, automated routing rules, CRM integration, follow-up automation, and reporting dashboards. The best tools also provide instant callback capabilities so you connect with leads while they are still engaged — within seconds, not hours.',
+      },
+    },
   ],
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.hero-speakable', '.features-speakable'],
+  },
+  url: seo.canonical,
 };
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
-  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+  <section class="hero-speakable border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
       <Breadcrumbs items={[{ name: "Lead Management System", url: seo.canonical }]} />
       <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
@@ -124,8 +160,19 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- Answer-First Block -->
+  <section class="border-b border-dark-800 py-12 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-dark-900/60 p-8">
+        <p class="text-lg text-dark-200 leading-relaxed">
+          <strong class="text-white">A lead management system</strong> organises how businesses capture, track, qualify, and convert sales leads from first touch to closed deal. Lead management software automates this process — ensuring no lead falls through the cracks, every prospect is scored and routed correctly, and your sales team spends their time on conversations that convert.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
-  <section class="py-16 sm:py-20">
+  <section class="features-speakable py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Everything in your lead management system</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -173,6 +220,122 @@ const faqSchema = {
             <div>
               <span class="font-semibold text-white">{item.stage}: </span>
               <span class="text-sm text-dark-400">{item.desc}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Dedicated Lead Management Software -->
+  <section class="border-t border-dark-800 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-dark-900/60 p-8">
+        <h3 class="text-xl font-bold text-white mb-4">Why You Need Dedicated Lead Management Software</h3>
+        <p class="text-sm text-dark-300 mb-4">Most teams rely on their CRM alone to manage leads. The problem? CRMs are built for relationship management, not speed-to-lead. Dedicated lead management software bridges the gap between lead capture and CRM, ensuring every prospect is scored, routed, and contacted before they lose interest.</p>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="flex items-start gap-3">
+            <span class="text-lime-400 mt-0.5">&#10003;</span>
+            <p class="text-sm text-dark-400">Leads contacted in under 60 seconds convert at significantly higher rates than those left in a queue</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-lime-400 mt-0.5">&#10003;</span>
+            <p class="text-sm text-dark-400">Automated scoring eliminates subjective rep judgements and ensures consistency</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-lime-400 mt-0.5">&#10003;</span>
+            <p class="text-sm text-dark-400">Rules-based routing means no lead sits unassigned while reps debate ownership</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-lime-400 mt-0.5">&#10003;</span>
+            <p class="text-sm text-dark-400">End-to-end attribution shows you exactly which channels produce revenue, not just volume</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Management Software Features -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Management Software Features</h2>
+      <p class="mb-12 text-center text-dark-300 max-w-2xl mx-auto">The best lead management software combines capture, scoring, routing, and analytics in one platform. Here are the eight features that matter most.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { icon: '📥', title: 'Multi-Channel Capture', desc: 'Automatically ingest leads from web forms, phone calls, SMS, live chat, and third-party integrations — no manual data entry.' },
+          { icon: '⚡', title: 'Instant Lead Alerts', desc: 'Notify the assigned rep the moment a lead enters the system. Reduce speed-to-lead from hours to seconds.' },
+          { icon: '🎯', title: 'AI-Powered Lead Scoring', desc: 'Score leads based on firmographic data, behavioral signals, and engagement history. Prioritise the leads most likely to convert.' },
+          { icon: '🔀', title: 'Rules-Based Routing', desc: 'Route leads by territory, product line, deal size, or rep availability. Ensure every lead reaches the right person instantly.' },
+          { icon: '📊', title: 'Pipeline Dashboards', desc: 'Visualise your entire pipeline in real time. Identify bottlenecks, stalled deals, and opportunities for acceleration.' },
+          { icon: '🔄', title: 'Automated Follow-Up', desc: 'Trigger callback sequences, SMS nudges, and email drips based on lead behaviour and pipeline stage.' },
+          { icon: '🔗', title: 'Native CRM Integration', desc: 'Two-way sync with Salesforce, HubSpot, Pipedrive, and 1,000+ tools via Zapier. Your CRM stays the system of record.' },
+          { icon: '📈', title: 'Attribution Reporting', desc: 'Track every lead from first touch to closed deal. Understand which channels, campaigns, and reps drive the most revenue.' },
+        ].map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="text-2xl mb-3">{f.icon}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Management System vs CRM -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Management System vs CRM</h2>
+      <p class="mb-10 text-center text-dark-300 max-w-2xl mx-auto">A lead management system is a subset of CRM focused exclusively on the pre-sale journey. Understanding the difference helps you build the right tech stack.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Dimension</th>
+              <th class="px-5 py-4 text-center font-semibold text-lime-400">Lead Management System</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-300">Full CRM</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['Primary focus', 'Pre-sale: capture to conversion', 'Full lifecycle: lead to customer retention'],
+              ['Core function', 'Lead capture, scoring, routing, follow-up', 'Contact management, deal tracking, support'],
+              ['Speed-to-lead', 'Optimised (instant callbacks, real-time routing)', 'Not a primary focus'],
+              ['Lead scoring depth', 'Deep (behavioral + firmographic + intent)', 'Basic or requires add-ons'],
+              ['Best for', 'Sales teams focused on pipeline velocity', 'Organisations managing full customer relationships'],
+              ['LimeCall role', 'Complete lead management platform', 'Integrates with your CRM as the lead engine'],
+            ].map(([dim, lms, crm], i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : 'bg-dark-900/20'}`}>
+                <td class="px-5 py-4 font-medium text-dark-300">{dim}</td>
+                <td class="px-5 py-4 text-center text-lime-400 font-semibold">{lms}</td>
+                <td class="px-5 py-4 text-center text-dark-400">{crm}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-sm text-dark-400 text-center">Most high-performing sales teams use both: a lead management system like LimeCall to capture and qualify leads at speed, paired with a CRM for post-qualification deal management.</p>
+    </div>
+  </section>
+
+  <!-- Lead Management Best Practices -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Management Best Practices</h2>
+      <p class="mb-10 text-center text-dark-300 max-w-2xl mx-auto">Follow these six best practices to get the most from your lead management software and maximise conversion rates.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {[
+          { title: 'Respond Within 60 Seconds', desc: 'Research shows that contacting a lead within the first minute increases conversion rates by up to 391%. Use instant callback tools to eliminate response lag entirely.' },
+          { title: 'Define Your ICP Before You Score', desc: 'Lead scoring is only as good as your Ideal Customer Profile. Document your ICP — industry, company size, budget range, decision-maker role — and configure your scoring rules to match.' },
+          { title: 'Automate Routing, Not Just Scoring', desc: 'Scoring without routing is half the equation. Set rules so high-score leads go directly to senior reps, mid-score leads get nurture sequences, and low-score leads are deprioritised automatically.' },
+          { title: 'Track Source Attribution End-to-End', desc: 'Tag every lead with its source (paid ad, organic, referral, event) and track it through to closed revenue. This tells you which channels actually produce pipeline, not just volume.' },
+          { title: 'Audit Your Pipeline Weekly', desc: 'Review stalled leads, ageing opportunities, and conversion rates by stage every week. Use your lead management dashboard to identify bottlenecks before they become revenue gaps.' },
+          { title: 'Integrate Everything Into Your CRM', desc: 'Every call, score, routing decision, and follow-up should sync to your CRM automatically. If reps have to log data manually, it will not get logged. Use native integrations or Zapier to close the loop.' },
+        ].map((bp, i) => (
+          <div class="flex items-start gap-4 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-bold text-lime-400 border border-lime-500/20">{i + 1}</span>
+            <div>
+              <h3 class="font-semibold text-white mb-1">{bp.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{bp.desc}</p>
             </div>
           </div>
         ))}

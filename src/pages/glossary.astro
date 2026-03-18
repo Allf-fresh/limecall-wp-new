@@ -4,6 +4,7 @@ import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import CrossLinks from '../components/CrossLinks.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
+import glossary from '../data/glossary.json';
 
 const seo = {
   title: 'LimeCall Glossary — Sales & Call Tracking Terms',
@@ -82,6 +83,15 @@ const quickTerms = [
   { term: 'Virtual Number', def: 'A phone number not tied to a physical line — used to build local presence in multiple countries.' },
   { term: 'Lead Scoring', def: 'Ranking leads by conversion likelihood using behaviour, demographics, and engagement signals.' },
 ];
+
+// Build A-Z index
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const byLetter = Object.fromEntries(
+  alphabet.map(letter => [
+    letter,
+    glossary.filter(e => e.title.toUpperCase().startsWith(letter)).sort((a, b) => a.title.localeCompare(b.title))
+  ])
+);
 ---
 
 <Base {...seo}>
@@ -185,6 +195,38 @@ const quickTerms = [
           <div class="rounded-xl border border-dark-800 bg-dark-900/60 px-5 py-4 flex gap-3">
             <span class="mt-0.5 shrink-0 text-lime-400 font-bold text-sm w-32">{item.term}</span>
             <span class="text-sm text-dark-400 leading-relaxed">{item.def}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- A-Z Glossary Index -->
+      <div class="mt-20">
+        <h2 class="text-2xl font-bold text-white mb-8 text-center">Browse All 409 Terms A–Z</h2>
+
+        <!-- Letter jump nav -->
+        <div class="flex flex-wrap gap-2 justify-center mb-10">
+          {alphabet.map(letter => (
+            byLetter[letter].length > 0 ? (
+              <a href={`#letter-${letter}`} class="rounded-lg border border-dark-700 px-3 py-1.5 text-sm font-semibold text-dark-300 hover:border-lime-500/40 hover:text-lime-400 transition">
+                {letter}
+              </a>
+            ) : (
+              <span class="rounded-lg border border-dark-800 px-3 py-1.5 text-sm text-dark-600">{letter}</span>
+            )
+          ))}
+        </div>
+
+        <!-- Terms by letter -->
+        {alphabet.map(letter => byLetter[letter].length > 0 && (
+          <div id={`letter-${letter}`} class="mb-10">
+            <h3 class="text-xl font-bold text-lime-400 mb-4 border-b border-dark-800 pb-2">{letter}</h3>
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {byLetter[letter].map(entry => (
+                <a href={`/glossary_cpt/${entry.slug}/`} class="rounded-lg border border-dark-800 bg-dark-900/40 px-4 py-3 hover:border-lime-500/30 hover:bg-dark-900 transition group">
+                  <span class="text-sm font-medium text-white group-hover:text-lime-400 transition">{entry.title}</span>
+                </a>
+              ))}
+            </div>
           </div>
         ))}
       </div>

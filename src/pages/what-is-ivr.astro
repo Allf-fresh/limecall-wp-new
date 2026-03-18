@@ -1,0 +1,338 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'What is IVR (Interactive Voice Response)? How It Works in 2025',
+  description: 'IVR (Interactive Voice Response) routes callers using voice or keypad menus. Learn how modern IVR works, types, costs, and why businesses are switching to callbacks.',
+  canonical: `${site.url}/what-is-ivr/`,
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: seo.title,
+  description: seo.description,
+  datePublished: '2024-03-15',
+  dateModified: '2025-03-01',
+  author: { '@type': 'Organization', name: 'LimeCall Team' },
+  publisher: { '@type': 'Organization', name: 'LimeCall', url: site.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': seo.canonical },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How much does IVR cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Basic IVR systems cost $20-$50 per month for small businesses. Mid-tier hosted IVR runs $50-$300/month depending on call volume and features. Enterprise on-premise IVR can cost $5,000-$100,000+ for hardware, licensing, and setup. Cloud-based solutions like LimeCall offer callback-first routing starting at $35/month — often replacing the need for complex IVR entirely.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between IVR and auto-attendant?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'An auto-attendant is a simple call-routing menu (e.g., "Press 1 for Sales"). IVR is more advanced — it can access databases, process payments, look up account information, and handle transactions without an agent. Think of auto-attendant as a receptionist and IVR as a self-service system.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can IVR trigger a callback?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Modern IVR systems can offer callers a callback option instead of waiting on hold. When a caller selects callback, they hang up and receive an automatic call when an agent becomes available. LimeCall takes this further by eliminating IVR entirely — connecting website visitors directly with reps in 28 seconds.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is IVR still relevant in 2025?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'IVR remains relevant for high-volume call centres handling routine enquiries (account balances, order status). However, for sales and lead conversion, businesses are increasingly replacing IVR with callback widgets and AI voice agents that eliminate hold times and menu frustration entirely.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is conversational IVR?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Conversational IVR uses natural language processing (NLP) and AI to understand spoken requests instead of requiring keypad input. Callers can say "I want to check my balance" instead of navigating numbered menus. It reduces call handling time by 30-40% but still cannot match the conversion power of instant callbacks.',
+      },
+    },
+  ],
+};
+
+const steps = [
+  { n: '01', title: 'Caller Dials In', desc: 'A customer or prospect calls your business phone number. The IVR system answers immediately with a pre-recorded greeting.' },
+  { n: '02', title: 'Menu Options Played', desc: 'The IVR presents a menu of options — e.g., "Press 1 for Sales, Press 2 for Support." Advanced systems accept voice commands instead.' },
+  { n: '03', title: 'Input Processed', desc: 'The system interprets the caller\'s keypad input or voice command and routes them accordingly — to an agent, a department, or a self-service flow.' },
+  { n: '04', title: 'Call Connected or Resolved', desc: 'The caller is transferred to the right agent, completes a self-service transaction, or is offered a callback if no agents are available.' },
+];
+
+const ivrTypes = [
+  { name: 'Touch-Tone (DTMF)', desc: 'The traditional IVR. Callers navigate menus by pressing keypad numbers. Simple, reliable, and universally understood — but slow and frustrating for complex routing.', era: 'Legacy' },
+  { name: 'Speech-Recognition', desc: 'Callers speak their responses instead of pressing keys. Uses basic speech recognition to match keywords. Faster than touch-tone but struggles with accents and ambient noise.', era: 'Modern' },
+  { name: 'AI-Powered / Conversational', desc: 'Uses natural language processing to understand full sentences and intent. Handles complex queries, accesses databases, and resolves issues without an agent.', era: 'Emerging' },
+];
+
+const comparison = [
+  { feature: 'Customer wait time', ivr: '2-15 minutes (on hold)', callback: '0 minutes (called back)' },
+  { feature: 'Customer satisfaction', ivr: '61% find IVR frustrating', callback: '89% satisfaction rate' },
+  { feature: 'Conversion rate', ivr: 'Low (callers abandon)', callback: 'Up to 391% higher' },
+  { feature: 'Setup complexity', ivr: 'High (menu trees, prompts)', callback: 'Low (widget in 5 minutes)' },
+  { feature: 'Self-service capable', ivr: 'Yes (payments, balances)', callback: 'No (human connection)' },
+  { feature: 'Best for', ivr: 'High-volume support', callback: 'Sales & lead conversion' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={articleSchema} />
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'What is IVR', url: `${site.url}/what-is-ivr/` }]} />
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400">
+        Definition
+      </div>
+
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        What is <span class="text-lime-400">IVR (Interactive Voice Response)?</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Interactive Voice Response (IVR) is a phone system technology that greets incoming callers with a pre-recorded menu and routes them to the appropriate department or agent using voice commands or keypad input. Modern IVR systems handle 70% of routine calls without human intervention.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Try Callback Instead — Free
+        </a>
+        <a href="/customer-callback-software/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Callback Software →
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">No IVR menus · No hold music · 28-second connection</p>
+    </div>
+  </section>
+
+  <!-- Definition block -->
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">IVR — Definition</h2>
+        <p class="text-dark-200 leading-relaxed text-base">
+          <strong class="text-white">Interactive Voice Response (IVR)</strong> is an automated telephony system that interacts with callers through pre-recorded voice prompts and menu options. Callers navigate by pressing keys on their phone keypad (DTMF tones) or by speaking commands. IVR systems can route calls, provide information, process transactions, and collect data — all without a human agent.
+        </p>
+        <p class="mt-4 text-dark-300 leading-relaxed text-sm">
+          While IVR handles high call volumes efficiently, 61% of customers find IVR menus frustrating — driving a shift toward callback-first solutions that eliminate hold times entirely.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How IVR Works -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          How IVR <span class="text-lime-400">Works</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Four steps from dial to resolution.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-sm">{s.n}</div>
+            <h3 class="text-base font-bold text-white mb-2">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Types of IVR -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Types of <span class="text-lime-400">IVR Systems</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {ivrTypes.map((t) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="mb-3 inline-flex rounded-full border border-dark-700 bg-dark-800 px-3 py-1 text-xs font-semibold text-dark-400">{t.era}</div>
+            <h3 class="text-base font-bold text-white mb-3">{t.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pros and Cons -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          IVR — <span class="text-lime-400">Pros & Cons</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+          <h3 class="text-base font-bold text-lime-400 mb-4">Advantages</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">+</span> Handles high call volumes 24/7 without additional staff</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">+</span> Self-service for routine tasks (account balance, order status)</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">+</span> Routes calls to the correct department automatically</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">+</span> Reduces operational costs by 30-50%</li>
+            <li class="flex gap-2"><span class="text-lime-400 shrink-0">+</span> Consistent customer experience every time</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+          <h3 class="text-base font-bold text-white mb-4">Disadvantages</h3>
+          <ul class="space-y-3 text-sm text-dark-300">
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">-</span> 61% of customers find IVR menus frustrating</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">-</span> Long hold times when all agents are busy</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">-</span> Complex menu trees cause caller abandonment</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">-</span> Poor speech recognition leads to misrouted calls</li>
+            <li class="flex gap-2"><span class="text-dark-500 shrink-0">-</span> High setup cost for enterprise on-premise systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IVR vs Callback Comparison -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          IVR vs <span class="text-lime-400">Callback</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">When to use IVR and when callback is the better choice.</p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">IVR</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">Callback (LimeCall)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {comparison.map((row) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{row.feature}</td>
+                <td class="px-5 py-4 text-dark-400">{row.ivr}</td>
+                <td class="px-5 py-4 font-semibold text-white">{row.callback}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- When to use which -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          When to Use IVR vs <span class="text-lime-400">Callback</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+          <h3 class="text-base font-bold text-white mb-3">Use IVR when...</h3>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li>You handle 1,000+ inbound calls per day</li>
+            <li>Most enquiries are routine (balance checks, order status)</li>
+            <li>Self-service resolution reduces agent workload</li>
+            <li>Compliance requires recorded menu navigation</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-lime-500/30 bg-lime-500/5 p-7">
+          <h3 class="text-base font-bold text-lime-400 mb-3">Use Callback when...</h3>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li>Leads come from your website (not phone)</li>
+            <li>Speed-to-lead is critical for conversion</li>
+            <li>You want to eliminate hold times completely</li>
+            <li>Your goal is sales, not self-service support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Frequently Asked <span class="text-lime-400">Questions</span>
+        </h2>
+      </div>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((item) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">&#9662;</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Skip the IVR. Connect in 28 Seconds.
+      </h2>
+      <p class="mt-4 text-lg text-dark-300">
+        LimeCall replaces frustrating IVR menus with instant callbacks. Your visitors click, you call back — in seconds.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Required
+        </a>
+        <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing →
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">Free plan available · No IVR needed · GDPR compliant</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Learn More"
+        links={[
+          { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud phone system for businesses — no hardware required.' },
+          { href: '/customer-callback-software/', title: 'Customer Callback Software', desc: 'The callback-first alternative to IVR for sales teams.' },
+          { href: '/ai-voice-agent/', title: 'AI Voice Agent', desc: 'AI-powered voice agents that replace traditional IVR menus.' },
+          { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans starting at $35/month.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

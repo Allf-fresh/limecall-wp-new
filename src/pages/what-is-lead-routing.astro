@@ -1,0 +1,335 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'What is Lead Routing? Definition, Rules & Best Practices (2025)',
+  description: 'Lead routing is the process of automatically assigning incoming leads to the right sales rep. Learn routing rules, round-robin vs skill-based methods, and tools.',
+  canonical: `${site.url}/what-is-lead-routing/`,
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: seo.title,
+  description: seo.description,
+  datePublished: '2024-04-01',
+  dateModified: '2025-03-01',
+  author: { '@type': 'Organization', name: 'LimeCall Team' },
+  publisher: { '@type': 'Organization', name: 'LimeCall', url: site.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': seo.canonical },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the best lead routing method?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The best lead routing method depends on your team size and sales model. Round-robin is ideal for equal distribution across small teams. Skill-based routing works best when leads require specific expertise. Most high-performing teams use a hybrid approach — combining territory rules with weighted distribution based on rep performance.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How fast should leads be routed?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Leads should be routed within 5 minutes of submission for maximum conversion. Research shows that contacting a lead within the first minute increases conversion by 391%. LimeCall routes leads in under 28 seconds, dramatically outperforming the industry average of 42 hours.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between lead routing and lead scoring?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead scoring assigns a numerical value to each lead based on their likelihood to convert (e.g., job title, company size, website behaviour). Lead routing determines which sales rep receives the lead. They work together — scoring qualifies and prioritises leads, while routing assigns them to the best-fit rep.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can lead routing work with my CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Most lead routing tools integrate natively with CRMs like Salesforce, HubSpot, and Pipedrive. LimeCall syncs routed leads, call recordings, and outcomes directly into your CRM — eliminating manual data entry and ensuring every interaction is logged automatically.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens if a routed lead is not answered?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Good lead routing software includes failover rules. If the assigned rep does not answer within a set time (e.g., 30 seconds), the lead is automatically escalated to the next available rep, a backup team, or placed in a callback queue. LimeCall supports multi-level failover to ensure zero leads are missed.',
+      },
+    },
+  ],
+};
+
+const routingTypes = [
+  { name: 'Round-Robin', desc: 'Leads are distributed equally among reps in rotation. Simple, fair, and ideal for teams with similar skill levels and territories.', best: 'Small teams with equal workloads' },
+  { name: 'Territory-Based', desc: 'Leads are assigned by geography, industry, or account segment. Ensures reps develop deep expertise in their assigned market.', best: 'Enterprise sales, regional teams' },
+  { name: 'Skill-Based', desc: 'Leads are matched to reps based on product expertise, language, or deal-stage experience. Maximises win rates on complex deals.', best: 'Technical products, multi-product companies' },
+  { name: 'Weighted', desc: 'Top performers receive a higher proportion of leads. Incentivises performance while maintaining coverage across the team.', best: 'Performance-driven teams' },
+  { name: 'Hybrid', desc: 'Combines two or more methods — e.g., territory rules first, then weighted round-robin within each territory. The most flexible approach.', best: 'Scaling sales orgs (50+ reps)' },
+];
+
+const steps = [
+  { n: '01', title: 'Lead Captured', desc: 'A visitor submits a form, requests a callback, or triggers a lead event on your website or ad campaign.' },
+  { n: '02', title: 'Data Enriched', desc: 'The routing engine enriches the lead with company size, industry, location, and engagement history from your CRM and third-party data.' },
+  { n: '03', title: 'Rules Evaluated', desc: 'Predefined routing rules — territory, deal size, product interest, rep availability — are evaluated in priority order.' },
+  { n: '04', title: 'Rep Assigned & Notified', desc: 'The matched rep is assigned instantly and notified via phone, Slack, or CRM task. LimeCall dials both parties within 28 seconds.' },
+];
+
+const rules = [
+  { rule: 'Geography', example: 'UK leads → London team', complexity: 'Low' },
+  { rule: 'Deal Size', example: '$50K+ → Enterprise AE', complexity: 'Medium' },
+  { rule: 'Product Interest', example: 'API enquiry → Technical AE', complexity: 'Medium' },
+  { rule: 'Lead Score', example: 'Score 80+ → Senior rep', complexity: 'High' },
+  { rule: 'Rep Availability', example: 'Online reps only', complexity: 'Low' },
+  { rule: 'Account Ownership', example: 'Existing account → Account owner', complexity: 'Low' },
+];
+
+const tools = [
+  { name: 'LimeCall', highlight: true, desc: 'Instant callback + intelligent lead routing. Routes and connects leads in 28 seconds with round-robin, skill-based, and weighted distribution.' },
+  { name: 'Salesforce Lead Assignment', highlight: false, desc: 'Native assignment rules within Salesforce CRM. Powerful but complex to configure for advanced routing scenarios.' },
+  { name: 'HubSpot Workflows', highlight: false, desc: 'Workflow-based lead rotation built into HubSpot Sales Hub. Good for teams already on the HubSpot ecosystem.' },
+  { name: 'LeanData', highlight: false, desc: 'Enterprise-grade lead-to-account matching and routing for Salesforce. Best for large, complex sales organisations.' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={articleSchema} />
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'What is Lead Routing', url: `${site.url}/what-is-lead-routing/` }]} />
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400">
+        Definition
+      </div>
+
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        What is <span class="text-lime-400">Lead Routing?</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Lead routing is the automated process of assigning incoming leads to sales representatives based on predefined rules — such as geography, deal size, product interest, or rep availability. Effective lead routing reduces response time from hours to seconds and increases conversion rates by 107%.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Route Leads in 28 Seconds
+        </a>
+        <a href="/lead-routing-software/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Lead Routing Software →
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Trusted by 10,000+ sales teams · 28-second routing · No credit card required</p>
+    </div>
+  </section>
+
+  <!-- Definition block -->
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Lead Routing — Definition</h2>
+        <p class="text-dark-200 leading-relaxed text-base">
+          <strong class="text-white">Lead routing</strong> (also called lead assignment or lead distribution) is the process of automatically directing incoming leads to the most appropriate sales representative or team. Routing decisions are based on rules such as geographic territory, deal size, product line, lead score, or rep workload and availability.
+        </p>
+        <p class="mt-4 text-dark-300 leading-relaxed text-sm">
+          Without automated lead routing, leads sit in a shared queue — and research from Harvard Business Review shows the odds of qualifying a lead drop by 10x if follow-up is delayed by just 10 minutes. Speed is everything.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types of Lead Routing -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Types of <span class="text-lime-400">Lead Routing</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Five methods — from simple rotation to intelligent hybrid assignment.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {routingTypes.map((t) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="text-base font-bold text-white mb-3">{t.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{t.desc}</p>
+            <p class="mt-3 text-xs text-lime-400 font-semibold">Best for: {t.best}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Speed Matters -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Why Lead Routing Speed <span class="text-lime-400">Matters</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="text-4xl font-extrabold text-lime-400">391%</div>
+          <div class="mt-2 font-bold text-white text-sm">More conversions</div>
+          <div class="mt-1 text-xs text-dark-500">When contacted in &lt; 1 minute</div>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="text-4xl font-extrabold text-lime-400">107%</div>
+          <div class="mt-2 font-bold text-white text-sm">Higher close rate</div>
+          <div class="mt-1 text-xs text-dark-500">With automated routing vs. manual</div>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="text-4xl font-extrabold text-lime-400">28s</div>
+          <div class="mt-2 font-bold text-white text-sm">LimeCall routing</div>
+          <div class="mt-1 text-xs text-dark-500">Industry avg is 42 hours</div>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="text-4xl font-extrabold text-lime-400">10x</div>
+          <div class="mt-2 font-bold text-white text-sm">Drop in qualification</div>
+          <div class="mt-1 text-xs text-dark-500">After just 10 minutes delay</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          How Lead Routing <span class="text-lime-400">Works</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Four steps from lead capture to live conversation.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-sm">{s.n}</div>
+            <h3 class="text-base font-bold text-white mb-2">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Rules Table -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Common Lead Routing <span class="text-lime-400">Rules</span>
+        </h2>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Routing Rule</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Example</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Complexity</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {rules.map((row) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-white">{row.rule}</td>
+                <td class="px-5 py-4 text-dark-400">{row.example}</td>
+                <td class="px-5 py-4 text-dark-400">{row.complexity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Lead Routing <span class="text-lime-400">Tools</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {tools.map((t) => (
+          <div class={`rounded-2xl border p-7 ${t.highlight ? 'border-lime-500/30 bg-lime-500/5' : 'border-dark-800 bg-dark-900/60'}`}>
+            <h3 class={`text-base font-bold mb-3 ${t.highlight ? 'text-lime-400' : 'text-white'}`}>{t.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Frequently Asked <span class="text-lime-400">Questions</span>
+        </h2>
+      </div>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((item) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">&#9662;</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Route Leads Instantly with LimeCall
+      </h2>
+      <p class="mt-4 text-lg text-dark-300">
+        Stop losing leads to slow response times. LimeCall routes and connects leads in 28 seconds — not 42 hours.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Required
+        </a>
+        <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing →
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">Free plan available · 5-minute setup · GDPR compliant</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Learn More"
+        links={[
+          { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Automated lead routing and instant callback for sales teams.' },
+          { href: '/automatic-lead-distribution/', title: 'Automatic Lead Distribution', desc: 'How automated lead distribution works and why speed wins.' },
+          { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why responding in under 60 seconds changes everything.' },
+          { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans starting at $35/month.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

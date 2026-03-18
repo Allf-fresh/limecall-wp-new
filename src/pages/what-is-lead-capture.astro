@@ -1,0 +1,281 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'What is Lead Capture? Definition, Tools & Strategies (2025)',
+  description: 'Lead capture is collecting contact information from potential customers. Compare forms, chatbots, and callback widgets — and learn which converts 391% more.',
+  canonical: `${site.url}/what-is-lead-capture/`,
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: seo.title,
+  description: seo.description,
+  datePublished: '2024-02-15',
+  dateModified: '2025-03-01',
+  author: { '@type': 'Organization', name: 'LimeCall Team' },
+  publisher: { '@type': 'Organization', name: 'LimeCall', url: site.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': seo.canonical },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the best lead capture tool?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The best lead capture tool depends on your conversion goal. For highest conversion rates, callback widgets like LimeCall outperform all other methods — converting 391% more leads than standard forms. For email nurturing, tools like HubSpot Forms or OptinMonster work well. Most high-performing teams combine callbacks with forms and chatbots.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between lead capture and lead generation?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead generation is the broader process of attracting potential customers to your business through marketing (SEO, ads, content, events). Lead capture is the specific moment you collect their contact information — via a form, callback widget, chatbot, or other tool. Generation drives traffic; capture converts that traffic into actionable leads.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are there free lead capture tools?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. HubSpot offers free forms and pop-ups. Google Forms is free for basic data collection. LimeCall offers a free plan with callback functionality. Tally and Typeform also offer generous free tiers. However, free tools typically lack advanced features like A/B testing, CRM integration, and intelligent routing that paid tools provide.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How many form fields should a lead capture form have?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Research shows that reducing form fields from 4 to 3 increases conversion by 50%. For top-of-funnel lead capture, use 2-3 fields (name, email, and optionally phone). For higher-intent pages like pricing or demo requests, 4-6 fields are acceptable because the visitor is more committed. Callback widgets need just one field — a phone number.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the average lead capture conversion rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The average website conversion rate across industries is 2.35%. Top-performing lead capture forms convert at 5-10%. Pop-ups average 3-5%. Chatbots convert at 5-15%. Callback widgets like LimeCall convert at 10-25% on high-intent pages — making them the highest-converting lead capture method available.',
+      },
+    },
+  ],
+};
+
+const methods = [
+  { name: 'Contact Forms', desc: 'The classic method. Visitors fill out name, email, and message fields. Simple and familiar, but conversion rates are the lowest of all methods at 2-5%.', rate: '2-5%' },
+  { name: 'Chatbots', desc: 'Conversational lead capture that qualifies visitors through a chat flow. Available 24/7 and less intimidating than forms, but text-based interaction lacks urgency.', rate: '5-15%' },
+  { name: 'Callback Widgets', desc: 'Visitor enters their phone number and receives a call in seconds. Lowest friction, highest conversion — one field, instant human connection.', rate: '10-25%' },
+  { name: 'Pop-ups & Slide-ins', desc: 'Triggered by time, scroll depth, or exit intent. Effective for email capture and content offers but can feel intrusive if poorly timed.', rate: '3-5%' },
+  { name: 'Landing Pages', desc: 'Dedicated pages built for a single conversion goal — webinar signup, ebook download, demo request. High intent traffic converts well.', rate: '5-15%' },
+];
+
+const comparison = [
+  { method: 'Contact Form', conversion: '2-5%', friction: 'Medium (4+ fields)', response: '1-48 hours', best: 'General enquiries' },
+  { method: 'Chatbot', conversion: '5-15%', friction: 'Low (conversational)', response: 'Instant (bot) / minutes (human)', best: 'Qualification & FAQ' },
+  { method: 'Callback Widget', conversion: '10-25%', friction: 'Very low (1 field)', response: '28 seconds', best: 'Sales & high-intent pages' },
+  { method: 'Pop-up / Slide-in', conversion: '3-5%', friction: 'Low (email only)', response: 'N/A (email nurture)', best: 'Email list building' },
+  { method: 'Landing Page', conversion: '5-15%', friction: 'Medium (3-6 fields)', response: 'Varies', best: 'Campaign-specific offers' },
+];
+
+const bestPractices = [
+  { title: 'Minimise Form Fields', desc: 'Every additional field reduces conversion by 10-25%. Ask only for what you need at this stage. Phone number alone is enough for a callback.' },
+  { title: 'Match Method to Intent', desc: 'Use callbacks on pricing and product pages (high intent). Use chatbots on blog posts (low intent). Use pop-ups for content offers (mid intent).' },
+  { title: 'Speed Wins', desc: 'Responding within 1 minute increases conversion by 391%. Callback widgets are the only method that guarantees sub-minute response.' },
+  { title: 'A/B Test Everything', desc: 'Test button copy, placement, timing, and number of fields. Small changes can yield 20-50% conversion lifts.' },
+  { title: 'Mobile-First Design', desc: '60%+ of traffic is mobile. Ensure your lead capture tools are tap-friendly, load fast, and do not obstruct content.' },
+  { title: 'Follow Up Immediately', desc: 'Leads captured via forms or chatbots must be followed up within 5 minutes. Better yet, use a callback widget to eliminate follow-up delay entirely.' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={articleSchema} />
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'What is Lead Capture', url: `${site.url}/what-is-lead-capture/` }]} />
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400">
+        Definition
+      </div>
+
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        What is <span class="text-lime-400">Lead Capture?</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Lead capture is the process of collecting contact information — name, email, phone number — from potential customers who have shown interest in your product or service. The most effective lead capture tools in 2025 combine callback widgets (391% higher conversion), chatbots, and smart forms.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Capture More Leads — Free
+        </a>
+        <a href="/lead-capture-software/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Lead Capture Software →
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">391% more conversions · 28-second callbacks · No credit card required</p>
+    </div>
+  </section>
+
+  <!-- Definition block -->
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Lead Capture — Definition</h2>
+        <p class="text-dark-200 leading-relaxed text-base">
+          <strong class="text-white">Lead capture</strong> is the process of converting anonymous website visitors into identifiable leads by collecting their contact information through forms, chatbots, callback widgets, pop-ups, or landing pages. It sits between lead generation (attracting visitors) and lead nurturing (converting them into customers).
+        </p>
+        <p class="mt-4 text-dark-300 leading-relaxed text-sm">
+          The goal of lead capture is simple: get the visitor's details before they leave your site. Since 96% of website visitors are not ready to buy on their first visit, capturing their information is essential for follow-up and conversion.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Capture Methods -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Lead Capture <span class="text-lime-400">Methods</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Five ways to turn visitors into leads — ranked by conversion rate.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {methods.map((m) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-base font-bold text-white">{m.name}</h3>
+              <span class="text-xs font-bold text-lime-400">{m.rate}</span>
+            </div>
+            <p class="text-sm text-dark-400 leading-relaxed">{m.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Lead Capture Methods <span class="text-lime-400">Compared</span>
+        </h2>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Method</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Conversion Rate</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Friction</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Response Time</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Best For</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {comparison.map((row) => (
+              <tr class={`hover:bg-dark-800/30 transition ${row.method === 'Callback Widget' ? 'bg-lime-500/5' : ''}`}>
+                <td class={`px-5 py-4 font-medium ${row.method === 'Callback Widget' ? 'text-lime-400' : 'text-dark-200'}`}>{row.method}</td>
+                <td class={`px-5 py-4 ${row.method === 'Callback Widget' ? 'font-semibold text-white' : 'text-dark-400'}`}>{row.conversion}</td>
+                <td class="px-5 py-4 text-dark-400">{row.friction}</td>
+                <td class={`px-5 py-4 ${row.method === 'Callback Widget' ? 'font-semibold text-white' : 'text-dark-400'}`}>{row.response}</td>
+                <td class="px-5 py-4 text-dark-400">{row.best}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best Practices -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Lead Capture <span class="text-lime-400">Best Practices</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {bestPractices.map((bp) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="text-base font-bold text-white mb-3">{bp.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{bp.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Frequently Asked <span class="text-lime-400">Questions</span>
+        </h2>
+      </div>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((item) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">&#9662;</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Capture 391% More Leads with LimeCall
+      </h2>
+      <p class="mt-4 text-lg text-dark-300">
+        Stop losing visitors to slow forms. LimeCall captures leads and connects them with your team in 28 seconds.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Required
+        </a>
+        <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing →
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">Free plan available · 5-minute setup · GDPR compliant</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Learn More"
+        links={[
+          { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'The complete LimeCall lead capture platform — callback, forms, and routing.' },
+          { href: '/customer-callback-software/', title: 'Customer Callback Software', desc: 'How callback widgets capture and convert more leads than forms.' },
+          { href: '/callback-vs-chatbot/', title: 'Callback vs Chatbot', desc: 'Head-to-head comparison of callbacks and chatbots for lead capture.' },
+          { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans starting at $35/month.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

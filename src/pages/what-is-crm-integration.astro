@@ -1,0 +1,344 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'What is CRM Integration? Definition, Benefits & How It Works',
+  description: 'CRM integration connects your business tools with your CRM to sync data automatically. Learn how callback-to-CRM integration works and why it matters for sales.',
+  canonical: `${site.url}/what-is-crm-integration/`,
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: seo.title,
+  description: seo.description,
+  datePublished: '2024-05-01',
+  dateModified: '2025-03-01',
+  author: { '@type': 'Organization', name: 'LimeCall Team' },
+  publisher: { '@type': 'Organization', name: 'LimeCall', url: site.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': seo.canonical },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How long does CRM integration take?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Native integrations (like LimeCall to Salesforce) can be set up in 5-15 minutes — just authenticate and map fields. API-based custom integrations take 1-4 weeks depending on complexity. Middleware solutions like Zapier fall in between — 30 minutes to a few hours for most workflows. Enterprise integrations with custom logic can take 2-3 months.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What data gets synced in a CRM integration?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Typical data synced includes contact information (name, email, phone), lead source and campaign data, call recordings and transcripts, meeting notes and follow-up tasks, deal stage and pipeline updates, and activity history. LimeCall syncs callback requests, call recordings, call duration, outcomes, and agent notes directly into your CRM contact record.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with my CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall offers native integrations with Salesforce, HubSpot, Pipedrive, and Zoho CRM. For other CRMs, LimeCall connects via Zapier (5,000+ apps) or a REST API for custom integrations. All plans include CRM integration — no additional cost.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between native and API integration?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Native integrations are pre-built connectors that require no coding — just authenticate and configure. They are faster to set up but limited to the fields and actions the vendor supports. API integrations use code to connect systems, offering complete flexibility to sync any data and trigger custom logic — but require developer resources to build and maintain.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is CRM integration secure?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, when implemented correctly. Reputable tools use OAuth 2.0 authentication (no password sharing), TLS/SSL encryption for data in transit, and comply with GDPR and SOC 2 standards. LimeCall encrypts all CRM-synced data, provides audit logs, and offers configurable data retention to meet enterprise security requirements.',
+      },
+    },
+  ],
+};
+
+const integrationTypes = [
+  { name: 'Native Integration', desc: 'Pre-built connectors between two platforms. One-click setup, no coding required. Limited to the features and fields the vendor has built in.', speed: '5-15 minutes', flexibility: 'Medium' },
+  { name: 'API Integration', desc: 'Custom-coded connections using each platform\'s REST or GraphQL API. Complete flexibility to sync any data, trigger custom workflows, and build unique logic.', speed: '1-4 weeks', flexibility: 'High' },
+  { name: 'Middleware (Zapier, Make)', desc: 'Third-party platforms that connect apps without code. Build multi-step workflows with triggers and actions across 5,000+ apps.', speed: '30 min - 2 hours', flexibility: 'Medium-High' },
+];
+
+const steps = [
+  { n: '01', title: 'Visitor Requests Callback', desc: 'A website visitor clicks the LimeCall widget and enters their phone number. The callback request is created with UTM source, page URL, and timestamp.' },
+  { n: '02', title: 'Call Connected & Recorded', desc: 'LimeCall connects the visitor with your sales rep in 28 seconds. The call is recorded, and the rep adds notes and a call outcome in real time.' },
+  { n: '03', title: 'Data Synced to CRM', desc: 'Immediately after the call, LimeCall pushes the contact, call recording, duration, outcome, and notes to your CRM — creating or updating the record automatically.' },
+  { n: '04', title: 'Workflows Triggered', desc: 'Your CRM triggers follow-up actions — task creation, email sequence enrolment, deal stage update, or manager notification — based on the call outcome.' },
+];
+
+const crms = [
+  { name: 'Salesforce', type: 'Native', desc: 'Auto-create leads, log calls as activities, attach recordings, and update opportunity stages.' },
+  { name: 'HubSpot', type: 'Native', desc: 'Sync contacts, log calls on the timeline, trigger workflows, and update deal pipelines.' },
+  { name: 'Pipedrive', type: 'Native', desc: 'Create persons, log activities, attach call notes, and move deals through pipeline stages.' },
+  { name: 'Zoho CRM', type: 'Native', desc: 'Push leads, log calls, sync custom fields, and trigger Zoho workflow rules.' },
+  { name: 'Monday.com', type: 'Zapier', desc: 'Create items, update columns, and notify teams when callbacks are completed.' },
+  { name: 'Custom CRM', type: 'REST API', desc: 'Use LimeCall\'s REST API to sync any data to your proprietary CRM or database.' },
+];
+
+const benefits = [
+  { stat: '27%', label: 'Less manual data entry', sub: 'Sales reps spend 1+ hr/day on manual CRM entry without integration' },
+  { stat: '41%', label: 'More revenue per rep', sub: 'When CRM data is complete and accurate' },
+  { stat: '0', label: 'Missed follow-ups', sub: 'Automated tasks and sequences after every call' },
+  { stat: '360°', label: 'Customer view', sub: 'Every interaction in one place' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={articleSchema} />
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'What is CRM Integration', url: `${site.url}/what-is-crm-integration/` }]} />
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400">
+        Definition
+      </div>
+
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        What is <span class="text-lime-400">CRM Integration?</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        CRM integration is the process of connecting your Customer Relationship Management system with other business tools — such as callback software, marketing automation, and analytics — so that data flows automatically between them without manual entry.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Connect Your CRM — Free
+        </a>
+        <a href="/salesforce-integration/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Salesforce Integration →
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Native Salesforce, HubSpot, Pipedrive · 5-minute setup · No credit card required</p>
+    </div>
+  </section>
+
+  <!-- Definition block -->
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">CRM Integration — Definition</h2>
+        <p class="text-dark-200 leading-relaxed text-base">
+          <strong class="text-white">CRM integration</strong> connects your Customer Relationship Management platform (Salesforce, HubSpot, Pipedrive, etc.) with other business tools so that customer data, interactions, and workflows sync automatically. Instead of sales reps manually copying data between systems, integrated tools share information in real time.
+        </p>
+        <p class="mt-4 text-dark-300 leading-relaxed text-sm">
+          Data silos kill sales productivity. Research shows 27% of sales reps spend more than one hour per day on manual data entry. CRM integration eliminates this waste — ensuring every call, email, meeting, and deal update is captured automatically in a single source of truth.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why It Matters - Stats -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Why CRM Integration <span class="text-lime-400">Matters</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Data silos kill sales. Integration fixes them.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        {benefits.map((b) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-4xl font-extrabold text-lime-400">{b.stat}</div>
+            <div class="mt-2 font-bold text-white text-sm">{b.label}</div>
+            <div class="mt-1 text-xs text-dark-500">{b.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Types of Integration -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Types of <span class="text-lime-400">CRM Integration</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {integrationTypes.map((t) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <h3 class="text-base font-bold text-white mb-3">{t.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{t.desc}</p>
+            <div class="mt-4 flex gap-4 text-xs">
+              <span class="text-dark-500">Setup: <span class="text-lime-400 font-semibold">{t.speed}</span></span>
+              <span class="text-dark-500">Flexibility: <span class="text-lime-400 font-semibold">{t.flexibility}</span></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How Callback-CRM Integration Works -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          How Callback-CRM Integration <span class="text-lime-400">Works</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Four steps from callback to CRM — fully automated.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-sm">{s.n}</div>
+            <h3 class="text-base font-bold text-white mb-2">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular CRM Integrations -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Popular CRM <span class="text-lime-400">Integrations</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {crms.map((c) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-base font-bold text-white">{c.name}</h3>
+              <span class="text-xs font-semibold text-lime-400 rounded-full border border-lime-500/20 bg-lime-500/10 px-2 py-0.5">{c.type}</span>
+            </div>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Table -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Before vs After <span class="text-lime-400">CRM Integration</span>
+        </h2>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Metric</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Without Integration</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">With Integration</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Data entry time</td>
+              <td class="px-5 py-4 text-dark-400">1+ hour/day per rep</td>
+              <td class="px-5 py-4 font-semibold text-white">Near zero (automated)</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">CRM data accuracy</td>
+              <td class="px-5 py-4 text-dark-400">30-50% incomplete records</td>
+              <td class="px-5 py-4 font-semibold text-white">95%+ complete records</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Follow-up speed</td>
+              <td class="px-5 py-4 text-dark-400">Hours to days</td>
+              <td class="px-5 py-4 font-semibold text-white">Instant (automated tasks)</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Call logging</td>
+              <td class="px-5 py-4 text-dark-400">Manual (often forgotten)</td>
+              <td class="px-5 py-4 font-semibold text-white">Automatic with recording</td>
+            </tr>
+            <tr class="hover:bg-dark-800/30 transition">
+              <td class="px-5 py-4 font-medium text-dark-200">Revenue per rep</td>
+              <td class="px-5 py-4 text-dark-400">Baseline</td>
+              <td class="px-5 py-4 font-semibold text-white">+41% (Nucleus Research)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Frequently Asked <span class="text-lime-400">Questions</span>
+        </h2>
+      </div>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((item) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">&#9662;</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Connect LimeCall to Your CRM in 5 Minutes
+      </h2>
+      <p class="mt-4 text-lg text-dark-300">
+        Native integrations with Salesforce, HubSpot, Pipedrive, and Zoho. Every callback synced automatically — zero manual entry.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Required
+        </a>
+        <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing →
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">Free plan available · Native CRM integrations · GDPR compliant</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Learn More"
+        links={[
+          { href: '/salesforce-integration/', title: 'Salesforce Integration', desc: 'Connect LimeCall with Salesforce for automatic lead and call logging.' },
+          { href: '/hubspot-integration/', title: 'HubSpot Integration', desc: 'Sync callbacks, recordings, and outcomes with HubSpot CRM.' },
+          { href: '/pipedrive-integration/', title: 'Pipedrive Integration', desc: 'Push callback data to Pipedrive and automate your sales pipeline.' },
+          { href: '/pricing/', title: 'LimeCall Pricing', desc: 'All plans include CRM integration. Starting at $35/month.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

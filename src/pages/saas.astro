@@ -1,0 +1,358 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for SaaS Companies | Convert Trial Signups Faster | LimeCall',
+  description: 'LimeCall helps SaaS teams convert free trials into paid customers. 28-second callback connects CSMs with high-intent users at the moment they need help.',
+  canonical: site.url + '/saas/',
+};
+
+const stats = [
+  { value: '28s', label: 'Average connection time from trial event to CSM' },
+  { value: '391%', label: 'More conversions vs form-based follow-up alone' },
+  { value: '42h', label: 'Industry average response time to trial signups' },
+  { value: '£57/mo', label: 'Flat-rate plan — offset by a single trial upgrade' },
+];
+
+const features = [
+  { icon: '🚀', title: 'Trial Signup Callback Trigger via Webhook', desc: 'When a user signs up for your free trial, fire a webhook to LimeCall and your onboarding team is connected within 28 seconds — catching intent at its absolute peak.' },
+  { icon: '🧱', title: 'Usage-Based Callback Triggers (Feature Wall)', desc: 'When a user hits a paid feature limit or upgrade prompt, trigger a callback automatically. Your CSM speaks with the user at the exact moment they\'re ready to buy.' },
+  { icon: '🎯', title: 'CSM Routing by Account Tier', desc: 'Enterprise prospects route to your senior AEs, SMB trials to onboarding reps, self-serve to chat — every user gets the right level of human attention without manual triage.' },
+  { icon: '📅', title: 'Demo Booking Widget', desc: 'Add a demo booking widget to your pricing page, feature pages, and onboarding emails. Prospects schedule time with your sales team without back-and-forth emails.' },
+  { icon: '🔔', title: 'Churn Prevention Callbacks — At-Risk User Alerts', desc: 'Integrate with your product analytics to trigger callbacks when users show churn signals — declining usage, support tickets, or approaching trial expiry — so your success team intervenes before cancellation.' },
+  { icon: '🔗', title: 'CRM Sync — HubSpot, Salesforce & Intercom', desc: 'Every callback logged automatically in HubSpot, Salesforce, or Intercom. Contact name, company, trigger event, call duration, and outcome notes — zero manual entry, full pipeline visibility.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I trigger callbacks from in-app events?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall accepts webhooks from any source. When your application fires an event — trial signup, feature limit reached, upgrade page visit, or churn risk signal — you send a POST request to your LimeCall webhook URL with the user\'s phone number and any metadata. LimeCall then triggers the callback flow, connecting your CSM or sales rep with the user within 28 seconds. Full webhook documentation and code examples are available in the LimeCall developer docs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with Intercom?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Intercom via Zapier and direct API. You can trigger LimeCall callbacks from Intercom conversation events, user segments, or automated message rules. When a high-intent user is identified in Intercom — for example, a trial user who has viewed pricing three times — LimeCall can automatically queue a callback to your sales team. Every LimeCall callback is also logged back to the Intercom conversation thread and user profile.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support webhooks for custom triggers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is built webhook-first for SaaS teams. You can trigger callbacks from any custom event in your application, CRM, or product analytics platform by sending a POST request to your LimeCall endpoint. Supported trigger types include trial signup, feature limit reached, upgrade intent detected, churn risk alert, payment failure, and manual CSM escalation. You can also use Zapier to connect LimeCall to any tool without writing code.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall help reduce SaaS trial-to-paid churn?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. SaaS teams using LimeCall report a significant improvement in trial-to-paid conversion because a human phone conversation at the right moment removes objections that email and in-app messages cannot. LimeCall can also trigger proactive callbacks when users show churn signals — declining logins, upcoming trial expiry, or support escalations — enabling your customer success team to intervene before the user cancels. Customers report an average 3× improvement in trial conversion after implementing LimeCall.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall route trial users to the right team member?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall\'s routing rules can use any data you pass in the webhook payload — company size, plan type, industry, usage score, or account tier. Enterprise trials (above your defined ARR threshold) route to senior AEs, SMB trials to onboarding reps, and self-serve users to a lower-touch automated flow. You configure routing in the LimeCall dashboard with no developer required, and rules can be updated in real time as your team scales.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the average trial-to-paid conversion lift with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The SaaS industry average trial-to-paid conversion rate is 2–5%. Adding a phone touchpoint via LimeCall at the moment of highest intent — trial signup or feature wall — lifts conversion to 15–20% for teams that implement it consistently. LimeCall customers report an average 3.1× improvement in trial-to-paid conversion. Combined with the churn prevention callback flow, the net revenue impact typically exceeds 10× the cost of the platform within the first quarter.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall alongside a product-led growth (PLG) model?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is designed to complement PLG strategies, not replace them. The platform sits on top of your self-serve funnel and activates human assist only when a user shows high-intent signals. This means your low-touch users convert via your product as normal, while your highest-value prospects get a human conversation at the right moment — maximising conversion without inflating your sales team headcount.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall — Callback Software for SaaS Companies',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Instant callback software for SaaS companies. Converts free trial signups into paying customers with 28-second CSM callbacks, webhook triggers, and CRM sync for HubSpot, Salesforce, and Intercom.',
+  url: site.url + '/saas/',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: '14-day free trial, no credit card required',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '287',
+  },
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'SaaS', url: site.url + '/saas/' }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        🚀 For SaaS Companies &amp; Product-Led Growth Teams
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Convert More SaaS Trials<br class="hidden sm:block" />
+        <span class="text-lime-400">into Paying Customers</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        SaaS trial-to-paid average is 2–5%. A phone touchpoint at the right moment lifts conversion to 18%. LimeCall connects your CSMs with high-intent trial users in 28 seconds — triggered automatically by in-app events.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ HubSpot &amp; Salesforce Native Integration · Webhook Support · Trusted by SaaS Teams in 40+ Countries</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Your Trial Users Are Churning While Your Team Writes Follow-Up Emails</h2>
+        <p class="text-dark-300">
+          The average SaaS team responds to trial signups 42 hours after they occur. By that point, the user has either figured it out alone, got stuck and disengaged, or signed up with a competitor. LimeCall closes that gap to 28 seconds — connecting your onboarding team with users while they're actively exploring your product, not the next morning when interest has cooled.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for SaaS Teams</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'In-App Event Fires a Webhook', desc: 'Trial signup, feature wall hit, upgrade page visit, or churn signal — your application sends a webhook to LimeCall with the user\'s phone number and account data.' },
+          { step: '02', title: 'LimeCall Routes to the Right CSM', desc: 'Routing rules match the user to the correct team member by account tier, company size, or product line. Enterprise to AE, SMB to onboarding, at-risk to customer success.' },
+          { step: '03', title: 'CSM Connected in 28 Seconds', desc: 'Your rep speaks with the user at peak intent — removing objections, demonstrating value, and converting the trial before the user disengages.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for SaaS Sales &amp; Customer Success Teams</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">SaaS Conversion Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { title: 'Trial Signup → Upgrade', desc: 'High-intent trial user signs up → LimeCall webhook fires → CSM call within 28s → value demonstrated → user upgrades to paid plan on the call.' },
+          { title: 'Feature Wall → AE Routing', desc: 'User hits paid feature limit → upgrade prompt fires webhook → AE connected in 28s → objections handled live → deal closed.' },
+          { title: 'Enterprise Prospect → AE Routing', desc: 'Prospect from target account visits pricing page three times → Intercom segment triggers LimeCall → senior AE connected → discovery call booked.' },
+          { title: 'Churning Customer → Success Team', desc: 'Usage drops below threshold → churn risk webhook fires → customer success rep calls within 28s → retention conversation happens before cancellation.' },
+          { title: 'Payment Failure → Recovery', desc: 'Failed payment event triggers LimeCall → billing team connected with customer → card updated on call → revenue recovered.' },
+          { title: 'Onboarding Stall → Human Assist', desc: 'User hasn\'t completed key onboarding step after 48h → automated callback trigger → onboarding specialist walks through setup live → activation achieved.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "Our trial-to-paid rate was sitting at 4.2%. We added LimeCall webhook triggers on signup and feature walls, and within 90 days conversion hit 13%. That's a 3.1× improvement. The enterprise routing alone drove £420k in additional ARR in the first year. It's the highest-ROI tool in our sales stack."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">VP of Sales</p>
+          <p class="text-sm text-dark-500">B2B SaaS platform — 3.1× trial-to-paid improvement, £420k additional ARR in year one</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Trial Conversion Methods</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Email Sequence', 'In-App Chat', 'Manual Outreach'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', '42 hours avg', 'Agent dependent', 'Hours to days'],
+              ['In-app webhook triggers', '✅ Any event', '⚠️ Delayed', '❌ None', '❌ Manual'],
+              ['Account tier routing', '✅ Enterprise/SMB/PLG', '❌ No routing', '⚠️ Manual', '⚠️ Manual'],
+              ['Churn prevention', '✅ At-risk alerts', '✅ Email only', '⚠️ Reactive', '⚠️ Slow'],
+              ['CRM auto-logging', '✅ HubSpot/Salesforce', '✅ Via sequence', '⚠️ Limited', '⚠️ Manual'],
+              ['Trial-to-paid lift', '🟢 Up to 3.1×', '🟡 Moderate', '🟡 Moderate', '🟡 Variable'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Native Integrations with Your SaaS Stack</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects natively to HubSpot, Salesforce, Intercom, and 1,000+ tools via Zapier. Trigger callbacks from any in-app event, log every call automatically to your CRM, and sync outcomes back to your product analytics. No developer required for most integrations — full webhook documentation for custom setups.
+          </p>
+          <a href="/salesforce-integration/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View Salesforce &amp; HubSpot integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry context -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Why Phone Converts SaaS Trials 3× Better Than Email</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '📈', title: '2–5% vs 18% Conversion', desc: 'The SaaS trial-to-paid industry average is 2–5% on self-serve alone. Adding a phone touchpoint at the right moment consistently lifts conversion to 15–20%, a 3–5× improvement.' },
+          { icon: '🤝', title: 'PLG + Human Assist', desc: 'Product-led growth works. But enterprise deals rarely close without a conversation. LimeCall adds human assist precisely when a user\'s intent is highest — not 42 hours later when it has cooled.' },
+          { icon: '⚡', title: '28s vs 42h Industry Average', desc: 'The average SaaS team responds to trial signups 42 hours after they occur. LimeCall responds in 28 seconds. That gap is where most SaaS ARR is won or lost.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Converting More SaaS Trials Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · Webhook-triggered callbacks · HubSpot &amp; Salesforce native</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full webhook documentation included</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/ai-voice-agent/', title: 'AI Voice Agent', desc: 'Automate initial trial qualification with AI.' },
+        { href: '/salesforce-integration/', title: 'Salesforce Integration', desc: 'Log every callback automatically in Salesforce.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route trial users to the right CSM automatically.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from £57/mo — offset by a single trial upgrade.' },
+      ]} />
+    </div>
+  </div>
+</Base>

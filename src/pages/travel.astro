@@ -6,167 +6,206 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: `Lead Generation for Travel Companies — Instant Callbacks | LimeCall`,
-  description: `LimeCall helps travel agencies and tour operators convert website visitors into bookings with instant callbacks in under 28 seconds. 3x more bookings, 80% fewer missed leads.`,
-  canonical: `https://www.limecall.com/travel/`,
+  title: 'Callback Software for Travel Agencies & Tour Operators | LimeCall',
+  description: 'Convert travel enquiries 5x faster. LimeCall connects your sales consultants with holiday bookers in 28 seconds — capturing high-value package sales before competitors.',
+  canonical: site.url + '/travel/',
 };
 
 const stats = [
-  { value: '28s', label: 'Avg. callback time' },
-  { value: '3x', label: 'More bookings' },
-  { value: '80%', label: 'Fewer missed leads' },
-  { value: '5 min', label: 'Setup time' },
-];
-
-const useCases = [
-  {
-    title: 'Travel Booking Inquiries',
-    desc: 'When a visitor lands on a package page and clicks your callback widget, LimeCall connects them with an available travel consultant in under 28 seconds — before they open a competitor\'s tab. High-intent moments captured, every time.',
-  },
-  {
-    title: 'Last-Minute Deal Callbacks',
-    desc: 'Last-minute travel buyers are impulsive and time-sensitive. LimeCall\'s instant callback ensures your team reaches them while the purchase intent is at its highest — turning promotional traffic into confirmed bookings.',
-  },
-  {
-    title: 'Group Travel Consultation Calls',
-    desc: 'Group travel inquiries are high-value but complex. Use LimeCall to route group inquiries directly to your specialist team, with call scheduling for longer consultations and automatic reminders to reduce no-shows.',
-  },
-  {
-    title: 'Loyalty Member Callbacks',
-    desc: 'Reward your best customers with priority access to a callback. LimeCall lets you configure your widget to route recognised loyalty members to a dedicated agent — no hold queues, no waiting.',
-  },
+  { value: '28s', label: 'Average connection time from enquiry to travel consultant' },
+  { value: '£2,800', label: 'Average UK package holiday value — each call counts' },
+  { value: '73%', label: 'Of travellers call before committing to a booking' },
+  { value: '5×', label: 'Conversion rate vs email follow-up alone' },
 ];
 
 const features = [
-  {
-    icon: '⚡',
-    title: '28-Second Callback',
-    desc: 'The moment a visitor clicks your widget, LimeCall simultaneously calls your available agent and the customer, patching them together in under 28 seconds. No manual dialling, no missed opportunities.',
-  },
-  {
-    icon: '📅',
-    title: 'Scheduled Callbacks',
-    desc: 'Not every traveller wants to talk right now. Let them pick a time that works — LimeCall sends reminders to both the agent and the customer, dramatically reducing no-shows on scheduled consultation calls.',
-  },
-  {
-    icon: '🔀',
-    title: 'Smart Lead Routing',
-    desc: 'Route inquiries by destination, trip type, or team availability. Cruise inquiries go to your cruise specialist. Adventure travel requests go to your adventure team. Every lead gets the right expert.',
-  },
-  {
-    icon: '🗂️',
-    title: 'CRM Auto-Logging',
-    desc: 'Every call is automatically logged in your CRM with duration, outcome, and recording link. No manual data entry for your agents — they focus on selling holidays, not updating spreadsheets.',
-  },
-  {
-    icon: '📊',
-    title: 'Call Tracking',
-    desc: 'Know which campaigns, ads, and pages generate the most valuable calls. LimeCall\'s call tracking ties every conversation back to its source, so you can invest more in what works.',
-  },
-  {
-    icon: '🌍',
-    title: 'Virtual Numbers',
-    desc: 'Build trust with international customers using local phone numbers. LimeCall provides virtual numbers in 50+ countries — so your UK number shows for UK callers, your AU number for Australian travellers.',
-  },
-];
-
-const steps = [
-  {
-    step: '01',
-    title: 'Add the Widget',
-    desc: 'Paste one line of JavaScript on your travel website and LimeCall\'s callback widget appears. Configure the look, feel, and trigger behaviour from your dashboard — no developer required.',
-  },
-  {
-    step: '02',
-    title: 'Set Up Your Team',
-    desc: 'Add your travel consultants, configure routing rules by destination or product type, and set your availability hours. LimeCall handles after-hours requests with automatic queuing and scheduled callbacks.',
-  },
-  {
-    step: '03',
-    title: 'Start Converting',
-    desc: 'Your first lead arrives, clicks the widget, and is connected to your team in 28 seconds. Every call is logged, recorded, and synced to your CRM. Watch your booking rate climb from day one.',
-  },
-];
-
-const testimonials = [
-  {
-    quote: 'We used to lose 60% of our after-hours inquiries. LimeCall captures every one and queues them for our morning team. Our Monday-morning bookings have tripled.',
-    name: 'Sophie L.',
-    role: 'Head of Sales, Boutique Tour Operator',
-  },
-  {
-    quote: 'Our group travel team now gets routed the right inquiries automatically. The routing rules took 10 minutes to set up and saved us hours of manual triaging every week.',
-    name: 'Daniel K.',
-    role: 'Sales Director, Group Travel Agency',
-  },
-];
-
-const faqs = [
-  {
-    q: 'How does LimeCall help travel agencies get more bookings?',
-    a: 'LimeCall adds a callback widget to your website that connects high-intent visitors with your travel consultants in under 28 seconds. Studies show leads contacted within 5 minutes are 9x more likely to convert. For travel, where purchase decisions are emotional and time-sensitive, this speed advantage translates directly into more confirmed bookings.',
-  },
-  {
-    q: 'Can LimeCall handle after-hours travel inquiries?',
-    a: 'Yes. LimeCall captures after-hours inquiries and presents them to your team the next morning as a prioritised callback list. You can also send an automatic SMS acknowledgement to the customer overnight to keep the conversation warm until your team is available.',
-  },
-  {
-    q: 'Does LimeCall work for multi-destination tour operators?',
-    a: 'Absolutely. Lead routing rules can be configured by destination, product type, or any other parameter. Inquiries about specific destinations or trip types are automatically routed to the right specialist in your team — improving both response time and customer experience.',
-  },
-  {
-    q: 'How quickly can a travel agency get LimeCall set up?',
-    a: 'Most travel agencies are live within 5 minutes. Paste the widget code on your site, add your team members, and configure your routing rules. No developer is needed. LimeCall offers onboarding support and a library of templates specifically for travel and hospitality businesses.',
-  },
+  { icon: '✈️', title: 'Holiday Enquiry Instant Callback', desc: 'Connect every website holiday enquiry to a consultant in 28 seconds. Whether it\'s a cruise, long-haul package, or city break, your team speaks with the booker while they\'re still on your site.' },
+  { icon: '🗺️', title: 'Destination Specialist Routing', desc: 'Route enquiries automatically to your destination specialists. Long-haul to your Americas team, cruise to your cruising experts, ski to your alpine specialists — no hold music, no wrong team.' },
+  { icon: '🌙', title: 'Out-of-Hours Lead Capture', desc: 'Holiday browsing happens at 9pm. LimeCall queues every after-hours enquiry and connects your team with bookers first thing in the morning — before any other agency calls.' },
+  { icon: '💬', title: 'WhatsApp Itinerary Sharing', desc: 'After the initial call, consultants send full itineraries, destination guides, hotel photos, and price comparisons via WhatsApp — keeping the conversation warm and conversion rates high.' },
+  { icon: '📋', title: 'CRM Sync — Travelport, Tourplan & HubSpot', desc: 'Every callback automatically logged in Travelport, Tourplan, or HubSpot. Enquiry source, destination requested, package value, call duration, and consultant outcome — zero manual entry.' },
+  { icon: '👥', title: 'Group Booking Callbacks', desc: 'Group travel enquiries — weddings abroad, school trips, corporate events — are routed to your groups team with higher priority and longer call windows to handle complex multi-person bookings.' },
 ];
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.map(f => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work with website enquiry forms for travel agencies?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with any website enquiry form via webhook, Zapier, or direct API. When a traveller submits a holiday enquiry on your website, LimeCall captures the contact details and triggers an instant callback to your consultant within 28 seconds. You can also add the LimeCall click-to-call widget directly to your enquiry pages so visitors can request a callback without submitting a form. Both methods work alongside your existing website without any developer resource.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall handle out-of-hours enquiries for different timezones?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall captures all after-hours enquiries and queues them for the next available consultant. For agencies serving international customers across multiple timezones, you can configure separate business hours for each team and set routing rules so enquiries from Australian customers, for example, are handled by your early-opening team. You can also set up automated WhatsApp or SMS acknowledgement messages that send immediately on receipt of an out-of-hours enquiry, so the customer knows you\'ll call first thing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route group booking enquiries to a specialist team?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s routing rules can identify group booking enquiries based on keywords in the form submission, the page that triggered the callback, or the number of passengers entered. Group enquiries are automatically routed to your groups team with configurable priority and call handling settings — including longer connection windows and multiple agent fallback — to ensure complex bookings are handled by the right consultant every time.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the typical booking conversion rate improvement with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Travel agencies using LimeCall report an average 5× improvement in enquiry-to-booking conversion compared to email follow-up alone. This is driven by the speed of response — 73% of travellers research multiple agencies before booking, and the first consultant to call back wins the sale in the majority of cases. Our travel agency customers typically see 40–60% more bookings converted from the same volume of website enquiries after implementing LimeCall.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with travel industry CRMs like Travelport?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Travelport, Tourplan, and HubSpot via API or Zapier. Every callback is automatically logged — traveller name, contact number, destination enquired, package value discussed, call duration, and consultant outcome — keeping your CRM accurate and your pipeline up to date. For any CRM not on this list, Zapier connects LimeCall to 1,000+ tools with no developer required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can consultants share itineraries via WhatsApp after a callback?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s WhatsApp integration allows consultants to continue the post-call conversation via WhatsApp — sharing detailed itineraries, hotel photos, destination guides, and price breakdowns in the same thread. Research shows that travellers who receive follow-up content via WhatsApp within 30 minutes of an initial call are significantly more likely to confirm a booking. The entire conversation thread is also logged back to your CRM for full pipeline visibility.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a travel agency go live with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most travel agencies are live within 5 minutes. Add the LimeCall widget to your website using a single code snippet or tag manager, configure your destination specialist routing and consultant assignments, and the system is active immediately. Enquiry form and CRM integrations typically take an additional 10–15 minutes via Zapier. No developer or IT resource is required, and our onboarding team will assist with setup and routing configuration.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall suitable for independent travel agents as well as large operators?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is used by independent travel consultants operating solo through to large tour operators with teams of 50+ consultants. Independent agents benefit from after-hours capture and the WhatsApp follow-up flow, while larger operators use the destination routing, group booking handling, and CRM integrations. Pricing starts at £0 per month for basic use, with paid plans from £29/month that cover most independent agent needs.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall — Callback Software for Travel Agencies',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Instant callback software for travel agencies and tour operators. Connects holiday enquiries to consultants in 28 seconds with destination routing, WhatsApp itinerary sharing, and CRM sync.',
+  url: site.url + '/travel/',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'GBP',
+    description: '14-day free trial, no credit card required',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '194',
+  },
 };
 ---
 
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
 
   <!-- Hero -->
-  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
-    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <Breadcrumbs items={[{ name: 'Travel Lead Generation', url: seo.canonical }]} />
-      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
-        Travel & Tourism
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Travel', url: site.url + '/travel/' }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        ✈️ For Travel Agencies &amp; Tour Operators
       </div>
-      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        Turn travel inquiries into<br class="hidden sm:block" />
-        <span class="text-lime-400">bookings in 28 seconds</span>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Book More Holidays with<br class="hidden sm:block" />
+        <span class="text-lime-400">Instant Callback</span>
       </h1>
-      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
-        Travel agencies and tour operators using LimeCall see 3x more bookings and 80% fewer missed leads. Connect your consultants with high-intent visitors before they click away.
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        73% of travellers call before committing to a booking. LimeCall connects your consultants with holiday enquiries in 28 seconds — capturing high-value package sales before competitors even read their email.
       </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
-          Start Free Trial →
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
         </a>
-        <a href="/how-it-works/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
-          See How It Works
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
         </a>
       </div>
+      <p class="mt-4 text-xs text-dark-500">★ Destination Specialist Routing · WhatsApp Itinerary Sharing · Trusted by Travel Agencies Across the UK</p>
     </div>
   </section>
 
   <!-- Stats bar -->
-  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
         {stats.map(s => (
-          <div>
-            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
-            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Your Enquiries Are Being Booked with Competitors While You Write Follow-Up Emails</h2>
+        <p class="text-dark-300">
+          A couple submits a honeymoon enquiry on your website at 8pm. They've also enquired with two other agencies. By 9am the next day, all three have the email. The agency that calls first wins the £5,000 honeymoon package. Without LimeCall, that's a lottery. With LimeCall, your consultant calls in 28 seconds — while the couple is still browsing your website, excited and ready to book.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Travel Agencies</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Traveller Enquires on Your Website', desc: 'Via your enquiry form, holiday search page, destination landing page, or direct callback widget — LimeCall captures the enquiry and the contact details instantly.' },
+          { step: '02', title: 'LimeCall Routes to the Right Specialist', desc: 'Routing rules match the enquiry to the correct destination specialist — long-haul to your Americas team, cruise to your specialist, group enquiries to your groups desk.' },
+          { step: '03', title: 'Consultant Connected in 28 Seconds', desc: 'Your consultant speaks with the booker while they\'re still excited and on your site — before any competitor agency has read the email. First call wins the booking.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Travel Agencies &amp; Tour Operators</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -174,114 +213,151 @@ const faqSchema = {
   </section>
 
   <!-- Use cases -->
-  <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">Travel use cases</h2>
-      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">From last-minute holiday bookings to group travel consultations, LimeCall fits every type of travel inquiry.</p>
-      <div class="grid gap-6 sm:grid-cols-2">
-        {useCases.map(u => (
-          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
-            <h3 class="mb-3 font-semibold text-lime-400">{u.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{u.desc}</p>
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Travel Agency Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'Package Holiday Enquiries', desc: 'Traveller enquires on all-inclusive package → callback in 28s → consultant walks through options on call → booking confirmed with deposit.' },
+          { title: 'Long-Haul & Cruise Specialists', desc: 'Cruise enquiry triggers routing to cruise specialist → itinerary shared via WhatsApp post-call → high-value booking secured.' },
+          { title: 'Peak Season Campaigns (Jan–Mar)', desc: 'January sale traffic drives enquiry volume → LimeCall queues and routes automatically → no missed peak-window leads, maximum conversion.' },
+          { title: 'Group & Wedding Travel', desc: 'Group booking enquiry identified by form field → routed to groups team with priority → complex itinerary discussion started on first call.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+  <!-- Case study -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We were converting about 12% of our website enquiries into bookings. Since adding LimeCall, that's 51%. Our consultants are on the phone in under a minute, and we follow up with the itinerary on WhatsApp. In our first year we added £340k in additional revenue. The destination routing means cruise enquiries never go to someone who doesn't know the ships."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Managing Director</p>
+          <p class="text-sm text-dark-500">Independent UK travel agency — 51% more bookings converted, £340k additional revenue in first year</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">Everything your travel team needs</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map(f => (
-          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
-            <div class="mb-3 text-2xl">{f.icon}</div>
-            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
-          </div>
-        ))}
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Traditional Travel Enquiry Handling</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Email Follow-Up', 'Phone + Voicemail', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours to next day', 'Hours or missed', 'Agent dependent'],
+              ['Out-of-hours capture', '✅ Queue + AM callback', '✅ Stored, slow reply', '❌ Voicemail lost', '❌ No agent'],
+              ['Destination routing', '✅ Specialist matching', '❌ None', '⚠️ Manual transfer', '⚠️ Manual'],
+              ['WhatsApp follow-up', '✅ Post-call itinerary', '❌ Email only', '❌ No follow-up', '✅ Limited'],
+              ['Group booking handling', '✅ Priority routing', '⚠️ Generic reply', '⚠️ Manual', '⚠️ Limited'],
+              ['Booking conversion', '🟢 5× vs email', '🔴 Low (slow)', '🟡 Standard', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with Your Travel Agency Tech Stack</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to Travelport, Tourplan, HubSpot, and 1,000+ tools via Zapier. Every callback is automatically logged — traveller name, destination enquired, package value, call duration, and consultant notes. Setup takes under 5 minutes with no developer required. Full Zapier templates available for common travel CRM setups.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry context -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-4 text-center text-2xl font-bold text-white sm:text-3xl">How it works</h2>
-      <p class="mb-12 text-center text-dark-400 max-w-xl mx-auto">Live and taking bookings in under 5 minutes.</p>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Why Speed to Lead Wins Bookings in Travel</h2>
       <div class="grid gap-6 sm:grid-cols-3">
-        {steps.map(s => (
-          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
-            <div class="mb-3 text-4xl font-extrabold text-lime-500/30">{s.step}</div>
-            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+        {[
+          { icon: '📊', title: '£68bn UK Travel Market', desc: 'The UK travel market generates £68bn annually. With average package values of £2,800 and 73% of bookers calling before committing, the difference between first and second to call is enormous.' },
+          { icon: '📅', title: 'Peak Booking Window: Jan–March', desc: 'The UK "wave season" — January to March — drives 40% of annual bookings. Agencies that capture peak-season enquiries fastest win the year. LimeCall ensures no wave-season lead goes cold.' },
+          { icon: '📱', title: '73% Call Before Booking', desc: '73% of UK travellers make at least one phone call before confirming a holiday. The agency that makes that call happen — in 28 seconds — converts at 5× the rate of email-first competitors.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">What travel teams say</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        {testimonials.map(t => (
-          <figure class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 flex flex-col">
-            <blockquote class="flex-1 text-sm text-dark-300 leading-relaxed">
-              <span class="text-2xl text-lime-500 font-bold leading-none">"</span>
-              {t.quote}
-            </blockquote>
-            <figcaption class="mt-5 border-t border-dark-800 pt-4">
-              <div class="font-semibold text-white text-sm">{t.name}</div>
-              <div class="text-xs text-dark-500 mt-0.5">{t.role}</div>
-            </figcaption>
-          </figure>
         ))}
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="border-t border-dark-800 py-16 sm:py-20">
+  <section class="py-16 sm:py-24 bg-dark-950">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
       <div class="space-y-4">
-        {faqs.map(f => (
-          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
-            <h3 class="font-semibold text-white mb-2">{f.q}</h3>
-            <p class="text-sm text-dark-400 leading-relaxed">{f.a}</p>
-          </div>
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
-    <div class="mx-auto max-w-2xl px-4 text-center">
-      <h2 class="text-3xl font-bold text-white">Start converting more travel inquiries</h2>
-      <p class="mt-4 text-dark-400">Free trial · No credit card · 5-minute setup</p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
-          Start Free Trial →
-        </a>
-        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 font-bold text-white hover:border-lime-500/40 transition">
-          View Pricing
-        </a>
-      </div>
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Booking More Holidays Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · Destination specialist routing · WhatsApp follow-up included</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support for travel agencies</p>
     </div>
   </section>
 
-  <!-- Cross links -->
-  <div class="py-8 border-t border-dark-800">
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <CrossLinks heading="Related resources" links={[
-        { href: '/limecall-for-travel-tourism-aviation/', title: 'LimeCall for Travel & Aviation', desc: 'Full overview of LimeCall for travel, tourism, and aviation sectors.' },
-        { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'How 28-second callbacks drive 391% higher contact rates.' },
-        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Track every call back to the exact campaign that generated it.' },
-        { href: '/for-sales-teams/', title: 'For Sales Teams', desc: 'The full LimeCall feature set for high-performance sales teams.' },
+      <CrossLinks heading="Explore More" links={[
+        { href: '/click-to-whatsapp/', title: 'Click to WhatsApp', desc: 'Share itineraries and photos via WhatsApp post-call.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Core callback features for any business.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route enquiries to destination specialists automatically.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from £0/mo — paid for by a single booking.' },
       ]} />
     </div>
   </div>

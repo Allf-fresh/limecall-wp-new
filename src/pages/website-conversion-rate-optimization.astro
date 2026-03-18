@@ -1,0 +1,621 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import { faqSchema, articleSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Website Conversion Rate Optimization (CRO) Guide 2025 | LimeCall',
+  description:
+    'Proven CRO strategies to turn more visitors into leads and customers. Includes callback widgets, A/B testing, and the 28-second conversion trick.',
+  canonical: `${site.url}/website-conversion-rate-optimization/`,
+};
+
+const faqs = [
+  {
+    question: 'What is a good website conversion rate?',
+    answer:
+      'According to WordStream, the average website conversion rate across industries is 2.35%. The top 25% of websites convert at 5.31% or higher, and the top 10% achieve 11.45% or more. For B2B lead generation specifically, a 3–5% conversion rate is considered good, while 8–12% is excellent. The fastest path from average to top-quartile performance is adding a callback widget — LimeCall data shows an average 30–65% lift in conversion rate within the first 30 days.',
+  },
+  {
+    question: 'How long does CRO take to show results?',
+    answer:
+      'Quick wins like adding a callback widget, removing form fields, or improving CTA copy can show results within days. A/B tests typically require 2–4 weeks to reach statistical significance (minimum 100 conversions per variant). Full CRO programmes — auditing, testing, and iterating across the entire funnel — typically show compounding returns over 3–6 months. The fastest single action you can take right now: install LimeCall\'s callback widget, which typically lifts conversion within 24–48 hours of going live.',
+  },
+  {
+    question: 'What are the best free CRO tools?',
+    answer:
+      'The best free CRO tools include: Google Analytics 4 (user behaviour and funnel analysis), Google Optimize (A/B testing — free tier), Hotjar (free heatmaps and session recordings for up to 35 daily sessions), Microsoft Clarity (free unlimited session recording), and PageSpeed Insights (page speed analysis). For callback-driven conversion, LimeCall offers a free plan that includes a callback widget, click-to-call, and scheduled callbacks — giving you the highest-ROI CRO tool at zero cost to start.',
+  },
+  {
+    question: 'How does a callback widget improve conversion rates?',
+    answer:
+      'A callback widget converts website visitors at the moment of highest intent — when they are actively on your site considering a purchase. Instead of forcing visitors through a multi-field form, they click one button and get a call back in under 28 seconds. LimeCall customer data shows callback widgets consistently outperform standard contact forms by 3–8x in conversion rate. The 28-second response time captures the full benefit of peak purchase intent before it fades.',
+  },
+  {
+    question: 'What should I A/B test first for CRO?',
+    answer:
+      'Test in order of impact: (1) Your primary CTA — text, colour, size, and placement drive the most variance. (2) Hero section headline — this is seen by 100% of visitors. (3) Form length — removing fields consistently increases conversions. (4) Social proof placement — moving testimonials above the fold can lift conversion 15–25%. (5) Callback widget vs. form — this single test often produces the largest lift. Run tests one at a time, wait for statistical significance (95% confidence), and document all learnings.',
+  },
+  {
+    question: 'What is the 28-second conversion trick?',
+    answer:
+      'The 28-second conversion trick refers to LimeCall\'s ability to connect a website visitor with a sales rep in an average of 28 seconds from the moment they click the callback widget. Research shows that every second of delay after intent is shown reduces conversion probability. By compressing the response time from hours (industry average) to 28 seconds, LimeCall captures the full conversion premium at peak intent — turning visitors who would have bounced into live conversations. This single change consistently produces 30–65% conversion rate improvement.',
+  },
+];
+
+const articleJsonLd = articleSchema({
+  title: seo.title,
+  description: seo.description,
+  url: `${site.url}/website-conversion-rate-optimization/`,
+  publishDate: '2024-04-01',
+  modifiedDate: '2025-02-15',
+  author: site.name,
+});
+
+const quickWins = [
+  { action: 'Add LimeCall callback widget', lift: '+30–65%', effort: 'Low', time: '< 1 day', highlight: true },
+  { action: 'Add live chat to high-intent pages', lift: '+20%', effort: 'Low', time: '1–2 days', highlight: false },
+  { action: 'Remove unnecessary form fields', lift: '+40% friction reduction', effort: 'Low', time: '< 1 day', highlight: false },
+  { action: 'Add customer testimonials above fold', lift: '+15%', effort: 'Medium', time: '2–3 days', highlight: false },
+  { action: 'Add exit intent popup with offer', lift: '+8%', effort: 'Low', time: '1 day', highlight: false },
+  { action: 'Improve page load speed (Core Web Vitals)', lift: '+7–12%', effort: 'High', time: '1–3 weeks', highlight: false },
+  { action: 'Personalise CTAs by traffic source', lift: '+20–30%', effort: 'High', time: '1–2 weeks', highlight: false },
+  { action: 'Add trust badges and security seals', lift: '+5–10%', effort: 'Low', time: '< 1 day', highlight: false },
+];
+
+const funnelStages = [
+  {
+    stage: 'Awareness',
+    goal: 'Attract the right visitors',
+    metric: 'Organic traffic, bounce rate',
+    tools: 'GA4, Search Console, Ahrefs',
+    cro: 'Page speed, mobile UX, meta title CTR optimisation',
+  },
+  {
+    stage: 'Consideration',
+    goal: 'Educate and build trust',
+    metric: 'Time on page, scroll depth, return visits',
+    tools: 'Hotjar, Clarity, ContentSquare',
+    cro: 'Social proof, comparison content, case studies, live chat',
+  },
+  {
+    stage: 'Decision',
+    goal: 'Convert intent to conversation',
+    metric: 'Conversion rate, cost per lead',
+    tools: 'LimeCall, Optimizely, VWO',
+    cro: 'Callback widget, frictionless CTAs, urgency triggers',
+  },
+  {
+    stage: 'Retention',
+    goal: 'Turn customers into advocates',
+    metric: 'NPS, referral rate, repeat revenue',
+    tools: 'HubSpot, Intercom, Mixpanel',
+    cro: 'Onboarding flow, check-in calls, feedback loops',
+  },
+];
+
+const auditChecklist = [
+  { item: 'Page speed (target: Largest Contentful Paint under 2.5s)', tool: 'Google PageSpeed Insights' },
+  { item: 'Mobile UX — test every CTA on iPhone and Android', tool: 'BrowserStack, manual testing' },
+  { item: 'CTA clarity — is the primary action immediately obvious?', tool: 'Hotjar heatmaps' },
+  { item: 'Trust signals — testimonials, logos, security badges above fold?', tool: 'User interviews' },
+  { item: 'Form friction — how many fields? Is every field necessary?', tool: 'Hotjar form analytics' },
+  { item: 'Callback accessibility — is there a phone/callback option visible?', tool: 'LimeCall widget audit' },
+  { item: 'Exit intent — what happens when a visitor tries to leave?', tool: 'OptinMonster, Privy' },
+  { item: 'Analytics tracking — are all micro-conversions tracked?', tool: 'GA4 event tracking' },
+];
+
+const abTestIdeas = [
+  { element: 'Primary CTA text', variants: '"Get a Free Demo" vs. "See It in Action" vs. "Call Me Back in 28s"', expectedLift: '15–40%' },
+  { element: 'Hero headline', variants: 'Feature-led vs. benefit-led vs. problem-led', expectedLift: '10–30%' },
+  { element: 'Form vs. callback widget', variants: 'Multi-field form vs. one-click LimeCall callback', expectedLift: '30–65%' },
+  { element: 'Social proof placement', variants: 'Below fold vs. immediately below CTA', expectedLift: '15–25%' },
+  { element: 'Pricing page layout', variants: 'Monthly/annual toggle vs. always-annual vs. tiered comparison', expectedLift: '10–20%' },
+  { element: 'Trust badges', variants: 'No badges vs. security seals vs. customer logos', expectedLift: '5–15%' },
+];
+
+const techStack = [
+  { tool: 'Hotjar', type: 'Heatmaps & Session Recording', purpose: 'Understand where visitors click, scroll, and drop off', free: true },
+  { tool: 'Optimizely / VWO', type: 'A/B Testing Platform', purpose: 'Run statistically significant split tests on any page element', free: false },
+  { tool: 'LimeCall', type: 'Callback Software', purpose: 'The #1 CRO tool — convert visitors to calls in 28 seconds', free: true, highlight: true },
+  { tool: 'Google Analytics 4', type: 'Web Analytics', purpose: 'Funnel analysis, attribution, and conversion goal tracking', free: true },
+  { tool: 'HubSpot', type: 'CRM + Landing Pages', purpose: 'Capture, manage, and nurture leads from optimised pages', free: true },
+  { tool: 'Microsoft Clarity', type: 'Free Session Recording', purpose: 'Unlimited free session recordings and rage-click detection', free: true },
+];
+
+const caseStudies = [
+  {
+    vertical: 'E-Commerce Fashion Brand',
+    challenge: 'High cart abandonment (78%) on product pages. Visitors adding to cart but not completing purchase.',
+    solution: 'LimeCall callback widget added to cart page. Exit intent popup with callback CTA. Form reduced from 8 fields to 3.',
+    result: '+41% conversion rate on product pages. Cart abandonment reduced to 61%.',
+    highlight: false,
+  },
+  {
+    vertical: 'B2B SaaS — HR Tech',
+    challenge: 'Demo request form converting at 4.2%. Long enterprise sales cycles starting cold because reps called back 6+ hours later.',
+    solution: 'Replaced standard demo form with LimeCall instant callback widget. Routed to specialist based on company size. A/B tested CTA copy.',
+    result: '+58% demo conversion rate. Average deal cycle shortened by 3.2 weeks due to faster first-touch qualification.',
+    highlight: true,
+  },
+  {
+    vertical: 'Financial Services — Mortgage Broker',
+    challenge: 'Compliance-sensitive industry. Visitors arriving from Google Ads at high intent but dropping off on complex application forms.',
+    solution: 'Two-step CRO: simplified landing page with social proof + LimeCall callback as primary CTA. Form moved to post-call.',
+    result: '+67% lead conversion rate. Cost per lead reduced from £142 to £85. Compliance maintained via recorded call transcripts.',
+    highlight: false,
+  },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={articleJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Website CRO', url: `${site.url}/website-conversion-rate-optimization/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        CRO Guide 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Website CRO:<br />
+        <span class="text-lime-400">Convert More of Your Existing Traffic</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        The average website converts 2.35% of visitors. The top 10% convert at 11.45%. The difference is not more traffic — it is smarter conversion infrastructure. This guide covers every CRO strategy that actually moves the needle, including the 28-second trick that lifts conversion by 30–65%.
+      </p>
+
+      <!-- Stats trio -->
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-5">
+          <div class="text-3xl font-extrabold text-lime-400">2.35%</div>
+          <div class="mt-1 text-sm font-semibold text-white">Average conversion rate</div>
+          <div class="mt-1 text-xs text-dark-500">WordStream, all industries</div>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-5">
+          <div class="text-3xl font-extrabold text-lime-400">11.45%</div>
+          <div class="mt-1 text-sm font-semibold text-white">Top 10% of websites</div>
+          <div class="mt-1 text-xs text-dark-500">WordStream conversion research</div>
+        </div>
+        <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-5">
+          <div class="text-3xl font-extrabold text-lime-400">+65%</div>
+          <div class="mt-1 text-sm font-semibold text-white">Avg lift from callback widget</div>
+          <div class="mt-1 text-xs text-dark-500">LimeCall customer data</div>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free — Lift Your Conversion Rate
+        </a>
+        <a
+          href="/contact-us"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Request a Demo
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan available · 30-day money-back guarantee · No setup fees</p>
+    </div>
+  </section>
+
+  <!-- What is CRO -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2 items-start">
+        <div>
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+            What Is CRO and Why It <span class="text-lime-400">Outperforms More Traffic</span>
+          </h2>
+          <div class="space-y-4 text-dark-400 text-sm leading-relaxed">
+            <p>
+              Conversion Rate Optimisation (CRO) is the systematic practice of increasing the percentage of website visitors who take a desired action — filling a form, booking a demo, making a purchase, or requesting a callback. Unlike traffic acquisition, CRO works on the visitors you already have, which means every improvement compounds across your entire marketing spend.
+            </p>
+            <p>
+              Consider the maths: if you currently convert 2% of 10,000 monthly visitors, you get 200 leads. Doubling your traffic to 20,000 visitors at the same conversion rate gives you 400 leads — but costs you double the ad spend. Doubling your conversion rate to 4% on your existing 10,000 visitors also gives you 400 leads, at zero additional acquisition cost. This is why CRO is the highest-ROI investment for growing businesses.
+            </p>
+            <p>
+              The single fastest CRO win available to any business with inbound traffic: adding a callback widget. When visitors can get a call back in 28 seconds instead of filling a form and waiting for a reply, conversion rates increase 30–65% overnight.
+            </p>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+          <h3 class="font-bold text-white mb-5">CRO vs. More Traffic: The Maths</h3>
+          <div class="space-y-4 text-sm">
+            <div class="rounded-lg bg-dark-950/50 p-4 border border-dark-800">
+              <div class="font-semibold text-dark-400 mb-2">Strategy A: Double the Traffic</div>
+              <div class="text-dark-500 space-y-1 text-xs">
+                <div>10,000 → 20,000 visitors / month</div>
+                <div>2% conversion rate (unchanged)</div>
+                <div class="font-bold text-white">= 400 leads / month</div>
+                <div class="text-red-400">Cost: 2× ad spend</div>
+              </div>
+            </div>
+            <div class="rounded-lg bg-lime-950/20 p-4 border border-lime-500/20">
+              <div class="font-semibold text-lime-400 mb-2">Strategy B: Double the Conversion Rate</div>
+              <div class="text-dark-400 space-y-1 text-xs">
+                <div>10,000 visitors / month (unchanged)</div>
+                <div>2% → 4% conversion rate (add LimeCall)</div>
+                <div class="font-bold text-white">= 400 leads / month</div>
+                <div class="text-lime-400">Cost: £99/month (LimeCall Pro)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRO Audit Checklist -->
+  <section class="border-t border-dark-800 bg-dark-900/50 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          The CRO Audit Checklist: <span class="text-lime-400">8 Areas to Fix Today</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Run this audit on your highest-traffic pages first. Most teams find 3–5 quick wins that can be implemented in under a week.
+        </p>
+      </div>
+      <div class="space-y-3">
+        {auditChecklist.map((item, i) => (
+          <div class="flex items-start gap-4 rounded-xl border border-dark-800 bg-dark-900/60 px-5 py-4">
+            <div class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/15 text-xs font-extrabold text-lime-400">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-dark-300 leading-relaxed">{item.item}</p>
+            </div>
+            <div class="hidden sm:block rounded-lg bg-dark-800/50 px-3 py-1 text-xs text-dark-500 whitespace-nowrap">
+              {item.tool}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversion Funnel -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          The Conversion Funnel:<br />
+          <span class="text-lime-400">CRO Tools for Every Stage</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Different stages of the funnel need different CRO interventions. Here is what works at each phase.
+        </p>
+      </div>
+      <div class="space-y-4">
+        {funnelStages.map((stage, i) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="grid gap-4 sm:grid-cols-4 items-start">
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="flex h-7 w-7 items-center justify-center rounded-full bg-lime-500/15 text-xs font-extrabold text-lime-400">
+                    {i + 1}
+                  </div>
+                  <h3 class="font-bold text-white">{stage.stage}</h3>
+                </div>
+                <p class="text-xs text-dark-500">{stage.goal}</p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider text-dark-500 mb-1">Key Metric</div>
+                <p class="text-xs text-dark-400">{stage.metric}</p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider text-dark-500 mb-1">Tools</div>
+                <p class="text-xs text-dark-400">{stage.tools}</p>
+              </div>
+              <div class="rounded-lg border border-lime-500/20 bg-lime-500/5 px-3 py-2">
+                <div class="text-xs font-semibold uppercase tracking-wider text-lime-400 mb-1">CRO Action</div>
+                <p class="text-xs text-dark-300">{stage.cro}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Wins Table -->
+  <section class="border-t border-dark-800 bg-dark-900/50 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          CRO Quick Wins: <span class="text-lime-400">Ranked by Conversion Lift</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Implement in order of impact. The callback widget is first for a reason — it is the fastest, highest-impact CRO change available.
+        </p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Action</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Conversion Lift</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Effort</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Time to Deploy</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800/60">
+            {quickWins.map((row) => (
+              <tr class={`transition-colors ${row.highlight ? 'bg-lime-950/20 hover:bg-lime-950/30' : 'bg-dark-900/30 hover:bg-dark-800/40'}`}>
+                <td class="px-6 py-4 font-medium text-white">
+                  {row.action}
+                  {row.highlight && (
+                    <span class="ml-2 rounded-full bg-lime-500/20 px-2 py-0.5 text-xs font-bold text-lime-400">Highest Impact</span>
+                  )}
+                </td>
+                <td class={`px-6 py-4 font-bold ${row.highlight ? 'text-lime-400' : 'text-dark-300'}`}>{row.lift}</td>
+                <td class="px-6 py-4 text-dark-400">{row.effort}</td>
+                <td class="px-6 py-4 text-dark-500">{row.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Callback as #1 CRO Tool -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2 items-center">
+        <div>
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+            Callback: The <span class="text-lime-400">#1 CRO Tool</span> Nobody Is Talking About
+          </h2>
+          <p class="mt-4 text-dark-400 leading-relaxed text-sm">
+            Every CRO guide tells you to A/B test your headline, reduce form friction, and add social proof. These matter. But they pale next to the conversion impact of changing <em class="text-white">how</em> a visitor contacts you.
+          </p>
+          <p class="mt-4 text-dark-400 leading-relaxed text-sm">
+            The standard contact form requires a visitor to: fill multiple fields, submit, wait for a confirmation email, then wait again for a rep to call or email back — typically 4–42 hours later. By that point, their intent has evaporated and they have spoken with competitors.
+          </p>
+          <p class="mt-4 text-dark-400 leading-relaxed text-sm">
+            LimeCall's callback widget requires exactly one click. The visitor enters their phone number, clicks request, and receives a call within 28 seconds. This single change consistently produces the largest conversion rate improvement of any CRO tactic.
+          </p>
+
+          <div class="mt-8 grid grid-cols-2 gap-4">
+            {[
+              { label: 'Standard contact form', rate: '2.1%', bad: true },
+              { label: 'Live chat', rate: '3.8%', bad: false },
+              { label: 'LimeCall callback widget', rate: '7.4%', bad: false },
+              { label: 'Phone number visible', rate: '4.2%', bad: false },
+            ].map((item) => (
+              <div class={`rounded-xl border p-4 ${item.label === 'LimeCall callback widget' ? 'border-lime-500/30 bg-lime-950/20' : 'border-dark-800 bg-dark-900/50'}`}>
+                <div class="text-xs text-dark-500 mb-1">{item.label}</div>
+                <div class={`text-2xl font-extrabold ${item.label === 'LimeCall callback widget' ? 'text-lime-400' : item.bad ? 'text-red-400' : 'text-dark-300'}`}>
+                  {item.rate}
+                </div>
+                <div class="text-xs text-dark-600 mt-0.5">avg conversion rate</div>
+              </div>
+            ))}
+          </div>
+          <p class="mt-3 text-xs text-dark-600">Average conversion rates by contact method. Source: LimeCall customer aggregated data.</p>
+        </div>
+
+        <div class="rounded-2xl border border-lime-500/20 bg-gradient-to-br from-lime-950/20 to-dark-900/80 p-8">
+          <h3 class="text-lg font-bold text-white mb-6">How LimeCall Works as a CRO Tool</h3>
+          <div class="space-y-5">
+            {[
+              { step: '01', title: 'Visitor Shows Intent', desc: 'They click the LimeCall widget on your page — a single action, no form to fill.' },
+              { step: '02', title: '28-Second Connection', desc: 'LimeCall simultaneously dials your rep and the visitor. Both pick up — they\'re talking before intent fades.' },
+              { step: '03', title: 'Live Qualification', desc: 'Your rep qualifies, nurtures, and advances the deal in real time. No cold follow-up email chains.' },
+              { step: '04', title: 'CRM Logged Automatically', desc: 'Every call is recorded and synced to your CRM with source attribution. Zero manual data entry.' },
+            ].map((s) => (
+              <div class="flex gap-4">
+                <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/15 text-xs font-extrabold text-lime-400">
+                  {s.step}
+                </div>
+                <div>
+                  <div class="font-semibold text-white text-sm">{s.title}</div>
+                  <div class="text-xs text-dark-400 mt-0.5">{s.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="mt-6 pt-5 border-t border-dark-800">
+            <a href="/customer-callback-software/" class="text-lime-400 hover:underline text-sm font-semibold">
+              Learn more about LimeCall callback software →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A/B Testing Guide -->
+  <section class="border-t border-dark-800 bg-dark-900/50 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          A/B Testing Guide: <span class="text-lime-400">What to Test and When</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          Not all A/B tests are created equal. Focus your testing effort on the elements with the highest variance — and always wait for statistical significance before concluding.
+        </p>
+      </div>
+
+      <div class="mb-8 grid gap-4 sm:grid-cols-3 text-center">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <div class="text-2xl font-extrabold text-lime-400 mb-1">95%</div>
+          <div class="text-sm font-semibold text-white">Confidence threshold</div>
+          <div class="text-xs text-dark-500 mt-1">Minimum before calling a winner</div>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <div class="text-2xl font-extrabold text-lime-400 mb-1">100+</div>
+          <div class="text-sm font-semibold text-white">Conversions per variant</div>
+          <div class="text-xs text-dark-500 mt-1">Minimum sample size for reliable results</div>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+          <div class="text-2xl font-extrabold text-lime-400 mb-1">1 at a time</div>
+          <div class="text-sm font-semibold text-white">Variables per test</div>
+          <div class="text-xs text-dark-500 mt-1">Only test one element per experiment</div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Element to Test</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Variant Ideas</th>
+              <th class="px-6 py-4 text-left font-semibold text-dark-400 uppercase tracking-wider text-xs">Expected Lift</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800/60">
+            {abTestIdeas.map((row) => (
+              <tr class="bg-dark-900/30 hover:bg-dark-800/40 transition-colors">
+                <td class="px-6 py-4 font-semibold text-white">{row.element}</td>
+                <td class="px-6 py-4 text-dark-400 text-xs">{row.variants}</td>
+                <td class="px-6 py-4 font-bold text-lime-400">{row.expectedLift}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          CRO Case Studies:<br />
+          <span class="text-lime-400">Real Results, Real Businesses</span>
+        </h2>
+      </div>
+      <div class="space-y-6">
+        {caseStudies.map((cs) => (
+          <div class={`rounded-2xl border p-7 ${cs.highlight ? 'border-lime-500/20 bg-gradient-to-br from-lime-950/20 to-dark-900/80' : 'border-dark-800 bg-dark-900/60'}`}>
+            <div class="grid gap-6 sm:grid-cols-3">
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-widest text-lime-400 mb-2">{cs.vertical}</div>
+                <h3 class="font-bold text-white mb-2 text-sm">The Challenge</h3>
+                <p class="text-xs text-dark-400 leading-relaxed">{cs.challenge}</p>
+              </div>
+              <div>
+                <h3 class="font-bold text-white mb-2 text-sm">The Solution</h3>
+                <p class="text-xs text-dark-400 leading-relaxed">{cs.solution}</p>
+              </div>
+              <div class={`rounded-xl border p-4 ${cs.highlight ? 'border-lime-500/30 bg-lime-950/30' : 'border-dark-700 bg-dark-950/50'}`}>
+                <h3 class="font-bold text-lime-400 mb-2 text-sm">Result</h3>
+                <p class="text-xs text-dark-300 leading-relaxed font-medium">{cs.result}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CRO Tech Stack -->
+  <section class="border-t border-dark-800 bg-dark-900/50 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          The CRO <span class="text-lime-400">Tech Stack</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          The tools that move conversion rates. Several are free — and the highest-impact one costs less than a monthly gym membership.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {techStack.map((t) => (
+          <div class={`rounded-2xl border p-6 flex flex-col gap-3 ${t.highlight ? 'border-lime-500/30 bg-lime-950/20' : 'border-dark-800 bg-dark-900/60'}`}>
+            <div class="flex items-center justify-between">
+              <h3 class={`font-bold text-lg ${t.highlight ? 'text-lime-400' : 'text-white'}`}>{t.tool}</h3>
+              {t.free && (
+                <span class="rounded-full bg-dark-800 px-2 py-0.5 text-xs font-semibold text-dark-400">Free plan</span>
+              )}
+            </div>
+            <div class="text-xs font-semibold text-dark-500 uppercase tracking-wider">{t.type}</div>
+            <p class="text-xs text-dark-400 leading-relaxed flex-1">{t.purpose}</p>
+            {t.highlight && (
+              <span class="rounded-full bg-lime-500/20 px-3 py-1 text-xs font-bold text-lime-400 self-start">Highest Impact</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400" set:html={faq.answer} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Your Traffic Deserves Better Conversion.<br />
+        <span class="text-lime-400">Add the 28-Second Widget Today.</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Stop leaving conversion on the table. Install LimeCall in minutes and see 30–65% more leads from your existing traffic — without spending a pound more on ads.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Free Trial
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">30-day money-back guarantee · Cancel anytime · Free plan included</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Related Resources"
+        links={[
+          { href: '/lead-capture-software/', title: 'Lead Capture Software', desc: 'Capture more leads from every page of your website.' },
+          { href: '/customer-callback-software/', title: 'Callback Software', desc: 'The #1 CRO tool — instant callbacks in 28 seconds.' },
+          { href: '/speed-to-lead/', title: 'Speed to Lead', desc: 'Why response time is the biggest conversion lever.' },
+          { href: '/pricing/', title: 'Pricing', desc: 'Start free. Upgrade as your conversions grow.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

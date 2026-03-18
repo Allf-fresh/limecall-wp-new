@@ -1,0 +1,368 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall + Zapier: Connect to 6,000+ Apps | LimeCall',
+  description: 'Connect LimeCall to 6,000+ apps with Zapier. Auto-create HubSpot deals, post Slack alerts, send data to Google Sheets, and trigger any workflow on every callback.',
+  canonical: 'https://www.limecall.com/zapier-integration/',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall integrate with Zapier?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall provides Zapier triggers for key call events — new callback request, call completed, call missed, and call outcome set. When any of these events occur in LimeCall, your Zap fires and sends the callback data to any of the 6,000+ apps available on Zapier. Connect LimeCall in the Zapier dashboard using your LimeCall API key, then build Zaps with LimeCall as the trigger app.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which Zapier triggers does LimeCall support?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall supports four core Zapier triggers: (1) New Callback Request — fires the moment a website visitor submits a callback request; (2) Call Completed — fires when a callback call ends successfully; (3) Call Missed — fires when a callback request could not be connected; (4) Call Outcome Set — fires when an agent marks a call with an outcome such as "demo booked" or "not interested". Each trigger passes the full callback data including caller name, phone number, page URL, UTM parameters, and call duration.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I create HubSpot deals from LimeCall callbacks via Zapier?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. A popular Zap connects LimeCall\'s "Call Completed" trigger to HubSpot\'s "Create Deal" action. When a callback ends, Zapier automatically creates a HubSpot deal with the caller\'s information, call duration, and outcome. You can also configure the Zap to first search for an existing HubSpot contact and update it rather than creating a duplicate. This is ideal for teams not on LimeCall\'s native HubSpot integration plan.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall send callback data to Google Sheets via Zapier?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. A LimeCall → Google Sheets Zap is one of the most popular recipes. Every callback event appends a new row to your chosen Google Sheet with columns for caller name, phone number, callback time, agent, call duration, outcome, and the page URL where the callback was requested. This gives you a simple, shareable call log without needing a full CRM.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I get Slack notifications for every LimeCall callback?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. A LimeCall → Slack Zap posts a notification to any Slack channel whenever a new callback is requested or completed. The message includes the caller\'s name, phone number, the page they called from, and the call outcome. This keeps your sales team immediately aware of every inbound callback request without needing to monitor the LimeCall dashboard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is the Zapier integration available on all LimeCall plans?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Basic Zapier connectivity is available on LimeCall\'s Starter plan and above. Advanced Zapier features, including custom field mapping and multi-step Zap support with all four LimeCall triggers, are available on the Pro plan. A free LimeCall account can test basic Zap triggers. Note that Zapier itself has its own plan requirements — multi-step Zaps require a Zapier paid plan.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "6,000+", label: "Apps you can connect" },
+  { value: "28s", label: "Average callback speed" },
+  { value: "5 min", label: "First Zap setup time" },
+  { value: "4", label: "LimeCall Zapier triggers" },
+];
+
+const features = [
+  {
+    title: "Connect any CRM not natively supported",
+    desc: "Use Zapier to send LimeCall callback data to Pipedrive, Zoho, Copper, Insightly, or any CRM with a Zapier app — no API development required. Full callback data flows into your CRM automatically.",
+  },
+  {
+    title: "Trigger Notion or Airtable workflows",
+    desc: "Create a new Notion database entry or Airtable record for every completed callback. Build a shared call log, track lead progress in Airtable, or update a Notion sales pipeline — all hands-free.",
+  },
+  {
+    title: "Send callback data to Google Sheets",
+    desc: "Append every callback as a new row in Google Sheets: caller name, phone, page URL, UTM source, agent, duration, outcome. Build custom reporting dashboards in Sheets or Data Studio without a BI tool.",
+  },
+  {
+    title: "Create HubSpot deals automatically",
+    desc: "A LimeCall → HubSpot Zap creates a Contact and Deal in HubSpot the moment a callback completes. The deal is pre-populated with caller information, call duration, and outcome tag.",
+  },
+  {
+    title: "Post Slack notifications on every callback",
+    desc: "Route callback alerts to the right Slack channel in real time. Your team sees new callback requests the moment they arrive — with caller name, page, and outcome — without leaving Slack.",
+  },
+  {
+    title: "Add callers to Mailchimp lists after calls",
+    desc: "When a callback ends with a positive outcome, Zapier adds the caller to the relevant Mailchimp audience and applies a tag. Your email nurture sequence starts immediately after the call.",
+  },
+];
+
+const zapRecipes = [
+  {
+    trigger: 'LimeCall: Call Completed',
+    action: 'HubSpot: Create Contact + Deal',
+    desc: 'Every completed callback creates a HubSpot contact and deal — caller details, outcome, and page source pre-populated.',
+    apps: ['LimeCall', 'HubSpot'],
+  },
+  {
+    trigger: 'LimeCall: New Callback Request',
+    action: 'Slack: Post Message',
+    desc: 'Post an instant Slack alert to your #sales channel the moment a callback request arrives.',
+    apps: ['LimeCall', 'Slack'],
+  },
+  {
+    trigger: 'LimeCall: Call Completed',
+    action: 'Google Sheets: Append Row',
+    desc: 'Build a real-time call log in Google Sheets. Every completed callback adds a row with caller data and outcome.',
+    apps: ['LimeCall', 'Google Sheets'],
+  },
+  {
+    trigger: 'LimeCall: Call Outcome Set',
+    action: 'Mailchimp: Add Subscriber',
+    desc: 'When a call outcome is "demo booked" or "interested", add the caller to your Mailchimp nurture audience automatically.',
+    apps: ['LimeCall', 'Mailchimp'],
+  },
+  {
+    trigger: 'LimeCall: Call Completed',
+    action: 'Airtable: Create Record',
+    desc: 'Add every callback as a record in your Airtable lead tracker — link it to deals, agents, and campaigns.',
+    apps: ['LimeCall', 'Airtable'],
+  },
+  {
+    trigger: 'LimeCall: Call Missed',
+    action: 'Gmail: Send Email',
+    desc: 'When a callback is missed, automatically email the caller to apologise and offer a rescheduled callback time.',
+    apps: ['LimeCall', 'Gmail'],
+  },
+];
+
+const useCases = [
+  {
+    role: "No-Code Teams",
+    title: "Connect any tool without a developer",
+    desc: "If your CRM isn't in LimeCall's native integration list, Zapier bridges the gap in minutes. Any tool with a Zapier app — from niche industry CRMs to custom internal tools — can receive LimeCall callback data automatically.",
+  },
+  {
+    role: "Sales Operations",
+    title: "Build a real-time callback dashboard in Google Sheets",
+    desc: "Route every LimeCall event to Google Sheets via Zapier. Build pivot tables, funnel views, and agent performance reports in a tool your whole team can access — no BI platform required.",
+  },
+  {
+    role: "Marketing Teams",
+    title: "Enrol callers in the right email sequence automatically",
+    desc: "A Zap detects the call outcome and adds the caller to the matching Mailchimp, ActiveCampaign, or ConvertKit sequence. 'Demo booked' gets pre-demo content. 'Pricing enquiry' gets case studies. All automatic.",
+  },
+  {
+    role: "Customer Success",
+    title: "Alert the right team member on every missed callback",
+    desc: "When a callback is missed, a Zap fires: Slack notification to the team, email to the caller, and a task in Asana or Todoist for follow-up. No missed lead falls through the cracks again.",
+  },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: 'Zapier', url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        Zapier Integration · 6,000+ Apps · No developers
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Connect LimeCall to<br class="hidden sm:block" />
+        <span class="text-lime-400">6,000+ Apps with Zapier</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Use Zapier to route LimeCall callback data to any CRM, spreadsheet, messaging tool, or workflow app — automatically, without writing a single line of code.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect via Zapier Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How LimeCall + Zapier works</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        LimeCall fires a Zapier trigger for every call event. Your Zap catches the data and sends it to any destination app automatically.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Call event in LimeCall</h3>
+          <p class="mt-1 text-xs text-dark-400">Request, completion, miss, or outcome set</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Zapier trigger fires</h3>
+          <p class="mt-1 text-xs text-dark-400">Full callback data passed to your Zap</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Zapier processes</h3>
+          <p class="mt-1 text-xs text-dark-400">Filter, format, and route data as needed</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Action fires</h3>
+          <p class="mt-1 text-xs text-dark-400">HubSpot, Slack, Sheets, or any of 6,000+ apps</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Connect LimeCall to Zapier</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">In Zapier, search for LimeCall and connect using your LimeCall API key from the dashboard. Choose your trigger: new callback, completed call, missed call, or outcome set.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Choose your action app</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Select any of 6,000+ Zapier apps as the destination. Map LimeCall fields — caller name, phone, outcome, URL — to the fields in your chosen app.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Test and turn on your Zap</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Use Zapier's test feature to trigger a sample callback. Verify the data arrives correctly in your destination app, then turn the Zap on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Six things you can automate with LimeCall + Zapier</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Connect your callback data to any tool in your stack — no developers, no APIs.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Zap Recipes -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Popular Zap Recipes</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm max-w-2xl mx-auto">Copy these ready-made Zap configurations to connect LimeCall to your most-used tools in minutes.</p>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {zapRecipes.map(recipe => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex items-center gap-2 flex-wrap">
+              {recipe.apps.map(app => (
+                <span class="rounded-full bg-lime-500/10 border border-lime-500/20 px-2.5 py-1 text-xs font-bold text-lime-400">{app}</span>
+              ))}
+            </div>
+            <div class="mb-1 text-xs text-dark-500 font-semibold uppercase tracking-wider">Trigger</div>
+            <div class="mb-2 text-sm font-semibold text-white">{recipe.trigger}</div>
+            <div class="mb-1 text-xs text-dark-500 font-semibold uppercase tracking-wider">Action</div>
+            <div class="mb-3 text-sm font-semibold text-lime-400">{recipe.action}</div>
+            <p class="text-xs text-dark-400 leading-relaxed">{recipe.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + Zapier and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Connect LimeCall to your entire stack — in minutes.</h2>
+      <p class="mt-4 text-dark-400">Free trial · No developers · 6,000+ apps available</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/integrations/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          All Integrations
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations" links={[
+        { href: '/salesforce-integration/', title: 'LimeCall + Salesforce', desc: 'Native Salesforce integration — auto-create Leads and Activities.' },
+        { href: '/activecampaign-integration/', title: 'LimeCall + ActiveCampaign', desc: 'Trigger automations on call outcome.' },
+        { href: '/google-ads-integration/', title: 'LimeCall + Google Ads', desc: 'Track which campaigns drive callback requests.' },
+        { href: '/limecall-for-hubspot/', title: 'LimeCall + HubSpot', desc: 'Log every call in HubSpot automatically.' },
+        { href: '/integrations/', title: 'All Integrations', desc: 'See every tool LimeCall connects with.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple plans that include all integrations.' },
+      ]} />
+    </div>
+  </div>
+</Base>

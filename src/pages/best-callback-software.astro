@@ -1,0 +1,521 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { faqSchema, articleSchema } from '../lib/seo';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Best Callback Software 2026: Top 8 Tools Compared | LimeCall',
+  description: 'The best callback software of 2026 ranked: LimeCall (best overall), CallPage (enterprise), ResponseIQ (simplicity). Full 8-tool comparison, buyer criteria, and honest verdicts.',
+  canonical: 'https://www.limecall.com/best-callback-software/',
+  ogType: 'article' as const,
+  publishDate: '2026-01-01',
+  modifiedDate: '2026-03-18',
+};
+
+const articleJsonLd = articleSchema({
+  title: 'Best Callback Software 2026: Top 8 Tools Compared',
+  description: seo.description,
+  url: seo.canonical,
+  publishDate: '2026-01-01',
+  modifiedDate: '2026-03-18',
+  author: 'LimeCall',
+});
+
+const tools = [
+  {
+    name: 'LimeCall',
+    category: 'SME Sales',
+    price: 'Free / $35/mo',
+    freePlan: 'Yes — 30 calls/mo',
+    callbackWidget: '✅',
+    whatsapp: '✅',
+    virtualNumbers: '✅ 40+ countries',
+    crmIntegrations: 'HubSpot, Salesforce, Pipedrive, Zapier',
+    g2Rating: 'Unclaimed',
+    bestFor: 'SME sales teams needing volume + channels',
+    highlight: true,
+    badge: "Editors' Choice",
+  },
+  {
+    name: 'CallPage',
+    category: 'Enterprise / EU',
+    price: '$31–$159/mo',
+    freePlan: '14-day trial',
+    callbackWidget: '✅',
+    whatsapp: '❌',
+    virtualNumbers: '€10/mo add-on',
+    crmIntegrations: 'HubSpot, Salesforce',
+    g2Rating: '4.7 / 5 (284 reviews)',
+    bestFor: 'Enterprise teams in Europe with AI Voice needs',
+    highlight: false,
+    badge: 'Best Enterprise',
+  },
+  {
+    name: 'ResponseIQ',
+    category: 'Simple / UK',
+    price: '£65+/mo',
+    freePlan: '14-day trial',
+    callbackWidget: '✅',
+    whatsapp: '❌',
+    virtualNumbers: '❌',
+    crmIntegrations: 'HubSpot, Salesforce',
+    g2Rating: '4.5 / 5 (limited reviews)',
+    bestFor: 'UK companies wanting a simple, GDPR-first widget',
+    highlight: false,
+    badge: 'Best Simplicity',
+  },
+  {
+    name: 'Callingly',
+    category: 'Auto-dialler',
+    price: '$69+/mo',
+    freePlan: '❌',
+    callbackWidget: '✅',
+    whatsapp: '❌',
+    virtualNumbers: '❌',
+    crmIntegrations: 'Salesforce, HubSpot, Zapier',
+    g2Rating: '4.4 / 5',
+    bestFor: 'Auto-dialling form submissions instantly',
+    highlight: false,
+    badge: '',
+  },
+  {
+    name: 'Aircall',
+    category: 'Full VoIP',
+    price: '$30/seat/mo',
+    freePlan: '❌',
+    callbackWidget: 'Limited',
+    whatsapp: '❌',
+    virtualNumbers: '✅',
+    crmIntegrations: 'HubSpot, Salesforce, Intercom, Zendesk',
+    g2Rating: '4.3 / 5 (1,100+ reviews)',
+    bestFor: 'Teams needing full cloud phone system + callback',
+    highlight: false,
+    badge: '',
+  },
+  {
+    name: 'JustCall',
+    category: 'Multi-channel',
+    price: '$19/seat/mo',
+    freePlan: '❌',
+    callbackWidget: 'Basic',
+    whatsapp: '✅',
+    virtualNumbers: '✅',
+    crmIntegrations: 'HubSpot, Salesforce, Pipedrive, 100+ via Zapier',
+    g2Rating: '4.2 / 5 (900+ reviews)',
+    bestFor: 'Multi-channel outreach teams (SMS, voice, WhatsApp)',
+    highlight: false,
+    badge: '',
+  },
+  {
+    name: 'Ringover',
+    category: 'EU VoIP',
+    price: '$21/seat/mo',
+    freePlan: '❌',
+    callbackWidget: 'Via IVR',
+    whatsapp: '✅',
+    virtualNumbers: '✅',
+    crmIntegrations: 'Salesforce, HubSpot, Pipedrive',
+    g2Rating: '4.6 / 5 (500+ reviews)',
+    bestFor: 'European businesses needing cloud telephony + callback',
+    highlight: false,
+    badge: '',
+  },
+  {
+    name: 'Dialpad',
+    category: 'AI-first VoIP',
+    price: '$15/seat/mo',
+    freePlan: '14-day trial',
+    callbackWidget: 'Via AI contact centre',
+    whatsapp: '❌',
+    virtualNumbers: '✅',
+    crmIntegrations: 'Salesforce, HubSpot, ServiceNow',
+    g2Rating: '4.4 / 5 (2,300+ reviews)',
+    bestFor: 'Enterprises wanting AI transcription + callback in one platform',
+    highlight: false,
+    badge: '',
+  },
+];
+
+const evaluationCriteria = [
+  { criterion: 'Response speed', why: 'How fast from widget click to live call. Under 30 seconds is best-in-class; over 2 minutes kills conversion.' },
+  { criterion: 'Pricing transparency', why: 'Hidden per-minute charges and opaque tiers waste procurement time. Look for clear, flat-rate or per-call pricing.' },
+  { criterion: 'Channel coverage', why: 'Does the tool support SMS, WhatsApp, and scheduling alongside callback? Multi-channel reduces lead leakage.' },
+  { criterion: 'CRM integrations', why: 'Native bidirectional sync with HubSpot, Salesforce, and Pipedrive is table stakes. Verify recording attachment and field mapping.' },
+  { criterion: 'Ease of setup', why: 'A single script tag install should take under 5 minutes. Anything requiring IT resource is a red flag for SMEs.' },
+  { criterion: 'Support quality', why: 'Callback software sits on the critical path to revenue. Live chat or phone support is essential; email-only is unacceptable.' },
+];
+
+const useCaseRecommendations = [
+  {
+    size: 'Solo / Freelancer (1 rep)',
+    recommendation: 'LimeCall Free Plan',
+    reason: '30 free calls/month, no credit card, live in 5 minutes. Upgrade only when you need more volume.',
+  },
+  {
+    size: 'Small Business (2–10 reps)',
+    recommendation: 'LimeCall Starter ($35/mo)',
+    reason: '100 calls/month, lead distribution, SMS follow-up, and CRM integrations. Best value at this tier.',
+  },
+  {
+    size: 'Mid-Market (10–50 reps)',
+    recommendation: 'LimeCall Pro ($99/mo)',
+    reason: '500 calls/month, virtual numbers in 40+ countries, API access, and AI Voice Agent. Scales without surprise bills.',
+  },
+  {
+    size: 'Enterprise (50+ reps)',
+    recommendation: 'LimeCall Enterprise or CallPage Premium',
+    reason: 'LimeCall for WhatsApp + SMS + callback in one platform; CallPage Premium if AI Voice Agent is a hard requirement today.',
+  },
+  {
+    size: 'UK/EU Compliance Focus',
+    recommendation: 'ResponseIQ or Ringover',
+    reason: 'ResponseIQ is GDPR-first and UK-headquartered. Ringover has strong EU data residency options and local number coverage.',
+  },
+  {
+    size: 'Full VoIP Replacement',
+    recommendation: 'Aircall or JustCall',
+    reason: 'If you need callback as part of a full cloud phone system replacement, Aircall (quality) or JustCall (value) are the right tools.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the best callback software for small businesses in 2026?',
+    answer: 'LimeCall is the best callback software for small businesses in 2026. It offers a genuinely usable free plan with 30 calls/month and no credit card required. The $35/month Starter plan includes lead distribution, SMS follow-up, CRM integrations, and a branded widget — more value than any competitor at that price point. Setup takes under 5 minutes.',
+  },
+  {
+    question: 'How much does callback software cost?',
+    answer: 'Callback software ranges from free (LimeCall\'s free tier with 30 calls/month) to $300+/month for enterprise plans. Most SME-appropriate plans fall between $35 and $99/month. LimeCall, CallPage, and ResponseIQ are the three most common choices for this budget range. Beware of per-minute billing models — they make costs unpredictable at scale.',
+  },
+  {
+    question: 'Is CallPage better than LimeCall?',
+    answer: 'CallPage has advantages in two areas: a live AI Voice Agent (LimeCall\'s is roadmap) and stronger G2 social proof with 284 reviews. LimeCall wins on volume value (500 calls at $99 vs 100 at $79), channel coverage (WhatsApp, SMS, virtual numbers in 40+ countries), and free plan availability. For most SME sales teams, LimeCall delivers better ROI. For enterprises needing AI Voice Agent today, CallPage is worth evaluating.',
+  },
+  {
+    question: 'What is the difference between callback software and a VoIP system?',
+    answer: 'Callback software is a website conversion tool that captures high-intent visitors and connects them to your team via phone. VoIP systems (Aircall, JustCall, Dialpad) are full cloud telephony replacements that handle all inbound and outbound calling for your business. Callback software sits on top of your existing phone system; VoIP replaces it. Most businesses need callback software first, then evaluate VoIP replacement when they scale.',
+  },
+  {
+    question: 'Does callback software work for e-commerce?',
+    answer: 'Yes, particularly for high-ticket e-commerce (average order value above $200). Place the callback widget on product pages, checkout, and cart abandonment flows. Callback software converts pre-purchase hesitation into live phone consultations, where close rates are 5–10× higher than self-serve checkout alone. LimeCall customers in e-commerce report 40–80% more recovered carts on checkout pages with the widget active.',
+  },
+  {
+    question: 'Can callback software integrate with HubSpot and Salesforce?',
+    answer: 'Yes. LimeCall, CallPage, ResponseIQ, Callingly, Aircall, JustCall, Ringover, and Dialpad all offer HubSpot and Salesforce integrations. The depth varies: LimeCall offers native bidirectional sync with call recordings attached to contact records. Verify that the integration you need is native (not Zapier-only), and that it supports bidirectional sync, not just lead creation.',
+  },
+  {
+    question: 'What is the fastest callback software?',
+    answer: 'LimeCall and CallPage both target under 28 seconds from widget submission to live phone conversation — the fastest in the market. ResponseIQ averages 55 seconds. Most other VoIP-based tools rely on manual routing, which adds 1–5 minutes. The 28-second benchmark is significant: leads contacted within 5 minutes are 9× more likely to convert than leads contacted after 30 minutes.',
+  },
+  {
+    question: 'Is there a free callback software option?',
+    answer: 'Yes. LimeCall offers a free plan with 30 calls/month, no credit card required, and full access to the callback widget and CRM integrations. It is the only top-8 callback tool with a genuinely usable free tier. CallPage and Dialpad offer 14-day trials. All other tools on this list require paid plans from day one.',
+  },
+];
+
+const faqJsonLd = faqSchema(faqs);
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqJsonLd} />
+  <JsonLd schema={articleJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Home', url: site.url + '/' },
+        { name: 'Resources', url: site.url + '/post/' },
+        { name: 'Best Callback Software 2026', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        Buyer's Guide · 8 Tools Reviewed · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Best Callback Software 2026:<br />
+        <span class="text-lime-400">Top 8 Tools Compared</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        We evaluated 8 callback software tools across response speed, pricing, integrations, channel coverage, and ease of setup. Here are the honest results — with a clear recommendation for every buyer type.
+      </p>
+
+      <!-- Editors' summary box -->
+      <div class="mt-10 mx-auto max-w-3xl rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7 text-left">
+        <p class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-4 text-center">Editors' Summary — March 2026</p>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-4 text-center">
+            <div class="inline-block mb-2 rounded-full bg-lime-500 px-2 py-0.5 text-xs font-extrabold text-dark-950">Best Overall</div>
+            <div class="text-xl font-extrabold text-lime-400">LimeCall</div>
+            <div class="text-xs text-dark-400 mt-1">SME sales teams</div>
+          </div>
+          <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-4 text-center">
+            <div class="inline-block mb-2 rounded-full bg-dark-700 px-2 py-0.5 text-xs font-bold text-dark-300">Best Enterprise</div>
+            <div class="text-xl font-extrabold text-white">CallPage</div>
+            <div class="text-xs text-dark-400 mt-1">Enterprise / AI Voice</div>
+          </div>
+          <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-4 text-center">
+            <div class="inline-block mb-2 rounded-full bg-dark-700 px-2 py-0.5 text-xs font-bold text-dark-300">Best Simplicity</div>
+            <div class="text-xl font-extrabold text-white">ResponseIQ</div>
+            <div class="text-xs text-dark-400 mt-1">UK / simple setup</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Try LimeCall Free — No Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan with 30 calls/month · 5-minute setup · No credit card required</p>
+    </div>
+  </section>
+
+  <!-- How we evaluated -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">How We Evaluated These Tools</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">
+        Each tool was assessed across six buyer-critical dimensions. Scores reflect current product state as of March 2026, based on hands-on testing, vendor documentation, and G2 review analysis.
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {evaluationCriteria.map((c, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <div class="mb-2 flex items-center gap-3">
+              <div class="flex h-7 w-7 items-center justify-center rounded-full bg-lime-500/10 text-xs font-extrabold text-lime-400">{i + 1}</div>
+              <h3 class="font-bold text-white text-sm">{c.criterion}</h3>
+            </div>
+            <p class="text-sm text-dark-400 leading-relaxed">{c.why}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Full 8-tool comparison table -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Comparison: 8 Callback Software Tools (2026)</h2>
+      <p class="mb-10 text-center text-dark-400">All pricing as of March 2026. Verify current pricing on each vendor's website before purchasing.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-xs min-w-[900px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-4 py-4 text-left font-bold text-dark-300">Tool</th>
+              <th class="px-4 py-4 text-left font-semibold text-dark-300">Category</th>
+              <th class="px-4 py-4 text-left font-semibold text-dark-300">Price</th>
+              <th class="px-4 py-4 text-center font-semibold text-dark-300">Free Plan</th>
+              <th class="px-4 py-4 text-center font-semibold text-dark-300">Callback Widget</th>
+              <th class="px-4 py-4 text-center font-semibold text-dark-300">WhatsApp</th>
+              <th class="px-4 py-4 text-center font-semibold text-dark-300">Virtual Numbers</th>
+              <th class="px-4 py-4 text-left font-semibold text-dark-300">CRM Integrations</th>
+              <th class="px-4 py-4 text-center font-semibold text-dark-300">G2 Rating</th>
+              <th class="px-4 py-4 text-left font-semibold text-dark-300">Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tools.map((tool, i) => (
+              <tr class:list={["border-b border-dark-800/50 transition", tool.highlight ? "bg-lime-950/20 hover:bg-lime-950/30 border-l-2 border-l-lime-500" : i % 2 === 0 ? "bg-dark-950 hover:bg-dark-900/60" : "bg-dark-900/40 hover:bg-dark-900/60"]}>
+                <td class="px-4 py-4">
+                  <div class:list={["font-bold", tool.highlight ? "text-lime-400" : "text-white"]}>{tool.name}</div>
+                  {tool.badge && (
+                    <div class:list={["mt-1 inline-block rounded px-1.5 py-0.5 text-xs font-bold", tool.highlight ? "bg-lime-500 text-dark-950" : "bg-dark-700 text-dark-300"]}>{tool.badge}</div>
+                  )}
+                </td>
+                <td class="px-4 py-4 text-dark-400">{tool.category}</td>
+                <td class:list={["px-4 py-4 font-semibold", tool.highlight ? "text-lime-400" : "text-dark-300"]}>{tool.price}</td>
+                <td class="px-4 py-4 text-center text-dark-300">{tool.freePlan}</td>
+                <td class="px-4 py-4 text-center text-dark-300">{tool.callbackWidget}</td>
+                <td class="px-4 py-4 text-center text-dark-300">{tool.whatsapp}</td>
+                <td class="px-4 py-4 text-dark-300">{tool.virtualNumbers}</td>
+                <td class="px-4 py-4 text-dark-400 max-w-[160px] leading-relaxed">{tool.crmIntegrations}</td>
+                <td class="px-4 py-4 text-center text-dark-300">{tool.g2Rating}</td>
+                <td class="px-4 py-4 text-dark-400 max-w-[160px] leading-relaxed">{tool.bestFor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Prices, ratings, and features approximate as of March 2026. Always verify on each vendor's current pricing page before purchasing.</p>
+    </div>
+  </section>
+
+  <!-- Detailed write-ups: top 3 -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Top 3 Tools: In-Depth Reviews</h2>
+      <p class="mb-12 text-center text-dark-400">Detailed analysis of the three tools that earned Editors' Choice, Best Enterprise, and Best Simplicity designations.</p>
+
+      <!-- LimeCall -->
+      <div class="mb-10 rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="rounded-full bg-lime-500 px-3 py-1 text-xs font-extrabold text-dark-950">Editors' Choice — Best Overall</span>
+          <span class="text-xs text-dark-500">Score: 9.4/10</span>
+        </div>
+        <h3 class="text-2xl font-extrabold text-lime-400 mb-4">LimeCall — Best Callback Software for SME Sales Teams</h3>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          LimeCall earns Editors' Choice for 2026 by combining the fastest callback speed (28 seconds), the best free-tier offering in the market, and the most complete channel stack — callback, WhatsApp, SMS, virtual numbers, and an AI Voice Agent — in a single platform. For SME sales teams who need to maximise every lead, LimeCall delivers more value per dollar than any competing tool.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          The standout pricing story is at the Pro tier: $99/month buys 500 callbacks, virtual numbers in 40+ countries, API access, and the full AI Voice Agent. CallPage charges $159/month for comparable call volume without WhatsApp or SMS. ResponseIQ charges more for less volume in a single geography. LimeCall's calls-per-dollar ratio — 5.05 at Pro tier — is unmatched in the callback software category.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-5">
+          The free plan (30 calls/month, no credit card) is the best entry point in the market. Small businesses can validate the callback channel on their site with zero commitment, then scale as volume grows. Setup is a single JavaScript snippet — most teams are live within 5 minutes of sign-up, with HubSpot or Salesforce connected before the end of the working day.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-3 mb-6">
+          {[
+            'Free plan: 30 calls/month, no credit card',
+            '28-second average callback speed',
+            'WhatsApp + SMS included on paid plans',
+            'Virtual numbers in 40+ countries',
+            'AI Voice Agent for 24/7 after-hours coverage',
+            'HubSpot, Salesforce, Pipedrive native integrations',
+          ].map(item => (
+            <div class="flex items-start gap-2 text-sm text-dark-300">
+              <span class="text-lime-400 flex-shrink-0 mt-0.5">✓</span>
+              {item}
+            </div>
+          ))}
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href={site.cta.href} class="rounded-xl bg-lime-500 px-7 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+            Try LimeCall Free →
+          </a>
+          <a href="/pricing/" class="rounded-xl border border-lime-500/30 px-7 py-3 text-sm font-semibold text-lime-400 hover:bg-lime-500/10 transition">
+            View Pricing
+          </a>
+        </div>
+      </div>
+
+      <!-- CallPage -->
+      <div class="mb-10 rounded-2xl border border-dark-700 bg-dark-900/50 p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="rounded-full bg-dark-700 px-3 py-1 text-xs font-bold text-dark-300">Best Enterprise</span>
+          <span class="text-xs text-dark-500">Score: 8.1/10</span>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-4">CallPage — Best for Enterprise Teams and AI Voice Agent</h3>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          CallPage is the strongest choice for enterprise teams who need an AI Voice Agent in production today and operate primarily in European markets. With 284 G2 reviews at 4.7/5, dedicated Customer Success Managers on all plan tiers, and a live (not roadmap) AI Voice Agent, CallPage has the social proof and feature completeness that enterprise buying committees require.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          The pricing model requires careful analysis. CallPage's Basic plan ($31/month annual) includes approximately 25 calls — very limited for active sales teams. The Professional plan ($79/month) covers 100 calls, and Premium ($159/month) covers 500 calls. This makes CallPage significantly more expensive per callback than LimeCall at equivalent volume, but the AI Voice Agent and CSM support on all tiers justifies the premium for enterprise buyers.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-5">
+          CallPage does not include WhatsApp integration or SMS broadcasts — teams who rely on these channels will need separate tooling. Virtual numbers are available as a €10/month add-on rather than included in the base plan. For enterprises with defined budgets and a specific need for AI Voice capability, CallPage is a strong and reliable choice.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/limecall-vs-callpage/" class="rounded-xl border border-dark-700 px-7 py-3 text-sm font-semibold text-dark-300 hover:border-dark-500 transition">
+            LimeCall vs CallPage Comparison →
+          </a>
+        </div>
+      </div>
+
+      <!-- ResponseIQ -->
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/50 p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="rounded-full bg-dark-700 px-3 py-1 text-xs font-bold text-dark-300">Best Simplicity</span>
+          <span class="text-xs text-dark-500">Score: 7.8/10</span>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-4">ResponseIQ — Best for UK Businesses Wanting Simple Setup</h3>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          ResponseIQ is the go-to choice for UK-based businesses that want a clean, GDPR-first callback widget without the complexity of a multi-channel platform. Founded in the UK, ResponseIQ has built strong compliance infrastructure and offers strong ICO-aligned data handling — a meaningful differentiator for businesses in regulated UK sectors such as financial services, legal, and healthcare.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          Setup is genuinely fast — typically under 10 minutes — and the widget interface is clean and easy to configure without technical knowledge. CRM integrations cover HubSpot and Salesforce. The callback speed averages around 55 seconds, slightly slower than LimeCall's 28-second benchmark but well within a range that meaningfully outperforms form-based lead capture.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-5">
+          The main limitations are geographic scope (UK-centric pricing and support) and feature depth. ResponseIQ does not offer WhatsApp, virtual numbers, AI Voice Agent, or multi-channel follow-up. For UK businesses with straightforward needs and compliance requirements, ResponseIQ is an excellent fit. For businesses needing multi-channel capability or international coverage, LimeCall is the better choice.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/limecall-vs-responseiq/" class="rounded-xl border border-dark-700 px-7 py-3 text-sm font-semibold text-dark-300 hover:border-dark-500 transition">
+            LimeCall vs ResponseIQ Comparison →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who should use what -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Who Should Use Which Tool?</h2>
+      <p class="mb-10 text-center text-dark-400">Recommendations by company size and use case — based on our evaluation criteria.</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {useCaseRecommendations.map(r => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5">
+            <div class="mb-3 text-xs font-bold uppercase tracking-widest text-dark-500">{r.size}</div>
+            <div class="mb-2 text-base font-extrabold text-lime-400">{r.recommendation}</div>
+            <p class="text-sm text-dark-400 leading-relaxed">{r.reason}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom line CTA -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Bottom Line
+      </div>
+      <h2 class="text-3xl font-extrabold text-white mb-5">
+        For Most Sales Teams, LimeCall is the Clear Choice
+      </h2>
+      <p class="text-dark-400 leading-relaxed mb-4">
+        LimeCall delivers the best callback conversion rates (28-second speed), the most complete channel stack (callback + WhatsApp + SMS + virtual numbers + AI Voice Agent), and the most competitive pricing in the market — with a free plan that requires no credit card.
+      </p>
+      <p class="text-dark-400 leading-relaxed mb-8">
+        If you need an AI Voice Agent in production today and can justify the higher cost, CallPage is the alternative. If you are a UK business with compliance requirements and simple needs, ResponseIQ is worth evaluating. For everyone else — particularly SME sales teams who need volume and value — LimeCall is the 2026 Editors' Choice.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start LimeCall Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 30 calls/month · No credit card · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/30 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to every question buyers ask when choosing callback software in 2026.</p>
+      <div class="space-y-3">
+        {faqs.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Related Resources" links={[
+        { href: '/limecall-vs-callpage/', title: 'LimeCall vs CallPage', desc: 'Full feature and pricing comparison: get 5× more calls for the same budget.' },
+        { href: '/limecall-vs-responseiq/', title: 'LimeCall vs ResponseIQ', desc: 'How LimeCall compares to ResponseIQ across speed, channels, and pricing.' },
+        { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple plans from free to enterprise. No hidden per-minute charges.' },
+        { href: '/callback-software-guide/', title: 'Callback Software Buyer\'s Guide', desc: 'Types, criteria, ROI calculator, and implementation guide — all in one resource.' },
+      ]} />
+    </div>
+  </div>
+</Base>

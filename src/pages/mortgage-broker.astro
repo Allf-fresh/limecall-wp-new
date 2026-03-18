@@ -1,0 +1,329 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Mortgage Brokers | LimeCall',
+  description: 'LimeCall connects mortgage leads to advisers in 28 seconds. FCA-compliant recording, GDPR consent capture, after-hours remortgage lead capture. Free trial.',
+  canonical: 'https://www.limecall.com/mortgage-broker/',
+};
+
+const stats = [
+  { value: '82%', label: 'Of mortgage leads use the first broker who calls back' },
+  { value: '28s', label: 'LimeCall callback vs 48-hour industry average' },
+  { value: '£1,200', label: 'Avg commission per mortgage — every contact counts' },
+  { value: 'FCA', label: 'Compliant call recording on every conversation' },
+];
+
+const features = [
+  { icon: '🔒', title: 'FCA-Compliant Call Recording & Storage', desc: 'All calls recorded, encrypted, and stored with configurable retention to meet FCA record-keeping requirements for mortgage intermediaries.' },
+  { icon: '🗂️', title: 'Routing by Mortgage Type', desc: 'Route enquiries to the right adviser automatically — residential, buy-to-let, commercial, or bridging finance — based on the page visited or enquiry type.' },
+  { icon: '🌙', title: 'After-Hours Remortgage Capture', desc: 'Remortgage enquiries peak between 8pm and 10pm. LimeCall captures every after-hours lead and queues it for same-morning callback before competitors respond.' },
+  { icon: '📝', title: 'Compliance Call Notes to CRM', desc: 'Advisers can record call outcome notes directly into LimeCall, which sync to your CRM automatically — keeping your compliance file complete without extra work.' },
+  { icon: '📞', title: 'Virtual Numbers for Local Presence', desc: 'Use virtual numbers that match the local area of your borrowers. Higher answer rates and greater trust before the conversation starts.' },
+  { icon: '✅', title: 'GDPR Consent Capture', desc: 'LimeCall captures explicit consent at the point of callback request. Consent records are timestamped and stored, keeping your GDPR compliance file audit-ready.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall meet FCA record-keeping requirements for mortgage brokers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall records and stores all client calls with configurable retention periods to meet FCA requirements for mortgage intermediaries. Recordings are encrypted in transit and at rest. Full audit logs are available on demand, and we sign Data Processing Agreements (DPAs) with all regulated mortgage customers.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall capture GDPR consent for mortgage leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall captures explicit GDPR consent at the point of callback request via a pre-call consent checkbox on the widget. Consent is timestamped and stored in your LimeCall account alongside the call record. This keeps your ICO compliance file current without manual processes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How are after-hours mortgage enquiries handled?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "After-hours enquiries — including the 8pm–10pm remortgage research peak — are captured and queued automatically. The next morning, your advisers work through a prioritised callback list with full lead details. You can configure priority routing for time-sensitive enquiries such as bridging finance or purchase deadline-driven remortgages.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which CRM systems does LimeCall integrate with for mortgage brokers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall integrates directly with Salesforce, HubSpot, and Zoho CRM, and connects to 1,000+ tools via Zapier — including popular mortgage CRM and case management platforms. Every callback is logged with lead name, contact number, mortgage enquiry type, call recording link, consent record, and outcome notes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a mortgage brokerage go live?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most mortgage brokerages are live within 5 minutes. Add the LimeCall widget to your website, configure routing by mortgage type, and the system is active. No IT team or developer required. We provide dedicated onboarding support for regulated financial services customers, including compliance configuration guidance.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does LimeCall cost for a mortgage broker?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall plans start from $35/month. With an average commission of £1,200 per mortgage, a single additional conversion from faster lead response typically covers several months of subscription. A 14-day free trial is available with no credit card required.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Mortgage Broker', url: `${site.url}/mortgage-broker/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        🏠 For Mortgage Advisers & Loan Officers
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Callback Software for Mortgage Brokers<br class="hidden sm:block" />
+        <span class="text-lime-400">— Call Back Before the Competition</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        Mortgage leads research multiple brokers simultaneously. Whoever calls first earns the relationship. LimeCall connects your advisers to leads in 28 seconds — FCA-compliant, GDPR-ready, 24/7.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ FCA-Compliant · GDPR Consent Capture · Trusted by mortgage brokers in 40+ countries</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-red-500/20 bg-red-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Your Most Motivated Leads Are Enquiring After 8pm</h2>
+        <p class="text-dark-300">
+          Remortgage enquiries peak between 8pm and 10pm. Without LimeCall, you're missing the most motivated leads of the day. The average mortgage broker responds in 48 hours. By then, 82% of those leads have already chosen an adviser who called them back first. With £1,200 average commission per mortgage, delayed response is an expensive habit.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Mortgage Brokers</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Borrower Visits Your Website', desc: "LimeCall widget appears on your mortgage product pages — residential, remortgage, buy-to-let, bridging. Borrower enters number and consents to callback." },
+          { step: '02', title: 'Routed to the Right Adviser', desc: 'LimeCall routes to the correct specialist by mortgage type. GDPR consent and lead details captured automatically and synced to your CRM.' },
+          { step: '03', title: 'Adviser Connected in 28 Seconds', desc: 'Adviser greets the borrower while they are still actively researching — before the 48-hour average response window has even opened.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Mortgage Advisers & Loan Officers</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Mortgage Broker Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'First-Time Buyer Enquiries', desc: 'First-time buyer page → adviser connected in 28s → affordability discussion started and DIP appointment booked.' },
+          { title: 'Remortgage Applications', desc: 'Remortgage page → specialist adviser → rate comparison started on the call, application process explained.' },
+          { title: 'Buy-to-Let Enquiries', desc: 'BTL page → experienced BTL adviser → rental yield and stress test discussed, product options outlined.' },
+          { title: 'Bridging Finance Calls', desc: 'Bridging page → specialist routed immediately → time-sensitive funding requirements assessed on the call.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study / testimonial -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "Our after-hours remortgage leads went from 0% contact rate to 67% same-day contact. We added £400k in monthly loan book within 90 days. LimeCall paid for itself in the first week."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Principal Mortgage Adviser</p>
+          <p class="text-sm text-dark-500">Independent mortgage brokerage, London</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. How Mortgage Brokers Typically Handle Leads</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone/Voicemail', 'Web Enquiry Form', 'Email Only'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Rep availability', '24–48 hours', '24–72 hours'],
+              ['FCA call recording', '✅ Automatic', '⚠️ Manual setup', '❌ No call', '❌ No call'],
+              ['GDPR consent capture', '✅ At point of request', '⚠️ Verbal only', '⚠️ Form field', '⚠️ Email opt-in'],
+              ['After-hours capture', '✅ Queue + AM callback', '❌ Voicemail', '✅ Form stored', '✅ Email stored'],
+              ['CRM auto-logging', '✅ Full call record', '❌ Manual', '⚠️ Partial', '⚠️ Email thread'],
+              ['Loan book growth', '🟢 £400k/90 days reported', '🟡 Standard', '🔴 Slow response', '🔴 Very slow'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with Your Mortgage CRM</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall integrates with Salesforce, HubSpot, Zoho CRM, and 1,000+ tools via Zapier — including popular mortgage case management platforms. Every callback is logged with borrower name, number, mortgage type, GDPR consent record, call recording link, and adviser notes. Your compliance file stays complete automatically.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance trust section -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Compliance Built In for FCA-Regulated Brokers</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '🔒', title: 'FCA Record-Keeping Compliant', desc: 'All client calls recorded and encrypted with AES-256. Configurable retention to meet FCA MCOB and SYSC requirements. Audit trail available on demand.' },
+          { icon: '✅', title: 'GDPR Consent Logged Automatically', desc: 'Borrower consent captured at point of callback request. Timestamped and stored alongside each call record — audit-ready for ICO review.' },
+          { icon: '📋', title: 'DPAs & Data Security', desc: 'We sign Data Processing Agreements with all mortgage broker customers. UK GDPR compliant with clearly defined controller and processor responsibilities.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-dark-500">
+        Trusted by mortgage brokers and IFAs across 40+ countries. <a href="/gdpr/" class="text-lime-400 hover:text-lime-300 transition">Read our compliance documentation →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Capturing More Mortgage Leads Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · FCA-compliant · GDPR consent capture included</p>
+      <a href="/signup" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/insurance/', title: 'Insurance Broker Callback', desc: 'FCA-compliant callback for insurance brokers.' },
+        { href: '/real-estate/', title: 'Real Estate Callback', desc: 'Connect estate agents with buyers fast.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Numbers', desc: 'Local numbers for every region you serve.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month.' },
+      ]} />
+    </div>
+  </div>
+</Base>

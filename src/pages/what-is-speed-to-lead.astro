@@ -1,0 +1,309 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'What is Speed to Lead? Definition, Benchmarks & Why It Matters',
+  description: 'Speed to lead is the time between a prospect submitting an inquiry and your team making first contact. The benchmark: under 5 minutes = 100x better odds.',
+  canonical: `${site.url}/what-is-speed-to-lead/`,
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What is Speed to Lead? Definition, Benchmarks & Why It Matters',
+  description: seo.description,
+  datePublished: '2024-02-01',
+  dateModified: '2025-02-15',
+  author: { '@type': 'Organization', name: 'LimeCall Team' },
+  publisher: { '@type': 'Organization', name: 'LimeCall', url: site.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': seo.canonical },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is speed to lead?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Speed to lead is the elapsed time between a prospect submitting an inquiry — filling out a form, clicking a callback button, or calling your number — and your sales team making first contact with that prospect. It is one of the most critical metrics in B2B and high-consideration B2C sales.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: "What's a good speed to lead benchmark?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The gold standard is under 5 minutes. Research from MIT and InsideSales.com shows that responding within 5 minutes makes you up to 100× more likely to reach the lead and 21× more likely to qualify them compared to a 30-minute response. The industry average is 42 hours — far too slow. Best-in-class teams respond within 1 minute using callback software.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you calculate speed to lead?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Speed to lead = timestamp of first contact attempt − timestamp of lead submission. Track this in your CRM for every lead, then average across a period. Most CRMs (Salesforce, HubSpot) can calculate this automatically. For accuracy, use the first meaningful outreach — call connected or email opened — not just the send timestamp.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What slows down lead response time?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The four main causes of slow speed to lead are: (1) manual lead assignment — reps not notified immediately when a lead comes in; (2) no after-hours coverage — leads that arrive outside office hours sit untouched until morning; (3) poor lead routing — leads going to the wrong rep or team; and (4) CRM lag — delays between form submission and the lead appearing in the sales queue.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does speed to lead apply to inbound and outbound sales?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Speed to lead is primarily an inbound sales concept — it measures how quickly you respond to someone who has raised their hand. For outbound, the equivalent concept is "contact rate" or "dial-to-connect" speed. Both measure the same underlying reality: the faster you reach a prospect while they are engaged, the higher your conversion rate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does callback software improve speed to lead?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Callback software like LimeCall eliminates the manual step entirely. Instead of a lead entering a CRM queue and waiting for a rep to notice it, the software immediately dials both the visitor and an available agent — connecting them in 28 seconds. This brings speed to lead from the industry average of 42 hours to under a minute, giving your team a decisive competitive advantage.",
+      },
+    },
+  ],
+};
+
+const benchmarks = [
+  { industry: 'Technology / SaaS', avg: '2.5 hours', best: '< 5 minutes', grade: 'C' },
+  { industry: 'Financial Services', avg: '3.1 hours', best: '< 5 minutes', grade: 'C' },
+  { industry: 'Real Estate', avg: '5.2 hours', best: '< 5 minutes', grade: 'D' },
+  { industry: 'Healthcare', avg: '7.8 hours', best: '< 5 minutes', grade: 'D' },
+  { industry: 'Legal Services', avg: '12.4 hours', best: '< 5 minutes', grade: 'F' },
+  { industry: 'LimeCall customers', avg: '28 seconds', best: '28 seconds', grade: 'A+' },
+];
+
+const improvements = [
+  { icon: '📞', title: 'Callback Software', desc: 'Automatically dials the visitor and agent simultaneously the moment a lead is submitted. Eliminates manual steps entirely. Reduces speed to lead to 28 seconds.' },
+  { icon: '🗺️', title: 'Intelligent Lead Routing', desc: 'Route leads to the right rep instantly using round-robin, territory, or skill-based rules. No manual assignment delays — the right rep is alerted in seconds.' },
+  { icon: '🌙', title: '24/7 AI Qualification', desc: 'Deploy AI-powered qualification outside business hours. Leads are scored, routed, and queued for first-thing callbacks — no lead sits cold overnight.' },
+  { icon: '📱', title: 'Mobile Push Alerts', desc: 'Push notifications to reps\' phones the instant a lead arrives. Even remote and field reps can respond within minutes rather than hours.' },
+  { icon: '📊', title: 'SLA Tracking & Dashboards', desc: 'Set speed-to-lead SLAs in your CRM and get alerted when any lead is not contacted within your target window. Track trends by team, rep, and lead source.' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={articleSchema} />
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'What is Speed to Lead', url: `${site.url}/what-is-speed-to-lead/` }]} />
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400">
+        Definition
+      </div>
+
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        What is <span class="text-lime-400">Speed to Lead?</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Speed to lead is the elapsed time between a prospect submitting an inquiry and your sales team making first contact. It is the single most impactful variable in inbound sales conversion — responding in under 5 minutes makes you up to 100× more likely to close the deal.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="/speed-to-lead/" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Improve Your Speed to Lead
+        </a>
+        <a href="/speed-to-lead-statistics/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          See the Statistics →
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Based on MIT, Harvard Business Review & InsideSales.com research</p>
+    </div>
+  </section>
+
+  <!-- Definition block -->
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Speed to Lead — Definition</h2>
+        <p class="text-dark-200 leading-relaxed text-base">
+          <strong class="text-white">Speed to lead</strong> (also called "lead response time") is the time elapsed between a prospect submitting an inbound inquiry — via web form, callback request, or phone call — and your sales or support team making their first meaningful contact attempt. It is measured in seconds, minutes, or hours, and tracked as an average across all leads in a given period.
+        </p>
+        <p class="mt-4 text-dark-300 leading-relaxed text-sm">
+          The formula is simple: <strong class="text-dark-200">Speed to Lead = First Contact Timestamp − Lead Submission Timestamp.</strong> The challenge is reducing it — and the research shows the rewards for doing so are extraordinary.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Research -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          What the Research <span class="text-lime-400">Says</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Three landmark studies from independent researchers all reach the same conclusion.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+          <div class="text-3xl font-extrabold text-lime-400 mb-2">391%</div>
+          <h3 class="font-bold text-white mb-2">MIT / InsideSales.com</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">
+            Responding to a web lead within 1 minute produces a <strong class="text-dark-300">391% lift</strong> in conversion rate vs. a 5-minute response. The study tracked 100,000 inbound leads across multiple industries.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+          <div class="text-3xl font-extrabold text-lime-400 mb-2">42 hrs</div>
+          <h3 class="font-bold text-white mb-2">Harvard Business Review</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">
+            The average B2B company takes <strong class="text-dark-300">42 hours</strong> to follow up on an inbound lead. Companies that responded within an hour were 7× more likely to have a meaningful conversation with the decision-maker.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+          <div class="text-3xl font-extrabold text-lime-400 mb-2">35–50%</div>
+          <h3 class="font-bold text-white mb-2">InsideSales.com</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">
+            <strong class="text-dark-300">35–50% of all sales</strong> go to the first vendor to respond. When multiple competitors receive the same lead simultaneously, being first to call wins the majority of the time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead decay explainer -->
+  <section class="py-14 sm:py-18">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">The Lead Decay Curve</h2>
+        <p class="text-dark-300 leading-relaxed">
+          A lead's intent peaks at the moment of inquiry and decays rapidly thereafter. Within 5 minutes, the prospect is still at their desk, browser open, emotionally committed to finding a solution. After 30 minutes they've moved on. After 24 hours, many have already spoken to a competitor. The longer you wait, the colder the lead — and the harder every subsequent touchpoint becomes.
+        </p>
+        <p class="mt-4 text-dark-300 leading-relaxed">
+          This isn't theoretical: MIT research showed that reps who called within 1 minute were <strong class="text-white">100× more likely to reach</strong> the lead than those who waited 30 minutes. Not 10× — <em>100×</em>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry benchmarks table -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Speed to Lead <span class="text-lime-400">Benchmarks by Industry</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">Industry averages vs. best-in-class performance. Most sectors have enormous room for improvement.</p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Industry</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Industry Average</th>
+              <th class="px-5 py-4 text-left font-semibold text-lime-400">Best-in-Class Target</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Grade</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {benchmarks.map((row) => (
+              <tr class={`hover:bg-dark-800/30 transition ${row.industry === 'LimeCall customers' ? 'bg-lime-500/5' : ''}`}>
+                <td class={`px-5 py-4 font-medium ${row.industry === 'LimeCall customers' ? 'text-lime-400 font-bold' : 'text-dark-200'}`}>{row.industry}</td>
+                <td class="px-5 py-4 text-dark-400">{row.avg}</td>
+                <td class={`px-5 py-4 font-semibold ${row.industry === 'LimeCall customers' ? 'text-lime-400' : 'text-dark-300'}`}>{row.best}</td>
+                <td class={`px-5 py-4 font-bold ${row.grade === 'A+' ? 'text-lime-400' : row.grade === 'C' ? 'text-yellow-400' : 'text-red-400'}`}>{row.grade}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-dark-600 text-center">Sources: Harvard Business Review, InsideSales.com, LimeCall customer data.</p>
+    </div>
+  </section>
+
+  <!-- How to improve -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          5 Ways to <span class="text-lime-400">Improve Speed to Lead</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {improvements.map((item) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Frequently Asked <span class="text-lime-400">Questions</span>
+        </h2>
+      </div>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((item) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Respond in 28 Seconds, Not 42 Hours
+      </h2>
+      <p class="mt-4 text-lg text-dark-300">
+        LimeCall's callback software connects your team with inbound leads before competitors even see the notification. Start your free trial today.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Required
+        </a>
+        <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing →
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">Free plan available · 5-minute setup · GDPR compliant</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Related Resources"
+        links={[
+          { href: '/speed-to-lead/', title: 'Speed to Lead Software', desc: 'LimeCall\'s speed-to-lead platform — connect with leads in 28 seconds.' },
+          { href: '/speed-to-lead-statistics/', title: 'Speed to Lead Statistics', desc: 'The definitive collection of speed-to-lead data and research.' },
+          { href: '/time-to-lead/', title: 'Time to Lead', desc: 'Understanding time-to-lead metrics and how to track them.' },
+          { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans starting at $35/month. Free tier available.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

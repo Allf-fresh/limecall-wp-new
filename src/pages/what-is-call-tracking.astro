@@ -1,0 +1,329 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'What is Call Tracking? How It Works, Benefits & Tools (2025)',
+  description: 'Call tracking shows which marketing campaigns drive phone calls. Learn how dynamic number insertion (DNI) works and why every PPC advertiser needs it.',
+  canonical: `${site.url}/what-is-call-tracking/`,
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What is Call Tracking? How It Works, Benefits & Tools (2025)',
+  description: seo.description,
+  datePublished: '2024-02-15',
+  dateModified: '2025-03-01',
+  author: { '@type': 'Organization', name: 'LimeCall Team' },
+  publisher: { '@type': 'Organization', name: 'LimeCall', url: site.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': seo.canonical },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is call tracking?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Call tracking is a marketing analytics technology that assigns unique phone numbers to different marketing channels, campaigns, or even individual website visitors. When an inbound call is received on one of those numbers, the system logs which campaign, keyword, or source drove the call — attributing the call conversion to the correct marketing touchpoint.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is dynamic number insertion (DNI)?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Dynamic Number Insertion (DNI) is the core technology behind session-level call tracking. A JavaScript snippet on your website detects each visitor\'s traffic source — the campaign, keyword, ad, or referral URL that brought them to your site — and dynamically swaps the phone number displayed on the page with a unique tracking number assigned to that session. When the visitor calls, the system knows exactly which campaign drove the call.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between call tracking and call recording?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Call tracking and call recording are complementary but distinct features. Call tracking attributes inbound calls to marketing sources — it answers 'which campaign drove this call?'. Call recording captures the audio of the conversation — it answers 'what was said on the call?'. Most call tracking platforms, including LimeCall, offer both: attribution data tells you which channels work, recordings tell you what happens on the calls that convert.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is call tracking GDPR compliant?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Call tracking can be GDPR compliant when implemented correctly. Key requirements are: (1) Inform callers that calls may be recorded (standard in callback flows and IVR greetings). (2) Process only the data necessary for the declared purpose. (3) Sign a Data Processing Agreement (DPA) with your call tracking provider. (4) Respect deletion and data portability requests. LimeCall is GDPR compliant and signs DPAs with all customers in EU/UK regulated industries.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does call tracking cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Call tracking costs typically range from $35 to $200 per month for SMBs, depending on the number of tracking numbers, call volume, and features. LimeCall starts at $35/month and includes call tracking, dynamic number insertion, callback software, call recording, and CRM integrations. Enterprise plans with high call volumes are priced separately.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does call tracking integrate with Google Ads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Call tracking integrates with Google Ads by importing call conversions directly into your Google Ads account. When a visitor from a specific Google Ads campaign calls your tracking number and the call meets your conversion criteria (e.g. call duration over 60 seconds), the conversion is sent back to Google Ads. This allows Google's bidding algorithms to optimise for calls — not just clicks — which dramatically improves paid search performance for businesses that sell over the phone.",
+      },
+    },
+  ],
+};
+
+const types = [
+  {
+    name: 'Source-Level Tracking',
+    desc: 'One unique phone number per marketing channel — one for Google Ads, one for Facebook, one for email, one for your website. When a call comes in on each number, you know the channel.',
+    use: 'Basic attribution, small budgets',
+    accuracy: 'Channel level',
+  },
+  {
+    name: 'Session-Level Tracking (DNI)',
+    desc: 'A unique tracking number is assigned to each website visitor session based on their traffic source. Dynamic Number Insertion swaps the displayed number per visitor. Most accurate form of call attribution.',
+    use: 'PPC optimisation, SEO analysis',
+    accuracy: 'Session / visitor level',
+  },
+  {
+    name: 'Keyword-Level Tracking',
+    desc: 'Goes one step further than session-level by capturing the specific search keyword that brought the visitor to your site. Allows you to see which keywords drive not just clicks, but actual phone call conversions.',
+    use: 'PPC keyword optimisation',
+    accuracy: 'Keyword level',
+  },
+];
+
+const tools = [
+  { name: 'LimeCall', strength: 'Callback + tracking combined', best: 'Businesses wanting callback and DNI in one platform', pricing: 'From $35/month' },
+  { name: 'CallRail', strength: 'Deep PPC attribution', best: 'US-focused agencies & advertisers', pricing: 'From $45/month' },
+  { name: 'CallTrackingMetrics', strength: 'Enterprise call centre features', best: 'Large contact centres', pricing: 'From $79/month' },
+  { name: 'Infinity', strength: 'Visitor-level insight', best: 'UK enterprise & agencies', pricing: 'Custom pricing' },
+];
+
+const benefits = [
+  { icon: '💰', title: 'Prove PPC ROI', desc: 'See exactly which Google Ads campaigns, ad groups, and keywords are driving phone calls — not just clicks. Import call conversions back into Google Ads to let the bidding algorithm optimise for calls.' },
+  { icon: '🔑', title: 'Optimise by Call Conversion', desc: 'Identify which keywords produce calls that convert to customers, not just calls. Pause spend on keywords that generate calls but no revenue. Scale keywords that produce your best customers.' },
+  { icon: '🗑️', title: 'Reduce Wasted Ad Spend', desc: 'The average B2B advertiser wastes 25–40% of their PPC budget on campaigns that drive traffic but not calls. Call tracking makes this waste visible and eliminates it.' },
+  { icon: '📊', title: 'Full Multi-Touch Attribution', desc: 'Understand the complete customer journey — from first click to phone call to closed deal. Session-level DNI captures every touchpoint and ties them to call outcomes.' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={articleSchema} />
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'What is Call Tracking', url: `${site.url}/what-is-call-tracking/` }]} />
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400">
+        Definition
+      </div>
+
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        What is <span class="text-lime-400">Call Tracking?</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Call tracking assigns unique phone numbers to your marketing channels and campaigns, attributing every inbound call to the source that drove it. It shows you which ads, keywords, and pages generate phone enquiries — and which are wasting your budget.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="/call-tracking/" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Try LimeCall Call Tracking
+        </a>
+        <a href="/inbound-call-tracking/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          Inbound Call Tracking →
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Dynamic number insertion · Google Ads import · GDPR compliant · From $35/month</p>
+    </div>
+  </section>
+
+  <!-- Definition block -->
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-8 sm:p-10">
+        <h2 class="text-xl font-bold text-white mb-4">Call Tracking — Definition</h2>
+        <p class="text-dark-200 leading-relaxed text-base">
+          <strong class="text-white">Call tracking</strong> is a marketing analytics technology that assigns unique, trackable phone numbers to different marketing channels — paid search, organic, social, email, direct — and attributes every inbound call to the source that generated it. At the session level (using Dynamic Number Insertion), each website visitor sees a different tracking number, enabling keyword-level attribution of phone call conversions.
+        </p>
+        <p class="mt-4 text-dark-300 leading-relaxed text-sm">
+          For any business that receives a significant portion of its leads or sales by phone, call tracking closes the attribution gap that web analytics alone cannot fill. Without it, a business running Google Ads has no reliable way to know which campaigns are driving calls — or whether those calls convert to revenue.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How DNI works -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          How Dynamic Number Insertion <span class="text-lime-400">(DNI) Works</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">DNI is the engine of session-level call tracking. Here is the four-step flow.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { n: '01', title: 'Visitor Arrives', desc: 'A visitor arrives at your website from a Google Ads campaign for the keyword "mortgage broker london".' },
+          { n: '02', title: 'DNI Script Detects Source', desc: 'Your call tracking JavaScript reads the UTM parameters, referrer, and session data to identify the exact traffic source and keyword.' },
+          { n: '03', title: 'Number Swapped', desc: 'The phone number displayed on your website is dynamically replaced with a unique tracking number assigned to this visitor\'s session.' },
+          { n: '04', title: 'Call Attributed', desc: 'When the visitor calls, the system records the call and logs it against the campaign, ad group, and keyword — enabling Google Ads conversion import.' },
+        ].map((s) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-sm">{s.n}</div>
+            <h3 class="text-base font-bold text-white mb-2">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Why Every PPC Advertiser <span class="text-lime-400">Needs Call Tracking</span>
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {benefits.map((b) => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{b.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Types -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          3 Types of <span class="text-lime-400">Call Tracking</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">From basic channel attribution to keyword-level conversion data.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {types.map((t, i) => (
+          <div class={`rounded-2xl border p-7 ${i === 1 ? 'border-lime-500/30 bg-lime-500/5' : 'border-dark-800 bg-dark-900/60'}`}>
+            <div class="mb-3 inline-block rounded-full border border-dark-700 bg-dark-800 px-3 py-1 text-xs font-semibold text-dark-400">
+              {i === 1 ? '★ Most Popular' : `Level ${i + 1}`}
+            </div>
+            <h3 class="text-base font-bold text-white mb-3">{t.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed mb-4">{t.desc}</p>
+            <div class="space-y-1">
+              <p class="text-xs text-dark-500">Best for: <span class="text-dark-300">{t.use}</span></p>
+              <p class="text-xs text-dark-500">Accuracy: <span class="text-dark-300">{t.accuracy}</span></p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools comparison -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Call Tracking <span class="text-lime-400">Tools Compared</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">The leading call tracking platforms and what each does best.</p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Tool</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Strength</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Best For</th>
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Pricing</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {tools.map((tool, i) => (
+              <tr class={`hover:bg-dark-800/30 transition ${i === 0 ? 'bg-lime-500/5' : ''}`}>
+                <td class={`px-5 py-4 font-bold ${i === 0 ? 'text-lime-400' : 'text-white'}`}>{tool.name}</td>
+                <td class="px-5 py-4 text-dark-400">{tool.strength}</td>
+                <td class="px-5 py-4 text-dark-400">{tool.best}</td>
+                <td class={`px-5 py-4 font-semibold ${i === 0 ? 'text-lime-400' : 'text-dark-300'}`}>{tool.pricing}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Frequently Asked <span class="text-lime-400">Questions</span>
+        </h2>
+      </div>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map((item) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-lime-500/20 bg-gradient-to-br from-lime-500/10 to-dark-900 py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Attribute Every Call to the Campaign That Drove It
+      </h2>
+      <p class="mt-4 text-lg text-dark-300">
+        LimeCall combines call tracking, dynamic number insertion, callback software, and Google Ads import in one platform. Start your free trial in 5 minutes.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="/signup" class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free — No Card Required
+        </a>
+        <a href="/pricing/" class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40">
+          View Pricing →
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">From $35/month · DNI included · Google Ads integration · GDPR compliant</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Related Resources"
+        links={[
+          { href: '/inbound-call-tracking/', title: 'Inbound Call Tracking', desc: 'LimeCall\'s inbound call tracking — DNI, attribution, and Google Ads import.' },
+          { href: '/call-tracking/', title: 'Call Tracking Software', desc: 'The full LimeCall call tracking platform — features and demo.' },
+          { href: '/google-ads-integration/', title: 'Google Ads Integration', desc: 'Import call conversions into Google Ads and optimise bidding for phone calls.' },
+          { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans starting at $35/month. Free tier available.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

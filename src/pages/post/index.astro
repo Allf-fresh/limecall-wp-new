@@ -1,9 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getPublishedContent } from '../../lib/supabase';
+import postsData from '../../data/posts.json';
 import { site } from '../../site.config';
 
-const allPosts = await getPublishedContent('blog');
+const allPosts = postsData;
 const latestPosts = allPosts.slice(0, 24);
 
 const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
@@ -12,7 +12,7 @@ const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
 <Base
   title="LimeCall Blog — Sales, Lead Generation & Callback Tips"
   description="Get LimeCall's advice on the best ways to convert website visitors, engage leads, and support your customers. Delivered straight from our team."
-  canonical="https://www.limecall.com/post"
+  canonical="https://www.limecall.com/post/"
 >
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -50,7 +50,7 @@ const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {latestPosts.map((post) => (
             <a
-              href={post.category ? `/post/${post.category}/${post.slug}` : `/post/${post.slug}`}
+              href={`/post/${post.slug}/`}
               class="group rounded-xl border border-dark-800 bg-dark-900/50 overflow-hidden transition-all hover:border-dark-700 flex flex-col"
             >
               {post.featured_image && (
@@ -72,12 +72,12 @@ const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
                 <h2 class="font-semibold text-white group-hover:text-lime-400 transition line-clamp-2 flex-1">
                   {post.title}
                 </h2>
-                {post.meta_description && (
-                  <p class="mt-2 text-sm text-dark-400 line-clamp-2">{post.meta_description}</p>
+                {(post.meta_description || post.seo_description) && (
+                  <p class="mt-2 text-sm text-dark-400 line-clamp-2">{post.meta_description || post.seo_description}</p>
                 )}
-                {post.publish_date && (
-                  <time class="mt-4 block text-xs text-dark-500" datetime={post.publish_date}>
-                    {new Date(post.publish_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                {(post.publish_date || post.date) && (
+                  <time class="mt-4 block text-xs text-dark-500" datetime={post.publish_date || post.date}>
+                    {new Date(post.publish_date || post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </time>
                 )}
               </div>

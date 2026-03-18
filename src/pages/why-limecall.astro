@@ -204,6 +204,46 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- E-E-A-T: Company credibility -->
+  <section class="border-b border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 sm:grid-cols-2 items-center">
+        <div>
+          <h2 class="text-2xl font-bold text-white sm:text-3xl mb-4">Trusted by 10,000+ businesses in 40+ countries</h2>
+          <p class="text-dark-300 leading-relaxed mb-4">
+            LimeCall was built by a team obsessed with one problem: the gap between a website visitor's peak buying intent and the moment a sales rep actually speaks with them. That gap — often measured in hours — is where deals are lost.
+          </p>
+          <p class="text-dark-300 leading-relaxed mb-4">
+            Since launch, LimeCall has powered over 10 million callbacks and is used by sales, marketing, and support teams at companies ranging from fast-growing SaaS startups to established financial services firms across North America, Europe, and Asia-Pacific.
+          </p>
+          <p class="text-dark-300 leading-relaxed">
+            Rated <strong class="text-white">4.5+ stars on G2 and Capterra</strong>, LimeCall is the platform of choice for teams who treat speed-to-lead as a competitive advantage — not an afterthought.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/customers/" class="text-sm font-semibold text-lime-400 hover:text-lime-300 transition">Read customer stories →</a>
+            <span class="text-dark-700">|</span>
+            <a href="/why-limecall/vs-callpage/" class="text-sm font-semibold text-lime-400 hover:text-lime-300 transition">LimeCall vs CallPage →</a>
+            <span class="text-dark-700">|</span>
+            <a href="/why-limecall/vs-leaddesk/" class="text-sm font-semibold text-lime-400 hover:text-lime-300 transition">LimeCall vs LeadDesk →</a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-5">
+          {[
+            { value: "10,000+", label: "Businesses trust LimeCall" },
+            { value: "40+", label: "Countries with virtual numbers" },
+            { value: "28s", label: "Average callback time" },
+            { value: "4.5★", label: "Average rating on G2 & Capterra" },
+          ].map(s => (
+            <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+              <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+              <div class="mt-2 text-xs text-dark-400 leading-snug">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Key differentiators -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

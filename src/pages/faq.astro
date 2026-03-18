@@ -49,7 +49,27 @@ const faqs = [
       },
       {
         question: 'Does LimeCall integrate with my CRM?',
-        answer: 'LimeCall integrates with HubSpot, Salesforce, Zapier, Slack, Zendesk, and more. Every call, lead, and note syncs automatically. New lead data flows into your CRM without any manual entry.',
+        answer: 'LimeCall integrates with HubSpot, Salesforce, Zapier, Slack, Zendesk, and more. Every call, lead, and note syncs automatically. New lead data flows into your CRM without any manual entry. See all integrations at /integrations.',
+      },
+      {
+        question: 'Does LimeCall support WhatsApp?',
+        answer: 'Yes. LimeCall includes WhatsApp integration so you can reach leads on their preferred messaging channel. Visitors can choose to be contacted via WhatsApp directly from your callback widget, and conversations sync to your dashboard alongside calls and SMS.',
+      },
+      {
+        question: 'Can I send SMS messages with LimeCall?',
+        answer: 'Yes. LimeCall supports outbound and inbound SMS. You can run SMS broadcasts to lists, send automated follow-up messages after missed calls, and allow visitors to request a text-back instead of a phone call. Learn more at /business-texting.',
+      },
+      {
+        question: 'Is there a mobile app for LimeCall?',
+        answer: 'Yes. LimeCall is available on iOS and Android. Your sales reps can receive callback requests, manage leads, review call recordings, and update availability directly from their phone. Download links are available in your LimeCall dashboard.',
+      },
+      {
+        question: 'Does LimeCall have an API?',
+        answer: 'Yes. LimeCall provides a REST API for custom integrations, advanced lead routing logic, and embedding callback functionality into proprietary platforms. API documentation is available in your developer dashboard. Contact support if you need help with a specific integration.',
+      },
+      {
+        question: 'Which countries does LimeCall support?',
+        answer: 'LimeCall is available in 50+ countries. Virtual phone numbers can be provisioned in major markets including the US, UK, Canada, Australia, India, Germany, France, and more. See the full list of supported countries at /virtual-numbers.',
       },
       {
         question: 'What is the time limit per call?',
@@ -129,8 +149,8 @@ const allFaqs = faqs.flatMap(cat => cat.items);
 ---
 
 <Base
-  title="LimeCall FAQ — Frequently Asked Questions"
-  description="Answers to the most common questions about LimeCall: how callbacks work, pricing, integrations, virtual numbers, call recording, GDPR compliance, and more."
+  title="LimeCall FAQ: Pricing, Setup & Features Answered"
+  description="Answers to the most common questions about LimeCall: callbacks, pricing, integrations, virtual numbers, WhatsApp, SMS, mobile app, API, GDPR, and more."
   canonical="https://www.limecall.com/faq/"
 >
   <JsonLd schema={faqSchema(allFaqs)} />

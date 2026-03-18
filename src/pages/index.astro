@@ -128,6 +128,58 @@ const testimonials = [
   canonical={`${site.url}/`}
 >
   <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={{
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'LimeCall',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web, iOS, Android',
+    url: 'https://www.limecall.com',
+    description: 'LimeCall is callback software that connects website visitors with sales teams in 28 seconds. Features include instant callback widget, lead routing, virtual phone numbers in 40+ countries, WhatsApp integration, SMS, and CRM sync.',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      description: 'Free plan available. Paid plans from $35/month.'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.5',
+      reviewCount: '127',
+      bestRating: '5',
+      worstRating: '1'
+    },
+    featureList: [
+      'Instant 28-second callback',
+      'Click-to-call widget',
+      'Lead distribution and routing',
+      'WhatsApp integration',
+      'SMS broadcasts',
+      'Virtual phone numbers (40+ countries)',
+      'Call recording',
+      'CRM integrations (HubSpot, Salesforce, Pipedrive)',
+      'AI voice agent',
+      'Speed-to-lead automation'
+    ]
+  }} />
+  <JsonLd schema={{
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+    logo: 'https://www.limecall.com/logo.png',
+    description: 'LimeCall is callback and speed-to-lead software for sales teams. Connect website leads to sales reps in 28 seconds.',
+    sameAs: [
+      'https://www.g2.com/products/limecall',
+      'https://www.capterra.com/p/196081/LimeCall/',
+      'https://www.linkedin.com/company/limecall'
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      url: 'https://www.limecall.com/contact-us/'
+    }
+  }} />
 
   <!-- Hero -->
   <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">

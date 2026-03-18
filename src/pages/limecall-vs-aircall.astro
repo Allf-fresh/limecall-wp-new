@@ -1,0 +1,541 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs Aircall: Callback Widget vs Call Centre 2026 | LimeCall',
+  description: 'LimeCall vs Aircall: instant 28s callback widget at $35/mo flat vs Aircall\'s $90/mo minimum (3 seats). No per-seat tax, WhatsApp included. Full comparison.',
+  canonical: 'https://www.limecall.com/limecall-vs-aircall/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price (monthly)', limecall: '$0 free / $35 Starter', aircall: '$90/mo min (3 seats × $30)', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat call-volume plans', aircall: 'Per-seat (scales steeply)', advantage: 'limecall' },
+  { feature: 'Free plan', limecall: '✅ 30 calls/mo', aircall: '❌ None', advantage: 'limecall' },
+  { feature: 'Minimum spend', limecall: '$0/mo', aircall: '$90/mo (3-user minimum)', advantage: 'limecall' },
+  { feature: 'Instant callback widget', limecall: '✅ 28-second connect', aircall: '❌ Manual dialling only', advantage: 'limecall' },
+  { feature: 'Speed to lead', limecall: '28 seconds average', aircall: 'Agent manually dials', advantage: 'limecall' },
+  { feature: 'WhatsApp integration', limecall: '✅ Native', aircall: '❌ Not available', advantage: 'limecall' },
+  { feature: 'SMS / text messaging', limecall: '✅ Included', aircall: '✅ Available', advantage: 'neutral' },
+  { feature: 'Multi-agent call centre', limecall: 'Basic routing', aircall: '✅ Full call centre suite', advantage: 'aircall' },
+  { feature: 'Call analytics & reporting', limecall: 'Standard dashboards', aircall: '✅ Advanced analytics', advantage: 'aircall' },
+  { feature: 'Salesforce integration', limecall: '✅', aircall: '✅', advantage: 'neutral' },
+  { feature: 'HubSpot integration', limecall: '✅', aircall: '✅', advantage: 'neutral' },
+  { feature: 'Virtual numbers', limecall: '40+ countries included', aircall: 'Available, per-number cost', advantage: 'limecall' },
+  { feature: 'Facebook Lead Ads CRM', limecall: '✅', aircall: '❌', advantage: 'limecall' },
+  { feature: 'Mobile sales app', limecall: '✅', aircall: '✅', advantage: 'neutral' },
+  { feature: 'Browser calling (WebCalls)', limecall: '✅', aircall: '✅', advantage: 'neutral' },
+  { feature: 'Free tools suite', limecall: '13 free tools', aircall: 'None', advantage: 'limecall' },
+  { feature: 'Setup time', limecall: '~5 minutes', aircall: '1–2 days (admin setup)', advantage: 'limecall' },
+  { feature: 'Small business friendly', limecall: '✅ Single-user OK', aircall: '❌ 3-user minimum', advantage: 'limecall' },
+  { feature: 'Best for', limecall: 'Lead gen & inbound speed', aircall: 'Multi-agent call centres', advantage: 'neutral' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '$0/mo', calls: '30', callsPerDollar: '∞', note: 'No credit card required' },
+      { name: 'Starter', price: '$35/mo', calls: '100', callsPerDollar: '2.86', note: 'Lead distribution, SMS' },
+      { name: 'Pro', price: '$99/mo', calls: '500', callsPerDollar: '5.05', note: 'Virtual numbers, API access' },
+    ],
+  },
+  {
+    tool: 'Aircall',
+    highlight: false,
+    tiers: [
+      { name: 'Essentials (3 users)', price: '$90/mo', calls: 'Unlimited*', callsPerDollar: 'Per-seat', note: '*Domestic only, 3-seat min' },
+      { name: 'Professional (3 users)', price: '$150/mo', calls: 'Unlimited*', callsPerDollar: 'Per-seat', note: 'Advanced analytics, Salesforce' },
+      { name: 'Custom (5+ users)', price: 'Custom', calls: 'Unlimited*', callsPerDollar: 'Negotiated', note: 'Enterprise features' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'You are a small team or solo operator — Aircall\'s 3-user minimum means you pay for seats you don\'t need',
+  'Speed-to-lead is your #1 priority — LimeCall\'s 28-second callback widget connects prospects instantly; Aircall requires agents to dial manually',
+  'You want WhatsApp or multi-channel follow-up baked in without a separate tool',
+  'You need virtual numbers across 40+ countries without paying per-number fees on top of seat costs',
+  'Your budget is under $90/mo — LimeCall\'s free and Starter plans cover you; Aircall starts at $90/mo minimum',
+  'You want a 5-minute setup, not a 2-day admin project',
+  'Facebook Lead Ads are a key lead source — LimeCall\'s CRM sync handles them natively',
+];
+
+const chooseAircall = [
+  'You run a multi-agent inbound call centre with 5+ agents handling high call volume',
+  'Advanced call analytics, queuing, and real-time dashboards are non-negotiable for your operations',
+  'You need deep Salesforce call logging, power diallers, and enterprise-grade routing rules',
+  'Your team already uses Aircall and is deeply embedded in its integrations ecosystem',
+  'You need calls to be the primary channel — Aircall\'s telephony depth is unmatched for call centres',
+];
+
+const testimonials = [
+  {
+    quote: 'We were paying $120/mo for Aircall for two reps and still had to manually chase every inbound lead. LimeCall\'s callback widget changed that immediately — prospects hear from us in 28 seconds and our close rate jumped 40%.',
+    name: 'James K.',
+    title: 'Sales Lead, B2B SaaS',
+    metric: '+40% close rate',
+  },
+  {
+    quote: 'Aircall is great if you\'re running a call centre. We\'re a 3-person marketing team. LimeCall gave us the instant callback we needed at a third of the price, plus WhatsApp follow-up built right in.',
+    name: 'Sarah M.',
+    title: 'Head of Growth, E-commerce',
+    metric: '3× fewer missed leads',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the main difference between LimeCall and Aircall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is an instant callback widget platform built for lead generation speed — when a prospect clicks the widget, both sides are connected in 28 seconds automatically. Aircall is a VoIP call centre platform designed for multi-agent teams handling large call volumes. LimeCall starts free and charges by call volume with no per-seat fees. Aircall starts at $30/user/month with a 3-user minimum ($90/mo minimum spend) and has no instant callback widget.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall cheaper than Aircall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For most small and medium businesses, yes. LimeCall has a free plan (30 calls/month, no credit card) and a Starter plan at $35/month. Aircall requires a minimum of 3 users at $30/user/month, meaning your minimum entry cost is $90/month — and that scales linearly with every agent you add. A 5-agent Aircall team costs $150/month on Essentials before any add-ons. LimeCall\'s Pro plan at $99/month covers your entire team with 500 calls regardless of headcount.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does Aircall have an instant callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Aircall does not offer an instant callback widget. When a prospect visits your website, Aircall cannot automatically trigger a two-way call connection in seconds. Aircall is a cloud phone system where agents manually initiate or receive calls. LimeCall\'s core product is the 28-second callback widget — a visitor clicks a button on your website, enters their number, and LimeCall simultaneously dials your agent and the prospect, bridging them in under 28 seconds on average.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for call centres like Aircall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall handles basic call routing and lead distribution, but it is not a full call centre platform. If you run a high-volume inbound call centre with 10+ agents, complex queuing rules, real-time wallboards, and supervisor monitoring, Aircall is the better fit. LimeCall excels at speed-to-lead: connecting inbound website leads with your team in seconds. If your primary use case is converting website visitors into sales conversations, LimeCall wins on speed, price, and simplicity.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall with WhatsApp? Does Aircall support WhatsApp?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall includes native WhatsApp integration on paid plans, allowing you to follow up leads via WhatsApp after a callback. Aircall does not offer WhatsApp integration as of 2026. If multi-channel follow-up (phone + WhatsApp + SMS) is important to your sales process, LimeCall covers all three channels in one platform without needing additional tools.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I switch from Aircall to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Switching from Aircall to LimeCall takes about 10 minutes. Sign up for LimeCall (no credit card needed), then install the LimeCall widget script on your website — just paste one script tag before the closing body tag. Connect your CRM (HubSpot, Salesforce, or via Zapier) using LimeCall\'s one-click integrations. Your agents receive callback alerts via the LimeCall app or mobile. Most teams are fully live the same day they sign up. LimeCall\'s support team can assist with any migration questions.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs Aircall', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2026 Comparison · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs Aircall:<br />
+        <span class="text-lime-400">Instant Callback Widget vs Call Centre Platform</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Aircall starts at $90/month minimum (3 seats) with no callback widget. LimeCall starts free with a 28-second instant callback widget and flat-rate pricing. Here is the full comparison.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Starter</div>
+          <div class="text-5xl font-extrabold text-lime-400">$35</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat</div>
+          <div class="mt-3 text-lg font-bold text-white">28s callback widget</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">No per-seat fees · Free plan available</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">Aircall Essentials</div>
+          <div class="text-5xl font-extrabold text-dark-300">$90</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per month minimum</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">Manual dialling only</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">3-user minimum · No callback widget</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
+        <h2 class="text-lg font-bold text-white mb-4">Quick Verdict</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">LimeCall wins on speed-to-lead and price for SMBs.</strong> The 28-second callback widget is LimeCall's core advantage — it's a feature Aircall simply doesn't have. For teams converting website visitors into sales calls, this alone justifies the switch.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">$90/mo minimum vs $0 free.</strong> Aircall forces a 3-user minimum at $30/seat. A solo operator or 2-person team pays for ghost seats. LimeCall has no per-seat model — one flat price covers your whole team.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">⚠️</span>
+            <span><strong class="text-white">Choose Aircall for large call centres.</strong> If you have 10+ agents handling hundreds of inbound calls per day with complex routing and real-time supervisor monitoring, Aircall's call centre infrastructure is superior. LimeCall is not a full call centre replacement for high-volume operations.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a speed-to-lead platform built around an instant callback widget. When a prospect visits your website and clicks the widget, LimeCall simultaneously dials your sales rep and the prospect — connecting them in an average of 28 seconds. It adds WhatsApp, SMS, virtual numbers, and 13 free sales tools in one flat-rate package.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Founded for SMBs and growth-stage companies</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing, no per-seat model</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Free plan with 30 calls/month</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">Aircall</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            Aircall is a cloud-based call centre platform designed for multi-agent sales and support teams. It offers advanced call routing, real-time analytics, call recording, and deep CRM integrations. Aircall is trusted by larger teams that handle high call volumes and need enterprise-grade telephony infrastructure.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Designed for 5–100+ agent call centres</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-seat pricing, 3-user minimum</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No free plan, no callback widget</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2026.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Aircall</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'aircall' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'aircall' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.aircall}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-seat: understand the true cost as your team grows.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-800">
+                    <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Plan</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Price</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Calls</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Model</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.tiers.map((t, i) => (
+                    <tr class:list={["border-b border-dark-800/40", i === p.tiers.length - 1 ? "border-0" : ""]}>
+                      <td class="py-3 pr-2">
+                        <div class="font-semibold text-white text-xs">{t.name}</div>
+                        <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                      </td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</td>
+                      <td class="py-3 text-center text-dark-300 text-xs">{t.calls}</td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.callsPerDollar}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">The per-seat trap:</strong> A 5-agent Aircall team on Essentials costs $150/month and grows to $300/month at 10 agents. LimeCall's Pro plan stays at $99/month regardless of team size — no per-seat tax, ever.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aircall Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Aircall: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Aircall Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Best-in-class multi-agent call centre infrastructure with queuing, IVR, and routing',
+              'Advanced real-time analytics, call recordings, and supervisor dashboards',
+              'Deep Salesforce integration with automatic call logging and activity tracking',
+              'Large ecosystem of 100+ integrations via the Aircall App Marketplace',
+              'Strong track record with enterprise sales and support teams at scale',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Aircall Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — prospects must wait for manual agent outreach',
+              '$90/month minimum (3 seats) makes it expensive for small teams and solopreneurs',
+              'No WhatsApp integration, limiting multi-channel follow-up options',
+              'Per-seat pricing scales aggressively — a 10-agent team pays $300+/month on Essentials',
+              'No free plan — every customer pays from day one',
+              'Complex setup requires IT/admin involvement, not a 5-minute install',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose Aircall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseAircall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://aircall.io" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit Aircall →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Steps -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Switch from Aircall to LimeCall in 5 Minutes</h2>
+      <p class="mb-10 text-center text-dark-400">No downtime. No developer required. Most teams are live within the same working day.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Sign up for LimeCall — no credit card needed',
+            desc: 'Create your account at limecall.com in under 60 seconds. You immediately access the widget builder, dashboard, and integrations hub. Your 14-day full-feature trial starts automatically. No seat minimums — invite your whole team.',
+          },
+          {
+            step: '2',
+            title: 'Install the LimeCall callback widget on your website',
+            desc: 'Copy your unique LimeCall widget script from the dashboard. Paste it into your website before the closing </body> tag. Works with WordPress, Webflow, Shopify, HubSpot CMS, or any custom site. The widget goes live instantly — your team will start receiving callback requests within minutes.',
+          },
+          {
+            step: '3',
+            title: 'Connect your CRM and activate WhatsApp + SMS',
+            desc: 'Use LimeCall\'s one-click integrations to connect HubSpot, Salesforce, Slack, or Zapier. All lead data flows into your existing CRM records. WhatsApp and SMS follow-up channels activate automatically on paid plans. Your Aircall phone numbers can be ported if needed — contact support for porting assistance.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Former Aircall Users Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and Aircall.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Stop Paying Per Seat.<br />Start Connecting in 28 Seconds.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Join thousands of sales teams who chose LimeCall for instant callback speed, flat pricing, and multi-channel follow-up — without Aircall's per-seat cost model.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/why-limecall/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          Why LimeCall
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore LimeCall" links={[
+      { href: '/compare/', title: 'Compare All Alternatives', desc: 'LimeCall vs every major competitor.' },
+      { href: '/limecall-vs-justcall/', title: 'LimeCall vs JustCall', desc: 'Flat pricing vs per-user cloud phone.' },
+      { href: '/limecall-vs-ringover/', title: 'LimeCall vs Ringover', desc: 'Instant callback vs European VoIP.' },
+      { href: '/limecall-vs-dialpad/', title: 'LimeCall vs Dialpad', desc: 'SME-friendly vs AI enterprise phone.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

@@ -1,0 +1,541 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs JustCall: Callback Widget + Flat Pricing 2026 | LimeCall',
+  description: 'LimeCall vs JustCall: instant 28s callback widget, 40+ virtual numbers included, flat plans from $35 vs JustCall\'s $29/user/mo. Full feature & pricing comparison.',
+  canonical: 'https://www.limecall.com/limecall-vs-justcall/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price (monthly)', limecall: '$0 free / $35 Starter', justcall: '$29/user/mo', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat call-volume plans', justcall: 'Per-user (scales with team)', advantage: 'limecall' },
+  { feature: 'Free plan', limecall: '✅ 30 calls/mo', justcall: '❌ None', advantage: 'limecall' },
+  { feature: 'Instant callback widget', limecall: '✅ 28-second connect', justcall: '❌ Not available', advantage: 'limecall' },
+  { feature: 'Speed to lead', limecall: '28 seconds average', justcall: 'Agent dials manually', advantage: 'limecall' },
+  { feature: 'Virtual numbers', limecall: '40+ countries included', justcall: 'Available, per-number fees', advantage: 'limecall' },
+  { feature: 'WhatsApp integration', limecall: '✅ Native', justcall: '✅ Available', advantage: 'neutral' },
+  { feature: 'SMS campaigns / broadcasts', limecall: '✅ Included', justcall: '✅ Strong SMS campaigns', advantage: 'neutral' },
+  { feature: 'AI call scoring', limecall: 'Roadmap', justcall: '✅ Live', advantage: 'justcall' },
+  { feature: 'CRM integrations', limecall: 'HubSpot, Salesforce, Zapier', justcall: '100+ CRM integrations', advantage: 'justcall' },
+  { feature: 'Power dialler', limecall: '❌', justcall: '✅ Available', advantage: 'justcall' },
+  { feature: 'Call recording', limecall: '✅', justcall: '✅', advantage: 'neutral' },
+  { feature: 'Call analytics', limecall: 'Standard dashboards', justcall: 'Advanced AI analytics', advantage: 'justcall' },
+  { feature: 'Facebook Lead Ads CRM', limecall: '✅', justcall: 'Via Zapier', advantage: 'limecall' },
+  { feature: 'Mobile sales app', limecall: '✅', justcall: '✅', advantage: 'neutral' },
+  { feature: 'Browser calling (WebCalls)', limecall: '✅', justcall: '✅', advantage: 'neutral' },
+  { feature: 'Free tools suite', limecall: '13 free tools', justcall: 'None', advantage: 'limecall' },
+  { feature: 'Setup time', limecall: '~5 minutes (widget install)', justcall: '1 day (number porting, setup)', advantage: 'limecall' },
+  { feature: '5-user team monthly cost', limecall: '$99/mo flat', justcall: '$145+/mo (5 × $29)', advantage: 'limecall' },
+  { feature: 'Best for', limecall: 'Lead gen & speed-to-lead', justcall: 'Sales teams needing diallers + AI', advantage: 'neutral' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '$0/mo', calls: '30', callsPerDollar: '∞', note: 'No credit card required' },
+      { name: 'Starter', price: '$35/mo', calls: '100', callsPerDollar: '2.86', note: 'Lead distribution, SMS' },
+      { name: 'Pro', price: '$99/mo', calls: '500', callsPerDollar: '5.05', note: 'Virtual numbers, API access' },
+    ],
+  },
+  {
+    tool: 'JustCall',
+    highlight: false,
+    tiers: [
+      { name: 'Essentials', price: '$29/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-user', note: '*Domestic. 1 user = $29/mo' },
+      { name: 'Team', price: '$39/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-user', note: 'AI features, SMS campaigns' },
+      { name: 'Pro', price: '$69/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-user', note: 'Advanced analytics, API' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'Speed-to-lead is your #1 metric — LimeCall\'s 28-second callback widget is a feature JustCall simply does not offer',
+  'You need virtual numbers in 40+ countries without paying per-number fees on top of per-user charges',
+  'Your team is small or growing — flat pricing means you never pay a per-seat tax as you hire',
+  'You want a zero-cost starting point — LimeCall\'s free plan requires no credit card and gives 30 calls/month',
+  'Facebook Lead Ads are a key lead source — LimeCall\'s native CRM sync handles them without Zapier',
+  'You want 13 free sales tools bundled alongside your callback platform',
+  'You need a 5-minute widget install, not a full telephony migration project',
+];
+
+const chooseJustCall = [
+  'Your team needs a power dialler to work through large prospect lists efficiently',
+  'AI call scoring and automated coaching insights are important for rep performance management',
+  'You need 100+ CRM integrations out of the box beyond HubSpot and Salesforce',
+  'Advanced SMS campaign automation with drip sequences is core to your outbound strategy',
+  'Your team is already accustomed to JustCall\'s interface and deeply integrated workflows',
+];
+
+const testimonials = [
+  {
+    quote: 'We were on JustCall at $29/user/month — fine for outbound, but we had no way to instantly call back website leads. LimeCall\'s callback widget was a game changer. Speed to lead went from hours to 28 seconds.',
+    name: 'David L.',
+    title: 'Sales Manager, SaaS company',
+    metric: 'Hours → 28 seconds',
+  },
+  {
+    quote: 'The per-user cost of JustCall was fine at 3 reps but when we scaled to 8, the bill jumped to $232/month. LimeCall Pro at $99 covers everyone, and we got 40 virtual numbers thrown in. Easy decision.',
+    name: 'Rachel T.',
+    title: 'VP Growth, B2B services firm',
+    metric: '57% cost reduction',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the main difference between LimeCall and JustCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is a speed-to-lead platform built around an instant callback widget — when a website visitor clicks the widget, LimeCall connects them to your sales rep in 28 seconds automatically. JustCall is a cloud phone system focused on outbound sales teams, with power diallers, AI call scoring, and SMS campaign automation. LimeCall uses flat-rate pricing (no per-seat fees). JustCall charges $29–$69 per user per month, which scales steeply as your team grows.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does JustCall have an instant callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. JustCall does not offer an instant callback widget. JustCall is a cloud phone system where agents use a dialler to make and receive calls. LimeCall\'s 28-second callback widget is a distinct product category — it sits on your website and automatically bridges a two-way call between your agent and the prospect in under 28 seconds when the prospect submits their number. If inbound website lead conversion speed is your priority, LimeCall has an advantage JustCall cannot match.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall cheaper than JustCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For teams of 3 or more, LimeCall is significantly cheaper. A 5-person team on JustCall Essentials costs $145/month ($29 × 5). LimeCall Pro costs $99/month regardless of team size. At 8 users, JustCall costs $232/month versus LimeCall\'s fixed $99/month — a 57% saving. LimeCall also offers a free plan with 30 calls/month and no credit card required, while JustCall has no free tier.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall include virtual numbers like JustCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall\'s Pro plan includes virtual numbers in 40+ countries at no additional per-number cost. JustCall also offers virtual numbers but charges per number on top of the per-user subscription fee, which can add up quickly for teams needing presence in multiple markets. LimeCall bundles the virtual number coverage into the flat plan price.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What does JustCall offer that LimeCall does not?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'JustCall offers a power dialler for working through large prospect lists, live AI call scoring and coaching, 100+ CRM integrations (more than LimeCall\'s native set), and advanced SMS campaign automation with drip sequences. If your team relies heavily on outbound dialling volume, AI coaching, or complex SMS drip sequences, JustCall\'s feature set is more comprehensive in those specific areas.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I switch from JustCall to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Switching from JustCall to LimeCall takes about 10 minutes for the core setup. Sign up for LimeCall (no credit card needed), install the LimeCall widget script on your website before the closing body tag, then connect your CRM via the native HubSpot, Salesforce, or Zapier integrations. Your virtual numbers can be ported to LimeCall — contact LimeCall support for porting assistance. WhatsApp and SMS channels activate on paid plans. Most teams complete the switch within one business day.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs JustCall', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2026 Comparison · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs JustCall:<br />
+        <span class="text-lime-400">28-Second Callback Widget vs Per-User Cloud Phone</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        JustCall charges $29/user/month with no instant callback widget. LimeCall starts free with a 28-second callback widget, 40+ virtual numbers included, and flat pricing that never scales per seat.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Pro (whole team)</div>
+          <div class="text-5xl font-extrabold text-lime-400">$99</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat</div>
+          <div class="mt-3 text-lg font-bold text-white">500 calls + 40+ numbers</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">No per-seat fees · Free plan available</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">JustCall Essentials (5 users)</div>
+          <div class="text-5xl font-extrabold text-dark-300">$145</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per month (and growing)</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">No callback widget</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">$29/user · Scales with every hire</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
+        <h2 class="text-lg font-bold text-white mb-4">Quick Verdict</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">LimeCall wins on speed-to-lead and team pricing.</strong> The 28-second callback widget is a feature JustCall does not offer. For inbound lead conversion, LimeCall wins decisively. And LimeCall's flat-rate model means a 5-person team pays $99/month instead of $145/month and growing.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">40+ virtual numbers included — no add-on fees.</strong> LimeCall bundles virtual numbers across 40+ countries in the Pro plan. JustCall charges per virtual number on top of per-user fees, which compounds quickly for international teams.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">⚠️</span>
+            <span><strong class="text-white">Choose JustCall for power diallers and AI call coaching.</strong> If your team's primary workflow is outbound dialling from large lists with AI scoring and coaching feedback, JustCall's feature set is deeper in those specific areas. LimeCall does not offer a power dialler or live AI call scoring today.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a speed-to-lead platform centered on an instant callback widget. When a website prospect clicks the button, LimeCall dials your agent and the prospect simultaneously, bridging them in 28 seconds on average. Virtual numbers in 40+ countries, WhatsApp, SMS, and 13 free sales tools are included in flat-rate plans — no per-seat model.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Built for SMBs, agencies, and growth-stage startups</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing, entire team on one plan</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Free plan: 30 calls/month, no credit card</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">JustCall</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            JustCall is a cloud phone system designed for outbound sales teams. It offers a power dialler, AI call scoring, SMS drip campaigns, and 100+ CRM integrations. JustCall charges $29–$69 per user per month, scaling with every agent you add. No instant callback widget is available.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Built for outbound sales teams and call centres</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-user pricing: $29–$69/user/month</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No free plan, no instant callback widget</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2026.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">JustCall</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'justcall' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'justcall' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.justcall}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-user: the cost difference grows every time you hire.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-800">
+                    <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Plan</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Price</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Calls</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Model</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.tiers.map((t, i) => (
+                    <tr class:list={["border-b border-dark-800/40", i === p.tiers.length - 1 ? "border-0" : ""]}>
+                      <td class="py-3 pr-2">
+                        <div class="font-semibold text-white text-xs">{t.name}</div>
+                        <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                      </td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</td>
+                      <td class="py-3 text-center text-dark-300 text-xs">{t.calls}</td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.callsPerDollar}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">The hiring trap:</strong> Every new rep you add on JustCall costs another $29–$69/month. A 10-person team costs $290–$690/month on JustCall. LimeCall Pro stays at $99/month — your entire team, no matter how many people you hire.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JustCall Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">JustCall: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">JustCall Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Power dialler for working through large prospect lists with minimal manual effort',
+              'AI call scoring and automated rep coaching on higher-tier plans',
+              '100+ CRM integrations including niche tools beyond HubSpot and Salesforce',
+              'Advanced SMS campaign automation with drip sequences and scheduling',
+              'Strong outbound sales feature set built for SDR and BDR teams',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">JustCall Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — cannot connect website visitors to reps in 28 seconds',
+              'Per-user pricing scales aggressively; a 10-rep team pays $290–$690/month',
+              'No free plan — every team pays from day one',
+              'Virtual numbers are an additional per-number cost on top of per-user fees',
+              'Complex feature surface area can be overwhelming for small teams just needing callbacks',
+              'No native Facebook Lead Ads CRM sync',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose JustCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseJustCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://justcall.io" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit JustCall →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Steps -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Switch from JustCall to LimeCall in 10 Minutes</h2>
+      <p class="mb-10 text-center text-dark-400">No downtime. No developer required. Most teams are live within the same working day.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Sign up for LimeCall — no credit card needed',
+            desc: 'Create your account at limecall.com in under 60 seconds. You immediately access the widget builder, dashboard, and integrations hub. Your 14-day full-feature trial starts automatically. Invite your entire team — no seat limits.',
+          },
+          {
+            step: '2',
+            title: 'Install the LimeCall callback widget on your website',
+            desc: 'Copy your unique LimeCall widget script from the dashboard. Paste it into your website before the closing </body> tag. Works with WordPress, Webflow, Shopify, HubSpot CMS, or any custom site. The widget appears on your site instantly — prospects can start requesting callbacks immediately.',
+          },
+          {
+            step: '3',
+            title: 'Connect your CRM and port your virtual numbers',
+            desc: 'Use LimeCall\'s one-click integrations for HubSpot, Salesforce, or Zapier. All lead data flows into your existing CRM records. Your JustCall virtual numbers can be ported to LimeCall — contact LimeCall support for porting assistance. WhatsApp and SMS channels activate automatically on paid plans.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Former JustCall Users Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and JustCall.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Flat Pricing. Instant Callbacks.<br />40+ Virtual Numbers Included.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Stop paying per seat as your team grows. LimeCall's flat-rate plans cover your whole team — plus a 28-second callback widget and 40+ virtual numbers that JustCall charges extra for.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/why-limecall/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          Why LimeCall
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore LimeCall" links={[
+      { href: '/compare/', title: 'Compare All Alternatives', desc: 'LimeCall vs every major competitor.' },
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Callback widget vs call centre platform.' },
+      { href: '/limecall-vs-ringover/', title: 'LimeCall vs Ringover', desc: 'Instant callback vs European VoIP.' },
+      { href: '/limecall-vs-dialpad/', title: 'LimeCall vs Dialpad', desc: 'SME-friendly vs AI enterprise phone.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

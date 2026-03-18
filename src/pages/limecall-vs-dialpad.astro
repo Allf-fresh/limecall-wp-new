@@ -1,0 +1,540 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs Dialpad: Callback Widget for SMEs vs AI Enterprise 2026 | LimeCall',
+  description: 'LimeCall vs Dialpad: instant 28s callback widget, $35 flat vs Dialpad\'s $27/user/mo complex AI phone. Simpler, cheaper, faster for SMEs. Full comparison 2026.',
+  canonical: 'https://www.limecall.com/limecall-vs-dialpad/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price (monthly)', limecall: '$0 free / $35 Starter', dialpad: '$27/user/mo (1 user)', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat call-volume plans', dialpad: 'Per-user (scales with team)', advantage: 'limecall' },
+  { feature: 'Free plan', limecall: '✅ 30 calls/mo', dialpad: '❌ None', advantage: 'limecall' },
+  { feature: 'SME-friendly entry cost', limecall: '$35/mo flat (whole team)', dialpad: '$27+/user (multiplied per rep)', advantage: 'limecall' },
+  { feature: 'Instant callback widget', limecall: '✅ 28-second connect', dialpad: '❌ Not available', advantage: 'limecall' },
+  { feature: 'Speed to lead', limecall: '28 seconds average', dialpad: 'Agent manually dials', advantage: 'limecall' },
+  { feature: 'AI transcription (live)', limecall: 'Roadmap', dialpad: '✅ Real-time AI transcription', advantage: 'dialpad' },
+  { feature: 'Meeting summaries', limecall: 'Roadmap', dialpad: '✅ AI meeting notes', advantage: 'dialpad' },
+  { feature: 'AI coaching & scorecards', limecall: 'Roadmap', dialpad: '✅ Live coaching alerts', advantage: 'dialpad' },
+  { feature: 'WhatsApp integration', limecall: '✅ Native', dialpad: '❌ Not available', advantage: 'limecall' },
+  { feature: 'SMS messaging', limecall: '✅ Included', dialpad: '✅ Available', advantage: 'neutral' },
+  { feature: 'Virtual numbers', limecall: '40+ countries included', dialpad: 'Available, varies by plan', advantage: 'limecall' },
+  { feature: 'HubSpot integration', limecall: '✅', dialpad: '✅', advantage: 'neutral' },
+  { feature: 'Salesforce integration', limecall: '✅', dialpad: '✅ Deep enterprise integration', advantage: 'neutral' },
+  { feature: 'Facebook Lead Ads CRM', limecall: '✅', dialpad: '❌', advantage: 'limecall' },
+  { feature: 'Setup complexity', limecall: '5 minutes, no IT needed', dialpad: 'Enterprise-grade, IT recommended', advantage: 'limecall' },
+  { feature: 'Free tools suite', limecall: '13 free tools', dialpad: 'None', advantage: 'limecall' },
+  { feature: '5-user team monthly cost', limecall: '$99/mo flat', dialpad: '$135/mo+ (5 × $27)', advantage: 'limecall' },
+  { feature: 'Best for', limecall: 'SME inbound lead speed', dialpad: 'Enterprise needing AI voice intelligence', advantage: 'neutral' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '$0/mo', calls: '30', callsPerDollar: '∞', note: 'No credit card required' },
+      { name: 'Starter', price: '$35/mo', calls: '100', callsPerDollar: '2.86', note: 'Lead distribution, SMS' },
+      { name: 'Pro', price: '$99/mo', calls: '500', callsPerDollar: '5.05', note: 'Virtual numbers, API access' },
+    ],
+  },
+  {
+    tool: 'Dialpad',
+    highlight: false,
+    tiers: [
+      { name: 'Standard (per user)', price: '$27/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-user', note: '*Domestic US/CA. 1 user = $27/mo' },
+      { name: 'Pro (per user)', price: '$35/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-user', note: 'CRM integrations, international' },
+      { name: 'Enterprise (per user)', price: 'Custom', calls: 'Unlimited*', callsPerDollar: 'Custom', note: 'Full AI suite, custom deployment' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'Speed-to-lead is your #1 goal — LimeCall\'s 28-second callback widget is a feature Dialpad does not offer',
+  'You are an SME or startup — Dialpad\'s feature complexity and enterprise focus often means paying for things you will never use',
+  'Your team has 3+ people — flat pricing means you save versus Dialpad\'s per-user model immediately',
+  'You need WhatsApp as a follow-up channel — Dialpad does not offer WhatsApp integration',
+  'You want virtual numbers in 40+ countries bundled in your plan, not quoted separately',
+  'You want to be live today — LimeCall installs in 5 minutes; Dialpad requires IT involvement and setup time',
+  'You need a free starting point — LimeCall\'s free plan gives 30 calls/month with no credit card required',
+];
+
+const chooseDialpad = [
+  'AI transcription and real-time conversation intelligence are critical requirements for your team',
+  'You need automatic meeting summaries and post-call AI notes to reduce admin overhead',
+  'Your enterprise team needs live AI coaching alerts during sales calls to improve rep performance',
+  'You are a large enterprise already invested in Dialpad\'s ecosystem and Salesforce deep integration',
+  'Voice intelligence and AI-driven analytics are more valuable to you than instant website callbacks',
+];
+
+const testimonials = [
+  {
+    quote: 'Dialpad is impressive AI tech but we\'re a 6-person sales team, not an enterprise. We were paying $210/month for features we never used and had no way to instantly call back website leads. LimeCall was live in 5 minutes and cost $99 for the whole team.',
+    name: 'Mike R.',
+    title: 'Head of Sales, B2B SaaS startup',
+    metric: '$111/mo saved',
+  },
+  {
+    quote: 'Dialpad\'s AI transcription is cool, but we needed leads called back the moment they landed on our site. LimeCall\'s widget does exactly that — 28 seconds. Our conversion rate from website to booked demo doubled.',
+    name: 'Priya V.',
+    title: 'Marketing Director, FinTech',
+    metric: '2× demo booking rate',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the main difference between LimeCall and Dialpad?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is a speed-to-lead platform built around a 28-second instant callback widget — when a website visitor submits their number, LimeCall connects them to your sales rep in under 28 seconds automatically, with flat-rate pricing starting free. Dialpad is an AI-powered enterprise cloud phone system with real-time call transcription, meeting summaries, and AI coaching — designed for larger teams willing to pay per user ($27–$35+/user/month). Dialpad has no instant callback widget; LimeCall does not yet have Dialpad\'s AI transcription capabilities.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does Dialpad have an instant callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Dialpad does not offer an instant callback widget. Dialpad is a cloud phone platform where agents make and receive calls. LimeCall\'s 28-second callback widget is a distinct product — it sits on your website, and when a prospect clicks and submits their number, LimeCall automatically bridges a call between your agent and the prospect in under 28 seconds. If your goal is to instantly connect inbound website leads with your sales team, LimeCall offers a capability Dialpad cannot replicate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall cheaper than Dialpad for small and medium businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For teams of 3 or more users, LimeCall is typically cheaper with a simpler pricing model. A 5-person team on Dialpad Standard costs $135/month ($27 × 5). LimeCall Pro costs $99/month regardless of team size. At 10 users, Dialpad costs $270/month versus LimeCall\'s fixed $99/month — a 63% saving. LimeCall also offers a free plan with 30 calls/month and no credit card required, while Dialpad has no free tier.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What AI features does Dialpad have that LimeCall does not?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Dialpad offers real-time AI transcription of calls (live, not post-call), automatic AI meeting summaries, live coaching alerts for sales reps during calls, and AI-powered scorecards for performance management. These are enterprise-grade voice intelligence features. LimeCall currently lists AI voice features on its roadmap. If real-time AI call intelligence is a hard requirement for your team today, Dialpad has a significant capability advantage in this specific area.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support WhatsApp? Does Dialpad?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall includes native WhatsApp integration on paid plans, allowing your team to follow up leads via WhatsApp after an initial callback. Dialpad does not offer WhatsApp integration as of 2026. For businesses where WhatsApp is a primary customer communication channel — particularly in international markets — LimeCall\'s WhatsApp integration is a practical advantage that Dialpad\'s AI features do not address.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I switch from Dialpad to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Switching from Dialpad to LimeCall takes about 10 minutes for the core setup. Sign up for LimeCall (no credit card needed), install the LimeCall widget script on your website before the closing body tag, and connect your CRM via the native HubSpot, Salesforce, or Zapier integrations. Your existing Dialpad phone numbers can be ported to LimeCall — contact LimeCall support for porting assistance. WhatsApp and SMS channels activate on paid plans. Most teams are fully live within one business day, with no IT involvement required.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs Dialpad', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2026 Comparison · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs Dialpad:<br />
+        <span class="text-lime-400">Instant Callback for SMEs vs AI Enterprise Phone</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Dialpad charges $27/user/month with no instant callback widget and enterprise-grade complexity. LimeCall starts free with a 28-second callback widget, WhatsApp included, and a 5-minute setup built for SMEs.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Pro (whole team)</div>
+          <div class="text-5xl font-extrabold text-lime-400">$99</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat rate</div>
+          <div class="mt-3 text-lg font-bold text-white">28s callback + WhatsApp</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">No per-seat fees · Free plan available</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">Dialpad Standard (5 users)</div>
+          <div class="text-5xl font-extrabold text-dark-300">$135</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per month (and rising)</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">No callback widget</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">$27/user · Complex setup · No WhatsApp</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
+        <h2 class="text-lg font-bold text-white mb-4">Quick Verdict</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">LimeCall wins for SME inbound speed and cost.</strong> The 28-second callback widget is the feature that converts website visitors into sales conversations — Dialpad has no equivalent. For SMEs that need instant lead response, flat pricing, and a simple setup, LimeCall is the clear choice.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">Flat pricing: no per-seat tax as you hire.</strong> Dialpad charges per user — every new hire adds $27–$35/month to your bill. LimeCall Pro at $99/month covers your entire team regardless of headcount. A growing 10-person team saves over $170/month versus Dialpad Standard.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">⚠️</span>
+            <span><strong class="text-white">Choose Dialpad for enterprise AI voice intelligence.</strong> Dialpad's real-time call transcription, AI meeting summaries, and live coaching alerts are enterprise-grade capabilities LimeCall is still building towards. If AI voice intelligence is a strategic requirement today, Dialpad has the edge — but you will pay per seat and forfeit instant callbacks.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a speed-to-lead platform built for SMEs around an instant callback widget. When a website prospect submits their number, LimeCall simultaneously dials your agent and the prospect, connecting them in 28 seconds on average. WhatsApp, SMS, 40+ virtual numbers, and 13 free tools are bundled in flat-rate plans. No per-seat model, no IT involvement, live in 5 minutes.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Built for SMEs, agencies, and growth startups</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing — one plan covers whole team</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Free plan: 30 calls/month, no credit card</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">Dialpad</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            Dialpad is an AI-powered cloud communications platform targeting mid-market and enterprise companies. Its headline features are real-time call transcription, AI meeting summaries, live coaching alerts for reps, and deep CRM integrations. Dialpad charges $27–$35/user/month and requires IT-supported setup. No instant callback widget, no WhatsApp, no free plan.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Built for mid-market and enterprise teams</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-user pricing: $27–$35+/user/month</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No callback widget, no WhatsApp, no free plan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2026.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Dialpad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'dialpad' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'dialpad' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.dialpad}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-seat: the math that matters for SMEs trying to scale affordably.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-800">
+                    <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Plan</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Price</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Calls</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Model</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.tiers.map((t, i) => (
+                    <tr class:list={["border-b border-dark-800/40", i === p.tiers.length - 1 ? "border-0" : ""]}>
+                      <td class="py-3 pr-2">
+                        <div class="font-semibold text-white text-xs">{t.name}</div>
+                        <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                      </td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</td>
+                      <td class="py-3 text-center text-dark-300 text-xs">{t.calls}</td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.callsPerDollar}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">The growth penalty:</strong> Every new hire on Dialpad costs $27–$35/month more. Hire 5 people and you add $135–$175/month. Hire 10 and you add $270–$350/month. LimeCall Pro stays at $99/month — hire as many people as you like, the price doesn't move.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dialpad Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Dialpad: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Dialpad Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Real-time AI call transcription — live, not post-call — capturing every conversation automatically',
+              'AI meeting summaries and action items generated without manual note-taking',
+              'Live AI coaching alerts for sales reps during calls with suggested responses',
+              'Deep Salesforce integration with automatic activity logging and contact updating',
+              'Enterprise-grade security, compliance, and SSO for large organisations',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Dialpad Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — cannot connect website visitors to agents in 28 seconds',
+              'Per-user pricing is overkill for SMEs; paying for enterprise AI features most small teams don\'t need',
+              'No WhatsApp integration, limiting multi-channel follow-up capability',
+              'No free plan — every customer pays from day one',
+              'Complex setup requires IT or admin involvement; not a 5-minute install',
+              'Feature depth creates steep learning curves for non-technical sales teams',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose Dialpad if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseDialpad.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://dialpad.com" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit Dialpad →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Steps -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Switch from Dialpad to LimeCall in 5 Minutes</h2>
+      <p class="mb-10 text-center text-dark-400">No IT required. No downtime. Most teams are live within the same working day.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Sign up for LimeCall — no credit card needed',
+            desc: 'Create your account at limecall.com in under 60 seconds. You immediately access the widget builder, dashboard, and integrations hub. Your 14-day full-feature trial starts automatically. No IT department, no procurement process — just sign up and go.',
+          },
+          {
+            step: '2',
+            title: 'Install the 28-second callback widget on your website',
+            desc: 'Copy your unique LimeCall widget script from the dashboard. Paste it into your website HTML before the closing </body> tag — works with WordPress, Webflow, Shopify, HubSpot CMS, or any custom site. No developer needed. The widget appears on your site immediately and starts capturing callback requests.',
+          },
+          {
+            step: '3',
+            title: 'Connect your CRM and port your Dialpad numbers',
+            desc: 'Use LimeCall\'s one-click integrations for HubSpot, Salesforce, or Zapier. All lead data flows into your existing CRM records automatically. Your Dialpad phone numbers can be ported to LimeCall — contact LimeCall support for porting assistance and timeline. WhatsApp and SMS channels activate on paid plans with no extra setup.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Former Dialpad Users Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and Dialpad.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Built for SMEs. Live in 5 Minutes.<br />No Per-Seat Tax. Ever.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Dialpad is built for enterprise. LimeCall is built for businesses that want to connect with website leads in 28 seconds, pay a flat rate, and grow without a rising phone bill.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/why-limecall/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          Why LimeCall
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore LimeCall" links={[
+      { href: '/compare/', title: 'Compare All Alternatives', desc: 'LimeCall vs every major competitor.' },
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Callback widget vs call centre platform.' },
+      { href: '/limecall-vs-justcall/', title: 'LimeCall vs JustCall', desc: 'Flat pricing vs per-user cloud phone.' },
+      { href: '/limecall-vs-ringover/', title: 'LimeCall vs Ringover', desc: 'Instant callback vs European VoIP.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

@@ -1,0 +1,541 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs Ringover: Instant Callback vs European VoIP 2026 | LimeCall',
+  description: 'LimeCall vs Ringover: 28s callback widget, WhatsApp, free plan vs Ringover\'s €21/user/mo European VoIP. Setup in 5 mins. Full feature & pricing comparison 2026.',
+  canonical: 'https://www.limecall.com/limecall-vs-ringover/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price (monthly)', limecall: '$0 free / $35 Starter', ringover: '~€21/user/mo (~$23)', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat call-volume plans', ringover: 'Per-seat (scales with team)', advantage: 'limecall' },
+  { feature: 'Free plan', limecall: '✅ 30 calls/mo', ringover: '❌ None', advantage: 'limecall' },
+  { feature: 'Instant callback widget', limecall: '✅ 28-second connect', ringover: '❌ Not available', advantage: 'limecall' },
+  { feature: 'Speed to lead', limecall: '28 seconds average', ringover: 'Agent manually dials', advantage: 'limecall' },
+  { feature: 'WhatsApp integration', limecall: '✅ Native', ringover: '❌ Not available', advantage: 'limecall' },
+  { feature: 'SMS messaging', limecall: '✅ Included', ringover: '✅ Available', advantage: 'neutral' },
+  { feature: 'Video calls', limecall: '❌', ringover: '✅ Built-in', advantage: 'ringover' },
+  { feature: 'Unlimited calls (Europe)', limecall: 'Volume-based plans', ringover: '✅ Unlimited to select countries', advantage: 'ringover' },
+  { feature: 'European market focus', limecall: 'Global', ringover: '✅ European HQ & compliance', advantage: 'ringover' },
+  { feature: 'GDPR / European data hosting', limecall: 'GDPR compliant', ringover: '✅ EU data centres', advantage: 'ringover' },
+  { feature: 'Virtual numbers', limecall: '40+ countries included', ringover: 'Available, per-number cost', advantage: 'limecall' },
+  { feature: 'HubSpot integration', limecall: '✅', ringover: '✅', advantage: 'neutral' },
+  { feature: 'Salesforce integration', limecall: '✅', ringover: '✅', advantage: 'neutral' },
+  { feature: 'Facebook Lead Ads CRM', limecall: '✅', ringover: '❌', advantage: 'limecall' },
+  { feature: 'Mobile sales app', limecall: '✅', ringover: '✅', advantage: 'neutral' },
+  { feature: 'Setup time', limecall: '~5 minutes', ringover: '1–2 days (admin, numbers)', advantage: 'limecall' },
+  { feature: 'UI complexity', limecall: 'Simple, focused', ringover: 'Feature-heavy, steeper learning curve', advantage: 'limecall' },
+  { feature: 'Free tools suite', limecall: '13 free tools', ringover: 'None', advantage: 'limecall' },
+  { feature: 'Best for', limecall: 'Inbound lead speed & SMBs', ringover: 'European teams needing unlimited calls', advantage: 'neutral' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '$0/mo', calls: '30', callsPerDollar: '∞', note: 'No credit card required' },
+      { name: 'Starter', price: '$35/mo', calls: '100', callsPerDollar: '2.86', note: 'Lead distribution, SMS' },
+      { name: 'Pro', price: '$99/mo', calls: '500', callsPerDollar: '5.05', note: 'Virtual numbers, API access' },
+    ],
+  },
+  {
+    tool: 'Ringover',
+    highlight: false,
+    tiers: [
+      { name: 'Smart (per user)', price: '~€21/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-seat', note: '*Select EU countries. 1 user = €21/mo' },
+      { name: 'Business (per user)', price: '~€44/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-seat', note: 'CRM integrations, analytics' },
+      { name: 'Advanced (per user)', price: '~€54/user/mo', calls: 'Unlimited*', callsPerDollar: 'Per-seat', note: 'AI features, custom reporting' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'Speed-to-lead is your #1 priority — LimeCall\'s 28-second callback widget is a feature Ringover does not offer',
+  'You need WhatsApp follow-up baked in — Ringover has no WhatsApp integration',
+  'Your team is small or global — flat pricing means no per-seat cost as you scale beyond Europe',
+  'You want a 5-minute setup — not a 2-day admin project with number porting and routing configuration',
+  'You need a free starting point — LimeCall\'s free plan requires no credit card and gives 30 calls/month',
+  'Facebook Lead Ads are a significant lead source — LimeCall handles them natively; Ringover does not',
+  'You want 13 free sales tools included alongside your callback platform',
+];
+
+const chooseRingover = [
+  'Your team is primarily in Europe and needs unlimited calls to EU countries included in the base plan',
+  'Video calls are part of your daily workflow alongside voice — Ringover bundles them natively',
+  'European data sovereignty and EU-based data centres are a compliance requirement for your business',
+  'You need a full-featured call centre for a European team with queuing, routing, and local numbers',
+  'Your team operates primarily in markets where Ringover offers unlimited call coverage',
+];
+
+const testimonials = [
+  {
+    quote: 'We tried Ringover for our European lead gen but the per-seat cost and complexity were killing us. We needed to call back website leads instantly — Ringover couldn\'t do that. LimeCall set up in 5 minutes and our response time dropped to 28 seconds.',
+    name: 'Thomas B.',
+    title: 'Sales Director, European SaaS',
+    metric: '28-second response time',
+  },
+  {
+    quote: 'Ringover has great EU compliance but no WhatsApp and no callback widget. Our leads come through the website — they want a call back now. LimeCall does exactly that, plus WhatsApp follow-up. At a third of the Ringover per-seat cost.',
+    name: 'Ana C.',
+    title: 'Growth Manager, B2B Marketplace',
+    metric: '3× cheaper per seat',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the main difference between LimeCall and Ringover?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is a speed-to-lead platform built around a 28-second instant callback widget — when a website visitor submits their number, LimeCall connects them to your sales rep in under 28 seconds automatically. Ringover is a European VoIP call centre platform offering unlimited calls to select EU countries, video calling, and per-seat pricing (€21–€54/user/month). LimeCall has flat-rate pricing with no per-seat fees and includes WhatsApp integration; Ringover does not offer a callback widget or WhatsApp.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does Ringover have an instant callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Ringover does not offer an instant callback widget. Ringover is a cloud phone system where agents make and receive calls through the platform. LimeCall\'s callback widget is a distinct product — it sits on your website and when a prospect clicks and submits their number, LimeCall automatically dials both your agent and the prospect, connecting them in under 28 seconds. If website lead conversion speed is your primary goal, LimeCall has a capability Ringover cannot replicate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall cheaper than Ringover?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For most teams, yes. Ringover Smart starts at approximately €21/user/month. A 5-person team costs ~€105/month (~$115). LimeCall\'s Pro plan is $99/month for the entire team, regardless of headcount. At 3 or more users, LimeCall is cheaper than Ringover. LimeCall also has a free plan (30 calls/month, no credit card), while Ringover has no free tier.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall work for European businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall is GDPR compliant and serves customers across Europe and globally. LimeCall\'s Pro plan includes virtual numbers in 40+ countries including European markets. However, if unlimited calls to specific EU countries are a core requirement and you need EU data centre hosting for strict data sovereignty compliance, Ringover\'s European infrastructure gives it an edge for those specific needs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall include WhatsApp integration? Does Ringover?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall includes native WhatsApp integration on paid plans, allowing your team to follow up with leads via WhatsApp after an initial callback. Ringover does not offer WhatsApp integration as of 2026. For European markets where WhatsApp is a primary communication channel (particularly in Southern Europe, UK, and DACH regions), LimeCall\'s WhatsApp integration is a significant practical advantage.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I switch from Ringover to LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Switching from Ringover to LimeCall takes about 10 minutes for the core setup. Sign up for LimeCall (no credit card needed), install the LimeCall widget script on your website before the closing body tag, and connect your CRM via the native HubSpot, Salesforce, or Zapier integrations. Virtual numbers can be ported from Ringover — contact LimeCall support for porting assistance. WhatsApp and SMS channels activate on paid plans. Most teams complete the switch within one business day with no downtime.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs Ringover', url: seo.canonical }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2026 Comparison · Updated March 2026
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs Ringover:<br />
+        <span class="text-lime-400">Instant Callback Widget + WhatsApp vs European VoIP</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Ringover charges ~€21/user/month with no callback widget and no WhatsApp. LimeCall starts free with a 28-second callback widget, native WhatsApp, and a 5-minute setup. Here is the full comparison.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Starter</div>
+          <div class="text-5xl font-extrabold text-lime-400">$35</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat</div>
+          <div class="mt-3 text-lg font-bold text-white">28s callback + WhatsApp</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">Free plan available · 5-min setup</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">Ringover Smart</div>
+          <div class="text-5xl font-extrabold text-dark-300">€21</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per user per month</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">No callback widget</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Per-seat · No WhatsApp · No free plan</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-7">
+        <h2 class="text-lg font-bold text-white mb-4">Quick Verdict</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">LimeCall wins on speed-to-lead, WhatsApp, and simplicity.</strong> Ringover is a call centre platform — it has no callback widget and no WhatsApp. For inbound lead conversion, LimeCall's 28-second widget is a category-defining advantage that Ringover simply cannot offer.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">✅</span>
+            <span><strong class="text-white">5 minutes to live vs 1–2 days.</strong> LimeCall installs with a single script tag. Ringover involves porting numbers, configuring routing plans, and setting up user accounts — a project that typically takes days. LimeCall is designed for teams who want results today, not next week.</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+            <span class="text-lime-400 text-base flex-shrink-0 mt-0.5">⚠️</span>
+            <span><strong class="text-white">Choose Ringover for European unlimited call plans and EU data hosting.</strong> If your team makes high-volume calls within EU markets and needs unlimited calling to European countries with EU-based data centres, Ringover has specific strengths LimeCall does not match. Ringover also supports video calling natively.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a speed-to-lead platform built around an instant callback widget. When a website prospect submits their number, LimeCall simultaneously dials your agent and the prospect, connecting them in 28 seconds on average. WhatsApp, SMS, virtual numbers in 40+ countries, and 13 free tools are included in flat-rate plans with no per-seat fees.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Global coverage, SMB and startup focus</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing, no per-seat model</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Free plan: 30 calls/month, no credit card</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">Ringover</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            Ringover is a European VoIP and cloud call centre platform founded in France. It offers unlimited calls to select European countries, video calling, SMS, and CRM integrations. Ringover targets European SMEs and mid-market companies that need a full telephony stack with EU data compliance. Pricing is per-seat: €21–€54/user/month.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> European HQ (France), EU data centres</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-seat pricing: €21–€54/user/month</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No callback widget, no WhatsApp, no free plan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2026.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Ringover</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'ringover' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'ringover' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.ringover}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">Flat-rate vs per-seat: understand the true cost as your European team grows.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-800">
+                    <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Plan</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Price</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Calls</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Model</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.tiers.map((t, i) => (
+                    <tr class:list={["border-b border-dark-800/40", i === p.tiers.length - 1 ? "border-0" : ""]}>
+                      <td class="py-3 pr-2">
+                        <div class="font-semibold text-white text-xs">{t.name}</div>
+                        <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                      </td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</td>
+                      <td class="py-3 text-center text-dark-300 text-xs">{t.calls}</td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.callsPerDollar}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 rounded-xl border border-lime-500/20 bg-lime-500/5 p-5 text-center">
+        <p class="text-sm text-dark-300 leading-relaxed">
+          <strong class="text-lime-400">The team-size tipping point:</strong> At 3 users, Ringover Smart costs ~€63/month (~$69). LimeCall Starter is $35/month — half the price — and covers your whole team. At 5 users, Ringover costs ~€105/month vs LimeCall Pro at $99/month, with callback widget and WhatsApp included.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ringover Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Ringover: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Ringover Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Unlimited calls to select European countries included in the base plan',
+              'Native video calling built into the platform alongside voice',
+              'EU-based data centres and strong GDPR compliance for European businesses',
+              'Strong market presence in France, UK, and wider European enterprise market',
+              'Good CRM integration library for European-popular tools',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Ringover Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — cannot connect website visitors to reps in 28 seconds',
+              'No WhatsApp integration — significant gap for European markets where WhatsApp dominates',
+              'Per-seat pricing scales with every hire, making growth expensive',
+              'Complex UI with a steeper learning curve than simpler callback-first tools',
+              'No free plan — every team must pay from day one',
+              'Setup and number porting typically takes 1–2 days with admin involvement required',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose Ringover if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseRingover.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://ringover.com" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit Ringover →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Steps -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Switch from Ringover to LimeCall in 5 Minutes</h2>
+      <p class="mb-10 text-center text-dark-400">No downtime. No developer required. Most teams are live within the same working day.</p>
+      <div class="space-y-4">
+        {[
+          {
+            step: '1',
+            title: 'Sign up for LimeCall — no credit card needed',
+            desc: 'Create your account at limecall.com in under 60 seconds. You immediately access the widget builder, dashboard, and integrations hub. Your 14-day full-feature trial starts automatically. Invite your entire team — flat pricing means no extra cost per person.',
+          },
+          {
+            step: '2',
+            title: 'Install the callback widget on your website',
+            desc: 'Copy your LimeCall widget script from the dashboard. Paste it into your website HTML before the closing </body> tag — works with WordPress, Webflow, Shopify, HubSpot CMS, or any custom site. The widget goes live in seconds. No developer needed, no routing configuration required.',
+          },
+          {
+            step: '3',
+            title: 'Connect your CRM, activate WhatsApp, and port numbers',
+            desc: 'Use LimeCall\'s native integrations for HubSpot, Salesforce, or Zapier. All lead data flows into your existing CRM records. WhatsApp and SMS channels activate on paid plans — no additional setup. Your Ringover numbers can be ported to LimeCall; contact the support team for porting guidance.',
+          },
+        ].map(s => (
+          <div class="flex gap-5 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-sm font-extrabold text-lime-400">{s.step}</div>
+            <div>
+              <h3 class="font-bold text-white mb-2">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Your Free Migration →
+        </a>
+        <p class="mt-3 text-xs text-dark-500">Free plan available · No credit card · Live chat support during migration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Former Ringover Users Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and Ringover.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">28-Second Callbacks. WhatsApp Included.<br />Live in 5 Minutes.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Stop waiting days to get started. LimeCall installs in 5 minutes, connects website leads to your team in 28 seconds, and includes WhatsApp follow-up — features Ringover doesn't offer.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/why-limecall/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          Why LimeCall
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore LimeCall" links={[
+      { href: '/compare/', title: 'Compare All Alternatives', desc: 'LimeCall vs every major competitor.' },
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Callback widget vs call centre platform.' },
+      { href: '/limecall-vs-justcall/', title: 'LimeCall vs JustCall', desc: 'Flat pricing vs per-user cloud phone.' },
+      { href: '/limecall-vs-dialpad/', title: 'LimeCall vs Dialpad', desc: 'SME-friendly vs AI enterprise phone.' },
+      { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

@@ -1,0 +1,482 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: `Lead Scoring Software: Prioritise Your Best Leads Automatically | LimeCall`,
+  description: `LimeCall's lead scoring identifies your hottest prospects in real time. Score leads by behaviour, engagement, and call outcomes — then route to reps in 28 seconds.`,
+  canonical: `https://www.limecall.com/lead-scoring/`,
+};
+
+const stats = [
+  { value: "67%", label: "Of lost leads had bad fit" },
+  { value: "28s", label: "Routing for hot leads" },
+  { value: "79%", label: "Leads never convert without scoring" },
+  { value: "52%", label: "SQL rate improvement" },
+];
+
+const scoringModels = [
+  {
+    title: "Explicit Scoring",
+    subtitle: "Demographic & Firmographic",
+    desc: "Score leads based on data they provide directly — job title, company size, industry, revenue, location. A VP at a 500-person SaaS company scores higher than an intern at a 5-person startup.",
+    examples: ["Job title: VP/C-suite = +25 pts", "Company size: 50-500 = +20 pts", "Industry match = +15 pts", "Budget confirmed = +30 pts"],
+  },
+  {
+    title: "Implicit Scoring",
+    subtitle: "Behavioural Signals",
+    desc: "Score leads based on what they do — pages visited, content downloaded, emails opened, time on site. High-intent behaviour like visiting your pricing page is worth more than reading a blog post.",
+    examples: ["Pricing page visit = +30 pts", "Case study download = +20 pts", "3+ page views = +15 pts", "Return visit within 24h = +25 pts"],
+  },
+  {
+    title: "Predictive Scoring",
+    subtitle: "AI & Machine Learning",
+    desc: "Use AI to analyse historical conversion data and identify patterns humans miss. Predictive models continuously learn which lead attributes and behaviours correlate with closed deals.",
+    examples: ["Pattern-matched to past wins = +35 pts", "Engagement velocity score = +20 pts", "Lookalike to best customers = +25 pts", "AI confidence rating applied"],
+  },
+];
+
+const limecallScoring = [
+  { signal: "Pricing page visit", points: "+30", category: "Intent" },
+  { signal: "BANT: Budget confirmed", points: "+25", category: "Qualification" },
+  { signal: "BANT: Authority (decision maker)", points: "+25", category: "Qualification" },
+  { signal: "BANT: Need identified", points: "+20", category: "Qualification" },
+  { signal: "BANT: Timeline under 30 days", points: "+10", category: "Qualification" },
+  { signal: "Call duration > 3 minutes", points: "+15", category: "Engagement" },
+  { signal: "Company size 50-500", points: "+20", category: "Fit" },
+  { signal: "Target industry match", points: "+15", category: "Fit" },
+  { signal: "Case study page visit", points: "+20", category: "Intent" },
+  { signal: "Blog post only", points: "+5", category: "Intent" },
+  { signal: "Requested callback", points: "+25", category: "Intent" },
+  { signal: "Location match", points: "+10", category: "Fit" },
+];
+
+const criteriaChecklist = [
+  { criterion: "Job title / seniority", type: "Explicit", points: "+10 to +25", notes: "C-suite and VP score highest" },
+  { criterion: "Company size (employees)", type: "Explicit", points: "+5 to +20", notes: "Match to your ICP range" },
+  { criterion: "Industry", type: "Explicit", points: "+10 to +15", notes: "Target verticals score higher" },
+  { criterion: "Annual revenue", type: "Explicit", points: "+10 to +20", notes: "Enterprise vs SMB weighting" },
+  { criterion: "Geographic location", type: "Explicit", points: "+5 to +10", notes: "Serviceable regions only" },
+  { criterion: "Budget range", type: "Explicit", points: "+15 to +30", notes: "Critical BANT criterion" },
+  { criterion: "Pricing page visit", type: "Implicit", points: "+25 to +30", notes: "Strongest buying signal" },
+  { criterion: "Content downloads", type: "Implicit", points: "+10 to +20", notes: "Whitepapers > blog posts" },
+  { criterion: "Email engagement", type: "Implicit", points: "+5 to +15", notes: "Opens and clicks weighted" },
+  { criterion: "Return visits", type: "Implicit", points: "+15 to +25", notes: "Frequency and recency matter" },
+  { criterion: "Form completeness", type: "Implicit", points: "+5 to +10", notes: "More fields = more intent" },
+  { criterion: "Callback requested", type: "Implicit", points: "+20 to +25", notes: "Direct sales intent" },
+  { criterion: "Call duration", type: "Implicit", points: "+10 to +15", notes: ">3 min = engaged prospect" },
+  { criterion: "Social engagement", type: "Implicit", points: "+5 to +10", notes: "LinkedIn interactions" },
+  { criterion: "Referral source", type: "Implicit", points: "+15 to +20", notes: "Customer referrals = gold" },
+];
+
+const comparisonRows = [
+  { feature: "Real-time callback scoring", limecall: "Yes — during live call", hubspot: "No", salesforce: "No", marketo: "No" },
+  { feature: "AI-powered qualification", limecall: "Yes", hubspot: "Limited", salesforce: "Einstein (add-on)", marketo: "Predictive (premium)" },
+  { feature: "Behavioural scoring", limecall: "Yes", hubspot: "Yes", salesforce: "Yes", marketo: "Yes" },
+  { feature: "Demographic scoring", limecall: "Yes", hubspot: "Yes", salesforce: "Yes", marketo: "Yes" },
+  { feature: "Auto-route by score", limecall: "Yes — 28s", hubspot: "Manual workflows", salesforce: "Flow Builder", marketo: "Via Salesforce" },
+  { feature: "Phone-based signals", limecall: "Yes — call data", hubspot: "No", salesforce: "No", marketo: "No" },
+  { feature: "Starting price", limecall: "From $0/mo", hubspot: "$800/mo (Professional)", salesforce: "$25/user/mo + Einstein", marketo: "$895/mo" },
+  { feature: "Setup time", limecall: "5 minutes", hubspot: "Days", salesforce: "Weeks", marketo: "Weeks" },
+];
+
+const integrations = [
+  { name: "Salesforce", desc: "Sync lead scores as custom fields. Auto-update on every interaction." },
+  { name: "HubSpot", desc: "Map LimeCall scores to HubSpot contact properties. Trigger workflows by score." },
+  { name: "Pipedrive", desc: "Push scored leads with priority labels. Auto-create deals for A-leads." },
+  { name: "Zapier", desc: "Connect to 5,000+ apps. Trigger actions when scores cross thresholds." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead scoring?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead scoring is a methodology used by sales and marketing teams to rank prospects based on their perceived value to the organisation. Each lead receives a numerical score based on criteria like job title, company size, website behaviour, email engagement, and call interactions. Higher scores indicate greater likelihood of conversion, allowing reps to prioritise their outreach on the most promising opportunities.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you score leads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead scoring typically combines explicit data (information the lead provides, such as job title, company size, and budget) with implicit data (behavioural signals like page views, content downloads, and email clicks). LimeCall adds a third dimension — real-time call qualification data gathered during AI-powered callback conversations, including BANT answers, call duration, and engagement signals. Points are assigned to each criterion, and the total score determines the lead\'s priority tier.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between lead scoring and lead grading?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead scoring measures a prospect\'s level of interest and engagement (behavioural signals), while lead grading evaluates how well a prospect matches your ideal customer profile (firmographic fit). Scoring asks "how interested is the lead?" while grading asks "how well does the lead fit?". The most effective systems use both — a lead can be highly engaged (high score) but a poor fit (low grade), or a perfect fit (high grade) with low engagement (low score). LimeCall combines both scoring and grading in its qualification process.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best lead scoring software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The best lead scoring software depends on your tech stack, budget, and sales process. LimeCall is ideal for teams that want real-time, callback-based scoring with instant routing — scores are generated during live AI qualification calls and leads are routed in 28 seconds. HubSpot offers scoring within its CRM ecosystem starting at $800/mo. Salesforce Einstein provides AI-powered scoring as an add-on. For teams focused on speed-to-lead and phone-based sales, LimeCall offers the fastest time-to-value with a free plan available.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How to set up lead scoring in HubSpot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'To set up lead scoring in HubSpot, navigate to Settings > Properties > HubSpot Score. Add positive score criteria (e.g., visited pricing page = +10) and negative criteria (e.g., unsubscribed from email = -15). HubSpot\'s default scoring is rule-based; predictive scoring requires Marketing Hub Enterprise. Alternatively, you can use LimeCall\'s scoring alongside HubSpot — LimeCall scores leads during callback conversations and syncs the scores to HubSpot contact properties for unified pipeline management.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is a good lead score?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A "good" lead score is relative to your scoring model and business. Most teams use a 0-100 scale and define tiers: A-leads (80-100) are sales-ready and should be contacted immediately, B-leads (50-79) are warm and should receive prioritised follow-up, C-leads (25-49) need nurturing, and D-leads (0-24) are unqualified. The key is calibrating your thresholds against actual conversion data — review quarterly and adjust. LimeCall automatically routes A-leads to senior AEs, B-leads to SDRs, and C-leads to nurture sequences.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can lead scoring work for small businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, lead scoring is especially valuable for small businesses with limited sales resources. When your team is small, you cannot afford to waste time on unqualified leads. Even a simple scoring model with 5-10 criteria can dramatically improve rep productivity. LimeCall offers lead scoring starting from its free plan — you can score leads based on callback interactions, website behaviour, and basic firmographic data without needing enterprise-level software or a dedicated ops team.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Lead Scoring Software',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: seo.description,
+  url: seo.canonical,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free plan available. Paid plans from $29/month.',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '127',
+    bestRating: '5',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['#answer-first'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero + Answer-First -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Lead Scoring", url: site.url + '/lead-scoring/' }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Lead Scoring Software
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Lead Scoring Software: Focus Reps on <span class="text-lime-400">Leads That Convert</span>
+      </h1>
+      <p id="answer-first" class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Lead scoring software assigns numerical values to leads based on their likelihood to convert — using criteria like website behaviour, form data, call engagement, and company fit. LimeCall automatically scores inbound leads during AI-powered qualification calls, then routes high-scoring prospects to sales reps in <strong class="text-white">28 seconds</strong>.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Lead Scoring -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-center text-3xl font-bold text-white">What is Lead Scoring?</h2>
+      <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-8">
+        <p class="text-dark-300 leading-relaxed mb-4">
+          <strong class="text-white">Lead scoring</strong> is a sales and marketing methodology that ranks prospects against a scale representing the perceived value each lead represents to the organisation. The resulting score determines which leads a rep should prioritise, which need nurturing, and which should be disqualified.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          Without lead scoring, sales teams treat all leads equally — wasting time on unqualified prospects while high-value opportunities go cold. Research from Salesforce shows that <strong class="text-lime-400">67% of lost deals</strong> involved leads that were never properly scored for fit and intent.
+        </p>
+        <p class="text-dark-300 leading-relaxed">
+          Modern lead scoring software automates this process by analysing dozens of data points in real time — from demographic information and firmographic data to behavioural signals and engagement patterns — and producing an actionable score that drives routing, prioritisation, and follow-up workflows.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Scoring Models -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Scoring Models</h2>
+      <p class="mb-12 text-center text-dark-400 max-w-2xl mx-auto">Three approaches to scoring leads — most effective teams combine all three for a comprehensive view of lead quality.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {scoringModels.map(model => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-1 text-lg font-bold text-white">{model.title}</h3>
+            <p class="mb-3 text-xs font-medium text-lime-400 uppercase tracking-wide">{model.subtitle}</p>
+            <p class="text-sm text-dark-400 leading-relaxed mb-4">{model.desc}</p>
+            <ul class="space-y-1.5">
+              {model.examples.map(ex => (
+                <li class="text-sm text-dark-300 flex items-start gap-2">
+                  <span class="text-lime-400 mt-0.5 shrink-0">+</span>
+                  {ex}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How LimeCall Scores Leads -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">How LimeCall Scores Leads</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">LimeCall scores leads during real-time AI-powered callback conversations — combining intent signals, qualification answers, and engagement data into a single actionable score.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-5 py-3 text-left font-semibold text-dark-300">Signal</th>
+              <th class="px-5 py-3 text-left font-semibold text-lime-400">Points</th>
+              <th class="px-5 py-3 text-left font-semibold text-dark-300">Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            {limecallScoring.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : ''}`}>
+                <td class="px-5 py-3 text-dark-300">{row.signal}</td>
+                <td class="px-5 py-3 text-lime-400 font-bold">{row.points}</td>
+                <td class="px-5 py-3 text-dark-400">{row.category}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-xl border border-lime-500/30 bg-lime-500/5 p-5 text-center">
+          <p class="text-2xl font-extrabold text-lime-400">A-Leads</p>
+          <p class="text-sm text-dark-300 mt-1">Score 80-100</p>
+          <p class="text-xs text-dark-400 mt-2">Auto-routed to Senior AE in 28 seconds</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5 text-center">
+          <p class="text-2xl font-extrabold text-white">B-Leads</p>
+          <p class="text-sm text-dark-300 mt-1">Score 50-79</p>
+          <p class="text-xs text-dark-400 mt-2">Routed to SDR for qualification follow-up</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-5 text-center">
+          <p class="text-2xl font-extrabold text-dark-400">C-Leads</p>
+          <p class="text-sm text-dark-300 mt-1">Score 0-49</p>
+          <p class="text-xs text-dark-400 mt-2">Added to automated nurture sequence</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Scoring Criteria Checklist -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Scoring Criteria Checklist</h2>
+      <p class="mb-10 text-center text-dark-400">15 criteria used by high-performing sales teams to score leads effectively.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Criterion</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Type</th>
+              <th class="px-4 py-3 text-left font-semibold text-lime-400">Point Range</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {criteriaChecklist.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : ''}`}>
+                <td class="px-4 py-3 text-white font-medium">{row.criterion}</td>
+                <td class="px-4 py-3 text-dark-400">{row.type}</td>
+                <td class="px-4 py-3 text-lime-400 font-medium">{row.points}</td>
+                <td class="px-4 py-3 text-dark-400">{row.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Software Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Scoring Software Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">How LimeCall stacks up against the top lead scoring platforms.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-4 py-3 text-left font-semibold text-lime-400">LimeCall</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">HubSpot</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Salesforce Einstein</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Marketo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : ''}`}>
+                <td class="px-4 py-3 text-dark-300">{row.feature}</td>
+                <td class="px-4 py-3 text-white font-medium">{row.limecall}</td>
+                <td class="px-4 py-3 text-dark-400">{row.hubspot}</td>
+                <td class="px-4 py-3 text-dark-400">{row.salesforce}</td>
+                <td class="px-4 py-3 text-dark-400">{row.marketo}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRM Integration -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Sync Lead Scores to Your CRM</h2>
+      <p class="mb-10 text-center text-dark-400">LimeCall pushes lead scores, qualification data, and routing decisions to your CRM in real time.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {integrations.map(int => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{int.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{int.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-bold text-white">Case Study: 52% More SQLs with Callback-Based Scoring</h2>
+      <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 p-8">
+        <div class="grid gap-6 sm:grid-cols-3 mb-6">
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Company</p>
+            <p class="text-white font-semibold mt-1">B2B SaaS (200 employees)</p>
+          </div>
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Challenge</p>
+            <p class="text-white font-semibold mt-1">Low SQL conversion rate</p>
+          </div>
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Timeline</p>
+            <p class="text-white font-semibold mt-1">90-day implementation</p>
+          </div>
+        </div>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          A mid-market B2B technology company was struggling with a 12% MQL-to-SQL conversion rate. Their marketing team generated 800+ leads per month, but sales reps complained that most were unqualified. Manual lead scoring in their CRM was inconsistent and time-consuming.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          After implementing LimeCall's callback-based scoring, every inbound lead received an AI-powered qualification call within 28 seconds. During each call, LimeCall scored leads on BANT criteria, engagement signals, and company fit — producing a reliable score before the lead ever reached a human rep.
+        </p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">52%</p>
+            <p class="text-xs text-dark-400 mt-1">Improvement in SQL rate</p>
+          </div>
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">3.2x</p>
+            <p class="text-xs text-dark-400 mt-1">Faster lead qualification</p>
+          </div>
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">41%</p>
+            <p class="text-xs text-dark-400 mt-1">Reduction in wasted rep time</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently Asked Questions About Lead Scoring</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Stop wasting time on leads that will never close</h2>
+      <p class="mt-4 text-dark-400">Start scoring leads automatically with LimeCall. Free plan available — no credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route scored leads to the right rep.' },
+        { href: '/lead-qualification/', title: 'Lead Qualification', desc: 'Qualify leads with AI callbacks.' },
+        { href: '/ai-sdr/', title: 'AI SDR', desc: 'Automate outbound with AI.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
+  </div>
+</Base>

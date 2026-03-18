@@ -1,0 +1,485 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: `Automated Lead Nurturing: Convert Cold Leads into Customers | LimeCall`,
+  description: `LimeCall's automated lead nurturing combines AI callbacks with email sequences to warm cold leads. 47% of nurtured leads buy vs 2% of cold leads.`,
+  canonical: `https://www.limecall.com/lead-nurturing/`,
+};
+
+const stats = [
+  { value: "47%", label: "More sales-ready leads" },
+  { value: "33%", label: "Lower cost per lead" },
+  { value: "20%", label: "More sales opportunities" },
+  { value: "28s", label: "Callback as nurture touchpoint" },
+];
+
+const bestPractices = [
+  {
+    n: "1",
+    title: "Segment by buyer stage",
+    desc: "Not all leads need the same nurturing. Segment your database by awareness, consideration, and decision stages. A new blog subscriber needs educational content. A pricing page visitor needs a callback from sales.",
+  },
+  {
+    n: "2",
+    title: "Personalise by behaviour, not just demographics",
+    desc: "Go beyond first name tokens. Personalise based on pages visited, content downloaded, features explored, and call history. A lead who watched your demo video gets different follow-up than one who read a blog post.",
+  },
+  {
+    n: "3",
+    title: "Use multiple channels — email, phone, and SMS",
+    desc: "Email-only nurture sequences hit a ceiling. Adding a callback touchpoint increases engagement by 391% compared to email alone. Combine email for education, SMS for urgency, and callbacks for conversion.",
+  },
+  {
+    n: "4",
+    title: "Time outreach based on engagement signals",
+    desc: "Stop sending nurture emails on a fixed schedule. Trigger outreach when leads take action — a return visit, a new page view, or a content download. Strike when intent is fresh.",
+  },
+  {
+    n: "5",
+    title: "Include a callback touchpoint",
+    desc: "The most underused nurture tactic: offering a callback at the right moment. When a nurtured lead revisits your pricing page or opens three emails in a week, trigger a callback offer. Phone conversations are 391% more effective at converting than email alone.",
+  },
+  {
+    n: "6",
+    title: "Score and re-route when leads heat up",
+    desc: "Integrate lead scoring with your nurture sequences. When a lead's score crosses your threshold — because they clicked, called, or engaged — automatically re-route them from nurture to a live sales conversation.",
+  },
+  {
+    n: "7",
+    title: "Measure and optimise continuously",
+    desc: "Track nurture-to-SQL conversion rate, time-to-conversion, and channel attribution. A/B test sequences, touchpoint timing, and callback triggers. The best nurture programs improve every quarter.",
+  },
+];
+
+const workflows = [
+  {
+    title: "New Lead → AI Callback → Nurture Sequence",
+    steps: [
+      "New lead submits form",
+      "LimeCall triggers instant AI callback (28s)",
+      "No answer → lead enters email nurture sequence",
+      "Day 3: Callback retry with personalised message",
+      "If answered: qualify and route to rep",
+      "If not: continue email sequence with callback CTA",
+    ],
+  },
+  {
+    title: "Content Download → Score → Callback Offer",
+    steps: [
+      "Lead downloads whitepaper or case study",
+      "Score increases by +15 points",
+      "Automated email: callback scheduling link",
+      "If scheduled: meeting booked with rep",
+      "If not: day-5 follow-up email with demo offer",
+      "Score monitored for additional engagement",
+    ],
+  },
+  {
+    title: "Trial Signup → Usage Drop → Re-engagement",
+    steps: [
+      "User signs up for free trial",
+      "Day 1-4: onboarding email sequence",
+      "Day 5: usage drops below threshold",
+      "LimeCall triggers re-engagement callback",
+      "CSM connects to help with adoption",
+      "Usage recovers → transition to upsell sequence",
+    ],
+  },
+  {
+    title: "Lost Deal → 90-Day Nurture → Re-engagement",
+    steps: [
+      "Deal marked as closed-lost in CRM",
+      "Lead enters 90-day re-engagement nurture",
+      "Monthly value-add emails (no hard sell)",
+      "Day 60: case study from similar company",
+      "Day 75: callback offer with special pricing",
+      "Re-engagement callback connects to original AE",
+    ],
+  },
+];
+
+const comparisonRows = [
+  { feature: "Callback as nurture channel", limecall: "Yes — AI-powered", hubspot: "No", marketo: "No", activecampaign: "No", pardot: "No" },
+  { feature: "Email sequences", limecall: "Via integration", hubspot: "Yes", marketo: "Yes", activecampaign: "Yes", pardot: "Yes" },
+  { feature: "SMS nurture", limecall: "Yes", hubspot: "Add-on", marketo: "Add-on", activecampaign: "Yes", pardot: "No" },
+  { feature: "Behavioural triggers", limecall: "Yes — including call data", hubspot: "Yes", marketo: "Yes", activecampaign: "Yes", pardot: "Yes" },
+  { feature: "Lead scoring", limecall: "Yes — real-time", hubspot: "$800/mo+", marketo: "$895/mo+", activecampaign: "$49/mo+", pardot: "$1,250/mo+" },
+  { feature: "28-second callback", limecall: "Yes", hubspot: "No", marketo: "No", activecampaign: "No", pardot: "No" },
+  { feature: "CRM integration", limecall: "Salesforce, HubSpot, Pipedrive", hubspot: "Native", marketo: "Salesforce", activecampaign: "Multiple", pardot: "Salesforce" },
+  { feature: "Starting price", limecall: "From $0/mo", hubspot: "$800/mo", marketo: "$895/mo", activecampaign: "$29/mo", pardot: "$1,250/mo" },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead nurturing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead nurturing is the process of developing and maintaining relationships with prospects at every stage of the sales funnel. It involves delivering relevant, personalised communications — including emails, phone calls, SMS, and content — to move leads closer to a purchase decision. Effective lead nurturing addresses the fact that most leads are not ready to buy immediately and need multiple touchpoints before converting.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are lead nurturing best practices?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The top lead nurturing best practices include: (1) Segment leads by buyer stage and behaviour, (2) Personalise communications based on actions, not just demographics, (3) Use multiple channels including email, phone callbacks, and SMS, (4) Time outreach based on engagement signals rather than fixed schedules, (5) Include callback touchpoints — phone conversations convert 391% better than email alone, (6) Integrate lead scoring to detect when leads heat up, and (7) Continuously measure and optimise your sequences.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you automate lead nurturing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'To automate lead nurturing, use software that triggers personalised communications based on lead behaviour. Set up workflows that fire when leads take specific actions — downloading content, visiting key pages, or reaching a score threshold. LimeCall adds automated callback triggers to nurture sequences: when a lead shows buying signals (like revisiting your pricing page), LimeCall automatically offers a callback, connecting the lead to a sales rep in 28 seconds.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between lead nurturing and lead generation?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead generation focuses on attracting and capturing new prospects — bringing leads into your funnel through ads, content, SEO, and events. Lead nurturing focuses on developing relationships with leads already in your funnel — moving them from initial interest to purchase readiness through targeted communications. Both are essential: generation fills the funnel, nurturing converts it. Companies that excel at lead nurturing generate 50% more sales-ready leads at 33% lower cost.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best lead nurturing software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The best lead nurturing software depends on your channels and budget. For email-centric nurturing, HubSpot ($800/mo) and ActiveCampaign ($29/mo) are popular. For enterprise marketing automation, Marketo ($895/mo) and Pardot ($1,250/mo) are common choices. LimeCall is the best choice for teams that want to add callback-based nurture touchpoints — research shows phone conversations are 391% more effective than email alone at converting leads. LimeCall starts free and integrates with all major email platforms.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How many touchpoints does lead nurturing require?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Research shows that the average B2B buyer needs 8 touchpoints before making a purchase decision. However, this varies by deal size and complexity — enterprise sales may require 15-20 touchpoints over months. The key is varying your touchpoints across channels: 3-4 educational emails, 1-2 callback conversations, 1-2 SMS messages, and retargeting ads create a multi-channel experience that keeps your brand top-of-mind without overwhelming the prospect.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do callbacks improve lead nurturing results?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Callbacks improve lead nurturing by adding a human touchpoint at the moment of highest intent. When a nurtured lead takes a buying action — revisiting your pricing page, opening multiple emails, or clicking a demo link — an automated callback connects them with a sales rep in 28 seconds. This is 391% more effective than sending another email. LimeCall can be inserted into any nurture sequence as a trigger-based callback touchpoint, dramatically increasing conversion rates from nurture to SQL.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Automated Lead Nurturing',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: seo.description,
+  url: seo.canonical,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free plan available. Paid plans from $29/month.',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.7',
+    reviewCount: '98',
+    bestRating: '5',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['#answer-first'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero + Answer-First -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Lead Nurturing", url: site.url + '/lead-nurturing/' }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Automated Lead Nurturing
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Automated Lead Nurturing That <span class="text-lime-400">Actually Converts</span>
+      </h1>
+      <p id="answer-first" class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Lead nurturing is the process of building relationships with prospects at every stage of the sales funnel through targeted communications. Automated lead nurturing uses software to trigger personalised callbacks, emails, and SMS based on lead behaviour — companies that nurture leads generate <strong class="text-white">47% more sales-ready leads</strong> at <strong class="text-white">33% lower cost</strong>.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Lead Nurturing -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-center text-3xl font-bold text-white">What is Lead Nurturing?</h2>
+      <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-8">
+        <p class="text-dark-300 leading-relaxed mb-4">
+          <strong class="text-white">Lead nurturing</strong> is the systematic process of engaging prospects with relevant, timely communications throughout their buying journey. Rather than pushing for an immediate sale, nurturing builds trust, educates the buyer, and positions your solution as the natural choice when they are ready to purchase.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          Effective lead nurturing addresses a fundamental reality: <strong class="text-lime-400">only 25% of new leads are ready to buy</strong>. The remaining 75% need education, relationship building, and repeated engagement before they convert. Without nurturing, these leads are lost to competitors who stay in touch.
+        </p>
+        <p class="text-dark-300 leading-relaxed">
+          Modern automated lead nurturing uses software to deliver the right message, through the right channel, at the right time — scaling what would be impossible for individual reps to do manually. The best nurture programs combine email sequences, SMS, and phone callbacks triggered by lead behaviour and engagement signals.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Lead Nurturing Problem -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">The Lead Nurturing Problem</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">Most companies generate leads but fail to nurture them — resulting in massive revenue leakage.</p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <p class="text-4xl font-extrabold text-red-400">79%</p>
+          <p class="text-sm text-dark-300 mt-2">of marketing leads never convert to sales</p>
+          <p class="text-xs text-dark-500 mt-1">Lack of nurturing is the top cause</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <p class="text-4xl font-extrabold text-yellow-400">25%</p>
+          <p class="text-sm text-dark-300 mt-2">of leads are sales-ready on day one</p>
+          <p class="text-xs text-dark-500 mt-1">75% need nurturing before they buy</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+          <p class="text-4xl font-extrabold text-lime-400">8</p>
+          <p class="text-sm text-dark-300 mt-2">touchpoints needed on average</p>
+          <p class="text-xs text-dark-500 mt-1">Before a lead becomes sales-ready</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Nurturing Best Practices -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Nurturing Best Practices</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">Seven proven practices that separate high-performing nurture programs from the rest.</p>
+      <div class="space-y-4">
+        {bestPractices.map(bp => (
+          <div class="flex items-start gap-4 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{bp.n}</span>
+            <div>
+              <h3 class="font-semibold text-white mb-1">{bp.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{bp.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Automated Nurture Workflows -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Automated Lead Nurturing Workflows</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">Four proven workflows that combine AI callbacks with automated sequences to convert more leads.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {workflows.map(wf => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="font-semibold text-white mb-4">{wf.title}</h3>
+            <ol class="space-y-2">
+              {wf.steps.map((step, i) => (
+                <li class="flex items-start gap-3 text-sm text-dark-300">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 text-xs font-bold border border-lime-500/20">{i + 1}</span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Nurturing Tools Comparison -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Nurturing Tools Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">How LimeCall's callback nurturing compares to traditional marketing automation platforms.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-4 py-3 text-left font-semibold text-lime-400">LimeCall</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">HubSpot</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Marketo</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">ActiveCampaign</th>
+              <th class="px-4 py-3 text-left font-semibold text-dark-300">Pardot</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : ''}`}>
+                <td class="px-4 py-3 text-dark-300">{row.feature}</td>
+                <td class="px-4 py-3 text-white font-medium">{row.limecall}</td>
+                <td class="px-4 py-3 text-dark-400">{row.hubspot}</td>
+                <td class="px-4 py-3 text-dark-400">{row.marketo}</td>
+                <td class="px-4 py-3 text-dark-400">{row.activecampaign}</td>
+                <td class="px-4 py-3 text-dark-400">{row.pardot}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Add Callbacks to Your Existing Nurture Sequences</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">LimeCall does not replace your marketing automation platform — it supercharges it by adding the most effective nurture touchpoint: a real-time phone conversation.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-semibold text-white mb-2">Email Platform Integration</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Connect LimeCall to HubSpot, Marketo, ActiveCampaign, or Mailchimp. When a lead reaches a scoring threshold in your email sequence, LimeCall automatically triggers a callback offer — converting email engagement into a live sales conversation.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-semibold text-white mb-2">CRM Workflow Triggers</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Use Salesforce workflows, HubSpot automation, or Pipedrive triggers to fire LimeCall callbacks at critical moments. Deal stage changes, lead score thresholds, and activity triggers can all initiate a callback — ensuring your nurture sequences include the human touch.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-semibold text-white mb-2">Behavioural Triggers via Zapier</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Use Zapier to connect LimeCall to any app in your stack. Trigger callbacks when leads complete webinar registrations, download premium content, submit support tickets, or take any action that signals increased buying intent.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="font-semibold text-white mb-2">Website Re-engagement</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">When a previously nurtured lead returns to your website and visits high-intent pages (pricing, demo, case studies), LimeCall can automatically surface a callback widget — turning a passive website visit into an active sales conversation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-bold text-white">Case Study: 38% More MQL-to-SQL Conversion with Callback Nurturing</h2>
+      <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 p-8">
+        <div class="grid gap-6 sm:grid-cols-3 mb-6">
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Company</p>
+            <p class="text-white font-semibold mt-1">SaaS Platform (150 employees)</p>
+          </div>
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Challenge</p>
+            <p class="text-white font-semibold mt-1">Email-only nurture plateau</p>
+          </div>
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Timeline</p>
+            <p class="text-white font-semibold mt-1">60-day implementation</p>
+          </div>
+        </div>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          A mid-market SaaS company was running email-only nurture sequences with a 14% MQL-to-SQL conversion rate. Despite sophisticated segmentation and personalisation, their email nurture had plateaued — open rates were healthy but leads were not progressing to sales conversations.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          They integrated LimeCall callback triggers into their existing HubSpot nurture workflows. At three key moments — post-webinar, after pricing page revisit, and when lead scores crossed 70 points — LimeCall automatically offered a callback. The phone touchpoint broke through the email-only ceiling.
+        </p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">38%</p>
+            <p class="text-xs text-dark-400 mt-1">More MQL → SQL conversions</p>
+          </div>
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">2.7x</p>
+            <p class="text-xs text-dark-400 mt-1">Higher response rate vs email alone</p>
+          </div>
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">23%</p>
+            <p class="text-xs text-dark-400 mt-1">Shorter sales cycle</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently Asked Questions About Lead Nurturing</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Stop losing leads to email-only nurture sequences</h2>
+      <p class="mt-4 text-dark-400">Add callback touchpoints to your nurture workflows with LimeCall. Free plan available — no credit card required.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/lead-scoring/', title: 'Lead Scoring', desc: 'Score leads automatically.' },
+        { href: '/activecampaign-integration/', title: 'ActiveCampaign Integration', desc: 'Connect nurture sequences.' },
+        { href: '/b2b-lead-generation/', title: 'B2B Lead Generation', desc: 'Generate more qualified leads.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
+  </div>
+</Base>

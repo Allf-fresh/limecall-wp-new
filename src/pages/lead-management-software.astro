@@ -1,0 +1,457 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: `Lead Management Software: Capture, Score, Route & Convert | LimeCall`,
+  description: `LimeCall's lead management software captures leads from every channel, scores them with AI, routes hot prospects in 28 seconds, and syncs everything to your CRM.`,
+  canonical: `https://www.limecall.com/lead-management-software/`,
+};
+
+const stats = [
+  { value: "1,900+", label: "Businesses searching monthly" },
+  { value: "80%", label: "Of leads lost without management" },
+  { value: "28s", label: "Average routing speed" },
+  { value: "$0", label: "To get started" },
+];
+
+const stages = [
+  {
+    n: "1",
+    title: "Capture",
+    desc: "Collect leads from every channel — web forms, callbacks, phone calls, SMS, live chat, landing pages, and third-party sources. LimeCall widgets capture leads with full attribution data including UTM parameters, referral source, and page visited.",
+    limecall: "Multi-channel capture with automatic source tracking and UTM attribution",
+  },
+  {
+    n: "2",
+    title: "Qualify",
+    desc: "Determine which leads are worth pursuing. LimeCall's AI-powered callback system qualifies leads in real time during the first conversation — asking BANT questions (Budget, Authority, Need, Timeline) and recording answers for your CRM.",
+    limecall: "AI qualification during 28-second callbacks with BANT scoring",
+  },
+  {
+    n: "3",
+    title: "Score",
+    desc: "Assign numerical values based on fit and intent. Combine demographic data (job title, company size) with behavioural signals (pages visited, content downloaded, call engagement) to produce an actionable priority score.",
+    limecall: "Real-time scoring during live calls plus behavioural tracking",
+  },
+  {
+    n: "4",
+    title: "Route",
+    desc: "Direct each lead to the right rep instantly. Use rules based on territory, product interest, lead score, company size, or round-robin distribution. High-score leads go to senior AEs; lower scores go to SDRs or nurture.",
+    limecall: "Intelligent routing in 28 seconds with automatic failover",
+  },
+  {
+    n: "5",
+    title: "Convert",
+    desc: "Close deals faster with full context. Reps receive scored, qualified leads with complete interaction history, call recordings, qualification answers, and source data — everything needed to have a productive first conversation.",
+    limecall: "Full lead context delivered to reps before the conversation starts",
+  },
+];
+
+const featureGrid = [
+  { title: "Multi-Channel Lead Capture", desc: "Capture leads from forms, callbacks, calls, SMS, chat, and third-party sources with automatic deduplication." },
+  { title: "AI Lead Qualification", desc: "Qualify leads during real-time AI-powered callback conversations. BANT scoring, intent detection, and automated disqualification." },
+  { title: "Lead Scoring Engine", desc: "Score every lead based on fit (firmographic), intent (behavioural), and engagement (call data). Configurable scoring models." },
+  { title: "Intelligent Lead Routing", desc: "Route leads to the right rep in 28 seconds using territory, skill, availability, round-robin, or score-based rules." },
+  { title: "CRM Synchronisation", desc: "Two-way sync with Salesforce, HubSpot, Pipedrive, Zoho, and 50+ tools. Lead data, scores, and call recordings push automatically." },
+  { title: "Automated Follow-Up", desc: "Trigger follow-up callbacks, SMS, and email sequences based on call outcomes, lead stage, and engagement signals." },
+  { title: "Pipeline Analytics", desc: "Track leads through every stage. See conversion rates, bottlenecks, rep performance, and source ROI in real-time dashboards." },
+  { title: "Lead Nurture Workflows", desc: "Build automated nurture sequences that combine callbacks, email, and SMS to warm cold leads until they are ready to buy." },
+  { title: "Duplicate Management", desc: "Automatically detect and merge duplicate leads across channels. Maintain a single, clean record for every prospect." },
+  { title: "Custom Fields & Tags", desc: "Add unlimited custom fields, tags, and labels to organise leads by any criteria your team needs. Full flexibility." },
+];
+
+const comparisonRows = [
+  { feature: "Starting price", limecall: "From $0/mo", salesforce: "$25/user/mo", hubspot: "$0 (limited)", zoho: "$14/user/mo", freshsales: "$15/user/mo", pipedrive: "$14/user/mo" },
+  { feature: "Lead capture widget", limecall: "Yes — callback + form", salesforce: "Web-to-Lead", hubspot: "Yes — forms", zoho: "Yes — forms", freshsales: "Yes — forms", pipedrive: "Via integration" },
+  { feature: "Lead scoring", limecall: "Yes — real-time", salesforce: "Einstein (add-on)", hubspot: "$800/mo+", zoho: "Yes", freshsales: "Yes", pipedrive: "Limited" },
+  { feature: "Lead routing", limecall: "Yes — 28s", salesforce: "Flow Builder", hubspot: "Rotation", zoho: "Assignment rules", freshsales: "Territory-based", pipedrive: "Round-robin" },
+  { feature: "AI qualification", limecall: "Yes — during callback", salesforce: "No", hubspot: "No", zoho: "Zia (basic)", freshsales: "Freddy AI", pipedrive: "No" },
+  { feature: "Instant callback", limecall: "Yes — 28 seconds", salesforce: "No", hubspot: "No", zoho: "No", freshsales: "No", pipedrive: "No" },
+  { feature: "SMS capabilities", limecall: "Yes — two-way", salesforce: "Add-on", hubspot: "Add-on", zoho: "Basic", freshsales: "Yes", pipedrive: "Via integration" },
+  { feature: "Integrations", limecall: "50+ native + Zapier", salesforce: "AppExchange", hubspot: "Marketplace", zoho: "Zoho ecosystem", freshsales: "Freshworks suite", pipedrive: "Marketplace" },
+  { feature: "Free trial", limecall: "Yes — free plan", salesforce: "30 days", hubspot: "Free CRM", zoho: "15 days", freshsales: "21 days", pipedrive: "14 days" },
+  { feature: "Setup time", limecall: "5 minutes", salesforce: "Weeks", hubspot: "Hours-days", zoho: "Hours", freshsales: "Hours", pipedrive: "Hours" },
+];
+
+const smallBusinessFeatures = [
+  { title: "Start Free, Scale When Ready", desc: "LimeCall's free plan includes lead capture, basic scoring, and callback functionality. No credit card required. Upgrade only when your volume demands it." },
+  { title: "No Technical Setup Required", desc: "Add LimeCall to your website with a single line of code. No developers, no IT involvement, no complex configurations. Live in 5 minutes." },
+  { title: "Works With Your Existing Tools", desc: "LimeCall integrates with the tools small businesses already use — Google Workspace, HubSpot Free CRM, Pipedrive, Zoho, Mailchimp, and hundreds more via Zapier." },
+  { title: "Compete With Enterprise Response Times", desc: "Small teams cannot afford slow lead response. LimeCall's 28-second callback gives you enterprise-grade speed-to-lead without enterprise headcount or budget." },
+];
+
+const integrations = [
+  { name: "Salesforce", desc: "Bi-directional sync for leads, contacts, and opportunities. Push scores, call recordings, and qualification data automatically." },
+  { name: "HubSpot", desc: "Native integration syncs leads, deals, and contact properties. Trigger LimeCall callbacks from HubSpot workflows." },
+  { name: "Pipedrive", desc: "Auto-create deals from scored leads. Sync call data, recordings, and outcomes to Pipedrive activities." },
+  { name: "Zoho CRM", desc: "Push leads with full attribution. Map LimeCall fields to Zoho modules for seamless pipeline management." },
+  { name: "Zapier", desc: "Connect to 5,000+ apps. Trigger callbacks from any event and push lead data to any destination." },
+  { name: "Slack", desc: "Real-time notifications when leads are captured, scored, or routed. Team alerts for high-priority leads." },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is lead management software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead management software is a platform that organises the entire lead lifecycle — from initial capture through qualification, scoring, routing, nurturing, and conversion. It centralises lead data from all sources, automates the process of determining lead quality and assigning leads to the right salespeople, and provides visibility into pipeline health and conversion metrics. LimeCall combines lead management with real-time callback technology, enabling teams to capture, qualify, score, and route leads in a single platform.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between lead management software and CRM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A CRM (Customer Relationship Management) system is a broad platform for managing all customer interactions and relationships across the entire customer lifecycle. Lead management software focuses specifically on the top-of-funnel process — capturing new leads, qualifying and scoring them, routing them to reps, and converting them into opportunities. Many teams use both: lead management software handles inbound lead processing with speed and automation, then pushes qualified leads into the CRM for ongoing relationship management. LimeCall acts as the lead management layer that feeds your CRM.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does lead management software cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead management software pricing varies widely. Enterprise CRMs like Salesforce start at $25/user/month but can cost $300+/user for full lead management features. Marketing automation platforms like HubSpot start at $800/month for professional-tier lead scoring. LimeCall offers a free plan with basic lead capture and callbacks, with paid plans starting at $29/month for advanced scoring, routing, and integrations. The best value depends on your team size, lead volume, and required features.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What features should I look for in lead management software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Essential lead management features include: (1) Multi-channel lead capture from forms, calls, and chat, (2) Lead scoring to prioritise prospects by fit and intent, (3) Automated routing to assign leads to the right rep instantly, (4) CRM integration for seamless data flow, (5) Follow-up automation to prevent leads from going cold, (6) Pipeline analytics for visibility and optimisation, and (7) Speed-to-lead capability — the faster you respond, the higher your conversion rate. LimeCall provides all seven with an emphasis on speed, offering 28-second lead routing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can lead management software work for small businesses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Absolutely. Lead management software is arguably more important for small businesses than enterprises, because small teams cannot afford to waste limited resources on unqualified leads or slow follow-up. LimeCall is designed for small-to-midsize businesses: it requires no technical setup (5-minute installation), starts with a free plan, and provides enterprise-grade lead scoring and 28-second routing without needing a dedicated sales ops team. Small businesses using LimeCall compete with much larger organisations on response time.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does lead management software improve conversion rates?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lead management software improves conversion rates in four ways: (1) Speed — responding to leads within 5 minutes makes you 100x more likely to connect than waiting 30 minutes; automated routing eliminates delays, (2) Prioritisation — lead scoring ensures reps focus on the highest-value opportunities first, (3) Consistency — automated workflows ensure every lead receives appropriate follow-up regardless of rep workload, and (4) Intelligence — data-driven insights reveal which sources, campaigns, and processes produce the best conversion rates, enabling continuous optimisation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does it take to set up lead management software?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Setup time varies dramatically by platform. Enterprise solutions like Salesforce can take weeks to months for full implementation with custom objects, flows, and integrations. Mid-market tools like HubSpot typically require hours to days. LimeCall is designed for rapid deployment — you can add the callback widget to your website, configure scoring rules, set up routing, and connect your CRM in under 5 minutes. No developers or IT involvement required. Most teams are live and capturing leads on the same day they sign up.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Lead Management Software',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: seo.description,
+  url: seo.canonical,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free plan available. Paid plans from $29/month.',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '152',
+    bestRating: '5',
+  },
+};
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['#answer-first'],
+  },
+  url: seo.canonical,
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+  <JsonLd schema={speakableSchema} />
+
+  <!-- Hero + Answer-First -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: "Lead Management Software", url: site.url + '/lead-management-software/' }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Lead Management Software
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Lead Management Software for Teams That Want to <span class="text-lime-400">Win Every Lead</span>
+      </h1>
+      <p id="answer-first" class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Lead management software organises the entire lead lifecycle — from initial capture through qualification, scoring, routing, nurturing, and conversion. LimeCall combines real-time lead capture, AI-powered scoring, <strong class="text-white">28-second routing</strong> to the right rep, and full CRM synchronisation into one platform starting at <strong class="text-white">$0/mo</strong>.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 shadow-lg">
+          Start Free Trial →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-b border-dark-800 bg-dark-900/30 py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold text-lime-400">{s.value}</p>
+            <p class="mt-1 text-sm text-dark-400">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Lead Management Software -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-center text-3xl font-bold text-white">What is Lead Management Software?</h2>
+      <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-8">
+        <p class="text-dark-300 leading-relaxed mb-4">
+          <strong class="text-white">Lead management software</strong> is a platform that handles the complete lifecycle of a sales lead — from the moment a prospect first interacts with your business to the point they become a paying customer. It replaces spreadsheets, manual assignments, and disconnected tools with a unified system that captures, qualifies, scores, routes, and converts leads automatically.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          Without lead management software, <strong class="text-lime-400">up to 80% of leads are lost</strong> — dropped between marketing and sales, left to go cold due to slow follow-up, or routed to the wrong rep. Lead management software eliminates these gaps by automating every handoff and ensuring every lead gets the right attention at the right time.
+        </p>
+        <p class="text-dark-300 leading-relaxed">
+          LimeCall's approach to lead management is unique: instead of just organising leads in a database, LimeCall actively engages them with AI-powered callbacks within 28 seconds of capture — qualifying, scoring, and routing in real time while the lead's intent is at its peak.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The 5 Stages of Lead Management -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">The 5 Stages of Lead Management</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">Every lead flows through five stages. LimeCall handles each one automatically.</p>
+
+      <!-- Visual flow -->
+      <div class="mb-10 flex flex-wrap items-center justify-center gap-2 text-sm font-bold">
+        <span class="rounded-lg bg-lime-500/10 border border-lime-500/20 px-4 py-2 text-lime-400">Capture</span>
+        <span class="text-dark-600">→</span>
+        <span class="rounded-lg bg-lime-500/10 border border-lime-500/20 px-4 py-2 text-lime-400">Qualify</span>
+        <span class="text-dark-600">→</span>
+        <span class="rounded-lg bg-lime-500/10 border border-lime-500/20 px-4 py-2 text-lime-400">Score</span>
+        <span class="text-dark-600">→</span>
+        <span class="rounded-lg bg-lime-500/10 border border-lime-500/20 px-4 py-2 text-lime-400">Route</span>
+        <span class="text-dark-600">→</span>
+        <span class="rounded-lg bg-lime-500/10 border border-lime-500/20 px-4 py-2 text-lime-400">Convert</span>
+      </div>
+
+      <div class="space-y-4">
+        {stages.map(stage => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-lime-400 font-bold text-lg border border-lime-500/20">{stage.n}</span>
+              <div>
+                <h3 class="font-bold text-white text-lg mb-1">{stage.title}</h3>
+                <p class="text-sm text-dark-400 leading-relaxed mb-2">{stage.desc}</p>
+                <p class="text-xs text-lime-400 font-medium">LimeCall: {stage.limecall}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Management Software Features</h2>
+      <p class="mb-12 text-center text-dark-400">Everything you need to manage the complete lead lifecycle in one platform.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featureGrid.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Software Comparison Table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Management Software Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Detailed feature comparison across the top lead management platforms.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900/80">
+              <th class="px-3 py-3 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-3 py-3 text-left font-semibold text-lime-400">LimeCall</th>
+              <th class="px-3 py-3 text-left font-semibold text-dark-300">Salesforce</th>
+              <th class="px-3 py-3 text-left font-semibold text-dark-300">HubSpot</th>
+              <th class="px-3 py-3 text-left font-semibold text-dark-300">Zoho</th>
+              <th class="px-3 py-3 text-left font-semibold text-dark-300">Freshsales</th>
+              <th class="px-3 py-3 text-left font-semibold text-dark-300">Pipedrive</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-900/40' : ''}`}>
+                <td class="px-3 py-3 text-dark-300">{row.feature}</td>
+                <td class="px-3 py-3 text-white font-medium">{row.limecall}</td>
+                <td class="px-3 py-3 text-dark-400">{row.salesforce}</td>
+                <td class="px-3 py-3 text-dark-400">{row.hubspot}</td>
+                <td class="px-3 py-3 text-dark-400">{row.zoho}</td>
+                <td class="px-3 py-3 text-dark-400">{row.freshsales}</td>
+                <td class="px-3 py-3 text-dark-400">{row.pipedrive}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Management for Small Business -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Lead Management for Small Business</h2>
+      <p class="mb-10 text-center text-dark-400 max-w-2xl mx-auto">You do not need an enterprise budget or a dedicated ops team to manage leads professionally. LimeCall is built for growing teams.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {smallBusinessFeatures.map(f => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Ecosystem -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-3xl font-bold text-white">Integration Ecosystem</h2>
+      <p class="mb-10 text-center text-dark-400">LimeCall syncs lead data, scores, call recordings, and outcomes to your existing tools.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {integrations.map(int => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{int.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{int.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-bold text-white">Case Study: From Spreadsheet Chaos to 45% More Conversions</h2>
+      <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 p-8">
+        <div class="grid gap-6 sm:grid-cols-3 mb-6">
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Company</p>
+            <p class="text-white font-semibold mt-1">Digital Agency (35 employees)</p>
+          </div>
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Challenge</p>
+            <p class="text-white font-semibold mt-1">Leads managed in spreadsheets</p>
+          </div>
+          <div class="text-center">
+            <p class="text-sm text-dark-400">Timeline</p>
+            <p class="text-white font-semibold mt-1">Same-day implementation</p>
+          </div>
+        </div>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          A growing digital marketing agency was managing 200+ inbound leads per month across three Google Sheets, with reps manually claiming leads via Slack messages. Average response time was 4 hours. Lead data was inconsistent, source attribution was missing, and the founder estimated 30-40% of leads were never contacted at all.
+        </p>
+        <p class="text-dark-300 leading-relaxed mb-4">
+          They implemented LimeCall's lead management in a single afternoon. The callback widget replaced their contact form, automatically capturing leads with full attribution. AI qualification scored each lead during the initial callback. Routing rules distributed leads to the right account executive based on service interest and company size.
+        </p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">45%</p>
+            <p class="text-xs text-dark-400 mt-1">More lead-to-client conversions</p>
+          </div>
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">4h → 28s</p>
+            <p class="text-xs text-dark-400 mt-1">Response time improvement</p>
+          </div>
+          <div class="rounded-lg border border-dark-800 bg-dark-950 p-4 text-center">
+            <p class="text-2xl font-extrabold text-lime-400">100%</p>
+            <p class="text-xs text-dark-400 mt-1">Lead coverage (zero dropped)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently Asked Questions About Lead Management Software</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/50 p-5 open:pb-4">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between gap-4">
+              {faq.name}
+              <span class="shrink-0 text-lime-400 text-lg">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{faq.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Stop losing leads to broken processes</h2>
+      <p class="mt-4 text-dark-400">Capture, score, route, and convert every lead with LimeCall. Free plan available — live in 5 minutes.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/lead-scoring/', title: 'Lead Scoring', desc: 'Score leads automatically.' },
+        { href: '/lead-routing-software/', title: 'Lead Routing Software', desc: 'Route leads to the right rep.' },
+        { href: '/lead-nurturing/', title: 'Lead Nurturing', desc: 'Nurture leads to conversion.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Simple, transparent pricing.' },
+      ]}
+    />
+  </div>
+</Base>

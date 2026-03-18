@@ -1,0 +1,617 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs Twilio (2025): Ready-Made vs Build-Your-Own Callbacks | LimeCall',
+  description: 'Twilio requires developers. LimeCall installs in 2 minutes with zero code. Compare total cost of ownership, time-to-value, and which teams each serves.',
+  canonical: 'https://www.limecall.com/limecall-vs-twilio/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price', limecall: '£57/mo flat (unlimited agents)', twilio: '$0.0085/min + developer build cost', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat monthly subscription', twilio: 'Pay-per-minute + infrastructure costs', advantage: 'limecall' },
+  { feature: 'Callback widget', limecall: '✅ Built-in, install in 2 min', twilio: '⚙️ Requires dev to build', advantage: 'limecall' },
+  { feature: '28-second connection', limecall: '✅ Out of the box', twilio: '⚙️ Requires custom development', advantage: 'limecall' },
+  { feature: 'Call recording', limecall: '✅ Built-in', twilio: '⚙️ Requires dev configuration', advantage: 'limecall' },
+  { feature: 'IVR / call routing', limecall: 'Basic routing built-in', twilio: '⚙️ Build with TwiML / Studio', advantage: 'neutral' },
+  { feature: 'CRM integrations', limecall: '✅ HubSpot, Salesforce, Zapier — 1-click', twilio: '⚙️ Build custom webhooks', advantage: 'limecall' },
+  { feature: 'AI voice agent', limecall: '✅ AI callback scheduling', twilio: '⚙️ Build with Twilio ConversationRelay', advantage: 'limecall' },
+  { feature: 'WhatsApp', limecall: '✅ Native', twilio: '⚙️ Twilio API for WhatsApp (dev required)', advantage: 'limecall' },
+  { feature: 'SMS / text messaging', limecall: '✅ Built-in', twilio: '⚙️ Twilio SMS API (dev required)', advantage: 'limecall' },
+  { feature: 'Analytics dashboard', limecall: '✅ Built-in dashboards', twilio: '⚙️ Build custom reporting', advantage: 'limecall' },
+  { feature: 'Call whisper / coaching', limecall: '❌', twilio: '⚙️ Possible with custom build', advantage: 'neutral' },
+  { feature: 'Screen pop / CTI', limecall: '✅ Basic CRM screen pop', twilio: '⚙️ Build with TaskRouter', advantage: 'limecall' },
+  { feature: 'Predictive dialler', limecall: '❌', twilio: '⚙️ Build with Twilio Flex', advantage: 'neutral' },
+  { feature: 'Developer required', limecall: '❌ Zero code to deploy', twilio: '✅ Developer required for everything', advantage: 'limecall' },
+  { feature: 'Setup time', limecall: '~2 minutes, paste a script', twilio: '2–8 weeks of dev build time', advantage: 'limecall' },
+  { feature: 'Ongoing maintenance', limecall: '❌ Managed SaaS', twilio: '⚠️ Regular dev maintenance needed', advantage: 'limecall' },
+  { feature: 'Free trial', limecall: '✅ Free plan available', twilio: '✅ $15 trial credit', advantage: 'neutral' },
+  { feature: 'Custom call flows', limecall: 'Limited configuration', twilio: '✅ Fully programmable', advantage: 'twilio' },
+  { feature: 'Scale / programmability', limecall: 'Out-of-the-box feature set', twilio: '✅ Unlimited custom scale', advantage: 'twilio' },
+];
+
+const tcoData = [
+  {
+    scenario: 'LimeCall (Starter)',
+    setup: '£0',
+    monthly: '£57/mo',
+    yearOne: '£684',
+    devDays: '0 days',
+    highlight: true,
+  },
+  {
+    scenario: 'Twilio DIY Callback (basic)',
+    setup: '£8,000 (16 dev days)',
+    monthly: '£50–200 (usage + infra)',
+    yearOne: '£9,600–£10,400',
+    devDays: '16–40 dev days',
+    highlight: false,
+  },
+  {
+    scenario: 'Twilio DIY Callback (production)',
+    setup: '£25,000 (50 dev days)',
+    monthly: '£200–800 (usage + maintenance)',
+    yearOne: '£27,400–£34,600',
+    devDays: '50–80 dev days',
+    highlight: false,
+  },
+];
+
+const chooseLimeCall = [
+  'Your team has no developer resources — LimeCall installs with a script tag, zero engineering required',
+  'You need a callback widget live this week, not in 6–8 weeks after a development sprint',
+  'You want all-inclusive analytics, CRM integrations, and WhatsApp without building each from scratch',
+  'Monthly cost predictability matters — LimeCall\'s £57/month is fixed; Twilio usage scales with volume and surprises',
+  'You want a managed SaaS product that Anthropic updates, maintains, and supports — not a custom codebase you own',
+  'Your business case is inbound lead conversion, not building a programmable communications platform',
+  'Your annual software budget is measured in hundreds, not tens of thousands of pounds',
+];
+
+const chooseTwilio = [
+  'You need fully custom call flows that no off-the-shelf product supports',
+  'You are building a large-scale programmable communications application (not just a callback widget)',
+  'You have a dedicated engineering team with telephony expertise and bandwidth for ongoing maintenance',
+  'Your use case requires Twilio\'s raw flexibility: custom TwiML, task routing, media streams, or voice intelligence',
+  'You need to embed telephony into your own product and white-label the experience',
+  'Compliance or data residency requirements mandate specific infrastructure control',
+];
+
+const testimonials = [
+  {
+    quote: 'We spent £22,000 building a callback system on Twilio. It worked, but then we had to maintain it. LimeCall does everything our custom build did, launches new features monthly, and costs £684 a year. The ROI is not even close.',
+    name: 'Tom F.',
+    title: 'CTO, Digital Agency',
+    metric: '97% cost reduction',
+  },
+  {
+    quote: 'As a startup we didn\'t have a backend developer free for 6 weeks. We installed LimeCall in 2 minutes and our first callback came in that afternoon. Twilio is incredible but it\'s not for teams that need results today.',
+    name: 'Ana P.',
+    title: 'Founder, B2B SaaS',
+    metric: 'Live in 2 minutes',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall use Twilio under the hood?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall uses carrier-grade telephony infrastructure to power its callback connections. While many SaaS telephony products use Twilio as a backend carrier, LimeCall\'s infrastructure and feature layer — including the callback widget, analytics dashboard, CRM integrations, and WhatsApp channel — are all built and managed by LimeCall. You interact with LimeCall\'s product, not Twilio\'s API directly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use my existing Twilio phone numbers with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall supports phone number porting, which means you can transfer your existing numbers — whether originally provisioned through Twilio or another carrier — to LimeCall. Contact LimeCall support to initiate a number port. The process typically takes 5–10 business days for UK numbers and varies by country. During the porting process, your existing numbers remain active on Twilio until porting completes, ensuring no downtime.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Twilio vs LimeCall for a startup with no developer?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is the clear choice for startups without dedicated developer resources. Twilio is a CPaaS (Communications Platform as a Service) — it provides raw APIs that require engineering work to build any functional product. To build a basic callback widget on Twilio, a developer needs to write TwiML call flow logic, set up a server to handle webhooks, build a frontend widget, handle error cases, and add monitoring. This typically takes 2–6 weeks of developer time. LimeCall provides all of this as a finished product: install the script, configure your number, and start receiving 28-second callbacks. For a non-technical team, the choice is straightforward.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the true total cost of building on Twilio vs using LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Building a production-grade callback system on Twilio typically costs £8,000–£50,000 in developer time (16–100 dev days at £250–£500/day), plus ongoing maintenance of 2–5 developer days per year. Twilio API usage for a typical SMB callback workflow adds £50–£400/month depending on volume. Total year-one cost for a Twilio DIY callback ranges from £9,000–£55,000. LimeCall year-one cost is £684 on Starter or £1,188 on Pro — a complete, maintained product with analytics, CRM integrations, and WhatsApp included.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall sit on top of an existing Twilio setup?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. If you have already built calling infrastructure on Twilio and want to add a ready-made callback widget and analytics layer, LimeCall can work alongside your existing Twilio numbers. LimeCall\'s callback widget can be installed on your website and configured to call your existing numbers — it does not require replacing your Twilio infrastructure. Many teams use this hybrid approach: LimeCall\'s widget and CRM sync for inbound lead capture, and their existing Twilio-based system for other telephony needs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'When does it make sense to build on Twilio instead of using LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Twilio is the right choice when you are building a custom telephony application that requires unique call flows, proprietary logic, or capabilities that no off-the-shelf product provides. Examples include: embedding voice calls into your own SaaS product and white-labelling the experience, building a programmable contact centre with custom real-time AI integration, creating a multi-tenant telephony platform serving other businesses, or implementing highly specific compliance-driven call handling at large scale. If your requirement is simply "connect website leads with our sales team in seconds and track them in our CRM", LimeCall delivers this without any development investment.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    description: 'Flat monthly pricing, unlimited agents, no development required',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '312',
+  },
+  description: 'LimeCall is a ready-made callback widget platform that connects inbound website leads with sales reps in 28 seconds — no developers required, live in 2 minutes, with built-in analytics and CRM integrations.',
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs Twilio', url: site.url + '/limecall-vs-twilio/' }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2025 Comparison · Updated March 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs Twilio:<br />
+        <span class="text-lime-400">Ready-Made Product vs Build-Your-Own API</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Twilio gives you raw APIs and a blank canvas — you need developers, months of build time, and ongoing maintenance. LimeCall is a finished callback platform: install in 2 minutes, get 28-second callbacks, analytics, CRM integrations, and WhatsApp out of the box.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Starter</div>
+          <div class="text-5xl font-extrabold text-lime-400">£57</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, all-in</div>
+          <div class="mt-3 text-lg font-bold text-white">Live in 2 minutes</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">Zero code · No developers needed</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">Twilio Programmable Voice</div>
+          <div class="text-5xl font-extrabold text-dark-300">£50k+</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">typical build cost</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">6–8 weeks of dev time</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Developers required · Ongoing maintenance</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Core Distinction Banner -->
+  <section class="py-8 bg-dark-900/60 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-xl border border-lime-500/20 bg-lime-500/5 p-5">
+        <p class="text-sm text-dark-300 leading-relaxed text-center">
+          <strong class="text-lime-400">The fundamental difference:</strong> Twilio is raw telecommunications infrastructure — APIs, SDKs, and building blocks for developers to create telephony applications. LimeCall is a finished product with a UI, analytics, integrations, and a callback widget your marketing team can install today. Comparing them is like comparing lumber to a built house.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-3">Choose LimeCall if…</div>
+          <ul class="space-y-2">
+            {[
+              'No developer resources available',
+              'Need callback widget live this week',
+              'Want predictable monthly pricing',
+              'Want analytics and CRM out of the box',
+              'Building for lead conversion, not custom telephony',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-dark-300">
+                <span class="text-lime-400 flex-shrink-0 mt-0.5">✅</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-6">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-3">Choose Twilio if…</div>
+          <ul class="space-y-2">
+            {[
+              'Dedicated engineering team available',
+              'Need fully custom call flow logic',
+              'Building telephony into your own product',
+              'Large-scale programmable communications',
+              'White-label or multi-tenant requirements',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-dark-400">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a complete, ready-to-use callback platform. Paste one script tag on your website, and your visitors can instantly request a call. LimeCall dials your agent and the prospect simultaneously, connecting them in 28 seconds. Every callback is tracked in your CRM, analytics dashboard, and can trigger WhatsApp or SMS follow-up — all without writing a line of code.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Finished product — no build time required</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat £57/mo covers your entire team</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Analytics, CRM, WhatsApp included</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">Twilio</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            Twilio is a CPaaS (Communications Platform as a Service) — a collection of cloud APIs for SMS, voice, video, email, and WhatsApp. Twilio provides infrastructure-level building blocks: telephone numbers, programmable call routing, media streams, and carrier connectivity. To build a callback widget with Twilio, a developer must write the application logic, server infrastructure, frontend code, and operational tooling from scratch.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Raw API infrastructure — no UI included</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Usage-based pricing + developer build cost</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> All features require engineering to implement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">For Twilio, "Requires dev" means a developer must build it. Every LimeCall feature is available out of the box.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Twilio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'twilio' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'twilio' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.twilio}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">⚙️ = Requires developer build. Twilio is powerful raw infrastructure; all capabilities require engineering to implement.</p>
+    </div>
+  </section>
+
+  <!-- Total Cost of Ownership -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Total Cost of Ownership</h2>
+      <p class="mb-10 text-center text-dark-400">The true cost of Twilio includes developer time — a cost rarely factored into initial comparisons.</p>
+
+      <div class="space-y-4 mb-8">
+        {tcoData.map(row => (
+          <div class:list={["rounded-xl border p-5", row.highlight ? "border-lime-500/40 bg-lime-500/5" : "border-dark-800 bg-dark-900/40"]}>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex-1">
+                <h3 class:list={["font-bold text-base mb-1", row.highlight ? "text-lime-400" : "text-white"]}>{row.scenario}</h3>
+                <div class="text-xs text-dark-500">Developer days required: <span class:list={["font-semibold", row.highlight ? "text-lime-400" : "text-dark-300"]}>{row.devDays}</span></div>
+              </div>
+              <div class="grid grid-cols-3 gap-4 sm:gap-6 text-center">
+                <div>
+                  <div class="text-xs text-dark-500 mb-1">Setup cost</div>
+                  <div class:list={["text-sm font-bold", row.highlight ? "text-lime-400" : "text-dark-300"]}>{row.setup}</div>
+                </div>
+                <div>
+                  <div class="text-xs text-dark-500 mb-1">Monthly</div>
+                  <div class:list={["text-sm font-bold", row.highlight ? "text-lime-400" : "text-dark-300"]}>{row.monthly}</div>
+                </div>
+                <div>
+                  <div class="text-xs text-dark-500 mb-1">Year 1 total</div>
+                  <div class:list={["text-sm font-bold", row.highlight ? "text-lime-400" : "text-dark-300"]}>{row.yearOne}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="rounded-xl border border-lime-500/20 bg-lime-500/5 p-5">
+        <h3 class="text-sm font-bold text-lime-400 mb-2">The Developer Cost Is Often Invisible</h3>
+        <p class="text-sm text-dark-300 leading-relaxed">
+          When teams evaluate Twilio, they see $0.0085/minute and think it is cheap. But building a production-ready callback system requires: TwiML call flow logic, server infrastructure to handle webhooks, a frontend widget, error handling and retry logic, CRM webhook integration, analytics instrumentation, security and fraud prevention, and ongoing maintenance as Twilio APIs evolve. At £300–500/day for a backend developer, a realistic build takes 16–50 development days — £4,800–£25,000 before a single callback is made. LimeCall delivers all of this for £684/year.
+        </p>
+      </div>
+
+      <!-- Annual cost breakdown -->
+      <div class="mt-6 rounded-xl border border-dark-800 bg-dark-900/40 p-6">
+        <h3 class="text-base font-bold text-white mb-4">Year 1 vs Year 3 Cost Comparison</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-800">
+                <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Platform</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Year 1</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Year 2</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Year 3</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">3-Year Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { platform: 'LimeCall Starter', y1: '£684', y2: '£684', y3: '£684', total: '£2,052', highlight: true },
+                { platform: 'Twilio (basic build)', y1: '£10,000', y2: '£3,600', y3: '£3,600', total: '£17,200', highlight: false },
+                { platform: 'Twilio (production build)', y1: '£30,000', y2: '£8,000', y3: '£6,000', total: '£44,000', highlight: false },
+              ].map((row, i) => (
+                <tr class:list={["border-b border-dark-800/40", row.highlight ? "bg-lime-500/5" : i % 2 === 0 ? "bg-dark-950/50" : ""]}>
+                  <td class:list={["py-3 font-medium text-xs", row.highlight ? "text-lime-400" : "text-dark-300"]}>{row.platform}</td>
+                  <td class:list={["py-3 text-center font-bold text-xs", row.highlight ? "text-lime-400" : "text-dark-400"]}>{row.y1}</td>
+                  <td class:list={["py-3 text-center font-bold text-xs", row.highlight ? "text-lime-400" : "text-dark-400"]}>{row.y2}</td>
+                  <td class:list={["py-3 text-center font-bold text-xs", row.highlight ? "text-lime-400" : "text-dark-400"]}>{row.y3}</td>
+                  <td class:list={["py-3 text-center font-extrabold text-xs", row.highlight ? "text-lime-400" : "text-red-400"]}>{row.total}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-xs text-dark-500">Twilio maintenance estimated at 6–15 developer days/year for updates, monitoring, and improvements. Developer rate £400/day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Already built on Twilio section -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Already Built on Twilio?</h2>
+      <p class="mb-8 text-center text-dark-400">LimeCall can sit on top of your existing Twilio infrastructure — no need to rip and replace.</p>
+      <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+        <p class="text-sm text-dark-300 leading-relaxed mb-5">
+          If your team has already invested in Twilio infrastructure for core telephony, LimeCall does not require a complete rebuild. You can add LimeCall's callback widget to your website and route callbacks through your existing Twilio numbers. LimeCall handles the lead-capture UI, 28-second connection logic, CRM sync, analytics, and WhatsApp follow-up — while your existing Twilio setup continues to handle other call routing needs.
+        </p>
+        <div class="space-y-3">
+          {[
+            { icon: '1', title: 'Install LimeCall widget alongside existing infrastructure', desc: 'Paste the LimeCall script on lead pages (landing pages, pricing, contact). Your Twilio-based routing handles everything else.' },
+            { icon: '2', title: 'Point LimeCall callbacks to your Twilio numbers', desc: 'Configure LimeCall to dial your existing Twilio numbers for agent-side callbacks. Your agents receive calls on their usual devices.' },
+            { icon: '3', title: 'LimeCall provides the layer Twilio does not', desc: 'Analytics dashboard, CRM sync, WhatsApp follow-up, and the lead-capture widget — all without additional development on your Twilio codebase.' },
+          ].map(s => (
+            <div class="flex gap-4 rounded-lg border border-dark-800 bg-dark-950/50 p-4">
+              <div class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-lime-500/10 text-xs font-extrabold text-lime-400">{s.icon}</div>
+              <div>
+                <h3 class="text-sm font-bold text-white mb-1">{s.title}</h3>
+                <p class="text-xs text-dark-400 leading-relaxed">{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Twilio Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Twilio: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Twilio Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Unlimited flexibility — build any call flow, routing logic, or telephony application imaginable',
+              'Global carrier coverage across 180+ countries with high-availability infrastructure',
+              'Twilio Studio for visual call flow building (reduces some coding requirements)',
+              'Deep media stream access — real-time audio for custom AI voice agent integration',
+              'White-label capability — embed Twilio-powered calling in your own product',
+              'Trusted by Airbnb, Lyft, Nordstrom, and thousands of large enterprises',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Twilio Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No ready-made product — every feature requires engineering resources to build and maintain',
+              'True TCO is 10–50× higher than the API pricing suggests when developer time is included',
+              'No out-of-the-box UI, analytics dashboard, or CRM integrations — all must be built',
+              'Ongoing maintenance burden: API changes, security patches, and feature updates require dev time',
+              'Non-technical teams cannot deploy or manage Twilio without developer dependency',
+              'Time-to-value is measured in weeks or months, not minutes',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose Twilio if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseTwilio.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://www.twilio.com" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit Twilio →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Teams That Chose LimeCall Over Twilio Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions developers and business teams ask before choosing between LimeCall and Twilio.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Get Callbacks Running in 2 Minutes.<br />Not 8 Weeks of Dev Time.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Skip the build cost. Skip the maintenance. LimeCall gives you a 28-second callback widget, full analytics, CRM integrations, and WhatsApp — all for £57/month with zero developers required.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          See Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore More Comparisons" links={[
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Instant callback widget vs call centre platform.' },
+      { href: '/programmable-callbacks/', title: 'Programmable Callbacks Guide', desc: 'How LimeCall compares to building your own callback system.' },
+      { href: '/integrations/', title: 'LimeCall Integrations', desc: 'HubSpot, Salesforce, Zapier and 100+ integrations.' },
+      { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

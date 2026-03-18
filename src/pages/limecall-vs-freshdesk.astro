@@ -1,0 +1,618 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'LimeCall vs Freshdesk (2025): Callback Speed vs Helpdesk Breadth | LimeCall',
+  description: 'Freshdesk is a helpdesk. LimeCall is a lead-conversion engine. See which converts more inbound leads and why 10,000+ businesses chose LimeCall.',
+  canonical: 'https://www.limecall.com/limecall-vs-freshdesk/',
+};
+
+const comparisonRows = [
+  { feature: 'Entry price (monthly)', limecall: '£57/mo flat (unlimited agents)', freshdesk: '$15/agent/mo Growth (limited calling)', advantage: 'limecall' },
+  { feature: 'Pricing model', limecall: 'Flat — no per-agent fees', freshdesk: 'Per-agent (scales with team)', advantage: 'limecall' },
+  { feature: 'Callback widget', limecall: '✅ 28-second connect', freshdesk: '❌ Not available natively', advantage: 'limecall' },
+  { feature: '28-second connection', limecall: '✅ Core product promise', freshdesk: '❌ Tickets, not instant calls', advantage: 'limecall' },
+  { feature: 'Call recording', limecall: '✅ Included', freshdesk: '✅ With Freshcaller add-on', advantage: 'neutral' },
+  { feature: 'IVR / call routing', limecall: 'Basic routing', freshdesk: '✅ Freshcaller add-on required', advantage: 'neutral' },
+  { feature: 'CRM integrations', limecall: '✅ HubSpot, Salesforce, Zapier', freshdesk: '✅ Wide marketplace integrations', advantage: 'neutral' },
+  { feature: 'AI voice agent', limecall: '✅ AI callback scheduling', freshdesk: '✅ Freddy AI (chatbot focused)', advantage: 'neutral' },
+  { feature: 'WhatsApp', limecall: '✅ Native', freshdesk: '✅ Available (paid tier)', advantage: 'neutral' },
+  { feature: 'SMS / text messaging', limecall: '✅ Included', freshdesk: '⚠️ Add-on required', advantage: 'limecall' },
+  { feature: 'Analytics dashboard', limecall: 'Lead conversion dashboards', freshdesk: '✅ Support ticket analytics', advantage: 'neutral' },
+  { feature: 'Call whisper / coaching', limecall: '❌', freshdesk: '⚠️ Freshcaller add-on', advantage: 'neutral' },
+  { feature: 'Screen pop / CTI', limecall: '✅ Basic CRM screen pop', freshdesk: '⚠️ Freshcaller add-on', advantage: 'limecall' },
+  { feature: 'Omnichannel suite', limecall: 'Phone + WhatsApp + SMS', freshdesk: '✅ Email, chat, phone, social', advantage: 'freshdesk' },
+  { feature: 'Ticketing system', limecall: '❌ Not a helpdesk', freshdesk: '✅ Core feature', advantage: 'freshdesk' },
+  { feature: 'Knowledge base', limecall: '❌', freshdesk: '✅ Built-in', advantage: 'freshdesk' },
+  { feature: 'Setup time', limecall: '~5 minutes, no code', freshdesk: '1–3 days (ticket config, routing)', advantage: 'limecall' },
+  { feature: 'Contract required', limecall: '❌ Month-to-month', freshdesk: '❌ Monthly available', advantage: 'neutral' },
+  { feature: 'Free trial', limecall: '✅ Free plan + 14-day trial', freshdesk: '✅ Free plan (limited)', advantage: 'neutral' },
+  { feature: 'Mobile app', limecall: '✅', freshdesk: '✅', advantage: 'neutral' },
+];
+
+const pricingTiers = [
+  {
+    tool: 'LimeCall',
+    highlight: true,
+    tiers: [
+      { name: 'Free', price: '£0/mo', users: 'Unlimited', note: 'No credit card required' },
+      { name: 'Starter', price: '£57/mo', users: 'Unlimited', note: 'Callback widget, SMS, WhatsApp' },
+      { name: 'Pro', price: '£99/mo', users: 'Unlimited', note: 'Virtual numbers, API, advanced CRM' },
+    ],
+  },
+  {
+    tool: 'Freshdesk',
+    highlight: false,
+    tiers: [
+      { name: 'Growth', price: '$15/agent/mo', users: 'Per agent', note: 'Ticketing, limited calling' },
+      { name: 'Pro', price: '$49/agent/mo', users: 'Per agent', note: 'Routing, CSAT, sandboxing' },
+      { name: 'Enterprise', price: '$79/agent/mo', users: 'Per agent', note: 'AI, custom roles, full features' },
+    ],
+  },
+];
+
+const chooseLimeCall = [
+  'Your team is focused on sales and lead conversion — Freshdesk is optimised for support ticketing, not outbound lead response',
+  'Speed-to-lead is your primary metric — LimeCall\'s 28-second callback widget means prospects hear from you before they visit a competitor\'s site',
+  'You want flat-rate pricing — a 10-agent team on Freshdesk Pro costs $490/month; LimeCall Pro costs £99/month for the same team',
+  'You need a callback widget that captures website visitors immediately — Freshdesk has no equivalent native feature',
+  'Your CRM is the source of truth and you want call outcomes to sync without ticket overhead',
+  'You need WhatsApp and SMS follow-up built into your calling workflow without managing separate platforms',
+  'You want to be live today, not after days of configuring ticket routing and macros',
+];
+
+const chooseFreshdesk = [
+  'You run a customer support team managing high volumes of inbound tickets, emails, and chats',
+  'A knowledge base and self-service portal are critical to deflecting support volume',
+  'You need omnichannel support across email, chat, phone, and social media in one ticketing system',
+  'CSAT surveys, SLA management, and ticket escalation workflows are core to your operations',
+  'Your primary team function is reactive support, not proactive sales outreach',
+  'You already use Freshdesk and Freshcaller together and are embedded in the Freshworks ecosystem',
+];
+
+const testimonials = [
+  {
+    quote: 'We were using Freshdesk\'s calling add-on for inbound demo requests. It was creating tickets instead of connecting people. Switched to LimeCall and our demo booking rate went up 3.1x — leads now get a call back in 28 seconds.',
+    name: 'Sophie B.',
+    title: 'Marketing Director, B2B SaaS',
+    metric: '3.1× more demo bookings',
+  },
+  {
+    quote: 'Freshdesk is excellent for our support team. But our sales team needed something different — instant callback, WhatsApp follow-up, and no per-agent fees. LimeCall solved all three and cost 70% less per month.',
+    name: 'David R.',
+    title: 'Head of Sales, E-commerce',
+    metric: '70% lower cost per lead',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does Freshdesk have a callback widget?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Freshdesk does not have a native callback widget. Freshdesk\'s calling capabilities come through Freshcaller, a separate product in the Freshworks suite that functions as a cloud phone system. Freshcaller allows agents to make and receive calls and has basic inbound routing, but it does not offer an instant callback widget that automatically connects website visitors with agents in seconds. LimeCall\'s core product is precisely this: a website visitor clicks the widget, enters their number, and LimeCall connects both sides in an average of 28 seconds.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does the Freshdesk calling add-on cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Freshdesk calling is powered by Freshcaller, which has its own separate pricing. Freshcaller starts with a limited free plan and paid tiers at $15/agent/month (Growth), $39/agent/month (Pro), and $69/agent/month (Enterprise) — these are in addition to your Freshdesk subscription costs. A team on Freshdesk Pro ($49/agent/mo) plus Freshcaller Pro ($39/agent/mo) is paying $88/agent/month total. For a 10-agent team, that is $880/month. LimeCall charges £57/month flat for unlimited agents, including all calling features.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use LimeCall and Freshdesk together?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, many businesses use both. Freshdesk handles customer support tickets, and LimeCall handles inbound lead callbacks. LimeCall integrates with Freshdesk via Zapier, allowing callback data and lead information to flow into Freshdesk as contacts or tickets where appropriate. This setup is particularly effective for companies with separate support and sales functions — support uses Freshdesk for ticket management, sales uses LimeCall for instant callback lead conversion.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the main difference between LimeCall and Freshdesk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Freshdesk is a customer support helpdesk platform. Its primary function is managing inbound support tickets across email, chat, phone, and social media. It is built for reactive support teams. LimeCall is a lead-conversion engine. Its primary function is connecting inbound website visitors with sales agents in 28 seconds via an automatic callback widget. It is built for proactive sales teams. Freshdesk\'s calling capabilities (via Freshcaller) are secondary to its ticketing core. LimeCall\'s calling and callback capabilities are the entire product.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall cheaper than Freshdesk for sales teams?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For sales teams using Freshdesk primarily for calling and lead capture, LimeCall is significantly cheaper. Freshdesk Pro costs $49/agent/month and requires Freshcaller as an add-on for advanced calling features. A 10-agent sales team on Freshdesk Pro would pay $490/month just for the base platform. LimeCall Pro costs £99/month for unlimited agents. Even for a 5-agent team, LimeCall saves approximately £1,800+ per year compared to Freshdesk Pro pricing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which converts more leads: LimeCall or Freshdesk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall is purpose-built for lead conversion. The 28-second callback widget means prospects hear from your team within half a minute of expressing interest — research consistently shows that response time is the single biggest factor in lead conversion rates (responding in under 5 minutes increases conversion by up to 100x vs responding after 30 minutes). Freshdesk creates a ticket when a prospect contacts you, which then joins a queue. For B2B sales and any context where speed of response drives conversion, LimeCall wins significantly. Freshdesk is not designed for this use case.',
+      },
+    },
+  ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: {
+    '@type': 'Offer',
+    price: '57',
+    priceCurrency: 'GBP',
+    description: 'Flat monthly pricing, unlimited agents',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '312',
+  },
+  description: 'LimeCall is a lead-conversion engine that connects inbound website visitors with sales reps in 28 seconds via an automatic callback widget, with flat-rate pricing and no per-agent fees.',
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={softwareSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Compare', url: 'https://www.limecall.com/compare/' },
+        { name: 'LimeCall vs Freshdesk', url: site.url + '/limecall-vs-freshdesk/' }
+      ]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6 mt-4">
+        2025 Comparison · Updated March 2025
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        LimeCall vs Freshdesk:<br />
+        <span class="text-lime-400">Lead-Conversion Engine vs Support Helpdesk</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Freshdesk is built for support tickets. LimeCall is built for sales callbacks. If you want to convert website visitors into conversations in 28 seconds — and track every lead in your CRM — this comparison explains why 10,000+ businesses chose LimeCall.
+      </p>
+
+      <!-- Side-by-side stat blocks -->
+      <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6">
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border-2 border-lime-500/50 bg-lime-500/10 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-2">LimeCall Starter</div>
+          <div class="text-5xl font-extrabold text-lime-400">£57</div>
+          <div class="text-sm font-semibold text-white mt-1">per month, flat</div>
+          <div class="mt-3 text-lg font-bold text-white">28s lead-conversion widget</div>
+          <div class="mt-2 text-xs text-lime-400 font-bold">Unlimited agents · Purpose-built for sales</div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="rounded-full border border-dark-700 bg-dark-900 px-4 py-2 text-sm font-bold text-dark-400">vs</div>
+        </div>
+
+        <div class="flex-1 max-w-xs mx-auto sm:mx-0 rounded-2xl border border-dark-700 bg-dark-900/60 p-6 text-center">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-2">Freshdesk Pro</div>
+          <div class="text-5xl font-extrabold text-dark-300">$49</div>
+          <div class="text-sm font-semibold text-dark-400 mt-1">per agent / per month</div>
+          <div class="mt-3 text-lg font-bold text-dark-300">Support helpdesk platform</div>
+          <div class="mt-2 text-xs text-dark-500 font-bold">Calling requires Freshcaller add-on</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="rounded-xl border border-dark-700 px-8 py-3.5 text-sm font-semibold text-white hover:border-lime-500/50 transition">
+          See Full Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Use Case Clarity Banner -->
+  <section class="py-8 bg-dark-900/60 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-xl border border-lime-500/20 bg-lime-500/5 p-5">
+        <p class="text-sm text-dark-300 leading-relaxed text-center">
+          <strong class="text-lime-400">The core distinction:</strong> Freshdesk is for support teams that receive tickets and manage customer issues reactively. LimeCall is for sales and marketing teams that need to connect with inbound leads proactively — the moment they express interest — before competitors respond.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Verdict -->
+  <section class="py-10 bg-dark-900/40 border-b border-dark-800">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
+          <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-3">Choose LimeCall if…</div>
+          <ul class="space-y-2">
+            {[
+              'You are a sales or marketing team',
+              'Speed-to-lead drives your conversion rate',
+              'Flat-rate pricing matters (no per-agent cost)',
+              'You need a callback widget this week',
+              'CRM sync without ticketing overhead',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-dark-300">
+                <span class="text-lime-400 flex-shrink-0 mt-0.5">✅</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-6">
+          <div class="text-xs font-bold uppercase tracking-widest text-dark-400 mb-3">Choose Freshdesk if…</div>
+          <ul class="space-y-2">
+            {[
+              'You are a customer support team',
+              'Ticket management is your primary workflow',
+              'Knowledge base and self-service matter',
+              'SLA tracking and escalation rules needed',
+              'You need omnichannel support ticketing',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-dark-400">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Overview -->
+  <section class="py-16 sm:py-20 border-b border-dark-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Platform Overview</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-6">
+          <h3 class="text-xl font-bold text-lime-400 mb-3">LimeCall</h3>
+          <p class="text-sm text-dark-300 leading-relaxed mb-4">
+            LimeCall is a lead-conversion platform with an instant callback widget at its core. When a prospect visits your website and clicks the widget, LimeCall simultaneously dials your sales rep and the prospect — connecting them in an average of 28 seconds. It is purpose-built for inbound sales: capturing interest at peak intent, before the prospect moves on or contacts a competitor.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-300">
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Built for sales and marketing teams</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> Flat-rate pricing — one plan covers your whole team</li>
+            <li class="flex items-start gap-2"><span class="text-lime-400">→</span> 28-second callback is the core differentiator</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-6">
+          <h3 class="text-xl font-bold text-dark-300 mb-3">Freshdesk</h3>
+          <p class="text-sm text-dark-400 leading-relaxed mb-4">
+            Freshdesk is a customer support helpdesk platform by Freshworks. It manages support tickets across email, phone, chat, and social media. Freshdesk is optimised for reactive support: customers submit issues, agents work through queues, tickets escalate through SLA-governed workflows. Phone calling is available via Freshcaller, a separate Freshworks product sold alongside Freshdesk.
+          </p>
+          <ul class="space-y-2 text-sm text-dark-400">
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Built for customer support and helpdesk teams</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> Per-agent pricing, calling requires add-on</li>
+            <li class="flex items-start gap-2"><span class="text-dark-500">→</span> No native callback widget for lead conversion</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Feature Comparison Table -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Full Feature Comparison</h2>
+      <p class="mb-10 text-center text-dark-400">Every row sourced from current vendor websites and documentation. Prices as of March 2025.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="px-5 py-4 text-left font-semibold text-dark-300">Feature</th>
+              <th class="px-5 py-4 text-center font-bold text-lime-400">LimeCall</th>
+              <th class="px-5 py-4 text-center font-semibold text-dark-400">Freshdesk</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class:list={["border-b border-dark-800/50", i % 2 === 0 ? "bg-dark-950" : "bg-dark-900/40"]}>
+                <td class="px-5 py-3.5 text-dark-300 font-medium">{row.feature}</td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'limecall' ? "text-lime-400" : row.advantage === 'freshdesk' ? "text-dark-400" : "text-dark-300"]}>
+                  {row.limecall}
+                </td>
+                <td class:list={["px-5 py-3.5 text-center font-semibold", row.advantage === 'freshdesk' ? "text-sky-400" : "text-dark-400"]}>
+                  {row.freshdesk}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-dark-600">Pricing and features approximate. Verify on each vendor's current pricing page.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Deep-Dive -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Pricing Deep-Dive</h2>
+      <p class="mb-10 text-center text-dark-400">The hidden cost of Freshdesk: base price plus Freshcaller add-on for calling.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {pricingTiers.map(p => (
+          <div class:list={["rounded-xl border p-6", p.highlight ? "border-lime-500/40 bg-dark-900/60" : "border-dark-800 bg-dark-900/40"]}>
+            <h3 class:list={["mb-5 text-xl font-bold", p.highlight ? "text-lime-400" : "text-dark-300"]}>{p.tool}</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-800">
+                    <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Plan</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Price</th>
+                    <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Users</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.tiers.map((t, i) => (
+                    <tr class:list={["border-b border-dark-800/40", i === p.tiers.length - 1 ? "border-0" : ""]}>
+                      <td class="py-3 pr-2">
+                        <div class="font-semibold text-white text-xs">{t.name}</div>
+                        <div class="text-xs text-dark-600 mt-0.5">{t.note}</div>
+                      </td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.price}</td>
+                      <td class:list={["py-3 text-center font-bold text-xs", p.highlight ? "text-lime-400" : "text-dark-400"]}>{t.users}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- The add-on trap -->
+      <div class="mt-8 rounded-xl border border-amber-500/20 bg-amber-500/5 p-5">
+        <h3 class="text-sm font-bold text-amber-400 mb-2">The Freshdesk + Freshcaller Add-On Trap</h3>
+        <p class="text-sm text-dark-300 leading-relaxed">
+          Freshdesk's base price does not include full calling capabilities. To get inbound call routing, recording, and IVR, you need Freshcaller. A 10-agent team on Freshdesk Pro ($49/agent) + Freshcaller Pro ($39/agent) pays <strong class="text-white">$880/month</strong> — $10,560/year. LimeCall Pro costs <strong class="text-lime-400">£99/month</strong> — £1,188/year — for the same team size with a purpose-built callback widget included.
+        </p>
+      </div>
+
+      <!-- Cost comparison table -->
+      <div class="mt-6 rounded-xl border border-lime-500/20 bg-lime-500/5 p-6">
+        <h3 class="text-base font-bold text-white mb-4">True Cost Comparison (Including Calling Add-On)</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-800">
+                <th class="pb-2 text-left text-xs text-dark-500 font-semibold">Team Size</th>
+                <th class="pb-2 text-center text-xs text-lime-500 font-semibold">LimeCall / month</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Freshdesk Pro + Freshcaller</th>
+                <th class="pb-2 text-center text-xs text-dark-500 font-semibold">Annual saving</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { size: '5 agents', limecall: '£57', freshdesk: '$440 (~£352)', saving: '~£3,540/yr' },
+                { size: '10 agents', limecall: '£57', freshdesk: '$880 (~£704)', saving: '~£7,764/yr' },
+                { size: '15 agents', limecall: '£99', freshdesk: '$1,320 (~£1,056)', saving: '~£11,484/yr' },
+                { size: '25 agents', limecall: '£99', freshdesk: '$2,200 (~£1,760)', saving: '~£19,932/yr' },
+              ].map((row, i) => (
+                <tr class:list={["border-b border-dark-800/40", i % 2 === 0 ? "bg-dark-950/50" : ""]}>
+                  <td class="py-2.5 text-dark-300 text-xs font-medium">{row.size}</td>
+                  <td class="py-2.5 text-center text-lime-400 font-bold text-xs">{row.limecall}</td>
+                  <td class="py-2.5 text-center text-dark-400 text-xs">{row.freshdesk}</td>
+                  <td class="py-2.5 text-center text-lime-400 font-bold text-xs">{row.saving}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-xs text-dark-500">Freshdesk Pro $49/agent + Freshcaller Pro $39/agent. Estimates based on current published pricing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Case Study: B2B SaaS Switches Calling to LimeCall</h2>
+      <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-8">
+        <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">3.1× More Demo Bookings</div>
+        <h3 class="text-lg font-bold text-white mb-4">The Problem</h3>
+        <p class="text-sm text-dark-300 leading-relaxed mb-5">
+          A B2B SaaS company was using Freshdesk + Freshcaller to handle inbound demo requests from their website. When a prospect filled in a form, a ticket was created. An agent would pick up the ticket, find the prospect's number, and call them back — often 30–90 minutes later. By that time, many prospects had already booked demos with competitors or lost interest.
+        </p>
+        <h3 class="text-lg font-bold text-white mb-4">The Switch</h3>
+        <p class="text-sm text-dark-300 leading-relaxed mb-5">
+          They installed LimeCall's callback widget on their pricing and demo pages. Instead of a ticket being created, LimeCall now instantly connects the prospect with a sales rep the moment they express interest — in 28 seconds. The Freshdesk platform was retained for customer support; LimeCall was added specifically for the sales conversion workflow.
+        </p>
+        <h3 class="text-lg font-bold text-white mb-4">The Results</h3>
+        <div class="grid gap-4 sm:grid-cols-3">
+          {[
+            { metric: '3.1×', label: 'More demo bookings', desc: 'Same traffic, more conversions' },
+            { metric: '28s', label: 'Average callback time', desc: 'Down from 45–90 minutes' },
+            { metric: '£700', label: 'Monthly saving', desc: 'vs Freshcaller per-agent pricing' },
+          ].map(stat => (
+            <div class="rounded-lg border border-dark-800 bg-dark-950/50 p-4 text-center">
+              <div class="text-2xl font-extrabold text-lime-400 mb-1">{stat.metric}</div>
+              <div class="text-xs font-bold text-white mb-1">{stat.label}</div>
+              <div class="text-xs text-dark-500">{stat.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Freshdesk Pros & Cons -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-3xl font-extrabold text-white">Freshdesk: Honest Pros & Cons</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Freshdesk Strengths</h3>
+          <ul class="space-y-3">
+            {[
+              'Excellent omnichannel support ticketing: email, chat, phone, social, and WhatsApp in one place',
+              'Built-in knowledge base and self-service portal to deflect support volume',
+              'Strong SLA management, escalation rules, and team collaboration tools',
+              'Freddy AI for intelligent ticket routing, summarisation, and chatbot deflection',
+              'Wide integration marketplace connecting with 1,000+ third-party tools',
+              'Free plan available for small support teams with limited requirements',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-sky-400 flex-shrink-0 mt-0.5">+</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-dark-700 bg-dark-900/50 p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Freshdesk Weaknesses</h3>
+          <ul class="space-y-3">
+            {[
+              'No instant callback widget — calling capabilities are a secondary add-on, not core product',
+              'Calling requires Freshcaller as a separate add-on product with its own pricing',
+              'Per-agent pricing means costs scale directly with team size with no flat-rate option',
+              'Built for reactive support, not proactive sales lead conversion',
+              'Creating tickets for inbound sales enquiries introduces delay and friction',
+              'Total cost (Freshdesk + Freshcaller) is significantly higher than LimeCall for sales teams',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-red-400 flex-shrink-0 mt-0.5">−</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Choose -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">Which Platform Should You Choose?</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-lime-500/30 bg-dark-900/60 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-lime-500/10">
+              <span class="text-lg text-lime-400">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-lime-400">Choose LimeCall if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseLimeCall.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-300 leading-relaxed">
+                <span class="text-lime-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-6 py-3 text-sm font-bold text-dark-950 hover:bg-lime-400 transition">
+              Try LimeCall Free →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-dark-800">
+              <span class="text-lg text-dark-300">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark-300">Choose Freshdesk if…</h3>
+          </div>
+          <ul class="space-y-3">
+            {chooseFreshdesk.map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <a href="https://www.freshdesk.com" rel="nofollow noopener" target="_blank" class="inline-block rounded-xl border border-dark-700 px-6 py-3 text-sm font-bold text-dark-400 hover:border-dark-500 transition">
+              Visit Freshdesk →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">What Sales Teams That Switched Say</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {testimonials.map(t => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-4 inline-block rounded-full bg-lime-500/10 px-3 py-1 text-xs font-bold text-lime-400">{t.metric}</div>
+            <blockquote class="text-sm text-dark-300 leading-relaxed mb-4">"{t.quote}"</blockquote>
+            <div>
+              <div class="text-sm font-semibold text-white">{t.name}</div>
+              <div class="text-xs text-dark-500">{t.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="mb-10 text-center text-dark-400">Honest answers to the questions every buyer asks before choosing between LimeCall and Freshdesk.</p>
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map(faq => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.name}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.acceptedAnswer.text}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Stop Creating Tickets for Sales Leads.<br />Start Connecting in 28 Seconds.</h2>
+      <p class="mt-4 text-dark-400 max-w-md mx-auto">Freshdesk is the right tool for support. LimeCall is the right tool for sales. Join 10,000+ businesses converting more inbound leads with the 28-second callback widget.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="inline-block rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition shadow-[0_2px_20px_-4px_rgba(163,230,53,0.4)]">
+          Start Free — No Credit Card →
+        </a>
+        <a href="/pricing/" class="inline-block rounded-xl border border-dark-700 px-8 py-4 font-semibold text-white hover:border-lime-500/50 transition">
+          See Pricing
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">Free plan · 14-day trial · Cancel anytime · Live support</p>
+    </div>
+  </section>
+
+  <!-- CrossLinks -->
+  <div class="border-t border-dark-800 py-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <CrossLinks heading="Explore More Comparisons" links={[
+      { href: '/limecall-vs-callpage/', title: 'LimeCall vs CallPage', desc: 'Compare callback widget platforms head to head.' },
+      { href: '/limecall-vs-aircall/', title: 'LimeCall vs Aircall', desc: 'Instant callback widget vs call centre platform.' },
+      { href: '/customer-callback-software/', title: 'Customer Callback Software Guide', desc: 'Complete guide to choosing callback software in 2025.' },
+      { href: '/pricing/', title: 'LimeCall Pricing', desc: 'Simple, transparent plans with a free tier.' },
+    ]} />
+  </div>
+</Base>

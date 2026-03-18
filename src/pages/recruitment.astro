@@ -1,0 +1,327 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Recruitment Agencies | LimeCall',
+  description: 'LimeCall connects recruiters with top candidates in 28 seconds — before competitors call. Fill 23% more roles, reduce time-to-offer and candidate ghosting. Free trial.',
+  canonical: 'https://www.limecall.com/recruitment/',
+};
+
+const stats = [
+  { value: '60%', label: 'Of top candidates accept offers within 24 hours' },
+  { value: '28s', label: 'LimeCall connects recruiter to candidate' },
+  { value: '4×', label: 'More placements vs email-only follow-up' },
+  { value: '62%', label: 'Of candidates ghost agencies that respond slowly' },
+];
+
+const features = [
+  { icon: '🚀', title: 'Candidate Callback in 28s While Still on Job Board', desc: 'Trigger an instant callback the moment a candidate expresses interest — connecting your recruiter before they close the tab and look elsewhere.' },
+  { icon: '🗂️', title: 'Multi-Recruiter Routing by Specialty', desc: 'Route candidate and employer enquiries to the right specialist — tech, finance, legal, healthcare — automatically based on the role or page.' },
+  { icon: '💬', title: 'SMS Follow-Up for Offer Updates', desc: 'Automated SMS keeps candidates informed at every stage of the process, reducing ghosting and keeping your pipeline warm.' },
+  { icon: '📥', title: 'Shared Inbox for Team Collaboration', desc: "All callback requests and notes appear in a shared team inbox so no candidate falls through the cracks when a recruiter is busy or away." },
+  { icon: '🎙️', title: 'Call Recording for Candidate Profiles', desc: 'Record and store every candidate and employer call. Use recordings to build richer profiles, resolve disputes, and train new consultants.' },
+  { icon: '🔗', title: 'CRM Sync to Bullhorn & Vincere', desc: 'Every callback is automatically logged in Bullhorn, Vincere, or your existing ATS — candidate name, number, role discussed, and outcome.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help recruitment agencies place more candidates?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Speed-to-contact is the single biggest driver of placement rates. LimeCall connects your recruiter with a candidate in 28 seconds — while they are still on your job board or website. Research shows 60% of top candidates accept the first offer that comes back to them quickly. Agencies using LimeCall report up to 4× more placements compared to email-only follow-up workflows.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall integrate with our ATS like Bullhorn or Vincere?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Bullhorn, Vincere, and other major ATS platforms directly and via Zapier (1,000+ tools). Every callback is automatically logged with candidate name, contact number, role discussed, call duration, and outcome notes — eliminating manual data entry and keeping your candidate database accurate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route enquiries to specialist recruitment teams?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. LimeCall's routing rules can direct candidates and employers to the right team based on the job category, the page they visited, or a brief IVR qualification step. Tech candidates go to your tech desk, finance roles to your finance team, and so on — reducing warm transfer time and improving candidate experience.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to candidate enquiries that come in outside business hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Candidates browsing job boards in the evening or at weekends can still request a callback. LimeCall queues these requests and presents them to your team first thing the next working day — prioritised by urgency. This means you reach hot candidates before they accept a competing offer or a rival agency calls them.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall send SMS updates to candidates during the recruitment process?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall includes automated SMS follow-up flows that keep candidates informed at key stages — interview confirmation, offer updates, start date reminders, and more. Keeping candidates engaged reduces ghosting rates and improves your firm\'s reputation for communication.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a recruitment agency get started with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most agencies are live within 5 minutes. Add the LimeCall widget to your job board or website using a single snippet, configure your team routing and specialty assignments, and the system is active immediately. No developer or IT resource is required. We provide full onboarding support for recruitment sector customers.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Recruitment', url: `${site.url}/recruitment/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        🎯 For Staffing Agencies &amp; Recruiters
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Callback Software for Recruitment Agencies<br class="hidden sm:block" />
+        <span class="text-lime-400">— Reach Candidates in 28 Seconds</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        60% of top candidates accept the first offer that comes back quickly. LimeCall connects your recruiters with active candidates in 28 seconds — before they close the tab, answer a competitor's call, or accept another offer.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ Trusted by staffing agencies · ATS Integrations · GDPR Compliant</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ The Speed Problem That's Costing You Placements</h2>
+        <p class="text-dark-300">
+          A top DevOps candidate had 3 offers within 48 hours. The recruiter who called first placed them. The other two were still composing follow-up emails. In talent acquisition, minutes matter more than your pitch — LimeCall gives you those minutes back.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Recruitment Agencies</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Candidate Browses Your Job Board', desc: 'LimeCall widget appears on job listings, candidate registration pages, and your contact page — wherever intent is highest.' },
+          { step: '02', title: 'Candidate Requests a Callback', desc: 'Enters their number; LimeCall routes to the right specialist recruiter based on the role category or job page visited.' },
+          { step: '03', title: 'Recruiter Connected in 28 Seconds', desc: 'Your consultant speaks with the candidate while they are still actively searching — before they move on or a competitor calls.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Staffing Agencies &amp; Talent Teams</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Recruitment Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'Hot Candidate Availability Calls', desc: 'Candidate marks themselves available → recruiter connected in 28s → role discussed and shortlist updated immediately.' },
+          { title: 'Job Board Response Triggers', desc: 'Candidate clicks "I\'m interested" on a listing → instant callback triggered → recruiter speaks to them before any competitor.' },
+          { title: 'Employer Brief Calls', desc: 'Hiring managers request a brief call from your team → routed to specialist account manager → shortlist agreed on the first call.' },
+          { title: 'Offer Negotiation Follow-Ups', desc: 'LimeCall queues callbacks for offer-stage candidates and sends SMS updates, reducing the ghosting that kills placements at the finish line.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study / testimonial -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "Our time-to-call dropped from 4 hours to 28 seconds. We filled 23% more roles in Q1 because we reached candidates before competitors did. LimeCall has become the most important tool in our tech stack."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Head of Talent</p>
+          <p class="text-sm text-dark-500">UK tech staffing agency</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Candidate Contact Methods</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone + Voicemail', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours or next day', '1–48 hours', 'Agent dependent'],
+              ['After-hours capture', '✅ Queue + AM callback', '❌ Voicemail lost', '✅ Form stored', '❌ No agent'],
+              ['Specialty routing', '✅ Automatic by role type', '⚠️ Manual transfer', '❌ None', '⚠️ Manual'],
+              ['ATS integration', '✅ Bullhorn, Vincere', '⚠️ Manual logging', '⚠️ Basic only', '⚠️ Limited'],
+              ['SMS follow-up', '✅ Automated sequences', '❌ Manual only', '❌ None', '❌ None'],
+              ['Placement rate impact', '🟢 Up to 4× higher', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with Your Recruitment Tech Stack</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects natively to Bullhorn, Vincere, HubSpot, and 1,000+ tools via Zapier. Every candidate and employer callback is automatically logged — name, number, role, duration, outcome — so your ATS stays accurate without manual entry. Setup takes under 5 minutes with no developer required.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team efficiency section -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Built for High-Volume Recruitment Teams</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '📊', title: 'Real-Time Call Analytics', desc: 'Track which job listings generate the most callbacks, which consultants have the fastest response times, and where your conversion drops off.' },
+          { icon: '🔔', title: 'Instant Recruiter Alerts', desc: 'Push notifications and SMS alerts ensure your consultants never miss a hot candidate request — even when away from their desk.' },
+          { icon: '🌍', title: 'Multi-Office Support', desc: 'Central callback system across all your branch offices with separate reporting per location, team, and specialty desk.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Placing More Candidates Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · ATS integrations included · No IT team required</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support for recruitment agencies</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/legal/', title: 'Legal Callback Software', desc: 'Callback software for law firms and solicitors.' },
+        { href: '/financial-services/', title: 'Financial Services Callback', desc: 'Callback software for IFAs and mortgage brokers.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Core callback features for any business.' },
+        { href: '/automatic-lead-distribution/', title: 'Lead Distribution', desc: 'Route leads to the right team automatically.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month.' },
+      ]} />
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,330 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for Law Firms & Solicitors | LimeCall',
+  description: 'LimeCall connects prospective clients to your legal team in 28 seconds. Win more retainers, reduce missed enquiries, and record every call for file notes. Free trial.',
+  canonical: 'https://www.limecall.com/legal/',
+};
+
+const stats = [
+  { value: '78%', label: 'Of clients hire the first firm to respond' },
+  { value: '28s', label: 'LimeCall response vs 24hr+ law firm average' },
+  { value: '3×', label: 'More client consultations booked' },
+  { value: '5 min', label: 'Setup required — no IT team needed' },
+];
+
+const features = [
+  { icon: '⚖️', title: 'Conflict Check Before Callback', desc: 'Screen incoming enquiries and route only conflict-cleared prospects to your fee earners — protecting your firm from day one.' },
+  { icon: '📋', title: 'Client Intake Routing', desc: 'Route enquiries automatically by practice area — family, conveyancing, employment, personal injury — based on the page the prospect visited.' },
+  { icon: '🎙️', title: 'Call Recording for File Notes', desc: 'Every client call is recorded and stored securely, giving your team an instant file note and a full audit trail for compliance.' },
+  { icon: '🌙', title: 'After-Hours Scheduling', desc: 'Prospects searching for legal help at 10pm are queued automatically. Your intake team calls them first thing — before competitors open.' },
+  { icon: '📞', title: 'Virtual Numbers for Local Presence', desc: 'Display a local number in each region you serve. Clients trust a local solicitor — even when your team is centralised.' },
+  { icon: '🔗', title: 'CRM Sync to Clio & Practice Panther', desc: 'Every callback is logged automatically in Clio, Practice Panther, or your existing CRM. No double-entry, no missed follow-ups.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall call recording compliant for law firms in the UK?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall call recording is fully GDPR compliant. All recordings are encrypted in transit and at rest, with configurable retention periods. We sign Data Processing Agreements (DPAs) with all legal sector customers. Firms can download recordings at any time for file notes or compliance review. Callers are notified of recording as part of the standard flow.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route enquiries to the right practice area automatically?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. LimeCall's intelligent routing directs incoming enquiries to the correct team based on the page that triggered the callback request — so conveyancing enquiries reach your property team, employment matters reach your employment solicitors, and so on. You can also add an IVR qualification step to confirm the matter type before routing.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to legal enquiries that come in outside office hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'After-hours callback requests are queued in LimeCall. At the start of the next working day, your intake team sees a prioritised list and can work through them systematically. Because you call the prospect back — rather than waiting for them to call again — your firm reaches them before they have time to instruct a competitor.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with legal CRM systems like Clio or Practice Panther?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates natively with Clio and Practice Panther, and connects to 1,000+ tools via Zapier. Every callback is automatically logged with the prospect name, contact number, call duration, and outcome notes — eliminating manual data entry and ensuring no new matter enquiry is lost.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help law firms win more clients?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Research consistently shows that 78% of clients hire the first firm to respond to their enquiry. LimeCall connects your intake team with a prospective client in 28 seconds — while they are still on your website. This speed-to-contact advantage is the single most impactful change most law firms can make to their client acquisition process.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a law firm set up LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most firms are live within 5 minutes. Add the LimeCall widget to your website (a single line of code or a tag manager snippet), configure your routing rules and practice area assignments, and the system is active. No developer or IT team is needed. We provide full onboarding support for legal sector customers.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Legal', url: `${site.url}/legal/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        ⚖️ For Law Firms &amp; Solicitors
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Callback Software for Law Firms<br class="hidden sm:block" />
+        <span class="text-lime-400">— Win the Client Before a Competitor Calls</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        78% of legal clients hire the first firm to respond. LimeCall connects your intake team with a prospect in 28 seconds — while they are still on your website — so you win the retainer before a rival solicitor even picks up the phone.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ GDPR Compliant · Call Recording Included · Trusted by legal teams across the UK</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ The Speed-to-Contact Reality in Legal</h2>
+        <p class="text-dark-300">
+          A client searched 5 firms. The first to call back got a £15,000 retainer. The other four went to voicemail. In legal services, being second is the same as being last — prospects under stress instruct the first solicitor who actually speaks to them. LimeCall makes your firm that solicitor, every time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Law Firms</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Prospect Finds Your Website', desc: 'LimeCall widget appears on your practice area pages, contact page, and pricing page — wherever high-intent visitors land.' },
+          { step: '02', title: 'Prospect Requests a Callback', desc: 'Enters their number; LimeCall routes the request to the correct practice area team and screens for conflicts before connecting.' },
+          { step: '03', title: 'Connected in 28 Seconds', desc: 'Your intake team or fee earner speaks with the prospect while they are still on your website — establishing trust and converting the enquiry.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for Law Firms &amp; Solicitors</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Legal Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'New Client Intake', desc: 'Website visitor → intake team in 28s → matter opened and initial consultation booked on the call.' },
+          { title: 'Employment Tribunal Enquiries', desc: 'Urgent employment matters connected to your employment team instantly — before the client instructs a rival firm.' },
+          { title: 'Conveyancing Quotes', desc: 'Property buyers and sellers request a callback from your conveyancing team and receive a quote on the first call.' },
+          { title: 'Personal Injury First Contact', desc: 'PI prospects converted to no-win-no-fee clients in minutes — not days — with 28-second connection times.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study / testimonial -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We went from 15% enquiry-to-client rate to 41% in 90 days. LimeCall calls our intake team and the prospect simultaneously — the client is still on our website when we connect. It has completely changed how we win new business."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Managing Partner</p>
+          <p class="text-sm text-dark-500">London commercial law firm</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Client Contact Methods</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone + Voicemail', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours or next day', '1–48 hours', 'Agent dependent'],
+              ['After-hours capture', '✅ Queue + AM callback', '❌ Voicemail lost', '✅ Form stored', '❌ No agent available'],
+              ['Practice area routing', '✅ Automatic', '⚠️ Manual transfer', '❌ None', '⚠️ Manual'],
+              ['Call recording', '✅ Automatic & compliant', '⚠️ Manual setup', '❌ No call', '❌ No call'],
+              ['CRM integration', '✅ Clio, Practice Panther', '⚠️ Manual logging', '⚠️ Basic only', '⚠️ Limited'],
+              ['Enquiry-to-client rate', '🟢 Up to 3× higher', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with Your Legal Tech Stack</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to Clio, Practice Panther, HubSpot, Salesforce, and 1,000+ tools via Zapier. Every client callback is automatically logged — name, number, duration, matter type, and outcome — so your fee earners have a complete record without any manual data entry. Setup takes under 5 minutes with no developer required.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance trust section -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Compliant by Design for Legal Teams</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '🔒', title: 'Encrypted Call Recording', desc: 'All call recordings are encrypted in transit and at rest using AES-256. Compliant with GDPR and SRA data handling obligations.' },
+          { icon: '📋', title: 'Data Processing Agreements', desc: 'We sign DPAs with all legal sector customers as standard — required for GDPR compliance and typically requested by practice managers.' },
+          { icon: '🗂️', title: 'Configurable Retention & Deletion', desc: 'Set retention periods to match your professional obligations. Delete client data on request with a full audit trail for compliance review.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-dark-500">
+        LimeCall is trusted by legal teams across the UK and 40+ countries. <a href="/gdpr/" class="text-lime-400 hover:text-lime-300 transition">Read our GDPR documentation →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Winning More Legal Clients Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · GDPR compliant · No IT team required</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support for law firms</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/healthcare/', title: 'Healthcare Callback Software', desc: 'Connect patients with clinics instantly.' },
+        { href: '/financial-services/', title: 'Financial Services Callback', desc: 'Callback software for IFAs and mortgage brokers.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Core callback features for any business.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Numbers', desc: 'Local numbers for every region you serve.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month.' },
+      ]} />
+    </div>
+  </div>
+</Base>

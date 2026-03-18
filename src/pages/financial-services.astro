@@ -1,0 +1,330 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Software for IFAs & Mortgage Brokers | LimeCall',
+  description: 'LimeCall helps IFAs and mortgage brokers respond to leads in 28 seconds, capture after-hours enquiries, and record every call. FCA-compliant. Free trial.',
+  canonical: 'https://www.limecall.com/financial-services/',
+};
+
+const stats = [
+  { value: '79%', label: 'Of clients choose the first adviser who calls back' },
+  { value: '28s', label: 'LimeCall vs 3-day average IFA response time' },
+  { value: '42%', label: 'Higher AUM per adviser with faster lead follow-up' },
+  { value: '100%', label: 'FCA-compliant call recording on every call' },
+];
+
+const features = [
+  { icon: '🎙️', title: 'Compliance Call Recording', desc: 'Every client call is recorded automatically and stored securely. Full audit trail for FCA compliance, complaints handling, and best-interest evidence.' },
+  { icon: '🌙', title: 'After-Hours Lead Capture for Mortgage Enquiries', desc: 'Mortgage and pension enquiries that come in at 9pm are queued automatically. Your advisers call first thing — before any competitor opens their inbox.' },
+  { icon: '📞', title: 'Virtual Numbers for Local Presence', desc: 'Display a local number in every region you serve. Clients trust an adviser who appears local — even when your team is centralised.' },
+  { icon: '🗂️', title: 'Lead Routing by Product Type', desc: 'Route enquiries automatically by product — mortgages to your mortgage desk, pensions to your pension specialists, investments to wealth managers.' },
+  { icon: '🔗', title: 'CRM Sync to Salesforce & Zoho', desc: 'Every callback logged automatically in Salesforce, Zoho, or your existing CRM — client name, number, product enquired, call duration, and outcome.' },
+  { icon: '🔒', title: 'GDPR-Compliant Data Handling', desc: 'All client data encrypted in transit and at rest. Configurable retention periods, DPA agreements as standard, and full audit logs for regulatory review.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is LimeCall call recording compliant with FCA requirements?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall call recording is designed for FCA-regulated firms. All recordings are encrypted in transit and at rest, with configurable retention periods that meet COBS and SYSC obligations. We sign Data Processing Agreements (DPAs) with all financial services customers. Full audit logs are available for compliance review, and callers are notified of recording as part of the standard callback flow.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can LimeCall route leads to the right adviser by product type?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. LimeCall's intelligent routing directs enquiries based on the product page that triggered the callback — mortgage enquiries go to your mortgage advisers, pension reviews to your pension specialists, ISA and investment queries to your wealth managers. You can also add an IVR step to confirm the enquiry type before connecting, ensuring every lead reaches the most relevant expert.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens to financial leads that come in after business hours?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'After-hours enquiries are queued in LimeCall and surfaced to your team first thing the next morning, prioritised by urgency and enquiry type. Research shows that 79% of financial services clients instruct the first adviser to make contact. By calling back before competitors open their email, your firm consistently wins the instruction.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall integrate with financial services CRMs like Salesforce?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall integrates with Salesforce, Zoho CRM, HubSpot, and 1,000+ tools via Zapier. Every callback is automatically logged — client name, contact number, product enquired, call duration, and adviser outcome notes — eliminating manual data entry and keeping your compliance records accurate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does LimeCall help IFAs and mortgage brokers grow AUM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The fastest-growing IFA practices respond to leads within minutes, not days. LimeCall connects prospects with your advisers in 28 seconds — while the client is still actively researching. Studies show advisers who respond within 5 minutes are 21× more likely to win the client. Our customers report up to 42% higher AUM per adviser after implementing LimeCall, driven by capturing leads they previously missed.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How quickly can a financial services firm get started with LimeCall?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most firms are live within 5 minutes. Add the LimeCall widget to your website using a single code snippet or tag manager, configure your product routing and adviser assignments, and the system is active immediately. No developer or IT resource is required. We provide full onboarding support for financial services customers, including compliance documentation.',
+      },
+    },
+  ],
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <Breadcrumbs items={[{ name: 'Financial Services', url: `${site.url}/financial-services/` }]} />
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500/10 border border-lime-500/20 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        💼 For IFAs, Mortgage Brokers &amp; Wealth Managers
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Callback Software for Financial Services<br class="hidden sm:block" />
+        <span class="text-lime-400">— Connect Clients in 28 Seconds, Compliantly</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        79% of financial services clients instruct the first adviser who calls them back. LimeCall connects your IFAs and mortgage advisers with prospects in 28 seconds — with FCA-compliant call recording built in as standard.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+          Start Free Trial — 14 Days
+        </a>
+        <a href="/demo/" class="inline-flex items-center justify-center gap-2 rounded-xl border border-dark-700 px-8 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+          Book a Demo →
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-dark-500">★ FCA-Compliant Call Recording · GDPR Compliant · Trusted by IFAs &amp; Brokers across the UK</p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-y border-dark-800 bg-dark-900/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+        {stats.map(s => (
+          <div class="text-center">
+            <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>
+            <dd class="mt-1 text-sm text-dark-400">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Problem callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-orange-500/30 bg-orange-500/5 p-8">
+        <h2 class="text-xl font-bold text-white mb-3">⚠️ Your Best Leads Are Enquiring After Hours</h2>
+        <p class="text-dark-300">
+          Your best leads are enquiring at 9pm. Without LimeCall, they're calling a competitor at 9am. The pension reviewer, the remortgage seeker, the ISA investor — they research in the evening and instruct whoever contacts them first the next morning. LimeCall makes that firm yours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">How LimeCall Works for Financial Advisers</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { step: '01', title: 'Client Researches on Your Website', desc: 'LimeCall widget appears on your mortgage, pension, ISA, and contact pages — wherever high-intent prospects land.' },
+          { step: '02', title: 'Client Requests a Callback', desc: 'Enters their number; LimeCall routes to the correct product specialist and queues after-hours requests for morning follow-up.' },
+          { step: '03', title: 'Adviser Connected in 28 Seconds', desc: 'Your IFA or mortgage adviser speaks with the prospect first — before any competitor — with call recording active from the start.' },
+        ].map(item => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-8">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-lime-500/10 text-lime-400 font-extrabold text-lg">{item.step}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-dark-400 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-14">Built for IFAs, Mortgage Brokers &amp; Wealth Managers</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(f => (
+          <div class="rounded-2xl border border-dark-800 bg-dark-900/60 p-7 hover:border-lime-500/30 transition">
+            <div class="text-3xl mb-3">{f.icon}</div>
+            <h3 class="text-base font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-sm text-dark-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Financial Services Use Cases</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'Mortgage Enquiry Callbacks', desc: 'Prospect visits your remortgage page → callback triggered → adviser connected in 28s → decision in principle started on the call.' },
+          { title: 'Pension Review Calls', desc: 'Retirement planning visitor requests callback → routed to pension specialist → suitability call and fact-find begins immediately.' },
+          { title: 'ISA & Investment Enquiries', desc: 'Investment page visitor connected to your wealth management team → portfolio discussion starts on the first call.' },
+          { title: 'Insurance Quote Follow-Ups', desc: 'Life, income protection, and critical illness leads queued and called back in priority order — no hot prospect goes cold overnight.' },
+        ].map(u => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <h3 class="font-bold text-white mb-2">{u.title}</h3>
+            <p class="text-sm text-dark-400">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study / testimonial -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <blockquote class="rounded-2xl border border-lime-500/20 bg-lime-500/5 p-10 text-center">
+        <p class="text-xl text-white italic leading-relaxed">
+          "We capture pension enquiries at 10pm. LimeCall queues them and our IFAs call first thing. We've added £2.1M AUM in 6 months from leads we used to miss entirely. The FCA-compliant recording means we have full best-interest evidence on every client conversation."
+        </p>
+        <footer class="mt-6">
+          <p class="font-bold text-lime-400">Director</p>
+          <p class="text-sm text-dark-500">Independent financial advisory firm, Manchester</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 sm:py-24 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">LimeCall vs. Other Client Contact Methods</h2>
+      <div class="overflow-x-auto rounded-2xl border border-dark-700">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              {['Feature', 'LimeCall', 'Phone + Voicemail', 'Contact Form', 'Live Chat'].map(h => (
+                <th class={`px-5 py-4 text-left font-semibold ${h === 'LimeCall' ? 'text-lime-400' : 'text-dark-300'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {[
+              ['Response time', '28 seconds', 'Hours or next day', '1–48 hours', 'Agent dependent'],
+              ['After-hours capture', '✅ Queue + AM callback', '❌ Voicemail lost', '✅ Form stored', '❌ No agent'],
+              ['Product routing', '✅ Mortgage/pension/ISA', '⚠️ Manual transfer', '❌ None', '⚠️ Manual'],
+              ['FCA call recording', '✅ Automatic & compliant', '⚠️ Manual setup', '❌ No call', '❌ No call'],
+              ['CRM integration', '✅ Salesforce, Zoho', '⚠️ Manual logging', '⚠️ Basic only', '⚠️ Limited'],
+              ['Lead-to-client rate', '🟢 Up to 3× higher', '🟡 Standard', '🔴 Low (slow)', '🟡 Medium'],
+            ].map(([feature, ...vals]) => (
+              <tr class="hover:bg-dark-800/30 transition">
+                <td class="px-5 py-4 font-medium text-dark-200">{feature}</td>
+                {vals.map((v, i) => (
+                  <td class={`px-5 py-4 ${i === 0 ? 'text-white font-semibold' : 'text-dark-400'}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration callout -->
+  <section class="py-12 bg-dark-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+        <div class="shrink-0 text-5xl">🔗</div>
+        <div>
+          <h2 class="text-xl font-bold text-white mb-2">Integrates with Your Financial Services Tech Stack</h2>
+          <p class="text-dark-400 text-sm leading-relaxed">
+            LimeCall connects to Salesforce, Zoho CRM, HubSpot, and 1,000+ tools via Zapier. Every client callback is automatically logged — name, number, product type, call duration, and adviser notes — keeping your CRM accurate and your compliance records complete. Setup takes under 5 minutes with no developer required.
+          </p>
+          <a href="/integrations/" class="mt-4 inline-flex items-center text-sm font-semibold text-lime-400 hover:text-lime-300 transition">
+            View all integrations →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance trust section -->
+  <section class="py-16 sm:py-20 bg-dark-900/40">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-10">Compliant by Design for FCA-Regulated Firms</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {[
+          { icon: '🎙️', title: 'Automatic Call Recording', desc: 'Every client call recorded automatically from the first second. Meets COBS 11.8 and SYSC 10A obligations for communication recording.' },
+          { icon: '🔒', title: 'Encrypted Storage & GDPR', desc: 'All recordings and client data encrypted in transit and at rest with AES-256. DPAs signed as standard. Configurable retention periods.' },
+          { icon: '📋', title: 'Full Audit Trail', desc: 'Complete logs of every callback — who requested it, which adviser handled it, call duration, and outcome — available for FCA inspection at any time.' },
+        ].map(item => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 text-center">
+            <div class="text-3xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-dark-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-dark-500">
+        LimeCall is trusted by financial advisers and brokers across the UK and 40+ countries. <a href="/gdpr/" class="text-lime-400 hover:text-lime-300 transition">Read our GDPR documentation →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-24 bg-dark-950">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 p-6">
+            <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+              {item.name}
+              <span class="ml-4 shrink-0 text-lime-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-gradient-to-br from-lime-500/10 to-dark-900 border-t border-lime-500/20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Start Winning More Financial Services Clients Today</h2>
+      <p class="mt-4 text-lg text-dark-300">14-day free trial · FCA-compliant recording · No IT team required</p>
+      <a href="/get-started/" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-lime-500 px-10 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
+        Try Free — 14 Days →
+      </a>
+      <p class="mt-4 text-xs text-dark-500">No credit card required · Cancel anytime · Full onboarding support for financial services firms</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <div class="py-12 bg-dark-950 border-t border-dark-800">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="Explore More" links={[
+        { href: '/legal/', title: 'Legal Callback Software', desc: 'Callback software for law firms and solicitors.' },
+        { href: '/recruitment/', title: 'Recruitment Callback Software', desc: 'Reach candidates before competitors do.' },
+        { href: '/customer-callback-software/', title: 'Callback Software', desc: 'Core callback features for any business.' },
+        { href: '/virtual-business-numbers/', title: 'Virtual Numbers', desc: 'Local numbers for every region you serve.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans from $35/month.' },
+      ]} />
+    </div>
+  </div>
+</Base>

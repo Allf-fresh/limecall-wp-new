@@ -1,12 +1,25 @@
 ---
 import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
 import postsData from '../../data/posts.json';
 import { site } from '../../site.config';
 
 const allPosts = postsData;
-const latestPosts = allPosts.slice(0, 24);
 
-const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
+// CollectionPage JSON-LD listing the 10 most recent posts
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'LimeCall Blog',
+  description: 'Sales, lead generation and callback tips from the LimeCall team.',
+  url: `${site.url}/post/`,
+  hasPart: allPosts.slice(0, 10).map((p) => ({
+    '@type': 'Article',
+    headline: p.seo_title || p.title,
+    url: `${site.url}/post/${p.slug}/`,
+    datePublished: p.date,
+  })),
+};
 ---
 
 <Base
@@ -14,6 +27,8 @@ const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
   description="Get LimeCall's advice on the best ways to convert website visitors, engage leads, and support your customers. Delivered straight from our team."
   canonical="https://www.limecall.com/post/"
 >
+  <JsonLd schema={collectionSchema} />
+
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-3xl text-center mb-14">
@@ -28,56 +43,24 @@ const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
         </p>
       </div>
 
-      {/* Categories */}
-      {categories.length > 0 && (
-        <div class="flex flex-wrap gap-3 justify-center mb-12">
-          <a href="/post" class="rounded-full border border-lime-500/40 bg-lime-500/10 px-4 py-1.5 text-sm font-semibold text-lime-400 hover:bg-lime-500/20 transition">
-            All Posts
-          </a>
-          {categories.map((cat) => (
-            <a
-              href={`/post/${cat}`}
-              class="rounded-full border border-dark-700 px-4 py-1.5 text-sm font-medium text-dark-300 hover:border-lime-500/40 hover:text-lime-400 transition"
-            >
-              {cat?.charAt(0).toUpperCase()}{cat?.slice(1).replace(/-/g, ' ')}
-            </a>
-          ))}
-        </div>
-      )}
-
-      {/* Posts Grid */}
-      {latestPosts.length > 0 ? (
+      {/* Posts Grid — all 220 posts */}
+      {allPosts.length > 0 ? (
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {latestPosts.map((post) => (
+          {allPosts.map((post) => (
             <a
               href={`/post/${post.slug}/`}
               class="group rounded-xl border border-dark-800 bg-dark-900/50 overflow-hidden transition-all hover:border-dark-700 flex flex-col"
             >
-              {post.featured_image && (
-                <div class="aspect-video overflow-hidden bg-dark-800">
-                  <img
-                    src={post.featured_image}
-                    alt={post.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-              )}
               <div class="p-6 flex-1 flex flex-col">
-                {post.category && (
-                  <span class="text-xs font-semibold uppercase tracking-wide text-lime-400 mb-2">
-                    {post.category.replace(/-/g, ' ')}
-                  </span>
-                )}
                 <h2 class="font-semibold text-white group-hover:text-lime-400 transition line-clamp-2 flex-1">
                   {post.title}
                 </h2>
-                {(post.meta_description || post.seo_description) && (
-                  <p class="mt-2 text-sm text-dark-400 line-clamp-2">{post.meta_description || post.seo_description}</p>
+                {(post.seo_description || post.excerpt) && (
+                  <p class="mt-2 text-sm text-dark-400 line-clamp-2">{post.seo_description || post.excerpt}</p>
                 )}
-                {(post.publish_date || post.date) && (
-                  <time class="mt-4 block text-xs text-dark-500" datetime={post.publish_date || post.date}>
-                    {new Date(post.publish_date || post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                {post.date && (
+                  <time class="mt-4 block text-xs text-dark-500" datetime={post.date}>
+                    {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </time>
                 )}
               </div>
@@ -86,9 +69,7 @@ const categories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
         </div>
       ) : (
         <div class="rounded-xl border border-dark-800 bg-dark-900/50 p-16 text-center">
-          <div class="text-4xl mb-4">📝</div>
           <p class="text-dark-400 text-lg">Blog posts coming soon.</p>
-          <p class="text-dark-600 text-sm mt-2">Connect Supabase to populate your blog.</p>
         </div>
       )}
 

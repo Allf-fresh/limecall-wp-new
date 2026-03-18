@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
 import CrossLinks from '../../components/CrossLinks.astro';
 import { site } from '../../site.config';
 import posts from '../../data/posts.json';
@@ -14,29 +15,84 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
+const canonical = `${site.url}/post/${post.slug}/`;
+
 const seo = {
   title: post.seo_title || post.title,
-  description: post.seo_description || '',
-  canonical: post.canonical || `https://www.limecall.com/post/${post.slug}/`,
+  description: post.seo_description || post.excerpt || '',
+  canonical,
 };
 
-// Related posts: same category or random 4 posts
+// Related posts: keyword overlap in title (first 3 posts sharing keywords)
+const titleWords = post.title
+  .toLowerCase()
+  .split(/\W+/)
+  .filter((w) => w.length > 4);
+
 const related = posts
-  .filter(p => p.slug !== post.slug)
-  .sort(() => 0.5 - Math.random())
-  .slice(0, 4);
+  .filter((p) => {
+    if (p.slug === post.slug) return false;
+    const otherWords = p.title.toLowerCase().split(/\W+/);
+    return titleWords.some((w) => otherWords.includes(w));
+  })
+  .slice(0, 3);
+
+// Fall back to most recent posts if no keyword overlap
+const relatedFinal =
+  related.length >= 1
+    ? related
+    : posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+
+// Article JSON-LD schema
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.seo_title || post.title,
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${site.url}/logo.png`,
+    },
+  },
+  description: post.seo_description || post.excerpt || '',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonical,
+  },
+};
 ---
 
 <Base {...seo}>
+  <JsonLd schema={articleSchema} />
+
   <!-- Article hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <Breadcrumbs items={[{ name: 'Blog', url: `${site.url}/post/` }, { name: post.title, url: seo.canonical }]} />
+      <Breadcrumbs
+        items={[
+          { name: 'Blog', url: `${site.url}/post/` },
+          { name: post.title, url: canonical },
+        ]}
+      />
       <h1 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl" set:html={post.title} />
       <div class="mt-4 flex items-center gap-4 text-sm text-dark-400">
-        <time datetime={post.date}>
-          {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
+        {post.date && (
+          <time datetime={post.date}>
+            {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        )}
+        <span class="text-dark-600">·</span>
+        <span>LimeCall Team</span>
       </div>
     </div>
   </section>
@@ -44,20 +100,53 @@ const related = posts
   <!-- Article content -->
   <section class="py-12 sm:py-16">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <div class="wp-content prose-dark" set:html={post.content} />
+      <div
+        class="wp-content prose prose-invert prose-lime max-w-none
+               prose-headings:text-white prose-p:text-dark-300
+               prose-a:text-lime-400 prose-a:no-underline hover:prose-a:underline
+               prose-strong:text-white prose-li:text-dark-300
+               prose-code:text-lime-300 prose-blockquote:border-lime-500/40
+               prose-blockquote:text-dark-400"
+        set:html={post.content}
+      />
+
+      <!-- CTA Sidebar Callout -->
+      <div class="bg-lime-500/10 border border-lime-500/20 rounded-xl p-6 my-8 text-center">
+        <p class="text-lime-400 font-bold text-lg mb-2">Connect leads in 28 seconds</p>
+        <p class="text-dark-400 text-sm mb-4">Turn website visitors into live sales calls — automatically.</p>
+        <a
+          href="/get-started/"
+          class="inline-block rounded-xl bg-lime-500 px-7 py-3 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Try LimeCall Free →
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- Related posts -->
-  {related.length > 0 && (
+  <!-- Related Articles -->
+  {relatedFinal.length > 0 && (
     <section class="border-t border-dark-800 py-12 sm:py-16">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <h2 class="mb-8 text-xl font-bold text-white">More from the blog</h2>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {related.map(r => (
-            <a href={`/post/${r.slug}/`} class="rounded-xl border border-dark-800 bg-dark-900/60 p-5 hover:border-lime-500/30 transition group">
-              <p class="text-xs text-dark-500 mb-2">{new Date(r.date).getFullYear()}</p>
-              <h3 class="text-sm font-semibold text-white group-hover:text-lime-400 transition line-clamp-3" set:html={r.title} />
+        <h2 class="mb-8 text-xl font-bold text-white">Related Articles</h2>
+        <div class="grid gap-4 sm:grid-cols-3">
+          {relatedFinal.map((r) => (
+            <a
+              href={`/post/${r.slug}/`}
+              class="rounded-xl border border-dark-800 bg-dark-900/60 p-5 hover:border-lime-500/30 transition group"
+            >
+              {r.date && (
+                <p class="text-xs text-dark-500 mb-2">
+                  {new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+                </p>
+              )}
+              <h3
+                class="text-sm font-semibold text-white group-hover:text-lime-400 transition line-clamp-3"
+                set:html={r.title}
+              />
+              {(r.seo_description || r.excerpt) && (
+                <p class="mt-2 text-xs text-dark-500 line-clamp-2">{r.seo_description || r.excerpt}</p>
+              )}
             </a>
           ))}
         </div>

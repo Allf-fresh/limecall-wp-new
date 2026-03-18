@@ -1,0 +1,421 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const integration = "Google Analytics 4";
+const slug = "google-analytics-integration";
+
+const seo = {
+  title: 'LimeCall + Google Analytics 4 | Track Callback Conversions in GA4',
+  description: 'Send LimeCall callback events to Google Analytics 4. See which pages, campaigns, and keywords drive phone leads — with full attribution.',
+  canonical: 'https://www.limecall.com/google-analytics-integration/',
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Google Analytics 4 Integration',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Send LimeCall callback events to Google Analytics 4. Track callback requests, completions, and missed calls as GA4 events with full UTM attribution, custom parameters, and conversion tracking.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Available on all LimeCall plans including Basic',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'LimeCall',
+    url: 'https://www.limecall.com',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does the LimeCall Google Analytics integration work with Universal Analytics?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Google sunset Universal Analytics (UA) on July 1, 2024 and stopped processing hits. The LimeCall analytics integration is built for Google Analytics 4 (GA4) only. If you were previously using Universal Analytics goals to track callback conversions, you need to migrate those goals to GA4 conversion events. LimeCall\'s GA4 integration sends events in the GA4 measurement protocol format — it is not compatible with the older Universal Analytics hit format.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LimeCall support Google Tag Manager for the GA4 integration?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. LimeCall fully supports Google Tag Manager (GTM) for the GA4 integration. Instead of adding the LimeCall GA4 snippet directly to your page source, you can deploy it as a Custom HTML tag in GTM. LimeCall publishes a pre-built GTM tag template that you can import — it fires the correct GA4 events for callback request, callback completed, and missed call with all required event parameters pre-configured. Using GTM also lets you add additional triggers or conditional firing rules without touching your site code.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I set up callback conversions in Google Analytics 4?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'In GA4, go to Admin → Events. LimeCall sends events named "limecall_callback_request", "limecall_callback_completed", and "limecall_callback_missed". Find the "limecall_callback_completed" event in your events list — it will appear after the first test call — and click the toggle to mark it as a conversion. GA4 will then include this event in your Conversions report and allow you to use it as a goal in Google Ads. You can also create a custom conversion with a value equal to your average call revenue for monetary conversion tracking.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What event parameters does LimeCall send to GA4?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'LimeCall sends the following custom event parameters with each GA4 event: utm_source, utm_medium, utm_campaign, utm_content, utm_term, page_location (the URL where the callback was requested), call_duration (in seconds, for completed calls), call_outcome (e.g. "demo_booked", "follow_up", "not_interested"), widget_name (the LimeCall widget that was used), and agent_name. All parameters are visible in GA4\'s DebugView during testing and in the Events report after 24–48 hours of data collection.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I create remarketing audiences from LimeCall callers in GA4?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. In GA4, go to Admin → Audiences and create a new audience based on users who triggered the "limecall_callback_completed" event. This audience syncs to your linked Google Ads account and can be used for remarketing campaigns — for example, showing follow-up ads to people who called but did not convert, or excluding existing customers from prospecting campaigns. GA4 audience syncing requires linking your GA4 property to a Google Ads account, which takes under 5 minutes in the GA4 admin panel.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I connect LimeCall GA4 data to Looker Studio for custom dashboards?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Once LimeCall callback events are flowing into GA4, you can connect your GA4 property to Looker Studio (formerly Google Data Studio) using the native GA4 connector. In Looker Studio, create a custom dashboard that pulls callback event counts, conversion rates, and event parameters — segmented by source, medium, campaign, or page. This gives you a dedicated callback conversion dashboard alongside your other GA4 traffic data. LimeCall also publishes a free Looker Studio template pre-built for callback reporting that you can copy and connect to your own GA4 property.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I verify the LimeCall GA4 integration is working correctly?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Use GA4\'s built-in DebugView to verify the integration. Enable debug mode by adding the query parameter "?ga-debug=1" to your page URL (if using the LimeCall snippet directly) or by enabling the GTM preview mode (if using GTM). Then request a test callback on the page. Within 30 seconds, the "limecall_callback_request" event should appear in DebugView with all event parameters. After the call ends, "limecall_callback_completed" should fire. If events appear in DebugView, the integration is working correctly and data will flow into your GA4 reports within 24 hours.',
+      },
+    },
+  ],
+};
+
+const stats = [
+  { value: "100%", label: "Callback calls attributed to source" },
+  { value: "< 30s", label: "Event fires in GA4 DebugView" },
+  { value: "3 events", label: "Request, completed, missed call" },
+  { value: "Free", label: "GA4 integration on all plans" },
+];
+
+const features = [
+  {
+    title: "Fire GA4 events on callback request, completed, and missed call",
+    desc: "LimeCall fires three distinct GA4 events: 'limecall_callback_request' when a visitor submits the widget, 'limecall_callback_completed' when the call connects and ends, and 'limecall_callback_missed' when no agent answers. Each event enables separate conversion and funnel analysis in GA4.",
+  },
+  {
+    title: "Custom event parameters: source, medium, campaign, page URL, call duration",
+    desc: "Every LimeCall GA4 event includes UTM source, medium, campaign, content, term, the page URL where the callback occurred, call duration in seconds, call outcome, widget name, and agent name — all as GA4 custom event parameters available for segmentation and reporting.",
+  },
+  {
+    title: "Goal and conversion setup in GA4",
+    desc: "Mark the 'limecall_callback_completed' event as a conversion in GA4 with two clicks. Set a conversion value equal to your average call revenue to enable monetary conversion tracking in Google Ads campaigns. Conversions appear in GA4's Conversions report and flow into your linked Google Ads account automatically.",
+  },
+  {
+    title: "Audience creation from callers for remarketing",
+    desc: "Build GA4 audiences from users who triggered LimeCall callback events — callers who completed a call, callers who were missed, or callers with a specific UTM campaign. Sync these audiences to Google Ads for targeted remarketing campaigns or to exclude from prospecting.",
+  },
+  {
+    title: "Google Tag Manager (GTM) integration",
+    desc: "Deploy the LimeCall GA4 integration via GTM using a pre-built Custom HTML tag template. No site code changes needed. GTM lets you add conditional firing rules, additional triggers, and custom variable mappings without touching your website's source.",
+  },
+  {
+    title: "Connect to Looker Studio for custom dashboards",
+    desc: "Once LimeCall events flow into GA4, connect your GA4 property to Looker Studio for custom callback reporting dashboards. Use LimeCall's free Looker Studio template to visualise callback conversion rate by channel, top callback-driving pages, and campaign ROI — ready in minutes.",
+  },
+];
+
+const reportingMetrics = [
+  {
+    metric: "Callback conversion rate by channel",
+    desc: "See what percentage of sessions from each traffic source (organic, paid, email, direct) result in a callback request and a completed call. Identify which channels deliver callers, not just clicks.",
+  },
+  {
+    metric: "Top callback-driving pages",
+    desc: "GA4's page_location parameter shows which pages on your site generate the most callback requests and completions. Optimise high-performing pages and improve underperforming ones based on real call data.",
+  },
+  {
+    metric: "Campaign ROI from phone leads",
+    desc: "By assigning a conversion value to completed callbacks, GA4 calculates revenue contribution per campaign. Google Ads can use this data for Target ROAS bidding — automatically allocating budget to campaigns that drive calls.",
+  },
+  {
+    metric: "Callback funnel drop-off",
+    desc: "The three LimeCall events — request, completed, missed — form a funnel in GA4. See what percentage of callback requests turn into completed calls and where callers are lost, enabling you to reduce missed call rate with team capacity changes.",
+  },
+];
+
+const useCases = [
+  {
+    role: "Marketing Teams",
+    title: "Attribute phone leads to the exact campaign",
+    desc: "Every LimeCall callback fires a GA4 event with UTM source, medium, and campaign. Marketing can see exactly which Google Ads campaign, SEO keyword, or email newsletter drove each phone lead — with the same attribution model applied to all conversions.",
+  },
+  {
+    role: "Paid Search Teams",
+    title: "Import callback conversions into Google Ads",
+    desc: "Mark 'limecall_callback_completed' as a conversion in GA4 and import it into your linked Google Ads account. Google Ads uses callback conversion data for Smart Bidding — automatically increasing bids for keywords and audiences that historically drive calls.",
+  },
+  {
+    role: "SEO Teams",
+    title: "Identify which pages generate phone leads",
+    desc: "GA4's page_location event parameter tells you exactly which pages on your site drive callback requests. SEO teams can prioritise link building and content optimisation for pages proven to generate phone leads, not just organic traffic.",
+  },
+  {
+    role: "Analytics & BI Teams",
+    title: "Build custom callback dashboards in Looker Studio",
+    desc: "Connect GA4 to Looker Studio and use LimeCall's free dashboard template to track callback conversion rate, missed call rate, and campaign ROI. Share live dashboards with stakeholders — no GA4 access required for viewers.",
+  },
+];
+
+const comparisonRows = [
+  { feature: "GA4 events: request, completed, missed", limecall: true, manual: false, others: "Partial" },
+  { feature: "UTM & page URL as event parameters", limecall: true, manual: false, others: "Partial" },
+  { feature: "GA4 conversion setup — 2 clicks", limecall: true, manual: false, others: false },
+  { feature: "Remarketing audiences from callers", limecall: true, manual: false, others: false },
+  { feature: "GTM tag template available", limecall: true, manual: false, others: false },
+  { feature: "Looker Studio template", limecall: true, manual: false, others: false },
+  { feature: "Free on all LimeCall plans", limecall: true, manual: "N/A", others: false },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { name: 'Integrations', url: 'https://www.limecall.com/integrations/' },
+        { name: integration, url: seo.canonical },
+      ]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold text-lime-400">
+        GA4 Native Integration · GTM Support · All Plans
+      </div>
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        LimeCall + <span class="text-lime-400">Google Analytics 4</span>:<br class="hidden sm:block" />
+        Track Callback Conversions in GA4
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Send LimeCall callback events to Google Analytics 4. See which pages, campaigns, and keywords drive phone leads — with full UTM attribution, GA4 conversion tracking, and remarketing audiences.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-8 py-3.5 text-sm font-bold text-dark-950 hover:bg-lime-400 transition shadow-lg">
+          Connect Google Analytics Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-8 py-3.5 text-sm font-bold text-white hover:border-lime-500/40 transition">
+          Watch Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-3xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Data flow diagram -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-white">How LimeCall callback events flow into GA4</h2>
+      <p class="mb-12 text-center text-dark-400 text-sm max-w-2xl mx-auto">
+        From widget click to GA4 event with full UTM attribution — here is exactly what happens.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">1</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Visitor requests callback</h3>
+          <p class="mt-1 text-xs text-dark-400">GA4 snippet or GTM tag reads UTM parameters</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">2</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Request event fires</h3>
+          <p class="mt-1 text-xs text-dark-400">limecall_callback_request sent to GA4 with all parameters</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">3</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">Call outcome recorded</h3>
+          <p class="mt-1 text-xs text-dark-400">Completed or missed event fires with duration + outcome</p>
+        </div>
+        <div class="h-8 w-px sm:h-px sm:w-12 bg-lime-500/30 mx-2 my-0"></div>
+        <div class="flex flex-col items-center text-center max-w-[180px]">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lime-500/20 border border-lime-500/30 text-2xl font-extrabold text-lime-400">4</div>
+          <h3 class="mt-3 text-sm font-semibold text-white">GA4 conversion counted</h3>
+          <p class="mt-1 text-xs text-dark-400">Appears in GA4 Conversions report and Google Ads</p>
+        </div>
+      </div>
+
+      <!-- Setup steps -->
+      <div class="mt-14 grid gap-6 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 1</div>
+          <h3 class="mb-2 font-semibold text-white">Add the LimeCall GA4 snippet</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Copy your LimeCall GA4 Measurement ID from the LimeCall dashboard and paste the snippet before your closing body tag — or deploy it as a Custom HTML tag in Google Tag Manager. The snippet auto-detects UTM parameters from the page URL.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 2</div>
+          <h3 class="mb-2 font-semibold text-white">Configure events in GA4</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">In GA4, go to Admin → Events. After your first test callback, find "limecall_callback_completed" in the event list and toggle it as a conversion. Optionally set a conversion value to enable revenue-based reporting in Google Ads.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <div class="mb-3 text-xs font-bold uppercase tracking-widest text-lime-400">Step 3</div>
+          <h3 class="mb-2 font-semibold text-white">Verify in GA4 DebugView</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">Open GA4 DebugView and make a test callback. Within 30 seconds, all three LimeCall events should appear with their parameters. Once verified, your conversion data flows into GA4 reports and Google Ads automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">Everything the LimeCall + GA4 integration does</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Six capabilities that bring full phone call attribution to your Google Analytics 4 property.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 hover:border-lime-500/30 transition">
+            <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/15 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-white">{f.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reporting metrics -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center text-2xl font-bold text-white">What you can report on in GA4</h2>
+      <p class="mb-10 text-center text-dark-400 text-sm">Sample dashboard metrics available once LimeCall events are flowing into your GA4 property.</p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {reportingMetrics.map(rm => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{rm.metric}</div>
+            <p class="mt-3 text-sm text-dark-400 leading-relaxed">{rm.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Who uses LimeCall + Google Analytics 4 and how</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {useCases.map(uc => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="mb-2 inline-block rounded-full bg-lime-500/15 px-3 py-1 text-xs font-bold text-lime-400">{uc.role}</div>
+            <h3 class="mb-2 font-semibold text-white">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">LimeCall + GA4 vs the alternatives</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-800 bg-dark-900">
+              <th class="py-4 px-5 text-left font-semibold text-dark-300">Feature</th>
+              <th class="py-4 px-5 text-center font-semibold text-lime-400">LimeCall + GA4</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Manual tagging</th>
+              <th class="py-4 px-5 text-center font-semibold text-dark-400">Other callback tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr class={`border-b border-dark-800/50 ${i % 2 === 0 ? 'bg-dark-950/40' : 'bg-dark-900/20'}`}>
+                <td class="py-3 px-5 text-dark-300">{row.feature}</td>
+                <td class="py-3 px-5 text-center">
+                  {row.limecall === true
+                    ? <span class="text-lime-400 font-bold">Yes</span>
+                    : <span class="text-dark-500">{row.limecall}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.manual === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.manual}</span>}
+                </td>
+                <td class="py-3 px-5 text-center">
+                  {row.others === false
+                    ? <span class="text-dark-600">No</span>
+                    : <span class="text-dark-400">{row.others}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-2xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to track callback conversions in GA4?</h2>
+      <p class="mt-4 text-dark-400">GA4 native events · GTM support · Free on all plans</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={site.cta.href} class="rounded-xl bg-lime-500 px-10 py-4 font-bold text-dark-950 hover:bg-lime-400 transition">
+          Start Free →
+        </a>
+        <a href="/demo/" class="rounded-xl border border-dark-700 bg-dark-800 px-10 py-4 font-bold text-white hover:border-lime-500/40 transition">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks heading="More Integrations & Resources" links={[
+        { href: '/google-ads-integration/', title: 'LimeCall + Google Ads', desc: 'Import callback conversions into Google Ads for Smart Bidding.' },
+        { href: '/inbound-call-tracking/', title: 'Inbound Call Tracking', desc: 'Track which campaigns drive inbound phone calls.' },
+        { href: '/call-tracking/', title: 'Call Tracking', desc: 'Full call tracking with source attribution and recording.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'GA4 integration included on all LimeCall plans.' },
+      ]} />
+    </div>
+  </div>
+</Base>

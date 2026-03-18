@@ -288,6 +288,49 @@ const faqJsonLd = faqSchema(faqs);
     </div>
   </section>
 
+  <!-- When to choose each -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">When to Choose Each Channel</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-dark-700 bg-dark-900/40 p-7">
+          <h3 class="text-xl font-bold text-white mb-4">Choose a Chatbot When…</h3>
+          <ul class="space-y-3">
+            {[
+              'You need 24/7 tier-1 support without staffing overnight agents',
+              'Your average deal value is under $200 and phone calls are not cost-effective',
+              'You handle high volumes of repetitive, structured queries (FAQs, status checks)',
+              'Your audience skews younger and text-messaging-native',
+              'You need to qualify and route a large number of inbound leads simultaneously',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-dark-500 flex-shrink-0 mt-0.5">→</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-lime-500/20 bg-dark-900/60 p-7">
+          <h3 class="text-xl font-bold text-lime-400 mb-4">Choose Callback When…</h3>
+          <ul class="space-y-3">
+            {[
+              'Your average deal value is above $500 and a human conversation meaningfully improves close rate',
+              'You sell complex products that require discovery, demonstration, or consultative pitch',
+              'Your audience includes 35+ demographics who strongly prefer phone over chat',
+              'You are targeting B2B buyers where buying committees require a personal relationship',
+              'You need to recover high-value carts or handle post-trial upgrade conversations',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-dark-400 leading-relaxed">
+                <span class="text-lime-400 flex-shrink-0 mt-0.5">→</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="border-t border-dark-800 py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

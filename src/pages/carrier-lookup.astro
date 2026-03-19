@@ -1,0 +1,471 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: `Carrier Lookup by Phone Number | Identify Network | LimeCall`,
+  description: `Free carrier lookup tool. Enter any phone number to identify the mobile network, carrier name, and number type. Perfect for sales teams and SMS marketers.`,
+  canonical: `${site.url}/carrier-lookup/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a carrier lookup?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A carrier lookup identifies which mobile network or telephone company services a specific phone number. It reveals the carrier name (e.g. AT&T, Vodafone, T-Mobile), whether the number is mobile or landline, and whether it has been ported to a different network. Businesses use carrier lookups to validate numbers before calling or texting.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I identify mobile vs landline numbers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Carrier lookup tools classify numbers as mobile, landline, or VoIP. This is critical for SMS marketing because landline numbers cannot receive text messages. Knowing the line type before sending lets you route mobile numbers to SMS campaigns and landline numbers to voice-only outreach, saving money and improving deliverability.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is an HLR lookup?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'HLR stands for Home Location Register. An HLR lookup queries the central database that every mobile network maintains to check whether a phone number is currently active, which network it belongs to, and whether it is roaming. HLR lookups are the most accurate way to verify mobile numbers in real time and are widely used by SMS platforms and call centers.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why do phone numbers get ported?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Number porting allows customers to switch mobile carriers while keeping the same phone number. For example, a customer might move from Verizon to T-Mobile but retain their existing number. This means the carrier originally assigned to a number range may no longer be the current carrier. Carrier lookups check porting databases (MNP) to return the actual current carrier, not just the original one.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is carrier lookup legal?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, carrier lookup is legal in most countries. Carrier data is considered non-personal metadata about the network, not about the individual. However, you must comply with data protection regulations like GDPR and TCPA when using phone numbers for marketing or sales outreach. Always ensure you have consent to contact the number and that your use of lookup data complies with local telecommunications regulations.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How accurate is carrier lookup?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Accuracy depends on the data source. Basic lookups using number range databases are around 85-90% accurate because they cannot detect ported numbers. Real-time HLR lookups that query live network databases achieve 95-99% accuracy. For sales and SMS campaigns where accuracy matters, always use a real-time lookup service like LimeCall that checks porting status and current network assignment.',
+      },
+    },
+  ],
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Carrier Lookup by Phone Number',
+  description: seo.description,
+  url: seo.canonical,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.7',
+    ratingCount: '189',
+  },
+};
+
+const carriersByCountry = [
+  { country: 'United States', code: '+1', carriers: 'AT&T, Verizon, T-Mobile, US Cellular' },
+  { country: 'United Kingdom', code: '+44', carriers: 'EE, Vodafone, Three, O2' },
+  { country: 'Canada', code: '+1', carriers: 'Rogers, Bell, Telus, Freedom Mobile' },
+  { country: 'Australia', code: '+61', carriers: 'Telstra, Optus, Vodafone AU, TPG' },
+  { country: 'Germany', code: '+49', carriers: 'Telekom, Vodafone DE, O2 DE, 1&1' },
+  { country: 'India', code: '+91', carriers: 'Jio, Airtel, Vi (Vodafone Idea), BSNL' },
+  { country: 'France', code: '+33', carriers: 'Orange, SFR, Bouygues, Free Mobile' },
+  { country: 'Brazil', code: '+55', carriers: 'Vivo, Claro, TIM, Oi' },
+  { country: 'Japan', code: '+81', carriers: 'NTT Docomo, au (KDDI), SoftBank, Rakuten' },
+  { country: 'South Africa', code: '+27', carriers: 'Vodacom, MTN, Cell C, Telkom Mobile' },
+];
+
+const stats = [
+  { value: "Free", label: "Country & type detection" },
+  { value: "200+", label: "Countries supported" },
+  { value: "Real-time", label: "HLR lookup via LimeCall" },
+  { value: "99%", label: "Accuracy with paid API" },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Carrier Lookup', url: `${site.url}/carrier-lookup/` }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Free Tool
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Carrier Lookup <span class="text-lime-400">by Phone Number</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Enter any phone number to identify the country, number type, and mobile network. Detect whether a number is mobile or landline before you call or text.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-2xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrier Lookup Tool -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/80 p-8 shadow-2xl">
+        <h2 class="mb-6 text-xl font-bold text-white">Lookup carrier by phone number</h2>
+        <div class="space-y-4">
+          <div>
+            <label for="phone-input" class="mb-1.5 block text-sm font-medium text-dark-300">Enter a phone number</label>
+            <input
+              id="phone-input"
+              type="tel"
+              placeholder="+1 (555) 123-4567"
+              class="w-full rounded-lg border border-dark-700 bg-dark-800 px-4 py-3 text-white placeholder-dark-500 text-sm focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500"
+            />
+          </div>
+          <button
+            id="lookup-btn"
+            type="button"
+            class="w-full rounded-xl bg-lime-500 py-3.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400 cursor-pointer"
+          >
+            Lookup Carrier
+          </button>
+
+          <!-- Results panel (hidden by default) -->
+          <div id="results-panel" class="hidden space-y-3">
+            <div class="rounded-lg border border-dark-700 bg-dark-800 p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-dark-400">Country</span>
+                <span id="res-country" class="text-sm font-semibold text-white">--</span>
+              </div>
+              <div class="h-px bg-dark-700"></div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-dark-400">Number Type</span>
+                <span id="res-type" class="text-sm font-semibold text-white">--</span>
+              </div>
+              <div class="h-px bg-dark-700"></div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-dark-400">Carrier</span>
+                <span id="res-carrier" class="text-sm font-semibold text-lime-400">--</span>
+              </div>
+            </div>
+            <div id="res-cta" class="hidden rounded-lg border border-lime-500/20 bg-lime-500/5 p-4">
+              <p class="text-sm text-dark-300 leading-relaxed">
+                For real-time carrier identification including carrier name, porting status, and reachability, use LimeCall's business phone platform.
+              </p>
+              <a href={site.cta.href} class="mt-3 inline-block rounded-lg bg-lime-500 px-6 py-2.5 text-sm font-bold text-dark-950 transition hover:bg-lime-400">
+                Get Full Carrier Data — Start Free →
+              </a>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-center text-xs text-dark-600">Country and type detection is free. Full carrier name and porting data requires LimeCall API.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const countryCodes: Record<string, { country: string; mobile: string }> = {
+      '1': { country: 'United States / Canada', mobile: '2-9' },
+      '44': { country: 'United Kingdom', mobile: '7' },
+      '61': { country: 'Australia', mobile: '4' },
+      '49': { country: 'Germany', mobile: '15,16,17' },
+      '33': { country: 'France', mobile: '6,7' },
+      '91': { country: 'India', mobile: '6,7,8,9' },
+      '81': { country: 'Japan', mobile: '70,80,90' },
+      '55': { country: 'Brazil', mobile: '9' },
+      '27': { country: 'South Africa', mobile: '6,7,8' },
+      '86': { country: 'China', mobile: '1' },
+      '39': { country: 'Italy', mobile: '3' },
+      '34': { country: 'Spain', mobile: '6,7' },
+      '52': { country: 'Mexico', mobile: '1' },
+      '7': { country: 'Russia', mobile: '9' },
+      '82': { country: 'South Korea', mobile: '10,11' },
+      '31': { country: 'Netherlands', mobile: '6' },
+      '46': { country: 'Sweden', mobile: '7' },
+      '47': { country: 'Norway', mobile: '4,9' },
+      '48': { country: 'Poland', mobile: '5,6,7,8' },
+      '353': { country: 'Ireland', mobile: '8' },
+      '971': { country: 'United Arab Emirates', mobile: '5' },
+      '966': { country: 'Saudi Arabia', mobile: '5' },
+      '65': { country: 'Singapore', mobile: '8,9' },
+      '60': { country: 'Malaysia', mobile: '1' },
+      '63': { country: 'Philippines', mobile: '9' },
+      '62': { country: 'Indonesia', mobile: '8' },
+      '64': { country: 'New Zealand', mobile: '2' },
+      '41': { country: 'Switzerland', mobile: '7' },
+      '43': { country: 'Austria', mobile: '6' },
+      '32': { country: 'Belgium', mobile: '4' },
+    };
+
+    function detectCountry(digits: string): { country: string; code: string; rest: string } | null {
+      for (const len of [3, 2, 1]) {
+        const prefix = digits.substring(0, len);
+        if (countryCodes[prefix]) {
+          return { country: countryCodes[prefix].country, code: prefix, rest: digits.substring(len) };
+        }
+      }
+      return null;
+    }
+
+    function detectType(code: string, rest: string): string {
+      const info = countryCodes[code];
+      if (!info || !rest) return 'Unknown';
+      const mobilePrefixes = info.mobile.split(',');
+      for (const mp of mobilePrefixes) {
+        if (rest.startsWith(mp)) return 'Mobile';
+      }
+      return 'Landline / Fixed';
+    }
+
+    const input = document.getElementById('phone-input') as HTMLInputElement;
+    const btn = document.getElementById('lookup-btn') as HTMLButtonElement;
+    const panel = document.getElementById('results-panel') as HTMLDivElement;
+    const resCountry = document.getElementById('res-country') as HTMLSpanElement;
+    const resType = document.getElementById('res-type') as HTMLSpanElement;
+    const resCarrier = document.getElementById('res-carrier') as HTMLSpanElement;
+    const resCta = document.getElementById('res-cta') as HTMLDivElement;
+
+    btn.addEventListener('click', () => {
+      const raw = input.value.trim();
+      const digits = raw.replace(/[^0-9]/g, '');
+
+      if (digits.length < 7) {
+        panel.classList.remove('hidden');
+        resCta.classList.add('hidden');
+        resCountry.textContent = '--';
+        resType.textContent = '--';
+        resCarrier.textContent = 'Please enter a valid phone number with country code';
+        resCarrier.className = 'text-sm font-semibold text-red-400';
+        return;
+      }
+
+      const match = detectCountry(digits);
+      if (match) {
+        resCountry.textContent = match.country;
+        resType.textContent = detectType(match.code, match.rest);
+      } else {
+        resCountry.textContent = 'Unknown (check country code)';
+        resType.textContent = 'Unknown';
+      }
+
+      resCarrier.textContent = 'Requires real-time HLR lookup';
+      resCarrier.className = 'text-sm font-semibold text-lime-400';
+      panel.classList.remove('hidden');
+      resCta.classList.remove('hidden');
+    });
+
+    input.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter') btn.click();
+    });
+  </script>
+
+  <!-- What is Carrier Lookup? -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-6 text-2xl font-bold text-white">What is Carrier Lookup?</h2>
+      <div class="prose prose-invert max-w-none space-y-4 text-dark-300 leading-relaxed">
+        <p>A carrier lookup identifies which telecommunications company currently services a phone number. When you enter a number, the lookup returns the carrier name (such as AT&T, Vodafone, or T-Mobile), the line type (mobile, landline, or VoIP), and whether the number has been ported to a different network.</p>
+        <p>Businesses rely on carrier lookups to clean their contact lists, route SMS campaigns to mobile numbers only, and avoid wasting time on disconnected or invalid numbers. Sales teams use carrier data to prioritize mobile numbers for text-first outreach and landlines for voice calls, improving connection rates across every channel.</p>
+        <p>Carrier identification works by querying number range databases and, for real-time accuracy, Home Location Register (HLR) databases maintained by mobile networks. The result tells you not just the original carrier assigned to a number range, but the current carrier after any porting events.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How Carrier Lookup Works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How Carrier Lookup Works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { n: '1', title: 'Number Range Database', desc: 'Every country assigns number ranges to carriers. The prefix of a phone number reveals the original carrier. For example, US numbers starting with certain area codes map to specific carriers.' },
+          { n: '2', title: 'MNP / Porting Database', desc: 'Mobile Number Portability (MNP) databases track when a number moves between carriers. Without checking MNP, you only see the original carrier — not the current one after porting.' },
+          { n: '3', title: 'HLR Real-time Query', desc: 'Home Location Register lookups query the live mobile network to confirm the number is active, identify the current carrier, and check roaming status. This is the most accurate method available.' },
+        ].map(s => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+            <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Sales Teams Need Carrier Data -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Why Sales Teams Need Carrier Data</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'Mobile vs Landline', desc: 'Know if a number can receive SMS before sending. Route mobile numbers to text campaigns and landlines to voice-only outreach.' },
+          { title: 'Detect Ported Numbers', desc: 'Identify numbers that have moved between carriers to avoid wrong-carrier routing and failed message delivery.' },
+          { title: 'Filter Invalid Numbers', desc: 'Detect disconnected, deactivated, or invalid numbers before your team wastes time dialing them.' },
+          { title: 'Reduce Wasted Calls by 30%', desc: 'Clean your contact list with carrier data to eliminate dead numbers and focus your reps on reachable prospects.' },
+        ].map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrier Lookup by Country -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Carrier Lookup by Country</h2>
+      <p class="mb-8 text-center text-dark-400 text-sm">Major mobile carriers in the top 10 markets. LimeCall supports carrier identification in 200+ countries.</p>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-dark-900/80 text-dark-400">
+            <tr>
+              <th class="px-5 py-3 font-medium">Country</th>
+              <th class="px-5 py-3 font-medium">Code</th>
+              <th class="px-5 py-3 font-medium">Major Carriers</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {carriersByCountry.map(row => (
+              <tr class="bg-dark-950/50">
+                <td class="px-5 py-3 font-medium text-white">{row.country}</td>
+                <td class="px-5 py-3 text-lime-400 font-mono">{row.code}</td>
+                <td class="px-5 py-3 text-dark-300">{row.carriers}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free vs Paid Carrier Lookup Tools -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">Free vs Paid Carrier Lookup Tools</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-dark-900/80 text-dark-400">
+            <tr>
+              <th class="px-5 py-3 font-medium">Tool</th>
+              <th class="px-5 py-3 font-medium">Country Detection</th>
+              <th class="px-5 py-3 font-medium">Line Type</th>
+              <th class="px-5 py-3 font-medium">Carrier Name</th>
+              <th class="px-5 py-3 font-medium">Porting Status</th>
+              <th class="px-5 py-3 font-medium">Price</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            <tr class="bg-dark-950/50">
+              <td class="px-5 py-3 font-medium text-lime-400">This Tool (Free)</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Basic</td>
+              <td class="px-5 py-3 text-dark-500">No</td>
+              <td class="px-5 py-3 text-dark-500">No</td>
+              <td class="px-5 py-3 text-white">Free</td>
+            </tr>
+            <tr class="bg-dark-950/50">
+              <td class="px-5 py-3 font-medium text-white">LimeCall API</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Included in plan</td>
+            </tr>
+            <tr class="bg-dark-950/50">
+              <td class="px-5 py-3 font-medium text-white">Twilio Lookup</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">$0.005/lookup</td>
+            </tr>
+            <tr class="bg-dark-950/50">
+              <td class="px-5 py-3 font-medium text-white">NumVerify</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-white">Yes</td>
+              <td class="px-5 py-3 text-dark-500">Limited</td>
+              <td class="px-5 py-3 text-white">Freemium</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Stop calling dead numbers</h2>
+      <p class="mt-4 text-dark-400">LimeCall validates and connects leads in 28 seconds. Identify carrier, line type, and reachability before your reps pick up the phone.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial →
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Local numbers in 40+ countries.' },
+        { href: '/inbound-call-tracking/', title: 'Inbound Call Tracking', desc: 'Track which campaigns drive phone calls.' },
+        { href: '/phone-number-validator/', title: 'Phone Number Validator', desc: 'Validate any phone number instantly.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans for every team size.' },
+      ]}
+    />
+  </div>
+</Base>

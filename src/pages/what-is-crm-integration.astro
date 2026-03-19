@@ -70,6 +70,17 @@ const faqSchema = {
   ],
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
+
 const integrationTypes = [
   { name: 'Native Integration', desc: 'Pre-built connectors between two platforms. One-click setup, no coding required. Limited to the features and fields the vendor has built in.', speed: '5-15 minutes', flexibility: 'Medium' },
   { name: 'API Integration', desc: 'Custom-coded connections using each platform\'s REST or GraphQL API. Complete flexibility to sync any data, trigger custom workflows, and build unique logic.', speed: '1-4 weeks', flexibility: 'High' },
@@ -103,6 +114,7 @@ const benefits = [
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">

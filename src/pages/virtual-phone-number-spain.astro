@@ -17,6 +17,27 @@ const seo = {
   canonical: `https://www.limecall.com/${slug}/`,
 };
 
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "LimeCall – Spain Virtual Phone Number",
+  "operatingSystem": "Web, iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "35",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "35",
+      "priceCurrency": "USD",
+      "unitText": "month"
+    }
+  },
+  "description": "Get a Spain virtual phone number (+34) with Madrid, Barcelona, Valencia, Seville and Bilbao area codes. Instant setup.",
+  "url": "https://www.limecall.com/virtual-phone-number-spain/"
+};
+
 const faqs = [
   {
     question: `Can I get a Spain virtual number without being in Spain?`,
@@ -43,6 +64,7 @@ const faqs = [
 
 <Base {...seo}>
   <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={softwareApplicationSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

@@ -6,7 +6,7 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { site } from '../site.config';
 
 const seo = {
-  title: 'What is Lead Routing? Definition, Rules & Best Practices (2025)',
+  title: 'What is Lead Routing? Rules & Best Practices',
   description: 'Lead routing is the process of automatically assigning incoming leads to the right sales rep. Learn routing rules, round-robin vs skill-based methods, and tools.',
   canonical: `${site.url}/what-is-lead-routing/`,
 };
@@ -94,6 +94,17 @@ const rules = [
   { rule: 'Account Ownership', example: 'Existing account → Account owner', complexity: 'Low' },
 ];
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
+
 const tools = [
   { name: 'LimeCall', highlight: true, desc: 'Instant callback + intelligent lead routing. Routes and connects leads in 28 seconds with round-robin, skill-based, and weighted distribution.' },
   { name: 'Salesforce Lead Assignment', highlight: false, desc: 'Native assignment rules within Salesforce CRM. Powerful but complex to configure for advanced routing scenarios.' },
@@ -105,6 +116,7 @@ const tools = [
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">

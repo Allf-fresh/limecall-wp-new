@@ -17,6 +17,27 @@ const seo = {
   canonical: `https://www.limecall.com/${slug}/`,
 };
 
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "LimeCall – Belgium Virtual Phone Number",
+  "operatingSystem": "Web, iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "35",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "35",
+      "priceCurrency": "USD",
+      "unitText": "month"
+    }
+  },
+  "description": "Get a Belgium virtual phone number (+32) with Brussels, Antwerp, Ghent, Liège, Bruges and Charleroi area codes. Instant setup.",
+  "url": "https://www.limecall.com/virtual-phone-number-belgium/"
+};
+
 const faqs = [
   {
     question: `Can I get a Belgium virtual number without being in Belgium?`,
@@ -43,6 +64,7 @@ const faqs = [
 
 <Base {...seo}>
   <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={softwareApplicationSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">

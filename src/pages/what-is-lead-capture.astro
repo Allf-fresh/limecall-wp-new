@@ -70,6 +70,17 @@ const faqSchema = {
   ],
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
+
 const methods = [
   { name: 'Contact Forms', desc: 'The classic method. Visitors fill out name, email, and message fields. Simple and familiar, but conversion rates are the lowest of all methods at 2-5%.', rate: '2-5%' },
   { name: 'Chatbots', desc: 'Conversational lead capture that qualifies visitors through a chat flow. Available 24/7 and less intimidating than forms, but text-based interaction lacks urgency.', rate: '5-15%' },
@@ -99,6 +110,7 @@ const bestPractices = [
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">

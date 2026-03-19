@@ -70,6 +70,17 @@ const faqSchema = {
   ],
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+  url: seo.canonical,
+};
+
 const steps = [
   { n: '01', title: 'Caller Dials In', desc: 'A customer or prospect calls your business phone number. The IVR system answers immediately with a pre-recorded greeting.' },
   { n: '02', title: 'Menu Options Played', desc: 'The IVR presents a menu of options — e.g., "Press 1 for Sales, Press 2 for Support." Advanced systems accept voice commands instead.' },
@@ -96,6 +107,7 @@ const comparison = [
 <Base {...seo}>
   <JsonLd schema={articleSchema} />
   <JsonLd schema={faqSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">

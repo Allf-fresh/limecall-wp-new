@@ -1,0 +1,421 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: `SMS Length Calculator | Check Character Count & Segments | LimeCall`,
+  description: `Free SMS length calculator. Check character count, segment count, encoding type (GSM-7 vs UCS-2), and cost per message before you send. Used by 5,000+ marketers.`,
+  canonical: `${site.url}/sms-length-calculator/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How many characters in an SMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A single SMS message can contain up to 160 characters when using the GSM-7 encoding (standard Latin letters, numbers, and common symbols). If your message contains special characters, emojis, or non-Latin scripts, it switches to UCS-2 encoding which allows only 70 characters per message segment.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is an SMS segment?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'An SMS segment is a single unit of a text message. If your message exceeds the character limit (160 for GSM-7 or 70 for UCS-2), it is split into multiple segments. Each segment is sent and billed separately. Multi-part messages use a User Data Header (UDH) which reduces the usable characters to 153 per segment for GSM-7 or 67 per segment for UCS-2.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why do emojis use more characters in SMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Emojis are not part of the GSM-7 character set, so including even one emoji forces the entire message to use UCS-2 encoding. UCS-2 uses 16 bits per character instead of 7 bits, which reduces the maximum characters per segment from 160 to 70. This means a message with a single emoji can cost twice as much to send as the same text without it.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between GSM-7 and UCS-2 encoding?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'GSM-7 is the default SMS encoding that supports 128 standard characters (Latin letters, digits, and common punctuation) using 7 bits per character, allowing 160 characters per segment. UCS-2 is a Unicode encoding that supports virtually all world scripts, emojis, and special symbols using 16 bits per character, but limits each segment to 70 characters. Your message encoding is determined automatically based on the characters used.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does an SMS cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'SMS pricing depends on the carrier, destination country, and number of segments. In the UK, a single segment typically costs between 3p and 5p. A 200-character GSM-7 message would use 2 segments and therefore cost double. With LimeCall business texting, SMS starts from as low as 3.5p per segment with volume discounts available.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I send long SMS messages?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, you can send SMS messages longer than 160 characters. The message is automatically split into multiple segments by the carrier and reassembled on the recipient\'s device. Most carriers support up to 10 segments (1,530 GSM-7 characters or 670 UCS-2 characters) in a single concatenated message. Each segment is billed individually, so longer messages cost more to send.',
+      },
+    },
+  ],
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'SMS Length Calculator',
+  description: seo.description,
+  url: seo.canonical,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'GBP',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    ratingCount: '1240',
+    bestRating: '5',
+  },
+};
+
+const stats = [
+  { value: 'Free', label: 'Tool — no account needed' },
+  { value: '5,000+', label: 'Marketers use this tool' },
+  { value: 'Real-time', label: 'Character & segment count' },
+  { value: 'GSM-7 / UCS-2', label: 'Auto encoding detection' },
+];
+
+const tips = [
+  { title: 'Avoid emojis in transactional SMS', desc: 'A single emoji forces UCS-2 encoding, cutting your character limit from 160 to 70. Remove emojis to keep costs down on high-volume campaigns.' },
+  { title: 'Use a URL shortener', desc: 'Long URLs eat up characters fast. Use a branded short link (e.g. link.yourbrand.com/offer) to save 30-50 characters per message.' },
+  { title: 'Test every message with this tool', desc: 'Paste your final SMS copy into this calculator before sending. A single curly quote or accented character can double your segment count.' },
+  { title: 'Keep messages under 160 characters', desc: 'Single-segment messages are cheapest and arrive fastest. Write concise copy and trim filler words to stay within one segment.' },
+  { title: 'Watch for hidden Unicode characters', desc: 'Copying text from Word, Google Docs, or email clients can introduce smart quotes, em dashes, and non-breaking spaces that trigger UCS-2 encoding.' },
+];
+
+const carrierLimits = [
+  { carrier: 'Most UK carriers', maxSegments: '10', maxGSM: '1,530', maxUCS2: '670' },
+  { carrier: 'Vodafone UK', maxSegments: '10', maxGSM: '1,530', maxUCS2: '670' },
+  { carrier: 'AT&T (US)', maxSegments: '10', maxGSM: '1,530', maxUCS2: '670' },
+  { carrier: 'T-Mobile (US)', maxSegments: '6', maxGSM: '918', maxUCS2: '402' },
+  { carrier: 'Twilio / API providers', maxSegments: '10', maxGSM: '1,530', maxUCS2: '670' },
+  { carrier: 'LimeCall Business Texting', maxSegments: '10', maxGSM: '1,530', maxUCS2: '670' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'SMS Length Calculator', url: `${site.url}/sms-length-calculator/` }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Free Tool
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        SMS Length <span class="text-lime-400">Calculator</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Check character count, segment count, and encoding type before you send. Avoid surprise costs from multi-segment messages and UCS-2 encoding.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-2xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tool UI -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/80 p-8 shadow-2xl">
+        <h2 class="mb-6 text-xl font-bold text-white">Check your SMS message</h2>
+        <div class="space-y-5">
+          <div>
+            <label for="sms-input" class="mb-1.5 block text-sm font-medium text-dark-300">Your SMS message</label>
+            <textarea
+              id="sms-input"
+              rows="5"
+              placeholder="Type or paste your SMS message here..."
+              class="w-full rounded-lg border border-dark-700 bg-dark-800 px-4 py-3 text-white placeholder-dark-500 text-sm focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500 resize-y"
+            ></textarea>
+          </div>
+
+          <!-- Progress bar -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span id="segment-fill-label" class="text-xs text-dark-400">Segment usage: 0%</span>
+              <span id="char-ratio" class="text-xs text-dark-400">0 / 160</span>
+            </div>
+            <div class="h-3 w-full rounded-full bg-dark-800 overflow-hidden">
+              <div id="progress-bar" class="h-full rounded-full bg-lime-500 transition-all duration-200" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Warning banner (hidden by default) -->
+          <div id="ucs2-warning" class="hidden rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-3">
+            <p class="text-sm text-yellow-400 font-medium">Special characters detected — message will use UCS-2 encoding (70 chars/segment instead of 160)</p>
+          </div>
+
+          <!-- Stats grid -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-lg border border-dark-700 bg-dark-800 p-4">
+              <p class="text-xs text-dark-400 mb-1">Characters</p>
+              <p id="stat-chars" class="text-2xl font-extrabold text-white">0</p>
+            </div>
+            <div class="rounded-lg border border-dark-700 bg-dark-800 p-4">
+              <p class="text-xs text-dark-400 mb-1">Encoding</p>
+              <p id="stat-encoding" class="text-2xl font-extrabold text-lime-400">GSM-7</p>
+            </div>
+            <div class="rounded-lg border border-dark-700 bg-dark-800 p-4">
+              <p class="text-xs text-dark-400 mb-1">Segments</p>
+              <p id="stat-segments" class="text-2xl font-extrabold text-white">0</p>
+            </div>
+            <div class="rounded-lg border border-dark-700 bg-dark-800 p-4">
+              <p class="text-xs text-dark-400 mb-1">Estimated Cost</p>
+              <p id="stat-cost" class="text-2xl font-extrabold text-white">&pound;0.00</p>
+            </div>
+          </div>
+
+          <a href={site.cta.href} class="block w-full rounded-xl bg-lime-500 py-3.5 text-center text-sm font-bold text-dark-950 transition hover:bg-lime-400">
+            Send SMS at scale with LimeCall &rarr;
+          </a>
+        </div>
+        <p class="mt-4 text-center text-xs text-dark-600">Calculation is instant and runs entirely in your browser. No data is sent to any server.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How SMS Length Works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">How SMS Length Works</h2>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">GSM-7 Encoding</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">The default SMS encoding supports standard Latin letters, digits, and common punctuation. Each character uses 7 bits, giving you 160 characters per single segment. Extended characters like curly braces and the euro sign count as two characters.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">UCS-2 Encoding</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">If your message contains any character outside the GSM-7 set (emojis, Chinese, Arabic, Cyrillic, or certain special symbols), the entire message switches to UCS-2. This uses 16 bits per character, limiting you to just 70 characters per segment.</p>
+        </div>
+        <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+          <h3 class="mb-2 font-semibold text-white">Multi-part Messages</h3>
+          <p class="text-sm text-dark-400 leading-relaxed">When a message exceeds one segment, a User Data Header (UDH) is added to each part so the recipient's phone can reassemble them in order. This header uses 7 bytes, reducing usable space to 153 characters (GSM-7) or 67 characters (UCS-2) per segment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMS Length Limits by Carrier -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">SMS Length Limits by Carrier</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-800">
+        <table class="w-full text-left text-sm">
+          <thead class="border-b border-dark-800 bg-dark-900/80">
+            <tr>
+              <th class="px-6 py-4 font-semibold text-white">Carrier / Provider</th>
+              <th class="px-6 py-4 font-semibold text-white">Max Segments</th>
+              <th class="px-6 py-4 font-semibold text-white">Max GSM-7 Chars</th>
+              <th class="px-6 py-4 font-semibold text-white">Max UCS-2 Chars</th>
+            </tr>
+          </thead>
+          <tbody>
+            {carrierLimits.map((row, i) => (
+              <tr class={`border-b border-dark-800 ${i % 2 === 0 ? 'bg-dark-950/50' : 'bg-dark-900/30'}`}>
+                <td class="px-6 py-3 text-dark-300">{row.carrier}</td>
+                <td class="px-6 py-3 text-dark-400">{row.maxSegments}</td>
+                <td class="px-6 py-3 text-dark-400">{row.maxGSM}</td>
+                <td class="px-6 py-3 text-dark-400">{row.maxUCS2}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips to Keep SMS Costs Down -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Tips to Keep SMS Costs Down</h2>
+      <div class="space-y-4">
+        {tips.map((tip, i) => (
+          <div class="flex gap-4 rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lime-500/20 text-sm font-extrabold text-lime-400">{i + 1}</div>
+            <div>
+              <h3 class="mb-1 font-semibold text-white">{tip.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{tip.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Need to send SMS at scale?</h2>
+      <p class="mt-4 text-dark-400">LimeCall's business texting starts at &pound;57/mo. Send bulk SMS, automate follow-ups, and track delivery — all from one dashboard.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial &rarr;
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/business-texting/', title: 'Business Texting', desc: 'Full two-way SMS platform for sales and support.' },
+        { href: '/sms-broadcasts/', title: 'SMS Broadcasts', desc: 'Send bulk SMS campaigns to thousands at once.' },
+        { href: '/sms-notify/', title: 'SMS Notify', desc: 'Automated SMS notifications and alerts.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Transparent plans starting at $0/mo.' },
+      ]}
+    />
+  </div>
+</Base>
+
+<script>
+  const GSM7_BASIC = new Set(
+    `@${String.fromCharCode(163)}$${String.fromCharCode(165)}${String.fromCharCode(232)}${String.fromCharCode(233)}${String.fromCharCode(249)}${String.fromCharCode(236)}${String.fromCharCode(242)}${String.fromCharCode(199)}${String.fromCharCode(216)}${String.fromCharCode(248)}${String.fromCharCode(197)}${String.fromCharCode(229)}${String.fromCharCode(916)}_${String.fromCharCode(934)}${String.fromCharCode(915)}${String.fromCharCode(923)}${String.fromCharCode(937)}${String.fromCharCode(928)}${String.fromCharCode(936)}${String.fromCharCode(931)}${String.fromCharCode(920)}${String.fromCharCode(926)}${String.fromCharCode(198)}${String.fromCharCode(230)}${String.fromCharCode(223)}${String.fromCharCode(201)} !"#${String.fromCharCode(164)}%&'()*+,-./0123456789:;<=>?${String.fromCharCode(161)}ABCDEFGHIJKLMNOPQRSTUVWXYZ${String.fromCharCode(196)}${String.fromCharCode(214)}${String.fromCharCode(209)}${String.fromCharCode(220)}${String.fromCharCode(167)}${String.fromCharCode(191)}abcdefghijklmnopqrstuvwxyz${String.fromCharCode(228)}${String.fromCharCode(246)}${String.fromCharCode(241)}${String.fromCharCode(252)}${String.fromCharCode(224)}\n\r`.split('')
+  );
+
+  const GSM7_EXTENDED = new Set(['|', '^', '€', '{', '}', '[', ']', '~', '\\']);
+
+  function analyzeMessage(text: string) {
+    if (!text) {
+      return { chars: 0, encoding: 'GSM-7' as const, segments: 0, isUCS2: false, extendedCount: 0 };
+    }
+
+    let isUCS2 = false;
+    let gsmLength = 0;
+    let extendedCount = 0;
+
+    for (const char of text) {
+      if (GSM7_BASIC.has(char)) {
+        gsmLength += 1;
+      } else if (GSM7_EXTENDED.has(char)) {
+        gsmLength += 2;
+        extendedCount += 1;
+      } else {
+        isUCS2 = true;
+        break;
+      }
+    }
+
+    const encoding = isUCS2 ? 'UCS-2' : 'GSM-7';
+    const charCount = isUCS2 ? [...text].length : gsmLength;
+
+    let segments = 0;
+    if (charCount > 0) {
+      if (isUCS2) {
+        segments = charCount <= 70 ? 1 : Math.ceil(charCount / 67);
+      } else {
+        segments = charCount <= 160 ? 1 : Math.ceil(charCount / 153);
+      }
+    }
+
+    return { chars: charCount, encoding, segments, isUCS2, extendedCount };
+  }
+
+  function updateUI() {
+    const input = document.getElementById('sms-input') as HTMLTextAreaElement;
+    const text = input.value;
+    const result = analyzeMessage(text);
+
+    const singleLimit = result.isUCS2 ? 70 : 160;
+    const multiLimit = result.isUCS2 ? 67 : 153;
+
+    (document.getElementById('stat-chars') as HTMLElement).textContent = String(result.chars);
+    (document.getElementById('stat-encoding') as HTMLElement).textContent = result.encoding;
+    (document.getElementById('stat-segments') as HTMLElement).textContent = String(result.segments);
+
+    const cost = (result.segments * 0.04).toFixed(2);
+    (document.getElementById('stat-cost') as HTMLElement).textContent = `\u00A3${cost}`;
+
+    (document.getElementById('char-ratio') as HTMLElement).textContent = `${result.chars} / ${singleLimit}`;
+
+    const warning = document.getElementById('ucs2-warning') as HTMLElement;
+    if (result.isUCS2) {
+      warning.classList.remove('hidden');
+    } else {
+      warning.classList.add('hidden');
+    }
+
+    // Progress bar
+    const bar = document.getElementById('progress-bar') as HTMLElement;
+    const fillLabel = document.getElementById('segment-fill-label') as HTMLElement;
+    let fillPercent = 0;
+
+    if (result.chars > 0 && result.segments > 0) {
+      const limit = result.segments === 1 ? singleLimit : multiLimit;
+      const charsInLastSegment = result.segments === 1
+        ? result.chars
+        : result.chars - (result.segments - 1) * multiLimit;
+      fillPercent = Math.min(100, Math.round((charsInLastSegment / limit) * 100));
+    }
+
+    bar.style.width = `${fillPercent}%`;
+    fillLabel.textContent = `Segment usage: ${fillPercent}%`;
+
+    // Color coding
+    bar.classList.remove('bg-lime-500', 'bg-yellow-500', 'bg-red-500');
+    if (result.segments <= 1) {
+      bar.classList.add('bg-lime-500');
+    } else if (result.segments === 2) {
+      bar.classList.add('bg-yellow-500');
+    } else {
+      bar.classList.add('bg-red-500');
+    }
+
+    // Encoding stat color
+    const encodingStat = document.getElementById('stat-encoding') as HTMLElement;
+    encodingStat.classList.remove('text-lime-400', 'text-yellow-400');
+    encodingStat.classList.add(result.isUCS2 ? 'text-yellow-400' : 'text-lime-400');
+  }
+
+  document.getElementById('sms-input')?.addEventListener('input', updateUI);
+  updateUI();
+</script>

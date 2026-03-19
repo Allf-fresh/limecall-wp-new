@@ -1,0 +1,393 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: 'Callback Automation Software | Automate Lead Callbacks | LimeCall',
+  description: 'Automate your callback workflow end-to-end. LimeCall triggers instant callbacks from form fills, chat, and CRM events — connecting leads in 28 seconds.',
+  canonical: `${site.url}/callbackautomation/`,
+};
+
+const stats = [
+  { value: '28s', label: 'Avg. Response Time', sub: 'From trigger event to live conversation' },
+  { value: '391%', label: 'More Conversions', sub: 'Vs. manual follow-up within 5 minutes' },
+  { value: '100%', label: 'Lead Coverage', sub: 'Every lead gets a callback — zero slip-through' },
+  { value: '24/7', label: 'Always-On', sub: 'After-hours automation keeps leads warm' },
+];
+
+const features = [
+  {
+    icon: '📋',
+    name: 'Form-Triggered Callbacks',
+    description: 'The moment a visitor submits a form, LimeCall triggers an instant callback to your sales team. No delay, no manual dialling — the lead hears from you in under 30 seconds while intent is at its peak.',
+  },
+  {
+    icon: '🔗',
+    name: 'CRM Event Callbacks',
+    description: 'Trigger callbacks automatically when a deal stage changes, a lead score crosses a threshold, or a contact goes untouched for 48 hours. Works with HubSpot, Salesforce, Pipedrive, and any CRM via Zapier.',
+  },
+  {
+    icon: '🕐',
+    name: 'Scheduled Callbacks',
+    description: 'Let leads pick their preferred callback time. LimeCall queues the call and fires it automatically at the scheduled moment — with timezone awareness and calendar sync built in.',
+  },
+  {
+    icon: '🌙',
+    name: 'After-Hours Automation',
+    description: 'Leads don\'t stop at 5 PM. After-hours requests are captured, confirmed via SMS, and queued for the first available slot next business day — or routed to an on-call rep immediately.',
+  },
+  {
+    icon: '🔄',
+    name: 'Smart Retry Logic',
+    description: 'If a callback goes unanswered, LimeCall retries automatically — up to 5 attempts across a schedule you define. Configurable intervals, escalation rules, and fallback to SMS or WhatsApp.',
+  },
+  {
+    icon: '📱',
+    name: 'Multi-Channel Follow-Up',
+    description: 'Not every lead answers the phone on the first ring. LimeCall follows up across voice, SMS, and WhatsApp — ensuring every lead gets reached on the channel they prefer.',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Lead Triggers an Event',
+    description: 'A visitor fills out a form, starts a chat, abandons a cart, or hits a CRM milestone. LimeCall detects the trigger event instantly via widget, API, or integration.',
+  },
+  {
+    number: '02',
+    title: 'LimeCall Routes the Callback',
+    description: 'The system identifies the right rep based on lead data, geography, availability, and routing rules. If no rep is free, it queues for the next available slot.',
+  },
+  {
+    number: '03',
+    title: 'Rep Connects in Seconds',
+    description: 'LimeCall dials the rep first, briefs them with lead context (name, source, score), then bridges the call to the lead — all within 28 seconds of the trigger.',
+  },
+  {
+    number: '04',
+    title: 'Outcome Is Logged & Next Steps Fire',
+    description: 'Call recordings, transcripts, and outcomes are pushed to your CRM automatically. If the lead didn\'t answer, retry sequences and SMS follow-ups kick in.',
+  },
+];
+
+const useCases = [
+  {
+    icon: '📋',
+    title: 'Form Fill → Instant Callback',
+    description: 'A prospect submits your "Request a Demo" form. Within 28 seconds, your SDR is on the phone with them — while competitors are still sending autoresponder emails. Speed-to-lead wins deals.',
+  },
+  {
+    icon: '🛒',
+    title: 'Cart Abandonment → Recovery Call',
+    description: 'A high-value cart is abandoned at checkout. LimeCall triggers a recovery callback to a sales rep who can address objections in real time — recovering revenue that email drip campaigns miss.',
+  },
+  {
+    icon: '🚀',
+    title: 'Trial Signup → Onboarding Call',
+    description: 'A new user signs up for your free trial. LimeCall fires an onboarding callback within minutes, connecting them with a success rep who walks them through setup and drives activation.',
+  },
+];
+
+const integrations = [
+  { name: 'HubSpot', href: '/hubspot-integration/' },
+  { name: 'Salesforce', href: '/integrations/' },
+  { name: 'Zapier', href: '/zapier-integration/' },
+  { name: 'Slack', href: '/slack-integration/' },
+  { name: 'Google Analytics', href: '/google-analytics-integration/' },
+  { name: 'WordPress', href: '/limecall-for-wordpress/' },
+  { name: 'Webhooks', href: '/webhooks/' },
+  { name: 'Google Ads', href: '/google-ads-integration/' },
+];
+
+const faqs = [
+  {
+    question: 'What is callback automation?',
+    answer: 'Callback automation is the process of using software to trigger, route, and manage phone callbacks without manual intervention. When a lead fills a form, starts a chat, or hits a CRM milestone, the system instantly connects them with a sales rep — eliminating the delay that kills conversion rates.',
+  },
+  {
+    question: 'How fast does LimeCall trigger a callback?',
+    answer: 'LimeCall triggers callbacks within 28 seconds of the event. The system dials your rep first, provides lead context, then bridges the call to the prospect. This speed-to-lead advantage means you reach prospects while their intent is still at its peak.',
+  },
+  {
+    question: 'What happens if a callback goes unanswered?',
+    answer: 'LimeCall\'s smart retry logic kicks in automatically. The system retries the callback up to 5 times at configurable intervals. If voice doesn\'t connect, it escalates to SMS or WhatsApp follow-up — ensuring no lead falls through the cracks.',
+  },
+  {
+    question: 'Can I automate callbacks outside business hours?',
+    answer: 'Yes. After-hours leads receive an instant SMS confirmation with their queue position. LimeCall schedules the callback for the first available slot next business day, or routes it to an on-call rep if your team operates 24/7.',
+  },
+  {
+    question: 'Does callback automation work with my CRM?',
+    answer: 'LimeCall integrates natively with HubSpot, Salesforce, and Pipedrive. For other CRMs, Zapier and webhook integrations connect LimeCall to thousands of tools. Call outcomes, recordings, and transcripts sync to your CRM automatically.',
+  },
+  {
+    question: 'How is callback automation different from a click-to-call widget?',
+    answer: 'A click-to-call widget requires the visitor to initiate the request manually. Callback automation goes further — it triggers callbacks from any event: form fills, CRM stage changes, cart abandonment, chat escalations, and more. It also includes retry logic, multi-channel follow-up, and after-hours handling that widgets alone don\'t provide.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+
+const softwareJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LimeCall Callback Automation',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: seo.description,
+  url: seo.canonical,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free tier available — paid plans start at $29/mo',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '124',
+    bestRating: '5',
+  },
+};
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqJsonLd} />
+  <JsonLd schema={softwareJsonLd} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Callback Automation', url: `${site.url}/callbackautomation/` }]} />
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-lime-400 mb-6">
+        Callback Automation
+      </div>
+
+      <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Callback Automation:<br />
+        <span class="text-lime-400">Never Miss a Lead Again</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        Automate your entire callback workflow end-to-end. LimeCall triggers instant callbacks from form fills, chat, CRM events, and custom triggers — connecting your reps with leads in 28 seconds flat.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-7 py-3.5 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Automating Free
+        </a>
+        <a
+          href="/demo"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-7 py-3.5 text-sm font-bold text-white transition hover:border-lime-500/40"
+        >
+          Book a Demo
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-dark-500">Free 14-day trial · No credit card required · Setup in 5 minutes</p>
+    </div>
+  </section>
+
+  <!-- Answer-first block -->
+  <section class="border-b border-dark-800 bg-dark-950 py-12 sm:py-14">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-lime-500/20 bg-dark-900/80 p-8">
+        <h2 class="text-xl font-bold text-lime-400 mb-4">What Is Callback Automation?</h2>
+        <p class="text-dark-300 leading-relaxed text-base">
+          Callback automation is software that triggers, routes, and manages phone callbacks without any manual work. Instead of a sales rep manually dialling leads from a spreadsheet, the system detects a trigger event — a form fill, a chat request, a CRM stage change, or a cart abandonment — and fires a callback to the right rep within seconds. The rep receives lead context before the call connects, and every outcome is logged back to your CRM automatically. The result: faster speed-to-lead, higher contact rates, and zero leads slipping through the cracks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b border-dark-800 bg-dark-900/60 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
+        {stats.map((s) => (
+          <div class="p-4">
+            <div class="text-4xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-2 text-sm font-bold text-white">{s.label}</div>
+            <div class="mt-1 text-xs text-dark-500">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Automate Every Stage of Your<br />
+          <span class="text-lime-400">Callback Workflow</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          From the moment a lead signals intent to the post-call CRM update, LimeCall handles it all — automatically.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-4">{f.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{f.name}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{f.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          How Callback Automation Works —<br />
+          <span class="text-lime-400">4 Simple Steps</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          From trigger event to connected call, the entire flow takes under 30 seconds — fully automated.
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((step) => (
+          <div class="relative flex flex-col rounded-2xl border border-dark-800 bg-dark-900/60 p-7">
+            <div class="text-4xl font-extrabold text-lime-500/20 mb-4 leading-none">{step.number}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{step.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Real-World <span class="text-lime-400">Use Cases</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          See how teams use callback automation to convert more leads, recover lost revenue, and accelerate onboarding.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {useCases.map((uc) => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <div class="text-3xl mb-3">{uc.icon}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{uc.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{uc.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Connects to Your <span class="text-lime-400">Existing Stack</span>
+        </h2>
+        <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+          LimeCall integrates with the CRMs, marketing platforms, and communication tools your team already uses.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {integrations.map((int) => (
+          <a href={int.href} class="flex items-center justify-center rounded-xl border border-dark-800 bg-dark-900/60 px-5 py-4 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:text-lime-400">
+            {int.name}
+          </a>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href="/integrations" class="text-sm font-semibold text-lime-400 hover:underline">
+          View All 50+ Integrations &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-extrabold text-white">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-3">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl border border-dark-800 bg-dark-900/50 transition-all hover:border-dark-700">
+            <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-medium text-white select-none">
+              {faq.question}
+              <svg class="h-4 w-4 flex-shrink-0 ml-4 text-dark-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 text-sm leading-relaxed text-dark-400">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Stop Losing Leads to Slow Follow-Up.<br />
+        <span class="text-lime-400">Automate Your Callbacks Today.</span>
+      </h2>
+      <p class="mt-4 text-dark-400 max-w-xl mx-auto">
+        Every minute you wait costs you conversions. LimeCall connects your reps with leads in 28 seconds — automatically.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/signup"
+          class="inline-flex items-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-base font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400"
+        >
+          Start Automating Free
+        </a>
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 rounded-xl border border-dark-700 bg-dark-800 px-8 py-4 text-base font-bold text-white transition hover:border-lime-500/40"
+        >
+          View Pricing
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-dark-500">Free 14-day trial · No credit card · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="border-t border-dark-800 bg-dark-900/40 py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <CrossLinks
+        heading="Related Callback & Automation Tools"
+        links={[
+          { href: '/programmable-callbacks/', title: 'Programmable Callbacks', desc: 'Trigger callbacks from any app via REST API and Zapier.' },
+          { href: '/customer-callback-software/', title: 'Customer Callback Software', desc: 'Full-featured callback platform for sales and support teams.' },
+          { href: '/ai-phone-agent/', title: 'AI Phone Agent', desc: 'AI-powered voice agent that qualifies and routes leads 24/7.' },
+          { href: '/pricing/', title: 'Pricing', desc: 'Callback automation included on all paid plans.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>

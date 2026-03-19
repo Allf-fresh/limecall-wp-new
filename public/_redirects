@@ -69,9 +69,81 @@
 /usecase/  /use-cases/  301
 /usecase   /use-cases/  301
 
-# Callback automation alias -> canonical product page
-/callbackautomation/  /customer-callback-software/  301
-/callbackautomation   /customer-callback-software/  301
-
 # Old WP media file that somehow got indexed and ranks (pos 3.8, 370 impressions)
 /wp-content/uploads/2016/11/5590.html  /click-to-call-software/  301
+
+# ────────────────────────────────────────────────────────────────
+# Features → closest Astro equivalents
+# ────────────────────────────────────────────────────────────────
+/post/features/two-way-sms/ /business-texting/ 301
+/post/features/call-routing/ /lead-routing-software/ 301
+/post/features/inbuilt-crm/ /integrations/ 301
+/post/features/outbound-calling/ /ai-phone-agent/ 301
+/post/features/team-management/ /how-it-works/ 301
+/post/features/lead-notification/ /lead-routing-software/ 301
+/post/features/incoming-numbers/ /virtual-business-numbers/ 301
+/post/features/call-analytics/ /inbound-call-tracking/ 301
+/post/features/call-transfer/ /lead-routing-software/ 301
+/post/features/lead-intelligence/ /lead-scoring/ 301
+/post/features/ivr/ /what-is-ivr/ 301
+/post/features/lead-qualification/ /lead-qualification/ 301
+/post/features/lead-generation/ /lead-capture-software/ 301
+/post/features/custom-hold-music/ /how-it-works/ 301
+/post/features/lead-identification/ /lead-scoring/ 301
+/post/features/business-hours/ /how-it-works/ 301
+/post/features/concurrent-ringing/ /lead-routing-software/ 301
+/post/features/conference-call-analytics/ /inbound-call-tracking/ 301
+/post/features/call-recording/ /ai-phone-agent/ 301
+/post/features/call-staking/ /lead-routing-software/ 301
+/post/features/call-masking/ /virtual-business-numbers/ 301
+/post/features/sms-notification/ /business-texting/ 301
+/post/features/conversation-scheduling/ /conversation-scheduling/ 301
+/post/features/programmable-callbacks/ /programmable-callbacks/ 301
+
+# ────────────────────────────────────────────────────────────────
+# Integrations NEW → Astro pages
+# ────────────────────────────────────────────────────────────────
+/post/integrations_new/slack/ /slack-integration/ 301
+/post/integrations_new/calendy/ /how-it-works/ 301
+/post/integrations_new/google-sheets/ /zapier-integration/ 301
+/post/integrations_new/hunspot/ /hubspot-integration/ 301
+/post/integrations_new/live-chat/ /callback-vs-live-chat/ 301
+/post/integrations_new/14629/ /integrations/ 301
+/post/integrations_new/wordpress/ /limecall-for-wordpress/ 301
+/post/integrations_new/wix/ /integrations/ 301
+/post/integrations_new/google-tag-manager/ /google-analytics-integration/ 301
+
+# ────────────────────────────────────────────────────────────────
+# Integrations OLD → Astro pages
+# ────────────────────────────────────────────────────────────────
+/post/integrations_old/limecall-with-webhooks/ /webhooks/ 301
+/post/integrations_old/slack-integration/ /slack-integration/ 301
+/post/integrations_old/hubspot-integration/ /hubspot-integration/ 301
+/post/integrations_old/zapier-integration/ /zapier-integration/ 301
+/post/integrations_old/google-analytics/ /google-analytics-integration/ 301
+/post/integrations_old/facebook-lead-ads/ /integrations/ 301
+/post/integrations_old/callbacks/ /callbackautomation/ 301
+/post/integrations_old/google-calendar/ /zapier-integration/ 301
+
+# ────────────────────────────────────────────────────────────────
+# How-to Guides (legacy BugHerd content → FAQ)
+# ────────────────────────────────────────────────────────────────
+/post/how-to-guides/how-to-add-a-custom-logo-to-your-bugherd-project/ /faq/ 301
+/post/how-to-guides/what-your-client-can-see-when-invited-to-limecall/ /faq/ 301
+/post/how-to-guides/account-access-and-visibility-of-limecall-projects/ /faq/ 301
+/post/how-to-guides/how-to-use-limecall-on-a-mobile/ /faq/ 301
+/post/how-to-guides/how-to-export-bugs-out-of-limecall/ /faq/ 301
+/post/how-to-guides/how-to-give-website-feedback-as-a-guest-user-on-limecall/ /faq/ 301
+/post/how-to-guides/how-to-share-limecall-projects-with-guests-and-team-members/ /faq/ 301
+
+# ────────────────────────────────────────────────────────────────
+# References → closest Astro equivalents
+# ────────────────────────────────────────────────────────────────
+/post/references/how-to-grow-your-sms-subscriber-list-2024/ /business-texting/ 301
+/post/references/the-ultimate-guide-to-click-to-call-2024/ /click-to-call-software/ 301
+/post/references/guide-to-business-texting-2024/ /business-texting/ 301
+/post/references/your-ultimate-guide-to-call-tracking-2024/ /what-is-call-tracking/ 301
+/post/references/ultimate-guide-to-call-forwarding/ /virtual-pbx/ 301
+/post/references/lead-distribution-a-complete-guide/ /lead-distribution-guide/ 301
+/post/references/guide-to-call-tracking-for-ads/ /google-ads-integration/ 301
+/post/references/lead-generation-guide-for-business-growth/ /b2b-lead-generation/ 301

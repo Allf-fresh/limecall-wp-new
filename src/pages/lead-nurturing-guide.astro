@@ -40,6 +40,17 @@ const faqs = [
   },
 ];
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  url: seo.canonical,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+};
+
 const articleJsonLd = articleSchema({
   title: seo.title,
   description: seo.description,
@@ -148,6 +159,7 @@ const tools = [
 <Base {...seo}>
   <JsonLd schema={articleJsonLd} />
   <JsonLd schema={faqSchema(faqs)} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero + Answer-First -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-14 sm:pt-20 sm:pb-18">
@@ -169,7 +181,7 @@ const tools = [
           <div class="h-1.5 w-1.5 rounded-full bg-lime-400"></div>
           <span class="text-xs font-bold uppercase tracking-widest text-lime-400">Quick Answer</span>
         </div>
-        <p class="text-base text-dark-200 leading-relaxed">
+        <p class="speakable-answer text-base text-dark-200 leading-relaxed">
           Lead nurturing is the process of building relationships with prospects through targeted, multi-channel communications until they are ready to buy. Companies that excel at lead nurturing generate 47% more sales-ready leads at a 33% lower cost. The seven best practices are: segment first, personalise every touch, add voice to your mix, time by engagement, score and re-route, use multiple channels, and iterate weekly.
         </p>
       </div>
@@ -202,7 +214,7 @@ const tools = [
         Most leads are not ready to buy when they first enter your funnel. Without nurturing, they go cold — and your acquisition spend is wasted. The data makes the case clearly.
       </p>
 
-      <div class="grid gap-6 sm:grid-cols-3 mb-10">
+      <div class="speakable-summary grid gap-6 sm:grid-cols-3 mb-10">
         {[
           { value: '47%', label: 'More Sales-Ready Leads', sub: 'Nurtured leads make 47% larger purchases and convert at significantly higher rates than non-nurtured leads (Forrester Research).' },
           { value: '33%', label: 'Lower Cost Per Lead', sub: 'Companies excelling at lead nurturing reduce cost-per-lead by 33% while simultaneously increasing pipeline volume.' },

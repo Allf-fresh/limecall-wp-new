@@ -127,6 +127,17 @@ const faqSchema = {
   ],
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  url: seo.canonical,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+};
+
 const softwareAppSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -152,6 +163,7 @@ const softwareAppSchema = {
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={softwareAppSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -169,8 +181,8 @@ const softwareAppSchema = {
         LimeCall vs 8x8:<br />
         <span class="text-lime-400">SMB Lead Tool vs Enterprise UCaaS</span>
       </h1>
-      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
-        8x8 is built for enterprise contact centres with complex requirements and multi-week deployments. LimeCall is built for SMB sales teams who need to start converting leads in 5 minutes. Here is the full comparison.
+      <p class="speakable-answer mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        LimeCall vs 8x8: LimeCall costs £57/mo flat for unlimited users while 8x8 charges £28–£120/user/mo on annual contracts. LimeCall connects leads in 28 seconds with self-serve setup in 5 minutes, while 8x8 focuses on enterprise contact centres with workforce management. Best for: SMBs needing fast lead conversion without enterprise complexity or pricing.
       </p>
 
       <!-- Side-by-side stat blocks -->
@@ -219,7 +231,7 @@ const softwareAppSchema = {
   <section class="py-10 bg-dark-900/40 border-b border-dark-800">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-lg font-bold text-white mb-6 text-center">Quick Verdict</h2>
-      <div class="grid gap-4 sm:grid-cols-2">
+      <div class="speakable-summary grid gap-4 sm:grid-cols-2">
         <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
           <div class="flex items-center gap-3 mb-4">
             <div class="flex h-9 w-9 items-center justify-center rounded-full bg-lime-500/15">

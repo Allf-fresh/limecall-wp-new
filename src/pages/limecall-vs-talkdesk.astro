@@ -145,6 +145,17 @@ const faqSchema = {
   ],
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  url: seo.canonical,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+};
+
 const softwareSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -169,6 +180,7 @@ const softwareSchema = {
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={softwareSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -186,8 +198,8 @@ const softwareSchema = {
         LimeCall vs Talkdesk:<br />
         <span class="text-lime-400">SMB Value vs Enterprise Contact Centre Cost</span>
       </h1>
-      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
-        Talkdesk CX Cloud starts at $85/user/month — a 10-agent team costs $850/month on the entry tier. LimeCall is £57/month flat for your entire team with a 28-second callback widget included. Here is the full comparison.
+      <p class="speakable-answer mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        LimeCall vs Talkdesk: LimeCall costs £57/mo flat for unlimited users while Talkdesk charges $85–$145/user/mo on annual contracts. LimeCall connects leads in 28 seconds with a purpose-built callback widget, while Talkdesk focuses on enterprise contact centre operations with workforce management. Best for: SMB sales teams wanting instant lead conversion without enterprise pricing.
       </p>
 
       <!-- Side-by-side stat blocks -->
@@ -228,7 +240,7 @@ const softwareSchema = {
   <!-- Quick Verdict -->
   <section class="py-10 bg-dark-900/40 border-b border-dark-800">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-5 sm:grid-cols-2">
+      <div class="speakable-summary grid gap-5 sm:grid-cols-2">
         <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
           <div class="text-xs font-bold uppercase tracking-widest text-lime-400 mb-3">Choose LimeCall if…</div>
           <ul class="space-y-2">

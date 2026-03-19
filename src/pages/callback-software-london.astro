@@ -98,6 +98,17 @@ const faqSchema = {
   ],
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  url: seo.canonical,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+};
+
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -127,6 +138,7 @@ const localBusinessSchema = {
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={localBusinessSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
@@ -139,8 +151,8 @@ const localBusinessSchema = {
         Convert London Website Leads<br class="hidden sm:block" />
         <span class="text-lime-400">5× Faster</span>
       </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-dark-300">
-        London's most competitive market demands instant response. LimeCall connects website visitors with your team in 28 seconds — from Canary Wharf to Shoreditch — so you win the lead before any competitor picks up the phone.
+      <p class="speakable-answer mx-auto mt-6 max-w-2xl text-lg text-dark-300">
+        LimeCall is London's fastest callback software, connecting website visitors with your team in 28 seconds. Trusted by 2,000+ London businesses across financial services, tech, property, legal, and healthcare, LimeCall converts 5x more leads than contact forms — from £57/mo with no per-call fees.
       </p>
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/get-started/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-500 px-8 py-4 text-sm font-bold text-dark-950 shadow-[0_2px_20px_-4px_rgba(163,230,53,0.5)] transition hover:bg-lime-400">
@@ -157,7 +169,7 @@ const localBusinessSchema = {
   <!-- Stats bar -->
   <section class="border-y border-dark-800 bg-dark-900/60">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-      <dl class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+      <dl class="speakable-summary grid grid-cols-2 gap-6 sm:grid-cols-4">
         {stats.map(s => (
           <div class="text-center">
             <dt class="text-3xl font-extrabold text-lime-400">{s.value}</dt>

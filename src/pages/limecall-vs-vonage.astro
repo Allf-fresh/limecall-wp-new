@@ -127,6 +127,17 @@ const faqSchema = {
   ],
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: seo.title,
+  url: seo.canonical,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.speakable-answer', '.speakable-summary'],
+  },
+};
+
 const softwareAppSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -152,6 +163,7 @@ const softwareAppSchema = {
 <Base {...seo}>
   <JsonLd schema={faqSchema} />
   <JsonLd schema={softwareAppSchema} />
+  <JsonLd schema={speakableSchema} />
 
   <!-- Hero -->
   <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -169,8 +181,8 @@ const softwareAppSchema = {
         LimeCall vs Vonage Business:<br />
         <span class="text-lime-400">Flat Callbacks vs Per-Minute Cloud PBX</span>
       </h1>
-      <p class="mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
-        Vonage Business starts at £14/user/mo but adds per-minute charges on every call. LimeCall is £57/mo flat with unlimited callback minutes and no hidden costs. Here is the full comparison.
+      <p class="speakable-answer mx-auto mt-5 max-w-2xl text-lg text-dark-300 leading-relaxed">
+        LimeCall vs Vonage: LimeCall costs £57/mo flat for unlimited users while Vonage charges £14–£34/user/mo plus per-minute call fees. LimeCall connects leads in 28 seconds with AI qualification, while Vonage focuses on cloud PBX replacement with desk phone support. Best for: SMBs wanting predictable callback pricing without hidden per-minute charges.
       </p>
 
       <!-- Side-by-side stat blocks -->
@@ -219,7 +231,7 @@ const softwareAppSchema = {
   <section class="py-10 bg-dark-900/40 border-b border-dark-800">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-lg font-bold text-white mb-6 text-center">Quick Verdict</h2>
-      <div class="grid gap-4 sm:grid-cols-2">
+      <div class="speakable-summary grid gap-4 sm:grid-cols-2">
         <div class="rounded-2xl border-2 border-lime-500/40 bg-lime-500/5 p-6">
           <div class="flex items-center gap-3 mb-4">
             <div class="flex h-9 w-9 items-center justify-center rounded-full bg-lime-500/15">

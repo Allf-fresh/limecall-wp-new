@@ -1,0 +1,478 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { site } from '../site.config';
+
+const seo = {
+  title: `Phone Number Validator | Check Format & Country Code | LimeCall`,
+  description: `Free phone number validation tool. Check if a number is valid, identify the country, format type (mobile/landline), and get E.164 formatting instantly.`,
+  canonical: `${site.url}/phone-number-validator/`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is E.164 format?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'E.164 is the international telephone number formatting standard defined by the ITU. It specifies that numbers must start with a + sign followed by the country code and subscriber number, with a maximum of 15 digits total. For example, a US number becomes +14155552671. This format is used by telecoms, APIs, and CRM platforms worldwide for consistent number storage and routing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I validate international phone numbers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'To validate an international phone number, first ensure it includes a country code (the 1-3 digit prefix after the + sign). Then check the total digit count matches the expected length for that country — for example, UK numbers should have 12 digits including the country code 44. Finally, verify the subscriber number starts with a valid prefix for mobile or landline in that country.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does mobile vs landline detection work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Mobile vs landline detection is based on the subscriber number prefix patterns specific to each country. For example, UK mobile numbers start with 07 (or +447), while UK landlines start with 01 or 02. US numbers are harder to classify because mobile and landline numbers share the same format. Detection accuracy varies by country — some countries have clear prefix-based separation, others do not.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why do some numbers fail validation?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Numbers can fail validation for several reasons: missing or incorrect country code, too few or too many digits for the given country, invalid subscriber number prefix, or formatting characters in the wrong position. Numbers from very small territories or newly allocated number ranges may also fail if they are not in the validation database. Always include the full country code with a + prefix for best results.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What country codes are supported?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'This tool supports over 30 of the most commonly used country codes, including +1 (US/Canada), +44 (UK), +61 (Australia), +91 (India), +33 (France), +49 (Germany), +81 (Japan), +86 (China), +55 (Brazil), +971 (UAE), +65 (Singapore), +852 (Hong Kong), and many more. The tool covers the vast majority of international business phone numbers.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is this phone number validation tool free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, this phone number validation tool is completely free to use with no account required. You can validate as many numbers as you need directly in your browser. All processing happens client-side — your phone numbers are never sent to a server. For bulk validation and real-time API access, check out LimeCall\'s platform.',
+      },
+    },
+  ],
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Phone Number Validator',
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: seo.description,
+  url: seo.canonical,
+};
+
+const countryFormats = [
+  { country: 'United States', code: '+1', format: '+1 (XXX) XXX-XXXX', length: '11', mobile: 'No fixed prefix' },
+  { country: 'United Kingdom', code: '+44', format: '+44 7XXX XXXXXX', length: '12', mobile: '7' },
+  { country: 'Australia', code: '+61', format: '+61 4XX XXX XXX', length: '11', mobile: '4' },
+  { country: 'India', code: '+91', format: '+91 XXXXX XXXXX', length: '12', mobile: '6-9' },
+  { country: 'Germany', code: '+49', format: '+49 1XX XXXXXXXX', length: '12-13', mobile: '15, 16, 17' },
+  { country: 'France', code: '+33', format: '+33 6 XX XX XX XX', length: '11', mobile: '6, 7' },
+  { country: 'Japan', code: '+81', format: '+81 90 XXXX XXXX', length: '12', mobile: '70, 80, 90' },
+  { country: 'Brazil', code: '+55', format: '+55 XX 9XXXX XXXX', length: '13', mobile: '9' },
+  { country: 'Canada', code: '+1', format: '+1 (XXX) XXX-XXXX', length: '11', mobile: 'No fixed prefix' },
+  { country: 'Singapore', code: '+65', format: '+65 9XXX XXXX', length: '10', mobile: '8, 9' },
+  { country: 'UAE', code: '+971', format: '+971 5X XXX XXXX', length: '12', mobile: '50, 52, 55, 56, 58' },
+  { country: 'Mexico', code: '+52', format: '+52 1 XXX XXX XXXX', length: '12', mobile: '1' },
+  { country: 'South Korea', code: '+82', format: '+82 10 XXXX XXXX', length: '12', mobile: '10' },
+  { country: 'Italy', code: '+39', format: '+39 3XX XXX XXXX', length: '12', mobile: '3' },
+  { country: 'Netherlands', code: '+31', format: '+31 6 XXXXXXXX', length: '11', mobile: '6' },
+];
+
+const stats = [
+  { value: 'Free', label: 'No account needed' },
+  { value: '30+', label: 'Country codes supported' },
+  { value: 'Instant', label: 'Client-side validation' },
+  { value: 'E.164', label: 'Format output included' },
+];
+---
+
+<Base {...seo}>
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={appSchema} />
+
+  <!-- Hero -->
+  <section class="border-b border-dark-800 bg-gradient-to-b from-dark-900 to-dark-950 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ name: 'Phone Number Validator', url: `${site.url}/phone-number-validator/` }]} />
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-lime-500/30 bg-lime-500/10 px-4 py-1.5 text-sm font-medium text-lime-400">
+        Free Tool
+      </div>
+      <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Phone Number <span class="text-lime-400">Validator</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-dark-300 leading-relaxed">
+        Check if a phone number is valid, identify its country and type, and get the correct E.164 format — instantly and for free.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="border-b border-dark-800 bg-dark-900/50 py-10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {stats.map(s => (
+          <div>
+            <div class="text-2xl font-extrabold text-lime-400">{s.value}</div>
+            <div class="mt-1 text-sm text-dark-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tool UI -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-dark-700 bg-dark-900/80 p-8 shadow-2xl">
+        <h2 class="mb-6 text-xl font-bold text-white">Validate a phone number</h2>
+        <div class="space-y-4">
+          <div>
+            <label for="phoneInput" class="mb-1.5 block text-sm font-medium text-dark-300">Enter a phone number (with country code)</label>
+            <input
+              type="text"
+              id="phoneInput"
+              placeholder="+1 (415) 555-2671"
+              class="w-full rounded-lg border border-dark-700 bg-dark-800 px-4 py-3 text-sm text-white placeholder-dark-500 outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500"
+            />
+          </div>
+          <button
+            id="validateBtn"
+            type="button"
+            class="w-full rounded-xl bg-lime-500 py-3.5 text-center text-sm font-bold text-dark-950 transition hover:bg-lime-400 cursor-pointer"
+          >
+            Validate Number
+          </button>
+
+          <!-- Results panel -->
+          <div id="resultsPanel" class="hidden rounded-xl border border-dark-700 bg-dark-800/60 p-6 space-y-3">
+            <div class="flex items-center gap-3">
+              <span id="validIcon" class="text-2xl"></span>
+              <span id="validText" class="text-lg font-bold"></span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div class="rounded-lg border border-dark-700 bg-dark-900/80 p-3">
+                <span class="block text-xs text-dark-500 mb-1">Country</span>
+                <span id="resCountry" class="font-semibold text-white">—</span>
+              </div>
+              <div class="rounded-lg border border-dark-700 bg-dark-900/80 p-3">
+                <span class="block text-xs text-dark-500 mb-1">Type</span>
+                <span id="resType" class="font-semibold text-white">—</span>
+              </div>
+              <div class="rounded-lg border border-dark-700 bg-dark-900/80 p-3">
+                <span class="block text-xs text-dark-500 mb-1">E.164 Format</span>
+                <span id="resE164" class="font-mono text-lime-400">—</span>
+              </div>
+              <div class="rounded-lg border border-dark-700 bg-dark-900/80 p-3">
+                <span class="block text-xs text-dark-500 mb-1">National Format</span>
+                <span id="resNational" class="font-mono text-white">—</span>
+              </div>
+              <div class="rounded-lg border border-dark-700 bg-dark-900/80 p-3 sm:col-span-2">
+                <span class="block text-xs text-dark-500 mb-1">Number Length</span>
+                <span id="resLength" class="font-semibold text-white">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-center text-xs text-dark-600">All validation runs in your browser. No data is sent to any server.</p>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    const COUNTRIES = [
+      { code: '1', country: 'United States / Canada', flag: '\u{1F1FA}\u{1F1F8}', mobilePrefix: [], minLen: 11, maxLen: 11 },
+      { code: '44', country: 'United Kingdom', flag: '\u{1F1EC}\u{1F1E7}', mobilePrefix: ['7'], minLen: 12, maxLen: 12, landlinePrefix: ['1','2'] },
+      { code: '61', country: 'Australia', flag: '\u{1F1E6}\u{1F1FA}', mobilePrefix: ['4'], minLen: 11, maxLen: 11, landlinePrefix: ['2','3','7','8'] },
+      { code: '91', country: 'India', flag: '\u{1F1EE}\u{1F1F3}', mobilePrefix: ['6','7','8','9'], minLen: 12, maxLen: 12 },
+      { code: '33', country: 'France', flag: '\u{1F1EB}\u{1F1F7}', mobilePrefix: ['6','7'], minLen: 11, maxLen: 11, landlinePrefix: ['1','2','3','4','5'] },
+      { code: '49', country: 'Germany', flag: '\u{1F1E9}\u{1F1EA}', mobilePrefix: ['15','16','17'], minLen: 12, maxLen: 13 },
+      { code: '34', country: 'Spain', flag: '\u{1F1EA}\u{1F1F8}', mobilePrefix: ['6','7'], minLen: 11, maxLen: 11, landlinePrefix: ['9'] },
+      { code: '39', country: 'Italy', flag: '\u{1F1EE}\u{1F1F9}', mobilePrefix: ['3'], minLen: 12, maxLen: 12, landlinePrefix: ['0'] },
+      { code: '31', country: 'Netherlands', flag: '\u{1F1F3}\u{1F1F1}', mobilePrefix: ['6'], minLen: 11, maxLen: 11 },
+      { code: '46', country: 'Sweden', flag: '\u{1F1F8}\u{1F1EA}', mobilePrefix: ['7'], minLen: 11, maxLen: 12 },
+      { code: '41', country: 'Switzerland', flag: '\u{1F1E8}\u{1F1ED}', mobilePrefix: ['7'], minLen: 11, maxLen: 11 },
+      { code: '48', country: 'Poland', flag: '\u{1F1F5}\u{1F1F1}', mobilePrefix: ['5','6','7','8'], minLen: 11, maxLen: 11 },
+      { code: '32', country: 'Belgium', flag: '\u{1F1E7}\u{1F1EA}', mobilePrefix: ['4'], minLen: 11, maxLen: 11 },
+      { code: '351', country: 'Portugal', flag: '\u{1F1F5}\u{1F1F9}', mobilePrefix: ['9'], minLen: 12, maxLen: 12 },
+      { code: '52', country: 'Mexico', flag: '\u{1F1F2}\u{1F1FD}', mobilePrefix: [], minLen: 12, maxLen: 12 },
+      { code: '55', country: 'Brazil', flag: '\u{1F1E7}\u{1F1F7}', mobilePrefix: ['9'], minLen: 12, maxLen: 13 },
+      { code: '65', country: 'Singapore', flag: '\u{1F1F8}\u{1F1EC}', mobilePrefix: ['8','9'], minLen: 10, maxLen: 10 },
+      { code: '852', country: 'Hong Kong', flag: '\u{1F1ED}\u{1F1F0}', mobilePrefix: ['5','6','9'], minLen: 11, maxLen: 11 },
+      { code: '64', country: 'New Zealand', flag: '\u{1F1F3}\u{1F1FF}', mobilePrefix: ['2'], minLen: 11, maxLen: 12 },
+      { code: '94', country: 'Sri Lanka', flag: '\u{1F1F1}\u{1F1F0}', mobilePrefix: ['7'], minLen: 11, maxLen: 11 },
+      { code: '971', country: 'United Arab Emirates', flag: '\u{1F1E6}\u{1F1EA}', mobilePrefix: ['50','52','55','56','58'], minLen: 12, maxLen: 12 },
+      { code: '966', country: 'Saudi Arabia', flag: '\u{1F1F8}\u{1F1E6}', mobilePrefix: ['5'], minLen: 12, maxLen: 12 },
+      { code: '81', country: 'Japan', flag: '\u{1F1EF}\u{1F1F5}', mobilePrefix: ['70','80','90'], minLen: 12, maxLen: 12, landlinePrefix: ['3','6','45','42'] },
+      { code: '82', country: 'South Korea', flag: '\u{1F1F0}\u{1F1F7}', mobilePrefix: ['10'], minLen: 12, maxLen: 12 },
+      { code: '86', country: 'China', flag: '\u{1F1E8}\u{1F1F3}', mobilePrefix: ['13','14','15','17','18','19'], minLen: 13, maxLen: 13 },
+      { code: '7', country: 'Russia', flag: '\u{1F1F7}\u{1F1FA}', mobilePrefix: ['9'], minLen: 11, maxLen: 11 },
+      { code: '27', country: 'South Africa', flag: '\u{1F1FF}\u{1F1E6}', mobilePrefix: ['6','7','8'], minLen: 11, maxLen: 11 },
+      { code: '234', country: 'Nigeria', flag: '\u{1F1F3}\u{1F1EC}', mobilePrefix: ['7','8','9'], minLen: 13, maxLen: 13 },
+      { code: '62', country: 'Indonesia', flag: '\u{1F1EE}\u{1F1E9}', mobilePrefix: ['8'], minLen: 12, maxLen: 13 },
+      { code: '60', country: 'Malaysia', flag: '\u{1F1F2}\u{1F1FE}', mobilePrefix: ['1'], minLen: 11, maxLen: 12 },
+      { code: '66', country: 'Thailand', flag: '\u{1F1F9}\u{1F1ED}', mobilePrefix: ['6','8','9'], minLen: 11, maxLen: 11 },
+      { code: '63', country: 'Philippines', flag: '\u{1F1F5}\u{1F1ED}', mobilePrefix: ['9'], minLen: 12, maxLen: 12 },
+      { code: '353', country: 'Ireland', flag: '\u{1F1EE}\u{1F1EA}', mobilePrefix: ['8'], minLen: 12, maxLen: 12 },
+      { code: '43', country: 'Austria', flag: '\u{1F1E6}\u{1F1F9}', mobilePrefix: ['6'], minLen: 12, maxLen: 13 },
+      { code: '47', country: 'Norway', flag: '\u{1F1F3}\u{1F1F4}', mobilePrefix: ['4','9'], minLen: 10, maxLen: 10 },
+      { code: '45', country: 'Denmark', flag: '\u{1F1E9}\u{1F1F0}', mobilePrefix: ['2','3','4','5','6','7','9'], minLen: 10, maxLen: 10 },
+    ];
+
+    // Sort by code length descending so longer codes match first (e.g. +852 before +8)
+    const SORTED = [...COUNTRIES].sort((a, b) => b.code.length - a.code.length);
+
+    function matchCountry(digits) {
+      for (const c of SORTED) {
+        if (digits.startsWith(c.code)) return c;
+      }
+      return null;
+    }
+
+    function detectType(entry, subscriber) {
+      if (!entry) return 'Unknown';
+      if (entry.mobilePrefix.length === 0 && !entry.landlinePrefix) return 'Unknown';
+      for (const p of entry.mobilePrefix) {
+        if (subscriber.startsWith(p)) return 'Mobile';
+      }
+      if (entry.landlinePrefix) {
+        for (const p of entry.landlinePrefix) {
+          if (subscriber.startsWith(p)) return 'Landline';
+        }
+      }
+      if (entry.mobilePrefix.length > 0) return 'Landline / Fixed';
+      return 'Unknown';
+    }
+
+    function formatNational(entry, subscriber) {
+      if (!entry || !subscriber) return subscriber || '—';
+      const d = subscriber;
+      if (entry.code === '1' && d.length === 10) {
+        return '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+      }
+      if (entry.code === '44' && d.length === 10) {
+        return '0' + d.slice(0,4) + ' ' + d.slice(4);
+      }
+      if (entry.code === '61' && d.length === 9) {
+        return '0' + d.slice(0,3) + ' ' + d.slice(3,6) + ' ' + d.slice(6);
+      }
+      if (entry.code === '91' && d.length === 10) {
+        return d.slice(0,5) + ' ' + d.slice(5);
+      }
+      if (entry.code === '33' && d.length === 9) {
+        return '0' + d.slice(0,1) + ' ' + d.slice(1,3) + ' ' + d.slice(3,5) + ' ' + d.slice(5,7) + ' ' + d.slice(7);
+      }
+      // Generic: group in chunks of 3-4
+      if (d.length <= 8) return d.replace(/(\d{4})(\d+)/, '$1 $2');
+      return d.replace(/(\d{3})(\d{3,4})(\d+)/, '$1 $2 $3');
+    }
+
+    function validate() {
+      const raw = document.getElementById('phoneInput').value.trim();
+      const panel = document.getElementById('resultsPanel');
+      panel.classList.remove('hidden');
+
+      // Strip everything except digits and leading +
+      let cleaned = raw.replace(/^00/, '+');
+      let digits = cleaned.replace(/[^\d]/g, '');
+
+      if (raw.startsWith('+') || raw.startsWith('00')) {
+        // already has intl prefix
+      } else if (digits.length > 10) {
+        // probably has country code already
+      }
+
+      const entry = matchCountry(digits);
+      const subscriber = entry ? digits.slice(entry.code.length) : digits;
+      const e164 = entry ? ('+' + digits) : ('+' + digits);
+      const totalDigits = digits.length;
+
+      // Valid check
+      let isValid = false;
+      let lengthNote = '';
+      if (entry) {
+        isValid = totalDigits >= entry.minLen && totalDigits <= entry.maxLen;
+        if (entry.minLen === entry.maxLen) {
+          lengthNote = totalDigits + ' digits (expected: ' + entry.minLen + ' for ' + entry.country + ')';
+        } else {
+          lengthNote = totalDigits + ' digits (expected: ' + entry.minLen + '-' + entry.maxLen + ' for ' + entry.country + ')';
+        }
+      } else {
+        isValid = totalDigits >= 7 && totalDigits <= 15;
+        lengthNote = totalDigits + ' digits (country not identified)';
+      }
+
+      if (totalDigits < 4) {
+        isValid = false;
+        lengthNote = totalDigits + ' digits (too short)';
+      }
+
+      // Update UI
+      const icon = document.getElementById('validIcon');
+      const text = document.getElementById('validText');
+      if (isValid) {
+        icon.textContent = '\u2713';
+        icon.className = 'text-2xl text-green-400';
+        text.textContent = 'Valid Number';
+        text.className = 'text-lg font-bold text-green-400';
+      } else {
+        icon.textContent = '\u2717';
+        icon.className = 'text-2xl text-red-400';
+        text.textContent = 'Invalid Number';
+        text.className = 'text-lg font-bold text-red-400';
+      }
+
+      document.getElementById('resCountry').textContent = entry ? (entry.flag + ' ' + entry.country) : 'Unknown';
+      document.getElementById('resType').textContent = detectType(entry, subscriber);
+      document.getElementById('resE164').textContent = e164;
+      document.getElementById('resNational').textContent = formatNational(entry, subscriber);
+      document.getElementById('resLength').textContent = lengthNote;
+    }
+
+    document.getElementById('validateBtn').addEventListener('click', validate);
+    document.getElementById('phoneInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') validate();
+    });
+  </script>
+
+  <!-- How Phone Number Validation Works -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-white">How Phone Number Validation Works</h2>
+      <div class="space-y-6 text-sm text-dark-400 leading-relaxed">
+        <p>
+          Phone number validation checks whether a given number conforms to the internationally recognized E.164 standard maintained by the International Telecommunication Union (ITU). E.164 defines that a valid international number must start with a country code, followed by a subscriber number, for a combined maximum of 15 digits.
+        </p>
+        <div class="grid gap-6 sm:grid-cols-3 mt-8">
+          {[
+            { n: '1', title: 'Parse & Normalize', desc: 'Strip spaces, dashes, and parentheses. Detect whether the number starts with a + or 00 international prefix.' },
+            { n: '2', title: 'Match Country Code', desc: 'Compare the leading digits against a database of ITU-assigned country calling codes to identify the country of origin.' },
+            { n: '3', title: 'Validate Length & Prefix', desc: 'Check that the total digit count matches the expected range for that country and verify the subscriber number prefix.' },
+          ].map(s => (
+            <div class="text-center">
+              <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lime-500/20 text-lg font-extrabold text-lime-400">{s.n}</div>
+              <h3 class="mb-2 font-semibold text-white">{s.title}</h3>
+              <p class="text-sm text-dark-400 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+        <p>
+          Country codes are assigned by the ITU and range from 1 digit (e.g., +1 for North America) to 3 digits (e.g., +852 for Hong Kong). Each country then defines its own numbering plan specifying valid subscriber number lengths and prefix allocations for mobile, landline, toll-free, and premium-rate numbers.
+        </p>
+        <p>
+          For businesses, validation matters because invalid numbers waste SMS credits, cause callback failures, and degrade CRM data quality. Validating numbers at the point of entry prevents downstream problems across sales, support, and marketing workflows.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phone Number Formats by Country -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Phone Number Formats by Country</h2>
+      <div class="overflow-x-auto rounded-xl border border-dark-700">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-dark-800/80">
+            <tr>
+              <th class="px-4 py-3 font-semibold text-lime-400">Country</th>
+              <th class="px-4 py-3 font-semibold text-lime-400">Code</th>
+              <th class="px-4 py-3 font-semibold text-lime-400">Format</th>
+              <th class="px-4 py-3 font-semibold text-lime-400">Total Digits</th>
+              <th class="px-4 py-3 font-semibold text-lime-400">Mobile Prefix</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-800">
+            {countryFormats.map(c => (
+              <tr class="hover:bg-dark-800/40">
+                <td class="px-4 py-3 font-medium text-white">{c.country}</td>
+                <td class="px-4 py-3 text-dark-300 font-mono">{c.code}</td>
+                <td class="px-4 py-3 text-dark-400 font-mono">{c.format}</td>
+                <td class="px-4 py-3 text-dark-300">{c.length}</td>
+                <td class="px-4 py-3 text-dark-400">{c.mobile}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Validate Phone Numbers -->
+  <section class="border-t border-dark-800 py-16 sm:py-20 bg-dark-900/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Why Validate Phone Numbers?</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { title: 'Reduce Failed Calls', desc: 'Catch invalid numbers before they reach your dialler. Fewer failed connection attempts means higher agent productivity and lower telecom costs.' },
+          { title: 'Improve CRM Data Quality', desc: 'Clean phone number data prevents duplicate records, failed automations, and broken lead routing. Validate at the point of entry for best results.' },
+          { title: 'Avoid Wasted SMS Credits', desc: 'Every SMS sent to an invalid number is money thrown away. Validate before sending to protect your messaging budget and improve delivery rates.' },
+          { title: 'Identify Number Type', desc: 'Know whether you are calling a mobile or landline before choosing your outreach channel. SMS to a landline will always fail.' },
+          { title: 'Correct Formatting Errors', desc: 'Users enter numbers in dozens of formats. Validation normalizes everything to E.164 so your systems store and route numbers consistently.' },
+          { title: 'Detect Country of Origin', desc: 'Automatically identify the country from the dialling code. Route calls to the right regional team and apply the correct compliance rules.' },
+        ].map(b => (
+          <div class="rounded-xl border border-dark-800 bg-dark-900/60 p-6">
+            <h3 class="mb-2 font-semibold text-white">{b.title}</h3>
+            <p class="text-sm text-dark-400 leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-dark-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">Frequently asked questions</h2>
+      <div class="space-y-4">
+        {faqSchema.mainEntity.map(item => (
+          <details class="rounded-xl border border-dark-800 bg-dark-900/60 p-6 group">
+            <summary class="cursor-pointer font-semibold text-white list-none flex items-center justify-between">
+              {item.name}
+              <span class="ml-4 text-lime-400 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-4 text-sm text-dark-400 leading-relaxed">{item.acceptedAnswer.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-dark-800 py-16 bg-gradient-to-b from-dark-950 to-dark-900">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Need to call validated numbers instantly?</h2>
+      <p class="mt-4 text-dark-400">LimeCall connects leads to your sales team in 28 seconds. Validate, route, and call — all from one platform.</p>
+      <a href={site.cta.href} class="mt-8 inline-block rounded-xl bg-lime-500 px-10 py-4 text-base font-bold text-dark-950 transition hover:bg-lime-400">
+        Start Free Trial &rarr;
+      </a>
+    </div>
+  </section>
+
+  <div class="py-8">
+    <CrossLinks
+      heading="Explore More"
+      links={[
+        { href: '/virtual-business-numbers/', title: 'Virtual Business Numbers', desc: 'Get local numbers in 40+ countries.' },
+        { href: '/virtual-pbx/', title: 'Virtual PBX', desc: 'Cloud phone system for modern teams.' },
+        { href: '/click-to-call-software/', title: 'Click-to-Call Software', desc: 'Voice callbacks connected in 28 seconds.' },
+        { href: '/pricing/', title: 'Pricing', desc: 'Plans for teams of every size.' },
+      ]}
+    />
+  </div>
+</Base>
